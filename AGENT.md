@@ -80,12 +80,21 @@ fontFamily: typography.primary.normal
 
 ---
 
-## 주요 파일 맵
+### 네비게이션 아키텍처 (BottomTab 도입 완료)
 
-| 목적 | 파일 |
-|---|---|
-| 네비게이션 라우트 추가 | `app/navigators/AppNavigator.tsx` + `app/navigators/navigationTypes.ts` |
-| 전역 테마/색상 수정 | `app/theme/colors.ts`, `app/theme/typography.ts` |
+프로젝트는 **Native Stack** 내부에 **Bottom Tab**이 중첩된 구조를 사용한다.
+
+- **최상위 스택**: `app/navigators/AppNavigator.tsx` (`Login`, `Main` 등)
+- **하단 탭 네비게이터**: `app/navigators/MainNavigator.tsx` (`Home`, `SafeBoard`, `SafeHealthMain`, `WorkerParticipation`)
+
+#### 탭 표시 기준
+- 앱의 핵심 메인 화면 4종(`Home`, `SafeBoard`, `SafeHealthMain`, `MyPage`)은 `MainNavigator`에 등록되어 하단 탭이 항상 표시된다.
+- 상세 페이지, 등록 폼 등 탭이 사라져야 하는 화면은 `AppNavigator`의 전역 스택에 직접 등록한다.
+
+#### ⚠️ 절대 규칙: 화면 내 직접 네비게이션 금지
+- `HomeScreen.tsx` 등 화면 컴포넌트 내부에 별도의 탭 바나 네비게이션 UI를 직접 구현하지 않는다.
+- 모든 화면 전환과 탭 관리는 `react-navigation`의 네비게이터 파일(`MainNavigator.tsx`, `AppNavigator.tsx`)에서 일괄 관리한다.
+
 | API 엔드포인트 설정 | `app/config/config.base.ts`, `app/services/api/index.ts` |
 | 로그인 화면 수정 | `app/screens/LoginScreen.tsx` |
 | 홈 화면 수정 | `app/screens/HomeScreen.tsx` |

@@ -112,17 +112,15 @@ NEW-KSAFE/
 
 ```
 AppNavigator (NativeStack)
-├── Login               →  LoginScreen
-├── Home                →  HomeScreen
-│   └── 안전게시판 더보기  →  SafeBoard
-├── SafeBoard           →  SafeBoardScreen
-├── SafeHealthMain      →  SafeHealthMainScreen
-└── WorkerParticipation →  WorkerParticipationScreen
+├── Login (LoginScreen)
+└── Main (MainNavigator: BottomTab)
+    ├── Home (HomeScreen)
+    ├── SafeBoard (SafeBoardScreen)
+    ├── SafeHealthMain (SafeHealthMainScreen)
+    └── WorkerParticipation (WorkerParticipationScreen: 마이페이지 placeholder)
 ```
 
-> 현재 인증 로직은 미구현 상태로, 로그인 버튼 클릭 시 바로 Home으로 이동합니다.
-> `AppNavigator.tsx`에 `isAuthenticated` 기반 조건 분기 코드가 주석 처리되어 있습니다.
-> 홈 화면 바텀 네비게이션의 탭 클릭은 아직 각 화면으로 연결되지 않았습니다.
+> **주의**: 홈 화면 내부의 하드코딩된 바텀 네비게이션은 `MainNavigator`로 리팩토링되어 제거되었습니다. 모든 탭 이동은 `MainNavigator`를 통해 관리됩니다.
 
 ---
 
