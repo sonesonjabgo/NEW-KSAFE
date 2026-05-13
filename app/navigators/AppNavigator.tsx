@@ -45,6 +45,7 @@ const AppStack = () => {
         },
       }}
     >
+      <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Home" component={HomeScreen} />
       {/* {isAuthenticated ? (
         <>

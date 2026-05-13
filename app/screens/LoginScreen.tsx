@@ -1,149 +1,221 @@
-import { ComponentType, FC, useEffect, useMemo, useRef, useState } from "react"
-// eslint-disable-next-line no-restricted-imports
-import { TextInput, TextStyle, ViewStyle } from "react-native"
-
-import { Button } from "@/components/Button"
-import { PressableIcon } from "@/components/Icon"
-import { Screen } from "@/components/Screen"
-import { Text } from "@/components/Text"
-import { TextField, type TextFieldAccessoryProps } from "@/components/TextField"
-import { useAuth } from "@/context/AuthContext"
+import { FC, useState } from "react"
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  Text as RNText,
+  StatusBar,
+  useWindowDimensions,
+  ViewStyle,
+  TextStyle,
+} from "react-native"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
-import { useAppTheme } from "@/theme/context"
-import type { ThemedStyle } from "@/theme/types"
+import { Screen } from "@/components/Screen"
+import { Icon } from "@/components/Icon"
+import { useNavigation } from "@react-navigation/native"
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
 export const LoginScreen: FC<LoginScreenProps> = () => {
-  const authPasswordInput = useRef<TextInput>(null)
-
-  const [authPassword, setAuthPassword] = useState("")
-  const [isAuthPasswordHidden, setIsAuthPasswordHidden] = useState(true)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [attemptsCount, setAttemptsCount] = useState(0)
-  const { authEmail, setAuthEmail, setAuthToken, validationError } = useAuth()
-
-  const {
-    themed,
-    theme: { colors },
-  } = useAppTheme()
-
-  useEffect(() => {
-    // Here is where you could fetch credentials from keychain or storage
-    // and pre-fill the form fields.
-    setAuthEmail("ignite@infinite.red")
-    setAuthPassword("ign1teIsAwes0m3")
-  }, [setAuthEmail])
-
-  const error = isSubmitted ? validationError : ""
-
-  function login() {
-    setIsSubmitted(true)
-    setAttemptsCount(attemptsCount + 1)
-
-    if (validationError) return
-
-    // Make a request to your server to get an authentication token.
-    // If successful, reset the fields and set the token.
-    setIsSubmitted(false)
-    setAuthPassword("")
-    setAuthEmail("")
-
-    // We'll mock this with a fake token.
-    setAuthToken(String(Date.now()))
-  }
-
-  const PasswordRightAccessory: ComponentType<TextFieldAccessoryProps> = useMemo(
-    () =>
-      function PasswordRightAccessory(props: TextFieldAccessoryProps) {
-        return (
-          <PressableIcon
-            icon={isAuthPasswordHidden ? "view" : "hidden"}
-            color={colors.palette.neutral800}
-            containerStyle={props.style}
-            size={20}
-            onPress={() => setIsAuthPasswordHidden(!isAuthPasswordHidden)}
-          />
-        )
-      },
-    [isAuthPasswordHidden, colors.palette.neutral800],
-  )
+  const navigation = useNavigation<any>()
+  const [secureText, setSecureText] = useState(true)
+  const { height } = useWindowDimensions()
 
   return (
-    <Screen
-      preset="auto"
-      contentContainerStyle={themed($screenContentContainer)}
-      safeAreaEdges={["top", "bottom"]}
-    >
-      <Text testID="login-heading" tx="loginScreen:logIn" preset="heading" style={themed($logIn)} />
-      <Text tx="loginScreen:enterDetails" preset="subheading" style={themed($enterDetails)} />
-      {attemptsCount > 2 && (
-        <Text tx="loginScreen:hint" size="sm" weight="light" style={themed($hint)} />
-      )}
+    <>
+      <StatusBar barStyle="light-content" backgroundColor="#1B2A4A" />
+      <Screen style={$root} preset="fixed" safeAreaEdges={["top", "bottom"]}>
+        {/* 상단 네이비 영역 */}
+        <View style={[$navySection, { height: height * 0.42 }]}>
+          <View style={$logoContainer}>
+            <View style={$helmetBadge}>
+              <RNText style={$helmetText}>A文</RNText>
+            </View>
+            <RNText style={$brandName}>K-SAFEONE</RNText>
+            <RNText style={$tagline}>현장을 이해하는 통합 안전 파트너</RNText>
+          </View>
+        </View>
 
-      <TextField
-        value={authEmail}
-        onChangeText={setAuthEmail}
-        containerStyle={themed($textField)}
-        autoCapitalize="none"
-        autoComplete="email"
-        autoCorrect={false}
-        keyboardType="email-address"
-        labelTx="loginScreen:emailFieldLabel"
-        placeholderTx="loginScreen:emailFieldPlaceholder"
-        helper={error}
-        status={error ? "error" : undefined}
-        onSubmitEditing={() => authPasswordInput.current?.focus()}
-      />
+        {/* 하단 흰색 카드 */}
+        <View style={$card}>
+          <RNText style={$cardTitle}>로그인</RNText>
 
-      <TextField
-        ref={authPasswordInput}
-        value={authPassword}
-        onChangeText={setAuthPassword}
-        containerStyle={themed($textField)}
-        autoCapitalize="none"
-        autoComplete="password"
-        autoCorrect={false}
-        secureTextEntry={isAuthPasswordHidden}
-        labelTx="loginScreen:passwordFieldLabel"
-        placeholderTx="loginScreen:passwordFieldPlaceholder"
-        onSubmitEditing={login}
-        RightAccessory={PasswordRightAccessory}
-      />
+          <View style={$gap24} />
 
-      <Button
-        testID="login-button"
-        tx="loginScreen:tapToLogIn"
-        style={themed($tapButton)}
-        preset="reversed"
-        onPress={login}
-      />
-    </Screen>
+          {/* 이메일 필드 */}
+          <RNText style={$label}>
+            이메일 <RNText style={$required}>*</RNText>
+          </RNText>
+          <View style={$inputRow}>
+            <RNText style={$mailIcon}>✉</RNText>
+            <TextInput
+              style={$textInput}
+              placeholder="이메일을 입력하세요."
+              placeholderTextColor="#9CA3AF"
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+          </View>
+
+          <View style={$gap16} />
+
+          {/* 비밀번호 필드 */}
+          <RNText style={$label}>
+            비밀번호 <RNText style={$required}>*</RNText>
+          </RNText>
+          <View style={$inputRow}>
+            <Icon icon="lock" size={18} color="#9CA3AF" />
+            <TextInput
+              style={[$textInput, $passwordInput]}
+              placeholder="패스워드를 입력하세요."
+              placeholderTextColor="#9CA3AF"
+              secureTextEntry={secureText}
+            />
+            <TouchableOpacity onPress={() => setSecureText((v) => !v)} hitSlop={8}>
+              <Icon icon={secureText ? "hidden" : "view"} size={18} color="#9CA3AF" />
+            </TouchableOpacity>
+          </View>
+
+          <View style={$gap24} />
+
+          {/* 로그인 버튼 */}
+          <TouchableOpacity
+            style={$loginButton}
+            onPress={() => navigation.navigate("Home")}
+            activeOpacity={0.85}
+          >
+            <RNText style={$loginButtonText}>로그인</RNText>
+          </TouchableOpacity>
+
+          <View style={$gap16} />
+
+          {/* 비밀번호 찾기 */}
+          <TouchableOpacity onPress={() => {}} style={$forgotWrapper}>
+            <RNText style={$forgotText}>비밀번호를 잊으셨나요?</RNText>
+          </TouchableOpacity>
+        </View>
+      </Screen>
+    </>
   )
 }
 
-const $screenContentContainer: ThemedStyle<ViewStyle> = ({ spacing }) => ({
-  paddingVertical: spacing.xxl,
-  paddingHorizontal: spacing.lg,
-})
+const $root: ViewStyle = {
+  flex: 1,
+  backgroundColor: "#1B2A4A",
+}
 
-const $logIn: ThemedStyle<TextStyle> = ({ spacing }) => ({
-  marginBottom: spacing.sm,
-})
+const $navySection: ViewStyle = {
+  justifyContent: "center",
+  alignItems: "center",
+}
 
-const $enterDetails: ThemedStyle<TextStyle> = ({ spacing }) => ({
-  marginBottom: spacing.lg,
-})
+const $logoContainer: ViewStyle = {
+  alignItems: "center",
+  gap: 10,
+}
 
-const $hint: ThemedStyle<TextStyle> = ({ colors, spacing }) => ({
-  color: colors.tint,
-  marginBottom: spacing.md,
-})
+const $helmetBadge: ViewStyle = {
+  width: 72,
+  height: 72,
+  borderRadius: 36,
+  backgroundColor: "rgba(255,255,255,0.15)",
+  justifyContent: "center",
+  alignItems: "center",
+  marginBottom: 4,
+}
 
-const $textField: ThemedStyle<ViewStyle> = ({ spacing }) => ({
-  marginBottom: spacing.lg,
-})
+const $helmetText: TextStyle = {
+  fontSize: 28,
+  color: "#FFFFFF",
+  fontWeight: "bold",
+}
 
-const $tapButton: ThemedStyle<ViewStyle> = ({ spacing }) => ({
-  marginTop: spacing.xs,
-})
+const $brandName: TextStyle = {
+  fontSize: 22,
+  color: "#FFFFFF",
+  fontWeight: "bold",
+  letterSpacing: 1,
+}
+
+const $tagline: TextStyle = {
+  fontSize: 14,
+  color: "rgba(255,255,255,0.8)",
+}
+
+const $card: ViewStyle = {
+  flex: 1,
+  backgroundColor: "#FFFFFF",
+  borderTopLeftRadius: 24,
+  borderTopRightRadius: 24,
+  marginTop: -20,
+  paddingHorizontal: 24,
+  paddingTop: 32,
+}
+
+const $cardTitle: TextStyle = {
+  fontSize: 22,
+  fontWeight: "bold",
+  color: "#1B2A4A",
+}
+
+const $label: TextStyle = {
+  fontSize: 14,
+  color: "#374151",
+  marginBottom: 6,
+}
+
+const $required: TextStyle = {
+  color: "#EF4444",
+}
+
+const $inputRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  backgroundColor: "#F5F5F5",
+  borderRadius: 12,
+  height: 48,
+  paddingHorizontal: 12,
+}
+
+const $mailIcon: TextStyle = {
+  fontSize: 16,
+  color: "#9CA3AF",
+  marginRight: 8,
+}
+
+const $textInput: TextStyle = {
+  flex: 1,
+  fontSize: 14,
+  color: "#111827",
+  height: 48,
+}
+
+const $passwordInput: TextStyle = {
+  marginLeft: 8,
+}
+
+const $loginButton: ViewStyle = {
+  backgroundColor: "#2563EB",
+  borderRadius: 12,
+  height: 48,
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+const $loginButtonText: TextStyle = {
+  color: "#FFFFFF",
+  fontSize: 16,
+  fontWeight: "bold",
+}
+
+const $forgotWrapper: ViewStyle = {
+  alignItems: "center",
+}
+
+const $forgotText: TextStyle = {
+  fontSize: 14,
+  color: "#6B7280",
+}
+
+const $gap16: ViewStyle = { height: 16 }
+const $gap24: ViewStyle = { height: 24 }
