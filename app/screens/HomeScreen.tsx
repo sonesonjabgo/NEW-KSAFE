@@ -1,10 +1,11 @@
 import { FC, useState } from "react"
 import { View, ViewStyle, TextStyle, TouchableOpacity, ScrollView } from "react-native"
+
+import { Icon, IconTypes } from "@/components/Icon"
+import { Text } from "@/components/Text"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
-import { Icon, IconTypes } from "@/components/Icon"
-import { Text } from "@/components/Text"
 
 interface HomeScreenProps extends AppStackScreenProps<"Home"> {}
 
@@ -100,9 +101,9 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
             </View>
             {renderTabContent()}
           </View>
-          
+
           <View style={$bottomInfoBox} />
-          
+
           <View style={$footerBox}>
             <Text text="홈페이지" style={$footerText} />
             <Text text=" | " style={$footerText} />
