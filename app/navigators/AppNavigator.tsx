@@ -15,6 +15,7 @@ import { LoginScreen } from "@/screens/LoginScreen"
 import { WelcomeScreen } from "@/screens/WelcomeScreen"
 import { useAppTheme } from "@/theme/context"
 import { SafeHealthMainScreen } from "@/screens/SafeHealthScreen/SafeHealthMainScreen"
+import { WorkerParticipationScreen } from "@/screens/WorkerParticipationScreen/WorkerParticipationScreen"
 
 import { DemoNavigator } from "./DemoNavigator"
 import type { AppStackParamList, NavigationProps } from "./navigationTypes"
@@ -49,6 +50,7 @@ const AppStack = () => {
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="SafeHealthMain" component={SafeHealthMainScreen} />
+      <Stack.Screen name="WorkerParticipation" component={WorkerParticipationScreen} />
 
       {/* {isAuthenticated ? (
         <>
