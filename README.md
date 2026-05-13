@@ -48,6 +48,26 @@ NEW-KSAFE/
 │   ├── screens/
 │   │   ├── LoginScreen.tsx      # 로그인 화면
 │   │   ├── HomeScreen.tsx       # 홈 화면 (역할 기반)
+│   │   ├── SafeBoardScreen/     # 안전게시판 화면
+│   │   │   ├── SafeBoardScreen.tsx
+│   │   │   ├── components/SafeBoardCard.tsx
+│   │   │   ├── mock/mockSafeBoardData.ts
+│   │   │   ├── styles.ts
+│   │   │   └── types.ts
+│   │   ├── SafeHealthScreen/    # 안전관리 화면
+│   │   │   ├── SafeHealthMainScreen.tsx
+│   │   │   ├── SafeHealthAdminView.tsx
+│   │   │   ├── SafeHealthUserView.tsx
+│   │   │   ├── components/SafeHealthMenuItem.tsx
+│   │   │   ├── mock/mockSafeHealthMenuData.ts
+│   │   │   ├── styles.ts
+│   │   │   └── types.ts
+│   │   ├── WorkerParticipationScreen/  # 근로자 참여 화면
+│   │   │   ├── WorkerParticipationScreen.tsx
+│   │   │   ├── components/WorkerParticipationMenuItem.tsx
+│   │   │   ├── mock/mockWorkerParticipationMenuData.ts
+│   │   │   ├── styles.ts
+│   │   │   └── types.ts
 │   │   ├── WelcomeScreen.tsx    # (Ignite 기본, 미사용)
 │   │   └── ErrorScreen/         # 전역 에러 경계
 │   ├── services/api/            # API 클라이언트 (apisauce)
@@ -72,6 +92,9 @@ NEW-KSAFE/
 |---|---|---|---|
 | 로그인 | `app/screens/LoginScreen.tsx` | `Login` | 이메일/비밀번호 입력, 로그인 버튼으로 홈 이동 |
 | 홈 | `app/screens/HomeScreen.tsx` | `Home` | 역할별 기능 그리드, 안전게시판, 바텀 네비게이션 |
+| 안전게시판 | `app/screens/SafeBoardScreen/SafeBoardScreen.tsx` | `SafeBoard` | 게시글 목록, 사업장 필터, 고정 글 정렬 (관리자/근로자 역할 분기) |
+| 안전관리 | `app/screens/SafeHealthScreen/SafeHealthMainScreen.tsx` | `SafeHealthMain` | 안전관리 메뉴 목록 (관리자: 6개 메뉴 / 근로자: 2개 메뉴) |
+| 근로자 참여 | `app/screens/WorkerParticipationScreen/WorkerParticipationScreen.tsx` | `WorkerParticipation` | 유해위험개소, 제도개선 제안 메뉴 |
 
 ### 홈 화면 구성 요소
 
@@ -89,12 +112,17 @@ NEW-KSAFE/
 
 ```
 AppNavigator (NativeStack)
-├── Login  →  LoginScreen
-└── Home   →  HomeScreen
+├── Login               →  LoginScreen
+├── Home                →  HomeScreen
+│   └── 안전게시판 더보기  →  SafeBoard
+├── SafeBoard           →  SafeBoardScreen
+├── SafeHealthMain      →  SafeHealthMainScreen
+└── WorkerParticipation →  WorkerParticipationScreen
 ```
 
 > 현재 인증 로직은 미구현 상태로, 로그인 버튼 클릭 시 바로 Home으로 이동합니다.
 > `AppNavigator.tsx`에 `isAuthenticated` 기반 조건 분기 코드가 주석 처리되어 있습니다.
+> 홈 화면 바텀 네비게이션의 탭 클릭은 아직 각 화면으로 연결되지 않았습니다.
 
 ---
 
@@ -139,11 +167,14 @@ npm run compile
 | `apisauce` | 3.1.1 | HTTP 클라이언트 |
 | `i18next` | ^23.14.0 | 다국어 처리 |
 | `lucide-react-native` | ^1.14.0 | 아이콘 |
+| `@tabler/icons-react-native` | ^3.44.0 | 아이콘 (안전관리, 근로자참여 화면) |
 | `tailwindcss` | ^3.4.1 | CSS 유틸리티 |
 
 ---
 
-## 이번 병합 작업 요약 (2026-05-13)
+## 병합 작업 이력 (2026-05-13)
+
+### 1차 병합 — 로컬 feature 브랜치
 
 | 브랜치 | 작업 내용 |
 |---|---|
@@ -151,3 +182,13 @@ npm run compile
 | `feat/home-screen-ui` | 홈 화면 UI 구현 (역할 기반 기능 그리드, 안전게시판, 바텀 네비게이션, 각종 아이콘 에셋 추가) |
 
 병합 후 `gluestack-ui-provider`의 TypeScript 타입 오류(`ColorSchemeName` 미처리 케이스) 수정 완료.
+
+### 2차 병합 — 팀원 원격 브랜치
+
+| 브랜치 | 작성자 | 작업 내용 |
+|---|---|---|
+| `feature/safe-health-ui` | hyojung22 | 안전관리 메인 화면 UI 구현 (관리자/근로자 역할 분기, `@tabler/icons-react-native` 도입) |
+| `feature/worker-participation-ui` | hyojung22 | 근로자 참여 화면 UI 구현 (유해위험개소, 제도개선 제안 메뉴) |
+| `feature/safe-board-ui` | hyojung22 | 안전게시판 목록 화면 UI 구현 (사업장 필터 모달, 고정 글 정렬, 홈 화면 더보기 버튼 네비게이션 연결) |
+
+병합 시 `AppNavigator.tsx`, `HomeScreen.tsx`, `babel.config.js` 충돌 수동 해결 완료.
