@@ -89,7 +89,11 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
 
   return (
     <View style={$root}>
-      <ScrollView contentContainerStyle={$scrollContent} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={$scrollView}
+        contentContainerStyle={$scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
         {/* ── Header (blue background) ── */}
         <View style={[$header, { paddingTop: insets.top + 12 }]}>
           {/* Row 1: Logo + Actions */}
@@ -186,11 +190,14 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
             <View style={$boardList}>
               {BOARD_ITEMS.map((item, i) => (
                 <TouchableOpacity key={i} style={$boardItem} activeOpacity={0.7}>
-                  <View style={[$tagBadge, item.tag === "사업장" ? $tagOrange : $tagBlue]}>
-                    <Text
-                      text={item.tag}
-                      style={[$tagText, item.tag === "사업장" ? $tagTextOrange : $tagTextBlue]}
-                    />
+                  <View style={$tagWrap}>
+                    <View style={[$tagBadge, item.tag === "사업장" ? $tagOrange : $tagBlue]}>
+                      <Text
+                        text={item.tag}
+                        style={[$tagText, item.tag === "사업장" ? $tagTextOrange : $tagTextBlue]}
+                        numberOfLines={1}
+                      />
+                    </View>
                   </View>
                   <View style={$boardItemContent}>
                     <Text text={item.title} style={$boardItemTitle} numberOfLines={1} />
@@ -212,9 +219,9 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
           {/* Footer */}
           <View style={$footer}>
             <Text text="홈페이지" style={$footerLink} />
-            <Text text=" | " style={$footerSep} />
+            <Text text="|" style={$footerSep} />
             <Text text="개인정보처리방침" style={$footerLink} />
-            <Text text=" | " style={$footerSep} />
+            <Text text="|" style={$footerSep} />
             <Text text="이용약관" style={$footerLink} />
           </View>
         </View>
@@ -251,9 +258,12 @@ const $root: ViewStyle = {
   backgroundColor: BLUE,
 }
 
+const $scrollView: ViewStyle = {
+  flex: 1,
+}
+
 const $scrollContent: ViewStyle = {
   flexGrow: 1,
-  paddingBottom: 16,
 }
 
 const $header: ViewStyle = {
@@ -504,12 +514,18 @@ const $boardItem: ViewStyle = {
   borderBottomColor: "#E9ECF0",
 }
 
+const $tagWrap: ViewStyle = {
+  minWidth: 47,
+  maxWidth: 47,
+}
+
 const $tagBadge: ViewStyle = {
   paddingTop: 3,
   paddingBottom: 2,
   paddingHorizontal: 6,
   borderRadius: 9,
   borderWidth: 1,
+  alignSelf: "flex-start",
 }
 
 const $tagOrange: ViewStyle = {
@@ -557,7 +573,6 @@ const $boardItemDate: TextStyle = {
 }
 
 const $banner: ViewStyle = {
-  marginBottom: 20,
   borderRadius: 10,
   overflow: "hidden",
   height: 111,
@@ -582,10 +597,9 @@ const $footer: ViewStyle = {
   flexDirection: "row",
   justifyContent: "center",
   alignItems: "center",
-  marginBottom: 8,
-  paddingVertical: 8,
-  borderTopWidth: 1,
-  borderTopColor: "#E9ECF0",
+  marginTop: 19,
+  gap: 20,
+  paddingBottom: 40,
 }
 
 const $footerLink: TextStyle = {
