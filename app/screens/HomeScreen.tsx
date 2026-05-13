@@ -1,5 +1,7 @@
 import { FC, useState } from "react"
 import {
+  Image,
+  ImageStyle,
   View,
   ViewStyle,
   TextStyle,
@@ -7,6 +9,7 @@ import {
   ScrollView,
   StyleSheet,
 } from "react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { typography } from "@/theme/typography"
 import { Icon, IconTypes } from "@/components/Icon"
@@ -14,16 +17,52 @@ import { Text } from "@/components/Text"
 
 interface HomeScreenProps extends AppStackScreenProps<"Home"> {}
 
-const GRID_ITEMS: { icon: IconTypes; label: string; sub: string }[] = [
-  { icon: "lock", label: "1:1 통역", sub: "실시간 통역 지원" },
-  { icon: "ladybug", label: "AI 안전 챗봇", sub: "안전 상담/질의응답" },
-  { icon: "view", label: "다국어 번역", sub: "언어 번역 지원" },
-  { icon: "components", label: "교육/발표", sub: "교육 자료 발표" },
-  { icon: "heart", label: "교육/발표 참여", sub: "교육/발표 참여" },
-  { icon: "community", label: "TBM 참여", sub: "안전점검 회의 참여" },
-  { icon: "pin", label: "순회점검", sub: "순회점검 진행/기록" },
-  { icon: "settings", label: "TBM 조회/생성", sub: "TBM 조회/생성" },
-  { icon: "debug", label: "TBM 보고서", sub: "TBM 보고서 조회" },
+const GRID_ITEMS: { img: number; label: string; sub: string }[] = [
+  {
+    img: require("@assets/icons/home/grid_interpret.png"),
+    label: "1:1 통역",
+    sub: "실시간 통역 지원",
+  },
+  {
+    img: require("@assets/icons/home/grid_chatbot.png"),
+    label: "AI 안전 챗봇",
+    sub: "안전 상담/질의응답",
+  },
+  {
+    img: require("@assets/icons/home/grid_translate.png"),
+    label: "다국어 번역",
+    sub: "언어 번역 지원",
+  },
+  {
+    img: require("@assets/icons/home/grid_education.png"),
+    label: "교육/발표",
+    sub: "교육 자료 발표",
+  },
+  {
+    img: require("@assets/icons/home/grid_edu_join.png"),
+    label: "교육/발표 참여",
+    sub: "교육/발표 참여",
+  },
+  {
+    img: require("@assets/icons/home/grid_tbm_join.png"),
+    label: "TBM 참여",
+    sub: "안전점검 회의 참여",
+  },
+  {
+    img: require("@assets/icons/home/grid_patrol.png"),
+    label: "순회점검",
+    sub: "순회점검 진행/기록",
+  },
+  {
+    img: require("@assets/icons/home/grid_tbm_create.png"),
+    label: "TBM 조회/생성",
+    sub: "TBM 조회/생성",
+  },
+  {
+    img: require("@assets/icons/home/grid_tbm_report.png"),
+    label: "TBM 보고서",
+    sub: "TBM 보고서 조회",
+  },
 ]
 
 const BOARD_ITEMS = [
@@ -42,49 +81,61 @@ const NAV_ITEMS: { icon: IconTypes; label: string }[] = [
 ]
 
 export const HomeScreen: FC<HomeScreenProps> = () => {
+  const insets = useSafeAreaInsets()
   const [selectedTab, setSelectedTab] = useState<TabType>("전체")
   const [activeNav, setActiveNav] = useState(0)
 
   return (
     <View style={s.root}>
       <ScrollView contentContainerStyle={s.scrollContent} showsVerticalScrollIndicator={false}>
-        {/* ── Header ── */}
-        <View style={s.header}>
-          <View>
-            <Text text="K-SAFEONE" style={s.appTitle} />
-            <Text text="KS산업안전협회" style={s.appSub} />
-          </View>
-          <View style={s.headerActions}>
-            <TouchableOpacity style={s.headerAction}>
-              <Icon icon="x" size={24} color="#FFFFFF" />
-              <Text text="QR스캔" style={s.headerActionLabel} />
-            </TouchableOpacity>
-            <TouchableOpacity style={s.headerAction}>
-              <Icon icon="bell" size={24} color="#FFFFFF" />
-              <Text text="알림" style={s.headerActionLabel} />
-            </TouchableOpacity>
-            <TouchableOpacity style={s.headerAction}>
-              <Icon icon="settings" size={24} color="#FFFFFF" />
-              <Text text="언어" style={s.headerActionLabel} />
-            </TouchableOpacity>
+        {/* ── Header (blue background) ── */}
+        <View style={[s.header, { paddingTop: insets.top + 12 }]}>
+          {/* Row 1: Logo + Actions */}
+          <View style={s.titleRow}>
+            <View>
+              <Text text="K-SAFEONE" style={s.appTitle} />
+              <Text text="KS산업안전협회" style={s.appSub} />
+            </View>
+            <View style={s.headerActions}>
+              <TouchableOpacity style={s.headerAction}>
+                <Image
+                  source={require("@assets/icons/nav/header_qr.png")}
+                  style={s.headerActionIcon}
+                  resizeMode="contain"
+                />
+                <Text text="QR스캔" style={s.headerActionLabel} />
+              </TouchableOpacity>
+              <TouchableOpacity style={s.headerAction}>
+                <Image
+                  source={require("@assets/icons/nav/header_bell.png")}
+                  style={s.headerActionIcon}
+                  resizeMode="contain"
+                />
+                <Text text="알림" style={s.headerActionLabel} />
+              </TouchableOpacity>
+              <TouchableOpacity style={s.headerAction}>
+                <Image
+                  source={require("@assets/icons/nav/header_lang.png")}
+                  style={s.headerActionIcon}
+                  resizeMode="contain"
+                />
+                <Text text="언어" style={s.headerActionLabel} />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
 
-        {/* ── Body ── */}
+        {/* ── Body (white rounded) ── */}
         <View style={s.body}>
-          {/* Greeting Card */}
-          <View style={s.greetCard}>
+          {/* Greeting + Avatar */}
+          <View style={s.greetRow}>
             <View style={s.greetLeft}>
-              <Text style={s.greetName}>
-                <Text text="김영희님," style={s.greetBold} />
-              </Text>
+              <Text text="김영희님," style={s.greetBold} />
               <Text text="오늘도 안전한 하루 되세요!" style={s.greetMsg} />
             </View>
-            <View style={s.greetIllust}>
-              <View style={s.illustOuter}>
-                <View style={s.illustHead} />
-                <View style={s.illustBody} />
-              </View>
+            <View style={s.avatar}>
+              <View style={s.avatarHead} />
+              <View style={s.avatarBody} />
             </View>
           </View>
 
@@ -92,9 +143,7 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
           <View style={s.grid}>
             {GRID_ITEMS.map((item, i) => (
               <TouchableOpacity key={i} style={s.gridCell} activeOpacity={0.7}>
-                <View style={s.gridIconWrap}>
-                  <Icon icon={item.icon} size={28} />
-                </View>
+                <Image source={item.img} style={s.gridIcon} resizeMode="contain" />
                 <Text text={item.label} style={s.gridLabel} numberOfLines={1} />
                 <Text text={item.sub} style={s.gridSub} numberOfLines={1} />
               </TouchableOpacity>
@@ -203,14 +252,17 @@ const s = StyleSheet.create({
     paddingBottom: 16,
   } as ViewStyle,
 
-  // Header
+  // Header (blue background, column layout)
   header: {
-    paddingTop: 64,
+    backgroundColor: BLUE,
     paddingBottom: 20,
     paddingHorizontal: 20,
+    gap: 16,
+  } as ViewStyle,
+  titleRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-end",
+    alignItems: "flex-start",
   } as ViewStyle,
   appTitle: {
     color: "#FFFFFF",
@@ -222,93 +274,87 @@ const s = StyleSheet.create({
     fontSize: 13,
     fontFamily: typography.primary.medium,
     marginTop: 2,
+    opacity: 0.9,
   } as TextStyle,
   headerActions: {
     flexDirection: "row",
-    gap: 16,
-    alignItems: "center",
-    paddingBottom: 2,
+    gap: 14,
+    paddingTop: 4,
   } as ViewStyle,
   headerAction: {
     alignItems: "center",
     gap: 4,
   } as ViewStyle,
+  headerActionIcon: {
+    width: 24,
+    height: 24,
+    tintColor: "#FFFFFF",
+  } as ImageStyle,
   headerActionLabel: {
     color: "#FFFFFF",
     fontSize: 11,
     fontFamily: typography.primary.medium,
   } as TextStyle,
 
-  // Body
-  body: {
-    backgroundColor: "#F9FAFE",
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-    paddingTop: 20,
-    paddingHorizontal: 20,
-    flex: 1,
-  } as ViewStyle,
-
-  // Greeting Card
-  greetCard: {
-    backgroundColor: "#FFFFFF",
-    borderRadius: 12,
-    padding: 16,
+  // Greeting row (in white body)
+  greetRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    elevation: 3,
+    marginBottom: 30,
   } as ViewStyle,
   greetLeft: {
     flex: 1,
+    gap: 2,
   } as ViewStyle,
-  greetName: {
-    fontSize: 20,
-    color: "#1A2236",
-  } as TextStyle,
   greetBold: {
     fontFamily: typography.primary.bold,
-    fontSize: 20,
-    color: "#1A2236",
+    fontSize: 21,
+    color: "#0B1929",
+    lineHeight: 30,
   } as TextStyle,
   greetMsg: {
     fontFamily: typography.primary.semiBold,
-    fontSize: 18,
-    color: "#1A2236",
-    marginTop: 4,
-    lineHeight: 26,
+    fontSize: 19,
+    color: "#0B1929",
+    lineHeight: 28,
   } as TextStyle,
-  greetIllust: {
-    marginLeft: 12,
-  } as ViewStyle,
-  illustOuter: {
+
+  // Avatar circle (person silhouette)
+  avatar: {
     width: 52,
     height: 52,
     borderRadius: 26,
-    backgroundColor: "#E7F0FD",
+    backgroundColor: "#D8E8F4",
     alignItems: "center",
     justifyContent: "flex-end",
     overflow: "hidden",
-    paddingBottom: 4,
+    marginLeft: 16,
   } as ViewStyle,
-  illustHead: {
+  avatarHead: {
     position: "absolute",
-    top: 8,
-    width: 18,
-    height: 18,
-    borderRadius: 9,
-    backgroundColor: "#D0DDF7",
-  } as ViewStyle,
-  illustBody: {
-    width: 32,
+    top: 9,
+    width: 20,
     height: 20,
     borderRadius: 10,
-    backgroundColor: "#0E336C",
+    backgroundColor: BLUE,
+  } as ViewStyle,
+  avatarBody: {
+    width: 38,
+    height: 24,
+    borderTopLeftRadius: 19,
+    borderTopRightRadius: 19,
+    backgroundColor: BLUE,
+  } as ViewStyle,
+
+  // Body (white rounded top)
+  body: {
+    backgroundColor: "#F2F4F8",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingTop: 20,
+    paddingHorizontal: 20,
+    flex: 1,
   } as ViewStyle,
 
   // Grid
@@ -327,34 +373,29 @@ const s = StyleSheet.create({
   } as ViewStyle,
   gridCell: {
     width: "33.33%",
-    paddingVertical: 18,
+    paddingTop: 7,
+    paddingBottom: 7,
     alignItems: "center",
     borderRightWidth: StyleSheet.hairlineWidth,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: "#E9ECF0",
   } as ViewStyle,
-  gridIconWrap: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: "#EEF3FC",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 6,
-  } as ViewStyle,
+  gridIcon: {
+    width: 54,
+    height: 54,
+    marginBottom: 14,
+  } as ImageStyle,
   gridLabel: {
-    fontSize: 12,
+    fontSize: 13,
     fontFamily: typography.primary.semiBold,
     color: "#1A2236",
     textAlign: "center",
-    marginTop: 2,
   } as TextStyle,
   gridSub: {
-    fontSize: 10,
-    fontFamily: typography.primary.normal,
-    color: "#7F848C",
+    fontSize: 11,
+    fontFamily: typography.primary.medium,
+    color: "#ABABAB",
     textAlign: "center",
-    marginTop: 2,
   } as TextStyle,
 
   // Board Section
