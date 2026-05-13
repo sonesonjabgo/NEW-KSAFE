@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import {
   Image,
   ImageStyle,
@@ -65,6 +65,18 @@ const GRID_ITEMS: { img: number; label: string; sub: string }[] = [
     label: "TBM 보고서",
     sub: "TBM 보고서 조회",
   },
+
+  // ── 근로자 전용 ──
+  {
+    img: require("@assets/icons/home/grid_patrol.png"), // 임시 아이콘
+    label: "유해위험개소",
+    sub: "유해위험개소 조회",
+  },
+  {
+    img: require("@assets/icons/home/grid_education.png"), // 임시 아이콘
+    label: "제도개선 제안",
+    sub: "제도개선 제안 등록",
+  },
 ]
 
 const BOARD_ITEMS = [
@@ -75,17 +87,30 @@ const BOARD_ITEMS = [
 const TABS = ["전체", "회사전체", "사업장"] as const
 type TabType = (typeof TABS)[number]
 
-const NAV_ITEMS: { icon: IconTypes; label: string }[] = [
-  { icon: "menu", label: "홈" },
-  { icon: "clap", label: "안전게시판" },
-  { icon: "check", label: "안전관리" },
-  { icon: "community", label: "근로자 참여" },
-]
-
 export const HomeScreen: FC<HomeScreenProps> = () => {
   const insets = useSafeAreaInsets()
+  const [userRole, setUserRole] = useState<"admin" | "worker">("worker")
   const [selectedTab, setSelectedTab] = useState<TabType>("전체")
   const [activeNav, setActiveNav] = useState(0)
+  // TODO: 추후 실제 API 연동으로 교체
+  const [hasExistingEdu, setHasExistingEdu] = useState(true)
+
+  useEffect(() => {
+    if (userRole === "worker") {
+      setSelectedTab("전체")
+    }
+  }, [userRole])
+
+  // 관리자: 인덱스 0~8 (9개) / 근로자: 인덱스 0~5 + 9~10 (8개)
+  const visibleGridItems =
+    userRole === "admin" ? GRID_ITEMS.slice(0, 9) : [...GRID_ITEMS.slice(0, 6), ...GRID_ITEMS.slice(9)]
+
+  const navItems: { icon: IconTypes; label: string }[] = [
+    { icon: "menu", label: "홈" },
+    { icon: "clap", label: "안전게시판" },
+    { icon: "check", label: "안전관리" },
+    { icon: "community", label: userRole === "admin" ? "근로자 참여" : "마이 페이지" },
+  ]
 
   return (
     <View style={$root}>
@@ -96,6 +121,47 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
       >
         {/* ── Header (blue background) ── */}
         <View style={[$header, { paddingTop: insets.top + 12 }]}>
+          {/* ── 임시 개발용 토글 영역 ── */}
+          <View style={$devToggleArea}>
+            {/* 역할 전환 */}
+            <View style={$roleToggleRow}>
+              <TouchableOpacity
+                style={[$roleToggleBtn, userRole === "admin" && $roleToggleBtnActive]}
+                onPress={() => setUserRole("admin")}
+              >
+                <Text
+                  text="관리자"
+                  style={[$roleToggleText, userRole === "admin" && $roleToggleTextActive]}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[$roleToggleBtn, userRole === "worker" && $roleToggleBtnActive]}
+                onPress={() => setUserRole("worker")}
+              >
+                <Text
+                  text="근로자"
+                  style={[$roleToggleText, userRole === "worker" && $roleToggleTextActive]}
+                />
+              </TouchableOpacity>
+            </View>
+
+            {/* 배너 카드 ON/OFF (근로자일 때만 표시) */}
+            {userRole === "worker" && (
+              <View style={$subToggleRow}>
+                <Text text="교육배너" style={$subToggleLabel} />
+                <TouchableOpacity
+                  style={[$subToggleBtn, hasExistingEdu ? $subToggleBtnOn : $subToggleBtnOff]}
+                  onPress={() => setHasExistingEdu(!hasExistingEdu)}
+                >
+                  <Text
+                    text={hasExistingEdu ? "ON" : "OFF"}
+                    style={[$subToggleText, hasExistingEdu ? $subToggleTextOn : $subToggleTextOff]}
+                  />
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
+
           {/* Row 1: Logo + Actions */}
           <View style={$titleRow}>
             <View>
@@ -147,7 +213,7 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
 
           {/* Feature Grid */}
           <View style={$grid}>
-            {GRID_ITEMS.map((item, i) => (
+            {visibleGridItems.map((item, i) => (
               <TouchableOpacity key={i} style={$gridCell} activeOpacity={0.7}>
                 <Image source={item.img} style={$gridIcon} resizeMode="contain" />
                 <View style={$gridTextWrap}>
@@ -157,6 +223,18 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
               </TouchableOpacity>
             ))}
           </View>
+
+          {/* 기존 교육/발표 참여 안내 배너 (근로자 전용) */}
+          {userRole === "worker" && hasExistingEdu && (
+            <TouchableOpacity style={$eduBanner} activeOpacity={0.7}>
+              <View style={$eduBannerBar} />
+              <View style={$eduBannerContent}>
+                <Text text="기존 교육/발표 참여" style={$eduBannerTitle} />
+                <Text text="이미 생성된 교육/발표실이 있습니다." style={$eduBannerDesc} />
+              </View>
+              <Icon icon="caretRight" size={16} color="#7F848C" />
+            </TouchableOpacity>
+          )}
 
           {/* Board Section */}
           <View style={$boardSection}>
@@ -168,23 +246,25 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
               </TouchableOpacity>
             </View>
 
-            {/* Tabs */}
-            <View style={$tabRow}>
-              {TABS.map((tab) => (
-                <TouchableOpacity
-                  key={tab}
-                  style={$tabItem}
-                  onPress={() => setSelectedTab(tab)}
-                  activeOpacity={0.7}
-                >
-                  <Text
-                    text={tab}
-                    style={[$tabLabel, selectedTab === tab ? $tabLabelActive : $tabLabelInactive]}
-                  />
-                  {selectedTab === tab && <View style={$tabLine} />}
-                </TouchableOpacity>
-              ))}
-            </View>
+            {/* Tabs — 관리자만 표시 */}
+            {userRole === "admin" && (
+              <View style={$tabRow}>
+                {TABS.map((tab) => (
+                  <TouchableOpacity
+                    key={tab}
+                    style={$tabItem}
+                    onPress={() => setSelectedTab(tab)}
+                    activeOpacity={0.7}
+                  >
+                    <Text
+                      text={tab}
+                      style={[$tabLabel, selectedTab === tab ? $tabLabelActive : $tabLabelInactive]}
+                    />
+                    {selectedTab === tab && <View style={$tabLine} />}
+                  </TouchableOpacity>
+                ))}
+              </View>
+            )}
 
             {/* Board Items */}
             <View style={$boardList}>
@@ -229,7 +309,7 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
 
       {/* Bottom Navigation */}
       <View style={$bottomNav}>
-        {NAV_ITEMS.map((item, i) => (
+        {navItems.map((item, i) => (
           <TouchableOpacity
             key={i}
             style={$navItem}
@@ -271,6 +351,80 @@ const $header: ViewStyle = {
   paddingBottom: 20,
   paddingHorizontal: 20,
   gap: 16,
+}
+
+const $devToggleArea: ViewStyle = {
+  alignItems: "center",
+  gap: 8,
+  marginBottom: 10,
+}
+
+const $roleToggleRow: ViewStyle = {
+  flexDirection: "row",
+  alignSelf: "center",
+  backgroundColor: "rgba(255,255,255,0.15)",
+  borderRadius: 8,
+  padding: 3,
+  gap: 4,
+}
+
+const $subToggleRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 8,
+}
+
+const $subToggleLabel: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.medium,
+  color: "rgba(255,255,255,0.6)",
+}
+
+const $subToggleBtn: ViewStyle = {
+  paddingVertical: 4,
+  paddingHorizontal: 14,
+  borderRadius: 6,
+}
+
+const $subToggleBtnOn: ViewStyle = {
+  backgroundColor: "#4CAF50",
+}
+
+const $subToggleBtnOff: ViewStyle = {
+  backgroundColor: "rgba(255,255,255,0.15)",
+}
+
+const $subToggleText: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.bold,
+}
+
+const $subToggleTextOn: TextStyle = {
+  color: "#FFFFFF",
+}
+
+const $subToggleTextOff: TextStyle = {
+  color: "rgba(255,255,255,0.5)",
+}
+
+const $roleToggleBtn: ViewStyle = {
+  paddingVertical: 6,
+  paddingHorizontal: 16,
+  borderRadius: 6,
+}
+
+const $roleToggleBtnActive: ViewStyle = {
+  backgroundColor: "#FFFFFF",
+}
+
+const $roleToggleText: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.semiBold,
+  color: "rgba(255,255,255,0.6)",
+}
+
+const $roleToggleTextActive: TextStyle = {
+  color: "#0B3069",
 }
 
 const $titleRow: ViewStyle = {
@@ -658,4 +812,42 @@ const $navLabelActive: TextStyle = {
 const $navLabelInactive: TextStyle = {
   color: "#9AA0AD",
   fontFamily: typography.primary.normal,
+}
+
+const $eduBanner: ViewStyle = {
+  backgroundColor: "#EEF3FC",
+  borderRadius: 12,
+  paddingVertical: 16,
+  paddingRight: 16,
+  paddingLeft: 0,
+  marginBottom: 20,
+  flexDirection: "row",
+  alignItems: "center",
+  overflow: "hidden",
+}
+
+const $eduBannerBar: ViewStyle = {
+  width: 4,
+  borderRadius: 2,
+  backgroundColor: "#214ACC",
+  alignSelf: "stretch",
+  marginLeft: 16,
+  marginRight: 14,
+}
+
+const $eduBannerContent: ViewStyle = {
+  flex: 1,
+  gap: 4,
+}
+
+const $eduBannerTitle: TextStyle = {
+  fontSize: 15,
+  fontFamily: typography.primary.bold,
+  color: "#1A2236",
+}
+
+const $eduBannerDesc: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#7F848C",
 }
