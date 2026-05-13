@@ -1,0 +1,36 @@
+import { vars } from "nativewind"
+
+export const config = {
+  light: vars({
+    "--color-primary-0": "#ffffff",
+    "--color-primary-50": "#f0f9ff",
+    "--color-primary-100": "#e0f2fe",
+    "--color-primary-200": "#bae6fd",
+    "--color-primary-300": "#7dd3fc",
+    "--color-primary-400": "#38bdf8",
+    "--color-primary-500": "#0ea5e9",
+    "--color-primary-600": "#0284c7",
+    "--color-primary-700": "#0369a1",
+    "--color-primary-800": "#075985",
+    "--color-primary-900": "#0c4a6e",
+    "--color-primary-950": "#082f49",
+    "--color-background-light": "#ffffff",
+    "--color-typography-light": "#000000",
+  }),
+  dark: vars({
+    "--color-primary-0": "#000000",
+    "--color-primary-50": "#082f49",
+    "--color-primary-100": "#0c4a6e",
+    "--color-primary-200": "#075985",
+    "--color-primary-300": "#0369a1",
+    "--color-primary-400": "#0284c7",
+    "--color-primary-500": "#0ea5e9",
+    "--color-primary-600": "#38bdf8",
+    "--color-primary-700": "#7dd3fc",
+    "--color-primary-800": "#bae6fd",
+    "--color-primary-900": "#e0f2fe",
+    "--color-primary-950": "#f0f9ff",
+    "--color-background-dark": "#171717",
+    "--color-typography-dark": "#ffffff",
+  }),
+}

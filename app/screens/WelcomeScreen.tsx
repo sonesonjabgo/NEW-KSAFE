@@ -4,6 +4,7 @@ import { Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
 import { Button } from "@/components/Button"
 import { Screen } from "@/components/Screen"
 import { Text } from "@/components/Text"
+import { Button as GluestackButton, ButtonText } from "@/components/ui/button"
 import { useAuth } from "@/context/AuthContext"
 import { isRTL } from "@/i18n"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
@@ -66,6 +67,15 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = function WelcomeScreen(_pro
           tx="welcomeScreen:letsGo"
           onPress={goNext}
         />
+
+        <GluestackButton
+          action="primary"
+          variant="solid"
+          size="lg"
+          onPress={() => console.log("Gluestack Button Pressed")}
+        >
+          <ButtonText>Gluestack UI Button</ButtonText>
+        </GluestackButton>
       </View>
     </Screen>
   )
