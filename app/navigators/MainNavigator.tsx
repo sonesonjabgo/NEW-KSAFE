@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { HomeScreen } from "@/screens/HomeScreen"
 import { SafeBoardScreen } from "@/screens/SafeBoardScreen/SafeBoardScreen"
 import { SafeHealthMainScreen } from "@/screens/SafeHealthScreen/SafeHealthMainScreen"
-import { WorkerParticipationScreen } from "@/screens/WorkerParticipationScreen/WorkerParticipationScreen"
+import { MyPageScreen } from "@/screens/MyPageScreen"
 import { typography } from "@/theme/typography"
 
 import type { MainTabParamList } from "./navigationTypes"
@@ -20,7 +20,7 @@ const navIcons = {
   Home: require("@assets/icons/nav/nav_home.png"),
   SafeBoard: require("@assets/icons/nav/nav_board.png"),
   SafeHealthMain: require("@assets/icons/nav/nav_safety.png"),
-  WorkerParticipation: require("@assets/icons/nav/nav_worker.png"),
+  MyPage: require("@assets/icons/nav/nav_worker.png"),
 }
 
 function TabIcon({ source, focused }: { source: number; focused: boolean }) {
@@ -76,19 +76,13 @@ export function MainNavigator() {
         }}
       />
 
-      {/* 마이페이지 — 미구현, 탭 버튼만 표시하고 동작 없음 */}
       <Tab.Screen
-        name="WorkerParticipation"
-        component={WorkerParticipationScreen}
-        listeners={{
-          tabPress: (e) => {
-            e.preventDefault()
-          },
-        }}
+        name="MyPage"
+        component={MyPageScreen}
         options={{
           tabBarLabel: "마이페이지",
           tabBarIcon: ({ focused }) => (
-            <TabIcon source={navIcons.WorkerParticipation} focused={focused} />
+            <TabIcon source={navIcons.MyPage} focused={focused} />
           ),
         }}
       />
