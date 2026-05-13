@@ -1,267 +1,553 @@
 import { FC, useState } from "react"
-import { View, ViewStyle, TextStyle, TouchableOpacity, ScrollView } from "react-native"
-
+import {
+  View,
+  ViewStyle,
+  TextStyle,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+} from "react-native"
+import type { AppStackScreenProps } from "@/navigators/navigationTypes"
+import { typography } from "@/theme/typography"
 import { Icon, IconTypes } from "@/components/Icon"
 import { Text } from "@/components/Text"
-import type { AppStackScreenProps } from "@/navigators/navigationTypes"
-import { colors } from "@/theme/colors"
-import { typography } from "@/theme/typography"
 
 interface HomeScreenProps extends AppStackScreenProps<"Home"> {}
 
-const GRID_ITEMS = [
-  { icon: "lock" as IconTypes, label: "1:1 통역", sub: "실시간 통역 지원" },
-  { icon: "ladybug" as IconTypes, label: "AI 안전 챗봇", sub: "안전 상담/질의응답" },
-  { icon: "bell" as IconTypes, label: "다국어 번역", sub: "언어 번역 지원" },
-  { icon: "settings" as IconTypes, label: "교육/발표", sub: "교육 자료 발표" },
-  { icon: "x" as IconTypes, label: "교육/발표 참여", sub: "교육/발표 참여" },
-  { icon: "view" as IconTypes, label: "TBM 참여", sub: "안전점검 회의 참여" },
-  { icon: "lock" as IconTypes, label: "순회점검", sub: "순회점검 진행/기록" },
-  { icon: "ladybug" as IconTypes, label: "TBM 조회/생성", sub: "TBM 조회/생성" },
-  { icon: "bell" as IconTypes, label: "TBM 보고서", sub: "TBM 보고서 조회" },
+const GRID_ITEMS: { icon: IconTypes; label: string; sub: string }[] = [
+  { icon: "lock", label: "1:1 통역", sub: "실시간 통역 지원" },
+  { icon: "ladybug", label: "AI 안전 챗봇", sub: "안전 상담/질의응답" },
+  { icon: "view", label: "다국어 번역", sub: "언어 번역 지원" },
+  { icon: "components", label: "교육/발표", sub: "교육 자료 발표" },
+  { icon: "heart", label: "교육/발표 참여", sub: "교육/발표 참여" },
+  { icon: "community", label: "TBM 참여", sub: "안전점검 회의 참여" },
+  { icon: "pin", label: "순회점검", sub: "순회점검 진행/기록" },
+  { icon: "settings", label: "TBM 조회/생성", sub: "TBM 조회/생성" },
+  { icon: "debug", label: "TBM 보고서", sub: "TBM 보고서 조회" },
+]
+
+const BOARD_ITEMS = [
+  { tag: "사업장", title: "2026년 4월 2일 앱 출시", date: "2026.04.02", pinned: true },
+  { tag: "회사전체", title: "2026년 4월 2일 앱 출시", date: "2026.04.02", pinned: false },
+]
+
+const TABS = ["전체", "회사전체", "사업장"] as const
+type TabType = (typeof TABS)[number]
+
+const NAV_ITEMS: { icon: IconTypes; label: string }[] = [
+  { icon: "menu", label: "홈" },
+  { icon: "clap", label: "안전게시판" },
+  { icon: "check", label: "안전관리" },
+  { icon: "community", label: "근로자 참여" },
 ]
 
 export const HomeScreen: FC<HomeScreenProps> = () => {
-  const [selectedTab, setSelectedTab] = useState("전체")
-
-  const renderTabContent = () => (
-    <View style={$tabContentBox}>
-      <View style={$contentItem}>
-        <Text text={`${selectedTab} 첫 번째 내용`} />
-      </View>
-      <View style={$contentItem}>
-        <Text text={`${selectedTab} 두 번째 내용`} />
-      </View>
-    </View>
-  )
+  const [selectedTab, setSelectedTab] = useState<TabType>("전체")
+  const [activeNav, setActiveNav] = useState(0)
 
   return (
-    <View style={$screenWrapper}>
-      <ScrollView contentContainerStyle={$scrollContent}>
-        <View style={$headerContainer}>
-          <View style={$leftBox}>
-            <Text text="K-SAFEONE" style={$titleText} />
-            <Text text="KS산업안전협회" style={$subtitleText} />
+    <View style={s.root}>
+      <ScrollView contentContainerStyle={s.scrollContent} showsVerticalScrollIndicator={false}>
+        {/* ── Header ── */}
+        <View style={s.header}>
+          <View>
+            <Text text="K-SAFEONE" style={s.appTitle} />
+            <Text text="KS산업안전협회" style={s.appSub} />
           </View>
-          <View style={$rightBox}>
-            <View style={$iconButton}>
-              <Icon icon="x" size={25} color="#FFFFFF" />
-              <Text text="QR스캔" style={$iconText} />
-            </View>
-            <View style={$iconButton}>
-              <Icon icon="bell" size={25} color="#FFFFFF" />
-              <Text text="알림" style={$iconText} />
-            </View>
-            <View style={$iconButton}>
-              <Icon icon="settings" size={25} color="#FFFFFF" />
-              <Text text="언어" style={$iconText} />
-            </View>
+          <View style={s.headerActions}>
+            <TouchableOpacity style={s.headerAction}>
+              <Icon icon="x" size={24} color="#FFFFFF" />
+              <Text text="QR스캔" style={s.headerActionLabel} />
+            </TouchableOpacity>
+            <TouchableOpacity style={s.headerAction}>
+              <Icon icon="bell" size={24} color="#FFFFFF" />
+              <Text text="알림" style={s.headerActionLabel} />
+            </TouchableOpacity>
+            <TouchableOpacity style={s.headerAction}>
+              <Icon icon="settings" size={24} color="#FFFFFF" />
+              <Text text="언어" style={s.headerActionLabel} />
+            </TouchableOpacity>
           </View>
         </View>
 
-        <View style={$bottomContainer}>
-          <View style={$cardBox}>
-            <View style={$nameTextWrapper}>
-              <Text style={$nameText} numberOfLines={1}>
-                <Text text="김영희님," style={$nameBold} />
+        {/* ── Body ── */}
+        <View style={s.body}>
+          {/* Greeting Card */}
+          <View style={s.greetCard}>
+            <View style={s.greetLeft}>
+              <Text style={s.greetName}>
+                <Text text="김영희님," style={s.greetBold} />
               </Text>
-              <Text text="오늘도 안전한 하루 되세요!" style={$messageText} numberOfLines={1} />
+              <Text text="오늘도 안전한 하루 되세요!" style={s.greetMsg} />
             </View>
-            <View style={$iconWrapper}>
-              <Icon icon="view" size={50} />
+            <View style={s.greetIllust}>
+              <View style={s.illustOuter}>
+                <View style={s.illustHead} />
+                <View style={s.illustBody} />
+              </View>
             </View>
           </View>
 
-          <View style={$gridContainer}>
+          {/* Feature Grid */}
+          <View style={s.grid}>
             {GRID_ITEMS.map((item, i) => (
-              <View key={i} style={$gridCell}>
-                <Icon icon={item.icon} size={30} />
-                <Text text={item.label} style={$gridLabel} />
-                <Text text={item.sub} style={$gridSub} />
-              </View>
+              <TouchableOpacity key={i} style={s.gridCell} activeOpacity={0.7}>
+                <View style={s.gridIconWrap}>
+                  <Icon icon={item.icon} size={28} />
+                </View>
+                <Text text={item.label} style={s.gridLabel} numberOfLines={1} />
+                <Text text={item.sub} style={s.gridSub} numberOfLines={1} />
+              </TouchableOpacity>
             ))}
           </View>
 
-          <View style={$boardHeader}>
-            <Text text="안전게시판" style={$boardTitle} />
-            <Text text="더보기 >" style={$boardMore} />
-          </View>
+          {/* Board Section */}
+          <View style={s.boardSection}>
+            <View style={s.boardHeader}>
+              <Text text="안전게시판" style={s.boardTitle} />
+              <TouchableOpacity style={s.boardMoreBtn}>
+                <Text text="더보기" style={s.boardMoreText} />
+                <Icon icon="caretRight" size={12} color="#7F848C" />
+              </TouchableOpacity>
+            </View>
 
-          <View style={$tabCombinedContainer}>
-            <View style={$tabContainer}>
-              {["전체", "회사전체", "사업장"].map((tab) => (
-                <TouchableOpacity key={tab} onPress={() => setSelectedTab(tab)} style={$tabButton}>
+            {/* Tabs */}
+            <View style={s.tabRow}>
+              {TABS.map((tab) => (
+                <TouchableOpacity
+                  key={tab}
+                  style={s.tabItem}
+                  onPress={() => setSelectedTab(tab)}
+                  activeOpacity={0.7}
+                >
                   <Text
                     text={tab}
-                    style={[$tabText, selectedTab === tab ? $tabTextSelected : $tabTextUnselected]}
+                    style={[
+                      s.tabLabel,
+                      selectedTab === tab ? s.tabLabelActive : s.tabLabelInactive,
+                    ]}
                   />
-                  {selectedTab === tab && <View style={$tabIndicator} />}
+                  {selectedTab === tab && <View style={s.tabLine} />}
                 </TouchableOpacity>
               ))}
             </View>
-            {renderTabContent()}
+
+            {/* Board Items */}
+            <View style={s.boardList}>
+              {BOARD_ITEMS.map((item, i) => (
+                <TouchableOpacity key={i} style={s.boardItem} activeOpacity={0.7}>
+                  <View style={s.boardItemTop}>
+                    <View style={[s.tagBadge, item.tag === "사업장" ? s.tagBlue : s.tagGray]}>
+                      <Text text={item.tag} style={s.tagText} />
+                    </View>
+                    {item.pinned && <Icon icon="pin" size={14} color="#C03403" />}
+                  </View>
+                  <Text text={item.title} style={s.boardItemTitle} numberOfLines={1} />
+                  <Text text={item.date} style={s.boardItemDate} />
+                </TouchableOpacity>
+              ))}
+            </View>
           </View>
 
-          <View style={$bottomInfoBox} />
+          {/* Bottom Banner */}
+          <View style={s.banner}>
+            <View style={s.bannerInner}>
+              <Text text="K-SAFEONE과 함께하는 안전한 작업환경" style={s.bannerText} />
+            </View>
+          </View>
 
-          <View style={$footerBox}>
-            <Text text="홈페이지" style={$footerText} />
-            <Text text=" | " style={$footerText} />
-            <Text text="개인정보처리방침" style={$footerText} />
-            <Text text=" | " style={$footerText} />
-            <Text text="이용약관" style={$footerText} />
+          {/* Footer */}
+          <View style={s.footer}>
+            <Text text="홈페이지" style={s.footerLink} />
+            <Text text=" | " style={s.footerSep} />
+            <Text text="개인정보처리방침" style={s.footerLink} />
+            <Text text=" | " style={s.footerSep} />
+            <Text text="이용약관" style={s.footerLink} />
           </View>
         </View>
       </ScrollView>
+
+      {/* Bottom Navigation */}
+      <View style={s.bottomNav}>
+        {NAV_ITEMS.map((item, i) => (
+          <TouchableOpacity
+            key={i}
+            style={s.navItem}
+            onPress={() => setActiveNav(i)}
+            activeOpacity={0.7}
+          >
+            <View style={[s.navIconWrap, i === activeNav && s.navIconWrapActive]}>
+              <Icon icon={item.icon} size={22} color={i === activeNav ? "#214ACC" : "#9AA0AD"} />
+            </View>
+            <Text
+              text={item.label}
+              style={[s.navLabel, i === activeNav ? s.navLabelActive : s.navLabelInactive]}
+            />
+          </TouchableOpacity>
+        ))}
+      </View>
     </View>
   )
 }
 
-const $scrollContent: ViewStyle = { flexGrow: 1 }
-const $screenWrapper: ViewStyle = { flex: 1, backgroundColor: colors.background }
-const $headerContainer: ViewStyle = {
-  marginTop: 60,
-  width: "90%",
-  alignSelf: "center",
-  flexDirection: "row",
-  justifyContent: "space-between",
-  alignItems: "flex-start",
-  marginBottom: 20,
-}
-const $leftBox: ViewStyle = { flex: 1 }
-const $rightBox: ViewStyle = {
-  width: 130,
-  height: 43,
-  flexDirection: "row",
-  justifyContent: "space-between",
-  alignItems: "center",
-}
-const $iconButton: ViewStyle = { alignItems: "center", justifyContent: "center" }
-const $titleText: TextStyle = {
-  color: "#FFFFFF",
-  fontSize: 21,
-  fontFamily: typography.primary.bold,
-}
-const $subtitleText: TextStyle = {
-  color: "#FFFFFF",
-  fontSize: 13,
-  fontFamily: typography.primary.medium,
-}
-const $iconText: TextStyle = {
-  color: "#FFFFFF",
-  fontSize: 11,
-  fontFamily: typography.primary.medium,
-  marginTop: 2,
-}
-const $bottomContainer: ViewStyle = {
-  flex: 1,
-  backgroundColor: "#F9FAFE",
-  borderTopLeftRadius: 12,
-  borderTopRightRadius: 12,
-  alignItems: "center",
-  paddingTop: 20,
-}
-const $cardBox: ViewStyle = {
-  width: 353,
-  flexDirection: "row",
-  justifyContent: "space-between",
-  alignItems: "center",
-  padding: 16,
-  borderRadius: 8,
-  marginBottom: 20,
-}
-const $gridContainer: ViewStyle = {
-  width: 351,
-  height: 360,
-  flexDirection: "row",
-  flexWrap: "wrap",
-  backgroundColor: "#FFFFFF",
-  borderRadius: 8,
-  shadowColor: "#000",
-  shadowOffset: { width: 0, height: 2 },
-  shadowOpacity: 0.1,
-  shadowRadius: 4,
-  elevation: 5,
-}
-const $gridCell: ViewStyle = {
-  width: "33.33%",
-  height: "33.33%",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: 5,
-}
-const $gridLabel: TextStyle = { fontSize: 12, fontWeight: "bold", marginTop: 5 }
-const $gridSub: TextStyle = { fontSize: 10, color: "#666" }
-const $boardHeader: ViewStyle = {
-  width: 346,
-  flexDirection: "row",
-  justifyContent: "space-between",
-  alignItems: "center",
-  marginTop: 20,
-}
-const $boardTitle: TextStyle = { fontSize: 16, fontWeight: "bold", color: "#000000" }
-const $boardMore: TextStyle = { fontSize: 14, color: "#7F848C" }
-const $tabCombinedContainer: ViewStyle = { width: 353, marginTop: 15 }
-const $tabContainer: ViewStyle = {
-  flexDirection: "row",
-  justifyContent: "space-around",
-  paddingVertical: 10,
-  backgroundColor: "transparent",
-}
-const $tabButton: ViewStyle = { alignItems: "center", paddingBottom: 10, flex: 1 }
-const $tabText: TextStyle = { fontSize: 14, fontWeight: "bold", textAlign: "center" }
-const $tabTextSelected: TextStyle = { color: "#1062D8" }
-const $tabTextUnselected: TextStyle = { color: "#979797" }
-const $tabIndicator: ViewStyle = {
-  height: 2,
-  width: "100%",
-  backgroundColor: "#1062D8",
-  marginTop: 10,
-  position: "absolute",
-  bottom: 0,
-}
-const $tabContentBox: ViewStyle = {
-  width: 353,
-  height: 139,
-  backgroundColor: "#FFFFFF",
-  borderRadius: 8,
-  borderWidth: 1,
-  borderColor: "#E9ECF0",
-  borderTopWidth: 0,
-}
-const $contentItem: ViewStyle = {
-  flex: 1,
-  justifyContent: "center",
-  alignItems: "center",
-  borderBottomWidth: 1,
-  borderBottomColor: "#EEE",
-}
+const BLUE = "#0B3069"
+const ACTIVE_BLUE = "#214ACC"
 
-const $nameTextWrapper: ViewStyle = { justifyContent: "center", flexShrink: 1 }
-const $nameText: TextStyle = { fontSize: 18, color: "#000000" }
-const $nameBold: TextStyle = { fontFamily: typography.primary.bold, fontSize: 18 }
-const $messageText: TextStyle = { fontSize: 18, color: "#000000", marginTop: 4 }
-const $iconWrapper: ViewStyle = { padding: 8, marginLeft: 10 }
-const $bottomInfoBox: ViewStyle = {
-  width: 352,
-  height: 111,
-  backgroundColor: "#E3F2FD",
-  alignSelf: "center",
-  marginTop: 20,
-  borderRadius: 8,
-}
-const $footerBox: ViewStyle = {
-  width: 237,
-  height: 15,
-  borderWidth: 1,
-  borderColor: "#CFD0D3",
-  alignSelf: "center",
-  flexDirection: "row",
-  justifyContent: "center",
-  marginTop: 20,
-  marginBottom: 40,
-}
-const $footerText: TextStyle = {
-  fontSize: 10,
-  color: "#7F848C",
-}
+const s = StyleSheet.create({
+  root: {
+    flex: 1,
+    backgroundColor: BLUE,
+  } as ViewStyle,
+  scrollContent: {
+    flexGrow: 1,
+    paddingBottom: 16,
+  } as ViewStyle,
+
+  // Header
+  header: {
+    paddingTop: 64,
+    paddingBottom: 20,
+    paddingHorizontal: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+  } as ViewStyle,
+  appTitle: {
+    color: "#FFFFFF",
+    fontSize: 21,
+    fontFamily: typography.primary.bold,
+  } as TextStyle,
+  appSub: {
+    color: "#FFFFFF",
+    fontSize: 13,
+    fontFamily: typography.primary.medium,
+    marginTop: 2,
+  } as TextStyle,
+  headerActions: {
+    flexDirection: "row",
+    gap: 16,
+    alignItems: "center",
+    paddingBottom: 2,
+  } as ViewStyle,
+  headerAction: {
+    alignItems: "center",
+    gap: 4,
+  } as ViewStyle,
+  headerActionLabel: {
+    color: "#FFFFFF",
+    fontSize: 11,
+    fontFamily: typography.primary.medium,
+  } as TextStyle,
+
+  // Body
+  body: {
+    backgroundColor: "#F9FAFE",
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    paddingTop: 20,
+    paddingHorizontal: 20,
+    flex: 1,
+  } as ViewStyle,
+
+  // Greeting Card
+  greetCard: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 12,
+    padding: 16,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 16,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 3,
+  } as ViewStyle,
+  greetLeft: {
+    flex: 1,
+  } as ViewStyle,
+  greetName: {
+    fontSize: 20,
+    color: "#1A2236",
+  } as TextStyle,
+  greetBold: {
+    fontFamily: typography.primary.bold,
+    fontSize: 20,
+    color: "#1A2236",
+  } as TextStyle,
+  greetMsg: {
+    fontFamily: typography.primary.semiBold,
+    fontSize: 18,
+    color: "#1A2236",
+    marginTop: 4,
+    lineHeight: 26,
+  } as TextStyle,
+  greetIllust: {
+    marginLeft: 12,
+  } as ViewStyle,
+  illustOuter: {
+    width: 52,
+    height: 52,
+    borderRadius: 26,
+    backgroundColor: "#E7F0FD",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    overflow: "hidden",
+    paddingBottom: 4,
+  } as ViewStyle,
+  illustHead: {
+    position: "absolute",
+    top: 8,
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    backgroundColor: "#D0DDF7",
+  } as ViewStyle,
+  illustBody: {
+    width: 32,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: "#0E336C",
+  } as ViewStyle,
+
+  // Grid
+  grid: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 12,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 3,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginBottom: 20,
+    overflow: "hidden",
+  } as ViewStyle,
+  gridCell: {
+    width: "33.33%",
+    paddingVertical: 18,
+    alignItems: "center",
+    borderRightWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: "#E9ECF0",
+  } as ViewStyle,
+  gridIconWrap: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: "#EEF3FC",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 6,
+  } as ViewStyle,
+  gridLabel: {
+    fontSize: 12,
+    fontFamily: typography.primary.semiBold,
+    color: "#1A2236",
+    textAlign: "center",
+    marginTop: 2,
+  } as TextStyle,
+  gridSub: {
+    fontSize: 10,
+    fontFamily: typography.primary.normal,
+    color: "#7F848C",
+    textAlign: "center",
+    marginTop: 2,
+  } as TextStyle,
+
+  // Board Section
+  boardSection: {
+    marginBottom: 20,
+  } as ViewStyle,
+  boardHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+  } as ViewStyle,
+  boardTitle: {
+    fontSize: 16,
+    fontFamily: typography.primary.bold,
+    color: "#1A2236",
+  } as TextStyle,
+  boardMoreBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 2,
+  } as ViewStyle,
+  boardMoreText: {
+    fontSize: 13,
+    color: "#7F848C",
+    fontFamily: typography.primary.normal,
+  } as TextStyle,
+
+  // Tabs
+  tabRow: {
+    flexDirection: "row",
+    borderBottomWidth: 1,
+    borderBottomColor: "#E9ECF0",
+  } as ViewStyle,
+  tabItem: {
+    flex: 1,
+    alignItems: "center",
+    paddingVertical: 10,
+    position: "relative",
+  } as ViewStyle,
+  tabLabel: {
+    fontSize: 14,
+    fontFamily: typography.primary.semiBold,
+    textAlign: "center",
+  } as TextStyle,
+  tabLabelActive: {
+    color: ACTIVE_BLUE,
+  } as TextStyle,
+  tabLabelInactive: {
+    color: "#979797",
+  } as TextStyle,
+  tabLine: {
+    position: "absolute",
+    bottom: -1,
+    left: 0,
+    right: 0,
+    height: 2,
+    backgroundColor: ACTIVE_BLUE,
+    borderRadius: 1,
+  } as ViewStyle,
+
+  // Board Items
+  boardList: {
+    backgroundColor: "#FFFFFF",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderWidth: 1,
+    borderTopWidth: 0,
+    borderColor: "#E9ECF0",
+    overflow: "hidden",
+  } as ViewStyle,
+  boardItem: {
+    padding: 14,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: "#E9ECF0",
+  } as ViewStyle,
+  boardItemTop: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    marginBottom: 6,
+  } as ViewStyle,
+  tagBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 4,
+    borderWidth: 1,
+  } as ViewStyle,
+  tagBlue: {
+    borderColor: ACTIVE_BLUE,
+    backgroundColor: "#EEF3FC",
+  } as ViewStyle,
+  tagGray: {
+    borderColor: "#C0C5CE",
+    backgroundColor: "#F4F5F7",
+  } as ViewStyle,
+  tagText: {
+    fontSize: 11,
+    fontFamily: typography.primary.medium,
+    color: "#3A4A6B",
+  } as TextStyle,
+  boardItemTitle: {
+    fontSize: 14,
+    fontFamily: typography.primary.medium,
+    color: "#1A2236",
+    marginBottom: 4,
+  } as TextStyle,
+  boardItemDate: {
+    fontSize: 12,
+    color: "#7F848C",
+    fontFamily: typography.primary.normal,
+  } as TextStyle,
+
+  // Banner
+  banner: {
+    marginBottom: 20,
+    borderRadius: 10,
+    overflow: "hidden",
+    height: 111,
+    backgroundColor: "#D0DDF7",
+  } as ViewStyle,
+  bannerInner: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 20,
+  } as ViewStyle,
+  bannerText: {
+    fontSize: 15,
+    fontFamily: typography.primary.semiBold,
+    color: BLUE,
+    textAlign: "center",
+  } as TextStyle,
+
+  // Footer
+  footer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 8,
+    paddingVertical: 8,
+    borderTopWidth: 1,
+    borderTopColor: "#E9ECF0",
+  } as ViewStyle,
+  footerLink: {
+    fontSize: 11,
+    color: "#7F848C",
+    fontFamily: typography.primary.normal,
+  } as TextStyle,
+  footerSep: {
+    fontSize: 11,
+    color: "#CFD0D3",
+  } as TextStyle,
+
+  // Bottom Navigation
+  bottomNav: {
+    flexDirection: "row",
+    backgroundColor: "#FFFFFF",
+    borderTopWidth: 1,
+    borderTopColor: "#E9ECF0",
+    paddingBottom: 24,
+    paddingTop: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    elevation: 10,
+  } as ViewStyle,
+  navItem: {
+    flex: 1,
+    alignItems: "center",
+    gap: 4,
+  } as ViewStyle,
+  navIconWrap: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+  } as ViewStyle,
+  navIconWrapActive: {
+    backgroundColor: "#EEF3FC",
+  } as ViewStyle,
+  navLabel: {
+    fontSize: 11,
+    textAlign: "center",
+  } as TextStyle,
+  navLabelActive: {
+    color: ACTIVE_BLUE,
+    fontFamily: typography.primary.semiBold,
+  } as TextStyle,
+  navLabelInactive: {
+    color: "#9AA0AD",
+    fontFamily: typography.primary.normal,
+  } as TextStyle,
+})
