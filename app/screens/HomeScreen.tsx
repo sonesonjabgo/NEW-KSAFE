@@ -20,7 +20,7 @@ const GRID_ITEMS = [
   { icon: "bell" as IconTypes, label: "TBM 보고서", sub: "TBM 보고서 조회" },
 ]
 
-export const HomeScreen: FC<HomeScreenProps> = () => {
+export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const [selectedTab, setSelectedTab] = useState("전체")
 
   const renderTabContent = () => (
@@ -81,10 +81,10 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
             ))}
           </View>
 
-          <View style={$boardHeader}>
+          <TouchableOpacity style={$boardHeader} onPress={() => navigation.navigate("SafeBoard")}>
             <Text text="안전게시판" style={$boardTitle} />
             <Text text="더보기 >" style={$boardMore} />
-          </View>
+          </TouchableOpacity>
 
           <View style={$tabCombinedContainer}>
             <View style={$tabContainer}>
@@ -100,9 +100,7 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
             </View>
             {renderTabContent()}
           </View>
-          
           <View style={$bottomInfoBox} />
-          
           <View style={$footerBox}>
             <Text text="홈페이지" style={$footerText} />
             <Text text=" | " style={$footerText} />
