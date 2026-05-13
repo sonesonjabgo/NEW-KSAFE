@@ -1,6 +1,7 @@
 import { FC, useState } from "react"
 import {
   View,
+  Image,
   TextInput,
   TouchableOpacity,
   Text as RNText,
@@ -8,11 +9,15 @@ import {
   useWindowDimensions,
   ViewStyle,
   TextStyle,
+  ImageStyle,
 } from "react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { Screen } from "@/components/Screen"
 import { Icon } from "@/components/Icon"
 import { useNavigation } from "@react-navigation/native"
+
+const logoImage = require("@assets/logo-ksafeone.png")
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
@@ -20,63 +25,70 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
   const navigation = useNavigation<any>()
   const [secureText, setSecureText] = useState(true)
   const { height } = useWindowDimensions()
+  const { bottom: bottomInset } = useSafeAreaInsets()
 
   return (
     <>
       <StatusBar barStyle="light-content" backgroundColor="#1B2A4A" />
-      <Screen style={$root} preset="fixed" safeAreaEdges={["top", "bottom"]}>
+      <Screen
+        style={$root}
+        contentContainerStyle={$screenContent}
+        preset="fixed"
+        safeAreaEdges={["top"]}
+      >
         {/* 상단 네이비 영역 */}
         <View style={[$navySection, { height: height * 0.42 }]}>
           <View style={$logoContainer}>
-            <View style={$helmetBadge}>
-              <RNText style={$helmetText}>A文</RNText>
-            </View>
+            <Image source={logoImage} style={$logoImage} resizeMode="contain" />
             <RNText style={$brandName}>K-SAFEONE</RNText>
             <RNText style={$tagline}>현장을 이해하는 통합 안전 파트너</RNText>
           </View>
         </View>
 
         {/* 하단 흰색 카드 */}
-        <View style={$card}>
+        <View style={[$card, { paddingBottom: Math.max(bottomInset, 24) }]}>
           <RNText style={$cardTitle}>로그인</RNText>
 
           <View style={$gap24} />
 
-          {/* 이메일 필드 */}
-          <RNText style={$label}>
-            이메일 <RNText style={$required}>*</RNText>
-          </RNText>
-          <View style={$inputRow}>
-            <RNText style={$mailIcon}>✉</RNText>
-            <TextInput
-              style={$textInput}
-              placeholder="이메일을 입력하세요."
-              placeholderTextColor="#9CA3AF"
-              keyboardType="email-address"
-              autoCapitalize="none"
-            />
+          {/* 입력 폼 박스 */}
+          <View style={$formBox}>
+            {/* 이메일 필드 */}
+            <RNText style={$label}>
+              이메일 <RNText style={$required}>*</RNText>
+            </RNText>
+            <View style={$inputRow}>
+              <RNText style={$mailIcon}>✉</RNText>
+              <TextInput
+                style={$textInput}
+                placeholder="이메일을 입력하세요."
+                placeholderTextColor="#9CA3AF"
+                keyboardType="email-address"
+                autoCapitalize="none"
+              />
+            </View>
+
+            <View style={$gap24} />
+
+            {/* 비밀번호 필드 */}
+            <RNText style={$label}>
+              비밀번호 <RNText style={$required}>*</RNText>
+            </RNText>
+            <View style={$inputRow}>
+              <Icon icon="lock" size={18} color="#9CA3AF" />
+              <TextInput
+                style={[$textInput, $passwordInput]}
+                placeholder="패스워드를 입력하세요."
+                placeholderTextColor="#9CA3AF"
+                secureTextEntry={secureText}
+              />
+              <TouchableOpacity onPress={() => setSecureText((v) => !v)} hitSlop={8}>
+                <Icon icon={secureText ? "hidden" : "view"} size={18} color="#9CA3AF" />
+              </TouchableOpacity>
+            </View>
           </View>
 
-          <View style={$gap16} />
-
-          {/* 비밀번호 필드 */}
-          <RNText style={$label}>
-            비밀번호 <RNText style={$required}>*</RNText>
-          </RNText>
-          <View style={$inputRow}>
-            <Icon icon="lock" size={18} color="#9CA3AF" />
-            <TextInput
-              style={[$textInput, $passwordInput]}
-              placeholder="패스워드를 입력하세요."
-              placeholderTextColor="#9CA3AF"
-              secureTextEntry={secureText}
-            />
-            <TouchableOpacity onPress={() => setSecureText((v) => !v)} hitSlop={8}>
-              <Icon icon={secureText ? "hidden" : "view"} size={18} color="#9CA3AF" />
-            </TouchableOpacity>
-          </View>
-
-          <View style={$gap24} />
+          <View style={$gap32} />
 
           {/* 로그인 버튼 */}
           <TouchableOpacity
@@ -101,7 +113,7 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
 
 const $root: ViewStyle = {
   flex: 1,
-  backgroundColor: "#1B2A4A",
+  backgroundColor: "#0B3069",
 }
 
 const $navySection: ViewStyle = {
@@ -111,23 +123,13 @@ const $navySection: ViewStyle = {
 
 const $logoContainer: ViewStyle = {
   alignItems: "center",
-  gap: 10,
+  gap: 9,
 }
 
-const $helmetBadge: ViewStyle = {
-  width: 72,
-  height: 72,
-  borderRadius: 36,
-  backgroundColor: "rgba(255,255,255,0.15)",
-  justifyContent: "center",
-  alignItems: "center",
-  marginBottom: 4,
-}
-
-const $helmetText: TextStyle = {
-  fontSize: 28,
-  color: "#FFFFFF",
-  fontWeight: "bold",
+const $logoImage: ImageStyle = {
+  width: 80,
+  height: 80,
+  marginBottom: 8,
 }
 
 const $brandName: TextStyle = {
@@ -195,7 +197,7 @@ const $passwordInput: TextStyle = {
 }
 
 const $loginButton: ViewStyle = {
-  backgroundColor: "#2563EB",
+  backgroundColor: "#0B3069",
   borderRadius: 12,
   height: 48,
   justifyContent: "center",
@@ -217,5 +219,12 @@ const $forgotText: TextStyle = {
   color: "#6B7280",
 }
 
+const $formBox: ViewStyle = {
+  borderRadius: 16,
+  padding: 20,
+}
+
+const $screenContent: ViewStyle = { flex: 1 }
 const $gap16: ViewStyle = { height: 16 }
 const $gap24: ViewStyle = { height: 24 }
+const $gap32: ViewStyle = { height: 32 }
