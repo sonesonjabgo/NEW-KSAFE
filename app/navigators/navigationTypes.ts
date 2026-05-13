@@ -21,6 +21,7 @@ export type AppStackParamList = {
   Login: undefined
   Home: undefined
   Demo: NavigatorScreenParams<DemoTabParamList>
+  SafeHealthMain: undefined
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
