@@ -11,6 +11,11 @@ import {
 } from "@expo-google-fonts/space-grotesk"
 
 export const customFontsToLoad = {
+  PretendardLight: require("../../assets/fonts/Pretendard-Light.otf"),
+  PretendardRegular: require("../../assets/fonts/Pretendard-Regular.otf"),
+  PretendardMedium: require("../../assets/fonts/Pretendard-Medium.otf"),
+  PretendardSemiBold: require("../../assets/fonts/Pretendard-SemiBold.otf"),
+  PretendardBold: require("../../assets/fonts/Pretendard-Bold.otf"),
   spaceGroteskLight,
   spaceGroteskRegular,
   spaceGroteskMedium,
@@ -19,6 +24,14 @@ export const customFontsToLoad = {
 }
 
 const fonts = {
+  pretendard: {
+    // Local font - supports Korean characters.
+    light: "PretendardLight",
+    normal: "PretendardRegular",
+    medium: "PretendardMedium",
+    semiBold: "PretendardSemiBold",
+    bold: "PretendardBold",
+  },
   spaceGrotesk: {
     // Cross-platform Google font.
     light: "spaceGroteskLight",
@@ -59,7 +72,7 @@ export const typography = {
   /**
    * The primary font. Used in most places.
    */
-  primary: fonts.spaceGrotesk,
+  primary: fonts.pretendard,
   /**
    * An alternate font used for perhaps titles and stuff.
    */
