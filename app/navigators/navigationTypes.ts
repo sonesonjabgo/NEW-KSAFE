@@ -20,6 +20,7 @@ export type AppStackParamList = {
   Welcome: undefined
   Login: undefined
   Home: undefined
+  SafeBoard: undefined
   Demo: NavigatorScreenParams<DemoTabParamList>
   SafeHealthMain: undefined
   WorkerParticipation: undefined

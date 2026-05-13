@@ -87,7 +87,7 @@ const BOARD_ITEMS = [
 const TABS = ["전체", "회사전체", "사업장"] as const
 type TabType = (typeof TABS)[number]
 
-export const HomeScreen: FC<HomeScreenProps> = () => {
+export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
   const [userRole, setUserRole] = useState<"admin" | "worker">("worker")
   const [selectedTab, setSelectedTab] = useState<TabType>("전체")
@@ -240,7 +240,7 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
           <View style={$boardSection}>
             <View style={$boardHeader}>
               <Text text="안전게시판" style={$boardTitle} />
-              <TouchableOpacity style={$boardMoreBtn}>
+              <TouchableOpacity style={$boardMoreBtn} onPress={() => navigation.navigate("SafeBoard")}>
                 <Text text="더보기" style={$boardMoreText} />
                 <Icon icon="caretRight" size={12} color="#7F848C" />
               </TouchableOpacity>

@@ -13,6 +13,7 @@ import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
 import { HomeScreen } from "@/screens/HomeScreen"
 import { LoginScreen } from "@/screens/LoginScreen"
 import { WelcomeScreen } from "@/screens/WelcomeScreen"
+import { SafeBoardScreen } from "@/screens/SafeBoardScreen/SafeBoardScreen"
 import { useAppTheme } from "@/theme/context"
 import { SafeHealthMainScreen } from "@/screens/SafeHealthScreen/SafeHealthMainScreen"
 import { WorkerParticipationScreen } from "@/screens/WorkerParticipationScreen/WorkerParticipationScreen"
@@ -51,6 +52,7 @@ const AppStack = () => {
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="SafeHealthMain" component={SafeHealthMainScreen} />
       <Stack.Screen name="WorkerParticipation" component={WorkerParticipationScreen} />
+      <Stack.Screen name="SafeBoard" component={SafeBoardScreen} />
 
       {/* {isAuthenticated ? (
         <>
