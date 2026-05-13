@@ -16,6 +16,9 @@ export const $headerContainer: ViewStyle = {
   paddingTop: 20,
   paddingBottom: 20,
   paddingHorizontal: 20,
+
+  alignItems: "center",
+  justifyContent: "center",
 }
 
 export const $adminHeaderContainer: ViewStyle = {
