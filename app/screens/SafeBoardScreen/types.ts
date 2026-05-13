@@ -1,4 +1,4 @@
-import type { AppStackScreenProps } from "@/navigators/navigationTypes"
+import type { MainTabScreenProps } from "@/navigators/navigationTypes"
 
 export type ScopeType = "company_wide" | "workplace"
 export type StatusType = "unread" | "pending_signature" | "completed" | "draft" | "published" | "archived"
@@ -15,4 +15,4 @@ export interface SafeBoardItem {
   status: StatusType
 }
 
-export interface SafeBoardScreenProps extends AppStackScreenProps<"SafeBoard"> {}
+export interface SafeBoardScreenProps extends MainTabScreenProps<"SafeBoard"> {}

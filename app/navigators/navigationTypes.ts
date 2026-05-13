@@ -15,21 +15,31 @@ export type DemoTabParamList = {
   DemoPodcastList: undefined
 }
 
+// Main Tab Navigator types
+export type MainTabParamList = {
+  Home: undefined
+  SafeBoard: undefined
+  SafeHealthMain: undefined
+  WorkerParticipation: undefined
+}
+
 // App Stack Navigator types
 export type AppStackParamList = {
   Welcome: undefined
   Login: undefined
-  Home: undefined
-  SafeBoard: undefined
+  Main: NavigatorScreenParams<MainTabParamList>
   Demo: NavigatorScreenParams<DemoTabParamList>
-  SafeHealthMain: undefined
-  WorkerParticipation: undefined
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<
   AppStackParamList,
   T
+>
+
+export type MainTabScreenProps<T extends keyof MainTabParamList> = CompositeScreenProps<
+  BottomTabScreenProps<MainTabParamList, T>,
+  AppStackScreenProps<keyof AppStackParamList>
 >
 
 export type DemoTabScreenProps<T extends keyof DemoTabParamList> = CompositeScreenProps<

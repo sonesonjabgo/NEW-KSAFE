@@ -10,15 +10,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import Config from "@/config"
 import { useAuth } from "@/context/AuthContext"
 import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
-import { HomeScreen } from "@/screens/HomeScreen"
 import { LoginScreen } from "@/screens/LoginScreen"
 import { WelcomeScreen } from "@/screens/WelcomeScreen"
-import { SafeBoardScreen } from "@/screens/SafeBoardScreen/SafeBoardScreen"
 import { useAppTheme } from "@/theme/context"
-import { SafeHealthMainScreen } from "@/screens/SafeHealthScreen/SafeHealthMainScreen"
-import { WorkerParticipationScreen } from "@/screens/WorkerParticipationScreen/WorkerParticipationScreen"
 
 import { DemoNavigator } from "./DemoNavigator"
+import { MainNavigator } from "./MainNavigator"
 import type { AppStackParamList, NavigationProps } from "./navigationTypes"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 
@@ -49,10 +46,7 @@ const AppStack = () => {
       }}
     >
       <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="SafeHealthMain" component={SafeHealthMainScreen} />
-      <Stack.Screen name="WorkerParticipation" component={WorkerParticipationScreen} />
-      <Stack.Screen name="SafeBoard" component={SafeBoardScreen} />
+      <Stack.Screen name="Main" component={MainNavigator} />
 
       {/* {isAuthenticated ? (
         <>

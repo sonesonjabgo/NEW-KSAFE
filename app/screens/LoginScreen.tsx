@@ -93,7 +93,7 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
           {/* 로그인 버튼 */}
           <TouchableOpacity
             style={$loginButton}
-            onPress={() => navigation.navigate("Home")}
+            onPress={() => navigation.navigate("Main")}
             activeOpacity={0.85}
           >
             <RNText style={$loginButtonText}>로그인</RNText>

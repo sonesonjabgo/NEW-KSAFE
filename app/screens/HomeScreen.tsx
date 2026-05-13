@@ -10,12 +10,12 @@ import {
   StyleSheet,
 } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import type { AppStackScreenProps } from "@/navigators/navigationTypes"
+import type { MainTabScreenProps } from "@/navigators/navigationTypes"
 import { typography } from "@/theme/typography"
-import { Icon, IconTypes } from "@/components/Icon"
+import { Icon } from "@/components/Icon"
 import { Text } from "@/components/Text"
 
-interface HomeScreenProps extends AppStackScreenProps<"Home"> {}
+interface HomeScreenProps extends MainTabScreenProps<"Home"> {}
 
 const GRID_ITEMS: { img: number; label: string; sub: string }[] = [
   {
@@ -91,7 +91,6 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
   const [userRole, setUserRole] = useState<"admin" | "worker">("worker")
   const [selectedTab, setSelectedTab] = useState<TabType>("전체")
-  const [activeNav, setActiveNav] = useState(0)
   // TODO: 추후 실제 API 연동으로 교체
   const [hasExistingEdu, setHasExistingEdu] = useState(true)
 
@@ -104,13 +103,6 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   // 관리자: 인덱스 0~8 (9개) / 근로자: 인덱스 0~5 + 9~10 (8개)
   const visibleGridItems =
     userRole === "admin" ? GRID_ITEMS.slice(0, 9) : [...GRID_ITEMS.slice(0, 6), ...GRID_ITEMS.slice(9)]
-
-  const navItems: { icon: IconTypes; label: string }[] = [
-    { icon: "menu", label: "홈" },
-    { icon: "clap", label: "안전게시판" },
-    { icon: "check", label: "안전관리" },
-    { icon: "community", label: userRole === "admin" ? "근로자 참여" : "마이 페이지" },
-  ]
 
   return (
     <View style={$root}>
@@ -307,31 +299,11 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         </View>
       </ScrollView>
 
-      {/* Bottom Navigation */}
-      <View style={$bottomNav}>
-        {navItems.map((item, i) => (
-          <TouchableOpacity
-            key={i}
-            style={$navItem}
-            onPress={() => setActiveNav(i)}
-            activeOpacity={0.7}
-          >
-            <View style={[$navIconWrap, i === activeNav && $navIconWrapActive]}>
-              <Icon icon={item.icon} size={22} color={i === activeNav ? "#214ACC" : "#9AA0AD"} />
-            </View>
-            <Text
-              text={item.label}
-              style={[$navLabel, i === activeNav ? $navLabelActive : $navLabelInactive]}
-            />
-          </TouchableOpacity>
-        ))}
-      </View>
     </View>
   )
 }
 
 const BLUE = "#0B3069"
-const ACTIVE_BLUE = "#214ACC"
 
 const $root: ViewStyle = {
   flex: 1,
@@ -765,53 +737,6 @@ const $footerLink: TextStyle = {
 const $footerSep: TextStyle = {
   fontSize: 11,
   color: "#CFD0D3",
-}
-
-const $bottomNav: ViewStyle = {
-  flexDirection: "row",
-  backgroundColor: "#FFFFFF",
-  borderTopWidth: 1,
-  borderTopColor: "#E9ECF0",
-  paddingBottom: 24,
-  paddingTop: 8,
-  shadowColor: "#000",
-  shadowOffset: { width: 0, height: -2 },
-  shadowOpacity: 0.06,
-  shadowRadius: 8,
-  elevation: 10,
-}
-
-const $navItem: ViewStyle = {
-  flex: 1,
-  alignItems: "center",
-  gap: 4,
-}
-
-const $navIconWrap: ViewStyle = {
-  width: 36,
-  height: 36,
-  borderRadius: 10,
-  alignItems: "center",
-  justifyContent: "center",
-}
-
-const $navIconWrapActive: ViewStyle = {
-  backgroundColor: "#EEF3FC",
-}
-
-const $navLabel: TextStyle = {
-  fontSize: 11,
-  textAlign: "center",
-}
-
-const $navLabelActive: TextStyle = {
-  color: ACTIVE_BLUE,
-  fontFamily: typography.primary.semiBold,
-}
-
-const $navLabelInactive: TextStyle = {
-  color: "#9AA0AD",
-  fontFamily: typography.primary.normal,
 }
 
 const $eduBanner: ViewStyle = {

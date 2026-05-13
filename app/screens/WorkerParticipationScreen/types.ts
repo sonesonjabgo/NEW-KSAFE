@@ -1,4 +1,4 @@
-import type { AppStackScreenProps } from "@/navigators/navigationTypes"
+import type { MainTabScreenProps } from "@/navigators/navigationTypes"
 
 export interface WorkerParticipationMenuItem {
   id: number
@@ -7,4 +7,4 @@ export interface WorkerParticipationMenuItem {
   icon: string
 }
 
-export interface WorkerParticipationScreenProps extends AppStackScreenProps<"WorkerParticipation"> {}
+export interface WorkerParticipationScreenProps extends MainTabScreenProps<"WorkerParticipation"> {}
