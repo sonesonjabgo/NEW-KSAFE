@@ -3,6 +3,7 @@ import { FlatList, Modal, Pressable, TouchableOpacity, View } from "react-native
 import { Bell, ChevronDown, PencilLine, Check } from "lucide-react-native"
 
 import { Text } from "@/components/Text"
+import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 
 import { SafeBoardCard } from "./components/SafeBoardCard"
@@ -10,10 +11,8 @@ import { mockMyPosts, mockSafeBoardData } from "./mock/mockSafeBoardData"
 import * as S from "./styles"
 import type { SafeBoardItem, SafeBoardScreenProps } from "./types"
 
-type Role = "admin" | "worker"
 type AdminTab = "all" | "my"
 
-const mockRole: Role = "admin"
 const mockWorkerWorkplaceId = 1
 
 const WORKPLACES = [
@@ -39,11 +38,12 @@ const filterByWorkplace = (posts: SafeBoardItem[], workplaceId: number): SafeBoa
 }
 
 export const SafeBoardScreen: FC<SafeBoardScreenProps> = () => {
+  const { role } = useRole()
   const [activeTab, setActiveTab] = useState<AdminTab>("all")
   const [selectedWorkplace, setSelectedWorkplace] = useState("서울 한강 레지던스 RC공사 현장")
   const [showWorkplaceModal, setShowWorkplaceModal] = useState(false)
 
-  const isAdmin = mockRole === "admin"
+  const isAdmin = role === "admin"
   const selectedWorkplaceId = getWorkplaceId(selectedWorkplace)
   const filterWorkplaceId = isAdmin ? selectedWorkplaceId : mockWorkerWorkplaceId
 
