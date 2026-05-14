@@ -1,4 +1,4 @@
-import { FC, useState, useRef, useCallback, useEffect, useMemo } from "react"
+import { FC, useState, useRef, useCallback, useEffect } from "react"
 import {
   View,
   ViewStyle,
@@ -326,7 +326,6 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
               placeholderTextColor="#ABABAB"
               value={inputText}
               onChangeText={setInputText}
-              multiline
               maxLength={1000}
               editable={!isLoading}
             />
@@ -353,7 +352,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
 
 const $root: ViewStyle = {
   flex: 1,
-  backgroundColor: BG,
+  backgroundColor: NAVY,
 }
 
 const $header: ViewStyle = {
@@ -389,6 +388,10 @@ const $trashButton: ViewStyle = {
 
 const $keyboardView: ViewStyle = {
   flex: 1,
+  backgroundColor: BG,
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+  overflow: "hidden",
 }
 
 const $chatList: {
@@ -422,7 +425,7 @@ const $userMsgWrapper: ViewStyle = {
 const $userBubble: ViewStyle = {
   backgroundColor: BLUE,
   borderRadius: 16,
-  borderBottomRightRadius: 4,
+  borderTopRightRadius: 4,
   paddingHorizontal: 14,
   paddingVertical: 10,
   maxWidth: "80%",
@@ -465,6 +468,7 @@ const $aiMsgName: TextStyle = {
 const $aiBubble: ViewStyle = {
   backgroundColor: "#FFFFFF",
   borderRadius: 16,
+  borderTopLeftRadius: 4,
   paddingHorizontal: 14,
   paddingVertical: 10,
   shadowColor: "#000",
@@ -561,29 +565,26 @@ const $inputContainer: ViewStyle = {
 const $inputRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-  gap: 10,
+  height: 50,
+  backgroundColor: "#F4F6FB",
+  borderRadius: 46.5,
+  borderWidth: 1,
+  borderColor: "#E0E5F0",
+  paddingLeft: 14,
+  paddingRight: 4,
 }
 
 const $textInput: TextStyle = {
   flex: 1,
-  backgroundColor: "#F4F6FB",
-  borderRadius: 12,
-  paddingHorizontal: 14,
-  paddingVertical: 15,
   fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#1A2236",
-  maxHeight: 120,
-  borderWidth: 1,
-  borderColor: "#E0E5F0",
-  lineHeight: 20,
-  textAlignVertical: "center",
 }
 
 const $sendButton: ViewStyle = {
-  width: 44,
-  height: 44,
-  borderRadius: 22,
+  width: 42,
+  height: 42,
+  borderRadius: 21,
   alignItems: "center",
   justifyContent: "center",
 }
