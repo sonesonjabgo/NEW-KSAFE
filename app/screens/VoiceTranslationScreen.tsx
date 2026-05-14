@@ -1,4 +1,4 @@
-import { FC, useState, useRef } from "react"
+import { FC, useState } from "react"
 import {
   View,
   ViewStyle,
@@ -106,15 +106,8 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
 
   const currentLangKey = langMenuTarget === "top" ? topLanguage : bottomLanguage
 
-  const getLangLabel = (key: LanguageKey) => {
-    const name = translate(`voiceTranslationScreen:languages.${key}` as any)
-    const sub = translate(`voiceTranslationScreen:languageSubtitles.${key}` as any)
-    return sub ? `${name} ${sub}` : name
-  }
-
-  const getDropdownLabel = (key: LanguageKey) => {
-    return translate(`voiceTranslationScreen:languages.${key}` as any)
-  }
+  const getDropdownLabel = (key: LanguageKey) =>
+    translate(`voiceTranslationScreen:languages.${key}` as any)
 
   return (
     <View style={[$root, { paddingTop: insets.top }]}>
