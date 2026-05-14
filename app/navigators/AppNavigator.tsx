@@ -14,6 +14,7 @@ import { LoginScreen } from "@/screens/LoginScreen"
 import { QrScannerScreen } from "@/screens/QrScannerScreen"
 import { useAppTheme } from "@/theme/context"
 
+import { AISafetyChatScreen } from "@/screens/AISafetyChatScreen/AISafetyChatScreen"
 import { MyPageScreen } from "@/screens/MyPageScreen"
 import { VoiceTranslationScreen } from "@/screens/VoiceTranslationScreen"
 
@@ -52,6 +53,7 @@ const AppStack = () => {
       <Stack.Screen name="MyPage" component={MyPageScreen} />
       <Stack.Screen name="VoiceTranslation" component={VoiceTranslationScreen} />
       <Stack.Screen name="QrScanner" component={QrScannerScreen} />
+      <Stack.Screen name="AISafetyChat" component={AISafetyChatScreen} />
     </Stack.Navigator>
   )
 }

@@ -58,6 +58,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         Icon: GridChatbot,
         label: translate("homeScreen:grid.chatbot.label"),
         sub: translate("homeScreen:grid.chatbot.sub"),
+        onPress: () => navigation.navigate("AISafetyChat"),
       },
       {
         Icon: GridTranslate,

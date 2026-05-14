@@ -226,6 +226,25 @@ const ja: Translations = {
     },
   },
 
+  aiSafetyChatScreen: {
+    title: "AI Safety Assistant",
+    aiName: "AI Safety Assistant",
+    welcomeMessage: "Hello! I am the Industrial Safety AI Assistant.",
+    inputPlaceholder: "Enter a message...",
+    inputHint: "Required. Please write between 2 and 1,000 characters.",
+    deleteDialog: {
+      title: "Delete Conversation",
+      message: "Are you sure you want to delete all conversation history?",
+      confirm: "Delete",
+      cancel: "Cancel",
+    },
+    suggestedQuestions: {
+      q1: "Explain general construction site safety regulations",
+      q2: "What are the safety rules for working at heights?",
+      q3: "What is the emergency response procedure in case of fire?",
+    },
+  },
+
   myPageScreen: {
     title: "My Page",
     workplace: {
