@@ -214,15 +214,32 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
           {/* Feature Grid */}
           <View style={$grid}>
-            {visibleGridItems.map((item, i) => (
-              <TouchableOpacity key={i} style={$gridCell} activeOpacity={0.7}>
-                <item.Icon width={36} height={36} style={$gridIcon} />
-                <View style={$gridTextWrap}>
-                  <Text text={item.label} style={$gridLabel} numberOfLines={1} />
-                  <Text text={item.sub} style={$gridSub} numberOfLines={1} />
-                </View>
-              </TouchableOpacity>
-            ))}
+            {visibleGridItems.map((item, i) => {
+              const originalIndex =
+                userRole === "admin"
+                  ? i
+                  : i < 6
+                    ? i
+                    : i + 3
+              return (
+                <TouchableOpacity
+                  key={i}
+                  style={$gridCell}
+                  activeOpacity={0.7}
+                  onPress={() => {
+                    if (originalIndex === 0) {
+                      navigation.navigate("VoiceTranslation")
+                    }
+                  }}
+                >
+                  <item.Icon width={36} height={36} style={$gridIcon} />
+                  <View style={$gridTextWrap}>
+                    <Text text={item.label} style={$gridLabel} numberOfLines={1} />
+                    <Text text={item.sub} style={$gridSub} numberOfLines={1} />
+                  </View>
+                </TouchableOpacity>
+              )
+            })}
           </View>
 
           {/* 기존 교육/발표 참여 안내 배너 (근로자 전용) */}
