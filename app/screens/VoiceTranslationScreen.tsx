@@ -10,12 +10,8 @@ import {
   FlatList,
 } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { ChevronDown, ArrowLeft, RotateCcw, Volume2, Mic, Square } from "lucide-react-native"
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-} from "react-native-reanimated"
+import { ChevronDown, RotateCcw, Volume2, Mic, Square } from "lucide-react-native"
+import { IconChevronLeft } from "@tabler/icons-react-native"
 
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
@@ -78,18 +74,6 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
   const [langMenuVisible, setLangMenuVisible] = useState(false)
   const [langMenuTarget, setLangMenuTarget] = useState<"top" | "bottom">("top")
 
-  const flipRotation = useSharedValue(0)
-
-  const topBoxAnimStyle = useAnimatedStyle(() => ({
-    transform: [{ rotateZ: `${flipRotation.value}deg` }],
-  }))
-
-  const handleFlip = () => {
-    const next = isFlipped ? 0 : 180
-    flipRotation.value = withTiming(next, { duration: 450 })
-    setIsFlipped((prev) => !prev)
-  }
-
   const openLangMenu = (target: "top" | "bottom") => {
     setLangMenuTarget(target)
     setLangMenuVisible(true)
@@ -113,86 +97,65 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
     <View style={[$root, { paddingTop: insets.top }]}>
       {/* ── Header ── */}
       <View style={$header}>
-        <TouchableOpacity style={$headerBtn} onPress={() => navigation.goBack()}>
-          <ArrowLeft size={22} color="#FFFFFF" strokeWidth={2} />
+        <TouchableOpacity style={$backButton} onPress={() => navigation.goBack()}>
+          <IconChevronLeft size={24} color="#FFFFFF" />
         </TouchableOpacity>
         <Text
           text={translate("voiceTranslationScreen:title")}
           style={$headerTitle}
         />
-        <TouchableOpacity
-          style={[$headerBtn, $headerBtnRight, isFlipped && $headerBtnActive]}
-          onPress={handleFlip}
-        >
-          <RotateCcw size={20} color={isFlipped ? NAVY : "#FFFFFF"} strokeWidth={2} />
-          <Text
-            text={translate("voiceTranslationScreen:flipScreen")}
-            style={[$headerBtnLabel, isFlipped && $headerBtnLabelActive]}
-          />
+        <TouchableOpacity style={$flipButton} onPress={() => setIsFlipped((prev) => !prev)}>
+          <RotateCcw size={22} color="#FFFFFF" strokeWidth={2} />
         </TouchableOpacity>
       </View>
 
       {/* ── Content ── */}
       <View style={$content}>
         {/* ── 상단 박스 (상대방 언어) ── */}
-        <Animated.View style={[topBoxAnimStyle]}>
-          <View style={$box}>
-            {/* 언어 드롭다운 */}
-            <TouchableOpacity style={$langDropdown} onPress={() => openLangMenu("top")}>
-              <Text text={getDropdownLabel(topLanguage)} style={$langDropdownText} />
-              <ChevronDown size={14} color="#1062D8" strokeWidth={2.5} />
-            </TouchableOpacity>
+        <View style={[$box, { transform: [{ rotateZ: isFlipped ? "180deg" : "0deg" }] }]}>
+          <TouchableOpacity style={$langDropdown} onPress={() => openLangMenu("top")}>
+            <Text text={getDropdownLabel(topLanguage)} style={$langDropdownText} />
+            <ChevronDown size={14} color={BLUE} strokeWidth={2.5} />
+          </TouchableOpacity>
 
-            {/* 대화 텍스트 영역 */}
-            <ScrollView style={$messageArea} showsVerticalScrollIndicator={false}>
-              {topMessages.map((msg) => (
-                <View key={msg.id} style={$messageRow}>
-                  <Text text={msg.text} style={$messageText} />
-                  <TouchableOpacity style={$speakerBtn}>
-                    <Volume2 size={16} color="#7F848C" strokeWidth={2} />
-                  </TouchableOpacity>
-                </View>
-              ))}
-            </ScrollView>
+          <ScrollView style={$messageArea} showsVerticalScrollIndicator={false}>
+            {topMessages.map((msg) => (
+              <View key={msg.id} style={$messageRow}>
+                <Text text={msg.text} style={$messageText} />
+                <TouchableOpacity style={$speakerBtn}>
+                  <Volume2 size={16} color="#7F848C" strokeWidth={2} />
+                </TouchableOpacity>
+              </View>
+            ))}
+          </ScrollView>
 
-            {/* 마이크 버튼 */}
-            <View style={$micArea}>
-              {topMicOn ? (
-                <View style={$micActiveRow}>
-                  <View style={$recordingDot} />
-                  <ActivityIndicator size="small" color="#1062D8" />
-                  <Text
-                    text={translate("voiceTranslationScreen:listening")}
-                    style={$listeningText}
-                  />
-                  <TouchableOpacity style={$stopBtn} onPress={() => setTopMicOn(false)}>
-                    <Square size={14} color="#FFFFFF" fill="#FFFFFF" />
-                  </TouchableOpacity>
-                </View>
-              ) : (
-                <View style={$micOffRow}>
-                  <Text
-                    text={translate("voiceTranslationScreen:speakNow")}
-                    style={$speakNowText}
-                  />
-                  <TouchableOpacity style={$micBtn} onPress={() => setTopMicOn(true)}>
-                    <Mic size={22} color="#1B2A4A" strokeWidth={2} />
-                  </TouchableOpacity>
-                </View>
-              )}
-            </View>
+          <View style={$micArea}>
+            {topMicOn ? (
+              <View style={$micActiveRow}>
+                <ActivityIndicator size="small" color={BLUE} />
+                <Text
+                  text={translate("voiceTranslationScreen:listening")}
+                  style={$listeningText}
+                />
+                <TouchableOpacity style={$stopBtn} onPress={() => setTopMicOn(false)}>
+                  <Square size={14} color="#FFFFFF" fill="#FFFFFF" />
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <TouchableOpacity style={$micBtn} onPress={() => setTopMicOn(true)}>
+                <Mic size={22} color={BLUE} strokeWidth={2} />
+              </TouchableOpacity>
+            )}
           </View>
-        </Animated.View>
+        </View>
 
         {/* ── 하단 박스 (내 언어) ── */}
         <View style={$box}>
-          {/* 언어 드롭다운 */}
           <TouchableOpacity style={$langDropdown} onPress={() => openLangMenu("bottom")}>
             <Text text={getDropdownLabel(bottomLanguage)} style={$langDropdownText} />
-            <ChevronDown size={14} color="#1062D8" strokeWidth={2.5} />
+            <ChevronDown size={14} color={BLUE} strokeWidth={2.5} />
           </TouchableOpacity>
 
-          {/* 대화 텍스트 영역 */}
           <ScrollView style={$messageArea} showsVerticalScrollIndicator={false}>
             {bottomMessages.map((msg) => (
               <View key={msg.id} style={$messageRow}>
@@ -204,12 +167,10 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
             ))}
           </ScrollView>
 
-          {/* 마이크 버튼 */}
           <View style={$micArea}>
             {bottomMicOn ? (
               <View style={$micActiveRow}>
-                <View style={$recordingDot} />
-                <ActivityIndicator size="small" color="#1062D8" />
+                <ActivityIndicator size="small" color={BLUE} />
                 <Text
                   text={translate("voiceTranslationScreen:listening")}
                   style={$listeningText}
@@ -219,15 +180,9 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
                 </TouchableOpacity>
               </View>
             ) : (
-              <View style={$micOffRow}>
-                <Text
-                  text={translate("voiceTranslationScreen:speakNow")}
-                  style={$speakNowText}
-                />
-                <TouchableOpacity style={$micBtn} onPress={() => setBottomMicOn(true)}>
-                  <Mic size={22} color="#1B2A4A" strokeWidth={2} />
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity style={$micBtn} onPress={() => setBottomMicOn(true)}>
+                <Mic size={22} color={BLUE} strokeWidth={2} />
+              </TouchableOpacity>
             )}
           </View>
         </View>
@@ -293,7 +248,7 @@ const BLUE = "#1062D8"
 
 const $root: ViewStyle = {
   flex: 1,
-  backgroundColor: "#F5F5F5",
+  backgroundColor: "#F9FAFE",
 }
 
 const $header: ViewStyle = {
@@ -301,48 +256,37 @@ const $header: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "space-between",
-  paddingHorizontal: 16,
-  paddingVertical: 12,
+  paddingHorizontal: 20,
+  paddingVertical: 22,
 }
 
-const $headerBtn: ViewStyle = {
-  flexDirection: "row",
-  alignItems: "center",
-  gap: 4,
-  minWidth: 60,
-}
-
-const $headerBtnRight: ViewStyle = {
-  justifyContent: "flex-end",
-}
-
-const $headerBtnActive: ViewStyle = {
-  backgroundColor: "#FFFFFF",
-  borderRadius: 8,
-  paddingHorizontal: 8,
-  paddingVertical: 4,
-}
-
-const $headerBtnLabel: TextStyle = {
-  fontSize: 12,
-  fontFamily: typography.primary.medium,
-  color: "#FFFFFF",
-}
-
-const $headerBtnLabelActive: TextStyle = {
-  color: NAVY,
+const $backButton: ViewStyle = {
+  width: 36,
+  height: 36,
+  justifyContent: "center",
+  alignItems: "flex-start",
 }
 
 const $headerTitle: TextStyle = {
-  fontSize: 16,
-  fontFamily: typography.primary.bold,
+  flex: 1,
+  fontSize: 21,
+  fontFamily: typography.primary.semiBold,
   color: "#FFFFFF",
+  textAlign: "center",
+}
+
+const $flipButton: ViewStyle = {
+  width: 36,
+  height: 36,
+  justifyContent: "center",
+  alignItems: "flex-end",
 }
 
 const $content: ViewStyle = {
   flex: 1,
   padding: 16,
   gap: 14,
+  backgroundColor: "#F9FAFE",
 }
 
 const $box: ViewStyle = {
@@ -413,40 +357,16 @@ const $micBtn: ViewStyle = {
   height: 48,
   borderRadius: 24,
   borderWidth: 2,
-  borderColor: NAVY,
+  borderColor: BLUE,
   alignItems: "center",
   justifyContent: "center",
   backgroundColor: "#FFFFFF",
-}
-
-const $micOffRow: ViewStyle = {
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  gap: 10,
-}
-
-const $speakNowText: TextStyle = {
-  fontSize: 12,
-  fontFamily: typography.primary.normal,
-  color: "#ABABAB",
-}
-
-const $recordingDot: ViewStyle = {
-  width: 8,
-  height: 8,
-  borderRadius: 4,
-  backgroundColor: "#E53935",
 }
 
 const $micActiveRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
   gap: 8,
-  backgroundColor: "#EEF3FC",
-  borderRadius: 24,
-  paddingHorizontal: 14,
-  paddingVertical: 10,
 }
 
 const $listeningText: TextStyle = {
@@ -459,7 +379,7 @@ const $stopBtn: ViewStyle = {
   width: 28,
   height: 28,
   borderRadius: 14,
-  backgroundColor: "#E53935",
+  backgroundColor: BLUE,
   alignItems: "center",
   justifyContent: "center",
 }
