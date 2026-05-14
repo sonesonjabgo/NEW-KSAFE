@@ -20,6 +20,7 @@ export type AppStackParamList = {
   Login: undefined
   Main: NavigatorScreenParams<MainTabParamList>
   MyPage: undefined
+  VoiceTranslation: undefined
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<

@@ -212,6 +212,36 @@ const ko: Translations = {
     },
   },
 
+  voiceTranslationScreen: {
+    title: "음성 대화 번역",
+    flipScreen: "돌리기",
+    listening: "음성을 듣는 중...",
+    speakNow: "말씀해 주세요",
+    languageMenu: {
+      title: "인식된 언어",
+    },
+    languages: {
+      korean: "한국어",
+      english: "English",
+      chineseSimplified: "简体中文",
+      chineseTraditional: "繁體中文",
+      russian: "Русский",
+      vietnamese: "Tiếng Việt",
+      indonesian: "Bahasa Indonesia",
+      khmer: "ភាសាខ្មែរ",
+    },
+    languageSubtitles: {
+      korean: "",
+      english: "(영어)",
+      chineseSimplified: "(중국어(간체))",
+      chineseTraditional: "(중국어(번체))",
+      russian: "(러시아어)",
+      vietnamese: "(베트남어)",
+      indonesian: "(인도네시아어)",
+      khmer: "(크메르어)",
+    },
+  },
+
   myPageScreen: {
     title: "마이페이지",
     workplace: {

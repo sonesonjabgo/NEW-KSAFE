@@ -14,6 +14,7 @@ import { LoginScreen } from "@/screens/LoginScreen"
 import { useAppTheme } from "@/theme/context"
 
 import { MyPageScreen } from "@/screens/MyPageScreen"
+import { VoiceTranslationScreen } from "@/screens/VoiceTranslationScreen"
 
 import { MainNavigator } from "./MainNavigator"
 import type { AppStackParamList, NavigationProps } from "./navigationTypes"
@@ -48,6 +49,7 @@ const AppStack = () => {
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Main" component={MainNavigator} />
       <Stack.Screen name="MyPage" component={MyPageScreen} />
+      <Stack.Screen name="VoiceTranslation" component={VoiceTranslationScreen} />
     </Stack.Navigator>
   )
 }

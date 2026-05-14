@@ -182,6 +182,36 @@ const ja: Translations = {
     },
   },
 
+  voiceTranslationScreen: {
+    title: "Voice Conversation Translation",
+    flipScreen: "Flip",
+    listening: "Listening...",
+    speakNow: "Speak now",
+    languageMenu: {
+      title: "Recognized Language",
+    },
+    languages: {
+      korean: "한국어",
+      english: "English",
+      chineseSimplified: "简体中文",
+      chineseTraditional: "繁體中文",
+      russian: "Русский",
+      vietnamese: "Tiếng Việt",
+      indonesian: "Bahasa Indonesia",
+      khmer: "ភាសាខ្មែរ",
+    },
+    languageSubtitles: {
+      korean: "",
+      english: "(영어)",
+      chineseSimplified: "(중국어(간체))",
+      chineseTraditional: "(중국어(번체))",
+      russian: "(러시아어)",
+      vietnamese: "(베트남어)",
+      indonesian: "(인도네시아어)",
+      khmer: "(크메르어)",
+    },
+  },
+
   myPageScreen: {
     title: "My Page",
     workplace: {
