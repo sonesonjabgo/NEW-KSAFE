@@ -11,8 +11,9 @@ import {
   useWindowDimensions,
 } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { ChevronDown, RotateCcw, Volume2, Mic, Square } from "lucide-react-native"
+import { ChevronDown, Volume2, Mic, Square } from "lucide-react-native"
 import { IconChevronLeft } from "@tabler/icons-react-native"
+import RotateIcon from "@assets/icons/voice/rotate.svg"
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -149,7 +150,7 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
           style={$headerTitle}
         />
         <TouchableOpacity style={$flipButton} onPress={() => setIsFlipped((prev) => !prev)}>
-          <RotateCcw size={22} color="#FFFFFF" strokeWidth={2} />
+          <RotateIcon style={{ transform: [{ scaleY: isFlipped ? -1 : 1 }] }} />
         </TouchableOpacity>
       </View>
 
