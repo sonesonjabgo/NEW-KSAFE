@@ -210,9 +210,7 @@ function SwitchAccessibilityLabel(props: SwitchInputProps & { role: "on" | "off"
       )}
 
       {accessibilityMode === "icon" && shouldLabelBeVisible && (
-        <View
-          style={[$switchAccessibilityIcon, { backgroundColor: color }]}
-        />
+        <View style={[$switchAccessibilityIcon, { backgroundColor: color }]} />
       )}
     </View>
   )

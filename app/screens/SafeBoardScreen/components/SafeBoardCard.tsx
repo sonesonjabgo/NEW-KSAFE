@@ -1,14 +1,16 @@
 import { FC } from "react"
 import { View, TouchableOpacity, TextStyle, ViewStyle } from "react-native"
-import { Text } from "@/components/Text"
-import { typography } from "@/theme/typography"
 import { Pin, PencilLine, MapPin } from "lucide-react-native"
-import type { SafeBoardItem, ScopeType, StatusType } from "../types"
 
 import BoardType1 from "@assets/icons/board/board_type1.svg"
 import BoardType2 from "@assets/icons/board/board_type2.svg"
 import BoardType3 from "@assets/icons/board/board_type3.svg"
 import BoardType4 from "@assets/icons/board/board_type4.svg"
+
+import { Text } from "@/components/Text"
+import { typography } from "@/theme/typography"
+
+import type { SafeBoardItem, ScopeType, StatusType } from "../types"
 
 interface SafeBoardCardProps {
   item: SafeBoardItem
@@ -47,7 +49,12 @@ function StatusBadge({ status }: { status: StatusType }) {
   )
 }
 
-export const SafeBoardCard: FC<SafeBoardCardProps> = ({ item, showStatus = false, showEditIcon = false, showDivider = true }) => {
+export const SafeBoardCard: FC<SafeBoardCardProps> = ({
+  item,
+  showStatus = false,
+  showEditIcon = false,
+  showDivider = true,
+}) => {
   return (
     <TouchableOpacity activeOpacity={0.7}>
       <View style={$cardContainer}>

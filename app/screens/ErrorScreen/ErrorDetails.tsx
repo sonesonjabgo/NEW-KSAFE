@@ -1,6 +1,5 @@
 import { ErrorInfo } from "react"
 import { ScrollView, TextStyle, View, ViewStyle } from "react-native"
-
 import { Bug } from "lucide-react-native"
 
 import { Button } from "@/components/Button"

@@ -9,17 +9,18 @@ import {
   ViewStyle,
   TextStyle,
 } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
-import type { AppStackScreenProps } from "@/navigators/navigationTypes"
-import { Screen } from "@/components/Screen"
 import { useNavigation } from "@react-navigation/native"
-import { translate } from "@/i18n/translate"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
+import EyeOffSvg from "@assets/icons/login/eye-off.svg"
+import EyeSvg from "@assets/icons/login/eye.svg"
+import LockSvg from "@assets/icons/login/lock.svg"
 import LogoSvg from "@assets/icons/login/logo-ksafeone.svg"
 import MailSvg from "@assets/icons/login/mail.svg"
-import LockSvg from "@assets/icons/login/lock.svg"
-import EyeSvg from "@assets/icons/login/eye.svg"
-import EyeOffSvg from "@assets/icons/login/eye-off.svg"
+
+import { Screen } from "@/components/Screen"
+import { translate } from "@/i18n/translate"
+import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 

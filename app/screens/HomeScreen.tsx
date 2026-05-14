@@ -1,19 +1,9 @@
 import { FC, useEffect, useState, useMemo } from "react"
 import { View, ViewStyle, TextStyle, TouchableOpacity, ScrollView, StyleSheet } from "react-native"
+import { Pin, ChevronRight } from "lucide-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import type { SvgProps } from "react-native-svg"
-import type { MainTabScreenProps } from "@/navigators/navigationTypes"
-import { typography } from "@/theme/typography"
-import { Text } from "@/components/Text"
-import { Pin, ChevronRight } from "lucide-react-native"
-import { translate } from "@/i18n/translate"
 
-import GridInterpret from "@assets/icons/home2/grid_interpret.svg"
-import GridChatbot from "@assets/icons/home2/grid_chatbot.svg"
-import GridTranslate from "@assets/icons/home2/grid_translate.svg"
-import GridEducation from "@assets/icons/home2/grid_education.svg"
-import GridEduJoin from "@assets/icons/home2/grid_edu_join.svg"
-import GridTbmJoin from "@assets/icons/home2/grid_tbm_join.svg"
 import GridPatrol from "@assets/icons/home2/grid_patrol.svg"
 import GridTbmCreate from "@assets/icons/home2/grid_tbm_create.svg"
 import GridTbmReport from "@assets/icons/home2/grid_tbm_report.svg"
@@ -22,10 +12,20 @@ import GridBulb from "@assets/icons/home2/grid_bulb.svg"
 
 import BoardType1 from "@assets/icons/board/board_type1.svg"
 import BoardType2 from "@assets/icons/board/board_type2.svg"
-
-import HeaderQr from "@assets/icons/nav2/header_qr.svg"
+import GridChatbot from "@assets/icons/home2/grid_chatbot.svg"
+import GridEduJoin from "@assets/icons/home2/grid_edu_join.svg"
+import GridEducation from "@assets/icons/home2/grid_education.svg"
+import GridInterpret from "@assets/icons/home2/grid_interpret.svg"
+import GridTbmJoin from "@assets/icons/home2/grid_tbm_join.svg"
+import GridTranslate from "@assets/icons/home2/grid_translate.svg"
 import HeaderBell from "@assets/icons/nav2/header_bell.svg"
 import HeaderLang from "@assets/icons/nav2/header_lang.svg"
+import HeaderQr from "@assets/icons/nav2/header_qr.svg"
+
+import { Text } from "@/components/Text"
+import { translate } from "@/i18n/translate"
+import type { MainTabScreenProps } from "@/navigators/navigationTypes"
+import { typography } from "@/theme/typography"
 
 interface HomeScreenProps extends MainTabScreenProps<"Home"> {}
 
@@ -43,68 +43,68 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   // TODO: 추후 실제 API 연동으로 교체
   const [hasExistingEdu, setHasExistingEdu] = useState(true)
 
-  const TABS: TabType[] = useMemo(
-    () => ["all", "company", "workplace"],
-    []
-  )
+  const TABS: TabType[] = useMemo(() => ["all", "company", "workplace"], [])
 
-  const GRID_ITEMS: { Icon: React.FC<SvgProps>; label: string; sub: string }[] = useMemo(() => [
-    {
-      Icon: GridInterpret,
-      label: translate("homeScreen:grid.interpret.label"),
-      sub: translate("homeScreen:grid.interpret.sub"),
-    },
-    {
-      Icon: GridChatbot,
-      label: translate("homeScreen:grid.chatbot.label"),
-      sub: translate("homeScreen:grid.chatbot.sub"),
-    },
-    {
-      Icon: GridTranslate,
-      label: translate("homeScreen:grid.translate.label"),
-      sub: translate("homeScreen:grid.translate.sub"),
-    },
-    {
-      Icon: GridEducation,
-      label: translate("homeScreen:grid.education.label"),
-      sub: translate("homeScreen:grid.education.sub"),
-    },
-    {
-      Icon: GridEduJoin,
-      label: translate("homeScreen:grid.eduJoin.label"),
-      sub: translate("homeScreen:grid.eduJoin.sub"),
-    },
-    {
-      Icon: GridTbmJoin,
-      label: translate("homeScreen:grid.tbmJoin.label"),
-      sub: translate("homeScreen:grid.tbmJoin.sub"),
-    },
-    {
-      Icon: GridPatrol,
-      label: translate("homeScreen:grid.patrol.label"),
-      sub: translate("homeScreen:grid.patrol.sub"),
-    },
-    {
-      Icon: GridTbmCreate,
-      label: translate("homeScreen:grid.tbmCreate.label"),
-      sub: translate("homeScreen:grid.tbmCreate.sub"),
-    },
-    {
-      Icon: GridTbmReport,
-      label: translate("homeScreen:grid.tbmReport.label"),
-      sub: translate("homeScreen:grid.tbmReport.sub"),
-    },
-    {
-      Icon: GridWarning,
-      label: translate("homeScreen:grid.hazard.label"),
-      sub: translate("homeScreen:grid.hazard.sub"),
-    },
-    {
-      Icon: GridBulb,
-      label: translate("homeScreen:grid.suggestion.label"),
-      sub: translate("homeScreen:grid.suggestion.sub"),
-    },
-  ], [])
+  const GRID_ITEMS: { Icon: React.FC<SvgProps>; label: string; sub: string }[] = useMemo(
+    () => [
+      {
+        Icon: GridInterpret,
+        label: translate("homeScreen:grid.interpret.label"),
+        sub: translate("homeScreen:grid.interpret.sub"),
+      },
+      {
+        Icon: GridChatbot,
+        label: translate("homeScreen:grid.chatbot.label"),
+        sub: translate("homeScreen:grid.chatbot.sub"),
+      },
+      {
+        Icon: GridTranslate,
+        label: translate("homeScreen:grid.translate.label"),
+        sub: translate("homeScreen:grid.translate.sub"),
+      },
+      {
+        Icon: GridEducation,
+        label: translate("homeScreen:grid.education.label"),
+        sub: translate("homeScreen:grid.education.sub"),
+      },
+      {
+        Icon: GridEduJoin,
+        label: translate("homeScreen:grid.eduJoin.label"),
+        sub: translate("homeScreen:grid.eduJoin.sub"),
+      },
+      {
+        Icon: GridTbmJoin,
+        label: translate("homeScreen:grid.tbmJoin.label"),
+        sub: translate("homeScreen:grid.tbmJoin.sub"),
+      },
+      {
+        Icon: GridPatrol,
+        label: translate("homeScreen:grid.patrol.label"),
+        sub: translate("homeScreen:grid.patrol.sub"),
+      },
+      {
+        Icon: GridTbmCreate,
+        label: translate("homeScreen:grid.tbmCreate.label"),
+        sub: translate("homeScreen:grid.tbmCreate.sub"),
+      },
+      {
+        Icon: GridTbmReport,
+        label: translate("homeScreen:grid.tbmReport.label"),
+        sub: translate("homeScreen:grid.tbmReport.sub"),
+      },
+      {
+        Icon: GridWarning,
+        label: translate("homeScreen:grid.hazard.label"),
+        sub: translate("homeScreen:grid.hazard.sub"),
+      },
+      {
+        Icon: GridBulb,
+        label: translate("homeScreen:grid.suggestion.label"),
+        sub: translate("homeScreen:grid.suggestion.sub"),
+      },
+    ],
+    [],
+  )
 
   useEffect(() => {
     if (userRole === "worker") {
@@ -114,7 +114,9 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
   // 관리자: 인덱스 0~8 (9개) / 근로자: 인덱스 0~5 + 9~10 (8개)
   const visibleGridItems =
-    userRole === "admin" ? GRID_ITEMS.slice(0, 9) : [...GRID_ITEMS.slice(0, 6), ...GRID_ITEMS.slice(9)]
+    userRole === "admin"
+      ? GRID_ITEMS.slice(0, 9)
+      : [...GRID_ITEMS.slice(0, 6), ...GRID_ITEMS.slice(9)]
 
   return (
     <View style={$root}>
@@ -179,7 +181,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
               </TouchableOpacity>
               <TouchableOpacity style={$headerAction}>
                 <HeaderBell width={22} height={22} style={$headerActionIcon} />
-                <Text text={translate("homeScreen:header.notification")} style={$headerActionLabel} />
+                <Text
+                  text={translate("homeScreen:header.notification")}
+                  style={$headerActionLabel}
+                />
               </TouchableOpacity>
               <TouchableOpacity style={$headerAction}>
                 <HeaderLang width={22} height={22} style={$headerActionIcon} />
@@ -194,7 +199,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           {/* Greeting + Avatar */}
           <View style={$greetRow}>
             <View style={$greetLeft}>
-              <Text text={translate("homeScreen:greeting.name", { name: "김영희" })} style={$greetBold} />
+              <Text
+                text={translate("homeScreen:greeting.name", { name: "김영희" })}
+                style={$greetBold}
+              />
               <Text text={translate("homeScreen:greeting.message")} style={$greetMsg} />
             </View>
             <View style={$avatar}>
@@ -232,7 +240,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           <View style={$boardSection}>
             <View style={$boardHeader}>
               <Text text={translate("homeScreen:board.title")} style={$boardTitle} />
-              <TouchableOpacity style={$boardMoreBtn} onPress={() => navigation.navigate("SafeBoard")}>
+              <TouchableOpacity
+                style={$boardMoreBtn}
+                onPress={() => navigation.navigate("SafeBoard")}
+              >
                 <Text text={translate("homeScreen:board.viewMore")} style={$boardMoreText} />
                 <ChevronRight size={12} color="#7F848C" strokeWidth={2} />
               </TouchableOpacity>
@@ -256,7 +267,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
                     >
                       <Text
                         text={tabLabels[tab]}
-                        style={[$tabLabel, selectedTab === tab ? $tabLabelActive : $tabLabelInactive]}
+                        style={[
+                          $tabLabel,
+                          selectedTab === tab ? $tabLabelActive : $tabLabelInactive,
+                        ]}
                       />
                       {selectedTab === tab && <View style={$tabLine} />}
                     </TouchableOpacity>
@@ -303,7 +317,6 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-
     </View>
   )
 }
@@ -648,7 +661,6 @@ const $tagWrap: ViewStyle = {
   minWidth: 47,
   maxWidth: 47,
 }
-
 
 const $boardItemContent: ViewStyle = {
   flex: 1,

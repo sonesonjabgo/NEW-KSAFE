@@ -1,5 +1,6 @@
 import { FC, useMemo } from "react"
 import { View } from "react-native"
+
 import { SafeHealthMenuItemComponent } from "./components/SafeHealthMenuItem"
 import { getMockWorkerMenus } from "./mock/mockSafeHealthMenuData"
 import * as S from "./styles"

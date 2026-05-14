@@ -1,9 +1,9 @@
 import { FC, useState } from "react"
 import { FlatList, Modal, Pressable, TouchableOpacity, View } from "react-native"
 import { Bell, ChevronDown, PencilLine, Check } from "lucide-react-native"
-import { translate } from "@/i18n/translate"
 
 import { Text } from "@/components/Text"
+import { translate } from "@/i18n/translate"
 
 import { SafeBoardCard } from "./components/SafeBoardCard"
 import { mockMyPosts, mockSafeBoardData } from "./mock/mockSafeBoardData"
@@ -112,7 +112,10 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = () => {
               activeOpacity={0.7}
               onPress={() => setActiveTab("my")}
             >
-              <Text text={translate("safeBoardScreen:tabs.myPosts")} style={[S.$tabText, activeTab === "my" && S.$activeTabText]} />
+              <Text
+                text={translate("safeBoardScreen:tabs.myPosts")}
+                style={[S.$tabText, activeTab === "my" && S.$activeTabText]}
+              />
             </TouchableOpacity>
           </View>
         </>

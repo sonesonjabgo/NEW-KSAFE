@@ -44,7 +44,7 @@ const hi: Translations = {
     passwordFieldPlaceholder: "सुपर सीक्रेट पासवर्ड यहाँ",
     tapToLogIn: "लॉग इन करने के लिए टैप करें!",
     hint: "Hint: you can use any email address and your favorite password :)",
-    forgotPassword: "Forgot your password?"
+    forgotPassword: "Forgot your password?",
   },
   demoNavigator: {
     componentsTab: "कंपोनेंट्स",
@@ -125,14 +125,17 @@ const hi: Translations = {
     },
   },
 
-
   homeScreen: {
     orgName: "Organization Name",
     header: { qrScan: "QR Scan", notification: "Notifications", language: "Language" },
     greeting: { message: "Have a safe day!", name: "{{name}}," },
     role: { admin: "Admin", worker: "Worker" },
     devToggle: { eduBanner: "Edu Banner" },
-    board: { title: "Board", viewMore: "More", tabs: { all: "All", company: "Company", workplace: "Workplace" } },
+    board: {
+      title: "Board",
+      viewMore: "More",
+      tabs: { all: "All", company: "Company", workplace: "Workplace" },
+    },
     edu: { title: "Education", description: "Description" },
     banner: { text: "Safe Environment" },
     footer: { homepage: "Homepage", privacy: "Privacy", terms: "Terms" },
@@ -147,12 +150,37 @@ const hi: Translations = {
       tbmCreate: { label: "Create", sub: "Create" },
       tbmReport: { label: "Report", sub: "Report" },
       hazard: { label: "Hazard", sub: "Hazard" },
-      suggestion: { label: "Suggestion", sub: "Suggestion" }
-    }
+      suggestion: { label: "Suggestion", sub: "Suggestion" },
+    },
   },
-  safeBoardScreen: { title: "Board", alertButton: "Alert", workplaceLabel: "Workplace", tabs: { all: "All", myPosts: "My" }, empty: "Empty", write: "Write" },
-  safeHealthScreen: { title: "Health", menu: { patrol: { title: "Patrol", description: "Patrol" }, educationMaterial: { title: "Material", description: "Material" }, tbmManage: { title: "TBM", description: "TBM" }, tbmReport: { title: "Report", description: "Report" }, tbmJoin: { title: "Join", description: "Join" }, tbmHistory: { title: "History", description: "History" }, tbmJoinWorker: { title: "Join", description: "Join" }, statusView: { title: "Status", description: "Status" } } },
-  workerParticipationScreen: { title: "Worker", menu: { hazard: { title: "Hazard", description: "Hazard" }, suggestion: { title: "Suggestion", description: "Suggestion" } } },
+  safeBoardScreen: {
+    title: "Board",
+    alertButton: "Alert",
+    workplaceLabel: "Workplace",
+    tabs: { all: "All", myPosts: "My" },
+    empty: "Empty",
+    write: "Write",
+  },
+  safeHealthScreen: {
+    title: "Health",
+    menu: {
+      patrol: { title: "Patrol", description: "Patrol" },
+      educationMaterial: { title: "Material", description: "Material" },
+      tbmManage: { title: "TBM", description: "TBM" },
+      tbmReport: { title: "Report", description: "Report" },
+      tbmJoin: { title: "Join", description: "Join" },
+      tbmHistory: { title: "History", description: "History" },
+      tbmJoinWorker: { title: "Join", description: "Join" },
+      statusView: { title: "Status", description: "Status" },
+    },
+  },
+  workerParticipationScreen: {
+    title: "Worker",
+    menu: {
+      hazard: { title: "Hazard", description: "Hazard" },
+      suggestion: { title: "Suggestion", description: "Suggestion" },
+    },
+  },
 
   ...demoHi,
 }

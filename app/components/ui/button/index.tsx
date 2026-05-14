@@ -62,7 +62,10 @@ const buttonTextStyle = tva({
 const Root = withStates(withStyleContext(Pressable, SCOPE))
 
 const Button = forwardRef(
-  ({ className, variant = "solid", size = "md", action = "primary", states = {}, ...props }: any, ref: any) => {
+  (
+    { className, variant = "solid", size = "md", action = "primary", states = {}, ...props }: any,
+    ref: any,
+  ) => {
     return (
       <Root
         ref={ref}

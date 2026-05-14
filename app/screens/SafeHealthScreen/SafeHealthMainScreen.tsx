@@ -1,8 +1,8 @@
 import { FC } from "react"
 import { View } from "react-native"
-import { translate } from "@/i18n/translate"
 
 import { Text } from "@/components/Text"
+import { translate } from "@/i18n/translate"
 
 import { SafeHealthAdminView } from "./SafeHealthAdminView"
 import { SafeHealthUserView } from "./SafeHealthUserView"

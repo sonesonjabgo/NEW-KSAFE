@@ -3,8 +3,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import type { SvgProps } from "react-native-svg"
 
-import NavHome from "@assets/icons/nav2/nav_home.svg"
 import NavBoard from "@assets/icons/nav2/nav_board.svg"
+import NavHome from "@assets/icons/nav2/nav_home.svg"
 import NavSafety from "@assets/icons/nav2/nav_safety.svg"
 import NavWorker from "@assets/icons/nav2/nav_worker.svg"
 
@@ -22,13 +22,7 @@ const ACTIVE_BLUE = "#214ACC"
 const INACTIVE = "#9AA0AD"
 const ICON_ACTIVE_BG = "#EEF3FC"
 
-function TabIcon({
-  Icon,
-  focused,
-}: {
-  Icon: React.FC<SvgProps>
-  focused: boolean
-}) {
+function TabIcon({ Icon, focused }: { Icon: React.FC<SvgProps>; focused: boolean }) {
   return (
     <View style={focused ? $iconWrapActive : $iconWrap}>
       <Icon width={22} height={22} color={focused ? ACTIVE_BLUE : INACTIVE} />

@@ -1,4 +1,5 @@
 import { translate } from "@/i18n/translate"
+
 import type { WorkerParticipationMenuItem } from "../types"
 
 export const getMockWorkerParticipationMenus = (): WorkerParticipationMenuItem[] => [

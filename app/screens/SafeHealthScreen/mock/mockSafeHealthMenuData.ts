@@ -1,4 +1,5 @@
 import { translate } from "@/i18n/translate"
+
 import type { SafeHealthMenuItem } from "../types"
 
 export const getMockAdminMenus = (): SafeHealthMenuItem[] => [

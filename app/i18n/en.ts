@@ -194,8 +194,14 @@ const en = {
     title: "Safety Management",
     menu: {
       patrol: { title: "Site Patrol Inspection", description: "Register site patrol inspection" },
-      educationMaterial: { title: "Educational Materials", description: "View and register educational materials" },
-      tbmManage: { title: "TBM Management/Create", description: "Manage and create TBM activities" },
+      educationMaterial: {
+        title: "Educational Materials",
+        description: "View and register educational materials",
+      },
+      tbmManage: {
+        title: "TBM Management/Create",
+        description: "Manage and create TBM activities",
+      },
       tbmReport: { title: "TBM Report View", description: "Check report status and download PDF" },
       tbmJoin: { title: "Join TBM", description: "Join another supervisor's safety meeting" },
       tbmHistory: { title: "TBM History", description: "View past TBM meeting history" },
