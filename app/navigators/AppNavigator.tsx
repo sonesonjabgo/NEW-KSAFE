@@ -11,11 +11,11 @@ import Config from "@/config"
 import { useAuth } from "@/context/AuthContext"
 import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
 import { LoginScreen } from "@/screens/LoginScreen"
-import { QrScannerScreen } from "@/screens/QrScannerScreen"
-import { useAppTheme } from "@/theme/context"
-
 import { MyPageScreen } from "@/screens/MyPageScreen"
+import { NotifyScreen } from "@/screens/NotifyScreen"
+import { QrScannerScreen } from "@/screens/QrScannerScreen"
 import { VoiceTranslationScreen } from "@/screens/VoiceTranslationScreen"
+import { useAppTheme } from "@/theme/context"
 
 import { MainNavigator } from "./MainNavigator"
 import type { AppStackParamList, NavigationProps } from "./navigationTypes"
@@ -50,6 +50,7 @@ const AppStack = () => {
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Main" component={MainNavigator} />
       <Stack.Screen name="MyPage" component={MyPageScreen} />
+      <Stack.Screen name="Notify" component={NotifyScreen} />
       <Stack.Screen name="VoiceTranslation" component={VoiceTranslationScreen} />
       <Stack.Screen name="QrScanner" component={QrScannerScreen} />
     </Stack.Navigator>

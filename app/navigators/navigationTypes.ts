@@ -20,6 +20,7 @@ export type AppStackParamList = {
   Login: undefined
   Main: NavigatorScreenParams<MainTabParamList>
   MyPage: undefined
+  Notify: undefined
   VoiceTranslation: undefined
   QrScanner: undefined
 }

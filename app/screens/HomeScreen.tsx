@@ -182,7 +182,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
                 <HeaderQr width={22} height={22} style={$headerActionIcon} />
                 <Text text={translate("homeScreen:header.qrScan")} style={$headerActionLabel} />
               </TouchableOpacity>
-              <TouchableOpacity style={$headerAction}>
+              <TouchableOpacity style={$headerAction} onPress={() => navigation.navigate("Notify")}>
                 <HeaderBell width={22} height={22} style={$headerActionIcon} />
                 <Text
                   text={translate("homeScreen:header.notification")}
