@@ -1,8 +1,7 @@
 import { FC, ReactNode } from "react"
-import { View, ViewStyle, TextStyle, TouchableOpacity } from "react-native"
+import { View, ViewStyle, TextStyle, TouchableOpacity, Switch } from "react-native"
 
 import { Text } from "@/components/Text"
-import { Switch } from "@/components/Toggle/Switch"
 import { typography } from "@/theme/typography"
 
 interface PermissionItemProps {
@@ -42,7 +41,12 @@ export const PermissionItem: FC<PermissionItemProps> = ({
               <Text text={buttonLabel} style={$allowButton} />
             </TouchableOpacity>
           ) : (
-            <Switch value={switchValue} onValueChange={onSwitchChange} />
+            <Switch
+              value={switchValue}
+              onValueChange={onSwitchChange}
+              trackColor={{ false: "#D9D9D9", true: "#1062D8" }}
+              thumbColor={switchValue ? "#A0C7FF" : "#FFFFFF"}
+            />
           )}
         </View>
       </View>
@@ -63,7 +67,6 @@ const $iconContainer: ViewStyle = {
   width: 44,
   height: 44,
   borderRadius: 12,
-  backgroundColor: "#F0F3FF",
   justifyContent: "center",
   alignItems: "center",
 }
@@ -75,7 +78,7 @@ const $content: ViewStyle = {
 const $title: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.semiBold,
-  color: "#1A1A2E",
+  color: "#000000",
   marginBottom: 3,
 }
 

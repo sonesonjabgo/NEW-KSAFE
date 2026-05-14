@@ -27,20 +27,21 @@ export const ProfileCard: FC<ProfileCardProps> = ({ orgName, userName, email }) 
 }
 
 const $card: ViewStyle = {
-  backgroundColor: "#1B2559",
+  backgroundColor: "#26416E",
   borderRadius: 16,
   padding: 20,
   flexDirection: "row",
   alignItems: "center",
   gap: 16,
-  marginHorizontal: 20,
-  marginTop: 16,
+  width: "100%",
+  height: 110,
+  marginTop: 35,
 }
 
 const $avatar: ViewStyle = {
-  width: 60,
-  height: 60,
-  borderRadius: 30,
+  width: 64,
+  height: 64,
+  borderRadius: 32,
   backgroundColor: "rgba(255,255,255,0.15)",
   justifyContent: "center",
   alignItems: "center",
@@ -54,14 +55,12 @@ const $orgName: TextStyle = {
   fontSize: 12,
   color: "rgba(255,255,255,0.65)",
   fontFamily: typography.primary.normal,
-  marginBottom: 4,
 }
 
 const $userName: TextStyle = {
-  fontSize: 18,
+  fontSize: 20,
   color: "#FFFFFF",
   fontFamily: typography.primary.bold,
-  marginBottom: 3,
 }
 
 const $email: TextStyle = {

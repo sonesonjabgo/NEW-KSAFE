@@ -221,17 +221,17 @@ const ko: Translations = {
       sectionTitle: "앱 권한 설정",
       camera: {
         title: "카메라",
-        description: "QR 스캔, AI 번역 촬영, 위험 응급 기록",
+        description: "QR 스캔, AI 번역 촬영, 위험 증적 기록",
         button: "허용",
       },
       microphone: {
         title: "마이크",
-        description: "음성번역, 호이 통화, 음성 실명 기능",
+        description: "음성번역, 회의 통역, 음성 입력",
         button: "허용",
       },
       photo: {
         title: "사진/라이브러리",
-        description: "AI 위험성 평가, 이미지 번역, TBM 교육 자료 작성 등",
+        description: "AI 위험성 평가, 이미지 번역, TBM 교육 자료/일지 작성 등",
         button: "허용",
       },
       notification: {

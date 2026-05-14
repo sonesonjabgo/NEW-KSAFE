@@ -13,7 +13,7 @@ interface WorkplaceChipProps {
 export const WorkplaceChip: FC<WorkplaceChipProps> = ({ name, onPress }) => {
   return (
     <TouchableOpacity style={$chip} onPress={onPress} activeOpacity={0.7}>
-      <IconBuilding size={18} color="#4A6CF7" />
+      <IconBuilding size={18} color="#FFFFFF" />
       <Text text={name} style={$chipText} />
     </TouchableOpacity>
   )
@@ -23,17 +23,16 @@ const $chip: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
   gap: 8,
-  backgroundColor: "#EEF0F8",
-  borderRadius: 20,
+  backgroundColor: "#26416E",
+  borderRadius: 12,
   paddingHorizontal: 16,
-  paddingVertical: 10,
-  alignSelf: "flex-start",
-  marginHorizontal: 20,
-  marginTop: 12,
+  width: "100%",
+  height: 57,
+  marginTop: 17,
 }
 
 const $chipText: TextStyle = {
   fontSize: 14,
-  color: "#333333",
+  color: "#FFFFFF",
   fontFamily: typography.primary.medium,
 }

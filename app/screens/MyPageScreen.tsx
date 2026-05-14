@@ -20,7 +20,7 @@ import { typography } from "@/theme/typography"
 
 type Role = "admin" | "worker"
 
-const ICON_COLOR = "#4A6CF7"
+const ICON_COLOR = "#000000"
 
 export const MyPageScreen: FC<MainTabScreenProps<"MyPage">> = ({ navigation }) => {
   const { authEmail, logout } = useAuth()
@@ -36,11 +36,21 @@ export const MyPageScreen: FC<MainTabScreenProps<"MyPage">> = ({ navigation }) =
   return (
     <View style={$root}>
       <View style={$header}>
-        <TouchableOpacity style={$backButton} onPress={() => navigation.goBack()}>
-          <IconChevronLeft size={24} color="#FFFFFF" />
-        </TouchableOpacity>
-        <Text text={translate("myPageScreen:title")} style={$headerTitle} />
-        <View style={$headerRight} />
+        <View style={$headerTop}>
+          <TouchableOpacity style={$backButton} onPress={() => navigation.goBack()}>
+            <IconChevronLeft size={24} color="#FFFFFF" />
+          </TouchableOpacity>
+          <Text text={translate("myPageScreen:title")} style={$headerTitle} />
+          <View style={$headerRight} />
+        </View>
+
+        <ProfileCard
+          orgName="KS산업안전협회"
+          userName="김관리"
+          email={authEmail ?? "worker-5@example.com"}
+        />
+
+        {isWorker && <WorkplaceChip name={translate("myPageScreen:workplace.label")} />}
       </View>
 
       <ScrollView
@@ -48,14 +58,6 @@ export const MyPageScreen: FC<MainTabScreenProps<"MyPage">> = ({ navigation }) =
         contentContainerStyle={$scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <ProfileCard
-          orgName="KS산업안전원"
-          userName="김관리"
-          email={authEmail ?? "worker-5@example.com"}
-        />
-
-        {isWorker && <WorkplaceChip name={translate("myPageScreen:workplace.label")} />}
-
         <View style={$section}>
           <Text text={translate("myPageScreen:permissions.sectionTitle")} style={$sectionTitle} />
           <View style={$permissionCard}>
@@ -113,11 +115,18 @@ const $root: ViewStyle = {
 
 const $header: ViewStyle = {
   backgroundColor: "#0B3069",
-  flexDirection: "row",
+  flexDirection: "column",
   alignItems: "center",
   paddingTop: 20,
   paddingBottom: 20,
   paddingHorizontal: 16,
+}
+
+const $headerTop: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+  width: "100%",
 }
 
 const $backButton: ViewStyle = {
@@ -140,6 +149,7 @@ const $headerRight: ViewStyle = {
 }
 
 const $scrollView: ViewStyle = {
+  backgroundColor: "#F9FAFE",
   flex: 1,
 }
 
@@ -165,7 +175,7 @@ const $permissionCard: ViewStyle = {
   backgroundColor: "#FFFFFF",
   borderRadius: 12,
   borderWidth: 1,
-  borderColor: "#E9ECF0",
+  borderColor: "#ABABAB",
   overflow: "hidden",
 }
 
@@ -179,7 +189,7 @@ const $logoutButton: ViewStyle = {
   paddingVertical: 14,
   borderRadius: 10,
   borderWidth: 1.5,
-  borderColor: "#E53935",
+  borderColor: "#ABABAB",
   backgroundColor: "#FFFFFF",
 }
 
