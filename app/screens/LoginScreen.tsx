@@ -1,7 +1,6 @@
 import { FC, useState } from "react"
 import {
   View,
-  Image,
   TextInput,
   TouchableOpacity,
   Text as RNText,
@@ -9,7 +8,6 @@ import {
   useWindowDimensions,
   ViewStyle,
   TextStyle,
-  ImageStyle,
 } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
@@ -17,7 +15,7 @@ import { Screen } from "@/components/Screen"
 import { Icon } from "@/components/Icon"
 import { useNavigation } from "@react-navigation/native"
 
-const logoImage = require("@assets/logo-ksafeone.png")
+import LogoSvg from "@assets/icons/login/logo-ksafeone.svg"
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
@@ -39,7 +37,7 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
         {/* 상단 네이비 영역 */}
         <View style={[$navySection, { height: height * 0.42 }]}>
           <View style={$logoContainer}>
-            <Image source={logoImage} style={$logoImage} resizeMode="contain" />
+            <LogoSvg width={80} height={80} style={$logoImage} />
             <RNText style={$brandName}>K-SAFEONE</RNText>
             <RNText style={$tagline}>현장을 이해하는 통합 안전 파트너</RNText>
           </View>
@@ -126,7 +124,7 @@ const $logoContainer: ViewStyle = {
   gap: 9,
 }
 
-const $logoImage: ImageStyle = {
+const $logoImage: ViewStyle = {
   width: 80,
   height: 80,
   marginBottom: 8,

@@ -1,79 +1,85 @@
 import { FC, useEffect, useState } from "react"
-import {
-  Image,
-  ImageStyle,
-  View,
-  ViewStyle,
-  TextStyle,
-  TouchableOpacity,
-  ScrollView,
-  StyleSheet,
-} from "react-native"
+import { View, ViewStyle, TextStyle, TouchableOpacity, ScrollView, StyleSheet } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+import type { SvgProps } from "react-native-svg"
 import type { MainTabScreenProps } from "@/navigators/navigationTypes"
 import { typography } from "@/theme/typography"
 import { Icon } from "@/components/Icon"
 import { Text } from "@/components/Text"
 
+import GridInterpret from "@assets/icons/home2/grid_interpret.svg"
+import GridChatbot from "@assets/icons/home2/grid_chatbot.svg"
+import GridTranslate from "@assets/icons/home2/grid_translate.svg"
+import GridEducation from "@assets/icons/home2/grid_education.svg"
+import GridEduJoin from "@assets/icons/home2/grid_edu_join.svg"
+import GridTbmJoin from "@assets/icons/home2/grid_tbm_join.svg"
+import GridPatrol from "@assets/icons/home2/grid_patrol.svg"
+import GridTbmCreate from "@assets/icons/home2/grid_tbm_create.svg"
+import GridTbmReport from "@assets/icons/home2/grid_tbm_report.svg"
+import GridWarning from "@assets/icons/home2/grid_warning.svg"
+import GridBulb from "@assets/icons/home2/grid_bulb.svg"
+
+import HeaderQr from "@assets/icons/nav2/header_qr.svg"
+import HeaderBell from "@assets/icons/nav2/header_bell.svg"
+import HeaderLang from "@assets/icons/nav2/header_lang.svg"
+
 interface HomeScreenProps extends MainTabScreenProps<"Home"> {}
 
-const GRID_ITEMS: { img: number; label: string; sub: string }[] = [
+const GRID_ITEMS: { Icon: React.FC<SvgProps>; label: string; sub: string }[] = [
   {
-    // img: require("@assets/icons/home/grid_interpret.png"),
-    // 임시 > 추출한 아이콘 크기가 안맞아서 다른걸로 대체
-    img: require("@assets/icons/home/grid_chatbot.png"),
+    Icon: GridInterpret,
     label: "1:1 통역",
     sub: "실시간 통역 지원",
   },
   {
-    img: require("@assets/icons/home/grid_chatbot.png"),
+    Icon: GridChatbot,
     label: "AI 안전 챗봇",
     sub: "안전 상담/질의응답",
   },
   {
-    img: require("@assets/icons/home/grid_translate.png"),
+    Icon: GridTranslate,
     label: "다국어 번역",
     sub: "언어 번역 지원",
   },
   {
-    img: require("@assets/icons/home/grid_education.png"),
+    Icon: GridEducation,
     label: "교육/발표",
     sub: "교육 자료 발표",
   },
   {
-    img: require("@assets/icons/home/grid_edu_join.png"),
+    Icon: GridEduJoin,
     label: "교육/발표 참여",
     sub: "교육/발표 참여",
   },
   {
-    img: require("@assets/icons/home/grid_tbm_join.png"),
+    Icon: GridTbmJoin,
     label: "TBM 참여",
     sub: "안전점검 회의 참여",
   },
   {
-    img: require("@assets/icons/home/grid_patrol.png"),
+    Icon: GridPatrol,
     label: "순회점검",
     sub: "순회점검 진행/기록",
   },
   {
-    img: require("@assets/icons/home/grid_tbm_create.png"),
+    Icon: GridTbmCreate,
     label: "TBM 조회/생성",
     sub: "TBM 조회/생성",
   },
   {
-    img: require("@assets/icons/home/grid_tbm_report.png"),
+    Icon: GridTbmReport,
     label: "TBM 보고서",
     sub: "TBM 보고서 조회",
   },
 
   // ── 근로자 전용 ──
   {
-    img: require("@assets/icons/home/grid_patrol.png"), // 임시 아이콘
+    Icon: GridWarning,
     label: "유해위험개소",
     sub: "유해위험개소 조회",
   },
   {
-    img: require("@assets/icons/home/grid_education.png"), // 임시 아이콘
+    Icon: GridBulb,
     label: "제도개선 제안",
     sub: "제도개선 제안 등록",
   },
@@ -162,27 +168,15 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
             </View>
             <View style={$headerActions}>
               <TouchableOpacity style={$headerAction}>
-                <Image
-                  source={require("@assets/icons/nav/header_qr.png")}
-                  style={$headerActionIcon}
-                  resizeMode="contain"
-                />
+                <HeaderQr width={22} height={22} style={$headerActionIcon} />
                 <Text text="QR스캔" style={$headerActionLabel} />
               </TouchableOpacity>
               <TouchableOpacity style={$headerAction}>
-                <Image
-                  source={require("@assets/icons/nav/header_bell.png")}
-                  style={$headerActionIcon}
-                  resizeMode="contain"
-                />
+                <HeaderBell width={22} height={22} style={$headerActionIcon} />
                 <Text text="알림" style={$headerActionLabel} />
               </TouchableOpacity>
               <TouchableOpacity style={$headerAction}>
-                <Image
-                  source={require("@assets/icons/nav/header_lang.png")}
-                  style={$headerActionIcon}
-                  resizeMode="contain"
-                />
+                <HeaderLang width={22} height={22} style={$headerActionIcon} />
                 <Text text="언어" style={$headerActionLabel} />
               </TouchableOpacity>
             </View>
@@ -207,7 +201,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           <View style={$grid}>
             {visibleGridItems.map((item, i) => (
               <TouchableOpacity key={i} style={$gridCell} activeOpacity={0.7}>
-                <Image source={item.img} style={$gridIcon} resizeMode="contain" />
+                <item.Icon width={36} height={36} style={$gridIcon} />
                 <View style={$gridTextWrap}>
                   <Text text={item.label} style={$gridLabel} numberOfLines={1} />
                   <Text text={item.sub} style={$gridSub} numberOfLines={1} />
@@ -430,10 +424,9 @@ const $headerAction: ViewStyle = {
   gap: 4,
 }
 
-const $headerActionIcon: ImageStyle = {
+const $headerActionIcon: ViewStyle = {
   width: 24,
   height: 24,
-  tintColor: "#FFFFFF",
 }
 
 const $headerActionLabel: TextStyle = {
@@ -529,7 +522,7 @@ const $gridCell: ViewStyle = {
   borderColor: "#E9ECF0",
 }
 
-const $gridIcon: ImageStyle = {
+const $gridIcon: ViewStyle = {
   width: 54,
   height: 54,
 }

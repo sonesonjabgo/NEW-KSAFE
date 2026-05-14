@@ -1,6 +1,12 @@
-import { Image, ImageStyle, TouchableOpacity, View, ViewStyle, TextStyle } from "react-native"
+import { View, ViewStyle, TextStyle } from "react-native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+import type { SvgProps } from "react-native-svg"
+
+import NavHome from "@assets/icons/nav2/nav_home.svg"
+import NavBoard from "@assets/icons/nav2/nav_board.svg"
+import NavSafety from "@assets/icons/nav2/nav_safety.svg"
+import NavWorker from "@assets/icons/nav2/nav_worker.svg"
 
 import { HomeScreen } from "@/screens/HomeScreen"
 import { SafeBoardScreen } from "@/screens/SafeBoardScreen/SafeBoardScreen"
@@ -16,20 +22,16 @@ const ACTIVE_BLUE = "#214ACC"
 const INACTIVE = "#9AA0AD"
 const ICON_ACTIVE_BG = "#EEF3FC"
 
-const navIcons = {
-  Home: require("@assets/icons/nav/nav_home.png"),
-  SafeBoard: require("@assets/icons/nav/nav_board.png"),
-  SafeHealthMain: require("@assets/icons/nav/nav_safety.png"),
-  WorkerParticipation: require("@assets/icons/nav/nav_worker.png"),
-}
-
-function TabIcon({ source, focused }: { source: number; focused: boolean }) {
+function TabIcon({
+  Icon,
+  focused,
+}: {
+  Icon: React.FC<SvgProps>
+  focused: boolean
+}) {
   return (
     <View style={focused ? $iconWrapActive : $iconWrap}>
-      <Image
-        source={source}
-        style={[$tabIcon, { tintColor: focused ? ACTIVE_BLUE : INACTIVE }]}
-      />
+      <Icon width={22} height={22} color={focused ? ACTIVE_BLUE : INACTIVE} />
     </View>
   )
 }
@@ -52,7 +54,7 @@ export function MainNavigator() {
         component={HomeScreen}
         options={{
           tabBarLabel: "홈",
-          tabBarIcon: ({ focused }) => <TabIcon source={navIcons.Home} focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabIcon Icon={NavHome} focused={focused} />,
         }}
       />
 
@@ -61,7 +63,7 @@ export function MainNavigator() {
         component={SafeBoardScreen}
         options={{
           tabBarLabel: "안전게시판",
-          tabBarIcon: ({ focused }) => <TabIcon source={navIcons.SafeBoard} focused={focused} />,
+          tabBarIcon: ({ focused }) => <TabIcon Icon={NavBoard} focused={focused} />,
         }}
       />
 
@@ -70,9 +72,7 @@ export function MainNavigator() {
         component={SafeHealthMainScreen}
         options={{
           tabBarLabel: "안전관리",
-          tabBarIcon: ({ focused }) => (
-            <TabIcon source={navIcons.SafeHealthMain} focused={focused} />
-          ),
+          tabBarIcon: ({ focused }) => <TabIcon Icon={NavSafety} focused={focused} />,
         }}
       />
 
@@ -87,9 +87,7 @@ export function MainNavigator() {
         }}
         options={{
           tabBarLabel: "마이페이지",
-          tabBarIcon: ({ focused }) => (
-            <TabIcon source={navIcons.WorkerParticipation} focused={focused} />
-          ),
+          tabBarIcon: ({ focused }) => <TabIcon Icon={NavWorker} focused={focused} />,
         }}
       />
     </Tab.Navigator>
@@ -119,12 +117,6 @@ const $iconWrap: ViewStyle = {
 const $iconWrapActive: ViewStyle = {
   ...$iconWrap,
   backgroundColor: ICON_ACTIVE_BG,
-}
-
-const $tabIcon: ImageStyle = {
-  width: 22,
-  height: 22,
-  resizeMode: "contain",
 }
 
 const $tabBarLabel: TextStyle = {
