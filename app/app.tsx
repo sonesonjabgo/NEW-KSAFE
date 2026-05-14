@@ -26,6 +26,7 @@ import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-c
 
 import { GluestackUIProvider } from "./components/ui/gluestack-ui-provider"
 import { AuthProvider } from "./context/AuthContext"
+import { RoleProvider } from "./context/RoleContext"
 import { initI18n } from "./i18n"
 import { AppNavigator } from "./navigators/AppNavigator"
 import { useNavigationPersistence } from "./navigators/navigationUtilities"
@@ -88,13 +89,15 @@ export function App() {
       <GluestackUIProvider mode="light">
         <KeyboardProvider>
           <AuthProvider>
-            <ThemeProvider>
-              <AppNavigator
-                linking={linking}
-                initialState={initialNavigationState}
-                onStateChange={onNavigationStateChange}
-              />
-            </ThemeProvider>
+            <RoleProvider>
+              <ThemeProvider>
+                <AppNavigator
+                  linking={linking}
+                  initialState={initialNavigationState}
+                  onStateChange={onNavigationStateChange}
+                />
+              </ThemeProvider>
+            </RoleProvider>
           </AuthProvider>
         </KeyboardProvider>
       </GluestackUIProvider>

@@ -182,6 +182,36 @@ const hi: Translations = {
     },
   },
 
+  myPageScreen: {
+    title: "My Page",
+    workplace: {
+      label: "Gwangyo Tower Crane Workplace",
+    },
+    permissions: {
+      sectionTitle: "App Permission Settings",
+      camera: {
+        title: "Camera",
+        description: "QR scan, AI translation photography, emergency hazard recording",
+        button: "Allow",
+      },
+      microphone: {
+        title: "Microphone",
+        description: "Voice translation, Hoi calls, voice real-name verification",
+        button: "Allow",
+      },
+      photo: {
+        title: "Photos/Library",
+        description: "AI risk assessment, image translation, TBM education materials",
+        button: "Allow",
+      },
+      notification: {
+        title: "Push Notifications",
+        description: "TBM notifications, hazard alerts, workplace announcements",
+      },
+    },
+    logout: "Logout",
+  },
+
   ...demoHi,
 }
 

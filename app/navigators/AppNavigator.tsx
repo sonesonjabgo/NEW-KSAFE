@@ -14,6 +14,8 @@ import { LoginScreen } from "@/screens/LoginScreen"
 import { QrScannerScreen } from "@/screens/QrScannerScreen"
 import { useAppTheme } from "@/theme/context"
 
+import { MyPageScreen } from "@/screens/MyPageScreen"
+
 import { MainNavigator } from "./MainNavigator"
 import type { AppStackParamList, NavigationProps } from "./navigationTypes"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
@@ -47,6 +49,7 @@ const AppStack = () => {
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Main" component={MainNavigator} />
       <Stack.Screen name="QrScanner" component={QrScannerScreen} />
+      <Stack.Screen name="MyPage" component={MyPageScreen} />
     </Stack.Navigator>
   )
 }
