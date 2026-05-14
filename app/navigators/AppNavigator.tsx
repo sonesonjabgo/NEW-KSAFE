@@ -11,6 +11,7 @@ import Config from "@/config"
 import { useAuth } from "@/context/AuthContext"
 import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
 import { LoginScreen } from "@/screens/LoginScreen"
+import { QrScannerScreen } from "@/screens/QrScannerScreen"
 import { useAppTheme } from "@/theme/context"
 
 import { MainNavigator } from "./MainNavigator"
@@ -45,6 +46,7 @@ const AppStack = () => {
     >
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Main" component={MainNavigator} />
+      <Stack.Screen name="QrScanner" component={QrScannerScreen} />
     </Stack.Navigator>
   )
 }

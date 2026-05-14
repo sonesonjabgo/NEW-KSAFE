@@ -45,7 +45,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
   const TABS: TabType[] = useMemo(() => ["all", "company", "workplace"], [])
 
-  const GRID_ITEMS: { Icon: React.FC<SvgProps>; label: string; sub: string }[] = useMemo(
+  const GRID_ITEMS: { Icon: React.FC<SvgProps>; label: string; sub: string; onPress?: () => void }[] = useMemo(
     () => [
       {
         Icon: GridInterpret,
@@ -71,6 +71,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         Icon: GridEduJoin,
         label: translate("homeScreen:grid.eduJoin.label"),
         sub: translate("homeScreen:grid.eduJoin.sub"),
+        onPress: () => navigation.navigate("QrScanner"),
       },
       {
         Icon: GridTbmJoin,
@@ -103,7 +104,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         sub: translate("homeScreen:grid.suggestion.sub"),
       },
     ],
-    [],
+    [navigation],
   )
 
   useEffect(() => {
@@ -175,7 +176,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
               <Text text={translate("homeScreen:orgName")} style={$appSub} />
             </View>
             <View style={$headerActions}>
-              <TouchableOpacity style={$headerAction}>
+              <TouchableOpacity style={$headerAction} onPress={() => navigation.navigate("QrScanner")}>
                 <HeaderQr width={22} height={22} style={$headerActionIcon} />
                 <Text text={translate("homeScreen:header.qrScan")} style={$headerActionLabel} />
               </TouchableOpacity>
@@ -214,7 +215,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           {/* Feature Grid */}
           <View style={$grid}>
             {visibleGridItems.map((item, i) => (
-              <TouchableOpacity key={i} style={$gridCell} activeOpacity={0.7}>
+              <TouchableOpacity key={i} style={$gridCell} activeOpacity={0.7} onPress={item.onPress}>
                 <item.Icon width={36} height={36} style={$gridIcon} />
                 <View style={$gridTextWrap}>
                   <Text text={item.label} style={$gridLabel} numberOfLines={1} />
