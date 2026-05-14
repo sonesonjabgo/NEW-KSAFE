@@ -13,6 +13,7 @@ export type MainTabParamList = {
   SafeBoard: undefined
   SafeHealthMain: undefined
   WorkerParticipation: undefined
+  MyPage: undefined
 }
 
 // App Stack Navigator types

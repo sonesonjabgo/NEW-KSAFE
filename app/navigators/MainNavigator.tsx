@@ -9,9 +9,9 @@ import NavSafety from "@assets/icons/nav2/nav_safety.svg"
 import NavWorker from "@assets/icons/nav2/nav_worker.svg"
 
 import { HomeScreen } from "@/screens/HomeScreen"
+import { MyPageScreen } from "@/screens/MyPageScreen"
 import { SafeBoardScreen } from "@/screens/SafeBoardScreen/SafeBoardScreen"
 import { SafeHealthMainScreen } from "@/screens/SafeHealthScreen/SafeHealthMainScreen"
-import { WorkerParticipationScreen } from "@/screens/WorkerParticipationScreen/WorkerParticipationScreen"
 import { typography } from "@/theme/typography"
 
 import type { MainTabParamList } from "./navigationTypes"
@@ -70,15 +70,9 @@ export function MainNavigator() {
         }}
       />
 
-      {/* 마이페이지 — 미구현, 탭 버튼만 표시하고 동작 없음 */}
       <Tab.Screen
-        name="WorkerParticipation"
-        component={WorkerParticipationScreen}
-        listeners={{
-          tabPress: (e) => {
-            e.preventDefault()
-          },
-        }}
+        name="MyPage"
+        component={MyPageScreen}
         options={{
           tabBarLabel: "마이페이지",
           tabBarIcon: ({ focused }) => <TabIcon Icon={NavWorker} focused={focused} />,

@@ -212,6 +212,36 @@ const ko: Translations = {
     },
   },
 
+  myPageScreen: {
+    title: "마이페이지",
+    workplace: {
+      label: "광교 타워크레인 작업장",
+    },
+    permissions: {
+      sectionTitle: "앱 권한 설정",
+      camera: {
+        title: "카메라",
+        description: "QR 스캔, AI 번역 촬영, 위험 응급 기록",
+        button: "허용",
+      },
+      microphone: {
+        title: "마이크",
+        description: "음성번역, 호이 통화, 음성 실명 기능",
+        button: "허용",
+      },
+      photo: {
+        title: "사진/라이브러리",
+        description: "AI 위험성 평가, 이미지 번역, TBM 교육 자료 작성 등",
+        button: "허용",
+      },
+      notification: {
+        title: "푸시 알림",
+        description: "TBM 알림, 위험 경보, 사업장 공지",
+      },
+    },
+    logout: "로그아웃",
+  },
+
   ...demoKo,
 }
 
