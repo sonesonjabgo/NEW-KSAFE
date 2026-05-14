@@ -13,6 +13,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { Screen } from "@/components/Screen"
 import { useNavigation } from "@react-navigation/native"
+import { translate } from "@/i18n/translate"
 
 import LogoSvg from "@assets/icons/login/logo-ksafeone.svg"
 import MailSvg from "@assets/icons/login/mail.svg"
@@ -42,13 +43,13 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
           <View style={$logoContainer}>
             <LogoSvg width={80} height={80} style={$logoImage} />
             <RNText style={$brandName}>K-SAFEONE</RNText>
-            <RNText style={$tagline}>현장을 이해하는 통합 안전 파트너</RNText>
+            <RNText style={$tagline}>{translate("loginScreen:tagline")}</RNText>
           </View>
         </View>
 
         {/* 하단 흰색 카드 */}
         <View style={[$card, { paddingBottom: Math.max(bottomInset, 24) }]}>
-          <RNText style={$cardTitle}>로그인</RNText>
+          <RNText style={$cardTitle}>{translate("loginScreen:logIn")}</RNText>
 
           <View style={$gap24} />
 
@@ -56,13 +57,13 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
           <View style={$formBox}>
             {/* 이메일 필드 */}
             <RNText style={$label}>
-              이메일 <RNText style={$required}>*</RNText>
+              {translate("loginScreen:emailFieldLabel")} <RNText style={$required}>*</RNText>
             </RNText>
             <View style={$inputRow}>
               <MailSvg width={18} height={18} color="#9CA3AF" style={$inputIcon} />
               <TextInput
                 style={$textInput}
-                placeholder="이메일을 입력하세요."
+                placeholder={translate("loginScreen:emailFieldPlaceholder")}
                 placeholderTextColor="#9CA3AF"
                 keyboardType="email-address"
                 autoCapitalize="none"
@@ -73,13 +74,13 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
 
             {/* 비밀번호 필드 */}
             <RNText style={$label}>
-              비밀번호 <RNText style={$required}>*</RNText>
+              {translate("loginScreen:passwordFieldLabel")} <RNText style={$required}>*</RNText>
             </RNText>
             <View style={$inputRow}>
               <LockSvg width={18} height={18} color="#9CA3AF" style={$inputIcon} />
               <TextInput
                 style={[$textInput, $passwordInput]}
-                placeholder="패스워드를 입력하세요."
+                placeholder={translate("loginScreen:passwordFieldPlaceholder")}
                 placeholderTextColor="#9CA3AF"
                 secureTextEntry={secureText}
               />
@@ -101,14 +102,14 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
             onPress={() => navigation.navigate("Main")}
             activeOpacity={0.85}
           >
-            <RNText style={$loginButtonText}>로그인</RNText>
+            <RNText style={$loginButtonText}>{translate("loginScreen:logIn")}</RNText>
           </TouchableOpacity>
 
           <View style={$gap16} />
 
           {/* 비밀번호 찾기 */}
           <TouchableOpacity onPress={() => {}} style={$forgotWrapper}>
-            <RNText style={$forgotText}>비밀번호를 잊으셨나요?</RNText>
+            <RNText style={$forgotText}>{translate("loginScreen:forgotPassword")}</RNText>
           </TouchableOpacity>
         </View>
       </Screen>

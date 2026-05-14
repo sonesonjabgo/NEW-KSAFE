@@ -1,55 +1,60 @@
+import { translate } from "@/i18n/translate"
 import type { SafeHealthMenuItem } from "../types"
 
-export const mockAdminMenus: SafeHealthMenuItem[] = [
+export const getMockAdminMenus = (): SafeHealthMenuItem[] => [
   {
     id: 1,
-    title: "작업장 순회 점검",
-    description: "작업장 순회 점검 등록",
+    title: translate("safeHealthScreen:menu.patrol.title"),
+    description: translate("safeHealthScreen:menu.patrol.description"),
     icon: "Walk",
   },
   {
     id: 2,
-    title: "교육 자료",
-    description: "교육 자료 조회 및 등록",
+    title: translate("safeHealthScreen:menu.educationMaterial.title"),
+    description: translate("safeHealthScreen:menu.educationMaterial.description"),
     icon: "Book",
   },
   {
     id: 3,
-    title: "TBM 관리/생성",
-    description: "TBM 활동을 관리하고 생성",
+    title: translate("safeHealthScreen:menu.tbmManage.title"),
+    description: translate("safeHealthScreen:menu.tbmManage.description"),
     icon: "CalendarPlus",
   },
   {
     id: 4,
-    title: "TBM 보고서 조회",
-    description: "보고서 상태 확인 및 PDF 다운로드",
+    title: translate("safeHealthScreen:menu.tbmReport.title"),
+    description: translate("safeHealthScreen:menu.tbmReport.description"),
     icon: "Download",
   },
   {
     id: 5,
-    title: "TBM 참여",
-    description: "다른 관리감독자의 안전점검 회의 참여",
+    title: translate("safeHealthScreen:menu.tbmJoin.title"),
+    description: translate("safeHealthScreen:menu.tbmJoin.description"),
     icon: "Users",
   },
   {
     id: 6,
-    title: "TBM 참여 이력",
-    description: "참여한 TBM 회의 이력 조회",
+    title: translate("safeHealthScreen:menu.tbmHistory.title"),
+    description: translate("safeHealthScreen:menu.tbmHistory.description"),
     icon: "History",
   },
 ]
 
-export const mockWorkerMenus: SafeHealthMenuItem[] = [
+export const getMockWorkerMenus = (): SafeHealthMenuItem[] => [
   {
     id: 1,
-    title: "TBM 참여",
-    description: "다른 관리감독자의 안전점검 회의 참여",
+    title: translate("safeHealthScreen:menu.tbmJoinWorker.title"),
+    description: translate("safeHealthScreen:menu.tbmJoinWorker.description"),
     icon: "Users",
   },
   {
     id: 2,
-    title: "현황 조회",
-    description: "진행 중인 TBM 현황 확인",
+    title: translate("safeHealthScreen:menu.statusView.title"),
+    description: translate("safeHealthScreen:menu.statusView.description"),
     icon: "LayoutList",
   },
 ]
+
+// 레거시 호환성을 위한 상수 (추후 제거 가능)
+export const mockAdminMenus = getMockAdminMenus()
+export const mockWorkerMenus = getMockWorkerMenus()

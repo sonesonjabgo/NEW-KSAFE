@@ -36,6 +36,7 @@ const fr: Translations = {
   },
   loginScreen: {
     logIn: "Se connecter",
+    tagline: "Safety Partner for the Workplace",
     enterDetails:
       "Entrez vos informations ci-dessous pour débloquer des informations top secrètes. Vous ne devinerez jamais ce que nous avons en attente. Ou peut-être que vous le ferez ; ce n'est pas de la science spatiale ici.",
     emailFieldLabel: "E-mail",
@@ -43,7 +44,8 @@ const fr: Translations = {
     emailFieldPlaceholder: "Entrez votre adresse e-mail",
     passwordFieldPlaceholder: "Mot de passe super secret ici",
     tapToLogIn: "Appuyez pour vous connecter!",
-    hint: "Astuce : vous pouvez utiliser n'importe quelle adresse e-mail et votre mot de passe préféré :)",
+    hint: "Hint: you can use any email address and your favorite password :)",
+    forgotPassword: "Forgot your password?"
   },
   demoNavigator: {
     componentsTab: "Composants",
@@ -124,6 +126,35 @@ const fr: Translations = {
         "Aucun favori n'a été ajouté pour le moment. Appuyez sur le cœur d'un épisode pour l'ajouter à vos favoris !",
     },
   },
+
+
+  homeScreen: {
+    orgName: "Organization Name",
+    header: { qrScan: "QR Scan", notification: "Notifications", language: "Language" },
+    greeting: { message: "Have a safe day!", name: "{{name}}," },
+    role: { admin: "Admin", worker: "Worker" },
+    devToggle: { eduBanner: "Edu Banner" },
+    board: { title: "Board", viewMore: "More", tabs: { all: "All", company: "Company", workplace: "Workplace" } },
+    edu: { title: "Education", description: "Description" },
+    banner: { text: "Safe Environment" },
+    footer: { homepage: "Homepage", privacy: "Privacy", terms: "Terms" },
+    grid: {
+      interpret: { label: "Interpret", sub: "Interpretation" },
+      chatbot: { label: "Chatbot", sub: "Chatbot" },
+      translate: { label: "Translate", sub: "Translate" },
+      education: { label: "Education", sub: "Education" },
+      eduJoin: { label: "Edu Join", sub: "Edu Join" },
+      tbmJoin: { label: "TBM", sub: "TBM" },
+      patrol: { label: "Patrol", sub: "Patrol" },
+      tbmCreate: { label: "Create", sub: "Create" },
+      tbmReport: { label: "Report", sub: "Report" },
+      hazard: { label: "Hazard", sub: "Hazard" },
+      suggestion: { label: "Suggestion", sub: "Suggestion" }
+    }
+  },
+  safeBoardScreen: { title: "Board", alertButton: "Alert", workplaceLabel: "Workplace", tabs: { all: "All", myPosts: "My" }, empty: "Empty", write: "Write" },
+  safeHealthScreen: { title: "Health", menu: { patrol: { title: "Patrol", description: "Patrol" }, educationMaterial: { title: "Material", description: "Material" }, tbmManage: { title: "TBM", description: "TBM" }, tbmReport: { title: "Report", description: "Report" }, tbmJoin: { title: "Join", description: "Join" }, tbmHistory: { title: "History", description: "History" }, tbmJoinWorker: { title: "Join", description: "Join" }, statusView: { title: "Status", description: "Status" } } },
+  workerParticipationScreen: { title: "Worker", menu: { hazard: { title: "Hazard", description: "Hazard" }, suggestion: { title: "Suggestion", description: "Suggestion" } } },
 
   ...demoFr,
 }

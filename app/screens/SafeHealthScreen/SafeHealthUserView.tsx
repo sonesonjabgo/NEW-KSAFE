@@ -1,10 +1,12 @@
-import { FC } from "react"
+import { FC, useMemo } from "react"
 import { View } from "react-native"
 import { SafeHealthMenuItemComponent } from "./components/SafeHealthMenuItem"
-import { mockWorkerMenus } from "./mock/mockSafeHealthMenuData"
+import { getMockWorkerMenus } from "./mock/mockSafeHealthMenuData"
 import * as S from "./styles"
 
 export const SafeHealthUserView: FC = () => {
+  const mockWorkerMenus = useMemo(() => getMockWorkerMenus(), [])
+
   return (
     <View style={S.$contentContainer}>
       <View style={S.$menuCard}>

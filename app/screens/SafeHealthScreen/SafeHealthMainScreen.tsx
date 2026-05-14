@@ -1,5 +1,6 @@
 import { FC } from "react"
 import { View } from "react-native"
+import { translate } from "@/i18n/translate"
 
 import { Text } from "@/components/Text"
 
@@ -18,7 +19,7 @@ export const SafeHealthMainScreen: FC<SafeHealthMainScreenProps> = () => {
   return (
     <View style={S.$screenContainer}>
       <View style={S.$headerContainer}>
-        <Text text="안전관리" style={S.$headerTitle} />
+        <Text text={translate("safeHealthScreen:title")} style={S.$headerTitle} />
       </View>
 
       {isAdmin ? <SafeHealthAdminView /> : <SafeHealthUserView />}

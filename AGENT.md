@@ -270,6 +270,87 @@ merge: {브랜치명} → {대상브랜치}
 
 ---
 
+## 다국어 지원 (i18n)
+
+프로젝트는 **i18next + react-i18next**를 사용하여 다국어를 지원합니다.
+
+### 파일 구조
+
+- `app/i18n/index.ts` — i18n 초기화 및 설정
+- `app/i18n/translate.ts` — translate() 함수 (권장)
+- `app/i18n/en.ts` — 영어 번역 (소스 of truth, 여기서 구조 정의)
+- `app/i18n/ko.ts` — 한국어 번역 (현재 주 언어)
+- `app/i18n/{ar|es|fr|hi|ja}.ts` — 기타 언어
+
+### 텍스트 추가 절차
+
+**절대 규칙: 사용자 노출 텍스트는 하드코딩 금지**
+
+새로운 텍스트가 필요할 때:
+
+1. **en.ts에 키와 영어 번역 추가** (TypeScript 타입 정의의 소스)
+   ```ts
+   myFeature: {
+     title: "My Feature Title",
+     description: "Feature description",
+   }
+   ```
+
+2. **ko.ts에 한국어 번역 추가** (동일한 구조)
+   ```ts
+   myFeature: {
+     title: "내 기능 제목",
+     description: "기능 설명",
+   }
+   ```
+
+3. **코드에서 translate() 함수 사용**
+   ```ts
+   import { translate } from "@/i18n/translate"
+   
+   <Text text={translate("myFeature:title")} />
+   ```
+
+### 키 네이밍 규칙
+
+- **패턴**: `screenOrFeature.section.element`
+- **구분자**: 최상위와 두 번째 사이는 `:` (콜론), 그 이하는 `.` (점)
+- **예시**: 
+  - `loginScreen:tagline`
+  - `homeScreen:grid.interpret.label`
+  - `safeBoardScreen:tabs.all`
+
+### translate() vs useTranslation()
+
+- **translate() 권장** — 컴포넌트 외부(모듈 레벨)에서도 사용 가능, 인터폴레이션 지원
+  ```ts
+  translate("key:path", { name: "value" })  // "Hello {{name}}"
+  ```
+
+- **useTranslation() 훅** — 복잡한 다국어 로직이 필요한 경우만 사용
+  ```ts
+  const { t } = useTranslation()
+  t("key:path")
+  ```
+
+### 모듈 레벨 배열에서 translate 사용
+
+배열이나 객체를 컴포넌트 외부에서 정의하고 translate를 사용해야 하는 경우, **useMemo 내부로 이동**:
+
+```ts
+// ❌ 나쁜 예: 모듈 레벨 (i18n 미초기화)
+const ITEMS = [
+  { label: translate("key:item1") }  // ⚠️ 작동 안 할 수 있음
+]
+
+// ✅ 좋은 예: 컴포넌트 내부 useMemo
+const ITEMS = useMemo(() => [
+  { label: translate("key:item1") }
+], [])
+```
+
+---
+
 ## 개발 환경 확인
 
 ```bash

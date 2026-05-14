@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react"
+import { FC, useEffect, useState, useMemo } from "react"
 import { View, ViewStyle, TextStyle, TouchableOpacity, ScrollView, StyleSheet } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import type { SvgProps } from "react-native-svg"
@@ -6,6 +6,7 @@ import type { MainTabScreenProps } from "@/navigators/navigationTypes"
 import { typography } from "@/theme/typography"
 import { Text } from "@/components/Text"
 import { Pin, ChevronRight } from "lucide-react-native"
+import { translate } from "@/i18n/translate"
 
 import GridInterpret from "@assets/icons/home2/grid_interpret.svg"
 import GridChatbot from "@assets/icons/home2/grid_chatbot.svg"
@@ -28,84 +29,86 @@ import HeaderLang from "@assets/icons/nav2/header_lang.svg"
 
 interface HomeScreenProps extends MainTabScreenProps<"Home"> {}
 
-const GRID_ITEMS: { Icon: React.FC<SvgProps>; label: string; sub: string }[] = [
-  {
-    Icon: GridInterpret,
-    label: "1:1 통역",
-    sub: "실시간 통역 지원",
-  },
-  {
-    Icon: GridChatbot,
-    label: "AI 안전 챗봇",
-    sub: "안전 상담/질의응답",
-  },
-  {
-    Icon: GridTranslate,
-    label: "다국어 번역",
-    sub: "언어 번역 지원",
-  },
-  {
-    Icon: GridEducation,
-    label: "교육/발표",
-    sub: "교육 자료 발표",
-  },
-  {
-    Icon: GridEduJoin,
-    label: "교육/발표 참여",
-    sub: "교육/발표 참여",
-  },
-  {
-    Icon: GridTbmJoin,
-    label: "TBM 참여",
-    sub: "안전점검 회의 참여",
-  },
-  {
-    Icon: GridPatrol,
-    label: "순회점검",
-    sub: "순회점검 진행/기록",
-  },
-  {
-    Icon: GridTbmCreate,
-    label: "TBM 조회/생성",
-    sub: "TBM 조회/생성",
-  },
-  {
-    Icon: GridTbmReport,
-    label: "TBM 보고서",
-    sub: "TBM 보고서 조회",
-  },
-
-  // ── 근로자 전용 ──
-  {
-    Icon: GridWarning,
-    label: "유해위험개소",
-    sub: "유해위험개소 조회",
-  },
-  {
-    Icon: GridBulb,
-    label: "제도개선 제안",
-    sub: "제도개선 제안 등록",
-  },
-]
-
 const BOARD_ITEMS = [
-  { tag: "사업장", title: "2026년 4월 2일 앱 출시", date: "2026.04.02", pinned: true },
-  { tag: "회사전체", title: "2026년 4월 2일 앱 출시", date: "2026.04.02", pinned: false },
+  { tag: "workplace", title: "2026년 4월 2일 앱 출시", date: "2026.04.02", pinned: true },
+  { tag: "company", title: "2026년 4월 2일 앱 출시", date: "2026.04.02", pinned: false },
 ]
 
-const TABS = ["전체", "회사전체", "사업장"] as const
-type TabType = (typeof TABS)[number]
+type TabType = "all" | "company" | "workplace"
 
 export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
   const [userRole, setUserRole] = useState<"admin" | "worker">("worker")
-  const [selectedTab, setSelectedTab] = useState<TabType>("전체")
+  const [selectedTab, setSelectedTab] = useState<TabType>("all")
   // TODO: 추후 실제 API 연동으로 교체
   const [hasExistingEdu, setHasExistingEdu] = useState(true)
 
+  const TABS: TabType[] = useMemo(
+    () => ["all", "company", "workplace"],
+    []
+  )
+
+  const GRID_ITEMS: { Icon: React.FC<SvgProps>; label: string; sub: string }[] = useMemo(() => [
+    {
+      Icon: GridInterpret,
+      label: translate("homeScreen:grid.interpret.label"),
+      sub: translate("homeScreen:grid.interpret.sub"),
+    },
+    {
+      Icon: GridChatbot,
+      label: translate("homeScreen:grid.chatbot.label"),
+      sub: translate("homeScreen:grid.chatbot.sub"),
+    },
+    {
+      Icon: GridTranslate,
+      label: translate("homeScreen:grid.translate.label"),
+      sub: translate("homeScreen:grid.translate.sub"),
+    },
+    {
+      Icon: GridEducation,
+      label: translate("homeScreen:grid.education.label"),
+      sub: translate("homeScreen:grid.education.sub"),
+    },
+    {
+      Icon: GridEduJoin,
+      label: translate("homeScreen:grid.eduJoin.label"),
+      sub: translate("homeScreen:grid.eduJoin.sub"),
+    },
+    {
+      Icon: GridTbmJoin,
+      label: translate("homeScreen:grid.tbmJoin.label"),
+      sub: translate("homeScreen:grid.tbmJoin.sub"),
+    },
+    {
+      Icon: GridPatrol,
+      label: translate("homeScreen:grid.patrol.label"),
+      sub: translate("homeScreen:grid.patrol.sub"),
+    },
+    {
+      Icon: GridTbmCreate,
+      label: translate("homeScreen:grid.tbmCreate.label"),
+      sub: translate("homeScreen:grid.tbmCreate.sub"),
+    },
+    {
+      Icon: GridTbmReport,
+      label: translate("homeScreen:grid.tbmReport.label"),
+      sub: translate("homeScreen:grid.tbmReport.sub"),
+    },
+    {
+      Icon: GridWarning,
+      label: translate("homeScreen:grid.hazard.label"),
+      sub: translate("homeScreen:grid.hazard.sub"),
+    },
+    {
+      Icon: GridBulb,
+      label: translate("homeScreen:grid.suggestion.label"),
+      sub: translate("homeScreen:grid.suggestion.sub"),
+    },
+  ], [])
+
   useEffect(() => {
     if (userRole === "worker") {
-      setSelectedTab("전체")
+      setSelectedTab("all")
     }
   }, [userRole])
 
@@ -131,7 +134,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
                 onPress={() => setUserRole("admin")}
               >
                 <Text
-                  text="관리자"
+                  text={translate("homeScreen:role.admin")}
                   style={[$roleToggleText, userRole === "admin" && $roleToggleTextActive]}
                 />
               </TouchableOpacity>
@@ -140,7 +143,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
                 onPress={() => setUserRole("worker")}
               >
                 <Text
-                  text="근로자"
+                  text={translate("homeScreen:role.worker")}
                   style={[$roleToggleText, userRole === "worker" && $roleToggleTextActive]}
                 />
               </TouchableOpacity>
@@ -149,7 +152,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
             {/* 배너 카드 ON/OFF (근로자일 때만 표시) */}
             {userRole === "worker" && (
               <View style={$subToggleRow}>
-                <Text text="교육배너" style={$subToggleLabel} />
+                <Text text={translate("homeScreen:devToggle.eduBanner")} style={$subToggleLabel} />
                 <TouchableOpacity
                   style={[$subToggleBtn, hasExistingEdu ? $subToggleBtnOn : $subToggleBtnOff]}
                   onPress={() => setHasExistingEdu(!hasExistingEdu)}
@@ -167,20 +170,20 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           <View style={$titleRow}>
             <View>
               <Text text="K-SAFEONE" style={$appTitle} />
-              <Text text="KS산업안전협회" style={$appSub} />
+              <Text text={translate("homeScreen:orgName")} style={$appSub} />
             </View>
             <View style={$headerActions}>
               <TouchableOpacity style={$headerAction}>
                 <HeaderQr width={22} height={22} style={$headerActionIcon} />
-                <Text text="QR스캔" style={$headerActionLabel} />
+                <Text text={translate("homeScreen:header.qrScan")} style={$headerActionLabel} />
               </TouchableOpacity>
               <TouchableOpacity style={$headerAction}>
                 <HeaderBell width={22} height={22} style={$headerActionIcon} />
-                <Text text="알림" style={$headerActionLabel} />
+                <Text text={translate("homeScreen:header.notification")} style={$headerActionLabel} />
               </TouchableOpacity>
               <TouchableOpacity style={$headerAction}>
                 <HeaderLang width={22} height={22} style={$headerActionIcon} />
-                <Text text="언어" style={$headerActionLabel} />
+                <Text text={translate("homeScreen:header.language")} style={$headerActionLabel} />
               </TouchableOpacity>
             </View>
           </View>
@@ -191,8 +194,8 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           {/* Greeting + Avatar */}
           <View style={$greetRow}>
             <View style={$greetLeft}>
-              <Text text="김영희님," style={$greetBold} />
-              <Text text="오늘도 안전한 하루 되세요!" style={$greetMsg} />
+              <Text text={translate("homeScreen:greeting.name", { name: "김영희" })} style={$greetBold} />
+              <Text text={translate("homeScreen:greeting.message")} style={$greetMsg} />
             </View>
             <View style={$avatar}>
               <View style={$avatarHead} />
@@ -218,8 +221,8 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
             <TouchableOpacity style={$eduBanner} activeOpacity={0.7}>
               <View style={$eduBannerBar} />
               <View style={$eduBannerContent}>
-                <Text text="기존 교육/발표 참여" style={$eduBannerTitle} />
-                <Text text="이미 생성된 교육/발표실이 있습니다." style={$eduBannerDesc} />
+                <Text text={translate("homeScreen:edu.title")} style={$eduBannerTitle} />
+                <Text text={translate("homeScreen:edu.description")} style={$eduBannerDesc} />
               </View>
               <ChevronRight size={16} color="#7F848C" strokeWidth={2} />
             </TouchableOpacity>
@@ -228,9 +231,9 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           {/* Board Section */}
           <View style={$boardSection}>
             <View style={$boardHeader}>
-              <Text text="안전게시판" style={$boardTitle} />
+              <Text text={translate("homeScreen:board.title")} style={$boardTitle} />
               <TouchableOpacity style={$boardMoreBtn} onPress={() => navigation.navigate("SafeBoard")}>
-                <Text text="더보기" style={$boardMoreText} />
+                <Text text={translate("homeScreen:board.viewMore")} style={$boardMoreText} />
                 <ChevronRight size={12} color="#7F848C" strokeWidth={2} />
               </TouchableOpacity>
             </View>
@@ -238,20 +241,27 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
             {/* Tabs — 관리자만 표시 */}
             {userRole === "admin" && (
               <View style={$tabRow}>
-                {TABS.map((tab) => (
-                  <TouchableOpacity
-                    key={tab}
-                    style={$tabItem}
-                    onPress={() => setSelectedTab(tab)}
-                    activeOpacity={0.7}
-                  >
-                    <Text
-                      text={tab}
-                      style={[$tabLabel, selectedTab === tab ? $tabLabelActive : $tabLabelInactive]}
-                    />
-                    {selectedTab === tab && <View style={$tabLine} />}
-                  </TouchableOpacity>
-                ))}
+                {TABS.map((tab) => {
+                  const tabLabels: Record<TabType, string> = {
+                    all: translate("homeScreen:board.tabs.all"),
+                    company: translate("homeScreen:board.tabs.company"),
+                    workplace: translate("homeScreen:board.tabs.workplace"),
+                  }
+                  return (
+                    <TouchableOpacity
+                      key={tab}
+                      style={$tabItem}
+                      onPress={() => setSelectedTab(tab)}
+                      activeOpacity={0.7}
+                    >
+                      <Text
+                        text={tabLabels[tab]}
+                        style={[$tabLabel, selectedTab === tab ? $tabLabelActive : $tabLabelInactive]}
+                      />
+                      {selectedTab === tab && <View style={$tabLine} />}
+                    </TouchableOpacity>
+                  )
+                })}
               </View>
             )}
 
@@ -260,7 +270,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
               {BOARD_ITEMS.map((item, i) => (
                 <TouchableOpacity key={i} style={$boardItem} activeOpacity={0.7}>
                   <View style={$tagWrap}>
-                    {item.tag === "사업장" ? (
+                    {item.tag === "workplace" ? (
                       <BoardType1 width={44} height={21} />
                     ) : (
                       <BoardType2 width={54} height={21} />
@@ -279,17 +289,17 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           {/* Bottom Banner */}
           <View style={$banner}>
             <View style={$bannerInner}>
-              <Text text="K-SAFEONE과 함께하는 안전한 작업환경" style={$bannerText} />
+              <Text text={translate("homeScreen:banner.text")} style={$bannerText} />
             </View>
           </View>
 
           {/* Footer */}
           <View style={$footer}>
-            <Text text="홈페이지" style={$footerLink} />
+            <Text text={translate("homeScreen:footer.homepage")} style={$footerLink} />
             <Text text="|" style={$footerSep} />
-            <Text text="개인정보처리방침" style={$footerLink} />
+            <Text text={translate("homeScreen:footer.privacy")} style={$footerLink} />
             <Text text="|" style={$footerSep} />
-            <Text text="이용약관" style={$footerLink} />
+            <Text text={translate("homeScreen:footer.terms")} style={$footerLink} />
           </View>
         </View>
       </ScrollView>

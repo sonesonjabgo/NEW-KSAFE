@@ -35,6 +35,7 @@ const ko: Translations = {
   },
   loginScreen: {
     logIn: "로그인",
+    tagline: "현장을 이해하는 통합 안전 파트너",
     enterDetails:
       "일급비밀 정보를 해제하기 위해 상세 정보를 입력하세요. 무엇이 기다리고 있는지 절대 모를겁니다. 혹은 알 수 있을지도 모르겠군요. 엄청 복잡한 뭔가는 아닙니다.",
     emailFieldLabel: "이메일",
@@ -42,7 +43,8 @@ const ko: Translations = {
     emailFieldPlaceholder: "이메일을 입력하세요",
     passwordFieldPlaceholder: "엄청 비밀스러운 암호를 입력하세요",
     tapToLogIn: "눌러서 로그인 하기!",
-    hint: "힌트: 가장 좋아하는 암호와 아무런 아무 이메일 주소나 사용할 수 있어요 :)",
+    hint: "힌트: 가장 좋아하는 암호와 아무란 아무 이메일 주소나 사용할 수 있어요 :)",
+    forgotPassword: "비밀번호를 잊으셨나요?",
   },
   demoNavigator: {
     componentsTab: "컴포넌트",
@@ -119,6 +121,94 @@ const ko: Translations = {
     noFavoritesEmptyState: {
       heading: "조금 텅 비어 있네요.",
       content: "즐겨찾기가 없습니다. 에피소드에 있는 하트를 눌러서 즐겨찾기에 추가하세요.",
+    },
+  },
+
+  homeScreen: {
+    orgName: "KS산업안전협회",
+    header: {
+      qrScan: "QR스캔",
+      notification: "알림",
+      language: "언어",
+    },
+    greeting: {
+      message: "오늘도 안전한 하루 되세요!",
+      name: "{{name}}님,",
+    },
+    role: {
+      admin: "관리자",
+      worker: "근로자",
+    },
+    devToggle: {
+      eduBanner: "교육배너",
+    },
+    board: {
+      title: "안전게시판",
+      viewMore: "더보기",
+      tabs: {
+        all: "전체",
+        company: "회사전체",
+        workplace: "사업장",
+      },
+    },
+    edu: {
+      title: "기존 교육/발표 참여",
+      description: "이미 생성된 교육/발표실이 있습니다.",
+    },
+    banner: {
+      text: "K-SAFEONE과 함께하는 안전한 작업환경",
+    },
+    footer: {
+      homepage: "홈페이지",
+      privacy: "개인정보처리방침",
+      terms: "이용약관",
+    },
+    grid: {
+      interpret: { label: "1:1 통역", sub: "실시간 통역 지원" },
+      chatbot: { label: "AI 안전 챗봇", sub: "안전 상담/질의응답" },
+      translate: { label: "다국어 번역", sub: "언어 번역 지원" },
+      education: { label: "교육/발표", sub: "교육 자료 발표" },
+      eduJoin: { label: "교육/발표 참여", sub: "교육/발표 참여" },
+      tbmJoin: { label: "TBM 참여", sub: "안전점검 회의 참여" },
+      patrol: { label: "순회점검", sub: "순회점검 진행/기록" },
+      tbmCreate: { label: "TBM 조회/생성", sub: "TBM 조회/생성" },
+      tbmReport: { label: "TBM 보고서", sub: "TBM 보고서 조회" },
+      hazard: { label: "유해위험개소", sub: "유해위험개소 조회" },
+      suggestion: { label: "제도개선 제안", sub: "제도개선 제안 등록" },
+    },
+  },
+
+  safeBoardScreen: {
+    title: "안전게시판",
+    alertButton: "알림 발송",
+    workplaceLabel: "선택된 작업장",
+    tabs: {
+      all: "안전게시판",
+      myPosts: "내 게시글",
+    },
+    empty: "게시물이 없습니다",
+    write: "작성하기",
+  },
+
+  safeHealthScreen: {
+    title: "안전관리",
+    menu: {
+      patrol: { title: "작업장 순회 점검", description: "작업장 순회 점검 등록" },
+      educationMaterial: { title: "교육 자료", description: "교육 자료 조회 및 등록" },
+      tbmManage: { title: "TBM 관리/생성", description: "TBM 활동을 관리하고 생성" },
+      tbmReport: { title: "TBM 보고서 조회", description: "보고서 상태 확인 및 PDF 다운로드" },
+      tbmJoin: { title: "TBM 참여", description: "다른 관리감독자의 안전점검 회의 참여" },
+      tbmHistory: { title: "TBM 참여 이력", description: "참여한 TBM 회의 이력 조회" },
+      tbmJoinWorker: { title: "TBM 참여", description: "다른 관리감독자의 안전점검 회의 참여" },
+      statusView: { title: "현황 조회", description: "진행 중인 TBM 현황 확인" },
+    },
+  },
+
+  workerParticipationScreen: {
+    title: "근로자 참여",
+    menu: {
+      hazard: { title: "유해위험개소", description: "유해위험개소 등록" },
+      suggestion: { title: "제도개선 제안", description: "제도개선 제안 등록" },
     },
   },
 

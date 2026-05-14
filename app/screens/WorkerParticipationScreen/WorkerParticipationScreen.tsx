@@ -1,16 +1,19 @@
-import { FC } from "react"
+import { FC, useMemo } from "react"
 import { View } from "react-native"
+import { translate } from "@/i18n/translate"
 import { Text } from "@/components/Text"
 import { WorkerParticipationMenuItemComponent } from "./components/WorkerParticipationMenuItem"
-import { mockWorkerParticipationMenus } from "./mock/mockWorkerParticipationMenuData"
+import { getMockWorkerParticipationMenus } from "./mock/mockWorkerParticipationMenuData"
 import * as S from "./styles"
 import type { WorkerParticipationScreenProps } from "./types"
 
 export const WorkerParticipationScreen: FC<WorkerParticipationScreenProps> = () => {
+  const mockWorkerParticipationMenus = useMemo(() => getMockWorkerParticipationMenus(), [])
+
   return (
     <View style={S.$screenContainer}>
       <View style={S.$headerContainer}>
-        <Text text="근로자 참여" style={S.$headerTitle} />
+        <Text text={translate("workerParticipationScreen:title")} style={S.$headerTitle} />
       </View>
 
       <View style={S.$contentContainer}>

@@ -1,6 +1,7 @@
 import { FC, useState } from "react"
 import { FlatList, Modal, Pressable, TouchableOpacity, View } from "react-native"
 import { Bell, ChevronDown, PencilLine, Check } from "lucide-react-native"
+import { translate } from "@/i18n/translate"
 
 import { Text } from "@/components/Text"
 
@@ -61,7 +62,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = () => {
         <>
           <View style={S.$adminHeaderContainer}>
             <View style={S.$adminHeaderContent}>
-              <Text text="안전게시판" style={S.$headerTitle} />
+              <Text text={translate("safeBoardScreen:title")} style={S.$headerTitle} />
 
               <TouchableOpacity
                 style={S.$bellIconContainer}
@@ -71,13 +72,13 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = () => {
                 }}
               >
                 <Bell size={20} color="#FFFFFF" strokeWidth={1.8} />
-                <Text text="알림 발송" style={S.$bellText} />
+                <Text text={translate("safeBoardScreen:alertButton")} style={S.$bellText} />
               </TouchableOpacity>
             </View>
           </View>
 
           <View style={S.$workplaceContainer}>
-            <Text text="선택된 작업장" style={S.$workplaceLabel} />
+            <Text text={translate("safeBoardScreen:workplaceLabel")} style={S.$workplaceLabel} />
             <TouchableOpacity
               style={S.$workplaceSelectorNew}
               activeOpacity={0.6}
@@ -101,7 +102,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = () => {
               onPress={() => setActiveTab("all")}
             >
               <Text
-                text="안전게시판"
+                text={translate("safeBoardScreen:tabs.all")}
                 style={[S.$tabText, activeTab === "all" && S.$activeTabText]}
               />
             </TouchableOpacity>
@@ -111,13 +112,13 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = () => {
               activeOpacity={0.7}
               onPress={() => setActiveTab("my")}
             >
-              <Text text="내 게시글" style={[S.$tabText, activeTab === "my" && S.$activeTabText]} />
+              <Text text={translate("safeBoardScreen:tabs.myPosts")} style={[S.$tabText, activeTab === "my" && S.$activeTabText]} />
             </TouchableOpacity>
           </View>
         </>
       ) : (
         <View style={S.$headerContainer}>
-          <Text text="안전게시판" style={S.$headerTitle} />
+          <Text text={translate("safeBoardScreen:title")} style={S.$headerTitle} />
         </View>
       )}
 
@@ -136,7 +137,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = () => {
           contentContainerStyle={S.$listContainer}
           ListEmptyComponent={
             <View style={S.$emptyContainer}>
-              <Text text="게시물이 없습니다" style={S.$emptyText} />
+              <Text text={translate("safeBoardScreen:empty")} style={S.$emptyText} />
             </View>
           }
         />
@@ -151,7 +152,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = () => {
           }}
         >
           <PencilLine size={20} color="#FFFFFF" strokeWidth={1.8} />
-          <Text text="작성하기" style={S.$floatingButtonText} />
+          <Text text={translate("safeBoardScreen:write")} style={S.$floatingButtonText} />
         </TouchableOpacity>
       )}
 

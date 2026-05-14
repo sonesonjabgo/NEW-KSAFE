@@ -34,6 +34,7 @@ const en = {
   },
   loginScreen: {
     logIn: "Log In",
+    tagline: "Integrated Safety Partner for the Workplace",
     enterDetails:
       "Enter your details below to unlock top secret info. You'll never guess what we've got waiting. Or maybe you will; it's not rocket science here.",
     emailFieldLabel: "Email",
@@ -42,6 +43,7 @@ const en = {
     passwordFieldPlaceholder: "Super secret password here",
     tapToLogIn: "Tap to log in!",
     hint: "Hint: you can use any email address and your favorite password :)",
+    forgotPassword: "Forgot your password?",
   },
   demoNavigator: {
     componentsTab: "Components",
@@ -119,6 +121,94 @@ const en = {
       heading: "This looks a bit empty",
       content:
         "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
+    },
+  },
+
+  homeScreen: {
+    orgName: "KS Industrial Safety Association",
+    header: {
+      qrScan: "QR Scan",
+      notification: "Notifications",
+      language: "Language",
+    },
+    greeting: {
+      message: "Have a safe day today!",
+      name: "{{name}},",
+    },
+    role: {
+      admin: "Admin",
+      worker: "Worker",
+    },
+    devToggle: {
+      eduBanner: "Edu Banner",
+    },
+    board: {
+      title: "Safety Board",
+      viewMore: "View More",
+      tabs: {
+        all: "All",
+        company: "Company",
+        workplace: "Workplace",
+      },
+    },
+    edu: {
+      title: "Join Existing Education/Presentation",
+      description: "An education/presentation room already exists.",
+    },
+    banner: {
+      text: "Safe Working Environment with K-SAFEONE",
+    },
+    footer: {
+      homepage: "Homepage",
+      privacy: "Privacy Policy",
+      terms: "Terms of Service",
+    },
+    grid: {
+      interpret: { label: "1:1 Interpretation", sub: "Real-time interpretation" },
+      chatbot: { label: "AI Safety Chatbot", sub: "Safety Q&A / Consultation" },
+      translate: { label: "Multilingual Translation", sub: "Language translation" },
+      education: { label: "Education/Presentation", sub: "Present educational materials" },
+      eduJoin: { label: "Join Education", sub: "Join education/presentation" },
+      tbmJoin: { label: "Join TBM", sub: "Join safety inspection meeting" },
+      patrol: { label: "Site Patrol", sub: "Patrol and record" },
+      tbmCreate: { label: "TBM View/Create", sub: "View/Create TBM" },
+      tbmReport: { label: "TBM Report", sub: "View TBM report" },
+      hazard: { label: "Hazard Areas", sub: "View hazard areas" },
+      suggestion: { label: "Improvement Proposals", sub: "Submit improvement proposals" },
+    },
+  },
+
+  safeBoardScreen: {
+    title: "Safety Board",
+    alertButton: "Send Alert",
+    workplaceLabel: "Selected Workplace",
+    tabs: {
+      all: "Safety Board",
+      myPosts: "My Posts",
+    },
+    empty: "No posts found",
+    write: "Write",
+  },
+
+  safeHealthScreen: {
+    title: "Safety Management",
+    menu: {
+      patrol: { title: "Site Patrol Inspection", description: "Register site patrol inspection" },
+      educationMaterial: { title: "Educational Materials", description: "View and register educational materials" },
+      tbmManage: { title: "TBM Management/Create", description: "Manage and create TBM activities" },
+      tbmReport: { title: "TBM Report View", description: "Check report status and download PDF" },
+      tbmJoin: { title: "Join TBM", description: "Join another supervisor's safety meeting" },
+      tbmHistory: { title: "TBM History", description: "View past TBM meeting history" },
+      tbmJoinWorker: { title: "Join TBM", description: "Join another supervisor's safety meeting" },
+      statusView: { title: "Status View", description: "Check ongoing TBM status" },
+    },
+  },
+
+  workerParticipationScreen: {
+    title: "Worker Participation",
+    menu: {
+      hazard: { title: "Hazard Areas", description: "Register hazard area" },
+      suggestion: { title: "Improvement Proposals", description: "Submit improvement proposal" },
     },
   },
 
