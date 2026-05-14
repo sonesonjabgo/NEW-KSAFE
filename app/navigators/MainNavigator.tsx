@@ -70,17 +70,11 @@ export function MainNavigator() {
         }}
       />
 
-      {/* 마이페이지 — 미구현, 탭 버튼만 표시하고 동작 없음 */}
       <Tab.Screen
         name="WorkerParticipation"
         component={WorkerParticipationScreen}
-        listeners={{
-          tabPress: (e) => {
-            e.preventDefault()
-          },
-        }}
         options={{
-          tabBarLabel: "마이페이지",
+          tabBarLabel: "근로자 참여",
           tabBarIcon: ({ focused }) => <TabIcon Icon={NavWorker} focused={focused} />,
         }}
       />

@@ -23,6 +23,7 @@ import HeaderLang from "@assets/icons/nav2/header_lang.svg"
 import HeaderQr from "@assets/icons/nav2/header_qr.svg"
 
 import { Text } from "@/components/Text"
+import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 import type { MainTabScreenProps } from "@/navigators/navigationTypes"
 import { typography } from "@/theme/typography"
@@ -38,7 +39,7 @@ type TabType = "all" | "company" | "workplace"
 
 export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
-  const [userRole, setUserRole] = useState<"admin" | "worker">("worker")
+  const { role: userRole, setRole: setUserRole } = useRole()
   const [selectedTab, setSelectedTab] = useState<TabType>("all")
   // TODO: 추후 실제 API 연동으로 교체
   const [hasExistingEdu, setHasExistingEdu] = useState(true)
