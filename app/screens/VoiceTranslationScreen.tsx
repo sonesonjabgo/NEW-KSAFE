@@ -81,13 +81,13 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
   const flipRotation = useSharedValue(0)
 
   const topBoxAnimStyle = useAnimatedStyle(() => ({
-    transform: [{ rotate: `${flipRotation.value}deg` }],
+    transform: [{ rotateZ: `${flipRotation.value}deg` }],
   }))
 
   const handleFlip = () => {
     const next = isFlipped ? 0 : 180
-    flipRotation.value = withTiming(next, { duration: 400 })
-    setIsFlipped(!isFlipped)
+    flipRotation.value = withTiming(next, { duration: 450 })
+    setIsFlipped((prev) => !prev)
   }
 
   const openLangMenu = (target: "top" | "bottom") => {
@@ -127,9 +127,15 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
           text={translate("voiceTranslationScreen:title")}
           style={$headerTitle}
         />
-        <TouchableOpacity style={$headerBtn} onPress={handleFlip}>
-          <RotateCcw size={20} color="#FFFFFF" strokeWidth={2} />
-          <Text text={translate("voiceTranslationScreen:flipScreen")} style={$headerBtnLabel} />
+        <TouchableOpacity
+          style={[$headerBtn, $headerBtnRight, isFlipped && $headerBtnActive]}
+          onPress={handleFlip}
+        >
+          <RotateCcw size={20} color={isFlipped ? NAVY : "#FFFFFF"} strokeWidth={2} />
+          <Text
+            text={translate("voiceTranslationScreen:flipScreen")}
+            style={[$headerBtnLabel, isFlipped && $headerBtnLabelActive]}
+          />
         </TouchableOpacity>
       </View>
 
@@ -313,10 +319,25 @@ const $headerBtn: ViewStyle = {
   minWidth: 60,
 }
 
+const $headerBtnRight: ViewStyle = {
+  justifyContent: "flex-end",
+}
+
+const $headerBtnActive: ViewStyle = {
+  backgroundColor: "#FFFFFF",
+  borderRadius: 8,
+  paddingHorizontal: 8,
+  paddingVertical: 4,
+}
+
 const $headerBtnLabel: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.medium,
   color: "#FFFFFF",
+}
+
+const $headerBtnLabelActive: TextStyle = {
+  color: NAVY,
 }
 
 const $headerTitle: TextStyle = {
