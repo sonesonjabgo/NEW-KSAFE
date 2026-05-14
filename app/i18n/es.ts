@@ -258,6 +258,29 @@ const es: Translations = {
     logout: "Logout",
   },
 
+  languageSettings: {
+    title: "Configuración de idioma",
+    description: "Cambia el idioma de la aplicación de inmediato.",
+    changedTitle: "Configuración de idioma",
+    changedDescription:
+      "El idioma ha sido cambiado a {{language}}.\nLa aplicación se reiniciará para aplicar los cambios.",
+    confirm: "Confirmar",
+    languages: {
+      ko: "Coreano (한국어)",
+      en: "Inglés (English)",
+      zhHans: "Chino simplificado (简体中文)",
+      zhHant: "Chino tradicional (繁體中文)",
+      ru: "Ruso (Русский)",
+      vi: "Vietnamita (Tiếng Việt)",
+      id: "Indonesio (Bahasa Indonesia)",
+      km: "Jemer (ភាសាខ្មែរ)",
+      th: "Tailandés (ไทย)",
+      ur: "Urdu (اردو)",
+      ne: "Nepalí (नेपाली)",
+      lo: "Lao (ພາສາລາວ)",
+    },
+  },
+
   ...demoEs,
 }
 

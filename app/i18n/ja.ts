@@ -256,6 +256,29 @@ const ja: Translations = {
     logout: "Logout",
   },
 
+  languageSettings: {
+    title: "言語設定",
+    description: "アプリの言語をすぐに変更できます。",
+    changedTitle: "言語設定",
+    changedDescription:
+      "言語が{{language}}に変更されました。\n変更を適用するためにアプリを再起動します。",
+    confirm: "確認",
+    languages: {
+      ko: "韓国語 (한국어)",
+      en: "英語 (English)",
+      zhHans: "簡体字中国語 (简体中文)",
+      zhHant: "繁体字中国語 (繁體中文)",
+      ru: "ロシア語 (Русский)",
+      vi: "ベトナム語 (Tiếng Việt)",
+      id: "インドネシア語 (Bahasa Indonesia)",
+      km: "クメール語 (ភាសាខ្មែរ)",
+      th: "タイ語 (ไทย)",
+      ur: "ウルドゥー語 (اردو)",
+      ne: "ネパール語 (नेपाली)",
+      lo: "ラオ語 (ພາສາລາວ)",
+    },
+  },
+
   ...demoJa,
 }
 

@@ -286,6 +286,29 @@ const ko: Translations = {
     logout: "로그아웃",
   },
 
+  languageSettings: {
+    title: "언어 설정",
+    description: "앱 언어를 바로 변경하세요.",
+    changedTitle: "언어 설정",
+    changedDescription:
+      "언어가 {{language}}(으)로 변경되었습니다.\n변경 사항 적용을 위해 앱을 다시 시작합니다.",
+    confirm: "확인",
+    languages: {
+      ko: "한국어",
+      en: "English (영어)",
+      zhHans: "简体中文 (중국어(간체))",
+      zhHant: "繁體中文 (중국어(번체))",
+      ru: "Русский (러시아어)",
+      vi: "Tiếng Việt (베트남어)",
+      id: "Bahasa Indonesia (인도네시아어)",
+      km: "ភាសាខ្មែរ (크메르어)",
+      th: "ไทย (태국어)",
+      ur: "اردو (우르드어)",
+      ne: "नेपाली (네팔어)",
+      lo: "ພາສາລາວ (라오어)",
+    },
+  },
+
   ...demoKo,
 }
 

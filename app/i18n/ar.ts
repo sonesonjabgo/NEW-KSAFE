@@ -252,6 +252,29 @@ const ar: Translations = {
     logout: "Logout",
   },
 
+  languageSettings: {
+    title: "إعدادات اللغة",
+    description: "غيّر لغة التطبيق على الفور.",
+    changedTitle: "إعدادات اللغة",
+    changedDescription:
+      "تم تغيير اللغة إلى {{language}}.\nسيتم إعادة تشغيل التطبيق لتطبيق التغييرات.",
+    confirm: "تأكيد",
+    languages: {
+      ko: "الكورية (한국어)",
+      en: "الإنجليزية (English)",
+      zhHans: "الصينية المبسطة (简体中文)",
+      zhHant: "الصينية التقليدية (繁體中文)",
+      ru: "الروسية (Русский)",
+      vi: "الفيتنامية (Tiếng Việt)",
+      id: "الإندونيسية (Bahasa Indonesia)",
+      km: "الخميرية (ភាសាខ្មែរ)",
+      th: "التايلاندية (ไทย)",
+      ur: "الأردية (اردو)",
+      ne: "النيبالية (नेपाली)",
+      lo: "اللاوية (ພາສາລາວ)",
+    },
+  },
+
   ...demoAr,
 }
 

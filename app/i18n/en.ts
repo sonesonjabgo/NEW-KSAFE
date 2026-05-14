@@ -292,6 +292,29 @@ const en = {
     logout: "Logout",
   },
 
+  languageSettings: {
+    title: "Language Settings",
+    description: "Change the app language right away.",
+    changedTitle: "Language Settings",
+    changedDescription:
+      "The language has been changed to {{language}}.\nThe app will restart to apply the changes.",
+    confirm: "Confirm",
+    languages: {
+      ko: "Korean (한국어)",
+      en: "English",
+      zhHans: "Simplified Chinese (简体中文)",
+      zhHant: "Traditional Chinese (繁體中文)",
+      ru: "Russian (Русский)",
+      vi: "Vietnamese (Tiếng Việt)",
+      id: "Indonesian (Bahasa Indonesia)",
+      km: "Khmer (ភាសាខ្មែរ)",
+      th: "Thai (ไทย)",
+      ur: "Urdu (اردو)",
+      ne: "Nepali (नेपाली)",
+      lo: "Lao (ພາສາລາວ)",
+    },
+  },
+
   ...demoEn,
 }
 
