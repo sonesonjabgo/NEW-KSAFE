@@ -465,7 +465,6 @@ const $aiMsgName: TextStyle = {
 const $aiBubble: ViewStyle = {
   backgroundColor: "#FFFFFF",
   borderRadius: 16,
-  borderTopLeftRadius: 4,
   paddingHorizontal: 14,
   paddingVertical: 10,
   shadowColor: "#000",
