@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   Modal,
   FlatList,
+  useWindowDimensions,
 } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { ChevronDown, RotateCcw, Volume2, Mic, Square } from "lucide-react-native"
@@ -29,6 +30,13 @@ type LanguageKey =
   | "vietnamese"
   | "indonesian"
   | "khmer"
+  | "thai"
+  | "urdu"
+  | "nepali"
+  | "lao"
+  | "japanese"
+  | "french"
+  | "spanish"
 
 interface Language {
   key: LanguageKey
@@ -44,6 +52,13 @@ const LANGUAGES: Language[] = [
   { key: "vietnamese", flag: "🇻🇳" },
   { key: "indonesian", flag: "🇮🇩" },
   { key: "khmer", flag: "🇰🇭" },
+  { key: "thai", flag: "🇹🇭" },
+  { key: "urdu", flag: "🇵🇰" },
+  { key: "nepali", flag: "🇳🇵" },
+  { key: "lao", flag: "🇱🇦" },
+  { key: "japanese", flag: "🇯🇵" },
+  { key: "french", flag: "🇫🇷" },
+  { key: "spanish", flag: "🇪🇸" },
 ]
 
 interface MessageItem {
@@ -63,6 +78,7 @@ const MOCK_BOTTOM_MESSAGES: MessageItem[] = [
 
 export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
+  const { height: screenHeight } = useWindowDimensions()
 
   const [topLanguage, setTopLanguage] = useState<LanguageKey>("english")
   const [bottomLanguage, setBottomLanguage] = useState<LanguageKey>("korean")
@@ -200,7 +216,7 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
           activeOpacity={1}
           onPress={() => setLangMenuVisible(false)}
         />
-        <View style={[$modalSheet, { paddingBottom: insets.bottom + 16 }]}>
+        <View style={[$modalSheet, { height: screenHeight * 0.65, paddingBottom: insets.bottom + 16 }]}>
           <View style={$modalHandle} />
           <Text
             text={translate("voiceTranslationScreen:languageMenu.title")}
@@ -395,7 +411,6 @@ const $modalSheet: ViewStyle = {
   borderTopRightRadius: 20,
   paddingTop: 12,
   paddingHorizontal: 0,
-  maxHeight: "65%",
 }
 
 const $modalHandle: ViewStyle = {
