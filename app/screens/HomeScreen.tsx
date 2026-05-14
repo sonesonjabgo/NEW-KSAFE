@@ -190,7 +190,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
                   style={$headerActionLabel}
                 />
               </TouchableOpacity>
-              <TouchableOpacity style={$headerAction}>
+              <TouchableOpacity style={$headerAction} onPress={() => navigation.navigate("LanguageSettings")}>
                 <HeaderLang width={22} height={22} style={$headerActionIcon} />
                 <Text text={translate("homeScreen:header.language")} style={$headerActionLabel} />
               </TouchableOpacity>

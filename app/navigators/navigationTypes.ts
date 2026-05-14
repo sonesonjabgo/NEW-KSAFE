@@ -19,6 +19,7 @@ export type MainTabParamList = {
 export type AppStackParamList = {
   Login: undefined
   Main: NavigatorScreenParams<MainTabParamList>
+  LanguageSettings: undefined
   MyPage: undefined
   VoiceTranslation: undefined
   QrScanner: undefined

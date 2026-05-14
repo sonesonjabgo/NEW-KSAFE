@@ -275,6 +275,29 @@ const hi: Translations = {
     logout: "Logout",
   },
 
+  languageSettings: {
+    title: "भाषा सेटिंग्स",
+    description: "ऐप की भाषा तुरंत बदलें।",
+    changedTitle: "भाषा सेटिंग्स",
+    changedDescription:
+      "भाषा को {{language}} में बदल दिया गया है।\nपरिवर्तन लागू करने के लिए ऐप पुनः प्रारंभ होगा।",
+    confirm: "पुष्टि करें",
+    languages: {
+      ko: "कोरियाई (한국어)",
+      en: "अंग्रेजी (English)",
+      zhHans: "सरलीकृत चीनी (简体中文)",
+      zhHant: "परंपरागत चीनी (繁體中文)",
+      ru: "रूसी (Русский)",
+      vi: "वियतनामी (Tiếng Việt)",
+      id: "इंडोनेशियाई (Bahasa Indonesia)",
+      km: "खमेर (ភាសាខ្មែរ)",
+      th: "थाई (ไทย)",
+      ur: "उर्दू (اردو)",
+      ne: "नेपाली (नेपाली)",
+      lo: "लाओ (ພາສາລາວ)",
+    },
+  },
+
   ...demoHi,
 }
 

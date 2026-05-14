@@ -277,6 +277,29 @@ const fr: Translations = {
     logout: "Logout",
   },
 
+  languageSettings: {
+    title: "Paramètres de langue",
+    description: "Changez la langue de l'application immédiatement.",
+    changedTitle: "Paramètres de langue",
+    changedDescription:
+      "La langue a été changée en {{language}}.\nL'application va redémarrer pour appliquer les modifications.",
+    confirm: "Confirmer",
+    languages: {
+      ko: "Coréen (한국어)",
+      en: "Anglais (English)",
+      zhHans: "Chinois simplifié (简体中文)",
+      zhHant: "Chinois traditionnel (繁體中文)",
+      ru: "Russe (Русский)",
+      vi: "Vietnamien (Tiếng Việt)",
+      id: "Indonésien (Bahasa Indonesia)",
+      km: "Khmer (ភាសាខ្មែរ)",
+      th: "Thaï (ไทย)",
+      ur: "Ourdou (اردو)",
+      ne: "Népalais (नेपाली)",
+      lo: "Laotien (ພາສາລາວ)",
+    },
+  },
+
   ...demoFr,
 }
 

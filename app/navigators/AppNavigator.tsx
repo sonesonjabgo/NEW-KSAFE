@@ -10,13 +10,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import Config from "@/config"
 import { useAuth } from "@/context/AuthContext"
 import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
-import { LoginScreen } from "@/screens/LoginScreen"
-import { QrScannerScreen } from "@/screens/QrScannerScreen"
-import { useAppTheme } from "@/theme/context"
-
 import { AISafetyChatScreen } from "@/screens/AISafetyChatScreen/AISafetyChatScreen"
+import { LanguageSettingsScreen } from "@/screens/LanguageSettingsScreen"
+import { LoginScreen } from "@/screens/LoginScreen"
 import { MyPageScreen } from "@/screens/MyPageScreen"
+import { QrScannerScreen } from "@/screens/QrScannerScreen"
 import { VoiceTranslationScreen } from "@/screens/VoiceTranslationScreen"
+import { useAppTheme } from "@/theme/context"
 
 import { MainNavigator } from "./MainNavigator"
 import type { AppStackParamList, NavigationProps } from "./navigationTypes"
@@ -50,6 +50,7 @@ const AppStack = () => {
     >
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Main" component={MainNavigator} />
+      <Stack.Screen name="LanguageSettings" component={LanguageSettingsScreen} />
       <Stack.Screen name="MyPage" component={MyPageScreen} />
       <Stack.Screen name="VoiceTranslation" component={VoiceTranslationScreen} />
       <Stack.Screen name="QrScanner" component={QrScannerScreen} />
