@@ -125,6 +125,34 @@ const es: Translations = {
     },
   },
 
+  myPageScreen: {
+    title: "Mi Página",
+    company: "Empresa",
+    email: "Correo Electrónico",
+    workplace: "Lugar de Trabajo de la Grúa de Torre",
+    appPermissions: "Permisos de la Aplicación",
+    camera: {
+      title: "Cámara",
+      description:
+        "Escaneo de código QR, fotos de traducción por IA, grabación de emergencia de peligro",
+    },
+    microphone: {
+      title: "Micrófono",
+      description: "Traducción de voz, llamada de radio, función de identificación de voz",
+    },
+    photoLibrary: {
+      title: "Fotos/Biblioteca",
+      description:
+        "Evaluación de riesgos de IA, traducción de imágenes, materiales de capacitación TBM/informes",
+    },
+    pushNotification: {
+      title: "Notificaciones Push",
+      description: "Alertas TBM, advertencias de peligro, avisos del lugar de trabajo",
+    },
+    allowButton: "Permitir",
+    logOutButton: "Cerrar Sesión",
+  },
+
   ...demoEs,
 }
 

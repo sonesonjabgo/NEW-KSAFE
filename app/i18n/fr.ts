@@ -125,6 +125,34 @@ const fr: Translations = {
     },
   },
 
+  myPageScreen: {
+    title: "Ma Page",
+    company: "Entreprise",
+    email: "E-mail",
+    workplace: "Lieu de travail Gwanggyo Tower Crane",
+    appPermissions: "Permissions de l'Application",
+    camera: {
+      title: "Appareil Photo",
+      description:
+        "Numérisation de codes QR, photos de traduction par IA, enregistrement d'urgence en cas de danger",
+    },
+    microphone: {
+      title: "Microphone",
+      description: "Traduction vocale, appels radio, fonction d'identification vocale",
+    },
+    photoLibrary: {
+      title: "Photos/Bibliothèque",
+      description:
+        "Évaluation des risques par IA, traduction d'images, matériaux de formation TBM/rapports",
+    },
+    pushNotification: {
+      title: "Notifications Push",
+      description: "Alertes TBM, avertissements de danger, avis du lieu de travail",
+    },
+    allowButton: "Autoriser",
+    logOutButton: "Déconnexion",
+  },
+
   ...demoFr,
 }
 

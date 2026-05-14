@@ -122,6 +122,32 @@ const en = {
     },
   },
 
+  myPageScreen: {
+    title: "My Page",
+    company: "Company",
+    email: "Email",
+    workplace: "Gwanggyo Tower Crane Workplace",
+    appPermissions: "App Permissions",
+    camera: {
+      title: "Camera",
+      description: "QR scan, AI translation photos, hazard emergency recording",
+    },
+    microphone: {
+      title: "Microphone",
+      description: "Voice translation, radio call, voice identification",
+    },
+    photoLibrary: {
+      title: "Photos/Library",
+      description: "AI risk assessment, image translation, TBM training materials/reports",
+    },
+    pushNotification: {
+      title: "Push Notifications",
+      description: "TBM alerts, hazard warnings, workplace notices",
+    },
+    allowButton: "Allow",
+    logOutButton: "Log Out",
+  },
+
   ...demoEn,
 }
 

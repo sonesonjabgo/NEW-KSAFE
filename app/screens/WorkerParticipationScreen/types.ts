@@ -7,4 +7,4 @@ export interface WorkerParticipationMenuItem {
   icon: string
 }
 
-export interface WorkerParticipationScreenProps extends MainTabScreenProps<"WorkerParticipation"> {}
+export interface WorkerParticipationScreenProps extends MainTabScreenProps<"MyPage"> {}

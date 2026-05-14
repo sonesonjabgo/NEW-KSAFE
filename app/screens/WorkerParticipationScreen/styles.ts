@@ -1,4 +1,5 @@
 import { ViewStyle, TextStyle } from "react-native"
+
 import { typography } from "@/theme/typography"
 
 export const $screenContainer: ViewStyle = {

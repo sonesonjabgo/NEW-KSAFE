@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react"
 import { TextInput, View } from "react-native"
 import { tva } from "@gluestack-ui/nativewind-utils/tva"
-import { withStyleContext, useStyleContext } from "@gluestack-ui/nativewind-utils/withStyleContext"
 import { withStates } from "@gluestack-ui/nativewind-utils/withStates"
+import { withStyleContext, useStyleContext } from "@gluestack-ui/nativewind-utils/withStyleContext"
 
 const SCOPE = "INPUT"
 
@@ -35,25 +35,23 @@ const inputFieldStyle = tva({
 
 const Root = withStates(withStyleContext(View, SCOPE))
 
-export const Input = forwardRef(({ className, variant = "outline", size = "md", states = {}, ...props }: any, ref: any) => {
-  return (
-    <Root
-      ref={ref}
-      {...props}
-      states={states}
-      className={inputStyle({ variant, size, className })}
-      context={{ variant, size }}
-    />
-  )
-})
+export const Input = forwardRef(
+  ({ className, variant = "outline", size = "md", states = {}, ...props }: any, ref: any) => {
+    return (
+      <Root
+        ref={ref}
+        {...props}
+        states={states}
+        className={inputStyle({ variant, size, className })}
+        context={{ variant, size }}
+      />
+    )
+  },
+)
 
 export const InputField = forwardRef(({ className, ...props }: any, ref: any) => {
   const { size: parentSize } = useStyleContext(SCOPE)
   return (
-    <TextInput
-      ref={ref}
-      className={inputFieldStyle({ size: parentSize, className })}
-      {...props}
-    />
+    <TextInput ref={ref} className={inputFieldStyle({ size: parentSize, className })} {...props} />
   )
 })

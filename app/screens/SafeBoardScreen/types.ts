@@ -1,7 +1,13 @@
 import type { MainTabScreenProps } from "@/navigators/navigationTypes"
 
 export type ScopeType = "company_wide" | "workplace"
-export type StatusType = "unread" | "pending_signature" | "completed" | "draft" | "published" | "archived"
+export type StatusType =
+  | "unread"
+  | "pending_signature"
+  | "completed"
+  | "draft"
+  | "published"
+  | "archived"
 
 export interface SafeBoardItem {
   id: number

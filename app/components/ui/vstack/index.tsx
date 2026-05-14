@@ -5,11 +5,11 @@ const vstackStyle = tva({
   base: "flex-col",
   variants: {
     space: {
-      xs: "gap-1",
-      sm: "gap-2",
-      md: "gap-3",
-      lg: "gap-4",
-      xl: "gap-5",
+      "xs": "gap-1",
+      "sm": "gap-2",
+      "md": "gap-3",
+      "lg": "gap-4",
+      "xl": "gap-5",
       "2xl": "gap-6",
       "3xl": "gap-7",
       "4xl": "gap-8",
@@ -21,10 +21,5 @@ const vstackStyle = tva({
 })
 
 export const VStack = ({ className, space, reversed, ...props }: any) => {
-  return (
-    <View
-      className={vstackStyle({ space, reversed, className })}
-      {...props}
-    />
-  )
+  return <View className={vstackStyle({ space, reversed, className })} {...props} />
 }

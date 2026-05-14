@@ -10,10 +10,11 @@ import {
   StyleSheet,
 } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import type { MainTabScreenProps } from "@/navigators/navigationTypes"
-import { typography } from "@/theme/typography"
+
 import { Icon } from "@/components/Icon"
 import { Text } from "@/components/Text"
+import type { MainTabScreenProps } from "@/navigators/navigationTypes"
+import { typography } from "@/theme/typography"
 
 interface HomeScreenProps extends MainTabScreenProps<"Home"> {}
 
@@ -102,7 +103,9 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
   // 관리자: 인덱스 0~8 (9개) / 근로자: 인덱스 0~5 + 9~10 (8개)
   const visibleGridItems =
-    userRole === "admin" ? GRID_ITEMS.slice(0, 9) : [...GRID_ITEMS.slice(0, 6), ...GRID_ITEMS.slice(9)]
+    userRole === "admin"
+      ? GRID_ITEMS.slice(0, 9)
+      : [...GRID_ITEMS.slice(0, 6), ...GRID_ITEMS.slice(9)]
 
   return (
     <View style={$root}>
@@ -232,7 +235,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           <View style={$boardSection}>
             <View style={$boardHeader}>
               <Text text="안전게시판" style={$boardTitle} />
-              <TouchableOpacity style={$boardMoreBtn} onPress={() => navigation.navigate("SafeBoard")}>
+              <TouchableOpacity
+                style={$boardMoreBtn}
+                onPress={() => navigation.navigate("SafeBoard")}
+              >
                 <Text text="더보기" style={$boardMoreText} />
                 <Icon icon="caretRight" size={12} color="#7F848C" />
               </TouchableOpacity>
@@ -298,7 +304,6 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-
     </View>
   )
 }

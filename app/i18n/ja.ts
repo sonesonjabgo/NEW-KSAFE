@@ -123,6 +123,32 @@ const ja: Translations = {
     },
   },
 
+  myPageScreen: {
+    title: "マイページ",
+    company: "会社名",
+    email: "メール",
+    workplace: "広教タワークレーン作業場",
+    appPermissions: "アプリ権限設定",
+    camera: {
+      title: "カメラ",
+      description: "QRコードスキャン、AI翻訳撮影、危険緊急記録",
+    },
+    microphone: {
+      title: "マイク",
+      description: "音声翻訳、無線通話、音声識別機能",
+    },
+    photoLibrary: {
+      title: "写真/ライブラリ",
+      description: "AI危険性評価、画像翻訳、TBM教育資料/レポート作成など",
+    },
+    pushNotification: {
+      title: "プッシュ通知",
+      description: "TBM通知、危険警報、作業場公開情報",
+    },
+    allowButton: "許可",
+    logOutButton: "ログアウト",
+  },
+
   ...demoJa,
 }
 

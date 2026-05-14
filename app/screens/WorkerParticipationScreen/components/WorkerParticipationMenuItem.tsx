@@ -1,8 +1,10 @@
 import { FC } from "react"
 import { TouchableOpacity, View } from "react-native"
-import { Text } from "@/components/Text"
-import { ChevronRight } from "lucide-react-native"
 import { IconAlertTriangle, IconBulb } from "@tabler/icons-react-native"
+import { ChevronRight } from "lucide-react-native"
+
+import { Text } from "@/components/Text"
+
 import * as S from "../styles"
 import type { WorkerParticipationMenuItem } from "../types"
 
@@ -19,10 +21,9 @@ const getIcon = (iconName: string) => {
   return iconMap[iconName] || ChevronRight
 }
 
-export const WorkerParticipationMenuItemComponent: FC<WorkerParticipationMenuItemComponentProps> = ({
-  item,
-  showDivider = true,
-}) => {
+export const WorkerParticipationMenuItemComponent: FC<
+  WorkerParticipationMenuItemComponentProps
+> = ({ item, showDivider = true }) => {
   const IconComponent = getIcon(item.icon)
 
   return (

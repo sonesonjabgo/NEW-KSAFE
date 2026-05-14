@@ -1,8 +1,10 @@
 import { FC } from "react"
 import { View, TouchableOpacity, TextStyle, ViewStyle } from "react-native"
+import { Pin, PencilLine, MapPin } from "lucide-react-native"
+
 import { Text } from "@/components/Text"
 import { typography } from "@/theme/typography"
-import { Pin, PencilLine, MapPin } from "lucide-react-native"
+
 import type { SafeBoardItem, ScopeType, StatusType } from "../types"
 
 interface SafeBoardCardProps {
@@ -42,7 +44,12 @@ const getStatusLabel = (status: StatusType): string => {
   return statusMap[status] || ""
 }
 
-export const SafeBoardCard: FC<SafeBoardCardProps> = ({ item, showStatus = false, showEditIcon = false, showDivider = true }) => {
+export const SafeBoardCard: FC<SafeBoardCardProps> = ({
+  item,
+  showStatus = false,
+  showEditIcon = false,
+  showDivider = true,
+}) => {
   const scopeStyle = getScopeStyle(item.scope)
   const statusLabel = getStatusLabel(item.status)
   const statusStyle = getStatusStyle()
@@ -53,12 +60,18 @@ export const SafeBoardCard: FC<SafeBoardCardProps> = ({ item, showStatus = false
         <View style={$contentWrapper}>
           <View style={$mainContent}>
             <View style={$scopeLabelRow}>
-              <View style={[{ ...($scopeLabel), borderColor: scopeStyle.borderColor }]}>
-                <Text text={getScopeLabel(item.scope)} style={[{ ...$scopeLabelText, color: scopeStyle.textColor }]} />
+              <View style={{ ...$scopeLabel, borderColor: scopeStyle.borderColor }}>
+                <Text
+                  text={getScopeLabel(item.scope)}
+                  style={{ ...$scopeLabelText, color: scopeStyle.textColor }}
+                />
               </View>
               {showStatus && statusLabel && (
-                <View style={[{ ...($scopeLabel), borderColor: statusStyle.borderColor }]}>
-                  <Text text={statusLabel} style={[{ ...$scopeLabelText, color: statusStyle.textColor }]} />
+                <View style={{ ...$scopeLabel, borderColor: statusStyle.borderColor }}>
+                  <Text
+                    text={statusLabel}
+                    style={{ ...$scopeLabelText, color: statusStyle.textColor }}
+                  />
                 </View>
               )}
             </View>

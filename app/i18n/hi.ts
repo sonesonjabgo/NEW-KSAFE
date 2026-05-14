@@ -123,6 +123,32 @@ const hi: Translations = {
     },
   },
 
+  myPageScreen: {
+    title: "मेरा पृष्ठ",
+    company: "कंपनी",
+    email: "ईमेल",
+    workplace: "ग्वांगगियो टावर क्रेन वर्कप्लेस",
+    appPermissions: "ऐप अनुमति",
+    camera: {
+      title: "कैमरा",
+      description: "QR स्कैन, AI अनुवाद फोटो, जोखिम आपातकाल रिकॉर्डिंग",
+    },
+    microphone: {
+      title: "माइक्रोफ़ोन",
+      description: "वॉयस अनुवाद, रेडियो कॉल, वॉयस पहचान",
+    },
+    photoLibrary: {
+      title: "फोटो/लाइब्रेरी",
+      description: "AI जोखिम मूल्यांकन, छवि अनुवाद, TBM प्रशिक्षण सामग्री/रिपोर्ट",
+    },
+    pushNotification: {
+      title: "पुश नोटिफिकेशन",
+      description: "TBM अलर्ट, जोखिम चेतावनी, कार्यस्थल नोटिस",
+    },
+    allowButton: "अनुमति दें",
+    logOutButton: "लॉग आउट",
+  },
+
   ...demoHi,
 }
 

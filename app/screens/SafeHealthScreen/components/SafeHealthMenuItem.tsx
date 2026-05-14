@@ -1,8 +1,5 @@
 import { FC } from "react"
 import { TouchableOpacity, View } from "react-native"
-
-import { Text } from "@/components/Text"
-import { ChevronRight } from "lucide-react-native"
 import {
   IconWalk,
   IconBook,
@@ -12,6 +9,9 @@ import {
   IconHistory,
   IconLayoutList,
 } from "@tabler/icons-react-native"
+import { ChevronRight } from "lucide-react-native"
+
+import { Text } from "@/components/Text"
 
 import * as S from "../styles"
 import type { SafeHealthMenuItem } from "../types"

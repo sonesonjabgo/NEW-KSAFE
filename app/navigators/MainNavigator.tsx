@@ -3,9 +3,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { HomeScreen } from "@/screens/HomeScreen"
+import { MyPageScreen } from "@/screens/MyPageScreen/MyPageScreen"
 import { SafeBoardScreen } from "@/screens/SafeBoardScreen/SafeBoardScreen"
 import { SafeHealthMainScreen } from "@/screens/SafeHealthScreen/SafeHealthMainScreen"
-import { MyPageScreen } from "@/screens/MyPageScreen"
 import { typography } from "@/theme/typography"
 
 import type { MainTabParamList } from "./navigationTypes"
@@ -26,10 +26,7 @@ const navIcons = {
 function TabIcon({ source, focused }: { source: number; focused: boolean }) {
   return (
     <View style={focused ? $iconWrapActive : $iconWrap}>
-      <Image
-        source={source}
-        style={[$tabIcon, { tintColor: focused ? ACTIVE_BLUE : INACTIVE }]}
-      />
+      <Image source={source} style={[$tabIcon, { tintColor: focused ? ACTIVE_BLUE : INACTIVE }]} />
     </View>
   )
 }
@@ -81,9 +78,7 @@ export function MainNavigator() {
         component={MyPageScreen}
         options={{
           tabBarLabel: "마이페이지",
-          tabBarIcon: ({ focused }) => (
-            <TabIcon source={navIcons.MyPage} focused={focused} />
-          ),
+          tabBarIcon: ({ focused }) => <TabIcon source={navIcons.MyPage} focused={focused} />,
         }}
       />
     </Tab.Navigator>

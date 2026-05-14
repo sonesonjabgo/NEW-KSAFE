@@ -1,6 +1,8 @@
 import { FC } from "react"
 import { View } from "react-native"
+
 import { Text } from "@/components/Text"
+
 import { WorkerParticipationMenuItemComponent } from "./components/WorkerParticipationMenuItem"
 import { mockWorkerParticipationMenus } from "./mock/mockWorkerParticipationMenuData"
 import * as S from "./styles"

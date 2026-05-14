@@ -119,6 +119,32 @@ const ar: Translations = {
     },
   },
 
+  myPageScreen: {
+    title: "صفحتي",
+    company: "الشركة",
+    email: "البريد الإلكتروني",
+    workplace: "موقع عمل برج كرين Gwanggyo",
+    appPermissions: "أذونات التطبيق",
+    camera: {
+      title: "الكاميرا",
+      description: "مسح QR، صور ترجمة AI، تسجيل الطوارئ الخطرة",
+    },
+    microphone: {
+      title: "الميكروفون",
+      description: "ترجمة صوتية، مكالمات لاسلكية، تحديد الصوت",
+    },
+    photoLibrary: {
+      title: "الصور/المكتبة",
+      description: "تقييم المخاطر بالذكاء الاصطناعي، ترجمة الصور، مواد تدريب TBM/التقارير",
+    },
+    pushNotification: {
+      title: "إشعارات الدفع",
+      description: "تنبيهات TBM، تحذيرات الخطر، إشعارات مكان العمل",
+    },
+    allowButton: "السماح",
+    logOutButton: "تسجيل خروج",
+  },
+
   ...demoAr,
 }
 

@@ -11,11 +11,12 @@ import {
   TextStyle,
   ImageStyle,
 } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
-import type { AppStackScreenProps } from "@/navigators/navigationTypes"
-import { Screen } from "@/components/Screen"
-import { Icon } from "@/components/Icon"
 import { useNavigation } from "@react-navigation/native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+
+import { Icon } from "@/components/Icon"
+import { Screen } from "@/components/Screen"
+import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 
 const logoImage = require("@assets/logo-ksafeone.png")
 
