@@ -206,10 +206,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
               />
               <Text text={translate("homeScreen:greeting.message")} style={$greetMsg} />
             </View>
-            <View style={$avatar}>
+            <TouchableOpacity style={$avatar} activeOpacity={0.7} onPress={() => navigation.navigate("MyPage")}>
               <View style={$avatarHead} />
               <View style={$avatarBody} />
-            </View>
+            </TouchableOpacity>
           </View>
 
           {/* Feature Grid */}

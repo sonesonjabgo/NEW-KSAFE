@@ -13,13 +13,13 @@ export type MainTabParamList = {
   SafeBoard: undefined
   SafeHealthMain: undefined
   WorkerParticipation: undefined
-  MyPage: undefined
 }
 
 // App Stack Navigator types
 export type AppStackParamList = {
   Login: undefined
   Main: NavigatorScreenParams<MainTabParamList>
+  MyPage: undefined
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<

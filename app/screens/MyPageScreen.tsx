@@ -15,14 +15,14 @@ import { WorkplaceChip } from "@/components/MyPage/WorkplaceChip"
 import { Text } from "@/components/Text"
 import { useAuth } from "@/context/AuthContext"
 import { translate } from "@/i18n/translate"
-import type { MainTabScreenProps } from "@/navigators/navigationTypes"
+import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { typography } from "@/theme/typography"
 
 type Role = "admin" | "worker"
 
 const ICON_COLOR = "#000000"
 
-export const MyPageScreen: FC<MainTabScreenProps<"MyPage">> = ({ navigation }) => {
+export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) => {
   const { authEmail, logout } = useAuth()
   const [userRole] = useState<Role>("worker")
   const [notificationEnabled, setNotificationEnabled] = useState(true)

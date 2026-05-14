@@ -9,9 +9,9 @@ import NavSafety from "@assets/icons/nav2/nav_safety.svg"
 import NavWorker from "@assets/icons/nav2/nav_worker.svg"
 
 import { HomeScreen } from "@/screens/HomeScreen"
-import { MyPageScreen } from "@/screens/MyPageScreen"
 import { SafeBoardScreen } from "@/screens/SafeBoardScreen/SafeBoardScreen"
 import { SafeHealthMainScreen } from "@/screens/SafeHealthScreen/SafeHealthMainScreen"
+import { WorkerParticipationScreen } from "@/screens/WorkerParticipationScreen/WorkerParticipationScreen"
 import { typography } from "@/theme/typography"
 
 import type { MainTabParamList } from "./navigationTypes"
@@ -71,10 +71,10 @@ export function MainNavigator() {
       />
 
       <Tab.Screen
-        name="MyPage"
-        component={MyPageScreen}
+        name="WorkerParticipation"
+        component={WorkerParticipationScreen}
         options={{
-          tabBarLabel: "마이페이지",
+          tabBarLabel: "근로자 참여",
           tabBarIcon: ({ focused }) => <TabIcon Icon={NavWorker} focused={focused} />,
         }}
       />

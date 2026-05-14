@@ -13,6 +13,8 @@ import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
 import { LoginScreen } from "@/screens/LoginScreen"
 import { useAppTheme } from "@/theme/context"
 
+import { MyPageScreen } from "@/screens/MyPageScreen"
+
 import { MainNavigator } from "./MainNavigator"
 import type { AppStackParamList, NavigationProps } from "./navigationTypes"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
@@ -45,6 +47,7 @@ const AppStack = () => {
     >
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Main" component={MainNavigator} />
+      <Stack.Screen name="MyPage" component={MyPageScreen} />
     </Stack.Navigator>
   )
 }
