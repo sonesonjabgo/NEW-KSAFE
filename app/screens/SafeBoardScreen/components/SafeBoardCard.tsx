@@ -5,29 +5,16 @@ import { typography } from "@/theme/typography"
 import { Pin, PencilLine, MapPin } from "lucide-react-native"
 import type { SafeBoardItem, ScopeType, StatusType } from "../types"
 
+import BoardType1 from "@assets/icons/board/board_type1.svg"
+import BoardType2 from "@assets/icons/board/board_type2.svg"
+import BoardType3 from "@assets/icons/board/board_type3.svg"
+import BoardType4 from "@assets/icons/board/board_type4.svg"
+
 interface SafeBoardCardProps {
   item: SafeBoardItem
   showStatus?: boolean
   showEditIcon?: boolean
   showDivider?: boolean
-}
-
-const getScopeLabel = (scope: ScopeType): string => {
-  const scopeMap: Record<ScopeType, string> = {
-    company_wide: "회사전체",
-    workplace: "사업장",
-  }
-  return scopeMap[scope]
-}
-
-const getScopeStyle = (scope: ScopeType): { borderColor: string; textColor: string } => {
-  return scope === "company_wide"
-    ? { borderColor: "#99C1F7", textColor: "#1260CE" }
-    : { borderColor: "#F88526", textColor: "#F67229" }
-}
-
-const getStatusStyle = (): { borderColor: string; textColor: string } => {
-  return { borderColor: "#BCBCBC", textColor: "#A7A7A7" }
 }
 
 const getStatusLabel = (status: StatusType): string => {
@@ -42,25 +29,33 @@ const getStatusLabel = (status: StatusType): string => {
   return statusMap[status] || ""
 }
 
-export const SafeBoardCard: FC<SafeBoardCardProps> = ({ item, showStatus = false, showEditIcon = false, showDivider = true }) => {
-  const scopeStyle = getScopeStyle(item.scope)
-  const statusLabel = getStatusLabel(item.status)
-  const statusStyle = getStatusStyle()
+function ScopeBadge({ scope }: { scope: ScopeType }) {
+  return scope === "workplace" ? (
+    <BoardType1 width={44} height={21} />
+  ) : (
+    <BoardType2 width={54} height={21} />
+  )
+}
 
+function StatusBadge({ status }: { status: StatusType }) {
+  const label = getStatusLabel(status)
+  if (!label) return null
+  return label === "임시저장" ? (
+    <BoardType3 width={54} height={21} />
+  ) : (
+    <BoardType4 width={44} height={21} />
+  )
+}
+
+export const SafeBoardCard: FC<SafeBoardCardProps> = ({ item, showStatus = false, showEditIcon = false, showDivider = true }) => {
   return (
     <TouchableOpacity activeOpacity={0.7}>
       <View style={$cardContainer}>
         <View style={$contentWrapper}>
           <View style={$mainContent}>
             <View style={$scopeLabelRow}>
-              <View style={[{ ...($scopeLabel), borderColor: scopeStyle.borderColor }]}>
-                <Text text={getScopeLabel(item.scope)} style={[{ ...$scopeLabelText, color: scopeStyle.textColor }]} />
-              </View>
-              {showStatus && statusLabel && (
-                <View style={[{ ...($scopeLabel), borderColor: statusStyle.borderColor }]}>
-                  <Text text={statusLabel} style={[{ ...$scopeLabelText, color: statusStyle.textColor }]} />
-                </View>
-              )}
+              <ScopeBadge scope={item.scope} />
+              {showStatus && <StatusBadge status={item.status} />}
             </View>
             <Text text={item.title} style={$titleText} numberOfLines={3} />
             {item.scope === "workplace" ? (
@@ -108,22 +103,6 @@ const $scopeLabelRow: ViewStyle = {
   marginBottom: 10,
   gap: 6,
   flexWrap: "wrap",
-}
-
-const $scopeLabel: ViewStyle = {
-  paddingVertical: 3,
-  paddingHorizontal: 8,
-  borderRadius: 10,
-  borderWidth: 1,
-  justifyContent: "center",
-  alignItems: "center",
-}
-
-const $scopeLabelText: TextStyle = {
-  fontSize: 11,
-  fontWeight: "700",
-  fontFamily: typography.primary.bold,
-  lineHeight: 13,
 }
 
 const $titleText: TextStyle = {

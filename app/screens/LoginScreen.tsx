@@ -12,10 +12,13 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { Screen } from "@/components/Screen"
-import { Icon } from "@/components/Icon"
 import { useNavigation } from "@react-navigation/native"
 
 import LogoSvg from "@assets/icons/login/logo-ksafeone.svg"
+import MailSvg from "@assets/icons/login/mail.svg"
+import LockSvg from "@assets/icons/login/lock.svg"
+import EyeSvg from "@assets/icons/login/eye.svg"
+import EyeOffSvg from "@assets/icons/login/eye-off.svg"
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
@@ -56,7 +59,7 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
               이메일 <RNText style={$required}>*</RNText>
             </RNText>
             <View style={$inputRow}>
-              <RNText style={$mailIcon}>✉</RNText>
+              <MailSvg width={18} height={18} color="#9CA3AF" style={$inputIcon} />
               <TextInput
                 style={$textInput}
                 placeholder="이메일을 입력하세요."
@@ -73,7 +76,7 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
               비밀번호 <RNText style={$required}>*</RNText>
             </RNText>
             <View style={$inputRow}>
-              <Icon icon="lock" size={18} color="#9CA3AF" />
+              <LockSvg width={18} height={18} color="#9CA3AF" style={$inputIcon} />
               <TextInput
                 style={[$textInput, $passwordInput]}
                 placeholder="패스워드를 입력하세요."
@@ -81,7 +84,11 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
                 secureTextEntry={secureText}
               />
               <TouchableOpacity onPress={() => setSecureText((v) => !v)} hitSlop={8}>
-                <Icon icon={secureText ? "hidden" : "view"} size={18} color="#9CA3AF" />
+                {secureText ? (
+                  <EyeOffSvg width={18} height={18} color="#9CA3AF" />
+                ) : (
+                  <EyeSvg width={18} height={18} color="#9CA3AF" />
+                )}
               </TouchableOpacity>
             </View>
           </View>
@@ -177,9 +184,7 @@ const $inputRow: ViewStyle = {
   paddingHorizontal: 12,
 }
 
-const $mailIcon: TextStyle = {
-  fontSize: 16,
-  color: "#9CA3AF",
+const $inputIcon: ViewStyle = {
   marginRight: 8,
 }
 

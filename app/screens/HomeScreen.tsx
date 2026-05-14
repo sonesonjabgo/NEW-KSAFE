@@ -4,8 +4,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import type { SvgProps } from "react-native-svg"
 import type { MainTabScreenProps } from "@/navigators/navigationTypes"
 import { typography } from "@/theme/typography"
-import { Icon } from "@/components/Icon"
 import { Text } from "@/components/Text"
+import { Pin, ChevronRight } from "lucide-react-native"
 
 import GridInterpret from "@assets/icons/home2/grid_interpret.svg"
 import GridChatbot from "@assets/icons/home2/grid_chatbot.svg"
@@ -18,6 +18,9 @@ import GridTbmCreate from "@assets/icons/home2/grid_tbm_create.svg"
 import GridTbmReport from "@assets/icons/home2/grid_tbm_report.svg"
 import GridWarning from "@assets/icons/home2/grid_warning.svg"
 import GridBulb from "@assets/icons/home2/grid_bulb.svg"
+
+import BoardType1 from "@assets/icons/board/board_type1.svg"
+import BoardType2 from "@assets/icons/board/board_type2.svg"
 
 import HeaderQr from "@assets/icons/nav2/header_qr.svg"
 import HeaderBell from "@assets/icons/nav2/header_bell.svg"
@@ -218,7 +221,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
                 <Text text="기존 교육/발표 참여" style={$eduBannerTitle} />
                 <Text text="이미 생성된 교육/발표실이 있습니다." style={$eduBannerDesc} />
               </View>
-              <Icon icon="caretRight" size={16} color="#7F848C" />
+              <ChevronRight size={16} color="#7F848C" strokeWidth={2} />
             </TouchableOpacity>
           )}
 
@@ -228,7 +231,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
               <Text text="안전게시판" style={$boardTitle} />
               <TouchableOpacity style={$boardMoreBtn} onPress={() => navigation.navigate("SafeBoard")}>
                 <Text text="더보기" style={$boardMoreText} />
-                <Icon icon="caretRight" size={12} color="#7F848C" />
+                <ChevronRight size={12} color="#7F848C" strokeWidth={2} />
               </TouchableOpacity>
             </View>
 
@@ -257,19 +260,17 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
               {BOARD_ITEMS.map((item, i) => (
                 <TouchableOpacity key={i} style={$boardItem} activeOpacity={0.7}>
                   <View style={$tagWrap}>
-                    <View style={[$tagBadge, item.tag === "사업장" ? $tagOrange : $tagBlue]}>
-                      <Text
-                        text={item.tag}
-                        style={[$tagText, item.tag === "사업장" ? $tagTextOrange : $tagTextBlue]}
-                        numberOfLines={1}
-                      />
-                    </View>
+                    {item.tag === "사업장" ? (
+                      <BoardType1 width={44} height={21} />
+                    ) : (
+                      <BoardType2 width={54} height={21} />
+                    )}
                   </View>
                   <View style={$boardItemContent}>
                     <Text text={item.title} style={$boardItemTitle} numberOfLines={1} />
                     <Text text={item.date} style={$boardItemDate} />
                   </View>
-                  {item.pinned && <Icon icon="pin" size={14} color="#C03403" />}
+                  {item.pinned && <Pin size={14} color="#C03403" strokeWidth={2.5} />}
                 </TouchableOpacity>
               ))}
             </View>
@@ -638,37 +639,6 @@ const $tagWrap: ViewStyle = {
   maxWidth: 47,
 }
 
-const $tagBadge: ViewStyle = {
-  paddingTop: 3,
-  paddingBottom: 2,
-  paddingHorizontal: 6,
-  borderRadius: 9,
-  borderWidth: 1,
-  alignSelf: "flex-start",
-}
-
-const $tagOrange: ViewStyle = {
-  borderColor: "#F88526",
-}
-
-const $tagBlue: ViewStyle = {
-  borderColor: "#99C1F7",
-}
-
-const $tagText: TextStyle = {
-  fontSize: 10,
-  fontFamily: typography.primary.bold,
-  lineHeight: 10,
-  includeFontPadding: false,
-}
-
-const $tagTextOrange: TextStyle = {
-  color: "#F67229",
-}
-
-const $tagTextBlue: TextStyle = {
-  color: "#1260CE",
-}
 
 const $boardItemContent: ViewStyle = {
   flex: 1,
