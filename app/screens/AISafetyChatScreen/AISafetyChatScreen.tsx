@@ -1,4 +1,4 @@
-import { FC, useState, useRef, useCallback } from "react"
+import { FC, useState, useRef, useCallback, useEffect, useMemo } from "react"
 import {
   View,
   ViewStyle,
@@ -9,8 +9,8 @@ import {
   KeyboardAvoidingView,
   Platform,
   Alert,
-  ActivityIndicator,
   ListRenderItemInfo,
+  Text as RNText,
 } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { IconChevronLeft, IconTrash, IconSend2, IconRobot } from "@tabler/icons-react-native"
@@ -29,52 +29,64 @@ interface Message {
   id: string
   role: MessageRole
   text: string
-  timestamp: number
 }
 
 const NAVY = "#1B2A4A"
 const BLUE = "#1062D8"
 const BG = "#F9FAFE"
 
-const SUGGESTED_QUESTIONS = [
-  translate("aiSafetyChatScreen:suggestedQuestions.q1"),
-  translate("aiSafetyChatScreen:suggestedQuestions.q2"),
-  translate("aiSafetyChatScreen:suggestedQuestions.q3"),
-]
-
-const MOCK_AI_RESPONSES: Record<string, string> = {
-  default: `안녕하세요! 건설 현장 안전에 관해 도움을 드리겠습니다.\n\n구체적인 질문을 입력해 주시면 상세히 안내해 드리겠습니다.`,
-}
-
 function getMockResponse(question: string): string {
   if (question.includes("일반 안전규정") || question.includes("안전규정")) {
     return `**건설 현장 일반 안전 규정**\n\n1. **개인보호장구 착용 의무화**\n   - 안전모, 안전화, 안전조끼를 반드시 착용해야 합니다.\n\n2. **작업 전 안전점검 실시**\n   - 매일 작업 시작 전 TBM(Tool Box Meeting)을 통해 당일 위험요인을 공유합니다.\n\n3. **안전 표지판 준수**\n   - 출입 금지 구역, 낙하물 위험 구역 등의 표지판을 반드시 따라야 합니다.\n\n4. **위험작업 허가제 운영**\n   - 고소작업, 밀폐공간 작업 등 위험작업은 사전 허가를 받아야 합니다.\n\n5. **안전통로 확보**\n   - 작업 통로는 항상 깨끗하게 유지하고 장애물을 제거합니다.`
   }
   if (question.includes("고소 작업") || question.includes("고소작업")) {
-    return `**고소 작업 안전 수칙 (산업안전보건기준에 관한 규칙)**\n\n1. **추락 방지 조치**\n   - 2m 이상 고소작업 시 안전대 착용 의무\n   - 안전난간 또는 안전망 설치\n\n2. **작업발판 설치 기준**\n   - 폭 40cm 이상의 발판 사용\n   - 발판 틈새 3cm 이내 유지\n\n3. **사다리 사용 기준**\n   - 75° 이하의 경사 유지\n   - 최상단 3개 발판에는 올라서지 않음\n\n4. **악천후 시 작업 중지**\n   - 풍속 10m/s 이상, 강우량 1mm/h 이상 시 중지\n\n5. **작업 전 점검**\n   - 발판, 안전대, 지지물의 이상 유무를 반드시 확인합니다.`
+    return `**고소 작업 안전 수칙**\n\n1. **추락 방지 조치**\n   - 2m 이상 고소작업 시 안전대 착용 의무\n   - 안전난간 또는 안전망 설치\n\n2. **작업발판 설치 기준**\n   - 폭 40cm 이상의 발판 사용\n   - 발판 틈새 3cm 이내 유지\n\n3. **사다리 사용 기준**\n   - 75° 이하의 경사 유지\n   - 최상단 3개 발판에는 올라서지 않음\n\n4. **악천후 시 작업 중지**\n   - 풍속 10m/s 이상, 강우량 1mm/h 이상 시 중지\n\n5. **작업 전 점검**\n   - 발판, 안전대, 지지물의 이상 유무를 반드시 확인합니다.`
   }
   if (question.includes("화재") || question.includes("비상")) {
-    return `**화재 발생 시 비상 대응 절차**\n\n**1단계: 발견 및 신고**\n- 화재를 발견하면 즉시 "불이야!"를 크게 외칩니다.\n- 119에 신고하고 현장 관리자에게 보고합니다.\n\n**2단계: 초기 진압 시도**\n- 소화기를 이용해 초기 진압을 시도합니다.\n- 불길이 크면 즉시 대피합니다.\n\n**3단계: 대피**\n- 비상구를 이용해 신속히 대피합니다.\n- 엘리베이터 사용을 금지합니다.\n- 낮은 자세로 이동합니다.\n\n**4단계: 집결지 집합**\n- 지정된 비상집결지로 이동합니다.\n- 인원 점검 후 관리자에게 보고합니다.\n\n⚠️ **절대 금지**: 화재 현장에 재진입하지 마세요.`
+    return `**화재 발생 시 비상 대응 절차**\n\n**1단계: 발견 및 신고**\n- 화재를 발견하면 즉시 "불이야!"를 크게 외칩니다.\n- 119에 신고하고 현장 관리자에게 보고합니다.\n\n**2단계: 초기 진압 시도**\n- 소화기를 이용해 초기 진압을 시도합니다.\n- 불길이 크면 즉시 대피합니다.\n\n**3단계: 대피**\n- 비상구를 이용해 신속히 대피합니다.\n- 낮은 자세로 이동합니다.\n\n**4단계: 집결지 집합**\n- 지정된 비상집결지로 이동합니다.\n- 인원 점검 후 관리자에게 보고합니다.\n\n⚠️ **절대 금지**: 화재 현장에 재진입하지 마세요.`
   }
-  return MOCK_AI_RESPONSES.default
+  return `안녕하세요! 건설 현장 안전에 관해 도움을 드리겠습니다.\n\n구체적인 질문을 입력해 주시면 상세히 안내해 드리겠습니다.`
+}
+
+// Renders a line that may contain **bold** segments
+function InlineLine({ text, baseStyle }: { text: string; baseStyle?: TextStyle }) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/)
+  return (
+    <RNText style={baseStyle}>
+      {parts.map((part, i) => {
+        const boldMatch = part.match(/^\*\*([^*]+)\*\*$/)
+        if (boldMatch) {
+          return (
+            <RNText key={i} style={[$mdBold, baseStyle]}>
+              {boldMatch[1]}
+            </RNText>
+          )
+        }
+        return <RNText key={i}>{part}</RNText>
+      })}
+    </RNText>
+  )
 }
 
 function SimpleMarkdown({ text, style }: { text: string; style?: TextStyle }) {
   const lines = text.split("\n")
-
   return (
     <View>
       {lines.map((line, lineIdx) => {
-        const numberedMatch = line.match(/^(\d+)\.\s+(.*)/)
-        const bulletMatch = line.match(/^[-*•]\s+(.*)/)
-        const indentedMatch = line.match(/^\s{3,}[-*]\s+(.*)/)
+        const numberedMatch = line.match(/^(\d+)\.\s+(.+)/)
+        const indentedBulletMatch = line.match(/^\s{2,}[-*]\s+(.+)/)
+        const bulletMatch = line.match(/^[-*•]\s+(.+)/)
 
-        if (indentedMatch) {
+        if (line.trim() === "") {
+          return <View key={lineIdx} style={$mdSpacer} />
+        }
+
+        if (indentedBulletMatch) {
           return (
             <View key={lineIdx} style={$mdIndentRow}>
-              <Text text="•" style={[$mdBulletDot, style]} />
+              <RNText style={[$mdBulletDot, style]}>{"•"}</RNText>
               <View style={$mdBulletContent}>
-                {renderInline(indentedMatch[1], style)}
+                <InlineLine text={indentedBulletMatch[1]} baseStyle={style} />
               </View>
             </View>
           )
@@ -83,9 +95,9 @@ function SimpleMarkdown({ text, style }: { text: string; style?: TextStyle }) {
         if (numberedMatch) {
           return (
             <View key={lineIdx} style={$mdListRow}>
-              <Text text={`${numberedMatch[1]}.`} style={[$mdListNum, style]} />
+              <RNText style={[$mdListNum, style]}>{`${numberedMatch[1]}.`}</RNText>
               <View style={$mdBulletContent}>
-                {renderInline(numberedMatch[2], style)}
+                <InlineLine text={numberedMatch[2]} baseStyle={style} />
               </View>
             </View>
           )
@@ -94,21 +106,17 @@ function SimpleMarkdown({ text, style }: { text: string; style?: TextStyle }) {
         if (bulletMatch) {
           return (
             <View key={lineIdx} style={$mdListRow}>
-              <Text text="•" style={[$mdBulletDot, style]} />
+              <RNText style={[$mdBulletDot, style]}>{"•"}</RNText>
               <View style={$mdBulletContent}>
-                {renderInline(bulletMatch[1], style)}
+                <InlineLine text={bulletMatch[1]} baseStyle={style} />
               </View>
             </View>
           )
         }
 
-        if (line.trim() === "") {
-          return <View key={lineIdx} style={$mdSpacer} />
-        }
-
         return (
           <View key={lineIdx} style={$mdParagraphRow}>
-            {renderInline(line, style)}
+            <InlineLine text={line} baseStyle={style} />
           </View>
         )
       })}
@@ -116,30 +124,22 @@ function SimpleMarkdown({ text, style }: { text: string; style?: TextStyle }) {
   )
 }
 
-function renderInline(text: string, baseStyle?: TextStyle) {
-  const parts = text.split(/(\*\*[^*]+\*\*)/)
+function LoadingDots() {
+  const [dotCount, setDotCount] = useState(1)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDotCount((prev) => (prev >= 3 ? 1 : prev + 1))
+    }, 400)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
-    <Text key={text}>
-      {parts.map((part, i) => {
-        const boldMatch = part.match(/^\*\*([^*]+)\*\*$/)
-        if (boldMatch) {
-          return (
-            <Text
-              key={i}
-              text={boldMatch[1]}
-              style={[$mdBold, baseStyle]}
-            />
-          )
-        }
-        return (
-          <Text
-            key={i}
-            text={part}
-            style={baseStyle}
-          />
-        )
-      })}
-    </Text>
+    <View style={$loadingDotsRow}>
+      <View style={[$dot, dotCount >= 1 && $dotActive]} />
+      <View style={[$dot, dotCount >= 2 && $dotActive]} />
+      <View style={[$dot, dotCount >= 3 && $dotActive]} />
+    </View>
   )
 }
 
@@ -151,6 +151,15 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
   const [inputText, setInputText] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [conversationStarted, setConversationStarted] = useState(false)
+
+  const suggestedQuestions = useMemo(
+    () => [
+      translate("aiSafetyChatScreen:suggestedQuestions.q1"),
+      translate("aiSafetyChatScreen:suggestedQuestions.q2"),
+      translate("aiSafetyChatScreen:suggestedQuestions.q3"),
+    ],
+    [],
+  )
 
   const canSend = inputText.trim().length >= 2 && inputText.trim().length <= 1000 && !isLoading
 
@@ -169,7 +178,6 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
         id: `user-${Date.now()}`,
         role: "user",
         text: trimmed,
-        timestamp: Date.now(),
       }
 
       setMessages((prev) => [...prev, userMsg])
@@ -178,13 +186,12 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
       setConversationStarted(true)
       scrollToBottom()
 
-      await new Promise((r) => setTimeout(r, 1500))
+      await new Promise<void>((r) => setTimeout(r, 1500))
 
       const aiMsg: Message = {
         id: `ai-${Date.now()}`,
         role: "ai",
         text: getMockResponse(trimmed),
-        timestamp: Date.now(),
       }
 
       setMessages((prev) => [...prev, aiMsg])
@@ -194,23 +201,16 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
     [isLoading, scrollToBottom],
   )
 
-  const handleSend = () => {
-    sendMessage(inputText)
-  }
+  const handleSend = () => sendMessage(inputText)
 
-  const handleSuggestedQuestion = (question: string) => {
-    sendMessage(question)
-  }
+  const handleSuggestedQuestion = (question: string) => sendMessage(question)
 
   const handleDeleteConversation = () => {
     Alert.alert(
       translate("aiSafetyChatScreen:deleteDialog.title"),
       translate("aiSafetyChatScreen:deleteDialog.message"),
       [
-        {
-          text: translate("aiSafetyChatScreen:deleteDialog.cancel"),
-          style: "cancel",
-        },
+        { text: translate("aiSafetyChatScreen:deleteDialog.cancel"), style: "cancel" },
         {
           text: translate("aiSafetyChatScreen:deleteDialog.confirm"),
           style: "destructive",
@@ -233,7 +233,6 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
         </View>
       )
     }
-
     return (
       <View style={$aiMsgWrapper}>
         <View style={$aiAvatarWrapper}>
@@ -276,7 +275,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
     )
   }
 
-  const renderWelcomeScreen = () => (
+  const renderWelcomeContent = () => (
     <View style={$welcomeContainer}>
       <View style={$welcomeIconWrapper}>
         <View style={$welcomeIconBg}>
@@ -296,7 +295,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
         </View>
       </View>
       <View style={$suggestedQsContainer}>
-        {SUGGESTED_QUESTIONS.map((q, idx) => (
+        {suggestedQuestions.map((q, idx) => (
           <TouchableOpacity
             key={idx}
             style={$suggestedQBtn}
@@ -326,11 +325,10 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
         </TouchableOpacity>
       </View>
 
-      {/* ── Chat Area ── */}
+      {/* ── Chat Area + Input ── */}
       <KeyboardAvoidingView
         style={$keyboardView}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={0}
       >
         {conversationStarted ? (
           <FlatList
@@ -339,17 +337,17 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
             keyExtractor={(item) => item.id}
             renderItem={renderMessage}
             contentContainerStyle={$chatList}
-            onContentSizeChange={scrollToBottom}
             ListFooterComponent={renderLoadingIndicator}
             showsVerticalScrollIndicator={false}
           />
         ) : (
           <FlatList
-            data={[]}
+            data={[] as Message[]}
             renderItem={null}
-            ListHeaderComponent={renderWelcomeScreen}
+            ListHeaderComponent={renderWelcomeContent}
             contentContainerStyle={$chatList}
             showsVerticalScrollIndicator={false}
+            keyExtractor={(item) => item.id}
           />
         )}
 
@@ -364,14 +362,10 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
               onChangeText={setInputText}
               multiline
               maxLength={1000}
-              returnKeyType="default"
               editable={!isLoading}
             />
             <TouchableOpacity
-              style={[
-                $sendButton,
-                canSend ? $sendButtonActive : $sendButtonInactive,
-              ]}
+              style={[$sendButton, canSend ? $sendButtonActive : $sendButtonInactive]}
               onPress={handleSend}
               disabled={!canSend}
               activeOpacity={0.8}
@@ -385,26 +379,6 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
           />
         </View>
       </KeyboardAvoidingView>
-    </View>
-  )
-}
-
-function LoadingDots() {
-  const [dotCount, setDotCount] = useState(1)
-
-  // Simple animated dots using interval
-  useState(() => {
-    const interval = setInterval(() => {
-      setDotCount((prev) => (prev >= 3 ? 1 : prev + 1))
-    }, 400)
-    return () => clearInterval(interval)
-  })
-
-  return (
-    <View style={$loadingDotsRow}>
-      <View style={[$dot, dotCount >= 1 && $dotActive]} />
-      <View style={[$dot, dotCount >= 2 && $dotActive]} />
-      <View style={[$dot, dotCount >= 3 && $dotActive]} />
     </View>
   )
 }
