@@ -292,6 +292,13 @@ const en = {
     logout: "Logout",
   },
 
+  notify: {
+    title: "Notifications",
+    emptyTitle: "No Notifications",
+    emptyDescription:
+      "You have no notifications right now.\nWe'll let you know when new notifications arrive.",
+  },
+
   ...demoEn,
 }
 

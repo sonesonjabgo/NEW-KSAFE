@@ -5,6 +5,7 @@ import { IconBellOff, IconChecks, IconChevronLeft, IconTrash } from "@tabler/ico
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { Text } from "@/components/Text"
+import { translate } from "@/i18n/translate"
 
 import { styles } from "./styles"
 
@@ -27,7 +28,7 @@ export const NotifyScreen: FC = () => {
             <IconChevronLeft size={24} color="#FFFFFF" />
           </TouchableOpacity>
 
-          <Text style={styles.headerTitle}>알림</Text>
+          <Text style={styles.headerTitle}>{translate("notify:title")}</Text>
 
           <View style={styles.headerRightActions}>
             <TouchableOpacity style={styles.headerIconBtn} activeOpacity={0.7}>
@@ -46,10 +47,8 @@ export const NotifyScreen: FC = () => {
             <View style={styles.emptyCircle}>
               <IconBellOff size={44} color="#9CA3AF" strokeWidth={1.5} />
             </View>
-            <Text style={styles.emptyTitle}>알림이 없습니다</Text>
-            <Text style={styles.emptyDesc}>
-              {"현재 받은 알림이 없습니다.\n새로운 알림이 도착하면 알려드리겠습니다."}
-            </Text>
+            <Text style={styles.emptyTitle}>{translate("notify:emptyTitle")}</Text>
+            <Text style={styles.emptyDesc}>{translate("notify:emptyDescription")}</Text>
           </View>
         </View>
       </View>

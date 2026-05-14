@@ -256,6 +256,12 @@ const ja: Translations = {
     logout: "Logout",
   },
 
+  notify: {
+    title: "通知",
+    emptyTitle: "通知はありません",
+    emptyDescription: "現在、受け取った通知はありません。\n新しい通知が届いたらお知らせします。",
+  },
+
   ...demoJa,
 }
 
