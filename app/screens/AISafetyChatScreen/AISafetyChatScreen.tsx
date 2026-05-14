@@ -13,13 +13,12 @@ import {
   Text as RNText,
 } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { IconChevronLeft, IconTrash, IconSend2, IconRobot } from "@tabler/icons-react-native"
+import { IconChevronLeft, IconTrash, IconSend2 } from "@tabler/icons-react-native"
 
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { typography } from "@/theme/typography"
-import GridChatbot from "@assets/icons/home2/grid_chatbot.svg"
 
 interface AISafetyChatScreenProps extends AppStackScreenProps<"AISafetyChat"> {}
 
@@ -152,15 +151,6 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
   const [isLoading, setIsLoading] = useState(false)
   const [conversationStarted, setConversationStarted] = useState(false)
 
-  const suggestedQuestions = useMemo(
-    () => [
-      translate("aiSafetyChatScreen:suggestedQuestions.q1"),
-      translate("aiSafetyChatScreen:suggestedQuestions.q2"),
-      translate("aiSafetyChatScreen:suggestedQuestions.q3"),
-    ],
-    [],
-  )
-
   const canSend = inputText.trim().length >= 2 && inputText.trim().length <= 1000 && !isLoading
 
   const scrollToBottom = useCallback(() => {
@@ -203,8 +193,6 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
 
   const handleSend = () => sendMessage(inputText)
 
-  const handleSuggestedQuestion = (question: string) => sendMessage(question)
-
   const handleDeleteConversation = () => {
     Alert.alert(
       translate("aiSafetyChatScreen:deleteDialog.title"),
@@ -235,11 +223,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
     }
     return (
       <View style={$aiMsgWrapper}>
-        <View style={$aiAvatarWrapper}>
-          <View style={$aiAvatar}>
-            <IconRobot size={18} color={BLUE} />
-          </View>
-        </View>
+        <View style={$aiAvatar} />
         <View style={$aiMsgContent}>
           <Text
             text={translate("aiSafetyChatScreen:aiName")}
@@ -257,11 +241,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
     if (!isLoading) return null
     return (
       <View style={$aiMsgWrapper}>
-        <View style={$aiAvatarWrapper}>
-          <View style={$aiAvatar}>
-            <IconRobot size={18} color={BLUE} />
-          </View>
-        </View>
+        <View style={$aiAvatar} />
         <View style={$aiMsgContent}>
           <Text
             text={translate("aiSafetyChatScreen:aiName")}
@@ -277,34 +257,20 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
 
   const renderWelcomeContent = () => (
     <View style={$welcomeContainer}>
-      <View style={$welcomeIconWrapper}>
-        <View style={$welcomeIconBg}>
-          <GridChatbot width={52} height={52} />
-        </View>
-      </View>
-      <View style={$aiMsgContent}>
-        <Text
-          text={translate("aiSafetyChatScreen:aiName")}
-          style={$aiMsgName}
-        />
-        <View style={$aiBubble}>
-          <SimpleMarkdown
-            text={translate("aiSafetyChatScreen:welcomeMessage")}
-            style={$aiMsgText}
+      <View style={$welcomeMsgRow}>
+        <View style={$aiAvatar} />
+        <View style={$aiMsgContent}>
+          <Text
+            text={translate("aiSafetyChatScreen:aiName")}
+            style={$aiMsgName}
           />
+          <View style={$aiBubble}>
+            <SimpleMarkdown
+              text={translate("aiSafetyChatScreen:welcomeMessage")}
+              style={$aiMsgText}
+            />
+          </View>
         </View>
-      </View>
-      <View style={$suggestedQsContainer}>
-        {suggestedQuestions.map((q, idx) => (
-          <TouchableOpacity
-            key={idx}
-            style={$suggestedQBtn}
-            onPress={() => handleSuggestedQuestion(q)}
-            activeOpacity={0.7}
-          >
-            <Text text={q} style={$suggestedQText} />
-          </TouchableOpacity>
-        ))}
       </View>
     </View>
   )
@@ -441,41 +407,10 @@ const $welcomeContainer: ViewStyle = {
   paddingTop: 8,
 }
 
-const $welcomeIconWrapper: ViewStyle = {
+const $welcomeMsgRow: ViewStyle = {
+  flexDirection: "row",
   alignItems: "flex-start",
-  marginBottom: 8,
-}
-
-const $welcomeIconBg: ViewStyle = {
-  width: 72,
-  height: 72,
-  borderRadius: 36,
-  backgroundColor: "#EEF4FF",
-  alignItems: "center",
-  justifyContent: "center",
-  borderWidth: 1,
-  borderColor: "#C8D8F5",
-}
-
-const $suggestedQsContainer: ViewStyle = {
-  marginTop: 20,
   gap: 10,
-}
-
-const $suggestedQBtn: ViewStyle = {
-  borderWidth: 1.5,
-  borderColor: BLUE,
-  borderRadius: 20,
-  paddingHorizontal: 16,
-  paddingVertical: 10,
-  backgroundColor: "#FFFFFF",
-  alignSelf: "flex-start",
-}
-
-const $suggestedQText: TextStyle = {
-  fontSize: 13,
-  fontFamily: typography.primary.medium,
-  color: BLUE,
 }
 
 // Messages
@@ -507,17 +442,11 @@ const $aiMsgWrapper: ViewStyle = {
   gap: 10,
 }
 
-const $aiAvatarWrapper: ViewStyle = {
-  paddingTop: 18,
-}
-
 const $aiAvatar: ViewStyle = {
-  width: 36,
-  height: 36,
-  borderRadius: 18,
+  width: 38,
+  height: 38,
+  borderRadius: 19,
   backgroundColor: "#EEF4FF",
-  alignItems: "center",
-  justifyContent: "center",
   borderWidth: 1,
   borderColor: "#C8D8F5",
 }
