@@ -7,14 +7,6 @@ import {
 } from "@react-navigation/native"
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 
-// Demo Tab Navigator types
-export type DemoTabParamList = {
-  DemoCommunity: undefined
-  DemoShowroom: { queryIndex?: string; itemIndex?: string }
-  DemoDebug: undefined
-  DemoPodcastList: undefined
-}
-
 // Main Tab Navigator types
 export type MainTabParamList = {
   Home: undefined
@@ -25,11 +17,8 @@ export type MainTabParamList = {
 
 // App Stack Navigator types
 export type AppStackParamList = {
-  Welcome: undefined
   Login: undefined
   Main: NavigatorScreenParams<MainTabParamList>
-  Demo: NavigatorScreenParams<DemoTabParamList>
-  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<
@@ -39,11 +28,6 @@ export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStack
 
 export type MainTabScreenProps<T extends keyof MainTabParamList> = CompositeScreenProps<
   BottomTabScreenProps<MainTabParamList, T>,
-  AppStackScreenProps<keyof AppStackParamList>
->
-
-export type DemoTabScreenProps<T extends keyof DemoTabParamList> = CompositeScreenProps<
-  BottomTabScreenProps<DemoTabParamList, T>,
   AppStackScreenProps<keyof AppStackParamList>
 >
 

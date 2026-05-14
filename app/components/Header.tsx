@@ -15,8 +15,9 @@ import { $styles } from "@/theme/styles"
 import type { ThemedStyle } from "@/theme/types"
 import { ExtendedEdge, useSafeAreaInsetsStyle } from "@/utils/useSafeAreaInsetsStyle"
 
-import { IconTypes, PressableIcon } from "./Icon"
 import { Text, TextProps } from "./Text"
+
+type IconTypes = never
 
 export interface HeaderProps {
   /**
@@ -257,16 +258,7 @@ function HeaderAction(props: HeaderActionProps) {
   }
 
   if (icon) {
-    return (
-      <PressableIcon
-        size={24}
-        icon={icon}
-        color={iconColor}
-        onPress={onPress}
-        containerStyle={themed([$actionIconContainer, { backgroundColor }])}
-        style={isRTL ? { transform: [{ rotate: "180deg" }] } : {}}
-      />
-    )
+    return <View style={[$actionFillerContainer, { backgroundColor }]} />
   }
 
   return <View style={[$actionFillerContainer, { backgroundColor }]} />

@@ -45,22 +45,6 @@ const AppStack = () => {
     >
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Main" component={MainNavigator} />
-
-      {/* {isAuthenticated ? (
-        <>
-          <Stack.Screen name="Welcome" component={WelcomeScreen} />
-
-          <Stack.Screen name="Demo" component={DemoNavigator} />
-        </>
-      ) : (
-        <>
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="Home" component={HomeScreen} />
-        </>
-      )} */}
-
-      {/** 🔥 Your screens go here */}
-      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 }

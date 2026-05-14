@@ -12,8 +12,9 @@ import { useAppTheme } from "@/theme/context"
 import { $styles } from "@/theme/styles"
 import type { ThemedStyle } from "@/theme/types"
 
-import { Icon, IconTypes } from "./Icon"
 import { Text, TextProps } from "./Text"
+
+type IconTypes = never
 
 export interface ListItemProps extends TouchableOpacityProps {
   /**
@@ -190,19 +191,7 @@ function ListItemAction(props: ListItemActionProps) {
   if (Component) return Component
 
   if (icon !== undefined) {
-    return (
-      <Icon
-        size={24}
-        icon={icon}
-        color={iconColor}
-        containerStyle={themed([
-          $iconContainerStyles,
-          side === "left" && $iconContainerLeft,
-          side === "right" && $iconContainerRight,
-          { height: size },
-        ])}
-      />
-    )
+    return null
   }
 
   return null
