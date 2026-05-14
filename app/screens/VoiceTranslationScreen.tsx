@@ -255,8 +255,11 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
           <FlatList
             data={LANGUAGES}
             keyExtractor={(item) => item.key}
+            ItemSeparatorComponent={() => <View style={$langSeparator} />}
             renderItem={({ item }) => {
               const isSelected = currentLangKey === item.key
+              const nativeName = translate(`voiceTranslationScreen:languages.${item.key}` as any)
+              const subtitle = translate(`voiceTranslationScreen:languageSubtitles.${item.key}` as any)
               return (
                 <TouchableOpacity
                   style={[$langItem, isSelected && $langItemSelected]}
@@ -264,7 +267,15 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
                   activeOpacity={0.7}
                 >
                   <Text text={item.flag} style={$langItemFlag} />
-                  <Text text={getLangLabel(item.key)} style={[$langItemText, isSelected && $langItemTextSelected]} />
+                  <View style={$langItemContent}>
+                    <Text
+                      text={nativeName}
+                      style={[$langItemText, isSelected && $langItemTextSelected]}
+                    />
+                    {!!subtitle && (
+                      <Text text={subtitle} style={$langItemSubtitle} />
+                    )}
+                  </View>
                   {isSelected && (
                     <Text text="✓" style={$langItemCheck} />
                   )}
@@ -470,12 +481,23 @@ const $modalTitle: TextStyle = {
   marginBottom: 8,
 }
 
+const $langSeparator: ViewStyle = {
+  height: 1,
+  backgroundColor: "#F0F0F0",
+  marginHorizontal: 20,
+}
+
 const $langItem: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
   paddingHorizontal: 20,
   paddingVertical: 14,
   gap: 12,
+}
+
+const $langItemContent: ViewStyle = {
+  flex: 1,
+  gap: 2,
 }
 
 const $langItemSelected: ViewStyle = {
@@ -496,6 +518,12 @@ const $langItemText: TextStyle = {
 const $langItemTextSelected: TextStyle = {
   fontFamily: typography.primary.semiBold,
   color: BLUE,
+}
+
+const $langItemSubtitle: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.normal,
+  color: "#9CA3AF",
 }
 
 const $langItemCheck: TextStyle = {
