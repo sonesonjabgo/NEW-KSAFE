@@ -262,7 +262,7 @@ const ko: Translations = {
     welcomeMessage:
       "안녕하세요! 저는 산업안전AI 도우미입니다.\n건설 현장 안전에 관한 질문이 있으시면 언제든지 물어보세요.",
     inputPlaceholder: "메시지를 입력하세요...",
-    inputHint: "필수 입력, 2~1,000자 이내로 작성하세요.",
+    inputHint: "필수 입력. 2~1,000자 이내로 작성하세요.",
     deleteDialog: {
       title: "대화 삭제",
       message: "모든 대화 내역을 삭제하시겠습니까?",

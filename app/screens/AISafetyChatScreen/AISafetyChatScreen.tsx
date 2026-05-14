@@ -560,7 +560,7 @@ const $inputContainer: ViewStyle = {
 
 const $inputRow: ViewStyle = {
   flexDirection: "row",
-  alignItems: "flex-end",
+  alignItems: "center",
   gap: 10,
 }
 
@@ -569,7 +569,7 @@ const $textInput: TextStyle = {
   backgroundColor: "#F4F6FB",
   borderRadius: 12,
   paddingHorizontal: 14,
-  paddingVertical: 10,
+  paddingVertical: 15,
   fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#1A2236",
@@ -577,6 +577,7 @@ const $textInput: TextStyle = {
   borderWidth: 1,
   borderColor: "#E0E5F0",
   lineHeight: 20,
+  textAlignVertical: "center",
 }
 
 const $sendButton: ViewStyle = {
@@ -599,4 +600,5 @@ const $inputHint: TextStyle = {
   fontSize: 11,
   fontFamily: typography.primary.normal,
   color: "#9CA3AF",
+  textAlign: "center",
 }
