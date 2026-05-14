@@ -462,6 +462,8 @@ const $langItemText: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.normal,
   color: "#1A2236",
+  textAlign: "left",
+  writingDirection: "ltr",
 }
 
 const $langItemTextSelected: TextStyle = {
