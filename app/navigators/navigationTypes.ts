@@ -22,6 +22,7 @@ export type AppStackParamList = {
   MyPage: undefined
   VoiceTranslation: undefined
   QrScanner: undefined
+  AISafetyChat: undefined
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<
