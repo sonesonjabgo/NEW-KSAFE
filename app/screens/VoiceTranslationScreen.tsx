@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useState, useEffect } from "react"
 import {
   View,
   ViewStyle,
@@ -13,6 +13,12 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { ChevronDown, RotateCcw, Volume2, Mic, Square } from "lucide-react-native"
 import { IconChevronLeft } from "@tabler/icons-react-native"
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  runOnJS,
+} from "react-native-reanimated"
 
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
@@ -90,6 +96,28 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
   const [langMenuVisible, setLangMenuVisible] = useState(false)
   const [langMenuTarget, setLangMenuTarget] = useState<"top" | "bottom">("top")
 
+  const overlayOpacity = useSharedValue(0)
+  const sheetTranslateY = useSharedValue(600)
+
+  const overlayAnimStyle = useAnimatedStyle(() => ({ opacity: overlayOpacity.value }))
+  const sheetAnimStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: sheetTranslateY.value }],
+  }))
+
+  useEffect(() => {
+    if (langMenuVisible) {
+      overlayOpacity.value = withTiming(1, { duration: 250 })
+      sheetTranslateY.value = withTiming(0, { duration: 320 })
+    }
+  }, [langMenuVisible])
+
+  const closeLangMenu = () => {
+    overlayOpacity.value = withTiming(0, { duration: 220 })
+    sheetTranslateY.value = withTiming(600, { duration: 300 }, (finished) => {
+      if (finished) runOnJS(setLangMenuVisible)(false)
+    })
+  }
+
   const openLangMenu = (target: "top" | "bottom") => {
     setLangMenuTarget(target)
     setLangMenuVisible(true)
@@ -101,7 +129,7 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
     } else {
       setBottomLanguage(key)
     }
-    setLangMenuVisible(false)
+    closeLangMenu()
   }
 
   const currentLangKey = langMenuTarget === "top" ? topLanguage : bottomLanguage
@@ -208,15 +236,17 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
       <Modal
         visible={langMenuVisible}
         transparent
-        animationType="slide"
-        onRequestClose={() => setLangMenuVisible(false)}
+        animationType="none"
+        onRequestClose={closeLangMenu}
       >
-        <TouchableOpacity
-          style={$modalOverlay}
-          activeOpacity={1}
-          onPress={() => setLangMenuVisible(false)}
-        />
-        <View style={[$modalSheet, { height: screenHeight * 0.65, paddingBottom: insets.bottom + 16 }]}>
+        <View style={$modalContainer}>
+          {/* 오버레이: 페이드 인/아웃 */}
+          <Animated.View style={[$modalOverlay, overlayAnimStyle]}>
+            <TouchableOpacity style={$modalOverlayTouch} activeOpacity={1} onPress={closeLangMenu} />
+          </Animated.View>
+
+          {/* 시트: 슬라이드 업/다운 */}
+          <Animated.View style={[$modalSheet, sheetAnimStyle, { height: screenHeight * 0.65, paddingBottom: insets.bottom + 16 }]}>
           <View style={$modalHandle} />
           <Text
             text={translate("voiceTranslationScreen:languageMenu.title")}
@@ -253,6 +283,7 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
               )
             }}
           />
+          </Animated.View>
         </View>
       </Modal>
     </View>
@@ -400,9 +431,22 @@ const $stopBtn: ViewStyle = {
   justifyContent: "center",
 }
 
-const $modalOverlay: ViewStyle = {
+const $modalContainer: ViewStyle = {
   flex: 1,
+  justifyContent: "flex-end",
+}
+
+const $modalOverlay: ViewStyle = {
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
   backgroundColor: "rgba(0,0,0,0.4)",
+}
+
+const $modalOverlayTouch: ViewStyle = {
+  flex: 1,
 }
 
 const $modalSheet: ViewStyle = {
