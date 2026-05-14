@@ -160,6 +160,7 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
             <View style={$micArea}>
               {topMicOn ? (
                 <View style={$micActiveRow}>
+                  <View style={$recordingDot} />
                   <ActivityIndicator size="small" color="#1062D8" />
                   <Text
                     text={translate("voiceTranslationScreen:listening")}
@@ -170,9 +171,15 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
                   </TouchableOpacity>
                 </View>
               ) : (
-                <TouchableOpacity style={$micBtn} onPress={() => setTopMicOn(true)}>
-                  <Mic size={22} color="#1B2A4A" strokeWidth={2} />
-                </TouchableOpacity>
+                <View style={$micOffRow}>
+                  <Text
+                    text={translate("voiceTranslationScreen:speakNow")}
+                    style={$speakNowText}
+                  />
+                  <TouchableOpacity style={$micBtn} onPress={() => setTopMicOn(true)}>
+                    <Mic size={22} color="#1B2A4A" strokeWidth={2} />
+                  </TouchableOpacity>
+                </View>
               )}
             </View>
           </View>
@@ -202,6 +209,7 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
           <View style={$micArea}>
             {bottomMicOn ? (
               <View style={$micActiveRow}>
+                <View style={$recordingDot} />
                 <ActivityIndicator size="small" color="#1062D8" />
                 <Text
                   text={translate("voiceTranslationScreen:listening")}
@@ -212,9 +220,15 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
                 </TouchableOpacity>
               </View>
             ) : (
-              <TouchableOpacity style={$micBtn} onPress={() => setBottomMicOn(true)}>
-                <Mic size={22} color="#1B2A4A" strokeWidth={2} />
-              </TouchableOpacity>
+              <View style={$micOffRow}>
+                <Text
+                  text={translate("voiceTranslationScreen:speakNow")}
+                  style={$speakNowText}
+                />
+                <TouchableOpacity style={$micBtn} onPress={() => setBottomMicOn(true)}>
+                  <Mic size={22} color="#1B2A4A" strokeWidth={2} />
+                </TouchableOpacity>
+              </View>
             )}
           </View>
         </View>
@@ -378,6 +392,26 @@ const $micBtn: ViewStyle = {
   alignItems: "center",
   justifyContent: "center",
   backgroundColor: "#FFFFFF",
+}
+
+const $micOffRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  gap: 10,
+}
+
+const $speakNowText: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.normal,
+  color: "#ABABAB",
+}
+
+const $recordingDot: ViewStyle = {
+  width: 8,
+  height: 8,
+  borderRadius: 4,
+  backgroundColor: "#E53935",
 }
 
 const $micActiveRow: ViewStyle = {
