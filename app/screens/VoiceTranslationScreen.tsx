@@ -11,8 +11,9 @@ import {
   useWindowDimensions,
 } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { ChevronDown, RotateCcw, Volume2, Mic, Square } from "lucide-react-native"
+import { ChevronDown, Volume2, Mic, Square } from "lucide-react-native"
 import { IconChevronLeft } from "@tabler/icons-react-native"
+import RotateIcon from "@assets/icons/voice/rotate.svg"
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -149,87 +150,165 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
           style={$headerTitle}
         />
         <TouchableOpacity style={$flipButton} onPress={() => setIsFlipped((prev) => !prev)}>
-          <RotateCcw size={22} color="#FFFFFF" strokeWidth={2} />
+          <RotateIcon />
         </TouchableOpacity>
       </View>
 
       {/* ── Content ── */}
       <View style={$content}>
         {/* ── 상단 박스 (상대방 언어) ── */}
-        <View style={[$box, { transform: [{ rotateZ: isFlipped ? "180deg" : "0deg" }] }]}>
-          <TouchableOpacity style={$langDropdown} onPress={() => openLangMenu("top")}>
-            <Text text={getDropdownLabel(topLanguage)} style={$langDropdownText} />
-            <ChevronDown size={14} color={BLUE} strokeWidth={2.5} />
-          </TouchableOpacity>
+        {(!isFlipped) ? (
+          <View style={$box}>
+            <TouchableOpacity style={$langDropdown} onPress={() => openLangMenu("top")}>
+              <Text text={getDropdownLabel(topLanguage)} style={$langDropdownText} />
+              <ChevronDown size={14} color={BLUE} strokeWidth={2.5} />
+            </TouchableOpacity>
 
-          <ScrollView style={$messageArea} showsVerticalScrollIndicator={false}>
-            {topMessages.map((msg) => (
-              <View key={msg.id} style={$messageRow}>
-                <Text text={msg.text} style={$messageText} />
-                <TouchableOpacity style={$speakerBtn}>
-                  <Volume2 size={16} color="#7F848C" strokeWidth={2} />
-                </TouchableOpacity>
-              </View>
-            ))}
-          </ScrollView>
+            <ScrollView style={$messageArea} showsVerticalScrollIndicator={false}>
+              {topMessages.map((msg) => (
+                <View key={msg.id} style={$messageRow}>
+                  <Text text={msg.text} style={$messageText} />
+                  <TouchableOpacity style={$speakerBtn}>
+                    <Volume2 size={16} color="#7F848C" strokeWidth={2} />
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </ScrollView>
 
-          <View style={$micArea}>
-            {topMicOn ? (
-              <View style={$micActiveRow}>
-                <ActivityIndicator size="small" color={BLUE} />
-                <Text
-                  text={translate("voiceTranslationScreen:listening")}
-                  style={$listeningText}
-                />
-                <TouchableOpacity style={$stopBtn} onPress={() => setTopMicOn(false)}>
-                  <Square size={14} color="#FFFFFF" fill="#FFFFFF" />
+            <View style={$micArea}>
+              {topMicOn ? (
+                <View style={$micActiveRow}>
+                  <ActivityIndicator size="small" color={BLUE} />
+                  <Text
+                    text={translate("voiceTranslationScreen:listening")}
+                    style={$listeningText}
+                  />
+                  <TouchableOpacity style={$stopBtn} onPress={() => setTopMicOn(false)}>
+                    <Square size={14} color="#FFFFFF" fill="#FFFFFF" />
+                  </TouchableOpacity>
+                </View>
+              ) : (
+                <TouchableOpacity style={$micBtn} onPress={() => setTopMicOn(true)}>
+                  <Mic size={22} color={BLUE} strokeWidth={2} />
                 </TouchableOpacity>
-              </View>
-            ) : (
-              <TouchableOpacity style={$micBtn} onPress={() => setTopMicOn(true)}>
-                <Mic size={22} color={BLUE} strokeWidth={2} />
-              </TouchableOpacity>
-            )}
+              )}
+            </View>
           </View>
-        </View>
+        ) : (
+          <View style={$box}>
+            <TouchableOpacity style={$langDropdown} onPress={() => openLangMenu("bottom")}>
+              <Text text={getDropdownLabel(bottomLanguage)} style={$langDropdownText} />
+              <ChevronDown size={14} color={BLUE} strokeWidth={2.5} />
+            </TouchableOpacity>
+
+            <ScrollView style={$messageArea} showsVerticalScrollIndicator={false}>
+              {bottomMessages.map((msg) => (
+                <View key={msg.id} style={$messageRow}>
+                  <Text text={msg.text} style={$messageText} />
+                  <TouchableOpacity style={$speakerBtn}>
+                    <Volume2 size={16} color="#7F848C" strokeWidth={2} />
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </ScrollView>
+
+            <View style={$micArea}>
+              {bottomMicOn ? (
+                <View style={$micActiveRow}>
+                  <ActivityIndicator size="small" color={BLUE} />
+                  <Text
+                    text={translate("voiceTranslationScreen:listening")}
+                    style={$listeningText}
+                  />
+                  <TouchableOpacity style={$stopBtn} onPress={() => setBottomMicOn(false)}>
+                    <Square size={14} color="#FFFFFF" fill="#FFFFFF" />
+                  </TouchableOpacity>
+                </View>
+              ) : (
+                <TouchableOpacity style={$micBtn} onPress={() => setBottomMicOn(true)}>
+                  <Mic size={22} color={BLUE} strokeWidth={2} />
+                </TouchableOpacity>
+              )}
+            </View>
+          </View>
+        )}
 
         {/* ── 하단 박스 (내 언어) ── */}
-        <View style={$box}>
-          <TouchableOpacity style={$langDropdown} onPress={() => openLangMenu("bottom")}>
-            <Text text={getDropdownLabel(bottomLanguage)} style={$langDropdownText} />
-            <ChevronDown size={14} color={BLUE} strokeWidth={2.5} />
-          </TouchableOpacity>
+        {(!isFlipped) ? (
+          <View style={$box}>
+            <TouchableOpacity style={$langDropdown} onPress={() => openLangMenu("bottom")}>
+              <Text text={getDropdownLabel(bottomLanguage)} style={$langDropdownText} />
+              <ChevronDown size={14} color={BLUE} strokeWidth={2.5} />
+            </TouchableOpacity>
 
-          <ScrollView style={$messageArea} showsVerticalScrollIndicator={false}>
-            {bottomMessages.map((msg) => (
-              <View key={msg.id} style={$messageRow}>
-                <Text text={msg.text} style={$messageText} />
-                <TouchableOpacity style={$speakerBtn}>
-                  <Volume2 size={16} color="#7F848C" strokeWidth={2} />
-                </TouchableOpacity>
-              </View>
-            ))}
-          </ScrollView>
+            <ScrollView style={$messageArea} showsVerticalScrollIndicator={false}>
+              {bottomMessages.map((msg) => (
+                <View key={msg.id} style={$messageRow}>
+                  <Text text={msg.text} style={$messageText} />
+                  <TouchableOpacity style={$speakerBtn}>
+                    <Volume2 size={16} color="#7F848C" strokeWidth={2} />
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </ScrollView>
 
-          <View style={$micArea}>
-            {bottomMicOn ? (
-              <View style={$micActiveRow}>
-                <ActivityIndicator size="small" color={BLUE} />
-                <Text
-                  text={translate("voiceTranslationScreen:listening")}
-                  style={$listeningText}
-                />
-                <TouchableOpacity style={$stopBtn} onPress={() => setBottomMicOn(false)}>
-                  <Square size={14} color="#FFFFFF" fill="#FFFFFF" />
+            <View style={$micArea}>
+              {bottomMicOn ? (
+                <View style={$micActiveRow}>
+                  <ActivityIndicator size="small" color={BLUE} />
+                  <Text
+                    text={translate("voiceTranslationScreen:listening")}
+                    style={$listeningText}
+                  />
+                  <TouchableOpacity style={$stopBtn} onPress={() => setBottomMicOn(false)}>
+                    <Square size={14} color="#FFFFFF" fill="#FFFFFF" />
+                  </TouchableOpacity>
+                </View>
+              ) : (
+                <TouchableOpacity style={$micBtn} onPress={() => setBottomMicOn(true)}>
+                  <Mic size={22} color={BLUE} strokeWidth={2} />
                 </TouchableOpacity>
-              </View>
-            ) : (
-              <TouchableOpacity style={$micBtn} onPress={() => setBottomMicOn(true)}>
-                <Mic size={22} color={BLUE} strokeWidth={2} />
-              </TouchableOpacity>
-            )}
+              )}
+            </View>
           </View>
-        </View>
+        ) : (
+          <View style={$box}>
+            <TouchableOpacity style={$langDropdown} onPress={() => openLangMenu("top")}>
+              <Text text={getDropdownLabel(topLanguage)} style={$langDropdownText} />
+              <ChevronDown size={14} color={BLUE} strokeWidth={2.5} />
+            </TouchableOpacity>
+
+            <ScrollView style={$messageArea} showsVerticalScrollIndicator={false}>
+              {topMessages.map((msg) => (
+                <View key={msg.id} style={$messageRow}>
+                  <Text text={msg.text} style={$messageText} />
+                  <TouchableOpacity style={$speakerBtn}>
+                    <Volume2 size={16} color="#7F848C" strokeWidth={2} />
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </ScrollView>
+
+            <View style={$micArea}>
+              {topMicOn ? (
+                <View style={$micActiveRow}>
+                  <ActivityIndicator size="small" color={BLUE} />
+                  <Text
+                    text={translate("voiceTranslationScreen:listening")}
+                    style={$listeningText}
+                  />
+                  <TouchableOpacity style={$stopBtn} onPress={() => setTopMicOn(false)}>
+                    <Square size={14} color="#FFFFFF" fill="#FFFFFF" />
+                  </TouchableOpacity>
+                </View>
+              ) : (
+                <TouchableOpacity style={$micBtn} onPress={() => setTopMicOn(true)}>
+                  <Mic size={22} color={BLUE} strokeWidth={2} />
+                </TouchableOpacity>
+              )}
+            </View>
+          </View>
+        )}
       </View>
 
       {/* ── 언어 선택 Modal ── */}
