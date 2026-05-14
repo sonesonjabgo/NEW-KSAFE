@@ -11,6 +11,7 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { Text } from "@/components/Text"
+import { translate } from "@/i18n/translate"
 
 import { QrCodeBottomSheet } from "./components/QrCodeBottomSheet"
 import { styles } from "./styles"
@@ -36,7 +37,7 @@ export const QrScannerScreen: FC = () => {
             <IconChevronLeft size={24} color="#FFFFFF" />
           </TouchableOpacity>
 
-          <Text style={styles.headerTitle}>교육/발표 참여</Text>
+          <Text style={styles.headerTitle}>{translate("qrScanner:title")}</Text>
 
           <TouchableOpacity
             style={styles.keyboardBtn}
@@ -49,9 +50,7 @@ export const QrScannerScreen: FC = () => {
 
         {/* 헤더 설명 */}
         <View style={styles.headerDescContainer}>
-          <Text style={styles.headerDesc}>
-            {"QR 코드를 스캔하거나 발표자가 공유한\n코드를 입력해 회의에 참여하세요."}
-          </Text>
+          <Text style={styles.headerDesc}>{translate("qrScanner:description")}</Text>
         </View>
 
         {/* 하단 콘텐츠 영역 */}
@@ -76,7 +75,7 @@ export const QrScannerScreen: FC = () => {
                 <View style={styles.permissionBanner}>
                   <IconAlertTriangle size={16} color="#B45309" />
                   <Text style={styles.permissionText}>
-                    QR을 스캔하려면 카메라 권한이 필요합니다.
+                    {translate("qrScanner:permissionRequired")}
                   </Text>
                 </View>
 
@@ -86,7 +85,7 @@ export const QrScannerScreen: FC = () => {
                   activeOpacity={0.85}
                   onPress={() => setHasCameraPermission(true)}
                 >
-                  <Text style={styles.retryBtnText}>다시 시도</Text>
+                  <Text style={styles.retryBtnText}>{translate("qrScanner:retry")}</Text>
                 </TouchableOpacity>
               </>
             )}
@@ -96,7 +95,10 @@ export const QrScannerScreen: FC = () => {
           <View style={styles.languageCard}>
             <IconLanguageHiragana size={20} color="#4B5563" />
             <Text style={styles.languageText}>
-              사용할 언어 <Text style={styles.languageHighlight}>· 한국어</Text>
+              {translate("qrScanner:languageLabel")}{" "}
+              <Text style={styles.languageHighlight}>
+                · {translate("qrScanner:currentLanguage")}
+              </Text>
             </Text>
           </View>
         </View>

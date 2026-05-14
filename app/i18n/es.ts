@@ -214,6 +214,21 @@ const es: Translations = {
     logout: "Logout",
   },
 
+  qrScanner: {
+    title: "Unirse a Educación/Presentación",
+    description:
+      "Escanea el código QR o ingresa el código compartido por el presentador para unirte a la reunión.",
+    permissionRequired: "Se requiere permiso de cámara para escanear el código QR.",
+    retry: "Reintentar",
+    languageLabel: "Idioma",
+    currentLanguage: "Coreano",
+    enterCode:
+      "¿Tienes problemas con la cámara? Puedes ingresar el código de educación/presentación directamente.",
+    enterCodeDescription: "Ingresa el código numérico de 8 dígitos compartido por el presentador.",
+    joinMeeting: "Unirse a la Reunión",
+    codePlaceholder: "Ingresar código",
+  },
+
   ...demoEs,
 }
 

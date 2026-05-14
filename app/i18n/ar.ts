@@ -208,6 +208,19 @@ const ar: Translations = {
     logout: "Logout",
   },
 
+  qrScanner: {
+    title: "الانضمام إلى التعليم/العرض",
+    description: "امسح رمز QR أو أدخل الرمز الذي شاركه المقدم للانضمام إلى الاجتماع.",
+    permissionRequired: "يلزم إذن الكاميرا لمسح رمز QR.",
+    retry: "إعادة المحاولة",
+    languageLabel: "اللغة",
+    currentLanguage: "الكورية",
+    enterCode: "هل تواجه صعوبة مع الكاميرا؟ يمكنك إدخال رمز التعليم/العرض مباشرة.",
+    enterCodeDescription: "أدخل الرمز المكون من 8 أرقام الذي شاركه المقدم.",
+    joinMeeting: "الانضمام إلى الاجتماع",
+    codePlaceholder: "أدخل الرمز",
+  },
+
   ...demoAr,
 }
 

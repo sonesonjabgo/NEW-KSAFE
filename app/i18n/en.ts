@@ -248,6 +248,20 @@ const en = {
     logout: "Logout",
   },
 
+  qrScanner: {
+    title: "Join Education/Presentation",
+    description: "Scan the QR code or enter the code shared by the presenter to join the meeting.",
+    permissionRequired: "Camera permission is required to scan the QR code.",
+    retry: "Try Again",
+    languageLabel: "Language",
+    currentLanguage: "Korean",
+    enterCode:
+      "Having trouble with the camera? You can enter the education/presentation code directly.",
+    enterCodeDescription: "Enter the 8-digit numeric code shared by the presenter.",
+    joinMeeting: "Join Meeting",
+    codePlaceholder: "Enter code",
+  },
+
   ...demoEn,
 }
 
