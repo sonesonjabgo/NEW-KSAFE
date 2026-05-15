@@ -16,6 +16,7 @@ import { LoginScreen } from "@/screens/LoginScreen"
 import { MyPageScreen } from "@/screens/MyPageScreen"
 import { NotifyScreen } from "@/screens/NotifyScreen"
 import { QrScannerScreen } from "@/screens/QrScannerScreen"
+import { ImageTranslationScreen } from "@/screens/ImageTranslationScreen/ImageTranslationScreen"
 import { TextTranslationScreen } from "@/screens/TextTranslationScreen/TextTranslationScreen"
 import { VoiceTranslationScreen } from "@/screens/VoiceTranslationScreen"
 import { useAppTheme } from "@/theme/context"
@@ -59,6 +60,7 @@ const AppStack = () => {
       <Stack.Screen name="QrScanner" component={QrScannerScreen} />
       <Stack.Screen name="AISafetyChat" component={AISafetyChatScreen} />
       <Stack.Screen name="TextTranslation" component={TextTranslationScreen} />
+      <Stack.Screen name="ImageTranslation" component={ImageTranslationScreen} />
     </Stack.Navigator>
   )
 }

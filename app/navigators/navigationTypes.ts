@@ -26,6 +26,7 @@ export type AppStackParamList = {
   QrScanner: undefined
   AISafetyChat: undefined
   TextTranslation: undefined
+  ImageTranslation: undefined
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<

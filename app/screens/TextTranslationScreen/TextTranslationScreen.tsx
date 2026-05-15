@@ -283,7 +283,11 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
           {/* ── Bottom Input Area ── */}
           {inputMode === "voice" ? (
             <View style={[$voiceInputArea, { paddingBottom: insets.bottom + 8 }]}>
-              <TouchableOpacity style={$sideIconBtn} activeOpacity={0.7}>
+              <TouchableOpacity
+                style={$sideIconBtn}
+                onPress={() => navigation.navigate("ImageTranslation")}
+                activeOpacity={0.7}
+              >
                 <IconCamera size={26} color="#9CA3AF" strokeWidth={1.8} />
               </TouchableOpacity>
 
