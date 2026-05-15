@@ -64,6 +64,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         Icon: GridTranslate,
         label: translate("homeScreen:grid.translate.label"),
         sub: translate("homeScreen:grid.translate.sub"),
+        onPress: () => navigation.navigate("TextTranslation"),
       },
       {
         Icon: GridEducation,
