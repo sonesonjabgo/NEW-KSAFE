@@ -41,7 +41,7 @@ const hi: Translations = {
     emailFieldLabel: "ईमेल",
     passwordFieldLabel: "पासवर्ड",
     emailFieldPlaceholder: "अपना ईमेल पता दर्ज करें",
-    passwordFieldPlaceholder: "सुपर सीक्रेट पासवर्ड यहाँ",
+    passwordFieldPlaceholder: "अपना पासवर्ड दर्ज करें",
     tapToLogIn: "लॉग इन करने के लिए टैप करें!",
     hint: "Hint: you can use any email address and your favorite password :)",
     forgotPassword: "Forgot your password?",

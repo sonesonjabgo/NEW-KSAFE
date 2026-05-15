@@ -42,7 +42,7 @@ const fr: Translations = {
     emailFieldLabel: "E-mail",
     passwordFieldLabel: "Mot de passe",
     emailFieldPlaceholder: "Entrez votre adresse e-mail",
-    passwordFieldPlaceholder: "Mot de passe super secret ici",
+    passwordFieldPlaceholder: "Entrez votre mot de passe",
     tapToLogIn: "Appuyez pour vous connecter!",
     hint: "Hint: you can use any email address and your favorite password :)",
     forgotPassword: "Forgot your password?",

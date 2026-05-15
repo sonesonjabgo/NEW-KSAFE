@@ -42,7 +42,7 @@ const ja: Translations = {
     emailFieldLabel: "メールアドレス",
     passwordFieldLabel: "パスワード",
     emailFieldPlaceholder: "メールアドレスを入力してください",
-    passwordFieldPlaceholder: "パスワードを入力してください",
+    passwordFieldPlaceholder: "パスワードを入力してください ",
     tapToLogIn: "タップしてログインしよう！",
     hint: "Hint: you can use any email address and your favorite password :)",
     forgotPassword: "Forgot your password?",

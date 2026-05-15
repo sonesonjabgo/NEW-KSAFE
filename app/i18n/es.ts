@@ -42,7 +42,7 @@ const es: Translations = {
     emailFieldLabel: "Email",
     passwordFieldLabel: "Contraseña",
     emailFieldPlaceholder: "Ingresa tu email",
-    passwordFieldPlaceholder: "Contraseña super secreta aquí",
+    passwordFieldPlaceholder: "Ingresa tu contraseña",
     tapToLogIn: "¡Presiona acá para iniciar sesión!",
     hint: "Hint: you can use any email address and your favorite password :)",
     forgotPassword: "Forgot your password?",

@@ -41,7 +41,7 @@ const ar: Translations = {
     emailFieldLabel: "البريد الالكتروني",
     passwordFieldLabel: "كلمة السر",
     emailFieldPlaceholder: "ادخل بريدك الالكتروني",
-    passwordFieldPlaceholder: "كلمة السر هنا فائقة السر",
+    passwordFieldPlaceholder: "ادخل كلمة السر",
     tapToLogIn: "انقر لتسجيل الدخول!",
     hint: "Hint: you can use any email address and your favorite password :)",
     forgotPassword: "Forgot your password?",
