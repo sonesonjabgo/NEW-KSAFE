@@ -32,7 +32,13 @@ interface StackScreenProps {
  * </StackScreen>
  * ```
  */
-export function StackScreen({ title, onBack, rightSlot, contentBg = colors.screenBg, children }: StackScreenProps) {
+export function StackScreen({
+  title,
+  onBack,
+  rightSlot,
+  contentBg = colors.screenBg,
+  children,
+}: StackScreenProps) {
   const insets = useSafeAreaInsets()
 
   return (
@@ -69,6 +75,7 @@ const $header: ViewStyle = {
   justifyContent: "space-between",
   paddingHorizontal: 20,
   paddingBottom: 14,
+  minHeight: 100,
 }
 
 const $headerSide: ViewStyle = {
@@ -84,7 +91,7 @@ const $headerSideRight: ViewStyle = {
 
 const $headerTitle: TextStyle = {
   flex: 1,
-  fontSize: 21,
+  fontSize: 20,
   fontFamily: typography.primary.semiBold,
   color: "#FFFFFF",
   textAlign: "center",
