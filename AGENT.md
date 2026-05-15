@@ -226,6 +226,93 @@ const [hasExistingEdu, setHasExistingEdu] = useState(true)  // 교육 배너 ON/
 
 ---
 
+## 공통 컴포넌트 — 반드시 재사용할 것
+
+새 화면 작성 전에 아래 공통 컴포넌트를 확인하고, 해당하는 경우 직접 구현 없이 재사용한다.
+
+### `StackScreen` (`app/components/StackScreen.tsx`)
+
+**스택 네비게이션 화면**에 사용하는 전체 레이아웃 래퍼.
+- 네이비 배경 루트 + SafeArea 처리 + 헤더(뒤로가기/제목/우측 슬롯) + 라운드 상단 콘텐츠 영역을 일괄 제공
+- 현재 사용 중: `AISafetyChatScreen`, `VoiceTranslationScreen`, `TextTranslationScreen`, `ImageTranslationScreen`
+
+```tsx
+import { StackScreen } from "@/components/StackScreen"
+
+<StackScreen
+  title={translate("myScreen:title")}
+  onBack={() => navigation.goBack()}
+  contentBg="#FFFFFF"                          // 기본값: colors.screenBg (#F9FAFE)
+  rightSlot={<TouchableOpacity onPress={...}><IconTrash /></TouchableOpacity>}
+>
+  {/* 화면 콘텐츠 */}
+</StackScreen>
+```
+
+- `rightSlot` 미제공 시 레이아웃 균형용 빈 뷰 자동 삽입
+- 언어 선택 모달처럼 화면 위에 올라오는 Modal은 `StackScreen` 바깥, Fragment `<>` 안에 배치
+
+### `LanguagePickerModal` (`app/components/LanguagePickerModal.tsx`)
+
+**언어 선택 바텀시트 모달**. 15개 언어 목록, 슬라이드 업/다운 애니메이션 내장.
+- 현재 사용 중: `TextTranslationScreen`, `VoiceTranslationScreen`, `ImageTranslationScreen`
+
+```tsx
+import { LanguagePickerModal } from "@/components/LanguagePickerModal"
+import { LanguageKey } from "@/constants/languages"
+
+const [langMenuVisible, setLangMenuVisible] = useState(false)
+const [language, setLanguage] = useState<LanguageKey>("korean")
+
+<LanguagePickerModal
+  isVisible={langMenuVisible}
+  currentKey={language}
+  title={translate("myScreen:languageMenu.title")}
+  getLabel={(key) => translate(`myScreen:languages.${key}` as any)}
+  getSubtitle={(key) => translate(`myScreen:languageSubtitles.${key}` as any)}
+  onSelect={(key) => setLanguage(key)}
+  onClose={() => setLangMenuVisible(false)}
+/>
+```
+
+### `LanguageKey` 타입 / `LANGUAGES` 배열 (`app/constants/languages.ts`)
+
+번역 관련 화면에서 공유하는 15개 언어 상수. 직접 선언하지 말고 여기서 import.
+
+```ts
+import { LanguageKey, LANGUAGES } from "@/constants/languages"
+```
+
+### `menuScreenStyles` (`app/screens/shared/menuScreenStyles.ts`)
+
+**메뉴 목록 구조 화면** (SafeHealth, WorkerParticipation 등)의 공유 스타일.
+네이비 헤더 + 흰 카드 메뉴 항목 구조를 가진 화면은 이 파일을 사용한다.
+
+```ts
+import * as S from "@/screens/shared/menuScreenStyles"
+
+// 사용 가능한 토큰:
+// S.$screenContainer, S.$headerContainer, S.$headerTitle
+// S.$contentContainer, S.$menuCard, S.$menuItemContainer
+// S.$menuIconContainer, S.$menuContentContainer
+// S.$menuTitle, S.$menuDescription, S.$menuChevron, S.$menuDivider
+// S.$emptyContainer, S.$emptyText
+```
+
+### `colors` (`app/theme/colors.ts`)
+
+`const NAVY = "#0B3069"` 또는 `const BLUE = "#1062D8"` 를 화면 파일에 직접 선언하지 말 것.
+
+```ts
+import { colors } from "@/theme/colors"
+
+colors.navy      // "#0B3069"
+colors.blue      // "#1062D8"
+colors.screenBg  // "#F9FAFE"
+```
+
+---
+
 ## 새 화면 추가 시 따라야 할 절차
 
 1. `app/screens/새화면.tsx` 파일 생성

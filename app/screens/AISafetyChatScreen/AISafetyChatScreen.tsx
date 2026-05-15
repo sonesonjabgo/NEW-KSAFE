@@ -12,10 +12,11 @@ import {
   ListRenderItemInfo,
   Text as RNText,
 } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { IconChevronLeft, IconTrash, IconSend2 } from "@tabler/icons-react-native"
+import { IconTrash, IconSend2 } from "@tabler/icons-react-native"
 
+import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { colors } from "@/theme/colors"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { typography } from "@/theme/typography"
@@ -30,10 +31,6 @@ interface Message {
   text: string
 }
 
-const NAVY = "#0B3069"
-const BLUE = "#1062D8"
-const BG = "#F9FAFE"
-
 function getMockResponse(question: string): string {
   if (question.includes("일반 안전규정") || question.includes("안전규정")) {
     return `**건설 현장 일반 안전 규정**\n\n1. **개인보호장구 착용 의무화**\n   - 안전모, 안전화, 안전조끼를 반드시 착용해야 합니다.\n\n2. **작업 전 안전점검 실시**\n   - 매일 작업 시작 전 TBM(Tool Box Meeting)을 통해 당일 위험요인을 공유합니다.\n\n3. **안전 표지판 준수**\n   - 출입 금지 구역, 낙하물 위험 구역 등의 표지판을 반드시 따라야 합니다.\n\n4. **위험작업 허가제 운영**\n   - 고소작업, 밀폐공간 작업 등 위험작업은 사전 허가를 받아야 합니다.\n\n5. **안전통로 확보**\n   - 작업 통로는 항상 깨끗하게 유지하고 장애물을 제거합니다.`
@@ -47,7 +44,6 @@ function getMockResponse(question: string): string {
   return `안녕하세요! 건설 현장 안전에 관해 도움을 드리겠습니다.\n\n구체적인 질문을 입력해 주시면 상세히 안내해 드리겠습니다.`
 }
 
-// Renders a line that may contain **bold** segments
 function InlineLine({ text, baseStyle }: { text: string; baseStyle?: TextStyle }) {
   const parts = text.split(/(\*\*[^*]+\*\*)/)
   return (
@@ -143,7 +139,6 @@ function LoadingDots() {
 }
 
 export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) => {
-  const insets = useSafeAreaInsets()
   const flatListRef = useRef<FlatList<Message>>(null)
 
   const [messages, setMessages] = useState<Message[]>([])
@@ -225,10 +220,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
       <View style={$aiMsgWrapper}>
         <View style={$aiAvatar} />
         <View style={$aiMsgContent}>
-          <Text
-            text={translate("aiSafetyChatScreen:aiName")}
-            style={$aiMsgName}
-          />
+          <Text text={translate("aiSafetyChatScreen:aiName")} style={$aiMsgName} />
           <View style={$aiBubble}>
             <SimpleMarkdown text={item.text} style={$aiMsgText} />
           </View>
@@ -243,10 +235,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
       <View style={$aiMsgWrapper}>
         <View style={$aiAvatar} />
         <View style={$aiMsgContent}>
-          <Text
-            text={translate("aiSafetyChatScreen:aiName")}
-            style={$aiMsgName}
-          />
+          <Text text={translate("aiSafetyChatScreen:aiName")} style={$aiMsgName} />
           <View style={[$aiBubble, $loadingBubble]}>
             <LoadingDots />
           </View>
@@ -260,10 +249,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
       <View style={$welcomeMsgRow}>
         <View style={$aiAvatar} />
         <View style={$aiMsgContent}>
-          <Text
-            text={translate("aiSafetyChatScreen:aiName")}
-            style={$aiMsgName}
-          />
+          <Text text={translate("aiSafetyChatScreen:aiName")} style={$aiMsgName} />
           <View style={$aiBubble}>
             <SimpleMarkdown
               text={translate("aiSafetyChatScreen:welcomeMessage")}
@@ -276,22 +262,15 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
   )
 
   return (
-    <View style={[$root, { paddingTop: insets.top }]}>
-      {/* ── Header ── */}
-      <View style={$header}>
-        <TouchableOpacity style={$backButton} onPress={() => navigation.goBack()}>
-          <IconChevronLeft size={24} color="#FFFFFF" />
-        </TouchableOpacity>
-        <Text
-          text={translate("aiSafetyChatScreen:title")}
-          style={$headerTitle}
-        />
+    <StackScreen
+      title={translate("aiSafetyChatScreen:title")}
+      onBack={() => navigation.goBack()}
+      rightSlot={
         <TouchableOpacity style={$trashButton} onPress={handleDeleteConversation}>
           <IconTrash size={22} color="#FFFFFF" />
         </TouchableOpacity>
-      </View>
-
-      {/* ── Chat Area + Input ── */}
+      }
+    >
       <KeyboardAvoidingView
         style={$keyboardView}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -317,8 +296,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
           />
         )}
 
-        {/* ── Bottom Input ── */}
-        <View style={[$inputContainer, { paddingBottom: insets.bottom + 8 }]}>
+        <View style={$inputContainer}>
           <View style={$inputRow}>
             <TextInput
               style={$textInput}
@@ -338,46 +316,14 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
               <IconSend2 size={20} color={canSend ? "#FFFFFF" : "#ABABAB"} />
             </TouchableOpacity>
           </View>
-          <Text
-            text={translate("aiSafetyChatScreen:inputHint")}
-            style={$inputHint}
-          />
+          <Text text={translate("aiSafetyChatScreen:inputHint")} style={$inputHint} />
         </View>
       </KeyboardAvoidingView>
-    </View>
+    </StackScreen>
   )
 }
 
 // ── Styles ──
-
-const $root: ViewStyle = {
-  flex: 1,
-  backgroundColor: NAVY,
-}
-
-const $header: ViewStyle = {
-  backgroundColor: NAVY,
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "space-between",
-  paddingHorizontal: 20,
-  paddingVertical: 22,
-}
-
-const $backButton: ViewStyle = {
-  width: 36,
-  height: 36,
-  justifyContent: "center",
-  alignItems: "flex-start",
-}
-
-const $headerTitle: TextStyle = {
-  flex: 1,
-  fontSize: 21,
-  fontFamily: typography.primary.semiBold,
-  color: "#FFFFFF",
-  textAlign: "center",
-}
 
 const $trashButton: ViewStyle = {
   width: 36,
@@ -388,10 +334,7 @@ const $trashButton: ViewStyle = {
 
 const $keyboardView: ViewStyle = {
   flex: 1,
-  backgroundColor: BG,
-  borderTopLeftRadius: 20,
-  borderTopRightRadius: 20,
-  overflow: "hidden",
+  backgroundColor: colors.screenBg,
 }
 
 const $chatList: {
@@ -404,7 +347,6 @@ const $chatList: {
   flexGrow: 1,
 }
 
-// Welcome screen
 const $welcomeContainer: ViewStyle = {
   flex: 1,
   paddingTop: 8,
@@ -416,14 +358,13 @@ const $welcomeMsgRow: ViewStyle = {
   gap: 10,
 }
 
-// Messages
 const $userMsgWrapper: ViewStyle = {
   alignItems: "flex-end",
   marginBottom: 16,
 }
 
 const $userBubble: ViewStyle = {
-  backgroundColor: BLUE,
+  backgroundColor: colors.blue,
   borderRadius: 16,
   borderTopRightRadius: 4,
   paddingHorizontal: 14,
@@ -505,10 +446,9 @@ const $dot: ViewStyle = {
 }
 
 const $dotActive: ViewStyle = {
-  backgroundColor: BLUE,
+  backgroundColor: colors.blue,
 }
 
-// Markdown styles
 const $mdParagraphRow: ViewStyle = {
   flexDirection: "row",
   flexWrap: "wrap",
@@ -552,13 +492,13 @@ const $mdBold: TextStyle = {
   fontFamily: typography.primary.bold,
 }
 
-// Input area
 const $inputContainer: ViewStyle = {
   backgroundColor: "#FFFFFF",
   borderTopWidth: 1,
   borderTopColor: "#E8EBF2",
   paddingHorizontal: 16,
   paddingTop: 12,
+  paddingBottom: 20,
   gap: 6,
 }
 
@@ -590,7 +530,7 @@ const $sendButton: ViewStyle = {
 }
 
 const $sendButtonActive: ViewStyle = {
-  backgroundColor: BLUE,
+  backgroundColor: colors.blue,
 }
 
 const $sendButtonInactive: ViewStyle = {

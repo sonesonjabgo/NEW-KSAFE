@@ -8,13 +8,9 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
-  Modal,
   ListRenderItemInfo,
-  useWindowDimensions,
 } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
 import {
-  IconChevronLeft,
   IconChevronDown,
   IconArrowsExchange,
   IconVolume,
@@ -25,59 +21,17 @@ import {
   IconArrowUp,
 } from "@tabler/icons-react-native"
 import { Square } from "lucide-react-native"
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-  runOnJS,
-} from "react-native-reanimated"
 
+import { LanguagePickerModal } from "@/components/LanguagePickerModal"
+import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { LANGUAGES, LanguageKey } from "@/constants/languages"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
+import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
 interface TextTranslationScreenProps extends AppStackScreenProps<"TextTranslation"> {}
-
-type LanguageKey =
-  | "korean"
-  | "english"
-  | "chineseSimplified"
-  | "chineseTraditional"
-  | "russian"
-  | "vietnamese"
-  | "indonesian"
-  | "khmer"
-  | "thai"
-  | "urdu"
-  | "nepali"
-  | "lao"
-  | "japanese"
-  | "french"
-  | "spanish"
-
-interface Language {
-  key: LanguageKey
-  flag: string
-}
-
-const LANGUAGES: Language[] = [
-  { key: "korean", flag: "🇰🇷" },
-  { key: "english", flag: "🇺🇸" },
-  { key: "chineseSimplified", flag: "🇨🇳" },
-  { key: "chineseTraditional", flag: "🇹🇼" },
-  { key: "russian", flag: "🇷🇺" },
-  { key: "vietnamese", flag: "🇻🇳" },
-  { key: "indonesian", flag: "🇮🇩" },
-  { key: "khmer", flag: "🇰🇭" },
-  { key: "thai", flag: "🇹🇭" },
-  { key: "urdu", flag: "🇵🇰" },
-  { key: "nepali", flag: "🇳🇵" },
-  { key: "lao", flag: "🇱🇦" },
-  { key: "japanese", flag: "🇯🇵" },
-  { key: "french", flag: "🇫🇷" },
-  { key: "spanish", flag: "🇪🇸" },
-]
 
 interface TranslationItem {
   id: string
@@ -92,12 +46,7 @@ const DUMMY_TRANSLATIONS: TranslationItem[] = [
 
 type InputMode = "voice" | "text"
 
-const NAVY = "#0B3069"
-const BLUE = "#1062D8"
-
 export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigation }) => {
-  const insets = useSafeAreaInsets()
-  const { height: screenHeight } = useWindowDimensions()
   const flatListRef = useRef<FlatList<TranslationItem>>(null)
 
   const [sourceLanguage, setSourceLanguage] = useState<LanguageKey>("korean")
@@ -113,35 +62,19 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
   const [langMenuVisible, setLangMenuVisible] = useState(false)
   const [langMenuTarget, setLangMenuTarget] = useState<"source" | "target">("source")
 
-  const overlayOpacity = useSharedValue(0)
-  const sheetTranslateY = useSharedValue(600)
-
-  const overlayAnimStyle = useAnimatedStyle(() => ({ opacity: overlayOpacity.value }))
-  const sheetAnimStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: sheetTranslateY.value }],
-  }))
+  const currentLangKey = langMenuTarget === "source" ? sourceLanguage : targetLanguage
 
   const openLangMenu = (target: "source" | "target") => {
     setLangMenuTarget(target)
     setLangMenuVisible(true)
-    overlayOpacity.value = withTiming(1, { duration: 250 })
-    sheetTranslateY.value = withTiming(0, { duration: 320 })
   }
 
-  const closeLangMenu = () => {
-    overlayOpacity.value = withTiming(0, { duration: 220 })
-    sheetTranslateY.value = withTiming(600, { duration: 300 }, (finished) => {
-      if (finished) runOnJS(setLangMenuVisible)(false)
-    })
-  }
-
-  const selectLanguage = (key: LanguageKey) => {
+  const handleSelectLanguage = (key: LanguageKey) => {
     if (langMenuTarget === "source") {
       setSourceLanguage(key)
     } else {
       setTargetLanguage(key)
     }
-    closeLangMenu()
   }
 
   const swapLanguages = () => {
@@ -152,9 +85,11 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
   const getLangLabel = (key: LanguageKey) =>
     translate(`textTranslationScreen:languages.${key}` as any)
 
-  const getLangFlag = (key: LanguageKey): string => LANGUAGES.find((l) => l.key === key)?.flag ?? ""
+  const getLangSubtitle = (key: LanguageKey) =>
+    translate(`textTranslationScreen:languageSubtitles.${key}` as any)
 
-  const currentLangKey = langMenuTarget === "source" ? sourceLanguage : targetLanguage
+  const getLangFlag = (key: LanguageKey): string =>
+    LANGUAGES.find((l) => l.key === key)?.flag ?? ""
 
   const handleTranslate = useCallback(() => {
     const trimmed = inputText.trim()
@@ -192,28 +127,25 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
           <Text text={item.translatedText} style={$translatedText} />
         </View>
         <TouchableOpacity style={$speakerBtn} activeOpacity={0.7}>
-          <IconVolume size={18} color={BLUE} />
+          <IconVolume size={18} color={colors.blue} />
         </TouchableOpacity>
       </View>
     </View>
   )
 
   return (
-    <View style={[$root, { paddingTop: insets.top }]}>
-      {/* ── Header ── */}
-      <View style={$header}>
-        <TouchableOpacity style={$headerSide} onPress={() => navigation.goBack()}>
-          <IconChevronLeft size={24} color="#FFFFFF" />
-        </TouchableOpacity>
-        <Text text={translate("textTranslationScreen:title")} style={$headerTitle} />
-        <TouchableOpacity style={[$headerSide, $headerSideRight]}>
-          <Text text={translate("textTranslationScreen:fontSizeButton")} style={$fontSizeText} />
-        </TouchableOpacity>
-      </View>
-
-      {/* ── Main Container (rounded top) ── */}
-      <View style={$chatContainer}>
-        {/* ── Language Selector Bar ── */}
+    <>
+      <StackScreen
+        title={translate("textTranslationScreen:title")}
+        onBack={() => navigation.goBack()}
+        contentBg="#FFFFFF"
+        rightSlot={
+          <TouchableOpacity style={$headerSideRight}>
+            <Text text={translate("textTranslationScreen:fontSizeButton")} style={$fontSizeText} />
+          </TouchableOpacity>
+        }
+      >
+        {/* 언어 선택 바 */}
         <View style={$langBar}>
           <TouchableOpacity
             style={$langBtn}
@@ -222,11 +154,11 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
           >
             <Text text={getLangFlag(sourceLanguage)} style={$langFlag} />
             <Text text={getLangLabel(sourceLanguage)} style={$langBtnText} numberOfLines={1} />
-            <IconChevronDown size={14} color={BLUE} strokeWidth={2.5} />
+            <IconChevronDown size={14} color={colors.blue} strokeWidth={2.5} />
           </TouchableOpacity>
 
           <TouchableOpacity style={$swapBtn} onPress={swapLanguages} activeOpacity={0.7}>
-            <IconArrowsExchange size={20} color={BLUE} strokeWidth={2} />
+            <IconArrowsExchange size={20} color={colors.blue} strokeWidth={2} />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -236,21 +168,16 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
           >
             <Text text={getLangFlag(targetLanguage)} style={$langFlag} />
             <Text text={getLangLabel(targetLanguage)} style={$langBtnText} numberOfLines={1} />
-            <IconChevronDown size={14} color={BLUE} strokeWidth={2.5} />
+            <IconChevronDown size={14} color={colors.blue} strokeWidth={2.5} />
           </TouchableOpacity>
         </View>
 
-        {/* ── Conversation + Input ── */}
         <KeyboardAvoidingView
           style={$keyboardView}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          keyboardVerticalOffset={insets.top}
         >
-          {/* ── Chat outer wrapper (layout only) ── */}
           <View style={$chatWrapBox}>
-            {/* Inner box — border appears when listening */}
             <View style={[$chatInnerBox, isListening && $chatInnerBoxListening]}>
-              {/* Fixed-height top space — always rendered; opacity controls visibility */}
               <View style={$chatTopBanner}>
                 <Text
                   text={translate("textTranslationScreen:listening")}
@@ -258,7 +185,6 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
                 />
               </View>
 
-              {/* Translation list */}
               <FlatList
                 ref={flatListRef}
                 style={$chatFlatList}
@@ -269,7 +195,6 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
                 showsVerticalScrollIndicator={false}
               />
 
-              {/* X button — always visible, bottom-right of inner box, clears all translations */}
               <TouchableOpacity
                 style={$listeningCloseBtn}
                 onPress={() => setTranslations([])}
@@ -280,9 +205,8 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
             </View>
           </View>
 
-          {/* ── Bottom Input Area ── */}
           {inputMode === "voice" ? (
-            <View style={[$voiceInputArea, { paddingBottom: insets.bottom + 8 }]}>
+            <View style={$voiceInputArea}>
               <TouchableOpacity
                 style={$sideIconBtn}
                 onPress={() => navigation.navigate("ImageTranslation")}
@@ -312,8 +236,7 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
               </TouchableOpacity>
             </View>
           ) : (
-            <View style={[$textInputArea, { paddingBottom: insets.bottom + 8 }]}>
-              {/* 상: 최대 글자 안내 + 입력 카운터 */}
+            <View style={$textInputArea}>
               <View style={$inputTopRow}>
                 <Text
                   text={translate("textTranslationScreen:inputHint")}
@@ -322,7 +245,6 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
                 <Text text={`${inputText.length}/1000`} style={$inputCountText} />
               </View>
 
-              {/* 중: 텍스트 인풋 + 전송 버튼 */}
               <View style={$textInputRow}>
                 <TextInput
                   style={[
@@ -360,7 +282,6 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
                 </TouchableOpacity>
               </View>
 
-              {/* 하: 경고문 (항상 공간 차지, opacity로 표시/숨김) */}
               <Text
                 text={translate("textTranslationScreen:validationError")}
                 style={[$validationError, { opacity: showValidationError ? 1 : 0 }]}
@@ -368,119 +289,33 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
             </View>
           )}
         </KeyboardAvoidingView>
-      </View>
+      </StackScreen>
 
-      {/* ── Language Selection Modal ── */}
-      <Modal
-        visible={langMenuVisible}
-        transparent
-        animationType="none"
-        onRequestClose={closeLangMenu}
-      >
-        <View style={$modalContainer}>
-          <Animated.View style={[$modalOverlay, overlayAnimStyle]}>
-            <TouchableOpacity
-              style={$modalOverlayTouch}
-              activeOpacity={1}
-              onPress={closeLangMenu}
-            />
-          </Animated.View>
-
-          <Animated.View
-            style={[
-              $modalSheet,
-              sheetAnimStyle,
-              { height: screenHeight * 0.65, paddingBottom: insets.bottom + 16 },
-            ]}
-          >
-            <View style={$modalHandle} />
-            <Text
-              text={translate("textTranslationScreen:languageMenu.title")}
-              style={$modalTitle}
-            />
-            <FlatList
-              data={LANGUAGES}
-              keyExtractor={(item) => item.key}
-              ItemSeparatorComponent={() => <View style={$langSeparator} />}
-              renderItem={({ item }) => {
-                const isSelected = currentLangKey === item.key
-                const nativeName = translate(`textTranslationScreen:languages.${item.key}` as any)
-                const subtitle = translate(
-                  `textTranslationScreen:languageSubtitles.${item.key}` as any,
-                )
-                return (
-                  <TouchableOpacity
-                    style={[$langItem, isSelected && $langItemSelected]}
-                    onPress={() => selectLanguage(item.key)}
-                    activeOpacity={0.7}
-                  >
-                    <Text text={item.flag} style={$langItemFlag} />
-                    <View style={$langItemContent}>
-                      <Text
-                        text={nativeName}
-                        style={[$langItemText, isSelected && $langItemTextSelected]}
-                      />
-                      {!!subtitle && <Text text={subtitle} style={$langItemSubtitle} />}
-                    </View>
-                    {isSelected && <Text text="✓" style={$langItemCheck} />}
-                  </TouchableOpacity>
-                )
-              }}
-            />
-          </Animated.View>
-        </View>
-      </Modal>
-    </View>
+      <LanguagePickerModal
+        isVisible={langMenuVisible}
+        currentKey={currentLangKey}
+        title={translate("textTranslationScreen:languageMenu.title")}
+        getLabel={getLangLabel}
+        getSubtitle={getLangSubtitle}
+        onSelect={handleSelectLanguage}
+        onClose={() => setLangMenuVisible(false)}
+      />
+    </>
   )
 }
 
 // ── Styles ──
 
-const $root: ViewStyle = {
-  flex: 1,
-  backgroundColor: NAVY,
-}
-
-const $header: ViewStyle = {
-  backgroundColor: NAVY,
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "space-between",
-  paddingHorizontal: 20,
-  paddingVertical: 22,
-}
-
-const $headerSide: ViewStyle = {
-  width: 44,
-  height: 36,
-  justifyContent: "center",
-  alignItems: "flex-start",
-}
-
 const $headerSideRight: ViewStyle = {
   alignItems: "flex-end",
-}
-
-const $headerTitle: TextStyle = {
-  flex: 1,
-  fontSize: 21,
-  fontFamily: typography.primary.semiBold,
-  color: "#FFFFFF",
-  textAlign: "center",
+  justifyContent: "center",
+  height: 36,
 }
 
 const $fontSizeText: TextStyle = {
   fontSize: 16,
   fontFamily: typography.primary.bold,
   color: "#FFFFFF",
-}
-
-const $chatContainer: ViewStyle = {
-  flex: 1,
-  borderTopLeftRadius: 20,
-  borderTopRightRadius: 20,
-  overflow: "hidden",
-  backgroundColor: "#FFFFFF",
 }
 
 const $langBar: ViewStyle = {
@@ -509,7 +344,7 @@ const $langBtnText: TextStyle = {
   flex: 1,
   fontSize: 13,
   fontFamily: typography.primary.semiBold,
-  color: BLUE,
+  color: colors.blue,
 }
 
 const $swapBtn: ViewStyle = {
@@ -527,14 +362,12 @@ const $keyboardView: ViewStyle = {
   backgroundColor: "#FFFFFF",
 }
 
-// Outer layout container — no border, just spacing
 const $chatWrapBox: ViewStyle = {
   flex: 1,
   marginHorizontal: 12,
   marginTop: 8,
 }
 
-// Inner box — border toggles on listening
 const $chatInnerBox: ViewStyle = {
   flex: 1,
   borderRadius: 12,
@@ -545,10 +378,9 @@ const $chatInnerBox: ViewStyle = {
 }
 
 const $chatInnerBoxListening: ViewStyle = {
-  borderColor: BLUE,
+  borderColor: colors.blue,
 }
 
-// Fixed height top space — always present; text shown/hidden via opacity
 const $chatTopBanner: ViewStyle = {
   height: 28,
   alignItems: "center",
@@ -558,7 +390,7 @@ const $chatTopBanner: ViewStyle = {
 const $listeningText: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.medium,
-  color: BLUE,
+  color: colors.blue,
 }
 
 const $chatFlatList: ViewStyle = {
@@ -626,6 +458,7 @@ const $voiceInputArea: ViewStyle = {
   alignItems: "center",
   justifyContent: "space-around",
   paddingTop: 16,
+  paddingBottom: 32,
   paddingHorizontal: 32,
 }
 
@@ -640,10 +473,10 @@ const $micBtnInactive: ViewStyle = {
   width: 64,
   height: 64,
   borderRadius: 32,
-  backgroundColor: BLUE,
+  backgroundColor: colors.blue,
   alignItems: "center",
   justifyContent: "center",
-  shadowColor: BLUE,
+  shadowColor: colors.blue,
   shadowOffset: { width: 0, height: 4 },
   shadowOpacity: 0.35,
   shadowRadius: 8,
@@ -654,10 +487,10 @@ const $micBtnActive: ViewStyle = {
   width: 64,
   height: 64,
   borderRadius: 32,
-  backgroundColor: BLUE,
+  backgroundColor: colors.blue,
   alignItems: "center",
   justifyContent: "center",
-  shadowColor: BLUE,
+  shadowColor: colors.blue,
   shadowOffset: { width: 0, height: 4 },
   shadowOpacity: 0.35,
   shadowRadius: 8,
@@ -670,6 +503,7 @@ const $textInputArea: ViewStyle = {
   borderTopColor: "#E8EBF2",
   paddingHorizontal: 12,
   paddingTop: 8,
+  paddingBottom: 32,
   gap: 4,
 }
 
@@ -678,7 +512,6 @@ const $textInputRow: ViewStyle = {
   alignItems: "center",
   gap: 8,
 }
-
 
 const $inputTopRow: ViewStyle = {
   flexDirection: "row",
@@ -714,14 +547,13 @@ const $textInput: TextStyle = {
 }
 
 const $textInputFocused: TextStyle = {
-  borderColor: BLUE,
+  borderColor: colors.blue,
 }
 
 const $textInputError: TextStyle = {
   borderColor: "#EF4444",
 }
 
-// Circular send button
 const $sendBtn: ViewStyle = {
   width: 40,
   height: 40,
@@ -731,7 +563,7 @@ const $sendBtn: ViewStyle = {
 }
 
 const $sendBtnActive: ViewStyle = {
-  backgroundColor: BLUE,
+  backgroundColor: colors.blue,
 }
 
 const $sendBtnInactive: ViewStyle = {
@@ -742,97 +574,4 @@ const $validationError: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
   color: "#EF4444",
-}
-
-// Modal styles
-const $modalContainer: ViewStyle = {
-  flex: 1,
-  justifyContent: "flex-end",
-}
-
-const $modalOverlay: ViewStyle = {
-  position: "absolute",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  backgroundColor: "rgba(0,0,0,0.4)",
-}
-
-const $modalOverlayTouch: ViewStyle = {
-  flex: 1,
-}
-
-const $modalSheet: ViewStyle = {
-  backgroundColor: "#FFFFFF",
-  borderTopLeftRadius: 20,
-  borderTopRightRadius: 20,
-  paddingTop: 12,
-}
-
-const $modalHandle: ViewStyle = {
-  width: 36,
-  height: 4,
-  borderRadius: 2,
-  backgroundColor: "#D0D5DD",
-  alignSelf: "center",
-  marginBottom: 16,
-}
-
-const $modalTitle: TextStyle = {
-  fontSize: 15,
-  fontFamily: typography.primary.bold,
-  color: "#1A2236",
-  paddingHorizontal: 20,
-  marginBottom: 8,
-}
-
-const $langSeparator: ViewStyle = {
-  height: 1,
-  backgroundColor: "#F0F0F0",
-  marginHorizontal: 20,
-}
-
-const $langItem: ViewStyle = {
-  flexDirection: "row",
-  alignItems: "center",
-  paddingHorizontal: 20,
-  paddingVertical: 14,
-  gap: 12,
-}
-
-const $langItemSelected: ViewStyle = {
-  backgroundColor: "#F0F5FF",
-}
-
-const $langItemContent: ViewStyle = {
-  flex: 1,
-  gap: 2,
-}
-
-const $langItemFlag: TextStyle = {
-  fontSize: 22,
-}
-
-const $langItemText: TextStyle = {
-  fontSize: 15,
-  fontFamily: typography.primary.normal,
-  color: "#1A2236",
-}
-
-const $langItemTextSelected: TextStyle = {
-  fontFamily: typography.primary.semiBold,
-  color: BLUE,
-}
-
-const $langItemSubtitle: TextStyle = {
-  fontSize: 12,
-  fontFamily: typography.primary.normal,
-  color: "#9CA3AF",
-}
-
-const $langItemCheck: TextStyle = {
-  fontSize: 16,
-  color: BLUE,
-  fontFamily: typography.primary.bold,
 }

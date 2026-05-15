@@ -34,6 +34,8 @@ const palette = {
   overlay20: "rgba(25, 16, 21, 0.2)",
   overlay50: "rgba(25, 16, 21, 0.5)",
   deepBlue: "#0B3069",
+  actionBlue: "#1062D8",
+  screenBg: "#F9FAFE",
 } as const
 
 export const colors = {
@@ -83,4 +85,16 @@ export const colors = {
    * Error Background.
    */
   errorBackground: palette.angry100,
+  /**
+   * 앱 메인 네이비 색상 (#0B3069). 헤더, 루트 배경 등에 사용.
+   */
+  navy: palette.deepBlue,
+  /**
+   * 앱 메인 블루 색상 (#1062D8). 버튼, 링크, 강조 등에 사용.
+   */
+  blue: palette.actionBlue,
+  /**
+   * 기본 화면 배경색 (#F9FAFE).
+   */
+  screenBg: palette.screenBg,
 } as const

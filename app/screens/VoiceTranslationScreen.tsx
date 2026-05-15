@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react"
+import { FC, useState } from "react"
 import {
   View,
   ViewStyle,
@@ -6,13 +6,8 @@ import {
   TouchableOpacity,
   ScrollView,
   ActivityIndicator,
-  Modal,
-  FlatList,
-  useWindowDimensions,
 } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { ChevronDown, Volume2, Mic, Square } from "lucide-react-native"
-import { IconChevronLeft } from "@tabler/icons-react-native"
 import RotateIcon from "@assets/icons/voice/rotate.svg"
 import Animated, {
   useSharedValue,
@@ -21,52 +16,16 @@ import Animated, {
   runOnJS,
 } from "react-native-reanimated"
 
+import { LanguagePickerModal } from "@/components/LanguagePickerModal"
+import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { LANGUAGES, LanguageKey } from "@/constants/languages"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
+import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
 interface VoiceTranslationScreenProps extends AppStackScreenProps<"VoiceTranslation"> {}
-
-type LanguageKey =
-  | "korean"
-  | "english"
-  | "chineseSimplified"
-  | "chineseTraditional"
-  | "russian"
-  | "vietnamese"
-  | "indonesian"
-  | "khmer"
-  | "thai"
-  | "urdu"
-  | "nepali"
-  | "lao"
-  | "japanese"
-  | "french"
-  | "spanish"
-
-interface Language {
-  key: LanguageKey
-  flag: string
-}
-
-const LANGUAGES: Language[] = [
-  { key: "korean", flag: "🇰🇷" },
-  { key: "english", flag: "🇺🇸" },
-  { key: "chineseSimplified", flag: "🇨🇳" },
-  { key: "chineseTraditional", flag: "🇹🇼" },
-  { key: "russian", flag: "🇷🇺" },
-  { key: "vietnamese", flag: "🇻🇳" },
-  { key: "indonesian", flag: "🇮🇩" },
-  { key: "khmer", flag: "🇰🇭" },
-  { key: "thai", flag: "🇹🇭" },
-  { key: "urdu", flag: "🇵🇰" },
-  { key: "nepali", flag: "🇳🇵" },
-  { key: "lao", flag: "🇱🇦" },
-  { key: "japanese", flag: "🇯🇵" },
-  { key: "french", flag: "🇫🇷" },
-  { key: "spanish", flag: "🇪🇸" },
-]
 
 interface MessageItem {
   id: string
@@ -84,9 +43,6 @@ const MOCK_BOTTOM_MESSAGES: MessageItem[] = [
 ]
 
 export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ navigation }) => {
-  const insets = useSafeAreaInsets()
-  const { height: screenHeight } = useWindowDimensions()
-
   const [topLanguage, setTopLanguage] = useState<LanguageKey>("english")
   const [bottomLanguage, setBottomLanguage] = useState<LanguageKey>("korean")
   const [topMessages] = useState<MessageItem[]>(MOCK_TOP_MESSAGES)
@@ -97,230 +53,132 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
   const [langMenuVisible, setLangMenuVisible] = useState(false)
   const [langMenuTarget, setLangMenuTarget] = useState<"top" | "bottom">("top")
 
-  const overlayOpacity = useSharedValue(0)
-  const sheetTranslateY = useSharedValue(600)
-
-  const overlayAnimStyle = useAnimatedStyle(() => ({ opacity: overlayOpacity.value }))
-  const sheetAnimStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: sheetTranslateY.value }],
-  }))
-
-  useEffect(() => {
-    if (langMenuVisible) {
-      overlayOpacity.value = withTiming(1, { duration: 250 })
-      sheetTranslateY.value = withTiming(0, { duration: 320 })
-    }
-  }, [langMenuVisible])
-
-  const closeLangMenu = () => {
-    overlayOpacity.value = withTiming(0, { duration: 220 })
-    sheetTranslateY.value = withTiming(600, { duration: 300 }, (finished) => {
-      if (finished) runOnJS(setLangMenuVisible)(false)
-    })
-  }
-
   const openLangMenu = (target: "top" | "bottom") => {
     setLangMenuTarget(target)
     setLangMenuVisible(true)
   }
 
-  const selectLanguage = (key: LanguageKey) => {
+  const handleSelectLanguage = (key: LanguageKey) => {
     if (langMenuTarget === "top") {
       setTopLanguage(key)
     } else {
       setBottomLanguage(key)
     }
-    closeLangMenu()
   }
+
+  const getLabel = (key: LanguageKey) =>
+    translate(`voiceTranslationScreen:languages.${key}` as any)
+
+  const getSubtitle = (key: LanguageKey) =>
+    translate(`voiceTranslationScreen:languageSubtitles.${key}` as any)
 
   const currentLangKey = langMenuTarget === "top" ? topLanguage : bottomLanguage
 
-  const getDropdownLabel = (key: LanguageKey) =>
-    translate(`voiceTranslationScreen:languages.${key}` as any)
-
   return (
-    <View style={[$root, { paddingTop: insets.top }]}>
-      {/* ── Header ── */}
-      <View style={$header}>
-        <TouchableOpacity style={$backButton} onPress={() => navigation.goBack()}>
-          <IconChevronLeft size={24} color="#FFFFFF" />
-        </TouchableOpacity>
-        <Text
-          text={translate("voiceTranslationScreen:title")}
-          style={$headerTitle}
-        />
-        <TouchableOpacity style={$flipButton} onPress={() => setIsFlipped((prev) => !prev)}>
-          <RotateIcon style={{ transform: [{ scaleY: isFlipped ? -1 : 1 }] }} />
-        </TouchableOpacity>
-      </View>
-
-      {/* ── Content ── */}
-      <View style={$content}>
-        {/* ── 상단 박스 (상대방 언어) ── */}
-        <View style={[$box, { transform: [{ rotateZ: isFlipped ? "180deg" : "0deg" }] }]}>
-          <TouchableOpacity style={$langDropdown} onPress={() => openLangMenu("top")}>
-            <Text text={getDropdownLabel(topLanguage)} style={$langDropdownText} />
-            <ChevronDown size={14} color={BLUE} strokeWidth={2.5} />
+    <>
+      <StackScreen
+        title={translate("voiceTranslationScreen:title")}
+        onBack={() => navigation.goBack()}
+        contentBg={colors.screenBg}
+        rightSlot={
+          <TouchableOpacity
+            style={$flipButton}
+            onPress={() => setIsFlipped((prev) => !prev)}
+          >
+            <RotateIcon style={{ transform: [{ scaleY: isFlipped ? -1 : 1 }] }} />
           </TouchableOpacity>
-
-          <ScrollView style={$messageArea} showsVerticalScrollIndicator={false}>
-            {topMessages.map((msg) => (
-              <View key={msg.id} style={$messageRow}>
-                <Text text={msg.text} style={$messageText} />
-                <TouchableOpacity style={$speakerBtn}>
-                  <Volume2 size={16} color="#7F848C" strokeWidth={2} />
-                </TouchableOpacity>
-              </View>
-            ))}
-          </ScrollView>
-
-          <View style={$micArea}>
-            {topMicOn ? (
-              <View style={$micActiveRow}>
-                <ActivityIndicator size="small" color={BLUE} />
-                <Text
-                  text={translate("voiceTranslationScreen:listening")}
-                  style={$listeningText}
-                />
-                <TouchableOpacity style={$stopBtn} onPress={() => setTopMicOn(false)}>
-                  <Square size={14} color="#FFFFFF" fill="#FFFFFF" />
-                </TouchableOpacity>
-              </View>
-            ) : (
-              <TouchableOpacity style={$micBtn} onPress={() => setTopMicOn(true)}>
-                <Mic size={22} color={BLUE} strokeWidth={2} />
-              </TouchableOpacity>
-            )}
-          </View>
-        </View>
-
-        {/* ── 하단 박스 (내 언어) ── */}
-        <View style={$box}>
-          <TouchableOpacity style={$langDropdown} onPress={() => openLangMenu("bottom")}>
-            <Text text={getDropdownLabel(bottomLanguage)} style={$langDropdownText} />
-            <ChevronDown size={14} color={BLUE} strokeWidth={2.5} />
-          </TouchableOpacity>
-
-          <ScrollView style={$messageArea} showsVerticalScrollIndicator={false}>
-            {bottomMessages.map((msg) => (
-              <View key={msg.id} style={$messageRow}>
-                <Text text={msg.text} style={$messageText} />
-                <TouchableOpacity style={$speakerBtn}>
-                  <Volume2 size={16} color="#7F848C" strokeWidth={2} />
-                </TouchableOpacity>
-              </View>
-            ))}
-          </ScrollView>
-
-          <View style={$micArea}>
-            {bottomMicOn ? (
-              <View style={$micActiveRow}>
-                <ActivityIndicator size="small" color={BLUE} />
-                <Text
-                  text={translate("voiceTranslationScreen:listening")}
-                  style={$listeningText}
-                />
-                <TouchableOpacity style={$stopBtn} onPress={() => setBottomMicOn(false)}>
-                  <Square size={14} color="#FFFFFF" fill="#FFFFFF" />
-                </TouchableOpacity>
-              </View>
-            ) : (
-              <TouchableOpacity style={$micBtn} onPress={() => setBottomMicOn(true)}>
-                <Mic size={22} color={BLUE} strokeWidth={2} />
-              </TouchableOpacity>
-            )}
-          </View>
-        </View>
-      </View>
-
-      {/* ── 언어 선택 Modal ── */}
-      <Modal
-        visible={langMenuVisible}
-        transparent
-        animationType="none"
-        onRequestClose={closeLangMenu}
+        }
       >
-        <View style={$modalContainer}>
-          {/* 오버레이: 페이드 인/아웃 */}
-          <Animated.View style={[$modalOverlay, overlayAnimStyle]}>
-            <TouchableOpacity style={$modalOverlayTouch} activeOpacity={1} onPress={closeLangMenu} />
-          </Animated.View>
+        <View style={$content}>
+          {/* 상단 박스 (상대방 언어) */}
+          <View style={[$box, { transform: [{ rotateZ: isFlipped ? "180deg" : "0deg" }] }]}>
+            <TouchableOpacity style={$langDropdown} onPress={() => openLangMenu("top")}>
+              <Text text={getLabel(topLanguage)} style={$langDropdownText} />
+              <ChevronDown size={14} color={colors.blue} strokeWidth={2.5} />
+            </TouchableOpacity>
 
-          {/* 시트: 슬라이드 업/다운 */}
-          <Animated.View style={[$modalSheet, sheetAnimStyle, { height: screenHeight * 0.65, paddingBottom: insets.bottom + 16 }]}>
-          <View style={$modalHandle} />
-          <Text
-            text={translate("voiceTranslationScreen:languageMenu.title")}
-            style={$modalTitle}
-          />
-          <FlatList
-            data={LANGUAGES}
-            keyExtractor={(item) => item.key}
-            ItemSeparatorComponent={() => <View style={$langSeparator} />}
-            renderItem={({ item }) => {
-              const isSelected = currentLangKey === item.key
-              const nativeName = translate(`voiceTranslationScreen:languages.${item.key}` as any)
-              const subtitle = translate(`voiceTranslationScreen:languageSubtitles.${item.key}` as any)
-              return (
-                <TouchableOpacity
-                  style={[$langItem, isSelected && $langItemSelected]}
-                  onPress={() => selectLanguage(item.key)}
-                  activeOpacity={0.7}
-                >
-                  <Text text={item.flag} style={$langItemFlag} />
-                  <View style={$langItemContent}>
-                    <Text
-                      text={nativeName}
-                      style={[$langItemText, isSelected && $langItemTextSelected]}
-                    />
-                    {!!subtitle && (
-                      <Text text={subtitle} style={$langItemSubtitle} />
-                    )}
-                  </View>
-                  {isSelected && (
-                    <Text text="✓" style={$langItemCheck} />
-                  )}
+            <ScrollView style={$messageArea} showsVerticalScrollIndicator={false}>
+              {topMessages.map((msg) => (
+                <View key={msg.id} style={$messageRow}>
+                  <Text text={msg.text} style={$messageText} />
+                  <TouchableOpacity style={$speakerBtn}>
+                    <Volume2 size={16} color="#7F848C" strokeWidth={2} />
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </ScrollView>
+
+            <View style={$micArea}>
+              {topMicOn ? (
+                <View style={$micActiveRow}>
+                  <ActivityIndicator size="small" color={colors.blue} />
+                  <Text
+                    text={translate("voiceTranslationScreen:listening")}
+                    style={$listeningText}
+                  />
+                  <TouchableOpacity style={$stopBtn} onPress={() => setTopMicOn(false)}>
+                    <Square size={14} color="#FFFFFF" fill="#FFFFFF" />
+                  </TouchableOpacity>
+                </View>
+              ) : (
+                <TouchableOpacity style={$micBtn} onPress={() => setTopMicOn(true)}>
+                  <Mic size={22} color={colors.blue} strokeWidth={2} />
                 </TouchableOpacity>
-              )
-            }}
-          />
-          </Animated.View>
+              )}
+            </View>
+          </View>
+
+          {/* 하단 박스 (내 언어) */}
+          <View style={$box}>
+            <TouchableOpacity style={$langDropdown} onPress={() => openLangMenu("bottom")}>
+              <Text text={getLabel(bottomLanguage)} style={$langDropdownText} />
+              <ChevronDown size={14} color={colors.blue} strokeWidth={2.5} />
+            </TouchableOpacity>
+
+            <ScrollView style={$messageArea} showsVerticalScrollIndicator={false}>
+              {bottomMessages.map((msg) => (
+                <View key={msg.id} style={$messageRow}>
+                  <Text text={msg.text} style={$messageText} />
+                  <TouchableOpacity style={$speakerBtn}>
+                    <Volume2 size={16} color="#7F848C" strokeWidth={2} />
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </ScrollView>
+
+            <View style={$micArea}>
+              {bottomMicOn ? (
+                <View style={$micActiveRow}>
+                  <ActivityIndicator size="small" color={colors.blue} />
+                  <Text
+                    text={translate("voiceTranslationScreen:listening")}
+                    style={$listeningText}
+                  />
+                  <TouchableOpacity style={$stopBtn} onPress={() => setBottomMicOn(false)}>
+                    <Square size={14} color="#FFFFFF" fill="#FFFFFF" />
+                  </TouchableOpacity>
+                </View>
+              ) : (
+                <TouchableOpacity style={$micBtn} onPress={() => setBottomMicOn(true)}>
+                  <Mic size={22} color={colors.blue} strokeWidth={2} />
+                </TouchableOpacity>
+              )}
+            </View>
+          </View>
         </View>
-      </Modal>
-    </View>
+      </StackScreen>
+
+      <LanguagePickerModal
+        isVisible={langMenuVisible}
+        currentKey={currentLangKey}
+        title={translate("voiceTranslationScreen:languageMenu.title")}
+        getLabel={getLabel}
+        getSubtitle={getSubtitle}
+        onSelect={handleSelectLanguage}
+        onClose={() => setLangMenuVisible(false)}
+      />
+    </>
   )
-}
-
-const NAVY = "#0B3069"
-const BLUE = "#1062D8"
-
-const $root: ViewStyle = {
-  flex: 1,
-  backgroundColor: NAVY,
-}
-
-const $header: ViewStyle = {
-  backgroundColor: NAVY,
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "space-between",
-  paddingHorizontal: 20,
-  paddingVertical: 22,
-}
-
-const $backButton: ViewStyle = {
-  width: 36,
-  height: 36,
-  justifyContent: "center",
-  alignItems: "flex-start",
-}
-
-const $headerTitle: TextStyle = {
-  flex: 1,
-  fontSize: 21,
-  fontFamily: typography.primary.semiBold,
-  color: "#FFFFFF",
-  textAlign: "center",
 }
 
 const $flipButton: ViewStyle = {
@@ -334,10 +192,6 @@ const $content: ViewStyle = {
   flex: 1,
   padding: 16,
   gap: 14,
-  backgroundColor: "#F9FAFE",
-  borderTopLeftRadius: 20,
-  borderTopRightRadius: 20,
-  overflow: "hidden",
 }
 
 const $box: ViewStyle = {
@@ -368,7 +222,7 @@ const $langDropdown: ViewStyle = {
 const $langDropdownText: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.semiBold,
-  color: BLUE,
+  color: colors.blue,
 }
 
 const $messageArea: ViewStyle = {
@@ -408,7 +262,7 @@ const $micBtn: ViewStyle = {
   height: 48,
   borderRadius: 24,
   borderWidth: 2,
-  borderColor: BLUE,
+  borderColor: colors.blue,
   alignItems: "center",
   justifyContent: "center",
   backgroundColor: "#FFFFFF",
@@ -423,110 +277,14 @@ const $micActiveRow: ViewStyle = {
 const $listeningText: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.medium,
-  color: BLUE,
+  color: colors.blue,
 }
 
 const $stopBtn: ViewStyle = {
   width: 28,
   height: 28,
   borderRadius: 14,
-  backgroundColor: BLUE,
+  backgroundColor: colors.blue,
   alignItems: "center",
   justifyContent: "center",
-}
-
-const $modalContainer: ViewStyle = {
-  flex: 1,
-  justifyContent: "flex-end",
-}
-
-const $modalOverlay: ViewStyle = {
-  position: "absolute",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  backgroundColor: "rgba(0,0,0,0.4)",
-}
-
-const $modalOverlayTouch: ViewStyle = {
-  flex: 1,
-}
-
-const $modalSheet: ViewStyle = {
-  backgroundColor: "#FFFFFF",
-  borderTopLeftRadius: 20,
-  borderTopRightRadius: 20,
-  paddingTop: 12,
-  paddingHorizontal: 0,
-}
-
-const $modalHandle: ViewStyle = {
-  width: 36,
-  height: 4,
-  borderRadius: 2,
-  backgroundColor: "#D0D5DD",
-  alignSelf: "center",
-  marginBottom: 16,
-}
-
-const $modalTitle: TextStyle = {
-  fontSize: 15,
-  fontFamily: typography.primary.bold,
-  color: "#1A2236",
-  paddingHorizontal: 20,
-  marginBottom: 8,
-}
-
-const $langSeparator: ViewStyle = {
-  height: 1,
-  backgroundColor: "#F0F0F0",
-  marginHorizontal: 20,
-}
-
-const $langItem: ViewStyle = {
-  flexDirection: "row",
-  alignItems: "center",
-  paddingHorizontal: 20,
-  paddingVertical: 14,
-  gap: 12,
-}
-
-const $langItemContent: ViewStyle = {
-  flex: 1,
-  gap: 2,
-}
-
-const $langItemSelected: ViewStyle = {
-  backgroundColor: "#F0F5FF",
-}
-
-const $langItemFlag: TextStyle = {
-  fontSize: 22,
-}
-
-const $langItemText: TextStyle = {
-  flex: 1,
-  fontSize: 15,
-  fontFamily: typography.primary.normal,
-  color: "#1A2236",
-  textAlign: "left",
-  writingDirection: "ltr",
-}
-
-const $langItemTextSelected: TextStyle = {
-  fontFamily: typography.primary.semiBold,
-  color: BLUE,
-}
-
-const $langItemSubtitle: TextStyle = {
-  fontSize: 12,
-  fontFamily: typography.primary.normal,
-  color: "#9CA3AF",
-}
-
-const $langItemCheck: TextStyle = {
-  fontSize: 16,
-  color: BLUE,
-  fontFamily: typography.primary.bold,
 }
