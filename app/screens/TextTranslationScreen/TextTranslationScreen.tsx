@@ -309,14 +309,17 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
             </View>
           ) : (
             <View style={[$textInputArea, { paddingBottom: insets.bottom + 8 }]}>
+              {/* 상: 최대 글자 안내 + 입력 카운터 */}
+              <View style={$inputTopRow}>
+                <Text
+                  text={translate("textTranslationScreen:inputHint")}
+                  style={$inputHintText}
+                />
+                <Text text={`${inputText.length}/1000`} style={$inputCountText} />
+              </View>
+
+              {/* 중: 텍스트 인풋 + 전송 버튼 */}
               <View style={$textInputRow}>
-                <TouchableOpacity
-                  style={$voiceModeBtn}
-                  onPress={handleExitTextMode}
-                  activeOpacity={0.7}
-                >
-                  <IconMicrophone size={22} color="#9CA3AF" strokeWidth={1.8} />
-                </TouchableOpacity>
                 <TextInput
                   style={[
                     $textInput,
@@ -352,6 +355,8 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
                   />
                 </TouchableOpacity>
               </View>
+
+              {/* 하: 경고문 (항상 공간 차지, opacity로 표시/숨김) */}
               <Text
                 text={translate("textTranslationScreen:validationError")}
                 style={[$validationError, { opacity: showValidationError ? 1 : 0 }]}
@@ -660,8 +665,8 @@ const $textInputArea: ViewStyle = {
   borderTopWidth: 1,
   borderTopColor: "#E8EBF2",
   paddingHorizontal: 12,
-  paddingTop: 12,
-  gap: 6,
+  paddingTop: 8,
+  gap: 4,
 }
 
 const $textInputRow: ViewStyle = {
@@ -671,11 +676,23 @@ const $textInputRow: ViewStyle = {
 }
 
 
-const $voiceModeBtn: ViewStyle = {
-  width: 36,
-  height: 40,
+const $inputTopRow: ViewStyle = {
+  flexDirection: "row",
   alignItems: "center",
-  justifyContent: "center",
+  justifyContent: "space-between",
+  paddingHorizontal: 4,
+}
+
+const $inputHintText: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.normal,
+  color: "#9CA3AF",
+}
+
+const $inputCountText: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.normal,
+  color: "#9CA3AF",
 }
 
 const $textInput: TextStyle = {
@@ -684,6 +701,7 @@ const $textInput: TextStyle = {
   borderWidth: 1,
   borderColor: "#E0E5F0",
   paddingHorizontal: 14,
+  paddingVertical: 10,
   fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#1A2236",
