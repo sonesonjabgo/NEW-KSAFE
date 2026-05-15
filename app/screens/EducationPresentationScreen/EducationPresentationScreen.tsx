@@ -94,9 +94,11 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
   }
 
   const renderMessage = ({ item }: ListRenderItemInfo<MessageItem>) => (
-    <View style={$messageBubble}>
+    <View style={$msgWrapper}>
       <Text text={`[${item.sender}]`} style={$messageSender} />
-      <Text text={item.text} style={$messageText} />
+      <View style={$messageBubble}>
+        <Text text={item.text} style={$messageText} />
+      </View>
     </View>
   )
 
@@ -150,31 +152,33 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
             showsVerticalScrollIndicator={false}
           />
 
-          {/* 음성 인식 중 표시 */}
-          {micActive && (
-            <View style={$recognizingRow}>
-              <ActivityIndicator size="small" color={colors.blue} />
-              <Text
-                text={translate("educationPresentationScreen:recognizing")}
-                style={$recognizingText}
-              />
-            </View>
-          )}
+          {/* 음성 인식 중 표시 — 항상 고정 높이 확보, 비활성 시 빈 공간 유지 */}
+          <View style={$recognizingRow}>
+            {micActive && (
+              <>
+                <ActivityIndicator size="small" color={colors.blue} />
+                <Text
+                  text={translate("educationPresentationScreen:recognizing")}
+                  style={$recognizingText}
+                />
+              </>
+            )}
+          </View>
 
           {inputMode === "default" ? (
             <>
               {/* 상태 안내 문구 */}
               <View style={$statusBar}>
-                {!micActive && (
-                  <IconInfoCircle size={14} color="#6B7280" strokeWidth={2} />
-                )}
+                <View style={$statusIconCircle}>
+                  <IconInfoCircle size={13} color="#FFFFFF" strokeWidth={2} />
+                </View>
                 <Text
                   text={translate(
                     micActive
                       ? "educationPresentationScreen:statusMicOn"
                       : "educationPresentationScreen:statusMicOff",
                   )}
-                  style={[$statusText, micActive && $statusTextActive]}
+                  style={$statusText}
                 />
               </View>
 
@@ -297,8 +301,6 @@ const $langSelectorBar: ViewStyle = {
   paddingHorizontal: 20,
   paddingTop: 14,
   paddingBottom: 12,
-  borderBottomWidth: 1,
-  borderBottomColor: "#E8EBF2",
   gap: 8,
 }
 
@@ -313,12 +315,7 @@ const $langBtn: ViewStyle = {
   alignItems: "center",
   alignSelf: "flex-start",
   gap: 6,
-  paddingVertical: 6,
-  paddingHorizontal: 10,
-  borderWidth: 1,
-  borderColor: "#C8D8F5",
-  borderRadius: 8,
-  backgroundColor: "#F0F5FF",
+  paddingVertical: 4,
 }
 
 const $langFlag: TextStyle = {
@@ -338,23 +335,29 @@ const $chatContent: { padding: number; paddingBottom: number; flexGrow: number }
   flexGrow: 1,
 }
 
+const $msgWrapper: ViewStyle = {
+  marginBottom: 16,
+  gap: 4,
+}
+
 const $messageBubble: ViewStyle = {
   backgroundColor: "#FFFFFF",
-  borderRadius: 12,
-  padding: 12,
-  marginBottom: 10,
+  borderRadius: 16,
+  borderTopLeftRadius: 4,
+  paddingHorizontal: 14,
+  paddingVertical: 10,
+  alignSelf: "flex-start",
   shadowColor: "#000",
   shadowOffset: { width: 0, height: 1 },
   shadowOpacity: 0.06,
   shadowRadius: 4,
-  elevation: 1,
+  elevation: 2,
 }
 
 const $messageSender: TextStyle = {
   fontSize: 11,
   fontFamily: typography.primary.semiBold,
   color: colors.blue,
-  marginBottom: 4,
 }
 
 const $messageText: TextStyle = {
@@ -364,13 +367,13 @@ const $messageText: TextStyle = {
   lineHeight: 20,
 }
 
-// 음성 인식 중
+// 음성 인식 중 — 고정 높이로 레이아웃 시프트 방지
 const $recognizingRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
   gap: 8,
   paddingHorizontal: 16,
-  paddingVertical: 10,
+  height: 44,
   backgroundColor: "#EEF4FF",
 }
 
@@ -380,16 +383,26 @@ const $recognizingText: TextStyle = {
   color: colors.blue,
 }
 
-// 상태 안내 바
+// 상태 안내 박스
 const $statusBar: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-  gap: 6,
-  paddingHorizontal: 16,
+  gap: 10,
+  marginHorizontal: 16,
+  marginBottom: 8,
+  paddingHorizontal: 12,
   paddingVertical: 10,
-  backgroundColor: "#F9FAFE",
-  borderTopWidth: 1,
-  borderTopColor: "#E8EBF2",
+  backgroundColor: "#F2F5F6",
+  borderRadius: 10,
+}
+
+const $statusIconCircle: ViewStyle = {
+  width: 22,
+  height: 22,
+  borderRadius: 11,
+  backgroundColor: "#1062D8",
+  alignItems: "center",
+  justifyContent: "center",
 }
 
 const $statusText: TextStyle = {
@@ -400,11 +413,6 @@ const $statusText: TextStyle = {
   lineHeight: 16,
 }
 
-const $statusTextActive: TextStyle = {
-  color: colors.blue,
-  fontFamily: typography.primary.medium,
-}
-
 // 컨트롤 바
 const $controlBar: ViewStyle = {
   flexDirection: "row",
@@ -413,8 +421,6 @@ const $controlBar: ViewStyle = {
   paddingHorizontal: 20,
   paddingTop: 14,
   backgroundColor: "#FFFFFF",
-  borderTopWidth: 1,
-  borderTopColor: "#E8EBF2",
 }
 
 const $iconBtn: ViewStyle = {
