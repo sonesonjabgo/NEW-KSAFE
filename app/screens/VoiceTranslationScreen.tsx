@@ -291,12 +291,12 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
   )
 }
 
-const NAVY = "#1B2A4A"
+const NAVY = "#0B3069"
 const BLUE = "#1062D8"
 
 const $root: ViewStyle = {
   flex: 1,
-  backgroundColor: "#F9FAFE",
+  backgroundColor: NAVY,
 }
 
 const $header: ViewStyle = {
@@ -335,6 +335,9 @@ const $content: ViewStyle = {
   padding: 16,
   gap: 14,
   backgroundColor: "#F9FAFE",
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+  overflow: "hidden",
 }
 
 const $box: ViewStyle = {
