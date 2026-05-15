@@ -9,6 +9,7 @@ import {
 } from "react-native"
 
 import { Text } from "@/components/Text"
+import { translate } from "@/i18n/translate"
 
 import { styles } from "../styles"
 
@@ -81,14 +82,14 @@ export const QrCodeBottomSheet: FC<Props> = ({ isVisible, onClose }) => {
 
           {/* 안내 문구 */}
           <Text style={styles.sheetDesc}>
-            카메라 사용이 어려우신가요? 교육/발표 코드를 직접 입력할 수 있어요.
+            {translate("qrScanner:enterCode")}
             <Text style={styles.required}> *</Text>
           </Text>
 
           {/* 코드 입력 */}
           <TextInput
             style={styles.codeInput}
-            placeholder="코드를 입력하세요"
+            placeholder={translate("qrScanner:codePlaceholder")}
             placeholderTextColor="#9CA3AF"
             value={accessCode}
             onChangeText={(text) => setAccessCode(text.replace(/[^0-9]/g, "").slice(0, 8))}
@@ -97,7 +98,7 @@ export const QrCodeBottomSheet: FC<Props> = ({ isVisible, onClose }) => {
           />
 
           {/* 설명 문구 */}
-          <Text style={styles.helperText}>발표자가 공유한 8자리 숫자 코드를 입력하세요.</Text>
+          <Text style={styles.helperText}>{translate("qrScanner:enterCodeDescription")}</Text>
 
           {/* 회의 참여하기 버튼 */}
           <TouchableOpacity
@@ -112,7 +113,7 @@ export const QrCodeBottomSheet: FC<Props> = ({ isVisible, onClose }) => {
                 isReady ? styles.joinBtnTextActive : styles.joinBtnTextInactive,
               ]}
             >
-              회의 참여하기
+              {translate("qrScanner:joinMeeting")}
             </Text>
           </TouchableOpacity>
         </Animated.View>

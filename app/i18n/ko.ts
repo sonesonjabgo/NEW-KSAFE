@@ -335,6 +335,19 @@ const ko: Translations = {
     emptyDescription: "현재 받은 알림이 없습니다.\n새로운 알림이 도착하면 알려드리겠습니다.",
   },
 
+  qrScanner: {
+    title: "교육/발표 참여",
+    description: "QR 코드를 스캔하거나 발표자가 공유한\n코드를 입력해 회의에 참여하세요.",
+    permissionRequired: "QR을 스캔하려면 카메라 권한이 필요합니다.",
+    retry: "다시 시도",
+    languageLabel: "사용할 언어",
+    currentLanguage: "한국어",
+    enterCode: "카메라 사용이 어려우신가요? 교육/발표 코드를 직접 입력할 수 있어요.",
+    enterCodeDescription: "발표자가 공유한 8자리 숫자 코드를 입력하세요.",
+    joinMeeting: "회의 참여하기",
+    codePlaceholder: "코드를 입력하세요",
+  },
+
   ...demoKo,
 }
 

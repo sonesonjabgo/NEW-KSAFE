@@ -296,7 +296,7 @@ const fr: Translations = {
       th: "Thaï (ไทย)",
       ur: "Ourdou (اردو)",
       ne: "Népalais (नेपाली)",
-      lo: "Laotien (ພາສາລາວ)",
+      lo: "Laotien (ພາສາLaos)",
     },
   },
 
@@ -305,6 +305,21 @@ const fr: Translations = {
     emptyTitle: "Aucune notification",
     emptyDescription:
       "Vous n'avez aucune notification pour l'instant.\nNous vous informerons lorsque de nouvelles notifications arriveront.",
+  },
+
+  qrScanner: {
+    title: "Rejoindre Éducation/Présentation",
+    description:
+      "Scannez le code QR ou entrez le code partagé par le présentateur pour rejoindre la réunion.",
+    permissionRequired: "L'autorisation de la caméra est requise pour scanner le code QR.",
+    retry: "Réessayer",
+    languageLabel: "Langue",
+    currentLanguage: "Coréen",
+    enterCode:
+      "Problème avec la caméra ? Vous pouvez entrer le code d'éducation/présentation directement.",
+    enterCodeDescription: "Entrez le code numérique à 8 chiffres partagé par le présentateur.",
+    joinMeeting: "Rejoindre la Réunion",
+    codePlaceholder: "Entrer le code",
   },
 
   ...demoFr,

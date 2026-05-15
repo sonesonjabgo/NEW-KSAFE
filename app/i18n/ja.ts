@@ -304,6 +304,20 @@ const ja: Translations = {
     emptyDescription: "現在、受け取った通知はありません。\n新しい通知が届いたらお知らせします。",
   },
 
+  qrScanner: {
+    title: "教育/発表に参加",
+    description:
+      "QRコードをスキャンするか、発表者が共有したコードを入力して会議に参加してください。",
+    permissionRequired: "QRコードをスキャンするにはカメラの許可が必要です。",
+    retry: "再試行",
+    languageLabel: "使用言語",
+    currentLanguage: "韓国語",
+    enterCode: "カメラの使用が難しいですか？教育/発表コードを直接入力できます。",
+    enterCodeDescription: "発表者が共有した8桁の数字コードを入力してください。",
+    joinMeeting: "会議に参加",
+    codePlaceholder: "コードを入力",
+  },
+
   ...demoJa,
 }
 
