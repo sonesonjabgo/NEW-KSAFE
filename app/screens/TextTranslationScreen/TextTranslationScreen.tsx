@@ -94,7 +94,6 @@ type InputMode = "voice" | "text"
 
 const NAVY = "#0B3069"
 const BLUE = "#1062D8"
-const BG = "#F9FAFE"
 
 export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
@@ -109,6 +108,7 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
   const [inputText, setInputText] = useState("")
   const [inputFocused, setInputFocused] = useState(false)
   const [showValidationError, setShowValidationError] = useState(false)
+  const [inputHeight, setInputHeight] = useState(40)
 
   const [langMenuVisible, setLangMenuVisible] = useState(false)
   const [langMenuTarget, setLangMenuTarget] = useState<"source" | "target">("source")
@@ -170,6 +170,7 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
     setTranslations((prev) => [...prev, newItem])
     setInputText("")
     setShowValidationError(false)
+    setInputHeight(40)
     setInputMode("voice")
     setTimeout(() => {
       flatListRef.current?.scrollToEnd({ animated: true })
@@ -180,19 +181,16 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
     setInputMode("voice")
     setInputText("")
     setShowValidationError(false)
+    setInputHeight(40)
   }
 
   const renderTranslationItem = ({ item }: ListRenderItemInfo<TranslationItem>) => (
     <View style={$translationCard}>
       <View style={$cardRow}>
-        <Text text={item.sourceText} style={$sourceText} />
-        <TouchableOpacity style={$speakerBtn} activeOpacity={0.7}>
-          <IconVolume size={18} color="#7F848C" />
-        </TouchableOpacity>
-      </View>
-      <View style={$cardDivider} />
-      <View style={$cardRow}>
-        <Text text={item.translatedText} style={$translatedText} />
+        <View style={$cardTexts}>
+          <Text text={item.sourceText} style={$sourceText} />
+          <Text text={item.translatedText} style={$translatedText} />
+        </View>
         <TouchableOpacity style={$speakerBtn} activeOpacity={0.7}>
           <IconVolume size={18} color={BLUE} />
         </TouchableOpacity>
@@ -248,37 +246,38 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           keyboardVerticalOffset={insets.top}
         >
-          {/* ── Chat wrapper box — border changes color on listening ── */}
-          <View style={[$chatWrapBox, isListening && $chatWrapBoxListening]}>
-            {/* Fixed-height top space — always rendered; opacity controls visibility */}
-            <View style={$chatTopBanner}>
-              <Text
-                text={translate("textTranslationScreen:listening")}
-                style={[$listeningText, { opacity: isListening ? 1 : 0 }]}
+          {/* ── Chat outer wrapper (layout only) ── */}
+          <View style={$chatWrapBox}>
+            {/* Inner box — border appears when listening */}
+            <View style={[$chatInnerBox, isListening && $chatInnerBoxListening]}>
+              {/* Fixed-height top space — always rendered; opacity controls visibility */}
+              <View style={$chatTopBanner}>
+                <Text
+                  text={translate("textTranslationScreen:listening")}
+                  style={[$listeningText, { opacity: isListening ? 1 : 0 }]}
+                />
+              </View>
+
+              {/* Translation list */}
+              <FlatList
+                ref={flatListRef}
+                style={$chatFlatList}
+                data={translations}
+                keyExtractor={(item) => item.id}
+                renderItem={renderTranslationItem}
+                contentContainerStyle={$chatList}
+                showsVerticalScrollIndicator={false}
               />
-            </View>
 
-            {/* Translation list */}
-            <FlatList
-              ref={flatListRef}
-              style={$chatFlatList}
-              data={translations}
-              keyExtractor={(item) => item.id}
-              renderItem={renderTranslationItem}
-              contentContainerStyle={$chatList}
-              showsVerticalScrollIndicator={false}
-            />
-
-            {/* X close button at bottom of chat box — visible only when listening */}
-            {inputMode === "voice" && isListening && (
+              {/* X button — always visible, bottom-right of inner box, clears all translations */}
               <TouchableOpacity
                 style={$listeningCloseBtn}
-                onPress={() => setIsListening(false)}
+                onPress={() => setTranslations([])}
                 activeOpacity={0.7}
               >
                 <IconX size={17} color="#D3D3D3" />
               </TouchableOpacity>
-            )}
+            </View>
           </View>
 
           {/* ── Bottom Input Area ── */}
@@ -319,7 +318,12 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
                   <IconMicrophone size={22} color="#9CA3AF" strokeWidth={1.8} />
                 </TouchableOpacity>
                 <TextInput
-                  style={[$textInput, inputFocused && $textInputFocused]}
+                  style={[
+                    $textInput,
+                    { height: Math.max(40, inputHeight) },
+                    inputFocused && !showValidationError && $textInputFocused,
+                    showValidationError && $textInputError,
+                  ]}
                   placeholder={translate("textTranslationScreen:inputPlaceholder")}
                   placeholderTextColor="#ABABAB"
                   value={inputText}
@@ -327,9 +331,13 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
                     setInputText(t.slice(0, 1000))
                     if (showValidationError) setShowValidationError(false)
                   }}
+                  onContentSizeChange={(e) =>
+                    setInputHeight(e.nativeEvent.contentSize.height)
+                  }
                   onFocus={() => setInputFocused(true)}
                   onBlur={() => setInputFocused(false)}
                   maxLength={1000}
+                  multiline
                   autoFocus
                 />
                 <TouchableOpacity
@@ -344,12 +352,10 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
                   />
                 </TouchableOpacity>
               </View>
-              {showValidationError && (
-                <Text
-                  text={translate("textTranslationScreen:validationError")}
-                  style={$validationError}
-                />
-              )}
+              <Text
+                text={translate("textTranslationScreen:validationError")}
+                style={[$validationError, { opacity: showValidationError ? 1 : 0 }]}
+              />
             </View>
           )}
         </KeyboardAvoidingView>
@@ -475,8 +481,6 @@ const $langBar: ViewStyle = {
   justifyContent: "space-between",
   paddingHorizontal: 16,
   paddingVertical: 10,
-  borderBottomWidth: 1,
-  borderBottomColor: "#E8EBF2",
 }
 
 const $langBtn: ViewStyle = {
@@ -511,22 +515,27 @@ const $swapBtn: ViewStyle = {
 
 const $keyboardView: ViewStyle = {
   flex: 1,
-  backgroundColor: BG,
+  backgroundColor: "#FFFFFF",
 }
 
-// Chat inner wrapper — border color changes when listening
+// Outer layout container — no border, just spacing
 const $chatWrapBox: ViewStyle = {
   flex: 1,
   marginHorizontal: 12,
   marginTop: 8,
+}
+
+// Inner box — border toggles on listening
+const $chatInnerBox: ViewStyle = {
+  flex: 1,
   borderRadius: 12,
-  borderWidth: 1,
-  borderColor: "#E0E5F0",
+  borderWidth: 1.5,
+  borderColor: "transparent",
   backgroundColor: "#FFFFFF",
   overflow: "hidden",
 }
 
-const $chatWrapBoxListening: ViewStyle = {
+const $chatInnerBoxListening: ViewStyle = {
   borderColor: BLUE,
 }
 
@@ -558,9 +567,10 @@ const $chatList: {
 }
 
 const $listeningCloseBtn: ViewStyle = {
-  alignSelf: "center",
-  paddingVertical: 6,
-  paddingHorizontal: 12,
+  position: "absolute",
+  bottom: 8,
+  right: 8,
+  padding: 6,
 }
 
 const $translationCard: ViewStyle = {
@@ -569,15 +579,13 @@ const $translationCard: ViewStyle = {
 
 const $cardRow: ViewStyle = {
   flexDirection: "row",
-  alignItems: "flex-start",
-  justifyContent: "space-between",
-  paddingVertical: 6,
+  alignItems: "center",
   gap: 8,
 }
 
-const $cardDivider: ViewStyle = {
-  height: 1,
-  backgroundColor: "#E8EBF2",
+const $cardTexts: ViewStyle = {
+  flex: 1,
+  gap: 4,
 }
 
 const $sourceText: TextStyle = {
@@ -636,7 +644,7 @@ const $micBtnInactive: ViewStyle = {
 const $micBtnActive: ViewStyle = {
   width: 64,
   height: 64,
-  borderRadius: 16,
+  borderRadius: 32,
   backgroundColor: BLUE,
   alignItems: "center",
   justifyContent: "center",
@@ -662,6 +670,7 @@ const $textInputRow: ViewStyle = {
   gap: 8,
 }
 
+
 const $voiceModeBtn: ViewStyle = {
   width: 36,
   height: 40,
@@ -671,7 +680,6 @@ const $voiceModeBtn: ViewStyle = {
 
 const $textInput: TextStyle = {
   flex: 1,
-  height: 40,
   borderRadius: 20,
   borderWidth: 1,
   borderColor: "#E0E5F0",
@@ -680,10 +688,15 @@ const $textInput: TextStyle = {
   fontFamily: typography.primary.normal,
   color: "#1A2236",
   backgroundColor: "#FFFFFF",
+  textAlignVertical: "center",
 }
 
 const $textInputFocused: TextStyle = {
   borderColor: BLUE,
+}
+
+const $textInputError: TextStyle = {
+  borderColor: "#EF4444",
 }
 
 // Circular send button
