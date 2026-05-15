@@ -300,6 +300,13 @@ const fr: Translations = {
     },
   },
 
+  notify: {
+    title: "Notifications",
+    emptyTitle: "Aucune notification",
+    emptyDescription:
+      "Vous n'avez aucune notification pour l'instant.\nNous vous informerons lorsque de nouvelles notifications arriveront.",
+  },
+
   ...demoFr,
 }
 

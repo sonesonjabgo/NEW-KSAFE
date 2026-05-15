@@ -329,6 +329,12 @@ const ko: Translations = {
     },
   },
 
+  notify: {
+    title: "알림",
+    emptyTitle: "알림이 없습니다",
+    emptyDescription: "현재 받은 알림이 없습니다.\n새로운 알림이 도착하면 알려드리겠습니다.",
+  },
+
   ...demoKo,
 }
 

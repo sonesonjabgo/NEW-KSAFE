@@ -300,6 +300,13 @@ const es: Translations = {
     },
   },
 
+  notify: {
+    title: "Notificaciones",
+    emptyTitle: "Sin notificaciones",
+    emptyDescription:
+      "No tienes notificaciones en este momento.\nTe avisaremos cuando lleguen nuevas notificaciones.",
+  },
+
   ...demoEs,
 }
 

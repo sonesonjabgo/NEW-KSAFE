@@ -298,6 +298,12 @@ const hi: Translations = {
     },
   },
 
+  notify: {
+    title: "सूचनाएं",
+    emptyTitle: "कोई सूचना नहीं",
+    emptyDescription: "अभी कोई सूचना नहीं है।\nजब नई सूचनाएं आएंगी तो हम आपको बताएंगे।",
+  },
+
   ...demoHi,
 }
 

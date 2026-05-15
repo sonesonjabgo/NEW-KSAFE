@@ -14,6 +14,7 @@ import { AISafetyChatScreen } from "@/screens/AISafetyChatScreen/AISafetyChatScr
 import { LanguageSettingsScreen } from "@/screens/LanguageSettingsScreen"
 import { LoginScreen } from "@/screens/LoginScreen"
 import { MyPageScreen } from "@/screens/MyPageScreen"
+import { NotifyScreen } from "@/screens/NotifyScreen"
 import { QrScannerScreen } from "@/screens/QrScannerScreen"
 import { VoiceTranslationScreen } from "@/screens/VoiceTranslationScreen"
 import { useAppTheme } from "@/theme/context"
@@ -52,6 +53,7 @@ const AppStack = () => {
       <Stack.Screen name="Main" component={MainNavigator} />
       <Stack.Screen name="LanguageSettings" component={LanguageSettingsScreen} />
       <Stack.Screen name="MyPage" component={MyPageScreen} />
+      <Stack.Screen name="Notify" component={NotifyScreen} />
       <Stack.Screen name="VoiceTranslation" component={VoiceTranslationScreen} />
       <Stack.Screen name="QrScanner" component={QrScannerScreen} />
       <Stack.Screen name="AISafetyChat" component={AISafetyChatScreen} />
