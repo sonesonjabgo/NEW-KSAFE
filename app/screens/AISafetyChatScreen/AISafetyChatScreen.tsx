@@ -30,7 +30,7 @@ interface Message {
   text: string
 }
 
-const NAVY = "#1B2A4A"
+const NAVY = "#0B3069"
 const BLUE = "#1062D8"
 const BG = "#F9FAFE"
 
