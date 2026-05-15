@@ -297,7 +297,6 @@ const $inviteText: TextStyle = {
 
 // 언어 선택 영역
 const $langSelectorBar: ViewStyle = {
-  backgroundColor: "#FFFFFF",
   paddingHorizontal: 20,
   paddingTop: 14,
   paddingBottom: 12,
@@ -341,29 +340,29 @@ const $msgWrapper: ViewStyle = {
 }
 
 const $messageBubble: ViewStyle = {
-  backgroundColor: "#FFFFFF",
+  backgroundColor: "#1062D8",
   borderRadius: 16,
   borderTopLeftRadius: 4,
   paddingHorizontal: 14,
   paddingVertical: 10,
   alignSelf: "flex-start",
-  shadowColor: "#000",
-  shadowOffset: { width: 0, height: 1 },
-  shadowOpacity: 0.06,
-  shadowRadius: 4,
+  shadowColor: "#1062D8",
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.2,
+  shadowRadius: 6,
   elevation: 2,
 }
 
 const $messageSender: TextStyle = {
   fontSize: 11,
   fontFamily: typography.primary.semiBold,
-  color: colors.blue,
+  color: "#6B7280",
 }
 
 const $messageText: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#1A2236",
+  color: "#FFFFFF",
   lineHeight: 20,
 }
 
@@ -374,7 +373,6 @@ const $recognizingRow: ViewStyle = {
   gap: 8,
   paddingHorizontal: 16,
   height: 44,
-  backgroundColor: "#EEF4FF",
 }
 
 const $recognizingText: TextStyle = {
@@ -392,7 +390,6 @@ const $statusBar: ViewStyle = {
   marginBottom: 8,
   paddingHorizontal: 12,
   paddingVertical: 10,
-  backgroundColor: "#F2F5F6",
   borderRadius: 10,
 }
 
@@ -420,7 +417,6 @@ const $controlBar: ViewStyle = {
   justifyContent: "space-between",
   paddingHorizontal: 20,
   paddingTop: 14,
-  backgroundColor: "#FFFFFF",
 }
 
 const $iconBtn: ViewStyle = {
@@ -472,7 +468,6 @@ const $micBtnActive: ViewStyle = {
 
 // 텍스트 입력 영역 (TextTranslationScreen과 동일한 구조)
 const $textInputArea: ViewStyle = {
-  backgroundColor: "#FFFFFF",
   borderTopWidth: 1,
   borderTopColor: "#E8EBF2",
   paddingHorizontal: 12,
