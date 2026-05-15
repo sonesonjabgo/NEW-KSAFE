@@ -242,33 +242,33 @@ const ar: Translations = {
   },
 
   myPageScreen: {
-    title: "My Page",
+    title: "صفحتي",
     workplace: {
-      label: "Gwangyo Tower Crane Workplace",
+      label: "موقع عمل برج كرين Gwanggyo",
     },
     permissions: {
-      sectionTitle: "App Permission Settings",
+      sectionTitle: "أذونات التطبيق",
       camera: {
-        title: "Camera",
-        description: "QR scan, AI translation photography, emergency hazard recording",
-        button: "Allow",
+        title: "الكاميرا",
+        description: "مسح QR، صور ترجمة AI، تسجيل الطوارئ الخطرة",
+        button: "السماح",
       },
       microphone: {
-        title: "Microphone",
-        description: "Voice translation, Hoi calls, voice real-name verification",
-        button: "Allow",
+        title: "الميكروفون",
+        description: "ترجمة صوتية، مكالمات لاسلكية، تحديد الصوت",
+        button: "السماح",
       },
       photo: {
-        title: "Photos/Library",
-        description: "AI risk assessment, image translation, TBM education materials",
-        button: "Allow",
+        title: "الصور/المكتبة",
+        description: "تقييم المخاطر بالذكاء الاصطناعي، ترجمة الصور، مواد تدريب TBM/التقارير",
+        button: "السماح",
       },
       notification: {
-        title: "Push Notifications",
-        description: "TBM notifications, hazard alerts, workplace announcements",
+        title: "إشعارات الدفع",
+        description: "تنبيهات TBM، تحذيرات الخطر، إشعارات مكان العمل",
       },
     },
-    logout: "Logout",
+    logout: "تسجيل خروج",
   },
 
   languageSettings: {

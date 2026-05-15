@@ -248,33 +248,33 @@ const es: Translations = {
   },
 
   myPageScreen: {
-    title: "My Page",
+    title: "Mi Página",
     workplace: {
-      label: "Gwangyo Tower Crane Workplace",
+      label: "Lugar de Trabajo de la Grúa de Torre",
     },
     permissions: {
-      sectionTitle: "App Permission Settings",
+      sectionTitle: "Permisos de la Aplicación",
       camera: {
-        title: "Camera",
-        description: "QR scan, AI translation photography, emergency hazard recording",
-        button: "Allow",
+        title: "Cámara",
+        description: "Escaneo de código QR, fotos de traducción por IA, grabación de emergencia de peligro",
+        button: "Permitir",
       },
       microphone: {
-        title: "Microphone",
-        description: "Voice translation, Hoi calls, voice real-name verification",
-        button: "Allow",
+        title: "Micrófono",
+        description: "Traducción de voz, llamada de radio, función de identificación de voz",
+        button: "Permitir",
       },
       photo: {
-        title: "Photos/Library",
-        description: "AI risk assessment, image translation, TBM education materials",
-        button: "Allow",
+        title: "Fotos/Biblioteca",
+        description: "Evaluación de riesgos de IA, traducción de imágenes, materiales de capacitación TBM/informes",
+        button: "Permitir",
       },
       notification: {
-        title: "Push Notifications",
-        description: "TBM notifications, hazard alerts, workplace announcements",
+        title: "Notificaciones Push",
+        description: "Alertas TBM, advertencias de peligro, avisos del lugar de trabajo",
       },
     },
-    logout: "Logout",
+    logout: "Cerrar Sesión",
   },
 
   languageSettings: {

@@ -246,33 +246,33 @@ const hi: Translations = {
   },
 
   myPageScreen: {
-    title: "My Page",
+    title: "मेरा पृष्ठ",
     workplace: {
-      label: "Gwangyo Tower Crane Workplace",
+      label: "ग्वांগগियो टावर क्रेन वर्कप्लेस",
     },
     permissions: {
-      sectionTitle: "App Permission Settings",
+      sectionTitle: "ऐप अनुमति",
       camera: {
-        title: "Camera",
-        description: "QR scan, AI translation photography, emergency hazard recording",
-        button: "Allow",
+        title: "कैमरा",
+        description: "QR स्कैन, AI अनुवाद फोटो, जोखिम आपातकाल रिकॉर्डिंग",
+        button: "अनुमति दें",
       },
       microphone: {
-        title: "Microphone",
-        description: "Voice translation, Hoi calls, voice real-name verification",
-        button: "Allow",
+        title: "माइक्रोफ़ोन",
+        description: "वॉयस अनुवाद, रेडियो कॉल, वॉयस पहचान",
+        button: "अनुमति दें",
       },
       photo: {
-        title: "Photos/Library",
-        description: "AI risk assessment, image translation, TBM education materials",
-        button: "Allow",
+        title: "फोटो/लाइब्रेरी",
+        description: "AI जोखिम मूल्यांकन, छवि अनुवाद, TBM प्रशिक्षण सामग्री/रिपोर्ट",
+        button: "अनुमति दें",
       },
       notification: {
-        title: "Push Notifications",
-        description: "TBM notifications, hazard alerts, workplace announcements",
+        title: "पुश नोटिफिकेशन",
+        description: "TBM अलर्ट, जोखिम चेतावनी, कार्यस्थल नोटिस",
       },
     },
-    logout: "Logout",
+    logout: "लॉग आउट",
   },
 
   languageSettings: {

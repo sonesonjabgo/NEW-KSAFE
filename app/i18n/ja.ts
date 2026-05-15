@@ -246,33 +246,33 @@ const ja: Translations = {
   },
 
   myPageScreen: {
-    title: "My Page",
+    title: "マイページ",
     workplace: {
-      label: "Gwangyo Tower Crane Workplace",
+      label: "広教タワークレーン作業場",
     },
     permissions: {
-      sectionTitle: "App Permission Settings",
+      sectionTitle: "アプリ権限設定",
       camera: {
-        title: "Camera",
-        description: "QR scan, AI translation photography, emergency hazard recording",
-        button: "Allow",
+        title: "カメラ",
+        description: "QRコードスキャン、AI翻訳撮影、危険緊急記録",
+        button: "許可",
       },
       microphone: {
-        title: "Microphone",
-        description: "Voice translation, Hoi calls, voice real-name verification",
-        button: "Allow",
+        title: "マイク",
+        description: "音声翻訳、無線通話、音声識別機能",
+        button: "許可",
       },
       photo: {
-        title: "Photos/Library",
-        description: "AI risk assessment, image translation, TBM education materials",
-        button: "Allow",
+        title: "写真/ライブラリ",
+        description: "AI危険性評価、画像翻訳、TBM教育資料/レポート作成など",
+        button: "許可",
       },
       notification: {
-        title: "Push Notifications",
-        description: "TBM notifications, hazard alerts, workplace announcements",
+        title: "プッシュ通知",
+        description: "TBM通知、危険警報、作業場公開情報",
       },
     },
-    logout: "Logout",
+    logout: "ログアウト",
   },
 
   languageSettings: {

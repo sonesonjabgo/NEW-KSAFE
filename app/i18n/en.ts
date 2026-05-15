@@ -309,7 +309,7 @@ const en = {
         description: "TBM notifications, hazard alerts, workplace announcements",
       },
     },
-    logout: "Logout",
+    logout: "Log Out",
   },
 
   languageSettings: {
