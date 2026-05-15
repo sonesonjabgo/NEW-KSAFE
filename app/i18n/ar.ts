@@ -358,6 +358,11 @@ const ar: Translations = {
     },
   },
 
+  educationPresentationScreen: {
+    title: "교육/발표",
+    inviteButton: "초대",
+  },
+
   textTranslationScreen: {
     title: "ترجمة النص",
     fontSizeButton: "AA",

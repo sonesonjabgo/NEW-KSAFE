@@ -363,6 +363,11 @@ const ja: Translations = {
     },
   },
 
+  educationPresentationScreen: {
+    title: "교육/발표",
+    inviteButton: "초대",
+  },
+
   textTranslationScreen: {
     title: "テキスト翻訳",
     fontSizeButton: "AA",

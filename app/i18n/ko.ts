@@ -393,6 +393,11 @@ const ko: Translations = {
     },
   },
 
+  educationPresentationScreen: {
+    title: "교육/발표",
+    inviteButton: "초대",
+  },
+
   textTranslationScreen: {
     title: "텍스트 번역",
     fontSizeButton: "AA",

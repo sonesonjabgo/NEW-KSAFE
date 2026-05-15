@@ -401,6 +401,11 @@ const en = {
     },
   },
 
+  educationPresentationScreen: {
+    title: "Education/Presentation",
+    inviteButton: "Invite",
+  },
+
   textTranslationScreen: {
     title: "Text Translation",
     fontSizeButton: "AA",

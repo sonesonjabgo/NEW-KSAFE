@@ -367,6 +367,11 @@ const fr: Translations = {
     },
   },
 
+  educationPresentationScreen: {
+    title: "교육/발표",
+    inviteButton: "초대",
+  },
+
   textTranslationScreen: {
     title: "Traduction de Texte",
     fontSizeButton: "AA",

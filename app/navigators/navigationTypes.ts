@@ -27,6 +27,7 @@ export type AppStackParamList = {
   AISafetyChat: undefined
   TextTranslation: undefined
   ImageTranslation: undefined
+  EducationPresentation: undefined
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<
