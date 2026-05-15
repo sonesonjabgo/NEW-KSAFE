@@ -122,33 +122,36 @@ export const ImageTranslationScreen: FC<ImageTranslationScreenProps> = ({ naviga
         <View style={$headerRight} />
       </View>
 
-      {/* Navy main area with centered white card */}
-      <View style={$mainContent}>
-        <TouchableOpacity style={$imageCard} activeOpacity={0.7}>
-          <IconPhoto size={48} color="#9CA3AF" strokeWidth={1.5} />
+      {/* White rounded-top container */}
+      <View style={$whiteContainer}>
+        {/* Main content: image input box + texts, vertically centered */}
+        <View style={$innerContent}>
+          <TouchableOpacity style={$imageInputBox} activeOpacity={0.7}>
+            <IconPhoto size={48} color="#9CA3AF" strokeWidth={1.5} />
+          </TouchableOpacity>
           <Text text={translate("imageTranslationScreen:selectImage")} style={$selectImageTitle} />
           <Text
             text={translate("imageTranslationScreen:selectImageDesc")}
             style={$selectImageDesc}
           />
-        </TouchableOpacity>
-      </View>
-
-      {/* Bottom white area: language selector + camera button */}
-      <View style={[$bottomArea, { paddingBottom: insets.bottom + 16 }]}>
-        <View style={$langRow}>
-          <Text text={translate("imageTranslationScreen:languageLabel")} style={$langLabel} />
-          <TouchableOpacity style={$langBtn} onPress={openLangMenu} activeOpacity={0.7}>
-            <Text text={getLangFlag(targetLanguage)} style={$langFlag} />
-            <Text text={getLangLabel(targetLanguage)} style={$langBtnText} numberOfLines={1} />
-            <IconChevronDown size={14} color={BLUE} strokeWidth={2.5} />
-          </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={$cameraBtn} activeOpacity={0.8}>
-          <IconCamera size={22} color="#FFFFFF" strokeWidth={1.8} />
-          <Text text={translate("imageTranslationScreen:cameraButton")} style={$cameraBtnText} />
-        </TouchableOpacity>
+        {/* Bottom: language selector + camera button */}
+        <View style={[$bottomArea, { paddingBottom: insets.bottom + 16 }]}>
+          <View style={$langRow}>
+            <Text text={translate("imageTranslationScreen:languageLabel")} style={$langLabel} />
+            <TouchableOpacity style={$langBtn} onPress={openLangMenu} activeOpacity={0.7}>
+              <Text text={getLangFlag(targetLanguage)} style={$langFlag} />
+              <Text text={getLangLabel(targetLanguage)} style={$langBtnText} numberOfLines={1} />
+              <IconChevronDown size={14} color={BLUE} strokeWidth={2.5} />
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity style={$cameraBtn} activeOpacity={0.8}>
+            <IconCamera size={22} color="#FFFFFF" strokeWidth={1.8} />
+            <Text text={translate("imageTranslationScreen:cameraButton")} style={$cameraBtnText} />
+          </TouchableOpacity>
+        </View>
       </View>
 
       {/* Language selection modal */}
@@ -252,27 +255,39 @@ const $headerRight: ViewStyle = {
   width: 44,
 }
 
-const $mainContent: ViewStyle = {
+const $whiteContainer: ViewStyle = {
+  flex: 1,
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+  overflow: "hidden",
+  backgroundColor: "#FFFFFF",
+}
+
+const $innerContent: ViewStyle = {
   flex: 1,
   alignItems: "center",
   justifyContent: "center",
   paddingHorizontal: 24,
+  gap: 16,
 }
 
-const $imageCard: ViewStyle = {
-  backgroundColor: "#FFFFFF",
-  borderRadius: 16,
-  paddingVertical: 48,
-  paddingHorizontal: 32,
-  alignItems: "center",
+const $imageInputBox: ViewStyle = {
   width: "100%",
-  gap: 12,
+  height: 180,
+  backgroundColor: "#F2F5F6",
+  borderRadius: 10,
+  borderWidth: 1.5,
+  borderStyle: "dashed",
+  borderColor: "#D1D5D9",
+  alignItems: "center",
+  justifyContent: "center",
 }
 
 const $selectImageTitle: TextStyle = {
   fontSize: 16,
   fontFamily: typography.primary.bold,
   color: "#1A2236",
+  textAlign: "center",
 }
 
 const $selectImageDesc: TextStyle = {
