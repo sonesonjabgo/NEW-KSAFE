@@ -3,9 +3,7 @@ import { typography } from "@/theme/typography"
 
 const HEADER_BG = "#1E2A4A"
 const CARD_BG = "#FFFFFF"
-const LIST_BG = "#F2F3F5"
-const PILL_ACTIVE_BG = "#1E2A4A"
-
+const PILL_ACTIVE_BG = "#0B3069"
 
 // ── Tab Bar ──────────────────────────────────────────────────────────────────
 
@@ -14,15 +12,13 @@ export const $tabBar: ViewStyle = {
   backgroundColor: CARD_BG,
   paddingHorizontal: 16,
   paddingVertical: 8,
-  borderBottomWidth: 1,
-  borderBottomColor: "#E9ECF0",
 }
 
 export const $tab: ViewStyle = {
   flex: 1,
   alignItems: "center",
   justifyContent: "center",
-  paddingVertical: 8,
+  paddingVertical: 5,
   paddingHorizontal: 4,
   borderRadius: 20,
 }
@@ -45,7 +41,7 @@ export const $activeTabText: TextStyle = {
 
 export const $listContent: ViewStyle = {
   flex: 1,
-  backgroundColor: LIST_BG,
+  backgroundColor: "#FFFFFF",
 }
 
 export const $flatListContent: ViewStyle = {
@@ -56,15 +52,15 @@ export const $flatListContent: ViewStyle = {
 // ── Card ─────────────────────────────────────────────────────────────────────
 
 export const $card: ViewStyle = {
-  backgroundColor: CARD_BG,
+  backgroundColor: "#FFFFFF",
   borderRadius: 12,
   padding: 16,
   marginBottom: 12,
   shadowColor: "#000000",
-  shadowOffset: { width: 0, height: 1 },
-  shadowOpacity: 0.08,
-  shadowRadius: 4,
-  elevation: 2,
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.18,
+  shadowRadius: 6,
+  elevation: 4,
 }
 
 export const $cardTopRow: ViewStyle = {
