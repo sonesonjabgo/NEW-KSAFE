@@ -184,7 +184,7 @@ export const $educationCardTitle: TextStyle = {
   flex: 1,
   fontSize: 14,
   fontFamily: typography.primary.semiBold,
-  color: "#555555",
+  color: "#000000",
   lineHeight: 20,
 }
 
