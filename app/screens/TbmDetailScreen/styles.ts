@@ -227,9 +227,11 @@ export const $participantName: TextStyle = {
 }
 
 export const $participantBadge: ViewStyle = {
-  paddingHorizontal: 8,
-  paddingVertical: 3,
-  borderRadius: 4,
+  width: 34,
+  height: 20,
+  borderRadius: 20,
+  justifyContent: "center",
+  alignItems: "center",
 }
 
 export const $participantBadgeNormal: ViewStyle = {
