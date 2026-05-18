@@ -571,6 +571,12 @@ const en = {
     startActivity: "Start Activity",
     edit: "Edit",
     delete: "Delete",
+    toastStarted: "TBM activity has started.",
+    endActivity: "End TBM and Generate Report",
+    participantHeader: "Participants ({{count}})",
+    badgeNormal: "Normal",
+    badgeCaution: "Caution",
+    badgeDanger: "Danger",
     deleteModal: {
       title: "Delete TBM Activity",
       message: "Are you sure you want to delete this TBM activity?",

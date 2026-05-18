@@ -523,6 +523,12 @@ const ja: Translations = {
     startActivity: "Start Activity",
     edit: "Edit",
     delete: "Delete",
+    toastStarted: "TBM活動が開始されました。",
+    endActivity: "TBMを終了してレポートを生成する",
+    participantHeader: "参加者 ({{count}}名)",
+    badgeNormal: "正常",
+    badgeCaution: "注意",
+    badgeDanger: "危険",
     deleteModal: {
       title: "TBM活動を削除",
       message: "本当にこのTBM活動を削除しますか？",

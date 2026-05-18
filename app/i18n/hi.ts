@@ -523,6 +523,12 @@ const hi: Translations = {
     startActivity: "Start Activity",
     edit: "Edit",
     delete: "Delete",
+    toastStarted: "TBM गतिविधि शुरू हो गई है।",
+    endActivity: "TBM समाप्त करें और रिपोर्ट बनाएं",
+    participantHeader: "प्रतिभागी ({{count}})",
+    badgeNormal: "सामान्य",
+    badgeCaution: "सावधानी",
+    badgeDanger: "खतरा",
     deleteModal: {
       title: "TBM गतिविधि हटाएं",
       message: "क्या आप वाकई इस TBM गतिविधि को हटाना चाहते हैं?",

@@ -7,6 +7,15 @@ export interface TbmEducationMaterial {
   title: string
 }
 
+export type TbmParticipantBadge = "정상" | "주의" | "위험"
+
+export interface TbmParticipant {
+  id: number
+  name: string
+  badge: TbmParticipantBadge
+  time: string
+}
+
 export interface TbmDetail {
   id: number
   title: string
@@ -17,6 +26,7 @@ export interface TbmDetail {
   location: string
   activityContent: string
   educationMaterials: TbmEducationMaterial[]
+  participants: TbmParticipant[]
 }
 
 export type TbmDetailScreenProps = NativeStackScreenProps<AppStackParamList, "TbmDetail">

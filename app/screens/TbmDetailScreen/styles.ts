@@ -188,6 +188,121 @@ export const $educationCardTitle: TextStyle = {
   lineHeight: 20,
 }
 
+// ── Participant Section ───────────────────────────────────────────────────────
+
+export const $participantHeaderRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 10,
+}
+
+export const $participantSectionHeader: TextStyle = {
+  fontSize: 16,
+  fontFamily: typography.primary.semiBold,
+  color: "#555555",
+}
+
+export const $participantHeaderLine: ViewStyle = {
+  flex: 1,
+  height: 1,
+  backgroundColor: "#E9ECF0",
+}
+
+export const $participantCard: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  backgroundColor: "#FFFFFF",
+  borderRadius: 10,
+  height: 56,
+  paddingHorizontal: 16,
+  borderWidth: 1,
+  borderColor: "#E9ECF0",
+}
+
+export const $participantName: TextStyle = {
+  flex: 1,
+  fontSize: 14,
+  fontFamily: typography.primary.semiBold,
+  color: "#111111",
+}
+
+export const $participantBadge: ViewStyle = {
+  paddingHorizontal: 8,
+  paddingVertical: 3,
+  borderRadius: 4,
+}
+
+export const $participantBadgeNormal: ViewStyle = {
+  ...$participantBadge,
+  backgroundColor: "#CFFFE1",
+}
+
+export const $participantBadgeCaution: ViewStyle = {
+  ...$participantBadge,
+  backgroundColor: "#FFF6E6",
+}
+
+export const $participantBadgeDanger: ViewStyle = {
+  ...$participantBadge,
+  backgroundColor: "#FEEEED",
+}
+
+export const $participantBadgeNormalText: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.semiBold,
+  color: "#18A24A",
+}
+
+export const $participantBadgeCautionText: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.semiBold,
+  color: "#D97706",
+}
+
+export const $participantBadgeDangerText: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.semiBold,
+  color: "#F04E3E",
+}
+
+export const $participantTime: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#A9A9A9",
+  marginLeft: 12,
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+
+export const $toast: ViewStyle = {
+  position: "absolute",
+  left: 20,
+  right: 20,
+  backgroundColor: "#1062D8",
+  borderRadius: 12,
+  paddingHorizontal: 16,
+  paddingVertical: 14,
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 12,
+}
+
+export const $toastIconCircle: ViewStyle = {
+  width: 28,
+  height: 28,
+  borderRadius: 14,
+  backgroundColor: "rgba(255, 255, 255, 0.25)",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+export const $toastText: TextStyle = {
+  flex: 1,
+  fontSize: 14,
+  fontFamily: typography.primary.semiBold,
+  color: "#FFFFFF",
+}
+
 // ── Modal Icon ────────────────────────────────────────────────────────────────
 
 export const $modalIconCircle: ViewStyle = {

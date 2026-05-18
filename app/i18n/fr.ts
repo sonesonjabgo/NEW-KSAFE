@@ -527,6 +527,12 @@ const fr: Translations = {
     startActivity: "Start Activity",
     edit: "Edit",
     delete: "Delete",
+    toastStarted: "L'activité TBM a démarré.",
+    endActivity: "Terminer TBM et générer le rapport",
+    participantHeader: "Participants ({{count}})",
+    badgeNormal: "Normal",
+    badgeCaution: "Attention",
+    badgeDanger: "Danger",
     deleteModal: {
       title: "Supprimer l'activité TBM",
       message: "Êtes-vous sûr de vouloir supprimer cette activité TBM?",

@@ -563,6 +563,12 @@ const ko: Translations = {
     startActivity: "활동 시작",
     edit: "수정",
     delete: "삭제",
+    toastStarted: "TBM 활동이 시작되었습니다.",
+    endActivity: "TBM 종료하고 보고서 생성하기",
+    participantHeader: "참여자 목록 ({{count}}명)",
+    badgeNormal: "정상",
+    badgeCaution: "주의",
+    badgeDanger: "위험",
     deleteModal: {
       title: "TBM 활동 삭제",
       message: "정말로 이 TBM 활동을 삭제하시겠습니까?",

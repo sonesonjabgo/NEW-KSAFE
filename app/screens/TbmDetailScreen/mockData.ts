@@ -15,6 +15,12 @@ export const mockTbmDetails: Record<number, TbmDetail> = {
       { id: 1, title: "고소작업 안전 수칙 교육 자료" },
       { id: 2, title: "추락 방지 장비 착용 가이드" },
     ],
+    participants: [
+      { id: 1, name: "김 철수", badge: "정상", time: "09:15" },
+      { id: 2, name: "이 영희", badge: "주의", time: "09:18" },
+      { id: 3, name: "박 민준", badge: "정상", time: "09:21" },
+      { id: 4, name: "최 지수", badge: "위험", time: "09:24" },
+    ],
   },
   2: {
     id: 2,
@@ -27,6 +33,11 @@ export const mockTbmDetails: Record<number, TbmDetail> = {
     activityContent:
       "전기 설비 주변 작업 시 절연 장갑 착용을 의무화합니다. 배선 작업 전 전원 차단을 확인하고 잠금 장치를 설치합니다.",
     educationMaterials: [{ id: 3, title: "전기 안전 사고 예방 교육" }],
+    participants: [
+      { id: 1, name: "정 재원", badge: "정상", time: "10:05" },
+      { id: 2, name: "강 민지", badge: "정상", time: "10:08" },
+      { id: 3, name: "윤 성호", badge: "주의", time: "10:12" },
+    ],
   },
   3: {
     id: 3,
@@ -43,6 +54,13 @@ export const mockTbmDetails: Record<number, TbmDetail> = {
       { id: 5, title: "전기설비 점검 체크리스트" },
       { id: 6, title: "감전 사고 응급처치 방법" },
     ],
+    participants: [
+      { id: 1, name: "한 동현", badge: "정상", time: "09:35" },
+      { id: 2, name: "오 수빈", badge: "정상", time: "09:37" },
+      { id: 3, name: "임 재현", badge: "위험", time: "09:40" },
+      { id: 4, name: "서 지민", badge: "주의", time: "09:44" },
+      { id: 5, name: "남 기현", badge: "정상", time: "09:47" },
+    ],
   },
   4: {
     id: 4,
@@ -55,6 +73,11 @@ export const mockTbmDetails: Record<number, TbmDetail> = {
     activityContent:
       "2미터 이상 고소 작업 시 안전대를 착용하고 안전 로프에 연결합니다. 작업 발판의 상태를 점검하고 불량 발판은 즉시 교체합니다.",
     educationMaterials: [{ id: 7, title: "고소작업 안전대 착용 교육" }],
+    participants: [
+      { id: 1, name: "백 승현", badge: "정상", time: "08:10" },
+      { id: 2, name: "문 지현", badge: "주의", time: "08:13" },
+      { id: 3, name: "조 민석", badge: "정상", time: "08:16" },
+    ],
   },
   5: {
     id: 5,
@@ -70,6 +93,12 @@ export const mockTbmDetails: Record<number, TbmDetail> = {
       { id: 8, title: "화학물질 MSDS 교육 자료" },
       { id: 9, title: "개인보호장비 착용 방법 안내" },
     ],
+    participants: [
+      { id: 1, name: "신 민서", badge: "정상", time: "09:08" },
+      { id: 2, name: "류 준혁", badge: "위험", time: "09:11" },
+      { id: 3, name: "권 혜린", badge: "정상", time: "09:14" },
+      { id: 4, name: "황 도현", badge: "주의", time: "09:17" },
+    ],
   },
   6: {
     id: 6,
@@ -82,6 +111,10 @@ export const mockTbmDetails: Record<number, TbmDetail> = {
     activityContent:
       "비계 설치 작업 전 지반 상태를 확인하고 수평을 맞춥니다. 비계 클램프 체결 상태를 점검하고 작업 중 하중 초과를 방지합니다.",
     educationMaterials: [],
+    participants: [
+      { id: 1, name: "고 성민", badge: "정상", time: "07:38" },
+      { id: 2, name: "탁 지우", badge: "주의", time: "07:42" },
+    ],
   },
   7: {
     id: 7,
@@ -94,6 +127,11 @@ export const mockTbmDetails: Record<number, TbmDetail> = {
     activityContent:
       "크레인 작업 반경 내 작업자 접근을 금지합니다. 신호수를 배치하고 정해진 신호 체계에 따라 작업합니다.",
     educationMaterials: [{ id: 10, title: "크레인 안전 운전 교육 자료" }],
+    participants: [
+      { id: 1, name: "안 준서", badge: "정상", time: "08:40" },
+      { id: 2, name: "송 하은", badge: "정상", time: "08:43" },
+      { id: 3, name: "전 도윤", badge: "위험", time: "08:47" },
+    ],
   },
   8: {
     id: 8,
@@ -109,6 +147,12 @@ export const mockTbmDetails: Record<number, TbmDetail> = {
       { id: 11, title: "밀폐공간 진입 안전 절차" },
       { id: 12, title: "산소 결핍 위험 예방 교육" },
     ],
+    participants: [
+      { id: 1, name: "노 시현", badge: "정상", time: "09:09" },
+      { id: 2, name: "석 주원", badge: "주의", time: "09:12" },
+      { id: 3, name: "표 지안", badge: "정상", time: "09:15" },
+      { id: 4, name: "변 민재", badge: "위험", time: "09:18" },
+    ],
   },
   9: {
     id: 9,
@@ -121,6 +165,11 @@ export const mockTbmDetails: Record<number, TbmDetail> = {
     activityContent:
       "용접 작업 전 주변 가연성 물질을 제거합니다. 용접 불꽃 비산 방지를 위한 방화포를 설치합니다.",
     educationMaterials: [{ id: 13, title: "용접 화재 예방 안전 교육" }],
+    participants: [
+      { id: 1, name: "피 성현", badge: "정상", time: "10:06" },
+      { id: 2, name: "하 민아", badge: "정상", time: "10:09" },
+      { id: 3, name: "허 준영", badge: "주의", time: "10:12" },
+    ],
   },
   10: {
     id: 10,
@@ -135,6 +184,13 @@ export const mockTbmDetails: Record<number, TbmDetail> = {
     educationMaterials: [
       { id: 14, title: "건설기계 운전 안전 수칙" },
       { id: 15, title: "굴삭기 일상 점검 가이드" },
+    ],
+    participants: [
+      { id: 1, name: "천 수아", badge: "정상", time: "08:07" },
+      { id: 2, name: "방 지호", badge: "주의", time: "08:10" },
+      { id: 3, name: "공 예린", badge: "정상", time: "08:13" },
+      { id: 4, name: "계 민후", badge: "위험", time: "08:16" },
+      { id: 5, name: "마 준혁", badge: "정상", time: "08:20" },
     ],
   },
 }

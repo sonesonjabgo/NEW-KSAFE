@@ -1,7 +1,8 @@
-import { FC, useState } from "react"
-import { ScrollView, TouchableOpacity, View } from "react-native"
+import { FC, useCallback, useRef, useState } from "react"
+import { Animated, ScrollView, TouchableOpacity, View } from "react-native"
 import {
   IconCalendar,
+  IconCheck,
   IconEdit,
   IconDownload,
   IconPlayerPlayFilled,
@@ -16,6 +17,7 @@ import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
 import type { TbmStatus } from "@/screens/TbmListScreen/types"
+import type { TbmParticipantBadge } from "./types"
 
 import { mockTbmDetails } from "./mockData"
 import * as S from "./styles"
@@ -27,6 +29,18 @@ function getBadgeStyles(status: TbmStatus) {
   return { badge: S.$badgeEnded, text: S.$badgeEndedText }
 }
 
+function getParticipantBadgeStyles(badge: TbmParticipantBadge) {
+  if (badge === "정상") return { bg: S.$participantBadgeNormal, text: S.$participantBadgeNormalText }
+  if (badge === "주의") return { bg: S.$participantBadgeCaution, text: S.$participantBadgeCautionText }
+  return { bg: S.$participantBadgeDanger, text: S.$participantBadgeDangerText }
+}
+
+function getParticipantBadgeKey(badge: TbmParticipantBadge) {
+  if (badge === "정상") return "badgeNormal" as const
+  if (badge === "주의") return "badgeCaution" as const
+  return "badgeDanger" as const
+}
+
 const STATUS_LABEL: Record<TbmStatus, "drafting" | "ongoing" | "ended"> = {
   작성중: "drafting",
   진행중: "ongoing",
@@ -36,10 +50,24 @@ const STATUS_LABEL: Record<TbmStatus, "drafting" | "ongoing" | "ended"> = {
 export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route }) => {
   const { id } = route.params
   const insets = useSafeAreaInsets()
-  const [startModalVisible, setStartModalVisible] = useState(false)
-  const [deleteModalVisible, setDeleteModalVisible] = useState(false)
 
   const detail = mockTbmDetails[id]
+
+  const [isStarted, setIsStarted] = useState(detail?.status === "진행중")
+  const [startModalVisible, setStartModalVisible] = useState(false)
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false)
+  const [toastVisible, setToastVisible] = useState(false)
+  const toastAnim = useRef(new Animated.Value(0)).current
+
+  const showToast = useCallback(() => {
+    setToastVisible(true)
+    Animated.sequence([
+      Animated.timing(toastAnim, { toValue: 1, duration: 250, useNativeDriver: true }),
+      Animated.delay(2000),
+      Animated.timing(toastAnim, { toValue: 0, duration: 250, useNativeDriver: true }),
+    ]).start(() => setToastVisible(false))
+  }, [toastAnim])
+
   const badgeStyles = detail ? getBadgeStyles(detail.status) : null
 
   if (!detail) return null
@@ -58,7 +86,6 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
       >
         {/* ── 상세 카드 ── */}
         <View style={S.$detailCard}>
-          {/* 배지 + 날짜 */}
           <View style={S.$cardTopRow}>
             <View style={badgeStyles!.badge}>
               <Text
@@ -69,10 +96,8 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
             <Text text={detail.date} style={S.$cardDate} />
           </View>
 
-          {/* 제목 */}
           <Text text={detail.title} style={S.$cardTitle} />
 
-          {/* 작업일 */}
           <View style={S.$cardWorkDateRow}>
             <IconCalendar size={20} color="#6B7281" />
             <Text
@@ -81,7 +106,6 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
             />
           </View>
 
-          {/* 작성자 + 현장 */}
           <View style={S.$cardAuthorRow}>
             <View style={S.$cardAvatar} />
             <View>
@@ -90,10 +114,8 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
             </View>
           </View>
 
-          {/* 구분선 */}
           <View style={S.$cardDivider} />
 
-          {/* 활동 내용 */}
           <Text text={translate("tbmDetailScreen:activityLabel")} style={S.$activityLabel} />
           <Text text={detail.activityContent} style={S.$activityContent} />
         </View>
@@ -120,35 +142,76 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
           </View>
         ))}
 
-        {/* ── 하단 액션 바 (스크롤과 함께 이동) ── */}
+        {/* ── 참여자 목록 섹션 (활동 시작 후) ── */}
+        {isStarted && (
+          <>
+            <View style={S.$participantHeaderRow}>
+              <Text
+                text={translate("tbmDetailScreen:participantHeader", {
+                  count: detail.participants.length,
+                })}
+                style={S.$participantSectionHeader}
+              />
+              <View style={S.$participantHeaderLine} />
+            </View>
+            {detail.participants.map((p) => {
+              const pBadge = getParticipantBadgeStyles(p.badge)
+              return (
+                <View key={p.id} style={S.$participantCard}>
+                  <Text text={p.name} style={S.$participantName} />
+                  <View style={pBadge.bg}>
+                    <Text
+                      text={translate(`tbmDetailScreen:${getParticipantBadgeKey(p.badge)}`)}
+                      style={pBadge.text}
+                    />
+                  </View>
+                  <Text text={p.time} style={S.$participantTime} />
+                </View>
+              )
+            })}
+          </>
+        )}
+
+        {/* ── 하단 액션 바 ── */}
         <View style={S.$bottomBar}>
           <TouchableOpacity
             style={S.$startBtn}
             activeOpacity={0.8}
-            onPress={() => setStartModalVisible(true)}
+            onPress={() => (isStarted ? console.log("보고서 생성:", detail.id) : setStartModalVisible(true))}
           >
-            <IconPlayerPlayFilled size={24} color="#FFFFFF" />
-            <Text text={translate("tbmDetailScreen:startActivity")} style={S.$startBtnText} />
+            {isStarted ? (
+              <EducationFrame width={22} height={22} />
+            ) : (
+              <IconPlayerPlayFilled size={24} color="#FFFFFF" />
+            )}
+            <Text
+              text={translate(
+                isStarted ? "tbmDetailScreen:endActivity" : "tbmDetailScreen:startActivity",
+              )}
+              style={S.$startBtnText}
+            />
           </TouchableOpacity>
 
-          <View style={S.$actionRow}>
-            <TouchableOpacity
-              style={S.$editBtn}
-              activeOpacity={0.75}
-              onPress={() => console.log("수정:", detail.id)}
-            >
-              <IconEdit size={16} color="#4C4C4C" />
-              <Text text={translate("tbmDetailScreen:edit")} style={S.$editBtnText} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={S.$deleteBtn}
-              activeOpacity={0.75}
-              onPress={() => setDeleteModalVisible(true)}
-            >
-              <IconTrash size={16} color="#F87165" />
-              <Text text={translate("tbmDetailScreen:delete")} style={S.$deleteBtnText} />
-            </TouchableOpacity>
-          </View>
+          {!isStarted && (
+            <View style={S.$actionRow}>
+              <TouchableOpacity
+                style={S.$editBtn}
+                activeOpacity={0.75}
+                onPress={() => console.log("수정:", detail.id)}
+              >
+                <IconEdit size={16} color="#4C4C4C" />
+                <Text text={translate("tbmDetailScreen:edit")} style={S.$editBtnText} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={S.$deleteBtn}
+                activeOpacity={0.75}
+                onPress={() => setDeleteModalVisible(true)}
+              >
+                <IconTrash size={16} color="#F87165" />
+                <Text text={translate("tbmDetailScreen:delete")} style={S.$deleteBtnText} />
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
       </ScrollView>
     </StackScreen>
@@ -176,7 +239,7 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
       visible={startModalVisible}
       icon={
         <View style={S.$modalStartIconCircle}>
-          <IconPlayerPlayFilled size={26} color="#1062D8" />
+          <EducationFrame width={26} height={26} />
         </View>
       }
       title={translate("tbmDetailScreen:startModal.title")}
@@ -187,9 +250,21 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
       onCancel={() => setStartModalVisible(false)}
       onConfirm={() => {
         setStartModalVisible(false)
-        console.log("활동 시작 확인:", detail.id)
+        setIsStarted(true)
+        showToast()
       }}
     />
+
+    {toastVisible && (
+      <Animated.View
+        style={[S.$toast, { opacity: toastAnim, bottom: (insets.bottom || 0) + 24 }]}
+      >
+        <View style={S.$toastIconCircle}>
+          <IconCheck size={16} color="#FFFFFF" strokeWidth={2.5} />
+        </View>
+        <Text text={translate("tbmDetailScreen:toastStarted")} style={S.$toastText} />
+      </Animated.View>
+    )}
     </>
   )
 }

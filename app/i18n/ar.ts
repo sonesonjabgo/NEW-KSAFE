@@ -518,6 +518,12 @@ const ar: Translations = {
     startActivity: "Start Activity",
     edit: "Edit",
     delete: "Delete",
+    toastStarted: "TBM تم بدء نشاط",
+    endActivity: "إنهاء TBM وإنشاء تقرير",
+    participantHeader: "المشاركون ({{count}})",
+    badgeNormal: "طبيعي",
+    badgeCaution: "تحذير",
+    badgeDanger: "خطر",
     deleteModal: {
       title: "حذف نشاط TBM",
       message: "هل أنت متأكد من حذف نشاط TBM هذا؟",
