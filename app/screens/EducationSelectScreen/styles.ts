@@ -64,32 +64,30 @@ export const $searchInput: TextStyle = {
 
 // ── Category chips ─────────────────────────────────────────────────────────────
 
-export const $categoryScroll: ViewStyle = {
+export const $categoryRow: ViewStyle = {
+  flexDirection: "row",
   backgroundColor: "#FFFFFF",
-}
-
-export const $categoryScrollContent: ViewStyle = {
   paddingHorizontal: 20,
   paddingVertical: 12,
   gap: 8,
-  flexDirection: "row",
 }
 
 export const $categoryChip: ViewStyle = {
-  paddingHorizontal: 14,
+  flexGrow: 1,
   paddingVertical: 7,
   borderRadius: 20,
-  backgroundColor: "#F0F0F0",
+  backgroundColor: "#F9FAFE",
+  alignItems: "center",
 }
 
 export const $categoryChipActive: ViewStyle = {
-  backgroundColor: colors.navy,
+  backgroundColor: "#0B3069",
 }
 
 export const $categoryChipText: TextStyle = {
   fontSize: 13,
-  fontFamily: typography.primary.semiBold,
-  color: "#888888",
+  fontFamily: typography.primary.bold,
+  color: "#606679",
 }
 
 export const $categoryChipTextActive: TextStyle = {
@@ -102,7 +100,7 @@ export const $listContent: ViewStyle = {
   paddingHorizontal: 20,
   paddingTop: 16,
   paddingBottom: 40,
-  gap: 12,
+  gap: 16,
 }
 
 // ── Card ───────────────────────────────────────────────────────────────────────
@@ -110,18 +108,20 @@ export const $listContent: ViewStyle = {
 export const $card: ViewStyle = {
   backgroundColor: "#FFFFFF",
   borderRadius: 12,
+  height: 100,
   paddingVertical: 14,
   paddingHorizontal: 16,
   gap: 10,
+  borderWidth: 1.5,
+  borderColor: "transparent",
   shadowColor: "#000000",
-  shadowOffset: { width: 0, height: 1 },
-  shadowOpacity: 0.06,
-  shadowRadius: 4,
-  elevation: 2,
+  shadowOffset: { width: 0, height: 4 },
+  shadowOpacity: 0.1,
+  shadowRadius: 12,
+  elevation: 6,
 }
 
 export const $cardSelected: ViewStyle = {
-  borderWidth: 1.5,
   borderColor: "#1062D8",
 }
 
@@ -132,9 +132,9 @@ export const $cardTopRow: ViewStyle = {
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 12,
-  fontFamily: typography.primary.normal,
-  color: "#999999",
+  fontSize: 13,
+  fontFamily: typography.primary.medium,
+  color: "#606679",
 }
 
 export const $cardTopRight: ViewStyle = {
@@ -146,19 +146,17 @@ export const $cardTopRight: ViewStyle = {
 export const $cardBadge: ViewStyle = {
   paddingHorizontal: 8,
   paddingVertical: 3,
-  borderRadius: 20,
-  backgroundColor: "#E8EEF8",
+  borderRadius: 4,
 }
 
 export const $cardBadgeText: TextStyle = {
   fontSize: 11,
   fontFamily: typography.primary.semiBold,
-  color: "#1062D8",
 }
 
 export const $cardTitle: TextStyle = {
-  fontSize: 15,
-  fontFamily: typography.primary.semiBold,
+  fontSize: 16,
+  fontFamily: typography.primary.bold,
   color: "#111111",
   lineHeight: 22,
 }
@@ -196,7 +194,7 @@ export const $emptyContainer: ViewStyle = {
   flex: 1,
   justifyContent: "center",
   alignItems: "center",
-  gap: 14,
+  gap: 24,
   paddingBottom: 80,
 }
 
@@ -210,9 +208,9 @@ export const $emptyIconCircle: ViewStyle = {
 }
 
 export const $emptyText: TextStyle = {
-  fontSize: 15,
+  fontSize: 20,
   fontFamily: typography.primary.semiBold,
-  color: "#555555",
+  color: "#000000",
 }
 
 // ── Bottom bar ─────────────────────────────────────────────────────────────────

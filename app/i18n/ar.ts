@@ -516,8 +516,8 @@ const ar: Translations = {
     sourceTab2: "KS Safety Association",
     sourceTab3: "My Materials",
     searchPlaceholder: "Enter content to search",
-    confirm: "Confirm ({{count}})",
-    confirmNone: "Confirm",
+    confirm: "Complete ({{count}})",
+    confirmNone: "Complete",
     emptyText: "No educational materials available.",
   },
 

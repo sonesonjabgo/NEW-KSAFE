@@ -1,13 +1,13 @@
 import { FC, useCallback, useMemo, useState } from "react"
 import {
   FlatList,
-  ScrollView,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { IconSearch, IconFileText } from "@tabler/icons-react-native"
+import { IconSearch } from "@tabler/icons-react-native"
+import TbmEmptyImage from "@assets/images/tbm-empty.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -21,6 +21,12 @@ import * as S from "./styles"
 type EducationSelectScreenProps = AppStackScreenProps<"EducationSelect">
 
 type CategoryTab = "전체" | EducationSubcategory
+
+const SUBCATEGORY_COLORS: Record<EducationSubcategory, { bg: string; text: string }> = {
+  공통: { bg: "#E6F0FD", text: "#1062D8" },
+  감전사고: { bg: "#FDECEA", text: "#C62828" },
+  기계점검보수: { bg: "#E8F5E9", text: "#2E7D32" },
+}
 
 const CATEGORY_TABS: CategoryTab[] = ["전체", "감전사고", "공통", "기계점검보수"]
 
@@ -86,6 +92,7 @@ export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigati
   const renderItem = useCallback(
     ({ item }: { item: EducationMaterial }) => {
       const isSelected = selectedIds.includes(item.id)
+      const badgeColor = SUBCATEGORY_COLORS[item.subcategory]
       return (
         <TouchableOpacity
           style={[S.$card, isSelected && S.$cardSelected]}
@@ -93,11 +100,11 @@ export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigati
           onPress={() => toggleItem(item.id)}
         >
           <View style={S.$cardTopRow}>
-            <Text text={item.datetime} style={S.$cardDate} />
+            <View style={[S.$cardBadge, { backgroundColor: badgeColor.bg }]}>
+              <Text text={item.subcategory} style={[S.$cardBadgeText, { color: badgeColor.text }]} />
+            </View>
             <View style={S.$cardTopRight}>
-              <View style={S.$cardBadge}>
-                <Text text={item.subcategory} style={S.$cardBadgeText} />
-              </View>
+              <Text text={item.datetime} style={S.$cardDate} />
               <View style={[S.$checkbox, isSelected && S.$checkboxActive]}>
                 {isSelected && <View style={S.$checkboxDot} />}
               </View>
@@ -156,12 +163,7 @@ export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigati
         {hasSourceData ? (
           <>
             {/* 카테고리 탭 */}
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              style={S.$categoryScroll}
-              contentContainerStyle={S.$categoryScrollContent}
-            >
+            <View style={S.$categoryRow}>
               {CATEGORY_TABS.map((cat) => {
                 const isActive = cat === categoryTab
                 return (
@@ -178,7 +180,7 @@ export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigati
                   </TouchableOpacity>
                 )
               })}
-            </ScrollView>
+            </View>
 
             {/* 카드 리스트 */}
             <FlatList
@@ -193,9 +195,7 @@ export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigati
               keyboardShouldPersistTaps="handled"
               ListEmptyComponent={
                 <View style={S.$emptyContainer}>
-                  <View style={S.$emptyIconCircle}>
-                    <IconSearch size={28} color="#AAAAAA" />
-                  </View>
+                  <TbmEmptyImage width={150} height={162} />
                   <Text
                     text={translate("educationSelectScreen:emptyText")}
                     style={S.$emptyText}
@@ -206,9 +206,7 @@ export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigati
           </>
         ) : (
           <View style={S.$emptyContainer}>
-            <View style={S.$emptyIconCircle}>
-              <IconFileText size={28} color="#AAAAAA" />
-            </View>
+            <TbmEmptyImage width={150} height={162} />
             <Text
               text={translate("educationSelectScreen:emptyText")}
               style={S.$emptyText}
