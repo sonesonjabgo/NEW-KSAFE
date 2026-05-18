@@ -95,12 +95,15 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
         </View>
 
         {/* ── 교육자료 섹션 ── */}
-        <Text
-          text={translate("tbmDetailScreen:educationHeader", {
-            count: detail.educationMaterials.length,
-          })}
-          style={S.$educationSectionHeader}
-        />
+        <View style={S.$educationHeaderRow}>
+          <Text
+            text={translate("tbmDetailScreen:educationHeader", {
+              count: detail.educationMaterials.length,
+            })}
+            style={S.$educationSectionHeader}
+          />
+          <View style={S.$educationHeaderLine} />
+        </View>
         {detail.educationMaterials.map((item) => (
           <View key={item.id} style={S.$educationCard}>
             <View style={S.$educationIconCircle}>

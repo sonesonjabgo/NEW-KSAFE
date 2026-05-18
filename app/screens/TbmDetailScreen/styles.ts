@@ -140,10 +140,22 @@ export const $activityContent: TextStyle = {
 
 // ── Education Section ─────────────────────────────────────────────────────────
 
+export const $educationHeaderRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 10,
+}
+
 export const $educationSectionHeader: TextStyle = {
   fontSize: 16,
   fontFamily: typography.primary.semiBold,
-  color: "#111111",
+  color: "#555555",
+}
+
+export const $educationHeaderLine: ViewStyle = {
+  flex: 1,
+  height: 1,
+  backgroundColor: "#E9ECF0",
 }
 
 export const $educationCard: ViewStyle = {
