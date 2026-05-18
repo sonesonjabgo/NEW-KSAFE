@@ -1,7 +1,9 @@
 import { FC, useMemo, useState } from "react"
 import { FlatList, TouchableOpacity, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { ClipboardList, Plus } from "lucide-react-native"
+import { Plus } from "lucide-react-native"
+
+import TbmEmptyImage from "@assets/images/tbm-empty.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -81,8 +83,8 @@ const EmptyState: FC<{ tab: TabKey }> = ({ tab }) => {
 
   return (
     <View style={S.$emptyContainer}>
-      <View style={S.$emptyIconCircle}>
-        <ClipboardList size={40} color="#8DA4C4" strokeWidth={1.5} />
+      <View style={S.$emptyImage}>
+        <TbmEmptyImage width={150} height={162} />
       </View>
       <Text text={translate(`tbmListScreen:empty.${emptyKey[tab]}`)} style={S.$emptyText} />
     </View>

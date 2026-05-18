@@ -179,20 +179,14 @@ export const $emptyContainer: ViewStyle = {
   paddingVertical: 80,
 }
 
-export const $emptyIconCircle: ViewStyle = {
-  width: 80,
-  height: 80,
-  borderRadius: 40,
-  backgroundColor: "#EEF2F7",
-  justifyContent: "center",
-  alignItems: "center",
-  marginBottom: 16,
+export const $emptyImage: ViewStyle = {
+  marginBottom: 20,
 }
 
 export const $emptyText: TextStyle = {
-  fontSize: 14,
-  color: "#999999",
-  fontFamily: typography.primary.normal,
+  fontSize: 20,
+  color: "#000000",
+  fontFamily: typography.primary.semiBold,
 }
 
 // ── FAB ───────────────────────────────────────────────────────────────────────
