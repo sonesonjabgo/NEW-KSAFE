@@ -133,7 +133,7 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
         {detail.educationMaterials.map((item) => (
           <View key={item.id} style={S.$educationCard}>
             <View style={S.$educationIconCircle}>
-              <EducationFrame width={18} height={18} />
+              <EducationFrame width={18} height={18} color="#1062D8" />
             </View>
             <Text text={item.title} style={S.$educationCardTitle} numberOfLines={2} />
             <TouchableOpacity activeOpacity={0.7} onPress={() => console.log("download:", item.id)}>
@@ -180,7 +180,7 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
             onPress={() => (isStarted ? console.log("보고서 생성:", detail.id) : setStartModalVisible(true))}
           >
             {isStarted ? (
-              <EducationFrame width={22} height={22} />
+              <EducationFrame width={22} height={22} color="#FFFFFF" />
             ) : (
               <IconPlayerPlayFilled size={24} color="#FFFFFF" />
             )}
@@ -239,7 +239,7 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
       visible={startModalVisible}
       icon={
         <View style={S.$modalStartIconCircle}>
-          <EducationFrame width={26} height={26} />
+          <EducationFrame width={26} height={26} color="#1062D8" />
         </View>
       }
       title={translate("tbmDetailScreen:startModal.title")}
