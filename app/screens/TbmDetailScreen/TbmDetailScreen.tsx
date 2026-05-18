@@ -1,13 +1,9 @@
 import { FC } from "react"
 import { ScrollView, TouchableOpacity, View } from "react-native"
-import {
-  IconCalendar,
-  IconEdit,
-  IconFile,
-  IconDownload,
-  IconTrash,
-} from "@tabler/icons-react-native"
+import { IconCalendar, IconEdit, IconDownload, IconTrash } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+
+import EducationFrame from "@assets/icons/education_frame.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -39,108 +35,108 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
 
   if (!detail) return null
 
-  const bottomBarHeight = 52 + 10 + 48 + 14 + (insets.bottom || 16) + 24
-
   return (
-    <>
-      <StackScreen title={translate("tbmDetailScreen:title")} onBack={() => navigation.goBack()}>
-        <ScrollView
-          contentContainerStyle={[S.$scrollInner, { paddingBottom: bottomBarHeight }]}
-          showsVerticalScrollIndicator={false}
-        >
-          {/* ── 상세 카드 ── */}
-          <View style={S.$detailCard}>
-            {/* 배지 + 날짜 */}
-            <View style={S.$cardTopRow}>
-              <View style={badgeStyles!.badge}>
-                <Text
-                  text={translate(`tbmListScreen:status.${STATUS_LABEL[detail.status]}`)}
-                  style={badgeStyles!.text}
-                />
-              </View>
-              <Text text={detail.date} style={S.$cardDate} />
-            </View>
-
-            {/* 제목 */}
-            <Text text={detail.title} style={S.$cardTitle} />
-
-            {/* 작업일 */}
-            <View style={S.$cardWorkDateRow}>
-              <IconCalendar size={20} color="#6B7281" />
+    <StackScreen
+      title={translate("tbmDetailScreen:title")}
+      onBack={() => navigation.goBack()}
+      squareTop
+      contentBg="#FFFFFF"
+    >
+      <ScrollView
+        contentContainerStyle={[S.$scrollInner, { paddingBottom: (insets.bottom || 0) + 24 }]}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* ── 상세 카드 ── */}
+        <View style={S.$detailCard}>
+          {/* 배지 + 날짜 */}
+          <View style={S.$cardTopRow}>
+            <View style={badgeStyles!.badge}>
               <Text
-                text={translate("tbmDetailScreen:workDate", { date: detail.workDate })}
-                style={S.$cardWorkDate}
+                text={translate(`tbmListScreen:status.${STATUS_LABEL[detail.status]}`)}
+                style={badgeStyles!.text}
               />
             </View>
-
-            {/* 작성자 + 현장 */}
-            <View style={S.$cardAuthorRow}>
-              <View style={S.$cardAvatar} />
-              <View>
-                <Text text={detail.author} style={S.$cardAuthorName} />
-                <Text text={detail.location} style={S.$cardAuthorLocation} />
-              </View>
-            </View>
-
-            {/* 구분선 */}
-            <View style={S.$cardDivider} />
-
-            {/* 활동 내용 */}
-            <Text text={translate("tbmDetailScreen:activityLabel")} style={S.$activityLabel} />
-            <Text text={detail.activityContent} style={S.$activityContent} />
+            <Text text={detail.date} style={S.$cardDate} />
           </View>
 
-          {/* ── 교육자료 섹션 ── */}
-          <Text
-            text={translate("tbmDetailScreen:educationHeader", {
-              count: detail.educationMaterials.length,
-            })}
-            style={S.$educationSectionHeader}
-          />
-          {detail.educationMaterials.map((item) => (
-            <View key={item.id} style={S.$educationCard}>
-              <IconFile size={20} color="#606679" />
-              <Text text={item.title} style={S.$educationCardTitle} numberOfLines={2} />
-              <TouchableOpacity
-                activeOpacity={0.7}
-                onPress={() => console.log("download:", item.id)}
-              >
-                <IconDownload size={20} color="#606679" />
-              </TouchableOpacity>
+          {/* 제목 */}
+          <Text text={detail.title} style={S.$cardTitle} />
+
+          {/* 작업일 */}
+          <View style={S.$cardWorkDateRow}>
+            <IconCalendar size={20} color="#6B7281" />
+            <Text
+              text={translate("tbmDetailScreen:workDate", { date: detail.workDate })}
+              style={S.$cardWorkDate}
+            />
+          </View>
+
+          {/* 작성자 + 현장 */}
+          <View style={S.$cardAuthorRow}>
+            <View style={S.$cardAvatar} />
+            <View>
+              <Text text={detail.author} style={S.$cardAuthorName} />
+              <Text text={detail.location} style={S.$cardAuthorLocation} />
             </View>
-          ))}
-        </ScrollView>
-      </StackScreen>
+          </View>
 
-      {/* ── 하단 액션 바 ── */}
-      <View style={[S.$bottomBar, { paddingBottom: (insets.bottom || 0) + 16 }]}>
-        <TouchableOpacity
-          style={S.$startBtn}
-          activeOpacity={0.8}
-          onPress={() => console.log("활동시작:", detail.id)}
-        >
-          <Text text={translate("tbmDetailScreen:startActivity")} style={S.$startBtnText} />
-        </TouchableOpacity>
+          {/* 구분선 */}
+          <View style={S.$cardDivider} />
 
-        <View style={S.$actionRow}>
-          <TouchableOpacity
-            style={S.$editBtn}
-            activeOpacity={0.75}
-            onPress={() => console.log("수정:", detail.id)}
-          >
-            <IconEdit size={16} color="#4C4C4C" />
-            <Text text={translate("tbmDetailScreen:edit")} style={S.$editBtnText} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={S.$deleteBtn}
-            activeOpacity={0.75}
-            onPress={() => console.log("삭제:", detail.id)}
-          >
-            <IconTrash size={16} color="#F87165" />
-            <Text text={translate("tbmDetailScreen:delete")} style={S.$deleteBtnText} />
-          </TouchableOpacity>
+          {/* 활동 내용 */}
+          <Text text={translate("tbmDetailScreen:activityLabel")} style={S.$activityLabel} />
+          <Text text={detail.activityContent} style={S.$activityContent} />
         </View>
-      </View>
-    </>
+
+        {/* ── 교육자료 섹션 ── */}
+        <Text
+          text={translate("tbmDetailScreen:educationHeader", {
+            count: detail.educationMaterials.length,
+          })}
+          style={S.$educationSectionHeader}
+        />
+        {detail.educationMaterials.map((item) => (
+          <View key={item.id} style={S.$educationCard}>
+            <View style={S.$educationIconCircle}>
+              <EducationFrame width={18} height={18} />
+            </View>
+            <Text text={item.title} style={S.$educationCardTitle} numberOfLines={2} />
+            <TouchableOpacity activeOpacity={0.7} onPress={() => console.log("download:", item.id)}>
+              <IconDownload size={20} color="#1062D8" />
+            </TouchableOpacity>
+          </View>
+        ))}
+
+        {/* ── 하단 액션 바 (스크롤과 함께 이동) ── */}
+        <View style={S.$bottomBar}>
+          <TouchableOpacity
+            style={S.$startBtn}
+            activeOpacity={0.8}
+            onPress={() => console.log("활동시작:", detail.id)}
+          >
+            <Text text={translate("tbmDetailScreen:startActivity")} style={S.$startBtnText} />
+          </TouchableOpacity>
+
+          <View style={S.$actionRow}>
+            <TouchableOpacity
+              style={S.$editBtn}
+              activeOpacity={0.75}
+              onPress={() => console.log("수정:", detail.id)}
+            >
+              <IconEdit size={16} color="#4C4C4C" />
+              <Text text={translate("tbmDetailScreen:edit")} style={S.$editBtnText} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={S.$deleteBtn}
+              activeOpacity={0.75}
+              onPress={() => console.log("삭제:", detail.id)}
+            >
+              <IconTrash size={16} color="#F87165" />
+              <Text text={translate("tbmDetailScreen:delete")} style={S.$deleteBtnText} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
+    </StackScreen>
   )
 }

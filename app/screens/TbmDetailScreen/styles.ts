@@ -13,8 +13,9 @@ export const $scrollInner: ViewStyle = {
 
 export const $detailCard: ViewStyle = {
   backgroundColor: "#FFFFFF",
-  borderRadius: 12,
+  borderRadius: 10,
   padding: 16,
+  gap: 15,
   shadowColor: "#000000",
   shadowOffset: { width: 0, height: 2 },
   shadowOpacity: 0.1,
@@ -26,7 +27,6 @@ export const $cardTopRow: ViewStyle = {
   flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",
-  marginBottom: 12,
 }
 
 export const $badge: ViewStyle = {
@@ -80,14 +80,12 @@ export const $cardTitle: TextStyle = {
   fontSize: 21,
   fontFamily: typography.primary.bold,
   color: "#000000",
-  marginBottom: 10,
 }
 
 export const $cardWorkDateRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
   gap: 6,
-  marginBottom: 12,
 }
 
 export const $cardWorkDate: TextStyle = {
@@ -100,7 +98,6 @@ export const $cardAuthorRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
   gap: 10,
-  marginBottom: 14,
 }
 
 export const $cardAvatar: ViewStyle = {
@@ -126,14 +123,12 @@ export const $cardAuthorLocation: TextStyle = {
 export const $cardDivider: ViewStyle = {
   height: 1,
   backgroundColor: "#EEEEEE",
-  marginBottom: 14,
 }
 
 export const $activityLabel: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#606060",
-  marginBottom: 6,
 }
 
 export const $activityContent: TextStyle = {
@@ -149,42 +144,43 @@ export const $educationSectionHeader: TextStyle = {
   fontSize: 16,
   fontFamily: typography.primary.semiBold,
   color: "#111111",
-  marginTop: 6,
-  marginBottom: 2,
 }
 
 export const $educationCard: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-  gap: 10,
+  gap: 12,
   backgroundColor: "#FFFFFF",
   borderRadius: 10,
-  paddingVertical: 14,
+  height: 75,
   paddingHorizontal: 16,
   borderWidth: 1,
-  borderColor: "#E8E9ED",
+  borderColor: "#E9ECF0",
+}
+
+export const $educationIconCircle: ViewStyle = {
+  width: 36,
+  height: 36,
+  borderRadius: 18,
+  backgroundColor: "#DEE7F9",
+  justifyContent: "center",
+  alignItems: "center",
+  flexShrink: 0,
 }
 
 export const $educationCardTitle: TextStyle = {
   flex: 1,
   fontSize: 14,
   fontFamily: typography.primary.semiBold,
-  color: "#333333",
+  color: "#555555",
   lineHeight: 20,
 }
 
 // ── Bottom Action Bar ─────────────────────────────────────────────────────────
 
 export const $bottomBar: ViewStyle = {
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  right: 0,
   backgroundColor: "#FFFFFF",
-  paddingHorizontal: 20,
   paddingTop: 14,
-  borderTopWidth: 1,
-  borderTopColor: "#EEEEEE",
 }
 
 export const $startBtn: ViewStyle = {
