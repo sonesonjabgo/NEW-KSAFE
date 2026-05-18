@@ -180,7 +180,9 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
           >
             {/* 작성 가이드 */}
             <View style={[S.$card, S.$guideRow]}>
-              <HeaderBell width={51} height={51} color="#1062D8" />
+              <View style={S.$guideIconWrap}>
+                <HeaderBell width={25} height={25} color="#1062D8" />
+              </View>
               <View style={S.$guideTextBlock}>
                 <Text
                   text={translate("tbmCreateScreen:guide.title")}

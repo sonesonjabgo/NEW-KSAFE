@@ -30,18 +30,21 @@ export const $resetLabel: TextStyle = {
 
 export const $section: ViewStyle = {
   gap: 8,
+  paddingBottom: 16,
+  borderBottomWidth: 1,
+  borderBottomColor: "#E9ECF0",
 }
 
 export const $sectionLabel: TextStyle = {
-  fontSize: 15,
+  fontSize: 19,
   fontFamily: typography.primary.semiBold,
-  color: "#111111",
+  color: colors.navy,
 }
 
 export const $helperText: TextStyle = {
-  fontSize: 12,
+  fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#999999",
+  color: "#979797",
 }
 
 // ── Card ─────────────────────────────────────────────────────────────────────
@@ -49,7 +52,8 @@ export const $helperText: TextStyle = {
 export const $card: ViewStyle = {
   backgroundColor: "#FFFFFF",
   borderRadius: 12,
-  padding: 16,
+  paddingVertical: 20,
+  paddingHorizontal: 26,
   shadowColor: "#000000",
   shadowOffset: { width: 0, height: 2 },
   shadowOpacity: 0.08,
@@ -61,12 +65,19 @@ export const $card: ViewStyle = {
 
 export const $guideRow: ViewStyle = {
   flexDirection: "row",
-  gap: 12,
+  gap: 17,
+}
+
+export const $guideIconWrap: ViewStyle = {
+  width: 51,
+  height: 51,
+  justifyContent: "center",
+  alignItems: "center",
 }
 
 export const $guideTextBlock: ViewStyle = {
   flex: 1,
-  gap: 4,
+  gap: 8,
 }
 
 export const $guideTitle: TextStyle = {
@@ -118,7 +129,7 @@ export const $checkboxRow: ViewStyle = {
 export const $checkbox: ViewStyle = {
   width: 20,
   height: 20,
-  borderRadius: 10,
+  borderRadius: 4,
   borderWidth: 2,
   borderColor: "#CCCCCC",
   justifyContent: "center",
@@ -126,15 +137,18 @@ export const $checkbox: ViewStyle = {
 }
 
 export const $checkboxActive: ViewStyle = {
-  borderColor: colors.navy,
-  backgroundColor: colors.navy,
+  borderColor: "#1062D8",
+  backgroundColor: "#1062D8",
 }
 
 export const $checkboxDot: ViewStyle = {
-  width: 8,
-  height: 8,
-  borderRadius: 4,
-  backgroundColor: "#FFFFFF",
+  width: 10,
+  height: 6,
+  borderLeftWidth: 2,
+  borderBottomWidth: 2,
+  borderColor: "#FFFFFF",
+  transform: [{ rotate: "-45deg" }],
+  marginTop: -2,
 }
 
 export const $checkboxLabel: TextStyle = {
