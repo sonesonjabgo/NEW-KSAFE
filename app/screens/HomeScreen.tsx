@@ -12,15 +12,15 @@ import GridBulb from "@assets/icons/home2/grid_bulb.svg"
 
 import BoardType1 from "@assets/icons/board/board_type1.svg"
 import BoardType2 from "@assets/icons/board/board_type2.svg"
-import GridChatbot from "@assets/icons/home2/temp/bot.svg"
-import GridEduJoin from "@assets/icons/home2/temp/qr-code.svg"
+import GridChatbot from "@assets/icons/home2/grid_chatbot.svg"
+import GridEduJoin from "@assets/icons/home2/grid_edu_join.svg"
 import GridEducation from "@assets/icons/home2/grid_education.svg"
 import GridInterpret from "@assets/icons/home2/temp/text-search.svg"
 import GridTbmJoin from "@assets/icons/home2/grid_tbm_join.svg"
-import GridTranslate from "@assets/icons/home2/temp/languages.svg"
+import GridTranslate from "@assets/icons/home2/grid_translate.svg"
 import HeaderBell from "@assets/icons/nav2/header_bell.svg"
 import HeaderLang from "@assets/icons/nav2/header_lang.svg"
-import HeaderQr from "@assets/icons/home2/temp/qr-code-white.svg"
+import HeaderQr from "@assets/icons/nav2/header_qr.svg"
 
 import { Text } from "@/components/Text"
 import { useRole } from "@/context/RoleContext"
@@ -46,7 +46,13 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
   const TABS: TabType[] = useMemo(() => ["all", "company", "workplace"], [])
 
-  const GRID_ITEMS: { Icon: React.FC<SvgProps>; label: string; sub: string; onPress?: () => void }[] = useMemo(
+  const GRID_ITEMS: {
+    Icon: React.FC<SvgProps>
+    label: string
+    sub: string
+    onPress?: () => void
+    iconSize?: number
+  }[] = useMemo(
     () => [
       {
         Icon: GridInterpret,
@@ -59,12 +65,14 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         label: translate("homeScreen:grid.chatbot.label"),
         sub: translate("homeScreen:grid.chatbot.sub"),
         onPress: () => navigation.navigate("AISafetyChat"),
+        iconSize: 32,
       },
       {
         Icon: GridTranslate,
         label: translate("homeScreen:grid.translate.label"),
         sub: translate("homeScreen:grid.translate.sub"),
         onPress: () => navigation.navigate("TextTranslation"),
+        iconSize: 28,
       },
       {
         Icon: GridEducation,
@@ -76,6 +84,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         label: translate("homeScreen:grid.eduJoin.label"),
         sub: translate("homeScreen:grid.eduJoin.sub"),
         onPress: () => navigation.navigate("QrScanner"),
+        iconSize: 22,
       },
       {
         Icon: GridTbmJoin,
@@ -91,6 +100,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         Icon: GridTbmCreate,
         label: translate("homeScreen:grid.tbmCreate.label"),
         sub: translate("homeScreen:grid.tbmCreate.sub"),
+        iconSize: 24,
       },
       {
         Icon: GridTbmReport,
@@ -180,19 +190,31 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
               <Text text={translate("homeScreen:orgName")} style={$appSub} />
             </View>
             <View style={$headerActions}>
-              <TouchableOpacity style={$headerAction} onPress={() => navigation.navigate("QrScanner")}>
-                <HeaderQr width={22} height={22} style={$headerActionIcon} />
+              <TouchableOpacity
+                style={$headerAction}
+                onPress={() => navigation.navigate("QrScanner")}
+              >
+                <View style={$headerIconWrap}>
+                  <HeaderQr width={20} height={20} />
+                </View>
                 <Text text={translate("homeScreen:header.qrScan")} style={$headerActionLabel} />
               </TouchableOpacity>
               <TouchableOpacity style={$headerAction} onPress={() => navigation.navigate("Notify")}>
-                <HeaderBell width={22} height={22} style={$headerActionIcon} />
+                <View style={$headerIconWrap}>
+                  <HeaderBell width={22} height={22} />
+                </View>
                 <Text
                   text={translate("homeScreen:header.notification")}
                   style={$headerActionLabel}
                 />
               </TouchableOpacity>
-              <TouchableOpacity style={$headerAction} onPress={() => navigation.navigate("LanguageSettings")}>
-                <HeaderLang width={22} height={22} style={$headerActionIcon} />
+              <TouchableOpacity
+                style={$headerAction}
+                onPress={() => navigation.navigate("LanguageSettings")}
+              >
+                <View style={$headerIconWrap}>
+                  <HeaderLang width={22} height={22} />
+                </View>
                 <Text text={translate("homeScreen:header.language")} style={$headerActionLabel} />
               </TouchableOpacity>
             </View>
@@ -210,7 +232,11 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
               />
               <Text text={translate("homeScreen:greeting.message")} style={$greetMsg} />
             </View>
-            <TouchableOpacity style={$avatar} activeOpacity={0.7} onPress={() => navigation.navigate("MyPage")}>
+            <TouchableOpacity
+              style={$avatar}
+              activeOpacity={0.7}
+              onPress={() => navigation.navigate("MyPage")}
+            >
               <View style={$avatarHead} />
               <View style={$avatarBody} />
             </TouchableOpacity>
@@ -219,8 +245,15 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           {/* Feature Grid */}
           <View style={$grid}>
             {visibleGridItems.map((item, i) => (
-              <TouchableOpacity key={i} style={$gridCell} activeOpacity={0.7} onPress={item.onPress}>
-                <item.Icon width={36} height={36} style={$gridIcon} />
+              <TouchableOpacity
+                key={i}
+                style={$gridCell}
+                activeOpacity={0.7}
+                onPress={item.onPress}
+              >
+                <View style={$gridIconWrap}>
+                  <item.Icon width={item.iconSize ?? 36} height={item.iconSize ?? 36} />
+                </View>
                 <View style={$gridTextWrap}>
                   <Text text={item.label} style={$gridLabel} numberOfLines={1} />
                   <Text text={item.sub} style={$gridSub} numberOfLines={1} />
@@ -453,9 +486,11 @@ const $headerAction: ViewStyle = {
   gap: 4,
 }
 
-const $headerActionIcon: ViewStyle = {
+const $headerIconWrap: ViewStyle = {
   width: 24,
   height: 24,
+  justifyContent: "center",
+  alignItems: "center",
 }
 
 const $headerActionLabel: TextStyle = {
@@ -551,9 +586,11 @@ const $gridCell: ViewStyle = {
   borderColor: "#E9ECF0",
 }
 
-const $gridIcon: ViewStyle = {
+const $gridIconWrap: ViewStyle = {
   width: 54,
   height: 54,
+  justifyContent: "center",
+  alignItems: "center",
 }
 
 const $gridTextWrap: ViewStyle = {
