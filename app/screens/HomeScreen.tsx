@@ -103,6 +103,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         label: translate("homeScreen:grid.tbmCreate.label"),
         sub: translate("homeScreen:grid.tbmCreate.sub"),
         iconSize: 24,
+        onPress: () => navigation.navigate("TbmList"),
       },
       {
         Icon: GridTbmReport,
@@ -203,7 +204,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
               </TouchableOpacity>
               <TouchableOpacity style={$headerAction} onPress={() => navigation.navigate("Notify")}>
                 <View style={$headerIconWrap}>
-                  <HeaderBell width={22} height={22} />
+                  <HeaderBell width={22} height={22} color="white" />
                 </View>
                 <Text
                   text={translate("homeScreen:header.notification")}

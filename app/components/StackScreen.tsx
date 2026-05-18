@@ -14,6 +14,8 @@ interface StackScreenProps {
   rightSlot?: ReactNode
   /** 콘텐츠 영역 배경색. 기본값: colors.screenBg */
   contentBg?: string
+  /** true이면 콘텐츠 영역 상단 radius를 제거한다. 기본값: false */
+  squareTop?: boolean
   children: ReactNode
 }
 
@@ -37,6 +39,7 @@ export function StackScreen({
   onBack,
   rightSlot,
   contentBg = colors.screenBg,
+  squareTop = false,
   children,
 }: StackScreenProps) {
   const insets = useSafeAreaInsets()
@@ -58,7 +61,9 @@ export function StackScreen({
         <View style={[$headerSide, $headerSideRight]}>{rightSlot ?? null}</View>
       </View>
 
-      <View style={[$content, { backgroundColor: contentBg }]}>{children}</View>
+      <View style={[$content, squareTop && $contentSquareTop, { backgroundColor: contentBg }]}>
+        {children}
+      </View>
     </View>
   )
 }
@@ -102,4 +107,9 @@ const $content: ViewStyle = {
   borderTopLeftRadius: 20,
   borderTopRightRadius: 20,
   overflow: "hidden",
+}
+
+const $contentSquareTop: ViewStyle = {
+  borderTopLeftRadius: 0,
+  borderTopRightRadius: 0,
 }

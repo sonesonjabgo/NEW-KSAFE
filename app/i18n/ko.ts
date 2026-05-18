@@ -490,6 +490,69 @@ const ko: Translations = {
     },
   },
 
+  tbmListScreen: {
+    title: "TBM 활동 목록",
+    tabs: {
+      all: "전체",
+      drafting: "작성중",
+      ongoing: "진행중",
+      ended: "종료됨",
+    },
+    status: {
+      drafting: "작성중",
+      ongoing: "진행중",
+      ended: "종료됨",
+    },
+    participants: "참여자 {{count}}명",
+    fab: "새 활동 생성",
+    empty: {
+      drafting: "작성중인 TBM이 없습니다.",
+      ongoing: "진행중인 TBM이 없습니다.",
+      ended: "종료된 TBM이 없습니다.",
+      all: "TBM 활동이 없습니다.",
+    },
+  },
+
+  tbmCreateScreen: {
+    title: "TBM 활동 생성",
+    reset: "초기화",
+    guide: {
+      title: "작성 가이드",
+      description:
+        "사업장, 작업 일정, 활동 내용과 교육자료를 한 화면에서 관리해 TBM 활동을 바로 생성할 수 있습니다. 교육자료는 드롭 다운이나 직접 추가 중 선택할 수 있습니다.",
+    },
+    workplace: {
+      label: "사업장 선택",
+      placeholder: "사업장을 선택하세요",
+      helper: "TBM 활동을 진행할 사업장을 선택해주세요.",
+    },
+    dateTime: {
+      label: "작업 일시 (YYYY-MM-DD)",
+      includeDateInTitle: "제목에 작업 일시 포함하기",
+      helper: "작업 일정을 달력에서 선택해주세요.",
+      confirm: "확인",
+    },
+    activityTitle: {
+      label: "활동 제목",
+      placeholder: "예: 2026.05.15 오전 철근작업 TBM",
+      helper: "TBM 활동 제목은 최대 200자까지 입력해주세요.",
+    },
+    content: {
+      label: "활동 내용",
+      placeholder: "주요 작업 내용을 입력하세요",
+      helper: "작업 내용을 입력해주세요. 최대 2,000자까지 입력할 수 있습니다.",
+    },
+    education: {
+      label: "교육 자료 선택",
+      statusBadge: "선택 현황",
+      multipleBadge: "복수 선택 가능",
+      countText: "총 {{count}}개 선택",
+      countHelper: "선택 확인으로 이동해 교육자료를 추가하거나, 변경할 수 있습니다.",
+      selectButton: "+ 교육자료 선택하기",
+    },
+    submit: "생성하기",
+  },
+
   ...demoKo,
 }
 
