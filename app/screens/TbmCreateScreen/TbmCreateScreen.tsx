@@ -10,12 +10,10 @@ import {
   TouchableOpacity,
   View,
 } from "react-native"
-import DateTimePicker, {
-  DateTimePickerEvent,
-} from "@react-native-community/datetimepicker"
+import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { IconChevronDown } from "@tabler/icons-react-native"
-import HeaderBell from "@assets/icons/nav2/header_bell.svg"
+import HeaderBell from "@assets/icons/nav/header_bell.svg"
 import EducationFrame from "@assets/icons/education_frame.svg"
 
 import { StackScreen } from "@/components/StackScreen"
@@ -143,10 +141,13 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
     setDatePickerVisible(false)
   }, [])
 
-  const handleSelectWorkplace = useCallback((wp: string) => {
-    setWorkplace(wp)
-    closeWorkplaceModal()
-  }, [closeWorkplaceModal])
+  const handleSelectWorkplace = useCallback(
+    (wp: string) => {
+      setWorkplace(wp)
+      closeWorkplaceModal()
+    },
+    [closeWorkplaceModal],
+  )
 
   const handleOpenEducationSelect = useCallback(() => {
     navigation.navigate("EducationSelect", {
@@ -156,7 +157,9 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
   }, [navigation, selectedEducationIds])
 
   const handleSubmit = useCallback(() => {
-    console.log(JSON.stringify({ workplace, dateTime, title, content, selectedEducationIds }, null, 2))
+    console.log(
+      JSON.stringify({ workplace, dateTime, title, content, selectedEducationIds }, null, 2),
+    )
   }, [workplace, dateTime, title, content, selectedEducationIds])
 
   const resetLabel = useMemo(() => translate("tbmCreateScreen:reset"), [])
@@ -193,54 +196,33 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
                 <HeaderBell width={25} height={25} color="#1062D8" />
               </View>
               <View style={S.$guideTextBlock}>
-                <Text
-                  text={translate("tbmCreateScreen:guide.title")}
-                  style={S.$guideTitle}
-                />
-                <Text
-                  text={translate("tbmCreateScreen:guide.description")}
-                  style={S.$guideDesc}
-                />
+                <Text text={translate("tbmCreateScreen:guide.title")} style={S.$guideTitle} />
+                <Text text={translate("tbmCreateScreen:guide.description")} style={S.$guideDesc} />
               </View>
             </View>
 
             {/* 사업장 선택 */}
             <View style={S.$section}>
-              <Text
-                text={translate("tbmCreateScreen:workplace.label")}
-                style={S.$sectionLabel}
-              />
+              <Text text={translate("tbmCreateScreen:workplace.label")} style={S.$sectionLabel} />
               <TouchableOpacity
                 style={S.$inputRow}
                 activeOpacity={0.7}
                 onPress={openWorkplaceModal}
               >
                 <Text
-                  text={
-                    workplace || translate("tbmCreateScreen:workplace.placeholder")
-                  }
+                  text={workplace || translate("tbmCreateScreen:workplace.placeholder")}
                   style={[S.$inputText, !workplace && S.$inputPlaceholder]}
                   numberOfLines={1}
                 />
                 <IconChevronDown size={18} color="#AAAAAA" />
               </TouchableOpacity>
-              <Text
-                text={translate("tbmCreateScreen:workplace.helper")}
-                style={S.$helperText}
-              />
+              <Text text={translate("tbmCreateScreen:workplace.helper")} style={S.$helperText} />
             </View>
 
             {/* 작업 일시 */}
             <View style={S.$section}>
-              <Text
-                text={translate("tbmCreateScreen:dateTime.label")}
-                style={S.$sectionLabel}
-              />
-              <TouchableOpacity
-                style={S.$inputRow}
-                activeOpacity={0.7}
-                onPress={openDatePicker}
-              >
+              <Text text={translate("tbmCreateScreen:dateTime.label")} style={S.$sectionLabel} />
+              <TouchableOpacity style={S.$inputRow} activeOpacity={0.7} onPress={openDatePicker}>
                 <Text text={dateTime} style={S.$inputText} />
                 <IconChevronDown size={18} color="#AAAAAA" />
               </TouchableOpacity>
@@ -257,10 +239,7 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
                   style={S.$checkboxLabel}
                 />
               </TouchableOpacity>
-              <Text
-                text={translate("tbmCreateScreen:dateTime.helper")}
-                style={S.$helperText}
-              />
+              <Text text={translate("tbmCreateScreen:dateTime.helper")} style={S.$helperText} />
             </View>
 
             {/* 활동 제목 */}
@@ -287,10 +266,7 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
 
             {/* 활동 내용 */}
             <View style={S.$section}>
-              <Text
-                text={translate("tbmCreateScreen:content.label")}
-                style={S.$sectionLabel}
-              />
+              <Text text={translate("tbmCreateScreen:content.label")} style={S.$sectionLabel} />
               <View style={S.$textarea}>
                 <TextInput
                   style={S.$textareaInput}
@@ -303,18 +279,12 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
                   scrollEnabled={false}
                 />
               </View>
-              <Text
-                text={translate("tbmCreateScreen:content.helper")}
-                style={S.$helperText}
-              />
+              <Text text={translate("tbmCreateScreen:content.helper")} style={S.$helperText} />
             </View>
 
             {/* 교육 자료 선택 */}
             <View style={[S.$section, { borderBottomWidth: 0 }]}>
-              <Text
-                text={translate("tbmCreateScreen:education.label")}
-                style={S.$sectionLabel}
-              />
+              <Text text={translate("tbmCreateScreen:education.label")} style={S.$sectionLabel} />
               <View style={S.$educationCount}>
                 {/* 상단 배지 행 */}
                 <View style={S.$educationCountHeader}>
@@ -336,7 +306,9 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
                   </View>
                   <View style={S.$educationCountTextBlock}>
                     <Text
-                      text={translate("tbmCreateScreen:education.countText", { count: selectedEducationIds.length })}
+                      text={translate("tbmCreateScreen:education.countText", {
+                        count: selectedEducationIds.length,
+                      })}
                       style={S.$educationCountText}
                     />
                     <Text
@@ -367,10 +339,7 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
               onPress={handleSubmit}
               disabled={!isValid}
             >
-              <Text
-                text={translate("tbmCreateScreen:submit")}
-                style={S.$submitBtnText}
-              />
+              <Text text={translate("tbmCreateScreen:submit")} style={S.$submitBtnText} />
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
@@ -437,7 +406,10 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
           />
           <View style={[S.$datePickerSheet, { paddingBottom: insets.bottom + 8 }]}>
             <TouchableOpacity style={S.$datePickerConfirm} onPress={confirmIOSPicker}>
-              <Text text={translate("tbmCreateScreen:dateTime.confirm")} style={S.$datePickerConfirmText} />
+              <Text
+                text={translate("tbmCreateScreen:dateTime.confirm")}
+                style={S.$datePickerConfirmText}
+              />
             </TouchableOpacity>
             <DateTimePicker
               value={selectedDate}

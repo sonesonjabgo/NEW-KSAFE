@@ -60,6 +60,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         label: translate("homeScreen:grid.interpret.label"),
         sub: translate("homeScreen:grid.interpret.sub"),
         onPress: () => navigation.navigate("VoiceTranslation"),
+        iconSize: 30,
       },
       {
         Icon: GridChatbot,
