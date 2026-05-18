@@ -15,7 +15,7 @@ export const $scrollInner: ViewStyle = {
   paddingHorizontal: 20,
   paddingTop: 28,
   paddingBottom: 40,
-  gap: 24,
+  gap: 35,
 }
 
 // ── Reset button (header rightSlot) ──────────────────────────────────────────
@@ -179,59 +179,74 @@ export const $textareaInput: TextStyle = {
 
 // ── Education ─────────────────────────────────────────────────────────────────
 
-export const $educationBadgeRow: ViewStyle = {
-  flexDirection: "row",
-  gap: 6,
-}
-
-export const $badgeStatus: ViewStyle = {
-  paddingHorizontal: 10,
-  paddingVertical: 4,
-  borderRadius: 20,
-  backgroundColor: "#E8EEF8",
-}
-
-export const $badgeStatusText: TextStyle = {
-  fontSize: 12,
-  fontFamily: typography.primary.semiBold,
-  color: colors.navy,
-}
-
-export const $badgeMultiple: ViewStyle = {
-  paddingHorizontal: 10,
-  paddingVertical: 4,
-  borderRadius: 20,
-  backgroundColor: "#F0F0F0",
-}
-
-export const $badgeMultipleText: TextStyle = {
-  fontSize: 12,
-  fontFamily: typography.primary.normal,
-  color: "#888888",
-}
-
 export const $educationCount: ViewStyle = {
-  backgroundColor: "#FFFFFF",
+  backgroundColor: "#F0F4FB",
   borderRadius: 8,
   borderWidth: 1,
   borderColor: DIVIDER,
-  paddingVertical: 20,
-  paddingHorizontal: 16,
+  overflow: "hidden",
+}
+
+export const $educationCountHeader: ViewStyle = {
+  flexDirection: "row",
+  justifyContent: "space-between",
   alignItems: "center",
-  gap: 6,
+  paddingHorizontal: 18,
+  paddingTop: 14,
+  paddingBottom: 12,
+}
+
+export const $educationStatusBadgeText: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.semiBold,
+  color: "#1062D8",
+}
+
+export const $educationMultipleBadge: ViewStyle = {
+  paddingHorizontal: 8,
+  paddingVertical: 3,
+  borderRadius: 20,
+  backgroundColor: "#FFFFFF",
+}
+
+export const $educationMultipleBadgeText: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.normal,
+  color: "#1062D8",
+}
+
+export const $educationCountBody: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 14,
+  paddingHorizontal: 18,
+  paddingBottom: 20,
+}
+
+export const $educationIconCircle: ViewStyle = {
+  width: 55,
+  height: 55,
+  borderRadius: 27.5,
+  backgroundColor: "#DEE7F9",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+export const $educationCountTextBlock: ViewStyle = {
+  flex: 1,
+  gap: 10,
 }
 
 export const $educationCountText: TextStyle = {
-  fontSize: 14,
-  fontFamily: typography.primary.semiBold,
-  color: "#333333",
+  fontSize: 19,
+  fontFamily: typography.primary.bold,
+  color: "#000000",
 }
 
 export const $educationCountHelper: TextStyle = {
-  fontSize: 12,
+  fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#999999",
-  textAlign: "center",
+  color: "#564E4B",
 }
 
 export const $educationSelectBtn: ViewStyle = {
@@ -239,7 +254,7 @@ export const $educationSelectBtn: ViewStyle = {
   borderRadius: 8,
   borderWidth: 1,
   borderStyle: "dashed",
-  borderColor: "#CCCCCC",
+  borderColor: "#1062D8",
   backgroundColor: "#FFFFFF",
   justifyContent: "center",
   alignItems: "center",
@@ -248,7 +263,7 @@ export const $educationSelectBtn: ViewStyle = {
 export const $educationSelectBtnText: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.semiBold,
-  color: colors.navy,
+  color: "#1062D8",
 }
 
 // ── Submit bar ────────────────────────────────────────────────────────────────
@@ -256,19 +271,18 @@ export const $educationSelectBtnText: TextStyle = {
 export const $submitBar: ViewStyle = {
   paddingHorizontal: 16,
   paddingTop: 12,
-  backgroundColor: "#F2F3F5",
 }
 
 export const $submitBtn: ViewStyle = {
   height: 52,
   borderRadius: 12,
-  backgroundColor: colors.navy,
+  backgroundColor: "#1062D8",
   justifyContent: "center",
   alignItems: "center",
 }
 
 export const $submitBtnDisabled: ViewStyle = {
-  backgroundColor: "#CCCCCC",
+  backgroundColor: "#F3F2F0",
 }
 
 export const $submitBtnText: TextStyle = {

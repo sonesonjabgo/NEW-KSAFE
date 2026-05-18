@@ -16,6 +16,7 @@ import DateTimePicker, {
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { IconChevronDown } from "@tabler/icons-react-native"
 import HeaderBell from "@assets/icons/nav2/header_bell.svg"
+import EducationFrame from "@assets/icons/education_frame.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -301,34 +302,41 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
             </View>
 
             {/* 교육 자료 선택 */}
-            <View style={S.$section}>
+            <View style={[S.$section, { borderBottomWidth: 0 }]}>
               <Text
                 text={translate("tbmCreateScreen:education.label")}
                 style={S.$sectionLabel}
               />
-              <View style={S.$educationBadgeRow}>
-                <View style={S.$badgeStatus}>
+              <View style={S.$educationCount}>
+                {/* 상단 배지 행 */}
+                <View style={S.$educationCountHeader}>
                   <Text
                     text={translate("tbmCreateScreen:education.statusBadge")}
-                    style={S.$badgeStatusText}
+                    style={S.$educationStatusBadgeText}
                   />
+                  <View style={S.$educationMultipleBadge}>
+                    <Text
+                      text={translate("tbmCreateScreen:education.multipleBadge")}
+                      style={S.$educationMultipleBadgeText}
+                    />
+                  </View>
                 </View>
-                <View style={S.$badgeMultiple}>
-                  <Text
-                    text={translate("tbmCreateScreen:education.multipleBadge")}
-                    style={S.$badgeMultipleText}
-                  />
+                {/* 콘텐츠 행: 아이콘 + 텍스트 */}
+                <View style={S.$educationCountBody}>
+                  <View style={S.$educationIconCircle}>
+                    <EducationFrame width={28} height={28} />
+                  </View>
+                  <View style={S.$educationCountTextBlock}>
+                    <Text
+                      text={translate("tbmCreateScreen:education.countText", { count: 0 })}
+                      style={S.$educationCountText}
+                    />
+                    <Text
+                      text={translate("tbmCreateScreen:education.countHelper")}
+                      style={S.$educationCountHelper}
+                    />
+                  </View>
                 </View>
-              </View>
-              <View style={S.$educationCount}>
-                <Text
-                  text={translate("tbmCreateScreen:education.countText", { count: 0 })}
-                  style={S.$educationCountText}
-                />
-                <Text
-                  text={translate("tbmCreateScreen:education.countHelper")}
-                  style={S.$educationCountHelper}
-                />
               </View>
               <TouchableOpacity
                 style={S.$educationSelectBtn}
