@@ -163,7 +163,7 @@ export const TbmListScreen: FC<TbmListScreenProps> = ({ navigation }) => {
         <TouchableOpacity
           style={S.$fab}
           activeOpacity={0.8}
-          onPress={() => console.log("새 활동 생성")}
+          onPress={() => navigation.navigate("TbmCreate")}
         >
           <TbmFabIcon width={29} height={29} />
           <Text text={translate("tbmListScreen:fab")} style={S.$fabLabel} />

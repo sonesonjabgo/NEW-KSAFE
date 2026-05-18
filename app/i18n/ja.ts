@@ -474,6 +474,45 @@ const ja: Translations = {
     },
   },
 
+  tbmCreateScreen: {
+    title: "Create TBM Activity",
+    reset: "Reset",
+    guide: {
+      title: "Writing Guide",
+      description:
+        "Manage your workplace, work schedule, activity content, and educational materials all in one screen to create a TBM activity immediately. You can select educational materials from a dropdown or add them directly.",
+    },
+    workplace: {
+      label: "Select Workplace",
+      placeholder: "Select a workplace",
+      helper: "Please select the workplace for this TBM activity.",
+    },
+    dateTime: {
+      label: "Work Date (YYYY-MM-DD)",
+      includeDateInTitle: "Include date in title",
+      helper: "Please select the work schedule from the calendar.",
+    },
+    activityTitle: {
+      label: "Activity Title",
+      placeholder: "e.g. 2026.05.15 Morning Rebar Work TBM",
+      helper: "Activity title can be up to 200 characters.",
+    },
+    content: {
+      label: "Activity Content",
+      placeholder: "Enter main work content",
+      helper: "Enter work content. Maximum 2,000 characters.",
+    },
+    education: {
+      label: "Select Educational Materials",
+      statusBadge: "Selection Status",
+      multipleBadge: "Multiple selections allowed",
+      countText: "{{count}} item(s) selected",
+      countHelper: "Go to selection confirmation to add or change educational materials.",
+      selectButton: "+ Select Educational Materials",
+    },
+    submit: "Create",
+  },
+
   ...demoJa,
 }
 
