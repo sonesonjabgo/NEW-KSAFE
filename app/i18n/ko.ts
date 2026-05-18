@@ -516,9 +516,8 @@ const ko: Translations = {
   tbmReportScreen: {
     title: "TBM 보고서 생성",
     notice: {
-      title: "주의사항",
       description:
-        "보고서 제출 전 모든 항목을 정확히 기재해 주세요. 허위 작성 시 법적 책임이 따를 수 있습니다.",
+        "· 진행중인 TBM 활동에 대해서만 교육일지를 작성할 수 있습니다.\n· 교육일지를 완료하면 해당 TBM 활동이 자동으로 종료됩니다.\n· 현장 사진은 최소 1장 이상 반드시 첨부해야 합니다.",
     },
     activityName: {
       label: "TBM 활동명",

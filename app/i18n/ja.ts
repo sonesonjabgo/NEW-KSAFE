@@ -477,8 +477,9 @@ const ja: Translations = {
   tbmReportScreen: {
     title: "TBMレポート生成",
     notice: {
-      title: "注意事項",
-      description: "提出前にすべての項目を正確に記入してください。虚偽記載は法的責任を問われる場合があります。",
+      description: "· 教育日誌は進行中のTBM活動に対してのみ作成できます。
+· 教育日誌を完了すると、該当するTBM活動が自動的に終了します。
+· 現場写真を最低1枚以上添付する必要があります。",
     },
     activityName: {
       label: "TBM活動名",

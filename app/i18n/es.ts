@@ -481,8 +481,9 @@ const es: Translations = {
   tbmReportScreen: {
     title: "Generación de Informe TBM",
     notice: {
-      title: "Aviso",
-      description: "Complete todos los campos con precisión antes de enviar. Las entradas falsas pueden resultar en responsabilidad legal.",
+      description: "· Solo se puede redactar el registro educativo para actividades TBM en curso.
+· Al completar el registro, la actividad TBM finalizará automáticamente.
+· Se debe adjuntar al menos una foto del sitio.",
     },
     activityName: {
       label: "Nombre de actividad TBM",

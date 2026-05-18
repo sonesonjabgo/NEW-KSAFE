@@ -524,9 +524,8 @@ const en = {
   tbmReportScreen: {
     title: "TBM Report Generation",
     notice: {
-      title: "Notice",
       description:
-        "Please fill in all fields accurately before submitting. False entries may result in legal liability.",
+        "· Education logs can only be created for TBM activities in progress.\n· Completing the education log will automatically end the TBM activity.\n· At least one site photo must be attached.",
     },
     activityName: {
       label: "TBM Activity Name",

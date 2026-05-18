@@ -481,8 +481,9 @@ const fr: Translations = {
   tbmReportScreen: {
     title: "Génération de rapport TBM",
     notice: {
-      title: "Avis",
-      description: "Veuillez remplir tous les champs avec précision avant de soumettre. Les fausses déclarations peuvent entraîner des responsabilités légales.",
+      description: "· Le journal éducatif ne peut être rédigé que pour les activités TBM en cours.
+· La finalisation du journal mettra automatiquement fin à l'activité TBM.
+· Au moins une photo du site doit être jointe.",
     },
     activityName: {
       label: "Nom de l'activité TBM",

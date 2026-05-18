@@ -20,32 +20,26 @@ export const $scrollInner: ViewStyle = {
 // ── Notice Card ───────────────────────────────────────────────────────────────
 
 export const $noticeCard: ViewStyle = {
-  backgroundColor: "#FFF8E6",
+  backgroundColor: "#FFFBEA",
   borderRadius: 12,
   borderWidth: 1,
-  borderColor: "#FFE0A0",
-  paddingVertical: 16,
-  paddingHorizontal: 20,
-  gap: 6,
+  borderColor: "#FBE1AC",
+  paddingVertical: 18,
+  paddingHorizontal: 23,
 }
 
 export const $noticeRow: ViewStyle = {
   flexDirection: "row",
-  alignItems: "center",
-  gap: 8,
-}
-
-export const $noticeTitle: TextStyle = {
-  fontSize: 14,
-  fontFamily: typography.primary.bold,
-  color: "#B45309",
+  alignItems: "flex-start",
+  gap: 10,
 }
 
 export const $noticeDesc: TextStyle = {
-  fontSize: 13,
+  flex: 1,
+  fontSize: 15,
   fontFamily: typography.primary.normal,
-  color: "#78350F",
-  lineHeight: 20,
+  color: "#564E4B",
+  lineHeight: 24,
 }
 
 // ── Activity Name Card ────────────────────────────────────────────────────────
