@@ -28,6 +28,7 @@ export type AppStackParamList = {
   TextTranslation: undefined
   ImageTranslation: undefined
   EducationPresentation: undefined
+  TbmList: undefined
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<

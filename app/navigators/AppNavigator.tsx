@@ -17,6 +17,7 @@ import { MyPageScreen } from "@/screens/MyPageScreen"
 import { NotifyScreen } from "@/screens/NotifyScreen"
 import { QrScannerScreen } from "@/screens/QrScannerScreen"
 import { EducationPresentationScreen } from "@/screens/EducationPresentationScreen/EducationPresentationScreen"
+import { TbmListScreen } from "@/screens/TbmListScreen/TbmListScreen"
 import { ImageTranslationScreen } from "@/screens/ImageTranslationScreen/ImageTranslationScreen"
 import { TextTranslationScreen } from "@/screens/TextTranslationScreen/TextTranslationScreen"
 import { VoiceTranslationScreen } from "@/screens/VoiceTranslationScreen"
@@ -63,6 +64,7 @@ const AppStack = () => {
       <Stack.Screen name="TextTranslation" component={TextTranslationScreen} />
       <Stack.Screen name="ImageTranslation" component={ImageTranslationScreen} />
       <Stack.Screen name="EducationPresentation" component={EducationPresentationScreen} />
+      <Stack.Screen name="TbmList" component={TbmListScreen} />
     </Stack.Navigator>
   )
 }

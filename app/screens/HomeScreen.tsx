@@ -92,6 +92,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         Icon: GridTbmCreate,
         label: translate("homeScreen:grid.tbmCreate.label"),
         sub: translate("homeScreen:grid.tbmCreate.sub"),
+        onPress: () => navigation.navigate("TbmList"),
       },
       {
         Icon: GridTbmReport,
