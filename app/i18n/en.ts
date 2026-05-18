@@ -498,6 +498,29 @@ const en = {
     },
   },
 
+  tbmListScreen: {
+    title: "TBM Activity List",
+    tabs: {
+      all: "All",
+      drafting: "Drafting",
+      ongoing: "Ongoing",
+      ended: "Ended",
+    },
+    status: {
+      drafting: "Drafting",
+      ongoing: "Ongoing",
+      ended: "Ended",
+    },
+    participants: "{{count}} participant(s)",
+    fab: "New Activity",
+    empty: {
+      drafting: "No drafting TBMs.",
+      ongoing: "No ongoing TBMs.",
+      ended: "No ended TBMs.",
+      all: "No TBM activities.",
+    },
+  },
+
   ...demoEn,
 }
 

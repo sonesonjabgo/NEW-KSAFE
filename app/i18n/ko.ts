@@ -490,6 +490,29 @@ const ko: Translations = {
     },
   },
 
+  tbmListScreen: {
+    title: "TBM 활동 목록",
+    tabs: {
+      all: "전체",
+      drafting: "작성중",
+      ongoing: "진행중",
+      ended: "종료됨",
+    },
+    status: {
+      drafting: "작성중",
+      ongoing: "진행중",
+      ended: "종료됨",
+    },
+    participants: "참여자 {{count}}명",
+    fab: "새 활동 생성",
+    empty: {
+      drafting: "작성중인 TBM이 없습니다.",
+      ongoing: "진행중인 TBM이 없습니다.",
+      ended: "종료된 TBM이 없습니다.",
+      all: "TBM 활동이 없습니다.",
+    },
+  },
+
   ...demoKo,
 }
 
