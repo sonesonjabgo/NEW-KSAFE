@@ -122,6 +122,7 @@ export const TbmListScreen: FC<TbmListScreenProps> = ({ navigation }) => {
         title={translate("tbmListScreen:title")}
         onBack={() => navigation.goBack()}
         contentBg="#FFFFFF"
+        squareTop
       >
         {/* 탭 바 */}
         <View style={S.$tabBar}>
