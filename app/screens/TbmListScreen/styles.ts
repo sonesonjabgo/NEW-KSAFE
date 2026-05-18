@@ -12,6 +12,7 @@ export const $tabBar: ViewStyle = {
   backgroundColor: CARD_BG,
   paddingHorizontal: 16,
   paddingVertical: 8,
+  gap: 6,
 }
 
 export const $tab: ViewStyle = {
@@ -21,6 +22,7 @@ export const $tab: ViewStyle = {
   paddingVertical: 5,
   paddingHorizontal: 4,
   borderRadius: 20,
+  backgroundColor: "#F9FAFE",
 }
 
 export const $activeTab: ViewStyle = {
