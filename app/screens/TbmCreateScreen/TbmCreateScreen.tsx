@@ -46,6 +46,7 @@ function formatDate(d: Date): string {
 export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
 
+  const [selectedEducationIds, setSelectedEducationIds] = useState<number[]>([])
   const [workplace, setWorkplace] = useState("")
   const [selectedDate, setSelectedDate] = useState(() => new Date())
   const [dateTime, setDateTime] = useState(() => formatDate(new Date()))
@@ -147,9 +148,16 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
     closeWorkplaceModal()
   }, [closeWorkplaceModal])
 
+  const handleOpenEducationSelect = useCallback(() => {
+    navigation.navigate("EducationSelect", {
+      initialSelected: selectedEducationIds,
+      onConfirm: (ids) => setSelectedEducationIds(ids),
+    })
+  }, [navigation, selectedEducationIds])
+
   const handleSubmit = useCallback(() => {
-    console.log(JSON.stringify({ workplace, dateTime, title, content }, null, 2))
-  }, [workplace, dateTime, title, content])
+    console.log(JSON.stringify({ workplace, dateTime, title, content, selectedEducationIds }, null, 2))
+  }, [workplace, dateTime, title, content, selectedEducationIds])
 
   const resetLabel = useMemo(() => translate("tbmCreateScreen:reset"), [])
 
@@ -328,7 +336,7 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
                   </View>
                   <View style={S.$educationCountTextBlock}>
                     <Text
-                      text={translate("tbmCreateScreen:education.countText", { count: 0 })}
+                      text={translate("tbmCreateScreen:education.countText", { count: selectedEducationIds.length })}
                       style={S.$educationCountText}
                     />
                     <Text
@@ -341,7 +349,7 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
               <TouchableOpacity
                 style={S.$educationSelectBtn}
                 activeOpacity={0.7}
-                onPress={() => console.log("교육자료 선택 모달 열기")}
+                onPress={handleOpenEducationSelect}
               >
                 <Text
                   text={translate("tbmCreateScreen:education.selectButton")}

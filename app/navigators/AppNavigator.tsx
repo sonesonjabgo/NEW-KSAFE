@@ -19,6 +19,7 @@ import { QrScannerScreen } from "@/screens/QrScannerScreen"
 import { EducationPresentationScreen } from "@/screens/EducationPresentationScreen/EducationPresentationScreen"
 import { TbmListScreen } from "@/screens/TbmListScreen/TbmListScreen"
 import { TbmCreateScreen } from "@/screens/TbmCreateScreen/TbmCreateScreen"
+import { EducationSelectScreen } from "@/screens/EducationSelectScreen/EducationSelectScreen"
 import { ImageTranslationScreen } from "@/screens/ImageTranslationScreen/ImageTranslationScreen"
 import { TextTranslationScreen } from "@/screens/TextTranslationScreen/TextTranslationScreen"
 import { VoiceTranslationScreen } from "@/screens/VoiceTranslationScreen"
@@ -67,6 +68,7 @@ const AppStack = () => {
       <Stack.Screen name="EducationPresentation" component={EducationPresentationScreen} />
       <Stack.Screen name="TbmList" component={TbmListScreen} />
       <Stack.Screen name="TbmCreate" component={TbmCreateScreen} />
+      <Stack.Screen name="EducationSelect" component={EducationSelectScreen} />
     </Stack.Navigator>
   )
 }

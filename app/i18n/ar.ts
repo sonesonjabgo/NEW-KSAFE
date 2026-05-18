@@ -509,6 +509,18 @@ const ar: Translations = {
     submit: "Create",
   },
 
+
+  educationSelectScreen: {
+    title: "Select Educational Materials",
+    sourceTab1: "KS Safety Association",
+    sourceTab2: "KS Safety Association",
+    sourceTab3: "My Materials",
+    searchPlaceholder: "Enter content to search",
+    confirm: "Confirm ({{count}})",
+    confirmNone: "Confirm",
+    emptyText: "No educational materials available.",
+  },
+
   ...demoAr,
 }
 

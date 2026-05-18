@@ -30,6 +30,7 @@ export type AppStackParamList = {
   EducationPresentation: undefined
   TbmList: undefined
   TbmCreate: undefined
+  EducationSelect: { initialSelected: number[]; onConfirm: (ids: number[]) => void }
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<
