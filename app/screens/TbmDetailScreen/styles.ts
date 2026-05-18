@@ -187,12 +187,14 @@ export const $startBtn: ViewStyle = {
   height: 52,
   borderRadius: 12,
   backgroundColor: "#1062D8",
+  flexDirection: "row",
   justifyContent: "center",
   alignItems: "center",
+  gap: 8,
 }
 
 export const $startBtnText: TextStyle = {
-  fontSize: 16,
+  fontSize: 17,
   fontFamily: typography.primary.bold,
   color: "#FFFFFF",
 }

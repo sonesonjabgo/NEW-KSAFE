@@ -1,6 +1,12 @@
 import { FC } from "react"
 import { ScrollView, TouchableOpacity, View } from "react-native"
-import { IconCalendar, IconEdit, IconDownload, IconTrash } from "@tabler/icons-react-native"
+import {
+  IconCalendar,
+  IconEdit,
+  IconDownload,
+  IconPlayerPlayFilled,
+  IconTrash,
+} from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import EducationFrame from "@assets/icons/education_frame.svg"
@@ -114,6 +120,7 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
             activeOpacity={0.8}
             onPress={() => console.log("활동시작:", detail.id)}
           >
+            <IconPlayerPlayFilled size={24} color="#FFFFFF" />
             <Text text={translate("tbmDetailScreen:startActivity")} style={S.$startBtnText} />
           </TouchableOpacity>
 
