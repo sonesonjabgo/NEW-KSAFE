@@ -520,9 +520,21 @@ const ja: Translations = {
     workDate: "作業日:  {{date}}",
     activityLabel: "活動内容",
     educationHeader: "教育資料 ({{count}}件)",
-    startActivity: "活動開始",
-    edit: "編集",
-    delete: "削除",
+    startActivity: "Start Activity",
+    edit: "Edit",
+    delete: "Delete",
+    deleteModal: {
+      title: "TBM活動を削除",
+      message: "本当にこのTBM活動を削除しますか？",
+      cancel: "キャンセル",
+      confirm: "削除",
+    },
+    startModal: {
+      title: "TBM活動を開始",
+      message: "このTBM活動を開始しますか？\nステータスが「進行中」に変わります。",
+      cancel: "キャンセル",
+      confirm: "開始",
+    },
   },
 
   educationSelectScreen: {

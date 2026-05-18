@@ -520,9 +520,21 @@ const hi: Translations = {
     workDate: "कार्य तिथि:  {{date}}",
     activityLabel: "गतिविधि सामग्री",
     educationHeader: "शैक्षिक सामग्री ({{count}})",
-    startActivity: "गतिविधि शुरू करें",
-    edit: "संपादित करें",
-    delete: "हटाएं",
+    startActivity: "Start Activity",
+    edit: "Edit",
+    delete: "Delete",
+    deleteModal: {
+      title: "TBM गतिविधि हटाएं",
+      message: "क्या आप वाकई इस TBM गतिविधि को हटाना चाहते हैं?",
+      cancel: "रद्द करें",
+      confirm: "हटाएं",
+    },
+    startModal: {
+      title: "TBM गतिविधि शुरू करें",
+      message: "क्या आप इस TBM गतिविधि को शुरू करना चाहते हैं?\nस्थिति 'प्रगति में' में बदल जाएगी।",
+      cancel: "रद्द करें",
+      confirm: "शुरू करें",
+    },
   },
 
   educationSelectScreen: {

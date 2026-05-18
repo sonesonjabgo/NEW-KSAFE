@@ -515,9 +515,21 @@ const ar: Translations = {
     workDate: "تاريخ العمل:  {{date}}",
     activityLabel: "محتوى النشاط",
     educationHeader: "مواد التعليم ({{count}})",
-    startActivity: "بدء النشاط",
-    edit: "تعديل",
-    delete: "حذف",
+    startActivity: "Start Activity",
+    edit: "Edit",
+    delete: "Delete",
+    deleteModal: {
+      title: "حذف نشاط TBM",
+      message: "هل أنت متأكد من حذف نشاط TBM هذا؟",
+      cancel: "إلغاء",
+      confirm: "حذف",
+    },
+    startModal: {
+      title: "بدء نشاط TBM",
+      message: "هل تريد بدء نشاط TBM هذا؟\nسيتغير الحالة إلى 'قيد التقدم'.",
+      cancel: "إلغاء",
+      confirm: "بدء",
+    },
   },
 
   educationSelectScreen: {

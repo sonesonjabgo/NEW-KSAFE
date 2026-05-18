@@ -571,6 +571,18 @@ const en = {
     startActivity: "Start Activity",
     edit: "Edit",
     delete: "Delete",
+    deleteModal: {
+      title: "Delete TBM Activity",
+      message: "Are you sure you want to delete this TBM activity?",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
+    startModal: {
+      title: "Start TBM Activity",
+      message: "Are you sure you want to start this TBM activity?\nStatus will change to 'In Progress'.",
+      cancel: "Cancel",
+      confirm: "Start",
+    },
   },
 
   educationSelectScreen: {

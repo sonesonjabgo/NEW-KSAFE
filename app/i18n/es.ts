@@ -524,9 +524,21 @@ const es: Translations = {
     workDate: "Fecha de trabajo:  {{date}}",
     activityLabel: "Contenido de actividad",
     educationHeader: "Materiales educativos ({{count}})",
-    startActivity: "Iniciar actividad",
-    edit: "Editar",
-    delete: "Eliminar",
+    startActivity: "Start Activity",
+    edit: "Edit",
+    delete: "Delete",
+    deleteModal: {
+      title: "Eliminar actividad TBM",
+      message: "¿Está seguro de que desea eliminar esta actividad TBM?",
+      cancel: "Cancelar",
+      confirm: "Eliminar",
+    },
+    startModal: {
+      title: "Iniciar actividad TBM",
+      message: "¿Desea iniciar esta actividad TBM?\nEl estado cambiará a 'En progreso'.",
+      cancel: "Cancelar",
+      confirm: "Iniciar",
+    },
   },
 
   educationSelectScreen: {

@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import { ScrollView, TouchableOpacity, View } from "react-native"
 import {
   IconCalendar,
@@ -11,6 +11,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import EducationFrame from "@assets/icons/education_frame.svg"
 
+import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
@@ -35,6 +36,8 @@ const STATUS_LABEL: Record<TbmStatus, "drafting" | "ongoing" | "ended"> = {
 export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route }) => {
   const { id } = route.params
   const insets = useSafeAreaInsets()
+  const [startModalVisible, setStartModalVisible] = useState(false)
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false)
 
   const detail = mockTbmDetails[id]
   const badgeStyles = detail ? getBadgeStyles(detail.status) : null
@@ -42,6 +45,7 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
   if (!detail) return null
 
   return (
+    <>
     <StackScreen
       title={translate("tbmDetailScreen:title")}
       onBack={() => navigation.goBack()}
@@ -121,7 +125,7 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
           <TouchableOpacity
             style={S.$startBtn}
             activeOpacity={0.8}
-            onPress={() => console.log("활동시작:", detail.id)}
+            onPress={() => setStartModalVisible(true)}
           >
             <IconPlayerPlayFilled size={24} color="#FFFFFF" />
             <Text text={translate("tbmDetailScreen:startActivity")} style={S.$startBtnText} />
@@ -139,7 +143,7 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
             <TouchableOpacity
               style={S.$deleteBtn}
               activeOpacity={0.75}
-              onPress={() => console.log("삭제:", detail.id)}
+              onPress={() => setDeleteModalVisible(true)}
             >
               <IconTrash size={16} color="#F87165" />
               <Text text={translate("tbmDetailScreen:delete")} style={S.$deleteBtnText} />
@@ -148,5 +152,44 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
         </View>
       </ScrollView>
     </StackScreen>
+
+    <ConfirmModal
+      visible={deleteModalVisible}
+      icon={
+        <View style={S.$modalDeleteIconCircle}>
+          <IconTrash size={26} color="#E03526" />
+        </View>
+      }
+      title={translate("tbmDetailScreen:deleteModal.title")}
+      message={translate("tbmDetailScreen:deleteModal.message")}
+      cancelLabel={translate("tbmDetailScreen:deleteModal.cancel")}
+      confirmLabel={translate("tbmDetailScreen:deleteModal.confirm")}
+      confirmBgColor="#E03526"
+      onCancel={() => setDeleteModalVisible(false)}
+      onConfirm={() => {
+        setDeleteModalVisible(false)
+        console.log("삭제 확인:", detail.id)
+      }}
+    />
+
+    <ConfirmModal
+      visible={startModalVisible}
+      icon={
+        <View style={S.$modalStartIconCircle}>
+          <IconPlayerPlayFilled size={26} color="#1062D8" />
+        </View>
+      }
+      title={translate("tbmDetailScreen:startModal.title")}
+      message={translate("tbmDetailScreen:startModal.message")}
+      cancelLabel={translate("tbmDetailScreen:startModal.cancel")}
+      confirmLabel={translate("tbmDetailScreen:startModal.confirm")}
+      confirmBgColor="#1062D8"
+      onCancel={() => setStartModalVisible(false)}
+      onConfirm={() => {
+        setStartModalVisible(false)
+        console.log("활동 시작 확인:", detail.id)
+      }}
+    />
+    </>
   )
 }

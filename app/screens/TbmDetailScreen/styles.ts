@@ -188,6 +188,26 @@ export const $educationCardTitle: TextStyle = {
   lineHeight: 20,
 }
 
+// ── Modal Icon ────────────────────────────────────────────────────────────────
+
+export const $modalIconCircle: ViewStyle = {
+  width: 52,
+  height: 52,
+  borderRadius: 26,
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+export const $modalDeleteIconCircle: ViewStyle = {
+  ...$modalIconCircle,
+  backgroundColor: "#FEEEED",
+}
+
+export const $modalStartIconCircle: ViewStyle = {
+  ...$modalIconCircle,
+  backgroundColor: "#EAF1FD",
+}
+
 // ── Bottom Action Bar ─────────────────────────────────────────────────────────
 
 export const $bottomBar: ViewStyle = {

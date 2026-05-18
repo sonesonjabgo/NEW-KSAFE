@@ -563,6 +563,18 @@ const ko: Translations = {
     startActivity: "활동 시작",
     edit: "수정",
     delete: "삭제",
+    deleteModal: {
+      title: "TBM 활동 삭제",
+      message: "정말로 이 TBM 활동을 삭제하시겠습니까?",
+      cancel: "취소",
+      confirm: "삭제",
+    },
+    startModal: {
+      title: "TBM 활동 시작",
+      message: "이 TBM 활동을 시작하시겠습니까?\n상태가 '진행중'으로 변경됩니다.",
+      cancel: "취소",
+      confirm: "시작",
+    },
   },
 
   educationSelectScreen: {
