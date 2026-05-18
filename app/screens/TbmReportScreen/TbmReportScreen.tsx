@@ -53,7 +53,9 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
           {/* ── 1. 주의사항 카드 ── */}
           <View style={S.$noticeCard}>
             <View style={S.$noticeRow}>
-              <IconAlertTriangle size={18} color="#F7A733" />
+              <View style={{ paddingVertical: 6 }}>
+                <IconAlertTriangle size={22} color="#F7A733" />
+              </View>
               <Text
                 text={translate("tbmReportScreen:notice.description")}
                 style={S.$noticeDesc}
