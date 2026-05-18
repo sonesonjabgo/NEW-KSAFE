@@ -14,7 +14,7 @@ export const $scrollInner: ViewStyle = {
   paddingHorizontal: 20,
   paddingTop: 28,
   paddingBottom: 40,
-  gap: 28,
+  gap: 35,
 }
 
 // ── Notice Card ───────────────────────────────────────────────────────────────

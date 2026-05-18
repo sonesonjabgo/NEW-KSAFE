@@ -51,7 +51,7 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
           keyboardShouldPersistTaps="handled"
         >
           {/* ── 1+2. 주의사항 + 활동명 카드 (간격 20, 아래 섹션과 40) ── */}
-          <View style={{ gap: 20, marginBottom: 12 }}>
+          <View style={{ gap: 20, marginBottom: 5 }}>
           <View style={S.$noticeCard}>
             <View style={S.$noticeRow}>
               <View style={{ paddingVertical: 6 }}>
