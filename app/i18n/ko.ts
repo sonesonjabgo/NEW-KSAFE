@@ -530,6 +530,7 @@ const ko: Translations = {
       label: "작업 일시 (YYYY-MM-DD)",
       includeDateInTitle: "제목에 작업 일시 포함하기",
       helper: "작업 일정을 달력에서 선택해주세요.",
+      confirm: "확인",
     },
     activityTitle: {
       label: "활동 제목",

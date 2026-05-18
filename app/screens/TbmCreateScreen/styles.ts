@@ -12,9 +12,9 @@ export const $scrollContent: ViewStyle = {
 }
 
 export const $scrollInner: ViewStyle = {
-  paddingHorizontal: 16,
-  paddingTop: 20,
-  paddingBottom: 32,
+  paddingHorizontal: 20,
+  paddingTop: 28,
+  paddingBottom: 40,
   gap: 24,
 }
 
@@ -70,16 +70,16 @@ export const $guideTextBlock: ViewStyle = {
 }
 
 export const $guideTitle: TextStyle = {
-  fontSize: 14,
+  fontSize: 19,
   fontFamily: typography.primary.bold,
-  color: "#333333",
+  color: "#1062D8",
 }
 
 export const $guideDesc: TextStyle = {
-  fontSize: 13,
+  fontSize: 15,
   fontFamily: typography.primary.normal,
-  color: "#888888",
-  lineHeight: 19,
+  color: "#564E4B",
+  lineHeight: 22,
 }
 
 // ── Input row ─────────────────────────────────────────────────────────────────
@@ -266,12 +266,14 @@ export const $submitBtnText: TextStyle = {
 // ── Workplace modal ───────────────────────────────────────────────────────────
 
 export const $modalBackdrop: ViewStyle = {
-  flex: 1,
   backgroundColor: "rgba(0, 0, 0, 0.4)",
-  justifyContent: "flex-end",
 }
 
 export const $modalSheet: ViewStyle = {
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  right: 0,
   backgroundColor: "#FFFFFF",
   borderTopLeftRadius: 20,
   borderTopRightRadius: 20,
@@ -289,4 +291,32 @@ export const $modalItemText: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.normal,
   color: "#111111",
+}
+
+// ── Date Picker (iOS bottom sheet) ────────────────────────────────────────────
+
+export const $datePickerBackdrop: ViewStyle = {
+  flex: 1,
+  backgroundColor: "rgba(0, 0, 0, 0.3)",
+}
+
+export const $datePickerSheet: ViewStyle = {
+  backgroundColor: "#FFFFFF",
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+  paddingTop: 4,
+}
+
+export const $datePickerConfirm: ViewStyle = {
+  alignItems: "flex-end",
+  paddingHorizontal: 20,
+  paddingVertical: 12,
+  borderBottomWidth: 1,
+  borderBottomColor: "#EEEEEE",
+}
+
+export const $datePickerConfirmText: TextStyle = {
+  fontSize: 16,
+  fontFamily: typography.primary.semiBold,
+  color: colors.navy,
 }

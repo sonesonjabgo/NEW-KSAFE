@@ -486,6 +486,7 @@ const ar: Translations = {
       label: "Work Date (YYYY-MM-DD)",
       includeDateInTitle: "Include date in title",
       helper: "Please select the work schedule from the calendar.",
+      confirm: "Confirm",
     },
     activityTitle: {
       label: "Activity Title",

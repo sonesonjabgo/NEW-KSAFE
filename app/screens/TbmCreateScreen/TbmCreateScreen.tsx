@@ -1,15 +1,21 @@
-import { FC, useCallback, useMemo, useState } from "react"
+import { FC, useCallback, useMemo, useRef, useState } from "react"
 import {
+  Animated,
   KeyboardAvoidingView,
   Modal,
   Platform,
   ScrollView,
+  StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native"
+import DateTimePicker, {
+  DateTimePickerEvent,
+} from "@react-native-community/datetimepicker"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { IconChevronDown, IconNotes } from "@tabler/icons-react-native"
+import { IconChevronDown } from "@tabler/icons-react-native"
+import HeaderBell from "@assets/icons/nav2/header_bell.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -27,13 +33,12 @@ const MOCK_WORKPLACES = [
   "인천 연수구 송도동 건설현장",
 ]
 
-function getInitialDateTime(): string {
-  const now = new Date()
-  const yyyy = now.getFullYear()
-  const mm = String(now.getMonth() + 1).padStart(2, "0")
-  const dd = String(now.getDate()).padStart(2, "0")
-  const hh = String(now.getHours()).padStart(2, "0")
-  const min = String(now.getMinutes()).padStart(2, "0")
+function formatDate(d: Date): string {
+  const yyyy = d.getFullYear()
+  const mm = String(d.getMonth() + 1).padStart(2, "0")
+  const dd = String(d.getDate()).padStart(2, "0")
+  const hh = String(d.getHours()).padStart(2, "0")
+  const min = String(d.getMinutes()).padStart(2, "0")
   return `${yyyy}.${mm}.${dd} ${hh}:${min}`
 }
 
@@ -41,11 +46,31 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
 
   const [workplace, setWorkplace] = useState("")
-  const [dateTime, setDateTime] = useState(getInitialDateTime)
+  const [selectedDate, setSelectedDate] = useState(() => new Date())
+  const [dateTime, setDateTime] = useState(() => formatDate(new Date()))
   const [includeDateInTitle, setIncludeDateInTitle] = useState(false)
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [workplaceModalVisible, setWorkplaceModalVisible] = useState(false)
+  const [datePickerVisible, setDatePickerVisible] = useState(false)
+  const [datePickerMode, setDatePickerMode] = useState<"date" | "time">("date")
+  const slideAnim = useRef(new Animated.Value(400)).current
+  const fadeAnim = useRef(new Animated.Value(0)).current
+
+  const openWorkplaceModal = useCallback(() => {
+    setWorkplaceModalVisible(true)
+    Animated.parallel([
+      Animated.timing(fadeAnim, { toValue: 1, duration: 200, useNativeDriver: true }),
+      Animated.timing(slideAnim, { toValue: 0, duration: 260, useNativeDriver: true }),
+    ]).start()
+  }, [fadeAnim, slideAnim])
+
+  const closeWorkplaceModal = useCallback(() => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, { toValue: 0, duration: 160, useNativeDriver: true }),
+      Animated.timing(slideAnim, { toValue: 400, duration: 200, useNativeDriver: true }),
+    ]).start(() => setWorkplaceModalVisible(false))
+  }, [fadeAnim, slideAnim])
 
   const isValid = useMemo(
     () => !!workplace && !!dateTime.trim() && !!title.trim(),
@@ -53,8 +78,10 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
   )
 
   const handleReset = useCallback(() => {
+    const now = new Date()
     setWorkplace("")
-    setDateTime(getInitialDateTime())
+    setSelectedDate(now)
+    setDateTime(formatDate(now))
     setIncludeDateInTitle(false)
     setTitle("")
     setContent("")
@@ -71,10 +98,53 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
     }
   }, [includeDateInTitle, dateTime])
 
+  const openDatePicker = useCallback(() => {
+    if (Platform.OS === "ios") {
+      setDatePickerVisible(true)
+    } else {
+      setDatePickerMode("date")
+      setDatePickerVisible(true)
+    }
+  }, [])
+
+  const handleDateChange = useCallback(
+    (event: DateTimePickerEvent, picked?: Date) => {
+      if (Platform.OS === "android") {
+        setDatePickerVisible(false)
+        if (event.type === "dismissed" || !picked) return
+        if (datePickerMode === "date") {
+          // 날짜 선택 후 시간 선택으로 이동
+          const merged = new Date(picked)
+          merged.setHours(selectedDate.getHours(), selectedDate.getMinutes())
+          setSelectedDate(merged)
+          setDatePickerMode("time")
+          setDatePickerVisible(true)
+        } else {
+          const merged = new Date(selectedDate)
+          merged.setHours(picked.getHours(), picked.getMinutes())
+          setSelectedDate(merged)
+          const formatted = formatDate(merged)
+          setDateTime(formatted)
+          setDatePickerMode("date")
+        }
+      } else {
+        if (picked) {
+          setSelectedDate(picked)
+          setDateTime(formatDate(picked))
+        }
+      }
+    },
+    [datePickerMode, selectedDate],
+  )
+
+  const confirmIOSPicker = useCallback(() => {
+    setDatePickerVisible(false)
+  }, [])
+
   const handleSelectWorkplace = useCallback((wp: string) => {
     setWorkplace(wp)
-    setWorkplaceModalVisible(false)
-  }, [])
+    closeWorkplaceModal()
+  }, [closeWorkplaceModal])
 
   const handleSubmit = useCallback(() => {
     console.log(JSON.stringify({ workplace, dateTime, title, content }, null, 2))
@@ -87,7 +157,7 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
       <StackScreen
         title={translate("tbmCreateScreen:title")}
         onBack={() => navigation.goBack()}
-        contentBg="#F2F3F5"
+        contentBg="#FFFFFF"
         squareTop
         rightSlot={
           <TouchableOpacity
@@ -110,7 +180,7 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
           >
             {/* 작성 가이드 */}
             <View style={[S.$card, S.$guideRow]}>
-              <IconNotes size={20} color="#999999" style={{ marginTop: 2 }} />
+              <HeaderBell width={51} height={51} color="#1062D8" />
               <View style={S.$guideTextBlock}>
                 <Text
                   text={translate("tbmCreateScreen:guide.title")}
@@ -132,7 +202,7 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
               <TouchableOpacity
                 style={S.$inputRow}
                 activeOpacity={0.7}
-                onPress={() => setWorkplaceModalVisible(true)}
+                onPress={openWorkplaceModal}
               >
                 <Text
                   text={
@@ -155,14 +225,14 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
                 text={translate("tbmCreateScreen:dateTime.label")}
                 style={S.$sectionLabel}
               />
-              <View style={S.$inputRow}>
-                <TextInput
-                  style={S.$inputText}
-                  value={dateTime}
-                  onChangeText={setDateTime}
-                  placeholderTextColor="#BBBBBB"
-                />
-              </View>
+              <TouchableOpacity
+                style={S.$inputRow}
+                activeOpacity={0.7}
+                onPress={openDatePicker}
+              >
+                <Text text={dateTime} style={S.$inputText} />
+                <IconChevronDown size={18} color="#AAAAAA" />
+              </TouchableOpacity>
               <TouchableOpacity
                 style={S.$checkboxRow}
                 onPress={handleIncludeDateToggle}
@@ -292,15 +362,24 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
       <Modal
         visible={workplaceModalVisible}
         transparent
-        animationType="slide"
-        onRequestClose={() => setWorkplaceModalVisible(false)}
+        animationType="none"
+        onRequestClose={closeWorkplaceModal}
       >
-        <TouchableOpacity
-          style={S.$modalBackdrop}
-          onPress={() => setWorkplaceModalVisible(false)}
-          activeOpacity={1}
-        >
-          <View style={[S.$modalSheet, { paddingBottom: insets.bottom + 16 }]}>
+        <View style={StyleSheet.absoluteFill}>
+          <Animated.View
+            style={[StyleSheet.absoluteFill, S.$modalBackdrop, { opacity: fadeAnim }]}
+          />
+          <TouchableOpacity
+            style={StyleSheet.absoluteFill}
+            onPress={closeWorkplaceModal}
+            activeOpacity={1}
+          />
+          <Animated.View
+            style={[
+              S.$modalSheet,
+              { paddingBottom: insets.bottom + 16, transform: [{ translateY: slideAnim }] },
+            ]}
+          >
             {MOCK_WORKPLACES.map((wp) => (
               <TouchableOpacity
                 key={wp}
@@ -311,9 +390,48 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
                 <Text text={wp} style={S.$modalItemText} />
               </TouchableOpacity>
             ))}
-          </View>
-        </TouchableOpacity>
+          </Animated.View>
+        </View>
       </Modal>
+
+      {/* 날짜/시간 피커 — Android: 네이티브 다이얼로그 */}
+      {Platform.OS === "android" && datePickerVisible && (
+        <DateTimePicker
+          value={selectedDate}
+          mode={datePickerMode}
+          display="default"
+          onChange={handleDateChange}
+        />
+      )}
+
+      {/* 날짜/시간 피커 — iOS: 바텀시트 */}
+      {Platform.OS === "ios" && (
+        <Modal
+          visible={datePickerVisible}
+          transparent
+          animationType="slide"
+          onRequestClose={confirmIOSPicker}
+        >
+          <TouchableOpacity
+            style={S.$datePickerBackdrop}
+            onPress={confirmIOSPicker}
+            activeOpacity={1}
+          />
+          <View style={[S.$datePickerSheet, { paddingBottom: insets.bottom + 8 }]}>
+            <TouchableOpacity style={S.$datePickerConfirm} onPress={confirmIOSPicker}>
+              <Text text={translate("tbmCreateScreen:dateTime.confirm")} style={S.$datePickerConfirmText} />
+            </TouchableOpacity>
+            <DateTimePicker
+              value={selectedDate}
+              mode="datetime"
+              display="spinner"
+              onChange={handleDateChange}
+              locale="ko-KR"
+              style={{ width: "100%" }}
+            />
+          </View>
+        </Modal>
+      )}
     </>
   )
 }
