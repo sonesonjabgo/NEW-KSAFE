@@ -524,26 +524,31 @@ const ko: Translations = {
     },
     processName: {
       label: "공정명",
-      placeholder: "공정명을 입력하세요",
+      placeholder: "공정명을 입력하세요 (선택)",
+      helper: "비워둘 수 있으며, 입력 시 50자 이내로 입력할 수 있습니다.",
     },
     teamName: {
       label: "팀/반명",
-      placeholder: "팀 또는 반명을 입력하세요",
+      placeholder: "팀 또는 반명을 입력하세요 (선택)",
+      helper: "비워둘 수 있으며, 입력 시 50자 이내로 입력할 수 있습니다.",
     },
     educationSummary: {
       label: "교육 내용 요약",
-      placeholder: "교육 내용을 요약하여 입력하세요",
+      placeholder: "오늘 교육에서 다룬 핵심 내용을 작성하세요",
+      helper: "10자 이상 1,000자 이내로 입력할 수 있습니다.",
     },
     specialNotes: {
-      label: "특이사항",
-      placeholder: "특이사항을 입력하세요",
+      label: "특이사항 (비워두셔도 됩니다)",
+      placeholder: "공유가 필요한 특이사항이나 전달사항을 입력하세요",
+      helper: "최대 500자까지 입력할 수 있습니다.",
     },
     sitePhotos: {
       label: "현장 사진",
       addButton: "사진 추가",
-      helper: "현장 사진을 추가해 주세요.",
+      guide: "현장 사진은 최소 1장 이상 등록해야 합니다.\n사진은 최소 1장 이상, 최대 5장까지 첨부할 수 있습니다.",
+      preview: "이미지를 추가하면 미리보기가 표시됩니다.",
     },
-    submit: "보고서 생성하기",
+    submit: "저장하기",
   },
 
   tbmCreateScreen: {

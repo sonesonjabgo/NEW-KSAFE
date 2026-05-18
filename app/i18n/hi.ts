@@ -485,23 +485,28 @@ const hi: Translations = {
     processName: {
       label: "प्रक्रिया का नाम",
       placeholder: "प्रक्रिया का नाम दर्ज करें",
+      helper: "वैकल्पिक। अधिकतम 50 अक्षर।",
     },
     teamName: {
       label: "टीम / इकाई का नाम",
       placeholder: "टीम या इकाई का नाम दर्ज करें",
+      helper: "वैकल्पिक। अधिकतम 50 अक्षर।",
     },
     educationSummary: {
       label: "शिक्षा सामग्री सारांश",
       placeholder: "शिक्षा सामग्री का सारांश दर्ज करें",
+      helper: "10 से 1,000 अक्षरों के बीच।",
     },
     specialNotes: {
       label: "विशेष नोट्स",
       placeholder: "कोई विशेष नोट्स दर्ज करें",
+      helper: "अधिकतम 500 अक्षर।",
     },
     sitePhotos: {
       label: "साइट फ़ोटो",
       addButton: "फ़ोटो जोड़ें",
-      helper: "कृपया साइट फ़ोटो जोड़ें।",
+      guide: "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
+      preview: "A preview will be shown when you add an image.",
     },
     submit: "रिपोर्ट बनाएं",
   },

@@ -489,23 +489,28 @@ const fr: Translations = {
     processName: {
       label: "Nom du processus",
       placeholder: "Entrez le nom du processus",
+      helper: "Facultatif. Jusqu'à 50 caractères.",
     },
     teamName: {
       label: "Nom de l'équipe / unité",
       placeholder: "Entrez le nom de l'équipe ou de l'unité",
+      helper: "Facultatif. Jusqu'à 50 caractères.",
     },
     educationSummary: {
       label: "Résumé du contenu éducatif",
       placeholder: "Résumez le contenu éducatif",
+      helper: "Entre 10 et 1 000 caractères.",
     },
     specialNotes: {
       label: "Notes spéciales",
       placeholder: "Entrez des notes spéciales",
+      helper: "Jusqu'à 500 caractères.",
     },
     sitePhotos: {
       label: "Photos du site",
       addButton: "Ajouter une photo",
-      helper: "Veuillez ajouter des photos du site.",
+      guide: "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
+      preview: "A preview will be shown when you add an image.",
     },
     submit: "Générer le rapport",
   },

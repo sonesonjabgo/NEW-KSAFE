@@ -8,8 +8,11 @@ import {
   TouchableOpacity,
   View,
 } from "react-native"
-import { IconAlertTriangle, IconCalendar, IconPlus } from "@tabler/icons-react-native"
+import { IconAlertTriangle, IconCalendar } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+
+import Pic1 from "@assets/icons/pic1.svg"
+import Pic2 from "@assets/icons/pic2.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -92,8 +95,10 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
                 onChangeText={setProcessName}
                 placeholder={translate("tbmReportScreen:processName.placeholder")}
                 placeholderTextColor="#BBBBBB"
+                maxLength={50}
               />
             </View>
+            <Text text={translate("tbmReportScreen:processName.helper")} style={S.$helperText} />
           </View>
 
           {/* ── 4. 팀/반명 ── */}
@@ -109,8 +114,10 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
                 onChangeText={setTeamName}
                 placeholder={translate("tbmReportScreen:teamName.placeholder")}
                 placeholderTextColor="#BBBBBB"
+                maxLength={50}
               />
             </View>
+            <Text text={translate("tbmReportScreen:teamName.helper")} style={S.$helperText} />
           </View>
 
           {/* ── 5. 교육 내용 요약 ── */}
@@ -128,8 +135,10 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
                 placeholderTextColor="#BBBBBB"
                 multiline
                 scrollEnabled={false}
+                maxLength={1000}
               />
             </View>
+            <Text text={translate("tbmReportScreen:educationSummary.helper")} style={S.$helperText} />
           </View>
 
           {/* ── 6. 특이사항 ── */}
@@ -147,8 +156,10 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
                 placeholderTextColor="#BBBBBB"
                 multiline
                 scrollEnabled={false}
+                maxLength={500}
               />
             </View>
+            <Text text={translate("tbmReportScreen:specialNotes.helper")} style={S.$helperText} />
           </View>
 
           {/* ── 7. 현장 사진 ── */}
@@ -157,22 +168,42 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
               text={translate("tbmReportScreen:sitePhotos.label")}
               style={S.$sectionLabel}
             />
-            <View style={S.$photoGrid}>
+
+            {/* 안내 카드 */}
+            <View style={S.$photoGuideCard}>
+              <Pic1 width={30} height={30} />
+              <Text
+                text={translate("tbmReportScreen:sitePhotos.guide")}
+                style={[S.$photoGuideLine, { flex: 1 }]}
+              />
               <TouchableOpacity
-                style={S.$photoAddBtn}
+                style={S.$photoGuideAddBtn}
                 activeOpacity={0.7}
                 onPress={() => console.log("사진 추가")}
               >
-                <IconPlus size={22} color="#AAAAAA" />
                 <Text
                   text={translate("tbmReportScreen:sitePhotos.addButton")}
-                  style={S.$photoAddText}
+                  style={S.$photoGuideAddBtnText}
                 />
               </TouchableOpacity>
-              {photos.map((uri, i) => (
-                <Image key={i} source={{ uri }} style={S.$photoItem} />
-              ))}
             </View>
+
+            {/* 미리보기 카드 or 사진 그리드 */}
+            {photos.length > 0 ? (
+              <View style={S.$photoGrid}>
+                {photos.map((uri, i) => (
+                  <Image key={i} source={{ uri }} style={S.$photoItem} />
+                ))}
+              </View>
+            ) : (
+              <View style={S.$photoPreviewCard}>
+                <Pic2 width={30} height={30} />
+                <Text
+                  text={translate("tbmReportScreen:sitePhotos.preview")}
+                  style={S.$photoPreviewText}
+                />
+              </View>
+            )}
           </View>
         </ScrollView>
 

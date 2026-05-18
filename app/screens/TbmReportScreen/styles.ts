@@ -86,7 +86,7 @@ export const $activityNameCircle: ViewStyle = {
 // ── Section ───────────────────────────────────────────────────────────────────
 
 export const $section: ViewStyle = {
-  gap: 8,
+  gap: 10,
   paddingBottom: 20,
   borderBottomWidth: 1,
   borderBottomColor: "#E9ECF0",
@@ -128,6 +128,13 @@ export const $textarea: ViewStyle = {
   minHeight: 110,
 }
 
+export const $helperText: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.normal,
+  color: "#9AA0AB",
+  marginTop: 4,
+}
+
 export const $textareaInput: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
@@ -138,6 +145,67 @@ export const $textareaInput: TextStyle = {
 }
 
 // ── Site Photos ───────────────────────────────────────────────────────────────
+
+export const $photoGuideCard: ViewStyle = {
+  height: 83,
+  backgroundColor: "#F4F8FD",
+  borderRadius: 9,
+  borderWidth: 1,
+  borderStyle: "dashed",
+  borderColor: "#B5CEF3",
+  paddingHorizontal: 12,
+  paddingVertical: 15,
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 10,
+}
+
+export const $photoGuideTextBlock: ViewStyle = {
+  flex: 1,
+  gap: 3,
+}
+
+export const $photoGuideLine: TextStyle = {
+  fontSize: 11,
+  fontFamily: typography.primary.normal,
+  color: "#564E4B",
+  lineHeight: 16,
+}
+
+export const $photoGuideAddBtn: ViewStyle = {
+  width: 60,
+  height: 27,
+  borderRadius: 4,
+  borderWidth: 1,
+  borderColor: "#B5CCEC",
+  backgroundColor: "#FFFFFF",
+  justifyContent: "center",
+  alignItems: "center",
+  flexShrink: 0,
+}
+
+export const $photoGuideAddBtnText: TextStyle = {
+  fontSize: 11,
+  fontFamily: typography.primary.semiBold,
+  color: "#1062D8",
+}
+
+export const $photoPreviewCard: ViewStyle = {
+  backgroundColor: "#E9F7F0",
+  borderRadius: 9,
+  paddingHorizontal: 12,
+  paddingVertical: 15,
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 10,
+}
+
+export const $photoPreviewText: TextStyle = {
+  flex: 1,
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#3E7853",
+}
 
 export const $photoGrid: ViewStyle = {
   flexDirection: "row",

@@ -480,23 +480,28 @@ const ar: Translations = {
     processName: {
       label: "اسم العملية",
       placeholder: "أدخل اسم العملية",
+      helper: "اختياري. 50 حرفاً كحد أقصى.",
     },
     teamName: {
       label: "اسم الفريق / الوحدة",
       placeholder: "أدخل اسم الفريق أو الوحدة",
+      helper: "اختياري. 50 حرفاً كحد أقصى.",
     },
     educationSummary: {
       label: "ملخص محتوى التعليم",
       placeholder: "لخّص محتوى التعليم",
+      helper: "بين 10 و 1,000 حرف.",
     },
     specialNotes: {
       label: "ملاحظات خاصة",
       placeholder: "أدخل أي ملاحظات خاصة",
+      helper: "حتى 500 حرف.",
     },
     sitePhotos: {
       label: "صور الموقع",
       addButton: "إضافة صورة",
-      helper: "يرجى إضافة صور الموقع.",
+      guide: "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
+      preview: "A preview will be shown when you add an image.",
     },
     submit: "إنشاء التقرير",
   },

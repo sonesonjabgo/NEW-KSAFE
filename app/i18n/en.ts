@@ -532,26 +532,31 @@ const en = {
     },
     processName: {
       label: "Process Name",
-      placeholder: "Enter process name",
+      placeholder: "Enter process name (optional)",
+      helper: "Optional. Up to 50 characters.",
     },
     teamName: {
       label: "Team / Unit Name",
-      placeholder: "Enter team or unit name",
+      placeholder: "Enter team or unit name (optional)",
+      helper: "Optional. Up to 50 characters.",
     },
     educationSummary: {
       label: "Education Content Summary",
-      placeholder: "Summarize the education content",
+      placeholder: "Write the key content covered in today's education",
+      helper: "Between 10 and 1,000 characters.",
     },
     specialNotes: {
-      label: "Special Notes",
-      placeholder: "Enter any special notes",
+      label: "Special Notes (optional)",
+      placeholder: "Enter any special notes or announcements to share",
+      helper: "Up to 500 characters.",
     },
     sitePhotos: {
       label: "Site Photos",
       addButton: "Add Photo",
-      helper: "Please add site photos.",
+      guide: "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
+      preview: "A preview will be shown when you add an image.",
     },
-    submit: "Generate Report",
+    submit: "Save",
   },
 
   tbmCreateScreen: {

@@ -485,23 +485,28 @@ const ja: Translations = {
     processName: {
       label: "工程名",
       placeholder: "工程名を入力してください",
+      helper: "任意入力。50文字以内で入力できます。",
     },
     teamName: {
       label: "チーム/班名",
       placeholder: "チームまたは班名を入力してください",
+      helper: "任意入力。50文字以内で入力できます。",
     },
     educationSummary: {
       label: "教育内容要約",
       placeholder: "教育内容を要約して入力してください",
+      helper: "10文字以上1,000文字以内で入力できます。",
     },
     specialNotes: {
       label: "特記事項",
       placeholder: "特記事項を入力してください",
+      helper: "最大500文字まで入力できます。",
     },
     sitePhotos: {
       label: "現場写真",
       addButton: "写真を追加",
-      helper: "現場写真を追加してください。",
+      guide: "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
+      preview: "A preview will be shown when you add an image.",
     },
     submit: "レポートを生成する",
   },

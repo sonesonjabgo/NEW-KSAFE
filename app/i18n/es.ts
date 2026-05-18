@@ -489,23 +489,28 @@ const es: Translations = {
     processName: {
       label: "Nombre del proceso",
       placeholder: "Ingrese el nombre del proceso",
+      helper: "Opcional. Hasta 50 caracteres.",
     },
     teamName: {
       label: "Nombre del equipo / unidad",
       placeholder: "Ingrese el nombre del equipo o unidad",
+      helper: "Opcional. Hasta 50 caracteres.",
     },
     educationSummary: {
       label: "Resumen del contenido educativo",
       placeholder: "Resuma el contenido educativo",
+      helper: "Entre 10 y 1,000 caracteres.",
     },
     specialNotes: {
       label: "Notas especiales",
       placeholder: "Ingrese notas especiales",
+      helper: "Hasta 500 caracteres.",
     },
     sitePhotos: {
       label: "Fotos del sitio",
       addButton: "Agregar foto",
-      helper: "Por favor agregue fotos del sitio.",
+      guide: "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
+      preview: "A preview will be shown when you add an image.",
     },
     submit: "Generar informe",
   },
