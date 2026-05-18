@@ -553,6 +553,19 @@ const ko: Translations = {
     submit: "생성하기",
   },
 
+
+
+  educationSelectScreen: {
+    title: "교육자료 선택",
+    sourceTab1: "KS산업안전협회",
+    sourceTab2: "KS산업안전협회",
+    sourceTab3: "내가 만든 자료",
+    searchPlaceholder: "검색하고자 하는 콘텐츠를 입력하세요",
+    confirm: "선택완료 ({{count}}개)",
+    confirmNone: "선택완료",
+    emptyText: "회사 교육자료가 없습니다.",
+  },
+
   ...demoKo,
 }
 
