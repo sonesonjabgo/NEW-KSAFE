@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { View, ViewStyle, TextStyle } from "react-native"
-import { IconUser } from "@tabler/icons-react-native"
 
+import ProfileSwitch from "@assets/icons/nav2/profile_switch.svg"
 import { Text } from "@/components/Text"
 import { typography } from "@/theme/typography"
 
@@ -15,7 +15,7 @@ export const ProfileCard: FC<ProfileCardProps> = ({ orgName, userName, email }) 
   return (
     <View style={$card}>
       <View style={$avatar}>
-        <IconUser size={36} color="#FFFFFF" />
+        <ProfileSwitch width={64} height={64} />
       </View>
       <View style={$textArea}>
         <Text text={orgName} style={$orgName} />
@@ -41,8 +41,6 @@ const $card: ViewStyle = {
 const $avatar: ViewStyle = {
   width: 64,
   height: 64,
-  borderRadius: 32,
-  backgroundColor: "rgba(255,255,255,0.15)",
   justifyContent: "center",
   alignItems: "center",
 }

@@ -21,6 +21,7 @@ import GridTranslate from "@assets/icons/home2/grid_translate.svg"
 import HeaderBell from "@assets/icons/nav2/header_bell.svg"
 import HeaderLang from "@assets/icons/nav2/header_lang.svg"
 import HeaderQr from "@assets/icons/nav2/header_qr.svg"
+import ProfileSwitch from "@assets/icons/nav2/profile_switch.svg"
 
 import { Text } from "@/components/Text"
 import { useRole } from "@/context/RoleContext"
@@ -237,8 +238,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
               activeOpacity={0.7}
               onPress={() => navigation.navigate("MyPage")}
             >
-              <View style={$avatarHead} />
-              <View style={$avatarBody} />
+              <ProfileSwitch width={52} height={52} />
             </TouchableOpacity>
           </View>
 
@@ -528,29 +528,7 @@ const $greetMsg: TextStyle = {
 const $avatar: ViewStyle = {
   width: 52,
   height: 52,
-  borderRadius: 26,
-  backgroundColor: "#D8E8F4",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  overflow: "hidden",
   marginLeft: 16,
-}
-
-const $avatarHead: ViewStyle = {
-  position: "absolute",
-  top: 9,
-  width: 20,
-  height: 20,
-  borderRadius: 10,
-  backgroundColor: BLUE,
-}
-
-const $avatarBody: ViewStyle = {
-  width: 38,
-  height: 24,
-  borderTopLeftRadius: 19,
-  borderTopRightRadius: 19,
-  backgroundColor: BLUE,
 }
 
 const $body: ViewStyle = {
