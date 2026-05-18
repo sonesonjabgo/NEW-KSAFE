@@ -72,7 +72,7 @@ export const $cardTopRow: ViewStyle = {
 
 export const $cardDate: TextStyle = {
   fontSize: 12,
-  color: "#999999",
+  color: "#A9A9A9",
   fontFamily: typography.primary.normal,
 }
 
@@ -128,39 +128,37 @@ export const $cardMetaLocation: TextStyle = {
 // ── Badge ─────────────────────────────────────────────────────────────────────
 
 export const $badge: ViewStyle = {
-  borderRadius: 12,
-  paddingVertical: 4,
-  paddingHorizontal: 12,
+  width: 44,
+  height: 20,
+  borderRadius: 4,
+  justifyContent: "center",
+  alignItems: "center",
 }
 
 export const $badgeDrafting: ViewStyle = {
   ...$badge,
-  borderWidth: 1,
-  borderColor: "#3B82F6",
-  backgroundColor: "transparent",
+  backgroundColor: "#E5E6E9",
 }
 
 export const $badgeOngoing: ViewStyle = {
   ...$badge,
-  borderWidth: 1,
-  borderColor: "#22C55E",
-  backgroundColor: "transparent",
+  backgroundColor: "#CFFFE1",
 }
 
 export const $badgeEnded: ViewStyle = {
   ...$badge,
-  backgroundColor: "#9CA3AF",
+  backgroundColor: "#000000",
 }
 
 export const $badgeDraftingText: TextStyle = {
   fontSize: 12,
-  color: "#3B82F6",
+  color: "#606679",
   fontFamily: typography.primary.semiBold,
 }
 
 export const $badgeOngoingText: TextStyle = {
   fontSize: 12,
-  color: "#22C55E",
+  color: "#18A24A",
   fontFamily: typography.primary.semiBold,
 }
 
