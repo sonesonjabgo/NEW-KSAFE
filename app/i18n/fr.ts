@@ -481,7 +481,7 @@ const fr: Translations = {
   tbmReportScreen: {
     title: "Génération de rapport TBM",
     notice: {
-      description: "· Le journal éducatif ne peut être rédigé que pour les activités TBM en cours.\n· La finalisation du journal mettra automatiquement fin à l'activité TBM.\n· Au moins une photo du site doit être jointe.",
+      description: " · Le journal éducatif ne peut être rédigé que pour les activités TBM en cours.\n · La finalisation du journal mettra automatiquement fin à l'activité TBM.\n · Au moins une photo du site doit être jointe.",
     },
     activityName: {
       label: "Nom de l'activité TBM",

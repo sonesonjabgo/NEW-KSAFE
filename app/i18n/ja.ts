@@ -477,7 +477,7 @@ const ja: Translations = {
   tbmReportScreen: {
     title: "TBMレポート生成",
     notice: {
-      description: "· 教育日誌は進行中のTBM活動に対してのみ作成できます。\n· 教育日誌を完了すると、該当するTBM活動が自動的に終了します。\n· 現場写真を最低1枚以上添付する必要があります。",
+      description: " · 教育日誌は進行中のTBM活動に対してのみ作成できます。\n · 教育日誌を完了すると、該当するTBM活動が自動的に終了します。\n · 現場写真を最低1枚以上添付する必要があります。",
     },
     activityName: {
       label: "TBM活動名",
