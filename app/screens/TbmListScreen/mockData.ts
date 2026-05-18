@@ -4,15 +4,6 @@ export const mockTbmData: TbmItem[] = [
   {
     id: 1,
     title: "작업장 순회 점검",
-    status: "작성중",
-    date: "2026.02.19",
-    participants: 1,
-    author: "권 민수 사업장 관리자",
-    location: "서울 영등포구 레미안스 비즈타워 6층",
-  },
-  {
-    id: 2,
-    title: "작업장 순회 점검",
     status: "진행중",
     date: "2026.02.19",
     participants: 4,
@@ -20,7 +11,7 @@ export const mockTbmData: TbmItem[] = [
     location: "서울 영등포구 레미안스 비즈타워 8층",
   },
   {
-    id: 3,
+    id: 2,
     title: "작업장 순회 점검",
     status: "종료됨",
     date: "2026.02.19",
@@ -29,7 +20,7 @@ export const mockTbmData: TbmItem[] = [
     location: "서울 영등포구 레미안스 비즈타워 3층",
   },
   {
-    id: 4,
+    id: 3,
     title: "전기설비 안전점검",
     status: "진행중",
     date: "2026.02.18",
@@ -38,21 +29,12 @@ export const mockTbmData: TbmItem[] = [
     location: "부산 해운대구 센텀시티 12층",
   },
   {
-    id: 5,
+    id: 4,
     title: "고소작업 안전교육",
     status: "종료됨",
     date: "2026.02.17",
     participants: 8,
     author: "이 정민 현장소장",
     location: "인천 연수구 송도동 건설현장",
-  },
-  {
-    id: 6,
-    title: "화학물질 취급 점검",
-    status: "작성중",
-    date: "2026.02.20",
-    participants: 3,
-    author: "박 서연 환경안전팀장",
-    location: "경기 화성시 동탄산업단지 A동",
   },
 ]
