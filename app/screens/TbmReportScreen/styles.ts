@@ -31,7 +31,7 @@ export const $noticeCard: ViewStyle = {
 export const $noticeRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "flex-start",
-  gap: 10,
+  gap: 3,
 }
 
 export const $noticeDesc: TextStyle = {
