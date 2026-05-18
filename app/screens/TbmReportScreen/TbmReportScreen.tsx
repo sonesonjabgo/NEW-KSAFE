@@ -50,7 +50,8 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
-          {/* ── 1. 주의사항 카드 ── */}
+          {/* ── 1+2. 주의사항 + 활동명 카드 (간격 20, 아래 섹션과 40) ── */}
+          <View style={{ gap: 20, marginBottom: 12 }}>
           <View style={S.$noticeCard}>
             <View style={S.$noticeRow}>
               <View style={{ paddingVertical: 6 }}>
@@ -75,6 +76,7 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
             <View style={S.$activityNameCircle}>
               <IconCalendar size={22} color="#1062D8" />
             </View>
+          </View>
           </View>
 
           {/* ── 3. 공정명 ── */}
