@@ -288,20 +288,20 @@ export const $toast: ViewStyle = {
   position: "absolute",
   left: 20,
   right: 20,
-  backgroundColor: "#1062D8",
-  borderRadius: 12,
+  height: 45,
+  backgroundColor: "#F2F5F6",
+  borderRadius: 10,
   paddingHorizontal: 16,
-  paddingVertical: 14,
   flexDirection: "row",
   alignItems: "center",
   gap: 12,
 }
 
 export const $toastIconCircle: ViewStyle = {
-  width: 28,
-  height: 28,
-  borderRadius: 14,
-  backgroundColor: "rgba(255, 255, 255, 0.25)",
+  width: 24,
+  height: 24,
+  borderRadius: 12,
+  backgroundColor: "#1062D8",
   justifyContent: "center",
   alignItems: "center",
 }
@@ -310,7 +310,7 @@ export const $toastText: TextStyle = {
   flex: 1,
   fontSize: 14,
   fontFamily: typography.primary.semiBold,
-  color: "#FFFFFF",
+  color: "#333333",
 }
 
 // ── Modal Icon ────────────────────────────────────────────────────────────────

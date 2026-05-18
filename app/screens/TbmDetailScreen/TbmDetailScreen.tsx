@@ -262,7 +262,7 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
 
     {toastVisible && (
       <Animated.View
-        style={[S.$toast, { opacity: toastAnim, bottom: (insets.bottom || 0) + 24 }]}
+        style={[S.$toast, { opacity: toastAnim, top: Math.max(100, insets.top + 60) + 8 }]}
       >
         <View style={S.$toastIconCircle}>
           <IconCheck size={16} color="#FFFFFF" strokeWidth={2.5} />
