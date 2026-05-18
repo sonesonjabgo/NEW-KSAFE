@@ -484,7 +484,7 @@ const fr: Translations = {
       description: " ·  Le journal éducatif ne peut être rédigé que pour les activités TBM en cours.\n ·  La finalisation du journal mettra automatiquement fin à l'activité TBM.\n ·  Au moins une photo du site doit être jointe.",
     },
     activityName: {
-      label: "Nom de l'activité TBM",
+      label: "Activité TBM",
     },
     processName: {
       label: "Nom du processus",

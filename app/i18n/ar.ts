@@ -475,7 +475,7 @@ const ar: Translations = {
       description: " ·  لا يمكن كتابة سجل التعليم إلا لأنشطة TBM قيد التقدم.\n ·  سيؤدي إكمال سجل التعليم إلى إنهاء نشاط TBM تلقائياً.\n ·  يجب إرفاق صورة واحدة على الأقل من الموقع.",
     },
     activityName: {
-      label: "اسم نشاط TBM",
+      label: "نشاط TBM",
     },
     processName: {
       label: "اسم العملية",

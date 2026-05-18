@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native"
-import { IconAlertTriangle, IconPlus } from "@tabler/icons-react-native"
+import { IconAlertTriangle, IconCalendar, IconPlus } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { StackScreen } from "@/components/StackScreen"
@@ -65,11 +65,16 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
 
           {/* ── 2. TBM 활동명 카드 ── */}
           <View style={S.$activityNameCard}>
-            <Text
-              text={translate("tbmReportScreen:activityName.label")}
-              style={S.$activityNameLabel}
-            />
-            <Text text={detail.title} style={S.$activityNameText} />
+            <View style={S.$activityNameInfo}>
+              <Text
+                text={translate("tbmReportScreen:activityName.label")}
+                style={S.$activityNameLabel}
+              />
+              <Text text={detail.title} style={S.$activityNameText} />
+            </View>
+            <View style={S.$activityNameCircle}>
+              <IconCalendar size={22} color="#1062D8" />
+            </View>
           </View>
 
           {/* ── 3. 공정명 ── */}

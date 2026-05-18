@@ -528,7 +528,7 @@ const en = {
         " ·  Education logs can only be created for TBM activities in progress.\n ·  Completing the education log will automatically end the TBM activity.\n ·  At least one site photo must be attached.",
     },
     activityName: {
-      label: "TBM Activity Name",
+      label: "TBM Activity",
     },
     processName: {
       label: "Process Name",

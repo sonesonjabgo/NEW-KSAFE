@@ -520,7 +520,7 @@ const ko: Translations = {
         " ·  진행중인 TBM 활동에 대해서만 교육일지를 작성할 수 있습니다.\n ·  교육일지를 완료하면 해당 TBM 활동이 자동으로 종료됩니다.\n ·  현장 사진은 최소 1장 이상 반드시 첨부해야 합니다.",
     },
     activityName: {
-      label: "TBM 활동명",
+      label: "TBM 활동",
     },
     processName: {
       label: "공정명",

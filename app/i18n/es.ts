@@ -484,7 +484,7 @@ const es: Translations = {
       description: " ·  Solo se puede redactar el registro educativo para actividades TBM en curso.\n ·  Al completar el registro, la actividad TBM finalizará automáticamente.\n ·  Se debe adjuntar al menos una foto del sitio.",
     },
     activityName: {
-      label: "Nombre de actividad TBM",
+      label: "Actividad TBM",
     },
     processName: {
       label: "Nombre del proceso",

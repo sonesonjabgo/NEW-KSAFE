@@ -45,30 +45,42 @@ export const $noticeDesc: TextStyle = {
 // ── Activity Name Card ────────────────────────────────────────────────────────
 
 export const $activityNameCard: ViewStyle = {
-  backgroundColor: "#FFFFFF",
-  borderRadius: 12,
+  backgroundColor: "#F8FBFD",
+  borderRadius: 9,
   borderWidth: 1,
-  borderColor: "#E9ECF0",
-  paddingVertical: 18,
+  borderColor: "#DEE8F6",
+  paddingVertical: 16,
   paddingHorizontal: 20,
-  gap: 6,
-  shadowColor: "#000000",
-  shadowOffset: { width: 0, height: 2 },
-  shadowOpacity: 0.06,
-  shadowRadius: 6,
-  elevation: 2,
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 12,
+}
+
+export const $activityNameInfo: ViewStyle = {
+  flex: 1,
+  gap: 4,
 }
 
 export const $activityNameLabel: TextStyle = {
-  fontSize: 12,
-  fontFamily: typography.primary.semiBold,
-  color: "#1062D8",
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#564E4B",
 }
 
 export const $activityNameText: TextStyle = {
-  fontSize: 18,
+  fontSize: 17,
   fontFamily: typography.primary.bold,
-  color: "#111111",
+  color: "#000000",
+}
+
+export const $activityNameCircle: ViewStyle = {
+  width: 44,
+  height: 44,
+  borderRadius: 22,
+  backgroundColor: "#DEE8F6",
+  justifyContent: "center",
+  alignItems: "center",
+  flexShrink: 0,
 }
 
 // ── Section ───────────────────────────────────────────────────────────────────
