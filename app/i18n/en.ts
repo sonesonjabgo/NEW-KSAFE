@@ -571,6 +571,7 @@ const en = {
     startActivity: "Start Activity",
     edit: "Edit",
     delete: "Delete",
+    participantEmpty: "No participants.",
     toastStarted: "TBM activity has started.",
     endActivity: "End TBM and Generate Report",
     participantHeader: "Participants ({{count}})",

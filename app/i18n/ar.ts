@@ -518,6 +518,7 @@ const ar: Translations = {
     startActivity: "Start Activity",
     edit: "Edit",
     delete: "Delete",
+    participantEmpty: "لا يوجد مشاركون.",
     toastStarted: "TBM تم بدء نشاط",
     endActivity: "إنهاء TBM وإنشاء تقرير",
     participantHeader: "المشاركون ({{count}})",

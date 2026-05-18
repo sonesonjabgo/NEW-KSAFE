@@ -563,6 +563,7 @@ const ko: Translations = {
     startActivity: "활동 시작",
     edit: "수정",
     delete: "삭제",
+    participantEmpty: "참여자가 없습니다.",
     toastStarted: "TBM 활동이 시작되었습니다.",
     endActivity: "TBM 종료하고 보고서 생성하기",
     participantHeader: "참여자 목록 ({{count}}명)",

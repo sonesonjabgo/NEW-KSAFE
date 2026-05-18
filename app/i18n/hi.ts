@@ -523,6 +523,7 @@ const hi: Translations = {
     startActivity: "Start Activity",
     edit: "Edit",
     delete: "Delete",
+    participantEmpty: "कोई प्रतिभागी नहीं।",
     toastStarted: "TBM गतिविधि शुरू हो गई है।",
     endActivity: "TBM समाप्त करें और रिपोर्ट बनाएं",
     participantHeader: "प्रतिभागी ({{count}})",

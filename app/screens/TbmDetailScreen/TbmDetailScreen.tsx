@@ -154,7 +154,12 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
               />
               <View style={S.$participantHeaderLine} />
             </View>
-            {detail.participants.map((p) => {
+            {detail.participants.length === 0 ? (
+              <Text
+                text={translate("tbmDetailScreen:participantEmpty")}
+                style={S.$participantEmpty}
+              />
+            ) : detail.participants.map((p) => {
               const pBadge = getParticipantBadgeStyles(p.badge)
               return (
                 <View key={p.id} style={S.$participantCard}>

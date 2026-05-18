@@ -523,6 +523,7 @@ const ja: Translations = {
     startActivity: "Start Activity",
     edit: "Edit",
     delete: "Delete",
+    participantEmpty: "参加者がいません。",
     toastStarted: "TBM活動が開始されました。",
     endActivity: "TBMを終了してレポートを生成する",
     participantHeader: "参加者 ({{count}}名)",

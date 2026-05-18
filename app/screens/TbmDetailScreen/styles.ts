@@ -267,6 +267,14 @@ export const $participantBadgeDangerText: TextStyle = {
   color: "#F04E3E",
 }
 
+export const $participantEmpty: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#A9A9A9",
+  textAlign: "center",
+  paddingVertical: 16,
+}
+
 export const $participantTime: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,

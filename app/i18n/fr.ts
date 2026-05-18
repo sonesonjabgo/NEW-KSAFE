@@ -527,6 +527,7 @@ const fr: Translations = {
     startActivity: "Start Activity",
     edit: "Edit",
     delete: "Delete",
+    participantEmpty: "Aucun participant.",
     toastStarted: "L'activité TBM a démarré.",
     endActivity: "Terminer TBM et générer le rapport",
     participantHeader: "Participants ({{count}})",
