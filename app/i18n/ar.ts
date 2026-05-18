@@ -510,6 +510,16 @@ const ar: Translations = {
   },
 
 
+  tbmDetailScreen: {
+    title: "تفاصيل نشاط TBM",
+    workDate: "تاريخ العمل:  {{date}}",
+    activityLabel: "محتوى النشاط",
+    educationHeader: "مواد التعليم ({{count}})",
+    startActivity: "بدء النشاط",
+    edit: "تعديل",
+    delete: "حذف",
+  },
+
   educationSelectScreen: {
     title: "Select Educational Materials",
     sourceTab1: "KS Safety Association",

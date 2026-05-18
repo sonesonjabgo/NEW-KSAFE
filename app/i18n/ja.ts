@@ -515,6 +515,16 @@ const ja: Translations = {
   },
 
 
+  tbmDetailScreen: {
+    title: "TBM活動詳細",
+    workDate: "作業日:  {{date}}",
+    activityLabel: "活動内容",
+    educationHeader: "教育資料 ({{count}}件)",
+    startActivity: "活動開始",
+    edit: "編集",
+    delete: "削除",
+  },
+
   educationSelectScreen: {
     title: "Select Educational Materials",
     sourceTab1: "KS Safety Association",

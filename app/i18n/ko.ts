@@ -555,6 +555,16 @@ const ko: Translations = {
 
 
 
+  tbmDetailScreen: {
+    title: "TBM 활동 상세",
+    workDate: "작업일:  {{date}}",
+    activityLabel: "활동 내용",
+    educationHeader: "교육자료 ({{count}}개)",
+    startActivity: "활동시작",
+    edit: "수정",
+    delete: "삭제",
+  },
+
   educationSelectScreen: {
     title: "교육자료 선택",
     sourceTab1: "KS산업안전협회",

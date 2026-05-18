@@ -563,6 +563,16 @@ const en = {
 
 
 
+  tbmDetailScreen: {
+    title: "TBM Activity Detail",
+    workDate: "Work Date:  {{date}}",
+    activityLabel: "Activity Content",
+    educationHeader: "Education Materials ({{count}})",
+    startActivity: "Start Activity",
+    edit: "Edit",
+    delete: "Delete",
+  },
+
   educationSelectScreen: {
     title: "Select Educational Materials",
     sourceTab1: "KS Safety Association",

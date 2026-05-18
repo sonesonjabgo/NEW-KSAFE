@@ -515,6 +515,16 @@ const hi: Translations = {
   },
 
 
+  tbmDetailScreen: {
+    title: "TBM गतिविधि विवरण",
+    workDate: "कार्य तिथि:  {{date}}",
+    activityLabel: "गतिविधि सामग्री",
+    educationHeader: "शैक्षिक सामग्री ({{count}})",
+    startActivity: "गतिविधि शुरू करें",
+    edit: "संपादित करें",
+    delete: "हटाएं",
+  },
+
   educationSelectScreen: {
     title: "Select Educational Materials",
     sourceTab1: "KS Safety Association",

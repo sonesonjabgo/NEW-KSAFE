@@ -519,6 +519,16 @@ const es: Translations = {
   },
 
 
+  tbmDetailScreen: {
+    title: "Detalle de Actividad TBM",
+    workDate: "Fecha de trabajo:  {{date}}",
+    activityLabel: "Contenido de actividad",
+    educationHeader: "Materiales educativos ({{count}})",
+    startActivity: "Iniciar actividad",
+    edit: "Editar",
+    delete: "Eliminar",
+  },
+
   educationSelectScreen: {
     title: "Select Educational Materials",
     sourceTab1: "KS Safety Association",

@@ -9,18 +9,19 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import Config from "@/config"
 import { useAuth } from "@/context/AuthContext"
-import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
 import { AISafetyChatScreen } from "@/screens/AISafetyChatScreen/AISafetyChatScreen"
+import { EducationPresentationScreen } from "@/screens/EducationPresentationScreen/EducationPresentationScreen"
+import { EducationSelectScreen } from "@/screens/EducationSelectScreen/EducationSelectScreen"
+import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
+import { ImageTranslationScreen } from "@/screens/ImageTranslationScreen/ImageTranslationScreen"
 import { LanguageSettingsScreen } from "@/screens/LanguageSettingsScreen"
 import { LoginScreen } from "@/screens/LoginScreen"
 import { MyPageScreen } from "@/screens/MyPageScreen"
 import { NotifyScreen } from "@/screens/NotifyScreen"
 import { QrScannerScreen } from "@/screens/QrScannerScreen"
-import { EducationPresentationScreen } from "@/screens/EducationPresentationScreen/EducationPresentationScreen"
-import { TbmListScreen } from "@/screens/TbmListScreen/TbmListScreen"
 import { TbmCreateScreen } from "@/screens/TbmCreateScreen/TbmCreateScreen"
-import { EducationSelectScreen } from "@/screens/EducationSelectScreen/EducationSelectScreen"
-import { ImageTranslationScreen } from "@/screens/ImageTranslationScreen/ImageTranslationScreen"
+import { TbmDetailScreen } from "@/screens/TbmDetailScreen/TbmDetailScreen"
+import { TbmListScreen } from "@/screens/TbmListScreen/TbmListScreen"
 import { TextTranslationScreen } from "@/screens/TextTranslationScreen/TextTranslationScreen"
 import { VoiceTranslationScreen } from "@/screens/VoiceTranslationScreen"
 import { useAppTheme } from "@/theme/context"
@@ -68,6 +69,7 @@ const AppStack = () => {
       <Stack.Screen name="EducationPresentation" component={EducationPresentationScreen} />
       <Stack.Screen name="TbmList" component={TbmListScreen} />
       <Stack.Screen name="TbmCreate" component={TbmCreateScreen} />
+      <Stack.Screen name="TbmDetail" component={TbmDetailScreen} />
       <Stack.Screen name="EducationSelect" component={EducationSelectScreen} />
     </Stack.Navigator>
   )

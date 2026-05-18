@@ -30,6 +30,7 @@ export type AppStackParamList = {
   EducationPresentation: undefined
   TbmList: undefined
   TbmCreate: undefined
+  TbmDetail: { id: number }
   EducationSelect: { initialSelected: number[]; onConfirm: (ids: number[]) => void }
 }
 
