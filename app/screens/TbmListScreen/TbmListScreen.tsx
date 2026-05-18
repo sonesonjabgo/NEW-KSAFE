@@ -1,7 +1,7 @@
 import { FC, useMemo, useState } from "react"
 import { FlatList, TouchableOpacity, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { ClipboardList, MapPin, Plus, User } from "lucide-react-native"
+import { ClipboardList, Plus } from "lucide-react-native"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -61,16 +61,11 @@ const TbmCard: FC<{ item: TbmItem }> = ({ item }) => {
       {/* 구분선 */}
       <View style={S.$cardDivider} />
 
-      {/* 작성자 */}
+      {/* 작성자 + 현장 */}
       <View style={S.$cardMetaRow}>
-        <User size={16} color="#AAAAAA" strokeWidth={1.8} />
-        <Text text={item.author} style={S.$cardMetaText} numberOfLines={1} />
-      </View>
-
-      {/* 위치 */}
-      <View style={S.$cardMetaRow}>
-        <MapPin size={16} color="#AAAAAA" strokeWidth={1.8} />
-        <Text text={item.location} style={S.$cardMetaText} numberOfLines={1} />
+        <View style={S.$cardAvatar} />
+        <Text text={item.author} style={S.$cardMetaAuthor} numberOfLines={1} />
+        <Text text={` · ${item.location}`} style={S.$cardMetaLocation} numberOfLines={1} />
       </View>
     </TouchableOpacity>
   )

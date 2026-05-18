@@ -99,15 +99,30 @@ export const $cardDivider: ViewStyle = {
 export const $cardMetaRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-  marginBottom: 4,
 }
 
-export const $cardMetaText: TextStyle = {
-  fontSize: 13,
-  color: "#777777",
+export const $cardAvatar: ViewStyle = {
+  width: 24,
+  height: 24,
+  borderRadius: 12,
+  backgroundColor: "#F3F2F0",
+  marginRight: 6,
+  flexShrink: 0,
+}
+
+export const $cardMetaAuthor: TextStyle = {
+  fontSize: 12,
+  color: "#333333",
+  fontFamily: typography.primary.semiBold,
+  flexShrink: 1,
+  marginRight: 5,
+}
+
+export const $cardMetaLocation: TextStyle = {
+  fontSize: 12,
+  color: "#A9A9A9",
   fontFamily: typography.primary.normal,
-  marginLeft: 6,
-  flex: 1,
+  flexShrink: 1,
 }
 
 // ── Badge ─────────────────────────────────────────────────────────────────────
