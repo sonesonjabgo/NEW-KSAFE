@@ -560,7 +560,7 @@ const ko: Translations = {
     workDate: "작업일:  {{date}}",
     activityLabel: "활동 내용",
     educationHeader: "교육자료 ({{count}}개)",
-    startActivity: "활동시작",
+    startActivity: "활동 시작",
     edit: "수정",
     delete: "삭제",
   },
