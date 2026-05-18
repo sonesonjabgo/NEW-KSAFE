@@ -182,7 +182,7 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
           <TouchableOpacity
             style={S.$startBtn}
             activeOpacity={0.8}
-            onPress={() => (isStarted ? console.log("보고서 생성:", detail.id) : setStartModalVisible(true))}
+            onPress={() => (isStarted ? navigation.navigate("TbmReport", { id: detail.id }) : setStartModalVisible(true))}
           >
             {isStarted ? (
               <EducationFrame width={22} height={22} color="#FFFFFF" />

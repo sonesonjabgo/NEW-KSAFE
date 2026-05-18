@@ -521,6 +521,40 @@ const en = {
     },
   },
 
+  tbmReportScreen: {
+    title: "TBM Report Generation",
+    notice: {
+      title: "Notice",
+      description:
+        "Please fill in all fields accurately before submitting. False entries may result in legal liability.",
+    },
+    activityName: {
+      label: "TBM Activity Name",
+    },
+    processName: {
+      label: "Process Name",
+      placeholder: "Enter process name",
+    },
+    teamName: {
+      label: "Team / Unit Name",
+      placeholder: "Enter team or unit name",
+    },
+    educationSummary: {
+      label: "Education Content Summary",
+      placeholder: "Summarize the education content",
+    },
+    specialNotes: {
+      label: "Special Notes",
+      placeholder: "Enter any special notes",
+    },
+    sitePhotos: {
+      label: "Site Photos",
+      addButton: "Add Photo",
+      helper: "Please add site photos.",
+    },
+    submit: "Generate Report",
+  },
+
   tbmCreateScreen: {
     title: "Create TBM Activity",
     reset: "Reset",

@@ -513,6 +513,40 @@ const ko: Translations = {
     },
   },
 
+  tbmReportScreen: {
+    title: "TBM 보고서 생성",
+    notice: {
+      title: "주의사항",
+      description:
+        "보고서 제출 전 모든 항목을 정확히 기재해 주세요. 허위 작성 시 법적 책임이 따를 수 있습니다.",
+    },
+    activityName: {
+      label: "TBM 활동명",
+    },
+    processName: {
+      label: "공정명",
+      placeholder: "공정명을 입력하세요",
+    },
+    teamName: {
+      label: "팀/반명",
+      placeholder: "팀 또는 반명을 입력하세요",
+    },
+    educationSummary: {
+      label: "교육 내용 요약",
+      placeholder: "교육 내용을 요약하여 입력하세요",
+    },
+    specialNotes: {
+      label: "특이사항",
+      placeholder: "특이사항을 입력하세요",
+    },
+    sitePhotos: {
+      label: "현장 사진",
+      addButton: "사진 추가",
+      helper: "현장 사진을 추가해 주세요.",
+    },
+    submit: "보고서 생성하기",
+  },
+
   tbmCreateScreen: {
     title: "TBM 활동 생성",
     reset: "초기화",

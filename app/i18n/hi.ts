@@ -474,6 +474,39 @@ const hi: Translations = {
     },
   },
 
+  tbmReportScreen: {
+    title: "TBM रिपोर्ट जनरेशन",
+    notice: {
+      title: "नोटिस",
+      description: "सबमिट करने से पहले सभी फ़ील्ड सटीक रूप से भरें। गलत जानकारी देने पर कानूनी जिम्मेदारी हो सकती है।",
+    },
+    activityName: {
+      label: "TBM गतिविधि का नाम",
+    },
+    processName: {
+      label: "प्रक्रिया का नाम",
+      placeholder: "प्रक्रिया का नाम दर्ज करें",
+    },
+    teamName: {
+      label: "टीम / इकाई का नाम",
+      placeholder: "टीम या इकाई का नाम दर्ज करें",
+    },
+    educationSummary: {
+      label: "शिक्षा सामग्री सारांश",
+      placeholder: "शिक्षा सामग्री का सारांश दर्ज करें",
+    },
+    specialNotes: {
+      label: "विशेष नोट्स",
+      placeholder: "कोई विशेष नोट्स दर्ज करें",
+    },
+    sitePhotos: {
+      label: "साइट फ़ोटो",
+      addButton: "फ़ोटो जोड़ें",
+      helper: "कृपया साइट फ़ोटो जोड़ें।",
+    },
+    submit: "रिपोर्ट बनाएं",
+  },
+
   tbmCreateScreen: {
     title: "Create TBM Activity",
     reset: "Reset",

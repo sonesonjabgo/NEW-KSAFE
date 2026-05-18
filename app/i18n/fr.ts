@@ -478,6 +478,39 @@ const fr: Translations = {
     },
   },
 
+  tbmReportScreen: {
+    title: "Génération de rapport TBM",
+    notice: {
+      title: "Avis",
+      description: "Veuillez remplir tous les champs avec précision avant de soumettre. Les fausses déclarations peuvent entraîner des responsabilités légales.",
+    },
+    activityName: {
+      label: "Nom de l'activité TBM",
+    },
+    processName: {
+      label: "Nom du processus",
+      placeholder: "Entrez le nom du processus",
+    },
+    teamName: {
+      label: "Nom de l'équipe / unité",
+      placeholder: "Entrez le nom de l'équipe ou de l'unité",
+    },
+    educationSummary: {
+      label: "Résumé du contenu éducatif",
+      placeholder: "Résumez le contenu éducatif",
+    },
+    specialNotes: {
+      label: "Notes spéciales",
+      placeholder: "Entrez des notes spéciales",
+    },
+    sitePhotos: {
+      label: "Photos du site",
+      addButton: "Ajouter une photo",
+      helper: "Veuillez ajouter des photos du site.",
+    },
+    submit: "Générer le rapport",
+  },
+
   tbmCreateScreen: {
     title: "Create TBM Activity",
     reset: "Reset",

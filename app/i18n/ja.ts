@@ -474,6 +474,39 @@ const ja: Translations = {
     },
   },
 
+  tbmReportScreen: {
+    title: "TBMレポート生成",
+    notice: {
+      title: "注意事項",
+      description: "提出前にすべての項目を正確に記入してください。虚偽記載は法的責任を問われる場合があります。",
+    },
+    activityName: {
+      label: "TBM活動名",
+    },
+    processName: {
+      label: "工程名",
+      placeholder: "工程名を入力してください",
+    },
+    teamName: {
+      label: "チーム/班名",
+      placeholder: "チームまたは班名を入力してください",
+    },
+    educationSummary: {
+      label: "教育内容要約",
+      placeholder: "教育内容を要約して入力してください",
+    },
+    specialNotes: {
+      label: "特記事項",
+      placeholder: "特記事項を入力してください",
+    },
+    sitePhotos: {
+      label: "現場写真",
+      addButton: "写真を追加",
+      helper: "現場写真を追加してください。",
+    },
+    submit: "レポートを生成する",
+  },
+
   tbmCreateScreen: {
     title: "Create TBM Activity",
     reset: "Reset",

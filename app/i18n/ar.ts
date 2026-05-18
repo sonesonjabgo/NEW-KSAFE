@@ -469,6 +469,39 @@ const ar: Translations = {
     },
   },
 
+  tbmReportScreen: {
+    title: "إنشاء تقرير TBM",
+    notice: {
+      title: "تنبيه",
+      description: "يرجى ملء جميع الحقول بدقة قبل الإرسال. قد يترتب على الإدخال الخاطئ مسؤولية قانونية.",
+    },
+    activityName: {
+      label: "اسم نشاط TBM",
+    },
+    processName: {
+      label: "اسم العملية",
+      placeholder: "أدخل اسم العملية",
+    },
+    teamName: {
+      label: "اسم الفريق / الوحدة",
+      placeholder: "أدخل اسم الفريق أو الوحدة",
+    },
+    educationSummary: {
+      label: "ملخص محتوى التعليم",
+      placeholder: "لخّص محتوى التعليم",
+    },
+    specialNotes: {
+      label: "ملاحظات خاصة",
+      placeholder: "أدخل أي ملاحظات خاصة",
+    },
+    sitePhotos: {
+      label: "صور الموقع",
+      addButton: "إضافة صورة",
+      helper: "يرجى إضافة صور الموقع.",
+    },
+    submit: "إنشاء التقرير",
+  },
+
   tbmCreateScreen: {
     title: "Create TBM Activity",
     reset: "Reset",
