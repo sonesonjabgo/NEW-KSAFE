@@ -1,9 +1,8 @@
 import { ViewStyle, TextStyle } from "react-native"
+import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
-const HEADER_BG = "#1E2A4A"
 const CARD_BG = "#FFFFFF"
-const PILL_ACTIVE_BG = "#0B3069"
 
 // ── Tab Bar ──────────────────────────────────────────────────────────────────
 
@@ -26,7 +25,7 @@ export const $tab: ViewStyle = {
 }
 
 export const $activeTab: ViewStyle = {
-  backgroundColor: PILL_ACTIVE_BG,
+  backgroundColor: colors.navy,
 }
 
 export const $tabText: TextStyle = {
@@ -192,23 +191,23 @@ export const $emptyText: TextStyle = {
 // ── FAB ───────────────────────────────────────────────────────────────────────
 
 export const $fab: ViewStyle = {
-  width: 58,
-  height: 58,
-  borderRadius: 29,
-  backgroundColor: HEADER_BG,
+  width: 80,
+  height: 80,
+  borderRadius: 40,
+  backgroundColor: colors.navy,
   justifyContent: "center",
   alignItems: "center",
   shadowColor: "#000000",
-  shadowOffset: { width: 0, height: 4 },
-  shadowOpacity: 0.25,
-  shadowRadius: 12,
-  elevation: 6,
+  shadowOffset: { width: 0, height: 6 },
+  shadowOpacity: 0.3,
+  shadowRadius: 16,
+  elevation: 8,
 }
 
 export const $fabLabel: TextStyle = {
   marginTop: 4,
-  fontSize: 12,
-  color: HEADER_BG,
+  fontSize: 11,
+  color: "#FFFFFF",
   fontFamily: typography.primary.bold,
   textAlign: "center",
 }

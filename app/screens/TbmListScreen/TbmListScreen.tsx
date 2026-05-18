@@ -1,9 +1,9 @@
 import { FC, useMemo, useState } from "react"
 import { FlatList, TouchableOpacity, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { Plus } from "lucide-react-native"
 
 import TbmEmptyImage from "@assets/images/tbm-empty.svg"
+import TbmFabIcon from "@assets/images/tbm-fab-icon.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -165,9 +165,9 @@ export const TbmListScreen: FC<TbmListScreenProps> = ({ navigation }) => {
           activeOpacity={0.8}
           onPress={() => console.log("새 활동 생성")}
         >
-          <Plus size={28} color="#FFFFFF" strokeWidth={2.5} />
+          <TbmFabIcon width={29} height={29} />
+          <Text text={translate("tbmListScreen:fab")} style={S.$fabLabel} />
         </TouchableOpacity>
-        <Text text={translate("tbmListScreen:fab")} style={S.$fabLabel} />
       </View>
     </>
   )
