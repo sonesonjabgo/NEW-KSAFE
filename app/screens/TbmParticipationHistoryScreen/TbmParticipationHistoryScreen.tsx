@@ -95,13 +95,14 @@ const $countRow: ViewStyle = {
 
 const $cardCount: TextStyle = {
   fontSize: 26,
+  lineHeight: 26,
   fontFamily: typography.primary.bold,
   textAlign: "left",
 }
 
 const $cardUnit: TextStyle = {
   fontSize: 15,
+  lineHeight: 15,
   fontFamily: typography.primary.normal,
   color: "#574D4A",
-  marginBottom: 2,
 }
