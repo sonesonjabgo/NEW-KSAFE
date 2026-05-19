@@ -825,6 +825,7 @@ const en = {
     totalParticipation: "Total Participation",
     cautionResponse: "Caution Response",
     unit: "case(s)",
+    workplaceLabel: "Workplace",
   },
 
   ...demoEn,

@@ -814,6 +814,7 @@ const ko: Translations = {
     totalParticipation: "전체 참여",
     cautionResponse: "주의 응답",
     unit: "건",
+    workplaceLabel: "사업장",
   },
 
   ...demoKo,

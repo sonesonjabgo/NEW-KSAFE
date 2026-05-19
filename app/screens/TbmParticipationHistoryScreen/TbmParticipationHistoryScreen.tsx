@@ -7,11 +7,27 @@ import { translate } from "@/i18n/translate"
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
-import { mockTbmData } from "@/screens/TbmListScreen/mockData"
-import type { TbmItem } from "@/screens/TbmListScreen/types"
 
 const MOCK_TOTAL = 12
 const MOCK_CAUTION = 3
+
+interface TbmHistoryItem {
+  id: number
+  badge: string
+  date: string
+  title: string
+  workplace: string
+}
+
+const mockHistoryData: TbmHistoryItem[] = [
+  { id: 1, badge: "정상", date: "2026.02.19", title: "작업장 순회 점검", workplace: "광교 타워크레인 사업장" },
+  { id: 2, badge: "정상", date: "2026.02.18", title: "전기설비 안전점검", workplace: "광교 타워크레인 사업장" },
+  { id: 3, badge: "정상", date: "2026.02.17", title: "고소작업 안전교육", workplace: "광교 타워크레인 사업장" },
+  { id: 4, badge: "정상", date: "2026.02.16", title: "화학물질 취급 안전점검", workplace: "광교 타워크레인 사업장" },
+  { id: 5, badge: "정상", date: "2026.02.15", title: "비계 설치 작업 전 TBM", workplace: "광교 타워크레인 사업장" },
+]
+
+// ── StatCard ──────────────────────────────────────────────
 
 interface StatCardProps {
   label: string
@@ -20,34 +36,43 @@ interface StatCardProps {
 }
 
 const StatCard: FC<StatCardProps> = ({ label, count, countColor = "#252525" }) => (
-  <View style={$card}>
-    <Text text={label} style={$cardLabel} />
+  <View style={$statCard}>
+    <Text text={label} style={$statLabel} />
     <View style={$countRow}>
-      <Text text={String(count)} style={[$cardCount, { color: countColor }]} />
-      <Text text={translate("tbmParticipationHistoryScreen:unit")} style={$cardUnit} />
+      <Text text={String(count)} style={[$statCount, { color: countColor }]} />
+      <Text text={translate("tbmParticipationHistoryScreen:unit")} style={$statUnit} />
     </View>
   </View>
 )
 
+// ── HistoryCard ───────────────────────────────────────────
+
 interface HistoryCardProps {
-  item: TbmItem
+  item: TbmHistoryItem
   onPress: () => void
 }
 
 const HistoryCard: FC<HistoryCardProps> = ({ item, onPress }) => (
   <TouchableOpacity style={$historyCard} activeOpacity={0.75} onPress={onPress}>
-    <View style={$historyCardTop}>
+    <View style={$historyTop}>
+      <View style={$badge}>
+        <Text text={item.badge} style={$badgeText} />
+      </View>
       <Text text={item.date} style={$historyDate} />
-      <Text
-        text={translate("tbmListScreen:participants", { count: item.participants })}
-        style={$historyParticipants}
-      />
     </View>
+
     <Text text={item.title} style={$historyTitle} numberOfLines={2} />
+
     <View style={$historyDivider} />
-    <Text text={item.location} style={$historyLocation} numberOfLines={1} />
+
+    <View style={$historyBottom}>
+      <Text text={translate("tbmParticipationHistoryScreen:workplaceLabel")} style={$workplaceLabel} />
+      <Text text={item.workplace} style={$workplaceName} numberOfLines={1} />
+    </View>
   </TouchableOpacity>
 )
+
+// ── Screen ────────────────────────────────────────────────
 
 type TbmParticipationHistoryScreenProps = AppStackScreenProps<"TbmParticipationHistory">
 
@@ -66,7 +91,7 @@ export const TbmParticipationHistoryScreen: FC<TbmParticipationHistoryScreenProp
         contentContainerStyle={$content}
         showsVerticalScrollIndicator={false}
       >
-        <View style={$row}>
+        <View style={$statRow}>
           <StatCard
             label={translate("tbmParticipationHistoryScreen:totalParticipation")}
             count={MOCK_TOTAL}
@@ -79,7 +104,7 @@ export const TbmParticipationHistoryScreen: FC<TbmParticipationHistoryScreenProp
         </View>
 
         <View style={$historyList}>
-          {mockTbmData.map((item) => (
+          {mockHistoryData.map((item) => (
             <HistoryCard
               key={item.id}
               item={item}
@@ -92,6 +117,8 @@ export const TbmParticipationHistoryScreen: FC<TbmParticipationHistoryScreenProp
   )
 }
 
+// ── Styles ────────────────────────────────────────────────
+
 const $scroll: ViewStyle = {
   flex: 1,
 }
@@ -100,12 +127,12 @@ const $content: ViewStyle = {
   padding: 24,
 }
 
-const $row: ViewStyle = {
+const $statRow: ViewStyle = {
   flexDirection: "row",
   gap: 11,
 }
 
-const $card: ViewStyle = {
+const $statCard: ViewStyle = {
   flex: 1,
   height: 88,
   backgroundColor: "#FFFFFF",
@@ -118,11 +145,10 @@ const $card: ViewStyle = {
   gap: 6,
 }
 
-const $cardLabel: TextStyle = {
+const $statLabel: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.normal,
   color: "#574D4A",
-  textAlign: "left",
 }
 
 const $countRow: ViewStyle = {
@@ -131,14 +157,13 @@ const $countRow: ViewStyle = {
   gap: 4,
 }
 
-const $cardCount: TextStyle = {
+const $statCount: TextStyle = {
   fontSize: 26,
   lineHeight: 26,
   fontFamily: typography.primary.bold,
-  textAlign: "left",
 }
 
-const $cardUnit: TextStyle = {
+const $statUnit: TextStyle = {
   fontSize: 15,
   lineHeight: 15,
   fontFamily: typography.primary.normal,
@@ -158,40 +183,61 @@ const $historyCard: ViewStyle = {
   borderColor: "#ECECEC",
   padding: 16,
   justifyContent: "space-between",
+  gap: 16,
 }
 
-const $historyCardTop: ViewStyle = {
+const $historyTop: ViewStyle = {
   flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",
 }
 
-const $historyDate: TextStyle = {
-  fontSize: 13,
-  fontFamily: typography.primary.normal,
-  color: "#979797",
+const $badge: ViewStyle = {
+  backgroundColor: "#CFFFE1",
+  borderRadius: 4,
+  paddingHorizontal: 8,
+  paddingVertical: 2,
 }
 
-const $historyParticipants: TextStyle = {
-  fontSize: 13,
+const $badgeText: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.medium,
+  color: "#18A24A",
+}
+
+const $historyDate: TextStyle = {
+  fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#979797",
+  color: "#A9A9A9",
 }
 
 const $historyTitle: TextStyle = {
   fontSize: 16,
   fontFamily: typography.primary.bold,
-  color: "#252525",
-  marginTop: 8,
+  color: "#000000",
+  flex: 1,
 }
 
 const $historyDivider: ViewStyle = {
   height: 1,
-  backgroundColor: "#ECECEC",
+  backgroundColor: "#E9ECF0",
 }
 
-const $historyLocation: TextStyle = {
-  fontSize: 13,
-  fontFamily: typography.primary.normal,
-  color: "#979797",
+const $historyBottom: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 8,
+}
+
+const $workplaceLabel: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.medium,
+  color: "#56524F",
+}
+
+const $workplaceName: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.semiBold,
+  color: "#2C2C2C",
+  flex: 1,
 }

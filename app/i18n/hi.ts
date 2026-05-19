@@ -775,6 +775,7 @@ const hi: Translations = {
     totalParticipation: "Total Participation",
     cautionResponse: "Caution Response",
     unit: "case(s)",
+    workplaceLabel: "Workplace",
   },
 
   ...demoHi,
