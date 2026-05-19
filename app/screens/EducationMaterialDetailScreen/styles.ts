@@ -1,5 +1,6 @@
 import { TextStyle, ViewStyle } from "react-native"
 
+import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
 export const $scroll: ViewStyle = {
@@ -31,13 +32,15 @@ export const $card: ViewStyle = {
 export const $badgesRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-  gap: 8,
+  justifyContent: "space-between",
 }
 
 export const $badge: ViewStyle = {
-  paddingHorizontal: 10,
-  paddingVertical: 4,
-  borderRadius: 6,
+  height: 23,
+  paddingHorizontal: 12,
+  borderRadius: 20,
+  justifyContent: "center",
+  alignItems: "center",
 }
 
 export const $badgeText: TextStyle = {
@@ -56,6 +59,20 @@ export const $title: TextStyle = {
   fontFamily: typography.primary.bold,
   color: "#000000",
   lineHeight: 28,
+}
+
+export const $authorBadge: ViewStyle = {
+  alignSelf: "flex-start",
+  backgroundColor: "#F3F2EF",
+  borderRadius: 6,
+  paddingHorizontal: 10,
+  paddingVertical: 4,
+}
+
+export const $authorBadgeText: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.medium,
+  color: "#606679",
 }
 
 export const $dateRow: ViewStyle = {
@@ -105,4 +122,20 @@ export const $fileChipName: TextStyle = {
   fontSize: 16,
   fontFamily: typography.primary.semiBold,
   color: "#1062D8",
+}
+
+export const $publishBtn: ViewStyle = {
+  height: 50,
+  borderRadius: 10,
+  backgroundColor: colors.blue,
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 8,
+}
+
+export const $publishBtnText: TextStyle = {
+  fontSize: 16,
+  fontFamily: typography.primary.semiBold,
+  color: "#FFFFFF",
 }

@@ -688,6 +688,8 @@ const fr: Translations = {
     statusArchived: "Archived",
     categoryLabel: "Category:",
     attachmentLabel: "Attachment",
+    registrantLabel: "Registrant:",
+    publishButton: "Publish After Activation",
   },
 
   educationSelectScreen: {

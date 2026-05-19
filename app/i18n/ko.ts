@@ -719,6 +719,8 @@ const ko: Translations = {
     statusArchived: "보관됨",
     categoryLabel: "분류:",
     attachmentLabel: "첨부파일",
+    registrantLabel: "등록자:",
+    publishButton: "활성화 후 게시하기",
   },
 
   educationSelectScreen: {

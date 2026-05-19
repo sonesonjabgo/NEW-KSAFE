@@ -1,6 +1,7 @@
 import { FC } from "react"
 import { ScrollView, TouchableOpacity, View } from "react-native"
 import {
+  IconBolt,
   IconCalendarTime,
   IconChevronRight,
   IconDownload,
@@ -29,6 +30,9 @@ function getFileType(name: string) {
   return ext ? ext.toUpperCase() : "FILE"
 }
 
+const ACTIVE_BADGE = { bg: "#E6F0FD", text: "#1062D8" }
+const ARCHIVED_BADGE = { bg: "#E5E6E9", text: "#606679" }
+
 export const EducationMaterialDetailScreen: FC<EducationMaterialDetailScreenProps> = ({
   navigation,
   route,
@@ -40,43 +44,39 @@ export const EducationMaterialDetailScreen: FC<EducationMaterialDetailScreenProp
 
   const { name: pureFileName, size: fileSize } = parseFileName(item.fileName)
   const fileType = getFileType(pureFileName)
+  const isMine = item.source === 2
 
-  const sourceLabel =
-    item.source === 2
-      ? translate("educationMaterialDetailScreen:sourceMine")
-      : translate("educationMaterialDetailScreen:sourceKs")
+  const sourceLabel = isMine
+    ? translate("educationMaterialDetailScreen:sourceMine")
+    : translate("educationMaterialDetailScreen:sourceKs")
 
   const statusLabel = item.isActive
     ? translate("educationMaterialDetailScreen:statusActive")
     : translate("educationMaterialDetailScreen:statusArchived")
 
-  const activeBadgeStyle = { bg: "#E6F0FD", text: "#1062D8" }
-  const archivedBadgeStyle = { bg: "#E5E6E9", text: "#606679" }
-  const statusBadgeStyle = item.isActive ? activeBadgeStyle : archivedBadgeStyle
+  const statusBadge = item.isActive ? ACTIVE_BADGE : ARCHIVED_BADGE
+  const showPublishButton = isMine && !item.isActive
 
   return (
     <StackScreen
       title={translate("educationMaterialDetailScreen:title")}
       onBack={() => navigation.goBack()}
       squareTop
-      contentBg="#F5F6FA"
+      contentBg="#FFFFFF"
     >
       <ScrollView style={S.$scroll} contentContainerStyle={S.$scrollContent}>
         {/* Card 1 — 기본 정보 */}
         <View style={S.$card}>
           <View style={S.$badgesRow}>
-            <View style={[S.$badge, { backgroundColor: activeBadgeStyle.bg }]}>
-              <Text text={sourceLabel} style={[S.$badgeText, { color: activeBadgeStyle.text }]} />
+            <View style={[S.$badge, { backgroundColor: ACTIVE_BADGE.bg }]}>
+              <Text text={sourceLabel} style={[S.$badgeText, { color: ACTIVE_BADGE.text }]} />
             </View>
-            <View style={[S.$badge, { backgroundColor: statusBadgeStyle.bg }]}>
-              <Text
-                text={statusLabel}
-                style={[S.$badgeText, { color: statusBadgeStyle.text }]}
-              />
+            <View style={[S.$badge, { backgroundColor: statusBadge.bg }]}>
+              <Text text={statusLabel} style={[S.$badgeText, { color: statusBadge.text }]} />
             </View>
           </View>
 
-          {item.source !== 2 && (
+          {!isMine && (
             <Text
               text={`${translate("educationMaterialDetailScreen:categoryLabel")} ${item.subcategory}`}
               style={S.$categoryLabel}
@@ -84,6 +84,15 @@ export const EducationMaterialDetailScreen: FC<EducationMaterialDetailScreenProp
           )}
 
           <Text text={item.title} style={S.$title} />
+
+          {isMine && (
+            <View style={S.$authorBadge}>
+              <Text
+                text={`${translate("educationMaterialDetailScreen:registrantLabel")} ${item.author}`}
+                style={S.$authorBadgeText}
+              />
+            </View>
+          )}
 
           <View style={S.$dateRow}>
             <IconCalendarTime size={18} color="#606060" />
@@ -113,6 +122,20 @@ export const EducationMaterialDetailScreen: FC<EducationMaterialDetailScreenProp
               <IconDownload size={20} color="#1062D8" />
             </TouchableOpacity>
           </View>
+
+          {showPublishButton && (
+            <TouchableOpacity
+              style={S.$publishBtn}
+              activeOpacity={0.8}
+              onPress={() => console.log("publish:", item.id)}
+            >
+              <IconBolt size={20} color="#FFFFFF" />
+              <Text
+                text={translate("educationMaterialDetailScreen:publishButton")}
+                style={S.$publishBtnText}
+              />
+            </TouchableOpacity>
+          )}
         </View>
       </ScrollView>
     </StackScreen>

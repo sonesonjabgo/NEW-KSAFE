@@ -145,25 +145,27 @@ export const EducationMaterialScreen: FC<EducationMaterialScreenProps> = ({ navi
 
       {hasSourceData ? (
         <>
-          {/* 카테고리 탭 */}
-          <View style={Shared.$categoryRow}>
-            {CATEGORY_TABS.map((cat) => {
-              const isActive = cat === categoryTab
-              return (
-                <TouchableOpacity
-                  key={cat}
-                  style={[Shared.$categoryChip, isActive && Shared.$categoryChipActive]}
-                  activeOpacity={0.7}
-                  onPress={() => setCategoryTab(cat)}
-                >
-                  <Text
-                    text={cat}
-                    style={[Shared.$categoryChipText, isActive && Shared.$categoryChipTextActive]}
-                  />
-                </TouchableOpacity>
-              )
-            })}
-          </View>
+          {/* 카테고리 탭 — 내가 만든 자료 탭에서는 숨김 */}
+          {sourceTabIndex !== 2 && (
+            <View style={Shared.$categoryRow}>
+              {CATEGORY_TABS.map((cat) => {
+                const isActive = cat === categoryTab
+                return (
+                  <TouchableOpacity
+                    key={cat}
+                    style={[Shared.$categoryChip, isActive && Shared.$categoryChipActive]}
+                    activeOpacity={0.7}
+                    onPress={() => setCategoryTab(cat)}
+                  >
+                    <Text
+                      text={cat}
+                      style={[Shared.$categoryChipText, isActive && Shared.$categoryChipTextActive]}
+                    />
+                  </TouchableOpacity>
+                )
+              })}
+            </View>
+          )}
 
           {/* 카드 리스트 */}
           <FlatList
