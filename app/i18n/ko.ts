@@ -706,6 +706,50 @@ const ko: Translations = {
     },
   },
 
+  educationMaterialScreen: {
+    title: "TBM 교육 자료 목록",
+    registerButton: "새 교육자료 등록",
+  },
+
+  educationMaterialRegisterScreen: {
+    title: "TBM 교육 자료 등록",
+    guide: {
+      title: "작성 가이드",
+      description:
+        "현장에서 바로 활용할 수 있도록 교육 제목, 핵심 내용, 첨부파일을 한 번에 등록해주세요. 등록된 자료는 이후 TBM 활동에서 여러 개 선택해 함께 사용할 수 있습니다.",
+    },
+    attachment: {
+      label: "첨부파일",
+      boxPlaceholder: "파일이름.형식",
+      helper: "허용 파일만 1개 등록할 수 있으며 최대 50MB까지 업로드할 수 있습니다.",
+    },
+    educationTitle: {
+      label: "교육 제목",
+      placeholder: "교육 자료 제목을 입력하세요",
+      includeFileName: "파일명을 제목에 그대로 입력",
+      includeFileNameDesc: "선택한 파일명을 제목 칸에 동일하게 반영합니다.",
+    },
+    content: {
+      label: "교육 내용",
+      placeholder: "교육 내용을 입력하세요",
+      helper:
+        "설명은 비워둘 수 있으며, 입력 시 최대 10,000자까지 작성할 수 있습니다.",
+    },
+    submit: "등록하기",
+  },
+
+  educationMaterialDetailScreen: {
+    title: "TBM 교육 자료 상세",
+    sourceKs: "KS산업안전협회",
+    sourceMine: "내가 만든 자료",
+    statusActive: "활성화됨",
+    statusArchived: "보관됨",
+    categoryLabel: "분류:",
+    attachmentLabel: "첨부파일",
+    registrantLabel: "등록자:",
+    publishButton: "활성화 후 게시하기",
+  },
+
   educationSelectScreen: {
     title: "교육자료 선택",
     sourceTab1: "KS산업안전협회",

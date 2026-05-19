@@ -668,6 +668,49 @@ const hi: Translations = {
     },
   },
 
+  educationMaterialScreen: {
+    title: "TBM Education Material List",
+    registerButton: "Register New Education Material",
+  },
+
+  educationMaterialRegisterScreen: {
+    title: "Register TBM Education Material",
+    guide: {
+      title: "Writing Guide",
+      description:
+        "Register the education title, key content, and attachment all at once so they can be used on-site immediately. Registered materials can be selected together for multiple TBM activities.",
+    },
+    attachment: {
+      label: "Attachment",
+      boxPlaceholder: "filename.format",
+      helper: "Only one allowed file can be registered, up to a maximum of 50MB.",
+    },
+    educationTitle: {
+      label: "Education Title",
+      placeholder: "Enter the education material title",
+      includeFileName: "Use filename as title",
+      includeFileNameDesc: "The selected filename will be reflected in the title field.",
+    },
+    content: {
+      label: "Education Content",
+      placeholder: "Enter the education content",
+      helper: "Description is optional. If provided, up to 10,000 characters can be entered.",
+    },
+    submit: "Register",
+  },
+
+  educationMaterialDetailScreen: {
+    title: "TBM Education Material Detail",
+    sourceKs: "KS Industrial Safety Association",
+    sourceMine: "My Material",
+    statusActive: "Active",
+    statusArchived: "Archived",
+    categoryLabel: "Category:",
+    attachmentLabel: "Attachment",
+    registrantLabel: "Registrant:",
+    publishButton: "Publish After Activation",
+  },
+
   educationSelectScreen: {
     title: "Select Educational Materials",
     sourceTab1: "KS Safety Association",

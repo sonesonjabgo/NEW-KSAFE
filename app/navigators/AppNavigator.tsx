@@ -9,6 +9,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import Config from "@/config"
 import { AISafetyChatScreen } from "@/screens/AISafetyChatScreen/AISafetyChatScreen"
+import { EducationMaterialDetailScreen } from "@/screens/EducationMaterialDetailScreen/EducationMaterialDetailScreen"
+import { EducationMaterialRegisterScreen } from "@/screens/EducationMaterialRegisterScreen/EducationMaterialRegisterScreen"
+import { EducationMaterialScreen } from "@/screens/EducationMaterialScreen/EducationMaterialScreen"
 import { EducationPresentationScreen } from "@/screens/EducationPresentationScreen/EducationPresentationScreen"
 import { EducationSelectScreen } from "@/screens/EducationSelectScreen/EducationSelectScreen"
 import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
@@ -83,6 +86,9 @@ const AppStack = () => {
       <Stack.Screen name="TbmJoinHealth" component={TbmJoinHealthScreen} />
       <Stack.Screen name="TbmJoinSign" component={TbmJoinSignScreen} />
       <Stack.Screen name="TbmJoinComplete" component={TbmJoinCompleteScreen} />
+      <Stack.Screen name="EducationMaterial" component={EducationMaterialScreen} />
+      <Stack.Screen name="EducationMaterialDetail" component={EducationMaterialDetailScreen} />
+      <Stack.Screen name="EducationMaterialRegister" component={EducationMaterialRegisterScreen} />
       <Stack.Screen name="EducationSelect" component={EducationSelectScreen} />
     </Stack.Navigator>
   )

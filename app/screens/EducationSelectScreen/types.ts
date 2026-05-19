@@ -6,4 +6,10 @@ export interface EducationMaterial {
   subcategory: EducationSubcategory
   datetime: string
   source: 0 | 1 | 2
+  fileName: string
+  author: string
+  department: string
+  isActive: boolean
+  startDate: string
+  endDate: string
 }
