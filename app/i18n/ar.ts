@@ -769,7 +769,7 @@ const ar: Translations = {
     title: "TBM Participation History",
     totalParticipation: "Total Participation",
     cautionResponse: "Caution Response",
-    countUnit: "{{count}} case(s)",
+    unit: "case(s)",
   },
 
   ...demoAr,

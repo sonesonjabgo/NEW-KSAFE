@@ -20,10 +20,10 @@ interface StatCardProps {
 const StatCard: FC<StatCardProps> = ({ label, count, countColor = "#252525" }) => (
   <View style={$card}>
     <Text text={label} style={$cardLabel} />
-    <Text
-      text={translate("tbmParticipationHistoryScreen:countUnit", { count })}
-      style={[$cardCount, { color: countColor }]}
-    />
+    <View style={$countRow}>
+      <Text text={String(count)} style={[$cardCount, { color: countColor }]} />
+      <Text text={translate("tbmParticipationHistoryScreen:unit")} style={$cardUnit} />
+    </View>
   </View>
 )
 
@@ -85,8 +85,21 @@ const $cardLabel: TextStyle = {
   textAlign: "left",
 }
 
+const $countRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "flex-end",
+  gap: 4,
+}
+
 const $cardCount: TextStyle = {
   fontSize: 26,
   fontFamily: typography.primary.bold,
   textAlign: "left",
+}
+
+const $cardUnit: TextStyle = {
+  fontSize: 15,
+  fontFamily: typography.primary.normal,
+  color: "#574D4A",
+  marginBottom: 2,
 }

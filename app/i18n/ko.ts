@@ -813,7 +813,7 @@ const ko: Translations = {
     title: "TBM 참여 이력",
     totalParticipation: "전체 참여",
     cautionResponse: "주의 응답",
-    countUnit: "{{count}} 건",
+    unit: "건",
   },
 
   ...demoKo,
