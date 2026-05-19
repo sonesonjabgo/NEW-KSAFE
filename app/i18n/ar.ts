@@ -683,6 +683,8 @@ const ar: Translations = {
     educationTitle: {
       label: "Education Title",
       placeholder: "Enter the education material title",
+      includeFileName: "Use filename as title",
+      includeFileNameDesc: "The selected filename will be reflected in the title field.",
       helper: "Education title can be up to 200 characters.",
     },
     content: {

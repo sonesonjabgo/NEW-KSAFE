@@ -32,6 +32,7 @@ export const EducationMaterialRegisterScreen: FC<EducationMaterialRegisterScreen
   const [selectedFile, setSelectedFile] = useState<{ name: string; size: string } | null>(null)
   const [educationTitle, setEducationTitle] = useState("")
   const [content, setContent] = useState("")
+  const [includeFileName, setIncludeFileName] = useState(false)
 
   const isValid = useMemo(
     () => !!selectedFile && !!educationTitle.trim(),
@@ -40,11 +41,26 @@ export const EducationMaterialRegisterScreen: FC<EducationMaterialRegisterScreen
 
   const handleSelectFile = useCallback(() => {
     setSelectedFile(MOCK_FILE)
-  }, [])
+    if (includeFileName) setEducationTitle(MOCK_FILE.name)
+  }, [includeFileName])
 
   const handleRemoveFile = useCallback(() => {
+    if (includeFileName) {
+      setEducationTitle("")
+      setIncludeFileName(false)
+    }
     setSelectedFile(null)
-  }, [])
+  }, [includeFileName])
+
+  const handleIncludeFileNameToggle = useCallback(() => {
+    const next = !includeFileName
+    setIncludeFileName(next)
+    if (next && selectedFile) {
+      setEducationTitle(selectedFile.name)
+    } else if (!next && selectedFile && educationTitle === selectedFile.name) {
+      setEducationTitle("")
+    }
+  }, [includeFileName, selectedFile, educationTitle])
 
   const handleSubmit = useCallback(() => {
     console.log(JSON.stringify({ selectedFile, educationTitle, content }, null, 2))
@@ -145,6 +161,25 @@ export const EducationMaterialRegisterScreen: FC<EducationMaterialRegisterScreen
                 maxLength={200}
               />
             </View>
+            <TouchableOpacity
+              style={S.$checkboxRow}
+              onPress={handleIncludeFileNameToggle}
+              activeOpacity={0.7}
+            >
+              <View style={[S.$checkbox, includeFileName && S.$checkboxActive]}>
+                {includeFileName && <View style={S.$checkboxDot} />}
+              </View>
+              <Text
+                text={translate("educationMaterialRegisterScreen:educationTitle.includeFileName")}
+                style={S.$checkboxLabel}
+              />
+            </TouchableOpacity>
+            <Text
+              text={translate(
+                "educationMaterialRegisterScreen:educationTitle.includeFileNameDesc",
+              )}
+              style={S.$checkboxDesc}
+            />
             <Text
               text={translate("educationMaterialRegisterScreen:educationTitle.helper")}
               style={S.$helperText}

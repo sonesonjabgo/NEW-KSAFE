@@ -726,6 +726,8 @@ const ko: Translations = {
     educationTitle: {
       label: "교육 제목",
       placeholder: "교육 자료 제목을 입력하세요",
+      includeFileName: "파일명을 제목에 그대로 입력",
+      includeFileNameDesc: "선택한 파일명을 제목 칸에 동일하게 반영합니다.",
       helper: "교육 제목은 200자까지 입력할 수 있습니다.",
     },
     content: {

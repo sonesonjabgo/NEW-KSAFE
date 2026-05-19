@@ -141,6 +141,52 @@ export const $fileChipSize: TextStyle = {
   color: "#888888",
 }
 
+// ── Checkbox ──────────────────────────────────────────────────────────────────
+
+export const $checkboxRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 8,
+}
+
+export const $checkbox: ViewStyle = {
+  width: 20,
+  height: 20,
+  borderRadius: 4,
+  borderWidth: 2,
+  borderColor: "#CCCCCC",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+export const $checkboxActive: ViewStyle = {
+  borderColor: "#1062D8",
+  backgroundColor: "#1062D8",
+}
+
+export const $checkboxDot: ViewStyle = {
+  width: 10,
+  height: 6,
+  borderLeftWidth: 2,
+  borderBottomWidth: 2,
+  borderColor: "#FFFFFF",
+  transform: [{ rotate: "-45deg" }],
+  marginTop: -2,
+}
+
+export const $checkboxLabel: TextStyle = {
+  fontSize: 15,
+  fontFamily: typography.primary.medium,
+  color: "#564E4B",
+}
+
+export const $checkboxDesc: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.medium,
+  color: "#979797",
+  paddingLeft: 28,
+}
+
 // ── Input row ─────────────────────────────────────────────────────────────────
 
 export const $inputRow: ViewStyle = {
