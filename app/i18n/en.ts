@@ -820,6 +820,10 @@ const en = {
     toastRegenerate: "Report regeneration request has been submitted.",
   },
 
+  patrolScreen: {
+    title: "Workplace Patrol Inspection",
+  },
+
   ...demoEn,
 }
 

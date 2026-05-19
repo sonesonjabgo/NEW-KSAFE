@@ -777,6 +777,10 @@ const es: Translations = {
     toastRegenerate: "Report regeneration request has been submitted.",
   },
 
+  patrolScreen: {
+    title: "Inspección de ronda del lugar de trabajo",
+  },
+
   ...demoEs,
 }
 

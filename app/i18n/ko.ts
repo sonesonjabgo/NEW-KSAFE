@@ -809,6 +809,10 @@ const ko: Translations = {
     toastRegenerate: "보고서 재생성 요청이 접수되었습니다.",
   },
 
+  patrolScreen: {
+    title: "작업장 순회 점검",
+  },
+
   ...demoKo,
 }
 

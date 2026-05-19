@@ -769,6 +769,10 @@ const ja: Translations = {
     toastRegenerate: "Report regeneration request has been submitted.",
   },
 
+  patrolScreen: {
+    title: "作業場巡回点検",
+  },
+
   ...demoJa,
 }
 

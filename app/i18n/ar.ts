@@ -765,6 +765,10 @@ const ar: Translations = {
     toastRegenerate: "Report regeneration request has been submitted.",
   },
 
+  patrolScreen: {
+    title: "فحص جولة مكان العمل",
+  },
+
   ...demoAr,
 }
 

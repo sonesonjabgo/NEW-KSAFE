@@ -770,6 +770,10 @@ const hi: Translations = {
     toastRegenerate: "Report regeneration request has been submitted.",
   },
 
+  patrolScreen: {
+    title: "कार्यस्थल순회 점검",
+  },
+
   ...demoHi,
 }
 
