@@ -223,7 +223,8 @@ export const $textareaInput: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#111111",
-  textAlignVertical: "top",
+  textAlign: "center",
+  textAlignVertical: "center",
   padding: 0,
   minHeight: 88,
 }

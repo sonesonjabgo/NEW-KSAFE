@@ -728,12 +728,12 @@ const ko: Translations = {
       placeholder: "교육 자료 제목을 입력하세요",
       includeFileName: "파일명을 제목에 그대로 입력",
       includeFileNameDesc: "선택한 파일명을 제목 칸에 동일하게 반영합니다.",
-      helper: "교육 제목은 200자까지 입력할 수 있습니다.",
     },
     content: {
       label: "교육 내용",
       placeholder: "교육 내용을 입력하세요",
-      helper: "교육 내용을 입력하세요. 최대 2,000자.",
+      helper:
+        "설명은 비워둘 수 있으며, 입력 시 최대 10,000자까지 작성할 수 있습니다.",
     },
     submit: "등록하기",
   },

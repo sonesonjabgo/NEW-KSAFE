@@ -180,10 +180,6 @@ export const EducationMaterialRegisterScreen: FC<EducationMaterialRegisterScreen
               )}
               style={S.$checkboxDesc}
             />
-            <Text
-              text={translate("educationMaterialRegisterScreen:educationTitle.helper")}
-              style={S.$helperText}
-            />
           </View>
 
           {/* 교육 내용 */}
@@ -196,10 +192,10 @@ export const EducationMaterialRegisterScreen: FC<EducationMaterialRegisterScreen
               <TextInput
                 style={S.$textareaInput}
                 value={content}
-                onChangeText={(t) => setContent(t.slice(0, 2000))}
+                onChangeText={(t) => setContent(t.slice(0, 10000))}
                 placeholder={translate("educationMaterialRegisterScreen:content.placeholder")}
                 placeholderTextColor="#BBBBBB"
-                maxLength={2000}
+                maxLength={10000}
                 multiline
                 scrollEnabled={false}
               />

@@ -739,12 +739,12 @@ const en = {
       placeholder: "Enter the education material title",
       includeFileName: "Use filename as title",
       includeFileNameDesc: "The selected filename will be reflected in the title field.",
-      helper: "Education title can be up to 200 characters.",
     },
     content: {
       label: "Education Content",
       placeholder: "Enter the education content",
-      helper: "Enter education content. Maximum 2,000 characters.",
+      helper:
+        "Description is optional. If provided, up to 10,000 characters can be entered.",
     },
     submit: "Register",
   },
