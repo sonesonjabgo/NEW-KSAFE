@@ -1,28 +1,31 @@
 import { FC } from "react"
-import { ScrollView, View, ViewStyle, TextStyle } from "react-native"
+import { ScrollView, TouchableOpacity, View, ViewStyle, TextStyle } from "react-native"
+import { IconDownload } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+
+import EducationFrame from "@assets/icons/education_frame.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
 import { typography } from "@/theme/typography"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
+import { mockTbmDetails } from "@/screens/TbmDetailScreen/mockData"
+import * as S from "@/screens/TbmDetailScreen/styles"
 
-interface TbmParticipationHistoryDetail {
-  id: number
+interface HistoryDetail {
   participationDate: string
   workDate: string
   workplace: string
-  title: string
   managerName: string
 }
 
-const mockDetails: Record<number, TbmParticipationHistoryDetail> = {
-  1: { id: 1, participationDate: "2026.02.19 08:30", workDate: "2026.02.19 09:00", workplace: "광교 타워크레인 사업장", title: "작업장 순회 점검", managerName: "권 민수" },
-  2: { id: 2, participationDate: "2026.02.18 09:00", workDate: "2026.02.18 10:00", workplace: "광교 타워크레인 사업장", title: "전기설비 안전점검", managerName: "권 민수" },
-  3: { id: 3, participationDate: "2026.02.17 07:45", workDate: "2026.02.17 08:30", workplace: "광교 타워크레인 사업장", title: "고소작업 안전교육", managerName: "권 민수" },
-  4: { id: 4, participationDate: "2026.02.16 08:15", workDate: "2026.02.16 09:00", workplace: "광교 타워크레인 사업장", title: "화학물질 취급 안전점검", managerName: "권 민수" },
-  5: { id: 5, participationDate: "2026.02.15 09:30", workDate: "2026.02.15 10:00", workplace: "광교 타워크레인 사업장", title: "비계 설치 작업 전 TBM", managerName: "권 민수" },
+const mockHistoryDetails: Record<number, HistoryDetail> = {
+  1: { participationDate: "2026.02.19 08:30", workDate: "2026.02.19 09:00", workplace: "광교 타워크레인 사업장", managerName: "권 민수" },
+  2: { participationDate: "2026.02.18 09:00", workDate: "2026.02.18 10:00", workplace: "광교 타워크레인 사업장", managerName: "권 민수" },
+  3: { participationDate: "2026.02.17 07:45", workDate: "2026.02.17 08:30", workplace: "광교 타워크레인 사업장", managerName: "권 민수" },
+  4: { participationDate: "2026.02.16 08:15", workDate: "2026.02.16 09:00", workplace: "광교 타워크레인 사업장", managerName: "권 민수" },
+  5: { participationDate: "2026.02.15 09:30", workDate: "2026.02.15 10:00", workplace: "광교 타워크레인 사업장", managerName: "권 민수" },
 }
 
 interface InfoRowProps {
@@ -42,9 +45,11 @@ type Props = AppStackScreenProps<"TbmParticipationHistoryDetail">
 export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, route }) => {
   const { id } = route.params
   const insets = useSafeAreaInsets()
-  const detail = mockDetails[id]
 
-  if (!detail) return null
+  const tbm = mockTbmDetails[id]
+  const history = mockHistoryDetails[id]
+
+  if (!tbm || !history) return null
 
   return (
     <StackScreen
@@ -54,48 +59,118 @@ export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, rou
       contentBg="#FFFFFF"
     >
       <ScrollView
-        contentContainerStyle={[$scroll, { paddingBottom: (insets.bottom || 0) + 24 }]}
+        contentContainerStyle={[S.$scrollInner, { paddingBottom: (insets.bottom || 0) + 24 }]}
         showsVerticalScrollIndicator={false}
       >
-        {/* ── 정보 카드 ── */}
-        <View style={$infoCard}>
-          <InfoRow
-            label={translate("tbmParticipationHistoryDetailScreen:participationDate")}
-            value={detail.participationDate}
-          />
-          <InfoRow
-            label={translate("tbmParticipationHistoryDetailScreen:workDate")}
-            value={detail.workDate}
-          />
-          <InfoRow
-            label={translate("tbmParticipationHistoryDetailScreen:workplace")}
-            value={detail.workplace}
-          />
-        </View>
-
-        {/* ── 진행 담당 ── */}
-        <View style={$profileRow}>
-          <View style={$avatar} />
-          <View style={$profileText}>
-            <Text
-              text={translate("tbmParticipationHistoryDetailScreen:manager")}
-              style={$managerRole}
+        {/* ── 첫 번째 카드 ── */}
+        <View style={S.$detailCard}>
+          {/* 정보 카드 */}
+          <View style={$infoCard}>
+            <InfoRow
+              label={translate("tbmParticipationHistoryDetailScreen:participationDate")}
+              value={history.participationDate}
             />
-            <Text text={detail.managerName} style={$managerName} />
+            <InfoRow
+              label={translate("tbmParticipationHistoryDetailScreen:workDate")}
+              value={history.workDate}
+            />
+            <InfoRow
+              label={translate("tbmParticipationHistoryDetailScreen:workplace")}
+              value={history.workplace}
+            />
+          </View>
+
+          {/* 진행 담당 프로필 */}
+          <View style={$profileRow}>
+            <View style={S.$cardAvatar} />
+            <View style={$profileText}>
+              <Text
+                text={translate("tbmParticipationHistoryDetailScreen:manager")}
+                style={$managerRole}
+              />
+              <Text text={history.managerName} style={$managerName} />
+            </View>
           </View>
         </View>
+
+        {/* ── 교육자료 섹션 ── */}
+        <View style={S.$educationHeaderRow}>
+          <Text
+            text={translate("tbmDetailScreen:educationHeader", {
+              count: tbm.educationMaterials.length,
+            })}
+            style={S.$educationSectionHeader}
+          />
+          <View style={S.$educationHeaderLine} />
+        </View>
+        {tbm.educationMaterials.map((item) => (
+          <View key={item.id} style={S.$educationCard}>
+            <View style={S.$educationIconCircle}>
+              <EducationFrame width={18} height={18} color="#1062D8" />
+            </View>
+            <Text text={item.title} style={S.$educationCardTitle} numberOfLines={2} />
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={() => console.log("download:", item.id)}
+            >
+              <IconDownload size={20} color="#1062D8" />
+            </TouchableOpacity>
+          </View>
+        ))}
+
+        {/* ── 참여자 목록 섹션 ── */}
+        <View style={S.$participantHeaderRow}>
+          <Text
+            text={translate("tbmDetailScreen:participantHeader", {
+              count: tbm.participants.length,
+            })}
+            style={S.$participantSectionHeader}
+          />
+          <View style={S.$participantHeaderLine} />
+        </View>
+        {tbm.participants.length === 0 ? (
+          <Text
+            text={translate("tbmDetailScreen:participantEmpty")}
+            style={S.$participantEmpty}
+          />
+        ) : (
+          tbm.participants.map((p) => {
+            const badge =
+              p.badge === "정상"
+                ? { bg: S.$participantBadgeNormal, text: S.$participantBadgeNormalText }
+                : p.badge === "주의"
+                  ? { bg: S.$participantBadgeCaution, text: S.$participantBadgeCautionText }
+                  : { bg: S.$participantBadgeDanger, text: S.$participantBadgeDangerText }
+            const key =
+              p.badge === "정상"
+                ? ("badgeNormal" as const)
+                : p.badge === "주의"
+                  ? ("badgeCaution" as const)
+                  : ("badgeDanger" as const)
+            return (
+              <View key={p.id} style={S.$participantCard}>
+                <Text text={p.name} style={S.$participantName} />
+                <View style={badge.bg}>
+                  <Text
+                    text={translate(`tbmDetailScreen:${key}`)}
+                    style={badge.text}
+                  />
+                </View>
+                <Text text={p.time} style={S.$participantTime} />
+              </View>
+            )
+          })
+        )}
       </ScrollView>
     </StackScreen>
   )
 }
 
-const $scroll: ViewStyle = {
-  padding: 20,
-}
+// ── 첫 번째 카드 내부 전용 스타일 ──────────────────────────
 
 const $infoCard: ViewStyle = {
   backgroundColor: "#F3F2F0",
-  borderRadius: 12,
+  borderRadius: 10,
   paddingHorizontal: 26,
   paddingVertical: 30,
   gap: 16,
@@ -125,15 +200,7 @@ const $infoValue: TextStyle = {
 const $profileRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-  marginTop: 20,
   gap: 12,
-}
-
-const $avatar: ViewStyle = {
-  width: 44,
-  height: 44,
-  borderRadius: 22,
-  backgroundColor: "#D9D9D9",
 }
 
 const $profileText: ViewStyle = {
