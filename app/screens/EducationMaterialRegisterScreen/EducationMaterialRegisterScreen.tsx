@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native"
-import { IconPaperclip, IconX } from "@tabler/icons-react-native"
+import { IconChevronDown, IconX } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import EducationFrame from "@assets/icons/education_frame.svg"
@@ -91,15 +91,32 @@ export const EducationMaterialRegisterScreen: FC<EducationMaterialRegisterScreen
               style={S.$sectionLabel}
             />
 
-            {selectedFile ? (
+            {/* 업로드 박스 — 항상 표시 */}
+            <TouchableOpacity style={S.$uploadBox} activeOpacity={0.7} onPress={handleSelectFile}>
+              <EducationFrame width={22} height={22} color="#AAAAAA" />
+              <Text
+                text={translate("educationMaterialRegisterScreen:attachment.boxPlaceholder")}
+                style={S.$uploadBoxText}
+              />
+              <IconChevronDown size={20} color="#AAAAAA" />
+            </TouchableOpacity>
+
+            {/* 설명글 — 항상 표시 */}
+            <Text
+              text={translate("educationMaterialRegisterScreen:attachment.helper")}
+              style={S.$helperText}
+            />
+
+            {/* 업로드된 파일 칩 — 파일 선택 후 표시 */}
+            {selectedFile && (
               <View style={S.$fileChip}>
-                <EducationFrame width={20} height={20} color="#1062D8" />
-                <Text text={selectedFile.name} style={S.$fileChipName} numberOfLines={1} />
-                <Text
-                  text={selectedFile.size}
-                  style={S.$fileChipSize}
-                  numberOfLines={1}
-                />
+                <View style={S.$fileIconBox}>
+                  <EducationFrame width={24} height={24} color="#1062D8" />
+                </View>
+                <View style={S.$fileTextBlock}>
+                  <Text text={selectedFile.name} style={S.$fileChipName} numberOfLines={1} />
+                  <Text text={selectedFile.size} style={S.$fileChipSize} numberOfLines={1} />
+                </View>
                 <TouchableOpacity
                   onPress={handleRemoveFile}
                   hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
@@ -107,24 +124,7 @@ export const EducationMaterialRegisterScreen: FC<EducationMaterialRegisterScreen
                   <IconX size={16} color="#888888" />
                 </TouchableOpacity>
               </View>
-            ) : (
-              <TouchableOpacity
-                style={S.$fileSelectBtn}
-                activeOpacity={0.7}
-                onPress={handleSelectFile}
-              >
-                <IconPaperclip size={16} color="#1062D8" />
-                <Text
-                  text={translate("educationMaterialRegisterScreen:attachment.selectButton")}
-                  style={S.$fileSelectBtnText}
-                />
-              </TouchableOpacity>
             )}
-
-            <Text
-              text={translate("educationMaterialRegisterScreen:attachment.helper")}
-              style={S.$helperText}
-            />
           </View>
 
           {/* 교육 제목 */}

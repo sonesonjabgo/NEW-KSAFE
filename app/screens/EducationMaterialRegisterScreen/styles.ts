@@ -77,54 +77,68 @@ export const $sectionLabel: TextStyle = {
 
 export const $helperText: TextStyle = {
   fontSize: 13,
-  fontFamily: typography.primary.normal,
+  fontFamily: typography.primary.medium,
   color: "#979797",
 }
 
-// ── File chip ─────────────────────────────────────────────────────────────────
+// ── Upload box ────────────────────────────────────────────────────────────────
+
+export const $uploadBox: ViewStyle = {
+  height: 60,
+  borderRadius: 8,
+  borderWidth: 1,
+  borderColor: INPUT_BORDER,
+  backgroundColor: "#FFFFFF",
+  flexDirection: "row",
+  alignItems: "center",
+  paddingHorizontal: 16,
+  gap: 10,
+}
+
+export const $uploadBoxText: TextStyle = {
+  flex: 1,
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#BBBBBB",
+}
+
+// ── File chip (after upload) ──────────────────────────────────────────────────
 
 export const $fileChip: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-  backgroundColor: "#F2F7FD",
+  backgroundColor: "#F8FBFD",
   borderRadius: 10,
-  paddingHorizontal: 14,
-  paddingVertical: 12,
-  gap: 8,
+  borderWidth: 1,
+  borderColor: "#DEE8F6",
+  padding: 12,
+  gap: 12,
+}
+
+export const $fileIconBox: ViewStyle = {
+  width: 44,
+  height: 44,
+  borderRadius: 8,
+  backgroundColor: "#DEE7F9",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+export const $fileTextBlock: ViewStyle = {
+  flex: 1,
+  gap: 4,
 }
 
 export const $fileChipName: TextStyle = {
-  flex: 1,
   fontSize: 14,
   fontFamily: typography.primary.semiBold,
-  color: "#1062D8",
+  color: "#111111",
 }
 
 export const $fileChipSize: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
   color: "#888888",
-}
-
-// ── File select button ────────────────────────────────────────────────────────
-
-export const $fileSelectBtn: ViewStyle = {
-  height: 48,
-  borderRadius: 8,
-  borderWidth: 1,
-  borderStyle: "dashed",
-  borderColor: "#1062D8",
-  backgroundColor: "#FFFFFF",
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: 6,
-}
-
-export const $fileSelectBtnText: TextStyle = {
-  fontSize: 14,
-  fontFamily: typography.primary.semiBold,
-  color: "#1062D8",
 }
 
 // ── Input row ─────────────────────────────────────────────────────────────────

@@ -673,12 +673,12 @@ const ar: Translations = {
     guide: {
       title: "Writing Guide",
       description:
-        "Upload an attachment and enter the education title and content to register a new education material.",
+        "Register the education title, key content, and attachment all at once so they can be used on-site immediately. Registered materials can be selected together for multiple TBM activities.",
     },
     attachment: {
       label: "Attachment",
-      selectButton: "+ Select File",
-      helper: "Select an education material file such as PDF or DOC.",
+      boxPlaceholder: "filename.format",
+      helper: "Only one allowed file can be registered, up to a maximum of 50MB.",
     },
     educationTitle: {
       label: "Education Title",

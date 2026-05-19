@@ -716,12 +716,12 @@ const ko: Translations = {
     guide: {
       title: "작성 가이드",
       description:
-        "첨부파일을 업로드하고 교육 제목과 내용을 입력하여 새 교육 자료를 등록하세요.",
+        "현장에서 바로 활용할 수 있도록 교육 제목, 핵심 내용, 첨부파일을 한 번에 등록해주세요. 등록된 자료는 이후 TBM 활동에서 여러 개 선택해 함께 사용할 수 있습니다.",
     },
     attachment: {
       label: "첨부파일",
-      selectButton: "+ 파일 선택",
-      helper: "PDF, DOC 등 교육 자료 파일을 선택하세요.",
+      boxPlaceholder: "파일이름.형식",
+      helper: "허용 파일만 1개 등록할 수 있으며 최대 50MB까지 업로드할 수 있습니다.",
     },
     educationTitle: {
       label: "교육 제목",
