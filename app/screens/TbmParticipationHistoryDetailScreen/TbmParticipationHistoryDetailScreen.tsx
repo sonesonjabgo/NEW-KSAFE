@@ -157,49 +157,6 @@ export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, rou
           </View>
         ))}
 
-        {/* ── 참여자 목록 섹션 ── */}
-        <View style={S.$participantHeaderRow}>
-          <Text
-            text={translate("tbmDetailScreen:participantHeader", {
-              count: tbm.participants.length,
-            })}
-            style={S.$participantSectionHeader}
-          />
-          <View style={S.$participantHeaderLine} />
-        </View>
-        {tbm.participants.length === 0 ? (
-          <Text
-            text={translate("tbmDetailScreen:participantEmpty")}
-            style={S.$participantEmpty}
-          />
-        ) : (
-          tbm.participants.map((p) => {
-            const badge =
-              p.badge === "정상"
-                ? { bg: S.$participantBadgeNormal, text: S.$participantBadgeNormalText }
-                : p.badge === "주의"
-                  ? { bg: S.$participantBadgeCaution, text: S.$participantBadgeCautionText }
-                  : { bg: S.$participantBadgeDanger, text: S.$participantBadgeDangerText }
-            const key =
-              p.badge === "정상"
-                ? ("badgeNormal" as const)
-                : p.badge === "주의"
-                  ? ("badgeCaution" as const)
-                  : ("badgeDanger" as const)
-            return (
-              <View key={p.id} style={S.$participantCard}>
-                <Text text={p.name} style={S.$participantName} />
-                <View style={badge.bg}>
-                  <Text
-                    text={translate(`tbmDetailScreen:${key}`)}
-                    style={badge.text}
-                  />
-                </View>
-                <Text text={p.time} style={S.$participantTime} />
-              </View>
-            )
-          })
-        )}
       </ScrollView>
     </StackScreen>
   )
