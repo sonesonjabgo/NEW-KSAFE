@@ -40,6 +40,7 @@ export type AppStackParamList = {
   TbmJoinSign: { id: number }
   TbmJoinComplete: undefined
   EducationMaterial: undefined
+  EducationMaterialDetail: { id: number }
   EducationSelect: { initialSelected: number[]; onConfirm: (ids: number[]) => void }
 }
 

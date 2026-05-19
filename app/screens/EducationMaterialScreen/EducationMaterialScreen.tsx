@@ -76,7 +76,7 @@ export const EducationMaterialScreen: FC<EducationMaterialScreenProps> = ({ navi
       <TouchableOpacity
         style={S.$card}
         activeOpacity={0.7}
-        onPress={() => console.log(`교육자료 상세: ${item.id}`)}
+        onPress={() => navigation.navigate("EducationMaterialDetail", { id: item.id })}
       >
         <View style={S.$cardTopRow}>
           <View style={[S.$cardBadge, { backgroundColor: badgeColor.bg }]}>

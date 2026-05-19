@@ -10,6 +10,9 @@ export const MOCK_EDUCATION_MATERIALS: EducationMaterial[] = [
     fileName: "감전사고_예방교육.pdf (23 MB)",
     author: "이준혁",
     department: "교육콘텐츠팀",
+    isActive: true,
+    startDate: "2026.05.10",
+    endDate: "2026.06.10",
   },
   {
     id: 2,
@@ -20,6 +23,9 @@ export const MOCK_EDUCATION_MATERIALS: EducationMaterial[] = [
     fileName: "공통안전점검표.pdf (8 MB)",
     author: "박소연",
     department: "안전기획팀",
+    isActive: true,
+    startDate: "2026.05.08",
+    endDate: "2026.06.08",
   },
   {
     id: 3,
@@ -30,6 +36,9 @@ export const MOCK_EDUCATION_MATERIALS: EducationMaterial[] = [
     fileName: "기계점검보수절차.pdf (15 MB)",
     author: "최도현",
     department: "기술지원팀",
+    isActive: false,
+    startDate: "2026.04.01",
+    endDate: "2026.04.30",
   },
   {
     id: 4,
@@ -40,6 +49,9 @@ export const MOCK_EDUCATION_MATERIALS: EducationMaterial[] = [
     fileName: "전기설비감전위험.pdf (31 MB)",
     author: "강민지",
     department: "교육콘텐츠팀",
+    isActive: true,
+    startDate: "2026.04.28",
+    endDate: "2026.05.28",
   },
   {
     id: 5,
@@ -50,6 +62,9 @@ export const MOCK_EDUCATION_MATERIALS: EducationMaterial[] = [
     fileName: "현장안전규정가이드.pdf (12 MB)",
     author: "윤서준",
     department: "안전기획팀",
+    isActive: true,
+    startDate: "2026.04.20",
+    endDate: "2026.05.20",
   },
   {
     id: 6,
@@ -60,6 +75,9 @@ export const MOCK_EDUCATION_MATERIALS: EducationMaterial[] = [
     fileName: "감전위험구역안내.pdf (6 MB)",
     author: "홍길동",
     department: "A현장 안전팀",
+    isActive: true,
+    startDate: "2026.05.12",
+    endDate: "2026.06.12",
   },
   {
     id: 7,
@@ -70,6 +88,9 @@ export const MOCK_EDUCATION_MATERIALS: EducationMaterial[] = [
     fileName: "기계보수일지.pdf (9 MB)",
     author: "김영수",
     department: "B현장 관리팀",
+    isActive: false,
+    startDate: "2026.04.01",
+    endDate: "2026.04.30",
   },
   {
     id: 8,
@@ -80,5 +101,8 @@ export const MOCK_EDUCATION_MATERIALS: EducationMaterial[] = [
     fileName: "현장안전수칙.pdf (4 MB)",
     author: "이민아",
     department: "C현장 안전팀",
+    isActive: true,
+    startDate: "2026.04.15",
+    endDate: "2026.05.15",
   },
 ]

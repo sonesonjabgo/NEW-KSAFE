@@ -721,6 +721,16 @@ const en = {
     registerButton: "Register New Education Material",
   },
 
+  educationMaterialDetailScreen: {
+    title: "TBM Education Material Detail",
+    sourceKs: "KS Industrial Safety Association",
+    sourceMine: "My Material",
+    statusActive: "Active",
+    statusArchived: "Archived",
+    categoryLabel: "Category:",
+    attachmentLabel: "Attachment",
+  },
+
   educationSelectScreen: {
     title: "Select Educational Materials",
     sourceTab1: "KS Safety Association",

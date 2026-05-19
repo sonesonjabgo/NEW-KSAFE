@@ -711,6 +711,16 @@ const ko: Translations = {
     registerButton: "새 교육자료 등록",
   },
 
+  educationMaterialDetailScreen: {
+    title: "TBM 교육 자료 상세",
+    sourceKs: "KS산업안전협회",
+    sourceMine: "내가 만든 자료",
+    statusActive: "활성화됨",
+    statusArchived: "보관됨",
+    categoryLabel: "분류:",
+    attachmentLabel: "첨부파일",
+  },
+
   educationSelectScreen: {
     title: "교육자료 선택",
     sourceTab1: "KS산업안전협회",

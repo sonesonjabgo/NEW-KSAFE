@@ -9,4 +9,7 @@ export interface EducationMaterial {
   fileName: string
   author: string
   department: string
+  isActive: boolean
+  startDate: string
+  endDate: string
 }
