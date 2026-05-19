@@ -1,4 +1,5 @@
 import { FC } from "react"
+import type { TbmStatus } from "@/screens/TbmListScreen/types"
 import { ScrollView, TouchableOpacity, View, ViewStyle, TextStyle } from "react-native"
 import { IconDownload } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
@@ -28,6 +29,18 @@ const mockHistoryDetails: Record<number, HistoryDetail> = {
   5: { participationDate: "2026.02.15 09:30", workDate: "2026.02.15 10:00", workplace: "광교 타워크레인 사업장", managerName: "권 민수" },
 }
 
+const STATUS_LABEL: Record<TbmStatus, "drafting" | "ongoing" | "ended"> = {
+  작성중: "drafting",
+  진행중: "ongoing",
+  종료됨: "ended",
+}
+
+function getBadgeStyles(status: TbmStatus) {
+  if (status === "작성중") return { badge: S.$badgeDrafting, text: S.$badgeDraftingText }
+  if (status === "진행중") return { badge: S.$badgeOngoing, text: S.$badgeOngoingText }
+  return { badge: S.$badgeEnded, text: S.$badgeEndedText }
+}
+
 interface InfoRowProps {
   label: string
   value: string
@@ -51,6 +64,8 @@ export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, rou
 
   if (!tbm || !history) return null
 
+  const badgeStyles = getBadgeStyles(tbm.status)
+
   return (
     <StackScreen
       title={translate("tbmDetailScreen:title")}
@@ -64,6 +79,20 @@ export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, rou
       >
         {/* ── 첫 번째 카드 ── */}
         <View style={S.$detailCard}>
+          {/* 뱃지 + 날짜 */}
+          <View style={S.$cardTopRow}>
+            <View style={badgeStyles.badge}>
+              <Text
+                text={translate(`tbmListScreen:status.${STATUS_LABEL[tbm.status]}`)}
+                style={badgeStyles.text}
+              />
+            </View>
+            <Text text={tbm.date} style={S.$cardDate} />
+          </View>
+
+          {/* 제목 */}
+          <Text text={tbm.title} style={S.$cardTitle} />
+
           {/* 정보 카드 */}
           <View style={$infoCard}>
             <InfoRow
