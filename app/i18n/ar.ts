@@ -514,9 +514,9 @@ const ar: Translations = {
 
   tbmJoinCompleteScreen: {
     title: "الانضمام إلى TBM",
-    heading: "اكتمل الانضمام إلى TBM!",
-    subtitle: "تم تسجيل مشاركتك بنجاح.",
-    goHome: "الذهاب إلى الرئيسية",
+    heading: "اكتمل الانضمام إلى TBM",
+    subtitle: "أتمنى لك يوماً آمناً!",
+    goHome: "تم",
   },
 
   tbmJoinScreen: {

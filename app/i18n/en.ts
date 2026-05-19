@@ -566,9 +566,9 @@ const en = {
 
   tbmJoinCompleteScreen: {
     title: "Join TBM",
-    heading: "TBM Participation Complete!",
-    subtitle: "Your participation has been successfully recorded.",
-    goHome: "Go to Home",
+    heading: "TBM Participation Complete",
+    subtitle: "Have a safe day!",
+    goHome: "Complete",
   },
 
   tbmJoinScreen: {

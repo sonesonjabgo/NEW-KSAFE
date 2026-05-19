@@ -519,9 +519,9 @@ const ja: Translations = {
 
   tbmJoinCompleteScreen: {
     title: "TBM参加",
-    heading: "TBM参加が完了しました！",
-    subtitle: "参加情報が正常に記録されました。",
-    goHome: "ホームへ",
+    heading: "TBM参加完了",
+    subtitle: "安全な一日をお過ごしください！",
+    goHome: "完了",
   },
 
   tbmJoinScreen: {

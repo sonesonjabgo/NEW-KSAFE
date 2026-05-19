@@ -558,8 +558,8 @@ const ko: Translations = {
 
   tbmJoinCompleteScreen: {
     title: "TBM 참여",
-    heading: "TBM 참여가 완료되었습니다!",
-    subtitle: "TBM 참여 정보가 성공적으로 기록되었습니다.",
+    heading: "TBM 참여 완료",
+    subtitle: "안전한 하루 되세요!",
     goHome: "완료",
   },
 

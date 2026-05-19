@@ -523,9 +523,9 @@ const fr: Translations = {
 
   tbmJoinCompleteScreen: {
     title: "Rejoindre TBM",
-    heading: "Participation au TBM complétée !",
-    subtitle: "Votre participation a été enregistrée avec succès.",
-    goHome: "Aller à l'accueil",
+    heading: "Participation au TBM complétée",
+    subtitle: "Passez une journée en toute sécurité !",
+    goHome: "Terminer",
   },
 
   tbmJoinScreen: {

@@ -519,9 +519,9 @@ const hi: Translations = {
 
   tbmJoinCompleteScreen: {
     title: "TBM में शामिल हों",
-    heading: "TBM भागीदारी पूर्ण!",
-    subtitle: "आपकी भागीदारी सफलतापूर्वक दर्ज की गई है।",
-    goHome: "होम पर जाएं",
+    heading: "TBM भागीदारी पूर्ण",
+    subtitle: "आपका दिन सुरक्षित रहे!",
+    goHome: "पूर्ण",
   },
 
   tbmJoinScreen: {
