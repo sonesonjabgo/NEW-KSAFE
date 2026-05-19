@@ -36,6 +36,8 @@ export const TbmParticipationHistoryScreen: FC<TbmParticipationHistoryScreenProp
     <StackScreen
       title={translate("tbmParticipationHistoryScreen:title")}
       onBack={() => navigation.goBack()}
+      squareTop
+      contentBg="#FFFFFF"
     >
       <View style={$content}>
         <View style={$row}>
@@ -57,7 +59,7 @@ export const TbmParticipationHistoryScreen: FC<TbmParticipationHistoryScreenProp
 const $content: ViewStyle = {
   flex: 1,
   padding: 16,
-  backgroundColor: "#FFFFFF",
+  paddingTop: 24,
 }
 
 const $row: ViewStyle = {
