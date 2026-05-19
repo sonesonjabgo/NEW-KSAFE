@@ -202,7 +202,7 @@ export const EducationMaterialRegisterScreen: FC<EducationMaterialRegisterScreen
             </View>
             <Text
               text={translate("educationMaterialRegisterScreen:content.helper")}
-              style={S.$helperText}
+              style={[S.$helperText, { textAlign: "center" }]}
             />
           </View>
         </ScrollView>
