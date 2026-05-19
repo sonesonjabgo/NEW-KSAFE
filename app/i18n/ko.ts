@@ -735,6 +735,11 @@ const ko: Translations = {
     },
   },
 
+  tbmReportStatusScreen: {
+    title: "TBM 보고서 상태",
+    regenerate: "재생성",
+  },
+
   ...demoKo,
 }
 

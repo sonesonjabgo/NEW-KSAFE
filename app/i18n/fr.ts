@@ -704,6 +704,11 @@ const fr: Translations = {
     },
   },
 
+  tbmReportStatusScreen: {
+    title: "TBM Report Status",
+    regenerate: "Regenerate",
+  },
+
   ...demoFr,
 }
 

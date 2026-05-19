@@ -124,7 +124,7 @@ export const TbmReportInquiryScreen: FC<TbmReportInquiryScreenProps> = ({ naviga
         renderItem={({ item }) => (
           <TbmReportCard
             item={item}
-            onPress={() => console.log("보고서 클릭:", item.id)}
+            onPress={() => navigation.navigate("TbmReportStatus", { id: item.id })}
           />
         )}
         ListEmptyComponent={<EmptyState tab={activeTab} />}

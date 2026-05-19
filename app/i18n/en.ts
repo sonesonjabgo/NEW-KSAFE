@@ -745,6 +745,11 @@ const en = {
     },
   },
 
+  tbmReportStatusScreen: {
+    title: "TBM Report Status",
+    regenerate: "Regenerate",
+  },
+
   ...demoEn,
 }
 

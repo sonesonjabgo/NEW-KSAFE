@@ -33,6 +33,7 @@ export type AppStackParamList = {
   TbmDetail: { id: number }
   TbmReport: { id: number }
   TbmReportInquiry: undefined
+  TbmReportStatus: { id: number }
   TbmJoin: undefined
   TbmJoinInfo: { id: number }
   TbmJoinHealth: { id: number }

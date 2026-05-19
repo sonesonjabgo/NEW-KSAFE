@@ -692,6 +692,11 @@ const ar: Translations = {
     },
   },
 
+  tbmReportStatusScreen: {
+    title: "TBM Report Status",
+    regenerate: "Regenerate",
+  },
+
   ...demoAr,
 }
 
