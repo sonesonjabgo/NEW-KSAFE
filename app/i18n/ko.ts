@@ -513,6 +513,129 @@ const ko: Translations = {
     },
   },
 
+  tbmJoinInfoScreen: {
+    title: "TBM 참여",
+    sectionInfo: "TBM 정보",
+    activityName: "활동명",
+    manager: "담당자",
+    date: "날짜",
+    sectionAttachments: "첨부파일",
+    noAttachments: "첨부된 파일이 없습니다.",
+    prev: "이전",
+    next: "다음",
+  },
+
+  tbmJoinHealthScreen: {
+    title: "TBM 참여",
+    heading: "건강 상태 확인",
+    prompt: "전날, 과음을 하거나 금일 건강 이상여부를\n확인해주세요",
+    statusGood: "이상 없음",
+    statusBad: "이상 있음",
+    prev: "이전",
+    next: "다음",
+    toastMessage: "건강 상태를 선택한 뒤 다음 단계로 진행해주세요.",
+    notAllCheckedModal: {
+      title: "건강 상태를 선택해주세요.",
+      message: "이상 없음 또는 이상 있음을 선택해야\n다음 단계로 진행할 수 있습니다.",
+      confirm: "확인",
+    },
+  },
+
+  tbmJoinSignScreen: {
+    title: "TBM 참여",
+    heading: "전자 서명",
+    description: "아래 영역에 서명을 해주세요",
+    signatureArea: "이곳에 서명해주세요",
+    clearLabel: "서명 초기화",
+    prev: "이전",
+    next: "다음",
+    noSignatureModal: {
+      title: "서명이 필요합니다.",
+      message: "서명을 완료해야 다음 단계로 진행할 수 있습니다.",
+      confirm: "확인",
+    },
+  },
+
+  tbmJoinCompleteScreen: {
+    title: "TBM 참여",
+    heading: "TBM 참여 완료",
+    subtitle: "안전한 하루 되세요!",
+    goHome: "완료",
+  },
+
+  tbmJoinScreen: {
+    title: "TBM 참여",
+    selectPrompt: "참여할 TBM을 선택해주세요",
+    empty: {
+      title: "진행 중인 TBM이 없습니다.",
+      subtitle: "현재 참여할 수 있는 TBM 세션이 없습니다.",
+    },
+    prev: "이전",
+    next: "다음",
+    noSelectionModal: {
+      title: "선택된 세션이 없습니다.",
+      message: "참여할 TBM 세션을 선택해주세요.",
+      confirm: "확인",
+    },
+    infoModal: {
+      title: "TBM 안내",
+      meaning: {
+        heading: "TBM의 뜻",
+        body: "TBM은 Tool Box Meeting의 약자로, 작업 시작 전에 당일 작업 내용과 위험요인, 안전대책을 함께 확인하는 짧은 안전회의입니다.",
+      },
+      importance: {
+        heading: "TBM이 중요한 이유",
+        body: "TBM은 작업 전 위험요인을 미리 공유하고, 역할 분담과 보호구 착용 여부를 확인해 사고를 예방하는 데 중요한 절차입니다.",
+      },
+      procedure: {
+        heading: "진행 절차",
+        step1: "오늘 작업 내용와 참여자를 확인합니다.",
+        step2: "주요 위험요인과 안전조치를 공유합니다.",
+        step3: "작업자 건강 상태, 보호구, 현장 변경사항을 점검합니다.",
+        step4: "내용을 확인한 뒤 TBM 참여와 서명을 진행합니다.",
+      },
+      close: "닫기",
+    },
+  },
+
+  tbmReportScreen: {
+    title: "TBM 보고서 생성",
+    notice: {
+      description:
+        " ·  진행중인 TBM 활동에 대해서만 교육일지를 작성할 수 있습니다.\n ·  교육일지를 완료하면 해당 TBM 활동이 자동으로 종료됩니다.\n ·  현장 사진은 최소 1장 이상 반드시 첨부해야 합니다.",
+    },
+    activityName: {
+      label: "TBM 활동",
+    },
+    processName: {
+      label: "공정명",
+      placeholder: "공정명을 입력하세요 (선택)",
+      helper: "비워둘 수 있으며, 입력 시 50자 이내로 입력할 수 있습니다.",
+    },
+    teamName: {
+      label: "팀/반명",
+      placeholder: "팀 또는 반명을 입력하세요 (선택)",
+      helper: "비워둘 수 있으며, 입력 시 50자 이내로 입력할 수 있습니다.",
+    },
+    educationSummary: {
+      label: "교육 내용 요약",
+      placeholder: "오늘 교육에서 다룬 핵심 내용을 작성하세요",
+      helper: "10자 이상 1,000자 이내로 입력할 수 있습니다.",
+    },
+    specialNotes: {
+      label: "특이사항 (비워두셔도 됩니다)",
+      placeholder: "공유가 필요한 특이사항이나 전달사항을 입력하세요",
+      helper: "최대 500자까지 입력할 수 있습니다.",
+    },
+    sitePhotos: {
+      label: "현장 사진",
+      addButton: "사진 추가",
+      guide: "현장 사진은 최소 1장 이상 등록해야 합니다.\n사진은 최소 1장 이상, 최대 5장까지 첨부할 수 있습니다.",
+      preview: "이미지를 추가하면 미리보기가 표시됩니다.",
+    },
+    submit: "저장하기",
+  },
+
   tbmCreateScreen: {
     title: "TBM 활동 생성",
     reset: "초기화",
@@ -554,6 +677,35 @@ const ko: Translations = {
   },
 
 
+
+  tbmDetailScreen: {
+    title: "TBM 활동 상세",
+    workDate: "작업일:  {{date}}",
+    activityLabel: "활동 내용",
+    educationHeader: "교육자료 ({{count}}개)",
+    startActivity: "활동 시작",
+    edit: "수정",
+    delete: "삭제",
+    participantEmpty: "참여자가 없습니다.",
+    toastStarted: "TBM 활동이 시작되었습니다.",
+    endActivity: "TBM 종료하고 보고서 생성하기",
+    participantHeader: "참여자 목록 ({{count}}명)",
+    badgeNormal: "정상",
+    badgeCaution: "주의",
+    badgeDanger: "위험",
+    deleteModal: {
+      title: "TBM 활동 삭제",
+      message: "정말로 이 TBM 활동을 삭제하시겠습니까?",
+      cancel: "취소",
+      confirm: "삭제",
+    },
+    startModal: {
+      title: "TBM 활동 시작",
+      message: "이 TBM 활동을 시작하시겠습니까?\n상태가 '진행중'으로 변경됩니다.",
+      cancel: "취소",
+      confirm: "시작",
+    },
+  },
 
   educationSelectScreen: {
     title: "교육자료 선택",

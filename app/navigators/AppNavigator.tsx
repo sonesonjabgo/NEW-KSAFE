@@ -9,18 +9,25 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import Config from "@/config"
 import { useAuth } from "@/context/AuthContext"
-import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
 import { AISafetyChatScreen } from "@/screens/AISafetyChatScreen/AISafetyChatScreen"
+import { EducationPresentationScreen } from "@/screens/EducationPresentationScreen/EducationPresentationScreen"
+import { EducationSelectScreen } from "@/screens/EducationSelectScreen/EducationSelectScreen"
+import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
+import { ImageTranslationScreen } from "@/screens/ImageTranslationScreen/ImageTranslationScreen"
 import { LanguageSettingsScreen } from "@/screens/LanguageSettingsScreen"
 import { LoginScreen } from "@/screens/LoginScreen"
 import { MyPageScreen } from "@/screens/MyPageScreen"
 import { NotifyScreen } from "@/screens/NotifyScreen"
 import { QrScannerScreen } from "@/screens/QrScannerScreen"
-import { EducationPresentationScreen } from "@/screens/EducationPresentationScreen/EducationPresentationScreen"
-import { TbmListScreen } from "@/screens/TbmListScreen/TbmListScreen"
 import { TbmCreateScreen } from "@/screens/TbmCreateScreen/TbmCreateScreen"
-import { EducationSelectScreen } from "@/screens/EducationSelectScreen/EducationSelectScreen"
-import { ImageTranslationScreen } from "@/screens/ImageTranslationScreen/ImageTranslationScreen"
+import { TbmDetailScreen } from "@/screens/TbmDetailScreen/TbmDetailScreen"
+import { TbmJoinCompleteScreen } from "@/screens/TbmJoinCompleteScreen/TbmJoinCompleteScreen"
+import { TbmJoinHealthScreen } from "@/screens/TbmJoinHealthScreen/TbmJoinHealthScreen"
+import { TbmJoinInfoScreen } from "@/screens/TbmJoinInfoScreen/TbmJoinInfoScreen"
+import { TbmJoinScreen } from "@/screens/TbmJoinScreen/TbmJoinScreen"
+import { TbmJoinSignScreen } from "@/screens/TbmJoinSignScreen/TbmJoinSignScreen"
+import { TbmListScreen } from "@/screens/TbmListScreen/TbmListScreen"
+import { TbmReportScreen } from "@/screens/TbmReportScreen/TbmReportScreen"
 import { TextTranslationScreen } from "@/screens/TextTranslationScreen/TextTranslationScreen"
 import { VoiceTranslationScreen } from "@/screens/VoiceTranslationScreen"
 import { useAppTheme } from "@/theme/context"
@@ -68,6 +75,13 @@ const AppStack = () => {
       <Stack.Screen name="EducationPresentation" component={EducationPresentationScreen} />
       <Stack.Screen name="TbmList" component={TbmListScreen} />
       <Stack.Screen name="TbmCreate" component={TbmCreateScreen} />
+      <Stack.Screen name="TbmDetail" component={TbmDetailScreen} />
+      <Stack.Screen name="TbmReport" component={TbmReportScreen} />
+      <Stack.Screen name="TbmJoin" component={TbmJoinScreen} />
+      <Stack.Screen name="TbmJoinInfo" component={TbmJoinInfoScreen} />
+      <Stack.Screen name="TbmJoinHealth" component={TbmJoinHealthScreen} />
+      <Stack.Screen name="TbmJoinSign" component={TbmJoinSignScreen} />
+      <Stack.Screen name="TbmJoinComplete" component={TbmJoinCompleteScreen} />
       <Stack.Screen name="EducationSelect" component={EducationSelectScreen} />
     </Stack.Navigator>
   )

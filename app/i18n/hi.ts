@@ -474,6 +474,128 @@ const hi: Translations = {
     },
   },
 
+  tbmJoinInfoScreen: {
+    title: "TBM में शामिल हों",
+    sectionInfo: "TBM जानकारी",
+    activityName: "गतिविधि का नाम",
+    manager: "प्रबंधक",
+    date: "तारीख",
+    sectionAttachments: "संलग्नक",
+    noAttachments: "कोई संलग्नक नहीं।",
+    prev: "पिछला",
+    next: "अगला",
+  },
+
+  tbmJoinHealthScreen: {
+    title: "TBM में शामिल हों",
+    heading: "स्वास्थ्य जांच",
+    prompt: "कृपया पुष्टि करें कि क्या आपने पिछले दिन अत्यधिक शराब का सेवन किया था या आज आपको कोई स्वास्थ्य समस्या है।",
+    statusGood: "कोई समस्या नहीं",
+    statusBad: "समस्या है",
+    prev: "पिछला",
+    next: "अगला",
+    toastMessage: "आगे बढ़ने से पहले कृपया अपनी स्वास्थ्य स्थिति चुनें।",
+    notAllCheckedModal: {
+      title: "कृपया अपनी स्वास्थ्य स्थिति चुनें।",
+      message: "आगे बढ़ने के लिए कोई समस्या नहीं या समस्या है चुनना अनिवार्य है।",
+      confirm: "ठीक है",
+    },
+  },
+
+  tbmJoinSignScreen: {
+    title: "TBM में शामिल हों",
+    heading: "इलेक्ट्रॉनिक हस्ताक्षर",
+    description: "कृपया नीचे दिए गए क्षेत्र में हस्ताक्षर करें।",
+    signatureArea: "यहाँ हस्ताक्षर करें",
+    clearLabel: "हस्ताक्षर रीसेट करें",
+    prev: "पिछला",
+    next: "अगला",
+    noSignatureModal: {
+      title: "हस्ताक्षर आवश्यक है।",
+      message: "आगे बढ़ने से पहले कृपया अपना हस्ताक्षर पूरा करें।",
+      confirm: "ठीक है",
+    },
+  },
+
+  tbmJoinCompleteScreen: {
+    title: "TBM में शामिल हों",
+    heading: "TBM भागीदारी पूर्ण",
+    subtitle: "आपका दिन सुरक्षित रहे!",
+    goHome: "पूर्ण",
+  },
+
+  tbmJoinScreen: {
+    title: "TBM में शामिल हों",
+    selectPrompt: "कृपया शामिल होने के लिए एक TBM चुनें",
+    empty: {
+      title: "कोई TBM चल नहीं रहा है।",
+      subtitle: "अभी शामिल होने के लिए कोई TBM सत्र उपलब्ध नहीं है।",
+    },
+    prev: "पिछला",
+    next: "अगला",
+    noSelectionModal: {
+      title: "कोई सत्र चयनित नहीं है।",
+      message: "कृपया शामिल होने के लिए एक TBM सत्र चुनें।",
+      confirm: "ठीक है",
+    },
+    infoModal: {
+      title: "TBM गाइड",
+      meaning: {
+        heading: "TBM क्या है?",
+        body: "TBM का अर्थ है Tool Box Meeting — काम शुरू होने से पहले एक संक्षिप्त सुरक्षा बैठक जहाँ दिन के कार्यों, खतरों और सुरक्षा उपायों की समीक्षा की जाती है।",
+      },
+      importance: {
+        heading: "TBM क्यों महत्वपूर्ण है",
+        body: "TBM दुर्घटनाओं को रोकने के लिए एक महत्वपूर्ण कदम है, जिसमें खतरों को पहले से साझा किया जाता है, भूमिकाएं स्पष्ट की जाती हैं और सुरक्षा उपकरण पहनने की जाँच की जाती है।",
+      },
+      procedure: {
+        heading: "यह कैसे काम करता है",
+        step1: "आज के कार्य क्षेत्र और प्रतिभागियों की पुष्टि करें।",
+        step2: "प्रमुख खतरों और सुरक्षा उपायों को साझा करें।",
+        step3: "कर्मचारियों के स्वास्थ्य, सुरक्षा उपकरण और साइट में किसी भी बदलाव की जाँच करें।",
+        step4: "सामग्री की समीक्षा करें, फिर TBM भागीदारी पूरी करें और हस्ताक्षर करें।",
+      },
+      close: "बंद करें",
+    },
+  },
+
+  tbmReportScreen: {
+    title: "TBM रिपोर्ट जनरेशन",
+    notice: {
+      description: " ·  शिक्षा लॉग केवल प्रगति में चल रही TBM गतिविधियों के लिए बनाया जा सकता है।\n ·  शिक्षा लॉग पूरा होने पर TBM गतिविधि स्वचालित रूप से समाप्त हो जाएगी।\n ·  कम से कम एक साइट फ़ोटो अवश्य संलग्न करें।",
+    },
+    activityName: {
+      label: "TBM गतिविधि",
+    },
+    processName: {
+      label: "प्रक्रिया का नाम",
+      placeholder: "प्रक्रिया का नाम दर्ज करें",
+      helper: "वैकल्पिक। अधिकतम 50 अक्षर।",
+    },
+    teamName: {
+      label: "टीम / इकाई का नाम",
+      placeholder: "टीम या इकाई का नाम दर्ज करें",
+      helper: "वैकल्पिक। अधिकतम 50 अक्षर।",
+    },
+    educationSummary: {
+      label: "शिक्षा सामग्री सारांश",
+      placeholder: "शिक्षा सामग्री का सारांश दर्ज करें",
+      helper: "10 से 1,000 अक्षरों के बीच।",
+    },
+    specialNotes: {
+      label: "विशेष नोट्स",
+      placeholder: "कोई विशेष नोट्स दर्ज करें",
+      helper: "अधिकतम 500 अक्षर।",
+    },
+    sitePhotos: {
+      label: "साइट फ़ोटो",
+      addButton: "फ़ोटो जोड़ें",
+      guide: "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
+      preview: "A preview will be shown when you add an image.",
+    },
+    submit: "रिपोर्ट बनाएं",
+  },
+
   tbmCreateScreen: {
     title: "Create TBM Activity",
     reset: "Reset",
@@ -514,6 +636,35 @@ const hi: Translations = {
     submit: "Create",
   },
 
+
+  tbmDetailScreen: {
+    title: "TBM गतिविधि विवरण",
+    workDate: "कार्य तिथि:  {{date}}",
+    activityLabel: "गतिविधि सामग्री",
+    educationHeader: "शैक्षिक सामग्री ({{count}})",
+    startActivity: "Start Activity",
+    edit: "Edit",
+    delete: "Delete",
+    participantEmpty: "कोई प्रतिभागी नहीं।",
+    toastStarted: "TBM गतिविधि शुरू हो गई है।",
+    endActivity: "TBM समाप्त करें और रिपोर्ट बनाएं",
+    participantHeader: "प्रतिभागी ({{count}})",
+    badgeNormal: "सामान्य",
+    badgeCaution: "सावधानी",
+    badgeDanger: "खतरा",
+    deleteModal: {
+      title: "TBM गतिविधि हटाएं",
+      message: "क्या आप वाकई इस TBM गतिविधि को हटाना चाहते हैं?",
+      cancel: "रद्द करें",
+      confirm: "हटाएं",
+    },
+    startModal: {
+      title: "TBM गतिविधि शुरू करें",
+      message: "क्या आप इस TBM गतिविधि को शुरू करना चाहते हैं?\nस्थिति 'प्रगति में' में बदल जाएगी।",
+      cancel: "रद्द करें",
+      confirm: "शुरू करें",
+    },
+  },
 
   educationSelectScreen: {
     title: "Select Educational Materials",

@@ -15,7 +15,7 @@ import type { TbmItem, TbmListScreenProps, TbmStatus } from "./types"
 
 type TabKey = "all" | "작성중" | "진행중" | "종료됨"
 
-const TbmCard: FC<{ item: TbmItem }> = ({ item }) => {
+const TbmCard: FC<{ item: TbmItem; onPress: () => void }> = ({ item, onPress }) => {
   const badgeStyle =
     item.status === "작성중"
       ? S.$badgeDrafting
@@ -37,11 +37,7 @@ const TbmCard: FC<{ item: TbmItem }> = ({ item }) => {
   }
 
   return (
-    <TouchableOpacity
-      style={S.$card}
-      activeOpacity={0.75}
-      onPress={() => console.log("TBM id:", item.id)}
-    >
+    <TouchableOpacity style={S.$card} activeOpacity={0.75} onPress={onPress}>
       {/* 상태 배지 + 날짜 */}
       <View style={S.$cardTopRow}>
         <View style={badgeStyle}>
@@ -107,9 +103,7 @@ export const TbmListScreen: FC<TbmListScreenProps> = ({ navigation }) => {
 
   const filteredData = useMemo(
     () =>
-      activeTab === "all"
-        ? mockTbmData
-        : mockTbmData.filter((item) => item.status === activeTab),
+      activeTab === "all" ? mockTbmData : mockTbmData.filter((item) => item.status === activeTab),
     [activeTab],
   )
 
@@ -143,21 +137,28 @@ export const TbmListScreen: FC<TbmListScreenProps> = ({ navigation }) => {
           style={S.$listContent}
           data={filteredData}
           keyExtractor={(item) => String(item.id)}
-          contentContainerStyle={[
-            S.$flatListContent,
-            filteredData.length === 0 && { flex: 1 },
-          ]}
-        renderItem={({ item }) => <TbmCard item={item} />}
-        ListEmptyComponent={<EmptyState tab={activeTab} />}
-        showsVerticalScrollIndicator={false}
-      />
+          contentContainerStyle={[S.$flatListContent, filteredData.length === 0 && { flex: 1 }]}
+          renderItem={({ item }) => (
+            <TbmCard
+              item={item}
+              onPress={() => navigation.navigate("TbmDetail", { id: item.id })}
+            />
+          )}
+          ListEmptyComponent={<EmptyState tab={activeTab} />}
+          showsVerticalScrollIndicator={false}
+        />
 
-      {/* FAB */}
+        {/* FAB */}
       </StackScreen>
 
       {/* FAB — StackScreen의 overflow:hidden 밖에 배치 */}
       <View
-        style={{ position: "absolute", right: 20, bottom: 30 + insets.bottom, alignItems: "center" }}
+        style={{
+          position: "absolute",
+          right: 20,
+          bottom: 30 + insets.bottom,
+          alignItems: "center",
+        }}
         pointerEvents="box-none"
       >
         <TouchableOpacity

@@ -521,6 +521,129 @@ const en = {
     },
   },
 
+  tbmJoinInfoScreen: {
+    title: "Join TBM",
+    sectionInfo: "TBM Information",
+    activityName: "Activity",
+    manager: "Manager",
+    date: "Date",
+    sectionAttachments: "Attachments",
+    noAttachments: "No attachments.",
+    prev: "Previous",
+    next: "Next",
+  },
+
+  tbmJoinHealthScreen: {
+    title: "Join TBM",
+    heading: "Health Check",
+    prompt: "Please confirm if you consumed excessive alcohol the day before or have any health issues today.",
+    statusGood: "No Issues",
+    statusBad: "Issues Present",
+    prev: "Previous",
+    next: "Next",
+    toastMessage: "Please select your health status before proceeding.",
+    notAllCheckedModal: {
+      title: "Please select your health status.",
+      message: "You must select either No Issues or Issues Present to proceed.",
+      confirm: "OK",
+    },
+  },
+
+  tbmJoinSignScreen: {
+    title: "Join TBM",
+    heading: "Electronic Signature",
+    description: "Please sign in the area below.",
+    signatureArea: "Sign here",
+    clearLabel: "Reset Signature",
+    prev: "Previous",
+    next: "Next",
+    noSignatureModal: {
+      title: "Signature required.",
+      message: "Please complete your signature before proceeding.",
+      confirm: "OK",
+    },
+  },
+
+  tbmJoinCompleteScreen: {
+    title: "Join TBM",
+    heading: "TBM Participation Complete",
+    subtitle: "Have a safe day!",
+    goHome: "Complete",
+  },
+
+  tbmJoinScreen: {
+    title: "Join TBM",
+    selectPrompt: "Please select a TBM to join",
+    empty: {
+      title: "No TBM in progress.",
+      subtitle: "There are no TBM sessions available to join.",
+    },
+    prev: "Previous",
+    next: "Next",
+    noSelectionModal: {
+      title: "No session selected.",
+      message: "Please select a TBM session to join.",
+      confirm: "OK",
+    },
+    infoModal: {
+      title: "TBM Guide",
+      meaning: {
+        heading: "What is TBM?",
+        body: "TBM stands for Tool Box Meeting — a brief pre-work safety briefing where the day's tasks, hazards, and safety measures are reviewed together.",
+      },
+      importance: {
+        heading: "Why TBM Matters",
+        body: "TBM is a critical step to prevent accidents by sharing hazards in advance, clarifying roles, and checking that personal protective equipment is properly worn.",
+      },
+      procedure: {
+        heading: "How It Works",
+        step1: "Confirm today's work scope and participants.",
+        step2: "Share key hazards and safety measures.",
+        step3: "Check worker health, protective equipment, and any site changes.",
+        step4: "Review the content, then complete TBM participation and sign off.",
+      },
+      close: "Close",
+    },
+  },
+
+  tbmReportScreen: {
+    title: "TBM Report Generation",
+    notice: {
+      description:
+        " ·  Education logs can only be created for TBM activities in progress.\n ·  Completing the education log will automatically end the TBM activity.\n ·  At least one site photo must be attached.",
+    },
+    activityName: {
+      label: "TBM Activity",
+    },
+    processName: {
+      label: "Process Name",
+      placeholder: "Enter process name (optional)",
+      helper: "Optional. Up to 50 characters.",
+    },
+    teamName: {
+      label: "Team / Unit Name",
+      placeholder: "Enter team or unit name (optional)",
+      helper: "Optional. Up to 50 characters.",
+    },
+    educationSummary: {
+      label: "Education Content Summary",
+      placeholder: "Write the key content covered in today's education",
+      helper: "Between 10 and 1,000 characters.",
+    },
+    specialNotes: {
+      label: "Special Notes (optional)",
+      placeholder: "Enter any special notes or announcements to share",
+      helper: "Up to 500 characters.",
+    },
+    sitePhotos: {
+      label: "Site Photos",
+      addButton: "Add Photo",
+      guide: "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
+      preview: "A preview will be shown when you add an image.",
+    },
+    submit: "Save",
+  },
+
   tbmCreateScreen: {
     title: "Create TBM Activity",
     reset: "Reset",
@@ -562,6 +685,35 @@ const en = {
   },
 
 
+
+  tbmDetailScreen: {
+    title: "TBM Activity Detail",
+    workDate: "Work Date:  {{date}}",
+    activityLabel: "Activity Content",
+    educationHeader: "Education Materials ({{count}})",
+    startActivity: "Start Activity",
+    edit: "Edit",
+    delete: "Delete",
+    participantEmpty: "No participants.",
+    toastStarted: "TBM activity has started.",
+    endActivity: "End TBM and Generate Report",
+    participantHeader: "Participants ({{count}})",
+    badgeNormal: "Normal",
+    badgeCaution: "Caution",
+    badgeDanger: "Danger",
+    deleteModal: {
+      title: "Delete TBM Activity",
+      message: "Are you sure you want to delete this TBM activity?",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
+    startModal: {
+      title: "Start TBM Activity",
+      message: "Are you sure you want to start this TBM activity?\nStatus will change to 'In Progress'.",
+      cancel: "Cancel",
+      confirm: "Start",
+    },
+  },
 
   educationSelectScreen: {
     title: "Select Educational Materials",

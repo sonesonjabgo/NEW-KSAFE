@@ -469,6 +469,128 @@ const ar: Translations = {
     },
   },
 
+  tbmJoinInfoScreen: {
+    title: "الانضمام إلى TBM",
+    sectionInfo: "معلومات TBM",
+    activityName: "اسم النشاط",
+    manager: "المسؤول",
+    date: "التاريخ",
+    sectionAttachments: "المرفقات",
+    noAttachments: "لا توجد مرفقات.",
+    prev: "السابق",
+    next: "التالي",
+  },
+
+  tbmJoinHealthScreen: {
+    title: "الانضمام إلى TBM",
+    heading: "فحص الحالة الصحية",
+    prompt: "يرجى التحقق مما إذا كنت قد تناولت كميات مفرطة من الكحول في اليوم السابق أو لديك أي مشكلات صحية اليوم.",
+    statusGood: "لا توجد مشكلات",
+    statusBad: "توجد مشكلات",
+    prev: "السابق",
+    next: "التالي",
+    toastMessage: "يرجى اختيار حالتك الصحية قبل المتابعة.",
+    notAllCheckedModal: {
+      title: "يرجى اختيار حالتك الصحية.",
+      message: "يجب اختيار لا توجد مشكلات أو توجد مشكلات للمتابعة.",
+      confirm: "موافق",
+    },
+  },
+
+  tbmJoinSignScreen: {
+    title: "الانضمام إلى TBM",
+    heading: "التوقيع الإلكتروني",
+    description: "يرجى التوقيع في المنطقة أدناه.",
+    signatureArea: "وقّع هنا",
+    clearLabel: "إعادة تعيين التوقيع",
+    prev: "السابق",
+    next: "التالي",
+    noSignatureModal: {
+      title: "التوقيع مطلوب.",
+      message: "يرجى إتمام توقيعك قبل المتابعة.",
+      confirm: "موافق",
+    },
+  },
+
+  tbmJoinCompleteScreen: {
+    title: "الانضمام إلى TBM",
+    heading: "اكتمل الانضمام إلى TBM",
+    subtitle: "أتمنى لك يوماً آمناً!",
+    goHome: "تم",
+  },
+
+  tbmJoinScreen: {
+    title: "الانضمام إلى TBM",
+    selectPrompt: "يرجى اختيار TBM للانضمام إليه",
+    empty: {
+      title: "لا يوجد TBM قيد التشغيل.",
+      subtitle: "لا توجد جلسات TBM متاحة للانضمام إليها حالياً.",
+    },
+    prev: "السابق",
+    next: "التالي",
+    noSelectionModal: {
+      title: "لم يتم اختيار أي جلسة.",
+      message: "يرجى اختيار جلسة TBM للانضمام إليها.",
+      confirm: "موافق",
+    },
+    infoModal: {
+      title: "دليل TBM",
+      meaning: {
+        heading: "ما هو TBM؟",
+        body: "TBM يعني اجتماع صندوق الأدوات — اجتماع سلامة مختصر قبل العمل حيث يتم مراجعة مهام اليوم والمخاطر وتدابير السلامة معاً.",
+      },
+      importance: {
+        heading: "لماذا يهم TBM",
+        body: "TBM خطوة حاسمة لمنع الحوادث من خلال مشاركة المخاطر مسبقاً، وتوضيح الأدوار، والتحقق من ارتداء معدات الحماية الشخصية بشكل صحيح.",
+      },
+      procedure: {
+        heading: "كيف يعمل",
+        step1: "تأكيد نطاق العمل اليوم والمشاركين.",
+        step2: "مشاركة المخاطر الرئيسية وتدابير السلامة.",
+        step3: "التحقق من صحة العمال ومعدات الحماية وأي تغييرات في الموقع.",
+        step4: "مراجعة المحتوى، ثم إكمال المشاركة في TBM والتوقيع.",
+      },
+      close: "إغلاق",
+    },
+  },
+
+  tbmReportScreen: {
+    title: "إنشاء تقرير TBM",
+    notice: {
+      description: " ·  لا يمكن كتابة سجل التعليم إلا لأنشطة TBM قيد التقدم.\n ·  سيؤدي إكمال سجل التعليم إلى إنهاء نشاط TBM تلقائياً.\n ·  يجب إرفاق صورة واحدة على الأقل من الموقع.",
+    },
+    activityName: {
+      label: "نشاط TBM",
+    },
+    processName: {
+      label: "اسم العملية",
+      placeholder: "أدخل اسم العملية",
+      helper: "اختياري. 50 حرفاً كحد أقصى.",
+    },
+    teamName: {
+      label: "اسم الفريق / الوحدة",
+      placeholder: "أدخل اسم الفريق أو الوحدة",
+      helper: "اختياري. 50 حرفاً كحد أقصى.",
+    },
+    educationSummary: {
+      label: "ملخص محتوى التعليم",
+      placeholder: "لخّص محتوى التعليم",
+      helper: "بين 10 و 1,000 حرف.",
+    },
+    specialNotes: {
+      label: "ملاحظات خاصة",
+      placeholder: "أدخل أي ملاحظات خاصة",
+      helper: "حتى 500 حرف.",
+    },
+    sitePhotos: {
+      label: "صور الموقع",
+      addButton: "إضافة صورة",
+      guide: "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
+      preview: "A preview will be shown when you add an image.",
+    },
+    submit: "إنشاء التقرير",
+  },
+
   tbmCreateScreen: {
     title: "Create TBM Activity",
     reset: "Reset",
@@ -509,6 +631,35 @@ const ar: Translations = {
     submit: "Create",
   },
 
+
+  tbmDetailScreen: {
+    title: "تفاصيل نشاط TBM",
+    workDate: "تاريخ العمل:  {{date}}",
+    activityLabel: "محتوى النشاط",
+    educationHeader: "مواد التعليم ({{count}})",
+    startActivity: "Start Activity",
+    edit: "Edit",
+    delete: "Delete",
+    participantEmpty: "لا يوجد مشاركون.",
+    toastStarted: "TBM تم بدء نشاط",
+    endActivity: "إنهاء TBM وإنشاء تقرير",
+    participantHeader: "المشاركون ({{count}})",
+    badgeNormal: "طبيعي",
+    badgeCaution: "تحذير",
+    badgeDanger: "خطر",
+    deleteModal: {
+      title: "حذف نشاط TBM",
+      message: "هل أنت متأكد من حذف نشاط TBM هذا؟",
+      cancel: "إلغاء",
+      confirm: "حذف",
+    },
+    startModal: {
+      title: "بدء نشاط TBM",
+      message: "هل تريد بدء نشاط TBM هذا؟\nسيتغير الحالة إلى 'قيد التقدم'.",
+      cancel: "إلغاء",
+      confirm: "بدء",
+    },
+  },
 
   educationSelectScreen: {
     title: "Select Educational Materials",

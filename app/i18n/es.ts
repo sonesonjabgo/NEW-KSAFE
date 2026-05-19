@@ -478,6 +478,128 @@ const es: Translations = {
     },
   },
 
+  tbmJoinInfoScreen: {
+    title: "Unirse al TBM",
+    sectionInfo: "Información del TBM",
+    activityName: "Nombre de la actividad",
+    manager: "Responsable",
+    date: "Fecha",
+    sectionAttachments: "Archivos adjuntos",
+    noAttachments: "No hay archivos adjuntos.",
+    prev: "Anterior",
+    next: "Siguiente",
+  },
+
+  tbmJoinHealthScreen: {
+    title: "Unirse al TBM",
+    heading: "Verificación de salud",
+    prompt: "Confirme si consumió alcohol en exceso el día anterior o tiene algún problema de salud hoy.",
+    statusGood: "Sin problemas",
+    statusBad: "Con problemas",
+    prev: "Anterior",
+    next: "Siguiente",
+    toastMessage: "Por favor, seleccione su estado de salud antes de continuar.",
+    notAllCheckedModal: {
+      title: "Por favor, seleccione su estado de salud.",
+      message: "Debe seleccionar Sin problemas o Con problemas para continuar.",
+      confirm: "Aceptar",
+    },
+  },
+
+  tbmJoinSignScreen: {
+    title: "Unirse al TBM",
+    heading: "Firma Electrónica",
+    description: "Por favor, firme en el área a continuación.",
+    signatureArea: "Firme aquí",
+    clearLabel: "Restablecer firma",
+    prev: "Anterior",
+    next: "Siguiente",
+    noSignatureModal: {
+      title: "Se requiere firma.",
+      message: "Por favor, complete su firma antes de continuar.",
+      confirm: "Aceptar",
+    },
+  },
+
+  tbmJoinCompleteScreen: {
+    title: "Unirse al TBM",
+    heading: "Participación en TBM completada",
+    subtitle: "¡Que tenga un día seguro!",
+    goHome: "Hecho",
+  },
+
+  tbmJoinScreen: {
+    title: "Unirse al TBM",
+    selectPrompt: "Por favor, seleccione un TBM al que unirse",
+    empty: {
+      title: "No hay TBM en progreso.",
+      subtitle: "No hay sesiones TBM disponibles para unirse en este momento.",
+    },
+    prev: "Anterior",
+    next: "Siguiente",
+    noSelectionModal: {
+      title: "No hay sesión seleccionada.",
+      message: "Por favor, seleccione una sesión TBM para unirse.",
+      confirm: "Aceptar",
+    },
+    infoModal: {
+      title: "Guía TBM",
+      meaning: {
+        heading: "¿Qué es TBM?",
+        body: "TBM significa Tool Box Meeting — una breve reunión de seguridad previa al trabajo donde se revisan las tareas del día, los peligros y las medidas de seguridad.",
+      },
+      importance: {
+        heading: "Por qué es importante el TBM",
+        body: "El TBM es un paso crítico para prevenir accidentes compartiendo los peligros con anticipación, aclarando roles y verificando que el equipo de protección personal se use correctamente.",
+      },
+      procedure: {
+        heading: "Cómo funciona",
+        step1: "Confirme el alcance del trabajo del día y los participantes.",
+        step2: "Comparta los principales peligros y medidas de seguridad.",
+        step3: "Verifique la salud de los trabajadores, el equipo de protección y cualquier cambio en el sitio.",
+        step4: "Revise el contenido, luego complete la participación en el TBM y firme.",
+      },
+      close: "Cerrar",
+    },
+  },
+
+  tbmReportScreen: {
+    title: "Generación de Informe TBM",
+    notice: {
+      description: " ·  Solo se puede redactar el registro educativo para actividades TBM en curso.\n ·  Al completar el registro, la actividad TBM finalizará automáticamente.\n ·  Se debe adjuntar al menos una foto del sitio.",
+    },
+    activityName: {
+      label: "Actividad TBM",
+    },
+    processName: {
+      label: "Nombre del proceso",
+      placeholder: "Ingrese el nombre del proceso",
+      helper: "Opcional. Hasta 50 caracteres.",
+    },
+    teamName: {
+      label: "Nombre del equipo / unidad",
+      placeholder: "Ingrese el nombre del equipo o unidad",
+      helper: "Opcional. Hasta 50 caracteres.",
+    },
+    educationSummary: {
+      label: "Resumen del contenido educativo",
+      placeholder: "Resuma el contenido educativo",
+      helper: "Entre 10 y 1,000 caracteres.",
+    },
+    specialNotes: {
+      label: "Notas especiales",
+      placeholder: "Ingrese notas especiales",
+      helper: "Hasta 500 caracteres.",
+    },
+    sitePhotos: {
+      label: "Fotos del sitio",
+      addButton: "Agregar foto",
+      guide: "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
+      preview: "A preview will be shown when you add an image.",
+    },
+    submit: "Generar informe",
+  },
+
   tbmCreateScreen: {
     title: "Create TBM Activity",
     reset: "Reset",
@@ -518,6 +640,35 @@ const es: Translations = {
     submit: "Create",
   },
 
+
+  tbmDetailScreen: {
+    title: "Detalle de Actividad TBM",
+    workDate: "Fecha de trabajo:  {{date}}",
+    activityLabel: "Contenido de actividad",
+    educationHeader: "Materiales educativos ({{count}})",
+    startActivity: "Start Activity",
+    edit: "Edit",
+    delete: "Delete",
+    participantEmpty: "No hay participantes.",
+    toastStarted: "La actividad TBM ha comenzado.",
+    endActivity: "Finalizar TBM y generar informe",
+    participantHeader: "Participantes ({{count}})",
+    badgeNormal: "Normal",
+    badgeCaution: "Precaución",
+    badgeDanger: "Peligro",
+    deleteModal: {
+      title: "Eliminar actividad TBM",
+      message: "¿Está seguro de que desea eliminar esta actividad TBM?",
+      cancel: "Cancelar",
+      confirm: "Eliminar",
+    },
+    startModal: {
+      title: "Iniciar actividad TBM",
+      message: "¿Desea iniciar esta actividad TBM?\nEl estado cambiará a 'En progreso'.",
+      cancel: "Cancelar",
+      confirm: "Iniciar",
+    },
+  },
 
   educationSelectScreen: {
     title: "Select Educational Materials",

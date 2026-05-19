@@ -302,7 +302,7 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
                 {/* 콘텐츠 행: 아이콘 + 텍스트 */}
                 <View style={S.$educationCountBody}>
                   <View style={S.$educationIconCircle}>
-                    <EducationFrame width={28} height={28} />
+                    <EducationFrame width={28} height={28} color="#1062D8" />
                   </View>
                   <View style={S.$educationCountTextBlock}>
                     <Text
