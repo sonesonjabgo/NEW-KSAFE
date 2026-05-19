@@ -1,7 +1,7 @@
 import { FC, useRef, useState } from "react"
 import { PanResponder, TouchableOpacity, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { IconAlertCircle } from "@tabler/icons-react-native"
+import { IconAlertCircle, IconRefresh } from "@tabler/icons-react-native"
 import Svg, { Path } from "react-native-svg"
 
 import { ConfirmModal } from "@/components/ConfirmModal"
@@ -74,8 +74,10 @@ export const TbmJoinSignScreen: FC<TbmJoinSignScreenProps> = ({ navigation, rout
       >
         <View style={S.$wrapper}>
           <View style={S.$container}>
-            <Text text={translate("tbmJoinSignScreen:prompt")} style={S.$prompt} />
+            <Text text={translate("tbmJoinSignScreen:heading")} style={S.$heading} />
+            <Text text={translate("tbmJoinSignScreen:description")} style={S.$description} />
 
+            {/* 서명 캔버스 */}
             <View style={S.$signatureBox} {...panResponder.panHandlers}>
               <Svg style={S.$svg} width="100%" height="100%">
                 {paths.map((d, i) => (
@@ -100,11 +102,11 @@ export const TbmJoinSignScreen: FC<TbmJoinSignScreenProps> = ({ navigation, rout
               )}
             </View>
 
-            {hasSignature && (
-              <TouchableOpacity style={S.$clearBtn} activeOpacity={0.75} onPress={handleClear}>
-                <Text text={translate("tbmJoinSignScreen:clearLabel")} style={S.$clearBtnText} />
-              </TouchableOpacity>
-            )}
+            {/* 초기화 버튼 */}
+            <TouchableOpacity style={S.$clearBtn} activeOpacity={0.75} onPress={handleClear}>
+              <IconRefresh size={20} color="#1062D8" />
+              <Text text={translate("tbmJoinSignScreen:clearLabel")} style={S.$clearBtnText} />
+            </TouchableOpacity>
           </View>
 
           <View style={S.$buttonDivider} />

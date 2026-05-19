@@ -1,7 +1,8 @@
 import { FC } from "react"
 import { TouchableOpacity, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { IconCircleCheck } from "@tabler/icons-react-native"
+
+import TbmDoneImage from "@assets/images/tbm_done.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -19,11 +20,11 @@ export const TbmJoinCompleteScreen: FC<TbmJoinCompleteScreenProps> = ({ navigati
     <StackScreen title={translate("tbmJoinCompleteScreen:title")} squareTop>
       <View style={S.$wrapper}>
         <View style={S.$container}>
-          <View style={S.$iconCircle}>
-            <IconCircleCheck size={56} color="#1062D8" strokeWidth={1.5} />
+          <TbmDoneImage width={162} height={167} />
+          <View style={S.$textBlock}>
+            <Text text={translate("tbmJoinCompleteScreen:heading")} style={S.$heading} />
+            <Text text={translate("tbmJoinCompleteScreen:subtitle")} style={S.$subtitle} />
           </View>
-          <Text text={translate("tbmJoinCompleteScreen:heading")} style={S.$heading} />
-          <Text text={translate("tbmJoinCompleteScreen:subtitle")} style={S.$subtitle} />
         </View>
 
         <View style={S.$buttonDivider} />

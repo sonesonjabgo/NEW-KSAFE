@@ -1,9 +1,14 @@
-import { FC, useState } from "react"
+import { FC, useRef, useState } from "react"
 import { TouchableOpacity, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { IconAlertCircle, IconCheck } from "@tabler/icons-react-native"
+import { IconAlertCircle } from "@tabler/icons-react-native"
+import Animated, {
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated"
 
-import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
@@ -13,87 +18,97 @@ import * as S from "./styles"
 
 type TbmJoinHealthScreenProps = AppStackScreenProps<"TbmJoinHealth">
 
-const HEALTH_ITEM_KEYS = ["item1", "item2", "item3", "item4"] as const
+type HealthStatus = "good" | "bad" | null
 
 export const TbmJoinHealthScreen: FC<TbmJoinHealthScreenProps> = ({ navigation, route }) => {
   const insets = useSafeAreaInsets()
   const { id } = route.params
-  const [checked, setChecked] = useState<Record<string, boolean>>({})
-  const [notAllModalVisible, setNotAllModalVisible] = useState(false)
+  const [status, setStatus] = useState<HealthStatus>(null)
+  const [toastVisible, setToastVisible] = useState(false)
+  const toastOpacity = useSharedValue(0)
+  const dismissTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const toggleItem = (key: string) => {
-    setChecked((prev) => ({ ...prev, [key]: !prev[key] }))
+  const toastAnimStyle = useAnimatedStyle(() => ({ opacity: toastOpacity.value }))
+
+  const showToast = () => {
+    if (dismissTimer.current) clearTimeout(dismissTimer.current)
+
+    setToastVisible(true)
+    toastOpacity.value = withTiming(1, { duration: 180 })
+
+    dismissTimer.current = setTimeout(() => {
+      toastOpacity.value = withTiming(0, { duration: 280 }, (finished) => {
+        if (finished) runOnJS(setToastVisible)(false)
+      })
+    }, 3000)
   }
 
-  const allChecked = HEALTH_ITEM_KEYS.every((k) => !!checked[k])
-
   const handleNext = () => {
-    if (!allChecked) {
-      setNotAllModalVisible(true)
+    if (status === null) {
+      showToast()
     } else {
       navigation.navigate("TbmJoinSign", { id })
     }
   }
 
   return (
-    <>
-      <StackScreen
-        title={translate("tbmJoinHealthScreen:title")}
-        onBack={() => navigation.goBack()}
-        squareTop
-      >
-        <View style={S.$wrapper}>
-          <View style={S.$container}>
-            <Text text={translate("tbmJoinHealthScreen:prompt")} style={S.$prompt} />
+    <StackScreen
+      title={translate("tbmJoinHealthScreen:title")}
+      onBack={() => navigation.goBack()}
+      squareTop
+    >
+      <View style={S.$wrapper}>
+        <View style={S.$container}>
+          <Text text={translate("tbmJoinHealthScreen:heading")} style={S.$heading} />
+          <Text text={translate("tbmJoinHealthScreen:prompt")} style={S.$prompt} />
 
-            <View style={S.$checklistContainer}>
-              {HEALTH_ITEM_KEYS.map((key) => {
-                const isChecked = !!checked[key]
-                return (
-                  <TouchableOpacity
-                    key={key}
-                    style={[S.$checkItem, isChecked && S.$checkItemSelected]}
-                    activeOpacity={0.75}
-                    onPress={() => toggleItem(key)}
-                  >
-                    <View style={isChecked ? S.$checkboxSelected : S.$checkbox}>
-                      {isChecked && <IconCheck size={14} color="#FFFFFF" strokeWidth={3} />}
-                    </View>
-                    <Text
-                      text={translate(`tbmJoinHealthScreen:items.${key}` as any)}
-                      style={[S.$checkItemText, isChecked && S.$checkItemTextSelected]}
-                    />
-                  </TouchableOpacity>
-                )
-              })}
-            </View>
-          </View>
-
-          <View style={S.$buttonDivider} />
-          <View style={[S.$buttonRow, { paddingBottom: insets.bottom + 28 }]}>
-            <TouchableOpacity style={S.$prevBtn} activeOpacity={0.75} onPress={() => navigation.goBack()}>
-              <Text text={translate("tbmJoinHealthScreen:prev")} style={S.$prevBtnText} />
+          <View style={S.$cardRow}>
+            <TouchableOpacity
+              style={[S.$card, status === "good" && S.$cardSelected]}
+              activeOpacity={0.8}
+              onPress={() => setStatus("good")}
+            >
+              <Text style={S.$emoji}>😊</Text>
+              <Text
+                text={translate("tbmJoinHealthScreen:statusGood")}
+                style={[S.$cardLabel, status === "good" && S.$cardLabelSelected]}
+              />
             </TouchableOpacity>
-            <TouchableOpacity style={S.$nextBtn} activeOpacity={0.75} onPress={handleNext}>
-              <Text text={translate("tbmJoinHealthScreen:next")} style={S.$nextBtnText} />
+
+            <TouchableOpacity
+              style={[S.$card, status === "bad" && S.$cardSelected]}
+              activeOpacity={0.8}
+              onPress={() => setStatus("bad")}
+            >
+              <Text style={S.$emoji}>🤢</Text>
+              <Text
+                text={translate("tbmJoinHealthScreen:statusBad")}
+                style={[S.$cardLabel, status === "bad" && S.$cardLabelSelected]}
+              />
             </TouchableOpacity>
           </View>
         </View>
-      </StackScreen>
 
-      <ConfirmModal
-        visible={notAllModalVisible}
-        icon={
-          <View style={S.$iconCircle}>
-            <IconAlertCircle size={19} color="#1062D8" />
-          </View>
-        }
-        title={translate("tbmJoinHealthScreen:notAllCheckedModal.title")}
-        message={translate("tbmJoinHealthScreen:notAllCheckedModal.message")}
-        confirmLabel={translate("tbmJoinHealthScreen:notAllCheckedModal.confirm")}
-        confirmBgColor="#1062D8"
-        onConfirm={() => setNotAllModalVisible(false)}
-      />
-    </>
+        {toastVisible && (
+          <Animated.View style={[S.$toast, toastAnimStyle]}>
+            <IconAlertCircle size={21} color="#F26160" />
+            <Text
+              text={translate("tbmJoinHealthScreen:toastMessage")}
+              style={S.$toastText}
+            />
+          </Animated.View>
+        )}
+
+        <View style={S.$buttonDivider} />
+        <View style={[S.$buttonRow, { paddingBottom: insets.bottom + 28 }]}>
+          <TouchableOpacity style={S.$prevBtn} activeOpacity={0.75} onPress={() => navigation.goBack()}>
+            <Text text={translate("tbmJoinHealthScreen:prev")} style={S.$prevBtnText} />
+          </TouchableOpacity>
+          <TouchableOpacity style={S.$nextBtn} activeOpacity={0.75} onPress={handleNext}>
+            <Text text={translate("tbmJoinHealthScreen:next")} style={S.$nextBtnText} />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </StackScreen>
   )
 }

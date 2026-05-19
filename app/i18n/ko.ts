@@ -527,27 +527,26 @@ const ko: Translations = {
 
   tbmJoinHealthScreen: {
     title: "TBM 참여",
-    prompt: "아래 항목을 모두 확인해주세요",
-    items: {
-      item1: "오늘 몸 상태가 양호합니다.",
-      item2: "충분한 수면을 취했습니다.",
-      item3: "현재 음주 상태가 아닙니다.",
-      item4: "안전 보호구를 착용하였습니다.",
-    },
+    heading: "건강 상태 확인",
+    prompt: "전날, 과음을 하거나 금일 건강 이상여부를\n확인해주세요",
+    statusGood: "이상 없음",
+    statusBad: "이상 있음",
     prev: "이전",
     next: "다음",
+    toastMessage: "건강 상태를 선택한 뒤 다음 단계로 진행해주세요.",
     notAllCheckedModal: {
-      title: "모든 항목을 확인해주세요.",
-      message: "건강 상태 항목을 모두 체크해야 다음 단계로 진행할 수 있습니다.",
+      title: "건강 상태를 선택해주세요.",
+      message: "이상 없음 또는 이상 있음을 선택해야\n다음 단계로 진행할 수 있습니다.",
       confirm: "확인",
     },
   },
 
   tbmJoinSignScreen: {
     title: "TBM 참여",
-    prompt: "전자 서명을 해주세요",
+    heading: "전자 서명",
+    description: "아래 영역에 서명을 해주세요",
     signatureArea: "이곳에 서명해주세요",
-    clearLabel: "서명 지우기",
+    clearLabel: "서명 초기화",
     prev: "이전",
     next: "다음",
     noSignatureModal: {
@@ -561,7 +560,7 @@ const ko: Translations = {
     title: "TBM 참여",
     heading: "TBM 참여가 완료되었습니다!",
     subtitle: "TBM 참여 정보가 성공적으로 기록되었습니다.",
-    goHome: "홈으로 가기",
+    goHome: "완료",
   },
 
   tbmJoinScreen: {

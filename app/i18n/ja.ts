@@ -488,27 +488,26 @@ const ja: Translations = {
 
   tbmJoinHealthScreen: {
     title: "TBM参加",
-    prompt: "以下の項目をすべて確認してください",
-    items: {
-      item1: "今日の体調は良好です。",
-      item2: "十分な睡眠を取りました。",
-      item3: "飲酒状態ではありません。",
-      item4: "必要な安全保護具を着用しています。",
-    },
+    heading: "健康状態確認",
+    prompt: "前日に過度の飲酒をしたか、または本日健康上の問題があるかご確認ください。",
+    statusGood: "異常なし",
+    statusBad: "異常あり",
     prev: "前へ",
     next: "次へ",
+    toastMessage: "次のステップに進む前に健康状態を選択してください。",
     notAllCheckedModal: {
-      title: "すべての項目を確認してください。",
-      message: "健康状態の項目をすべてチェックしないと次のステップに進めません。",
+      title: "健康状態を選択してください。",
+      message: "異常なしまたは異常ありを選択しないと次のステップに進めません。",
       confirm: "OK",
     },
   },
 
   tbmJoinSignScreen: {
     title: "TBM参加",
-    prompt: "下記に署名してください",
+    heading: "電子署名",
+    description: "下記の領域に署名してください。",
     signatureArea: "ここに署名",
-    clearLabel: "クリア",
+    clearLabel: "署名をリセット",
     prev: "前へ",
     next: "次へ",
     noSignatureModal: {

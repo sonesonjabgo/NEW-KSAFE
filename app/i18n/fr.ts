@@ -492,27 +492,26 @@ const fr: Translations = {
 
   tbmJoinHealthScreen: {
     title: "Rejoindre TBM",
-    prompt: "Veuillez confirmer tous les éléments ci-dessous",
-    items: {
-      item1: "Mon état de santé est bon aujourd'hui.",
-      item2: "J'ai suffisamment dormi.",
-      item3: "Je ne suis pas sous l'influence de l'alcool.",
-      item4: "Je porte les équipements de protection requis.",
-    },
+    heading: "Vérification de santé",
+    prompt: "Veuillez confirmer si vous avez consommé de l'alcool excessivement la veille ou si vous avez des problèmes de santé aujourd'hui.",
+    statusGood: "Aucun problème",
+    statusBad: "Problème présent",
     prev: "Précédent",
     next: "Suivant",
+    toastMessage: "Veuillez sélectionner votre état de santé avant de continuer.",
     notAllCheckedModal: {
-      title: "Veuillez confirmer tous les éléments.",
-      message: "Tous les éléments de l'état de santé doivent être confirmés pour continuer.",
+      title: "Veuillez sélectionner votre état de santé.",
+      message: "Vous devez sélectionner Aucun problème ou Problème présent pour continuer.",
       confirm: "OK",
     },
   },
 
   tbmJoinSignScreen: {
     title: "Rejoindre TBM",
-    prompt: "Veuillez signer ci-dessous",
+    heading: "Signature Électronique",
+    description: "Veuillez signer dans la zone ci-dessous.",
     signatureArea: "Signez ici",
-    clearLabel: "Effacer",
+    clearLabel: "Réinitialiser la signature",
     prev: "Précédent",
     next: "Suivant",
     noSignatureModal: {

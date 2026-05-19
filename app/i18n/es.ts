@@ -492,27 +492,26 @@ const es: Translations = {
 
   tbmJoinHealthScreen: {
     title: "Unirse al TBM",
-    prompt: "Por favor, confirme todos los elementos a continuación",
-    items: {
-      item1: "Mi estado de salud es bueno hoy.",
-      item2: "He dormido lo suficiente.",
-      item3: "No estoy bajo la influencia del alcohol.",
-      item4: "Llevo el equipo de protección requerido.",
-    },
+    heading: "Verificación de salud",
+    prompt: "Confirme si consumió alcohol en exceso el día anterior o tiene algún problema de salud hoy.",
+    statusGood: "Sin problemas",
+    statusBad: "Con problemas",
     prev: "Anterior",
     next: "Siguiente",
+    toastMessage: "Por favor, seleccione su estado de salud antes de continuar.",
     notAllCheckedModal: {
-      title: "Por favor, confirme todos los elementos.",
-      message: "Debe confirmar todos los elementos de salud para continuar.",
+      title: "Por favor, seleccione su estado de salud.",
+      message: "Debe seleccionar Sin problemas o Con problemas para continuar.",
       confirm: "Aceptar",
     },
   },
 
   tbmJoinSignScreen: {
     title: "Unirse al TBM",
-    prompt: "Por favor, firme a continuación",
+    heading: "Firma Electrónica",
+    description: "Por favor, firme en el área a continuación.",
     signatureArea: "Firme aquí",
-    clearLabel: "Borrar",
+    clearLabel: "Restablecer firma",
     prev: "Anterior",
     next: "Siguiente",
     noSignatureModal: {

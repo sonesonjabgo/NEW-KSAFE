@@ -12,33 +12,26 @@ export const $container: ViewStyle = {
   flex: 1,
   justifyContent: "center",
   alignItems: "center",
-  paddingHorizontal: 32,
-  gap: 16,
 }
 
-export const $iconCircle: ViewStyle = {
-  width: 96,
-  height: 96,
-  borderRadius: 48,
-  backgroundColor: "#ECF4FE",
-  justifyContent: "center",
+export const $textBlock: ViewStyle = {
   alignItems: "center",
-  marginBottom: 8,
+  marginTop: 32,
 }
 
 export const $heading: TextStyle = {
-  fontSize: 22,
-  fontFamily: typography.primary.bold,
-  color: "#111111",
+  fontSize: 20,
+  fontFamily: typography.primary.semiBold,
+  color: "#000000",
   textAlign: "center",
+  marginBottom: 15,
 }
 
 export const $subtitle: TextStyle = {
-  fontSize: 15,
-  fontFamily: typography.primary.normal,
+  fontSize: 17,
+  fontFamily: typography.primary.medium,
   color: "#7B7B7B",
   textAlign: "center",
-  lineHeight: 22,
 }
 
 export const $buttonDivider: ViewStyle = {

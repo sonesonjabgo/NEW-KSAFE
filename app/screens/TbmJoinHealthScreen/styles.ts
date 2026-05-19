@@ -11,79 +11,84 @@ export const $wrapper: ViewStyle = {
 export const $container: ViewStyle = {
   flex: 1,
   paddingHorizontal: 16,
-  paddingVertical: 20,
+  paddingTop: 20,
+}
+
+export const $heading: TextStyle = {
+  fontSize: 26,
+  fontFamily: typography.primary.semiBold,
+  color: "#000000",
+  marginBottom: 17,
 }
 
 export const $prompt: TextStyle = {
-  fontSize: 21,
-  fontFamily: typography.primary.bold,
-  color: "#000000",
-  marginBottom: 24,
+  fontSize: 17,
+  fontFamily: typography.primary.normal,
+  color: "#181818",
+  lineHeight: 26,
+  marginBottom: 47,
 }
 
-export const $checklistContainer: ViewStyle = {
-  gap: 12,
-}
+// ── Cards ─────────────────────────────────────────────────────────────────────
 
-export const $checkItem: ViewStyle = {
+export const $cardRow: ViewStyle = {
   flexDirection: "row",
-  alignItems: "center",
   gap: 14,
-  paddingHorizontal: 16,
-  paddingVertical: 18,
-  borderRadius: 12,
-  borderWidth: 1,
+}
+
+export const $card: ViewStyle = {
+  flex: 1,
+  height: 214,
+  borderRadius: 16,
+  borderWidth: 1.5,
   borderColor: "#ECECEC",
   backgroundColor: "#FFFFFF",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: 40,
 }
 
-export const $checkItemSelected: ViewStyle = {
+export const $cardSelected: ViewStyle = {
   borderColor: "#1062D8",
   backgroundColor: "#ECF4FE",
 }
 
-export const $checkbox: ViewStyle = {
-  width: 24,
-  height: 24,
-  borderRadius: 12,
-  borderWidth: 2,
-  borderColor: "#D3D3D3",
-  justifyContent: "center",
-  alignItems: "center",
-  flexShrink: 0,
+export const $emoji: TextStyle = {
+  fontSize: 72,
 }
 
-export const $checkboxSelected: ViewStyle = {
-  width: 24,
-  height: 24,
-  borderRadius: 12,
-  backgroundColor: "#1062D8",
-  justifyContent: "center",
-  alignItems: "center",
-  flexShrink: 0,
-}
-
-export const $checkItemText: TextStyle = {
-  flex: 1,
-  fontSize: 16,
-  fontFamily: typography.primary.medium,
-  color: "#333333",
-  lineHeight: 22,
-}
-
-export const $checkItemTextSelected: TextStyle = {
-  color: "#1062D8",
+export const $cardLabel: TextStyle = {
+  fontSize: 17,
   fontFamily: typography.primary.semiBold,
+  color: "#333333",
 }
 
-export const $iconCircle: ViewStyle = {
-  width: 38,
-  height: 38,
-  borderRadius: 19,
-  backgroundColor: "#E3EDFB",
-  justifyContent: "center",
-  alignItems: "center",
+export const $cardLabelSelected: TextStyle = {
+  color: "#1062D8",
 }
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+
+export const $toast: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  height: 45,
+  marginHorizontal: 16,
+  marginBottom: 8,
+  paddingHorizontal: 14,
+  backgroundColor: "#FDF1F1",
+  borderRadius: 10,
+  gap: 8,
+}
+
+export const $toastText: TextStyle = {
+  flex: 1,
+  fontSize: 14,
+  fontFamily: typography.primary.semiBold,
+  color: "#F26160",
+}
+
+// ── Buttons ───────────────────────────────────────────────────────────────────
 
 export const $buttonDivider: ViewStyle = {
   height: 1,

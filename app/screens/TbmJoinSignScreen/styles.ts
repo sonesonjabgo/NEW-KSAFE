@@ -11,23 +11,33 @@ export const $wrapper: ViewStyle = {
 export const $container: ViewStyle = {
   flex: 1,
   paddingHorizontal: 16,
-  paddingVertical: 20,
+  paddingTop: 20,
 }
 
-export const $prompt: TextStyle = {
-  fontSize: 21,
-  fontFamily: typography.primary.bold,
+export const $heading: TextStyle = {
+  fontSize: 26,
+  fontFamily: typography.primary.semiBold,
   color: "#000000",
+  marginBottom: 17,
+}
+
+export const $description: TextStyle = {
+  fontSize: 17,
+  fontFamily: typography.primary.normal,
+  color: "#181818",
   marginBottom: 24,
 }
 
+// ── Signature canvas ──────────────────────────────────────────────────────────
+
 export const $signatureBox: ViewStyle = {
-  flex: 1,
+  height: 320,
   borderRadius: 12,
-  borderWidth: 1.5,
-  borderColor: "#D3D3D3",
-  backgroundColor: "#FAFAFA",
+  borderWidth: 1,
+  borderColor: "#ECECEC",
+  backgroundColor: "#FFFFFF",
   overflow: "hidden",
+  marginBottom: 14,
 }
 
 export const $svg: ViewStyle = {
@@ -50,21 +60,26 @@ export const $signaturePlaceholder: TextStyle = {
   color: "#C0C0C0",
 }
 
+// ── Reset button ──────────────────────────────────────────────────────────────
+
 export const $clearBtn: ViewStyle = {
-  alignSelf: "flex-end",
-  marginTop: 10,
-  paddingVertical: 6,
-  paddingHorizontal: 14,
-  borderRadius: 8,
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  height: 50,
+  borderRadius: 10,
   borderWidth: 1,
-  borderColor: "#D3D3D3",
+  borderColor: "#1062D8",
+  gap: 8,
 }
 
 export const $clearBtnText: TextStyle = {
-  fontSize: 13,
-  fontFamily: typography.primary.medium,
-  color: "#7B7B7B",
+  fontSize: 16,
+  fontFamily: typography.primary.semiBold,
+  color: "#1062D8",
 }
+
+// ── Modal icon ────────────────────────────────────────────────────────────────
 
 export const $iconCircle: ViewStyle = {
   width: 38,
@@ -74,6 +89,8 @@ export const $iconCircle: ViewStyle = {
   justifyContent: "center",
   alignItems: "center",
 }
+
+// ── Buttons ───────────────────────────────────────────────────────────────────
 
 export const $buttonDivider: ViewStyle = {
   height: 1,

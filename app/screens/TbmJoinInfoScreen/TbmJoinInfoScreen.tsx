@@ -1,6 +1,9 @@
 import { FC } from "react"
 import { ScrollView, TouchableOpacity, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { IconDownload } from "@tabler/icons-react-native"
+
+import EducationFrame from "@assets/icons/education_frame.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -29,30 +32,33 @@ export const TbmJoinInfoScreen: FC<TbmJoinInfoScreenProps> = ({ navigation, rout
           contentContainerStyle={S.$scrollContent}
           showsVerticalScrollIndicator={false}
         >
-          <View style={S.$section}>
-            <Text text={translate("tbmJoinInfoScreen:sectionInfo")} style={S.$sectionHeading} />
-            <View style={S.$infoCard}>
-              <View style={S.$infoRow}>
-                <Text text={translate("tbmJoinInfoScreen:activityName")} style={S.$infoLabel} />
-                <Text text={tbm?.title ?? "-"} style={S.$infoValue} numberOfLines={2} />
-              </View>
-              <View style={S.$infoRowDivider} />
-              <View style={S.$infoRow}>
-                <Text text={translate("tbmJoinInfoScreen:manager")} style={S.$infoLabel} />
-                <Text text={tbm?.authorName ?? "-"} style={S.$infoValue} />
-              </View>
-              <View style={S.$infoRowDivider} />
-              <View style={S.$infoRow}>
-                <Text text={translate("tbmJoinInfoScreen:date")} style={S.$infoLabel} />
-                <Text text={tbm?.date ?? "-"} style={S.$infoValue} />
-              </View>
+          {/* 상단 정보 카드 */}
+          <View style={S.$infoCard}>
+            <View style={S.$iconCircle}>
+              <EducationFrame width={24} height={24} color="#FFFFFF" />
+            </View>
+            <View style={S.$cardTexts}>
+              <Text text={translate("tbmJoinInfoScreen:sectionInfo")} style={S.$cardTitle} />
+              <Text
+                text={`${tbm?.authorName ?? "-"}  ·  ${tbm?.date ?? "-"}`}
+                style={S.$cardSubtitle}
+              />
             </View>
           </View>
 
-          <View style={S.$section}>
-            <Text text={translate("tbmJoinInfoScreen:sectionAttachments")} style={S.$sectionHeading} />
-            <View style={S.$emptyAttachments}>
-              <Text text={translate("tbmJoinInfoScreen:noAttachments")} style={S.$emptyAttachmentsText} />
+          {/* TBM 제목 */}
+          <Text text={tbm?.title ?? "-"} style={S.$title} />
+
+          {/* 첨부파일 */}
+          <View>
+            <Text
+              text={translate("tbmJoinInfoScreen:sectionAttachments")}
+              style={S.$attachHeading}
+            />
+            <View style={S.$attachCard}>
+              <EducationFrame width={22} height={22} color="#1062D8" />
+              <Text text="해빙기 안전수칙.pdf" style={S.$attachName} numberOfLines={1} />
+              <IconDownload size={20} color="#1062D8" />
             </View>
           </View>
         </ScrollView>

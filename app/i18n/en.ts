@@ -535,27 +535,26 @@ const en = {
 
   tbmJoinHealthScreen: {
     title: "Join TBM",
-    prompt: "Please confirm all items below",
-    items: {
-      item1: "I am in good physical condition today.",
-      item2: "I have had enough sleep.",
-      item3: "I am not under the influence of alcohol.",
-      item4: "I am wearing the required protective equipment.",
-    },
+    heading: "Health Check",
+    prompt: "Please confirm if you consumed excessive alcohol the day before or have any health issues today.",
+    statusGood: "No Issues",
+    statusBad: "Issues Present",
     prev: "Previous",
     next: "Next",
+    toastMessage: "Please select your health status before proceeding.",
     notAllCheckedModal: {
-      title: "Please confirm all items.",
-      message: "All health condition items must be checked before proceeding.",
+      title: "Please select your health status.",
+      message: "You must select either No Issues or Issues Present to proceed.",
       confirm: "OK",
     },
   },
 
   tbmJoinSignScreen: {
     title: "Join TBM",
-    prompt: "Please sign below",
+    heading: "Electronic Signature",
+    description: "Please sign in the area below.",
     signatureArea: "Sign here",
-    clearLabel: "Clear",
+    clearLabel: "Reset Signature",
     prev: "Previous",
     next: "Next",
     noSignatureModal: {

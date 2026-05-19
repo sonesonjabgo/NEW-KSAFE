@@ -14,75 +14,88 @@ export const $container: ViewStyle = {
 
 export const $scrollContent: ViewStyle = {
   paddingHorizontal: 16,
-  paddingVertical: 20,
-  gap: 24,
+  paddingTop: 20,
+  paddingBottom: 12,
 }
 
-export const $section: ViewStyle = {
-  gap: 12,
-}
-
-export const $sectionHeading: TextStyle = {
-  fontSize: 15,
-  fontFamily: typography.primary.semiBold,
-  color: "#1062D8",
-}
+// ── Info Card ─────────────────────────────────────────────────────────────────
 
 export const $infoCard: ViewStyle = {
-  backgroundColor: "#FFFFFF",
+  height: 85,
+  borderRadius: 18,
+  backgroundColor: "#ECF4FE",
+  flexDirection: "row",
+  alignItems: "center",
+  paddingHorizontal: 16,
+  gap: 14,
+  marginBottom: 47,
+}
+
+export const $iconCircle: ViewStyle = {
+  width: 48,
+  height: 48,
+  borderRadius: 24,
+  backgroundColor: "#1062D8",
+  justifyContent: "center",
+  alignItems: "center",
+  flexShrink: 0,
+}
+
+export const $cardTexts: ViewStyle = {
+  flex: 1,
+  gap: 4,
+}
+
+export const $cardTitle: TextStyle = {
+  fontSize: 19,
+  fontFamily: typography.primary.bold,
+  color: "#181818",
+}
+
+export const $cardSubtitle: TextStyle = {
+  fontSize: 16,
+  fontFamily: typography.primary.normal,
+  color: "#A9A9A9",
+}
+
+// ── Title ─────────────────────────────────────────────────────────────────────
+
+export const $title: TextStyle = {
+  fontSize: 36,
+  fontFamily: typography.primary.bold,
+  color: "#000000",
+  marginBottom: 47,
+  lineHeight: 46,
+}
+
+// ── Attachments ───────────────────────────────────────────────────────────────
+
+export const $attachHeading: TextStyle = {
+  fontSize: 19,
+  fontFamily: typography.primary.bold,
+  color: "#000000",
+  marginBottom: 12,
+}
+
+export const $attachCard: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 12,
   borderRadius: 12,
   borderWidth: 1,
   borderColor: "#ECECEC",
   paddingHorizontal: 16,
-  shadowColor: "#000000",
-  shadowOffset: { width: 0, height: 2 },
-  shadowOpacity: 0.06,
-  shadowRadius: 6,
-  elevation: 2,
-}
-
-export const $infoRow: ViewStyle = {
-  flexDirection: "row",
-  alignItems: "center",
   paddingVertical: 14,
-  gap: 12,
 }
 
-export const $infoRowDivider: ViewStyle = {
-  height: 1,
-  backgroundColor: "#F2F2F2",
-}
-
-export const $infoLabel: TextStyle = {
-  fontSize: 14,
-  fontFamily: typography.primary.medium,
-  color: "#7B7B7B",
-  width: 60,
-  flexShrink: 0,
-}
-
-export const $infoValue: TextStyle = {
+export const $attachName: TextStyle = {
   flex: 1,
   fontSize: 15,
-  fontFamily: typography.primary.semiBold,
-  color: "#111111",
+  fontFamily: typography.primary.medium,
+  color: "#181818",
 }
 
-export const $emptyAttachments: ViewStyle = {
-  height: 80,
-  borderRadius: 12,
-  borderWidth: 1,
-  borderColor: "#ECECEC",
-  borderStyle: "dashed",
-  justifyContent: "center",
-  alignItems: "center",
-}
-
-export const $emptyAttachmentsText: TextStyle = {
-  fontSize: 14,
-  fontFamily: typography.primary.normal,
-  color: "#B0B0B0",
-}
+// ── Buttons ───────────────────────────────────────────────────────────────────
 
 export const $buttonDivider: ViewStyle = {
   height: 1,
