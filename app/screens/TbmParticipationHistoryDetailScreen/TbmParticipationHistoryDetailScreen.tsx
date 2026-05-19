@@ -74,7 +74,7 @@ export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, rou
       contentBg="#FFFFFF"
     >
       <ScrollView
-        contentContainerStyle={[S.$scrollInner, { paddingBottom: (insets.bottom || 0) + 24 }]}
+        contentContainerStyle={[S.$scrollInner, { gap: 25, paddingBottom: (insets.bottom || 0) + 24 }]}
         showsVerticalScrollIndicator={false}
       >
         {/* ── 첫 번째 카드 ── */}
