@@ -123,20 +123,21 @@ export const EducationMaterialDetailScreen: FC<EducationMaterialDetailScreenProp
             </TouchableOpacity>
           </View>
 
-          {showPublishButton && (
-            <TouchableOpacity
-              style={S.$publishBtn}
-              activeOpacity={0.8}
-              onPress={() => console.log("publish:", item.id)}
-            >
-              <IconBolt size={20} color="#FFFFFF" />
-              <Text
-                text={translate("educationMaterialDetailScreen:publishButton")}
-                style={S.$publishBtnText}
-              />
-            </TouchableOpacity>
-          )}
         </View>
+
+        {showPublishButton && (
+          <TouchableOpacity
+            style={S.$publishBtn}
+            activeOpacity={0.8}
+            onPress={() => console.log("publish:", item.id)}
+          >
+            <IconBolt size={20} color="#FFFFFF" />
+            <Text
+              text={translate("educationMaterialDetailScreen:publishButton")}
+              style={S.$publishBtnText}
+            />
+          </TouchableOpacity>
+        )}
       </ScrollView>
     </StackScreen>
   )
