@@ -719,6 +719,20 @@ const ko: Translations = {
 
   tbmReportInquiryScreen: {
     title: "TBM 보고서 조회",
+    tabs: {
+      all: "전체",
+      requested: "요청됨",
+      generating: "생성 중",
+      completed: "완료",
+      failed: "실패",
+    },
+    empty: {
+      all: "보고서가 없습니다.",
+      requested: "대기 중인 보고서가 없습니다.",
+      generating: "생성 중인 보고서가 없습니다.",
+      completed: "완료된 보고서가 없습니다.",
+      failed: "실패한 보고서가 없습니다.",
+    },
   },
 
   ...demoKo,

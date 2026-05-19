@@ -680,6 +680,20 @@ const ja: Translations = {
 
   tbmReportInquiryScreen: {
     title: "TBM報告書照会",
+    tabs: {
+      all: "All",
+      requested: "Requested",
+      generating: "Generating",
+      completed: "Completed",
+      failed: "Failed",
+    },
+    empty: {
+      all: "No reports found.",
+      requested: "No pending reports.",
+      generating: "No reports being generated.",
+      completed: "No completed reports.",
+      failed: "No failed reports.",
+    },
   },
 
   ...demoJa,

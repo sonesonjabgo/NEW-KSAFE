@@ -688,6 +688,20 @@ const es: Translations = {
 
   tbmReportInquiryScreen: {
     title: "TBM Report Inquiry",
+    tabs: {
+      all: "All",
+      requested: "Requested",
+      generating: "Generating",
+      completed: "Completed",
+      failed: "Failed",
+    },
+    empty: {
+      all: "No reports found.",
+      requested: "No pending reports.",
+      generating: "No reports being generated.",
+      completed: "No completed reports.",
+      failed: "No failed reports.",
+    },
   },
 
   ...demoEs,
