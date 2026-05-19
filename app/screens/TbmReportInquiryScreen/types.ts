@@ -19,6 +19,11 @@ export interface TbmReportItem {
   workDate?: string
   activityContent?: string
   history?: TbmReportHistory[]
+  processName?: string
+  teamName?: string
+  requestedAt?: string
+  startedAt?: string
+  completedAt?: string
 }
 
 export type TbmReportInquiryScreenProps = AppStackScreenProps<"TbmReportInquiry">
