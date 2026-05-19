@@ -226,7 +226,7 @@ const $historyDivider: ViewStyle = {
 const $historyBottom: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-  gap: 8,
+  justifyContent: "space-between",
 }
 
 const $workplaceLabel: TextStyle = {
@@ -239,5 +239,4 @@ const $workplaceName: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.semiBold,
   color: "#2C2C2C",
-  flex: 1,
 }
