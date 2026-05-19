@@ -20,11 +20,11 @@ interface TbmHistoryItem {
 }
 
 const mockHistoryData: TbmHistoryItem[] = [
-  { id: 1, badge: "정상", date: "2026.02.19", title: "작업장 순회 점검", workplace: "광교 타워크레인 사업장" },
-  { id: 2, badge: "정상", date: "2026.02.18", title: "전기설비 안전점검", workplace: "광교 타워크레인 사업장" },
-  { id: 3, badge: "정상", date: "2026.02.17", title: "고소작업 안전교육", workplace: "광교 타워크레인 사업장" },
-  { id: 4, badge: "정상", date: "2026.02.16", title: "화학물질 취급 안전점검", workplace: "광교 타워크레인 사업장" },
-  { id: 5, badge: "정상", date: "2026.02.15", title: "비계 설치 작업 전 TBM", workplace: "광교 타워크레인 사업장" },
+  { id: 1, badge: "정상", date: "2026.02.19 08:30", title: "작업장 순회 점검", workplace: "광교 타워크레인 사업장" },
+  { id: 2, badge: "정상", date: "2026.02.18 09:00", title: "전기설비 안전점검", workplace: "광교 타워크레인 사업장" },
+  { id: 3, badge: "정상", date: "2026.02.17 07:45", title: "고소작업 안전교육", workplace: "광교 타워크레인 사업장" },
+  { id: 4, badge: "정상", date: "2026.02.16 08:15", title: "화학물질 취급 안전점검", workplace: "광교 타워크레인 사업장" },
+  { id: 5, badge: "정상", date: "2026.02.15 09:30", title: "비계 설치 작업 전 TBM", workplace: "광교 타워크레인 사업장" },
 ]
 
 // ── StatCard ──────────────────────────────────────────────
