@@ -142,20 +142,22 @@ export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, rou
           />
           <View style={S.$educationHeaderLine} />
         </View>
-        {tbm.educationMaterials.map((item) => (
-          <View key={item.id} style={S.$educationCard}>
-            <View style={S.$educationIconCircle}>
-              <EducationFrame width={18} height={18} color="#1062D8" />
+        <View style={$educationList}>
+          {tbm.educationMaterials.map((item) => (
+            <View key={item.id} style={S.$educationCard}>
+              <View style={S.$educationIconCircle}>
+                <EducationFrame width={18} height={18} color="#1062D8" />
+              </View>
+              <Text text={item.title} style={S.$educationCardTitle} numberOfLines={2} />
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => console.log("download:", item.id)}
+              >
+                <IconDownload size={20} color="#1062D8" />
+              </TouchableOpacity>
             </View>
-            <Text text={item.title} style={S.$educationCardTitle} numberOfLines={2} />
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => console.log("download:", item.id)}
-            >
-              <IconDownload size={20} color="#1062D8" />
-            </TouchableOpacity>
-          </View>
-        ))}
+          ))}
+        </View>
 
       </ScrollView>
     </StackScreen>
@@ -163,6 +165,10 @@ export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, rou
 }
 
 // ── 첫 번째 카드 내부 전용 스타일 ──────────────────────────
+
+const $educationList: ViewStyle = {
+  gap: 15,
+}
 
 const $infoCard: ViewStyle = {
   backgroundColor: "#F3F2F0",
