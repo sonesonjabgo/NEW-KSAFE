@@ -11,7 +11,6 @@ import {
   ActivityIndicator,
   ListRenderItemInfo,
 } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
 import {
   IconChevronDown,
   IconKeyboard,
@@ -20,6 +19,7 @@ import {
   IconInfoCircle,
 } from "@tabler/icons-react-native"
 import { Square } from "lucide-react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { LanguagePickerModal } from "@/components/LanguagePickerModal"
 import { StackScreen } from "@/components/StackScreen"
@@ -68,8 +68,7 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
     translate(`educationPresentationScreen:languages.${key}` as any)
   const getLangSubtitle = (key: LanguageKey) =>
     translate(`educationPresentationScreen:languageSubtitles.${key}` as any)
-  const getLangFlag = (key: LanguageKey) =>
-    LANGUAGES.find((l) => l.key === key)?.flag ?? ""
+  const getLangFlag = (key: LanguageKey) => LANGUAGES.find((l) => l.key === key)?.flag ?? ""
 
   const handleSend = useCallback(() => {
     const trimmed = inputText.trim()
@@ -77,10 +76,7 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
       setShowValidationError(true)
       return
     }
-    setMessages((prev) => [
-      ...prev,
-      { id: `m-${Date.now()}`, sender: "관리자", text: trimmed },
-    ])
+    setMessages((prev) => [...prev, { id: `m-${Date.now()}`, sender: "관리자", text: trimmed }])
     setInputText("")
     setShowValidationError(false)
     setInputHeight(40)
@@ -128,19 +124,12 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
             activeOpacity={0.7}
           >
             <Text text={getLangFlag(inputLanguage)} style={$langFlag} />
-            <Text
-              text={getLangLabel(inputLanguage)}
-              style={$langBtnText}
-              numberOfLines={1}
-            />
+            <Text text={getLangLabel(inputLanguage)} style={$langBtnText} numberOfLines={1} />
             <IconChevronDown size={14} color={colors.blue} strokeWidth={2.5} />
           </TouchableOpacity>
         </View>
 
-        <KeyboardAvoidingView
-          style={$flex}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-        >
+        <KeyboardAvoidingView style={$flex} behavior={Platform.OS === "ios" ? "padding" : "height"}>
           {/* 채팅 영역 */}
           <FlatList
             ref={flatListRef}
@@ -241,9 +230,7 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
                     setInputText(t.slice(0, 1000))
                     if (showValidationError) setShowValidationError(false)
                   }}
-                  onContentSizeChange={(e) =>
-                    setInputHeight(e.nativeEvent.contentSize.height)
-                  }
+                  onContentSizeChange={(e) => setInputHeight(e.nativeEvent.contentSize.height)}
                   onFocus={() => setInputFocused(true)}
                   onBlur={() => setInputFocused(false)}
                   maxLength={1000}

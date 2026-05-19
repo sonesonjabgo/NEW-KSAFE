@@ -1,6 +1,5 @@
 import { FC, useRef, useState } from "react"
 import { TouchableOpacity, View } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { IconAlertCircle } from "@tabler/icons-react-native"
 import Animated, {
   runOnJS,
@@ -8,6 +7,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -92,16 +92,17 @@ export const TbmJoinHealthScreen: FC<TbmJoinHealthScreenProps> = ({ navigation, 
         {toastVisible && (
           <Animated.View style={[S.$toast, toastAnimStyle]}>
             <IconAlertCircle size={21} color="#F26160" />
-            <Text
-              text={translate("tbmJoinHealthScreen:toastMessage")}
-              style={S.$toastText}
-            />
+            <Text text={translate("tbmJoinHealthScreen:toastMessage")} style={S.$toastText} />
           </Animated.View>
         )}
 
         <View style={S.$buttonDivider} />
         <View style={[S.$buttonRow, { paddingBottom: insets.bottom + 28 }]}>
-          <TouchableOpacity style={S.$prevBtn} activeOpacity={0.75} onPress={() => navigation.goBack()}>
+          <TouchableOpacity
+            style={S.$prevBtn}
+            activeOpacity={0.75}
+            onPress={() => navigation.goBack()}
+          >
             <Text text={translate("tbmJoinHealthScreen:prev")} style={S.$prevBtnText} />
           </TouchableOpacity>
           <TouchableOpacity style={S.$nextBtn} activeOpacity={0.75} onPress={handleNext}>

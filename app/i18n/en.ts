@@ -536,7 +536,8 @@ const en = {
   tbmJoinHealthScreen: {
     title: "Join TBM",
     heading: "Health Check",
-    prompt: "Please confirm if you consumed excessive alcohol the day before or have any health issues today.",
+    prompt:
+      "Please confirm if you consumed excessive alcohol the day before or have any health issues today.",
     statusGood: "No Issues",
     statusBad: "Issues Present",
     prev: "Previous",
@@ -638,7 +639,8 @@ const en = {
     sitePhotos: {
       label: "Site Photos",
       addButton: "Add Photo",
-      guide: "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
+      guide:
+        "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
       preview: "A preview will be shown when you add an image.",
     },
     submit: "Save",
@@ -684,8 +686,6 @@ const en = {
     submit: "Create",
   },
 
-
-
   tbmDetailScreen: {
     title: "TBM Activity Detail",
     workDate: "Work Date:  {{date}}",
@@ -709,7 +709,8 @@ const en = {
     },
     startModal: {
       title: "Start TBM Activity",
-      message: "Are you sure you want to start this TBM activity?\nStatus will change to 'In Progress'.",
+      message:
+        "Are you sure you want to start this TBM activity?\nStatus will change to 'In Progress'.",
       cancel: "Cancel",
       confirm: "Start",
     },

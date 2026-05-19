@@ -11,10 +11,11 @@ import {
   View,
 } from "react-native"
 import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { IconChevronDown } from "@tabler/icons-react-native"
-import HeaderBell from "@assets/icons/nav/header_bell.svg"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+
 import EducationFrame from "@assets/icons/education_frame.svg"
+import HeaderBell from "@assets/icons/nav/header_bell.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"

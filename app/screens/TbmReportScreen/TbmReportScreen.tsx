@@ -55,39 +55,36 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
         >
           {/* ── 1+2. 주의사항 + 활동명 카드 (간격 20, 아래 섹션과 40) ── */}
           <View style={{ gap: 20, marginBottom: 5 }}>
-          <View style={S.$noticeCard}>
-            <View style={S.$noticeRow}>
-              <View style={{ paddingVertical: 6 }}>
-                <IconAlertTriangle size={22} color="#F7A733" />
+            <View style={S.$noticeCard}>
+              <View style={S.$noticeRow}>
+                <View style={{ paddingVertical: 6 }}>
+                  <IconAlertTriangle size={22} color="#F7A733" />
+                </View>
+                <Text
+                  text={translate("tbmReportScreen:notice.description")}
+                  style={S.$noticeDesc}
+                />
               </View>
-              <Text
-                text={translate("tbmReportScreen:notice.description")}
-                style={S.$noticeDesc}
-              />
             </View>
-          </View>
 
-          {/* ── 2. TBM 활동명 카드 ── */}
-          <View style={S.$activityNameCard}>
-            <View style={S.$activityNameInfo}>
-              <Text
-                text={translate("tbmReportScreen:activityName.label")}
-                style={S.$activityNameLabel}
-              />
-              <Text text={detail.title} style={S.$activityNameText} />
+            {/* ── 2. TBM 활동명 카드 ── */}
+            <View style={S.$activityNameCard}>
+              <View style={S.$activityNameInfo}>
+                <Text
+                  text={translate("tbmReportScreen:activityName.label")}
+                  style={S.$activityNameLabel}
+                />
+                <Text text={detail.title} style={S.$activityNameText} />
+              </View>
+              <View style={S.$activityNameCircle}>
+                <IconCalendar size={22} color="#1062D8" />
+              </View>
             </View>
-            <View style={S.$activityNameCircle}>
-              <IconCalendar size={22} color="#1062D8" />
-            </View>
-          </View>
           </View>
 
           {/* ── 3. 공정명 ── */}
           <View style={S.$section}>
-            <Text
-              text={translate("tbmReportScreen:processName.label")}
-              style={S.$sectionLabel}
-            />
+            <Text text={translate("tbmReportScreen:processName.label")} style={S.$sectionLabel} />
             <View style={S.$inputRow}>
               <TextInput
                 style={S.$inputText}
@@ -103,10 +100,7 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
 
           {/* ── 4. 팀/반명 ── */}
           <View style={S.$section}>
-            <Text
-              text={translate("tbmReportScreen:teamName.label")}
-              style={S.$sectionLabel}
-            />
+            <Text text={translate("tbmReportScreen:teamName.label")} style={S.$sectionLabel} />
             <View style={S.$inputRow}>
               <TextInput
                 style={S.$inputText}
@@ -138,15 +132,15 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
                 maxLength={1000}
               />
             </View>
-            <Text text={translate("tbmReportScreen:educationSummary.helper")} style={S.$helperText} />
+            <Text
+              text={translate("tbmReportScreen:educationSummary.helper")}
+              style={S.$helperText}
+            />
           </View>
 
           {/* ── 6. 특이사항 ── */}
           <View style={S.$section}>
-            <Text
-              text={translate("tbmReportScreen:specialNotes.label")}
-              style={S.$sectionLabel}
-            />
+            <Text text={translate("tbmReportScreen:specialNotes.label")} style={S.$sectionLabel} />
             <View style={S.$textarea}>
               <TextInput
                 style={S.$textareaInput}
@@ -164,10 +158,7 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
 
           {/* ── 7. 현장 사진 ── */}
           <View style={[S.$section, { borderBottomWidth: 0 }]}>
-            <Text
-              text={translate("tbmReportScreen:sitePhotos.label")}
-              style={S.$sectionLabel}
-            />
+            <Text text={translate("tbmReportScreen:sitePhotos.label")} style={S.$sectionLabel} />
 
             {/* 안내 카드 */}
             <View style={S.$photoGuideCard}>

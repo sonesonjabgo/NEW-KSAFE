@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { ScrollView, TouchableOpacity, View } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { IconDownload } from "@tabler/icons-react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import EducationFrame from "@assets/icons/education_frame.svg"
 
@@ -65,7 +65,11 @@ export const TbmJoinInfoScreen: FC<TbmJoinInfoScreenProps> = ({ navigation, rout
 
         <View style={S.$buttonDivider} />
         <View style={[S.$buttonRow, { paddingBottom: insets.bottom + 28 }]}>
-          <TouchableOpacity style={S.$prevBtn} activeOpacity={0.75} onPress={() => navigation.goBack()}>
+          <TouchableOpacity
+            style={S.$prevBtn}
+            activeOpacity={0.75}
+            onPress={() => navigation.goBack()}
+          >
             <Text text={translate("tbmJoinInfoScreen:prev")} style={S.$prevBtnText} />
           </TouchableOpacity>
           <TouchableOpacity

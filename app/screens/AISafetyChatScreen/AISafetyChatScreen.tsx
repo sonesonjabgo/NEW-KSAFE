@@ -16,9 +16,9 @@ import { IconTrash, IconSend2 } from "@tabler/icons-react-native"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
-import { colors } from "@/theme/colors"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
+import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
 interface AISafetyChatScreenProps extends AppStackScreenProps<"AISafetyChat"> {}

@@ -562,7 +562,8 @@ const ja: Translations = {
   tbmReportScreen: {
     title: "TBMレポート生成",
     notice: {
-      description: " ·  教育日誌は進行中のTBM活動に対してのみ作成できます。\n ·  教育日誌を完了すると、該当するTBM活動が自動的に終了します。\n ·  現場写真を最低1枚以上添付する必要があります。",
+      description:
+        " ·  教育日誌は進行中のTBM活動に対してのみ作成できます。\n ·  教育日誌を完了すると、該当するTBM活動が自動的に終了します。\n ·  現場写真を最低1枚以上添付する必要があります。",
     },
     activityName: {
       label: "TBM活動",
@@ -590,7 +591,8 @@ const ja: Translations = {
     sitePhotos: {
       label: "現場写真",
       addButton: "写真を追加",
-      guide: "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
+      guide:
+        "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
       preview: "A preview will be shown when you add an image.",
     },
     submit: "レポートを生成する",
@@ -635,7 +637,6 @@ const ja: Translations = {
     },
     submit: "Create",
   },
-
 
   tbmDetailScreen: {
     title: "TBM活動詳細",

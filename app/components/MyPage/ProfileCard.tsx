@@ -2,6 +2,7 @@ import { FC } from "react"
 import { View, ViewStyle, TextStyle } from "react-native"
 
 import ProfileSwitch from "@assets/icons/nav/profile_switch.svg"
+
 import { Text } from "@/components/Text"
 import { typography } from "@/theme/typography"
 

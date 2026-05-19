@@ -1,7 +1,20 @@
 import { useEffect } from "react"
-import { FlatList, Modal, TouchableOpacity, View, ViewStyle, TextStyle, useWindowDimensions } from "react-native"
+import {
+  FlatList,
+  Modal,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+  TextStyle,
+  useWindowDimensions,
+} from "react-native"
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  runOnJS,
+} from "react-native-reanimated"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import Animated, { useSharedValue, useAnimatedStyle, withTiming, runOnJS } from "react-native-reanimated"
 
 import { Text } from "@/components/Text"
 import { LANGUAGES, LanguageKey } from "@/constants/languages"

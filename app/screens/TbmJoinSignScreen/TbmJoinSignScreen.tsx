@@ -1,7 +1,7 @@
 import { FC, useRef, useState } from "react"
 import { PanResponder, TouchableOpacity, View } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { IconAlertCircle, IconRefresh } from "@tabler/icons-react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 import Svg, { Path } from "react-native-svg"
 
 import { ConfirmModal } from "@/components/ConfirmModal"
@@ -111,7 +111,11 @@ export const TbmJoinSignScreen: FC<TbmJoinSignScreenProps> = ({ navigation, rout
 
           <View style={S.$buttonDivider} />
           <View style={[S.$buttonRow, { paddingBottom: insets.bottom + 28 }]}>
-            <TouchableOpacity style={S.$prevBtn} activeOpacity={0.75} onPress={() => navigation.goBack()}>
+            <TouchableOpacity
+              style={S.$prevBtn}
+              activeOpacity={0.75}
+              onPress={() => navigation.goBack()}
+            >
               <Text text={translate("tbmJoinSignScreen:prev")} style={S.$prevBtnText} />
             </TouchableOpacity>
             <TouchableOpacity style={S.$nextBtn} activeOpacity={0.75} onPress={handleNext}>

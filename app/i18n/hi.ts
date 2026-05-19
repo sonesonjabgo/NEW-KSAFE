@@ -489,7 +489,8 @@ const hi: Translations = {
   tbmJoinHealthScreen: {
     title: "TBM में शामिल हों",
     heading: "स्वास्थ्य जांच",
-    prompt: "कृपया पुष्टि करें कि क्या आपने पिछले दिन अत्यधिक शराब का सेवन किया था या आज आपको कोई स्वास्थ्य समस्या है।",
+    prompt:
+      "कृपया पुष्टि करें कि क्या आपने पिछले दिन अत्यधिक शराब का सेवन किया था या आज आपको कोई स्वास्थ्य समस्या है।",
     statusGood: "कोई समस्या नहीं",
     statusBad: "समस्या है",
     prev: "पिछला",
@@ -562,7 +563,8 @@ const hi: Translations = {
   tbmReportScreen: {
     title: "TBM रिपोर्ट जनरेशन",
     notice: {
-      description: " ·  शिक्षा लॉग केवल प्रगति में चल रही TBM गतिविधियों के लिए बनाया जा सकता है।\n ·  शिक्षा लॉग पूरा होने पर TBM गतिविधि स्वचालित रूप से समाप्त हो जाएगी।\n ·  कम से कम एक साइट फ़ोटो अवश्य संलग्न करें।",
+      description:
+        " ·  शिक्षा लॉग केवल प्रगति में चल रही TBM गतिविधियों के लिए बनाया जा सकता है।\n ·  शिक्षा लॉग पूरा होने पर TBM गतिविधि स्वचालित रूप से समाप्त हो जाएगी।\n ·  कम से कम एक साइट फ़ोटो अवश्य संलग्न करें।",
     },
     activityName: {
       label: "TBM गतिविधि",
@@ -590,7 +592,8 @@ const hi: Translations = {
     sitePhotos: {
       label: "साइट फ़ोटो",
       addButton: "फ़ोटो जोड़ें",
-      guide: "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
+      guide:
+        "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
       preview: "A preview will be shown when you add an image.",
     },
     submit: "रिपोर्ट बनाएं",
@@ -635,7 +638,6 @@ const hi: Translations = {
     },
     submit: "Create",
   },
-
 
   tbmDetailScreen: {
     title: "TBM गतिविधि विवरण",

@@ -630,7 +630,8 @@ const ko: Translations = {
     sitePhotos: {
       label: "현장 사진",
       addButton: "사진 추가",
-      guide: "현장 사진은 최소 1장 이상 등록해야 합니다.\n사진은 최소 1장 이상, 최대 5장까지 첨부할 수 있습니다.",
+      guide:
+        "현장 사진은 최소 1장 이상 등록해야 합니다.\n사진은 최소 1장 이상, 최대 5장까지 첨부할 수 있습니다.",
       preview: "이미지를 추가하면 미리보기가 표시됩니다.",
     },
     submit: "저장하기",
@@ -675,8 +676,6 @@ const ko: Translations = {
     },
     submit: "생성하기",
   },
-
-
 
   tbmDetailScreen: {
     title: "TBM 활동 상세",

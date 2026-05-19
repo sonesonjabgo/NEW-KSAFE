@@ -88,8 +88,7 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
   const getLangSubtitle = (key: LanguageKey) =>
     translate(`textTranslationScreen:languageSubtitles.${key}` as any)
 
-  const getLangFlag = (key: LanguageKey): string =>
-    LANGUAGES.find((l) => l.key === key)?.flag ?? ""
+  const getLangFlag = (key: LanguageKey): string => LANGUAGES.find((l) => l.key === key)?.flag ?? ""
 
   const handleTranslate = useCallback(() => {
     const trimmed = inputText.trim()
@@ -238,10 +237,7 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
           ) : (
             <View style={$textInputArea}>
               <View style={$inputTopRow}>
-                <Text
-                  text={translate("textTranslationScreen:inputHint")}
-                  style={$inputHintText}
-                />
+                <Text text={translate("textTranslationScreen:inputHint")} style={$inputHintText} />
                 <Text text={`${inputText.length}/1000`} style={$inputCountText} />
               </View>
 
@@ -260,9 +256,7 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
                     setInputText(t.slice(0, 1000))
                     if (showValidationError) setShowValidationError(false)
                   }}
-                  onContentSizeChange={(e) =>
-                    setInputHeight(e.nativeEvent.contentSize.height)
-                  }
+                  onContentSizeChange={(e) => setInputHeight(e.nativeEvent.contentSize.height)}
                   onFocus={() => setInputFocused(true)}
                   onBlur={() => setInputFocused(false)}
                   maxLength={1000}

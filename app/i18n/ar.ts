@@ -484,7 +484,8 @@ const ar: Translations = {
   tbmJoinHealthScreen: {
     title: "الانضمام إلى TBM",
     heading: "فحص الحالة الصحية",
-    prompt: "يرجى التحقق مما إذا كنت قد تناولت كميات مفرطة من الكحول في اليوم السابق أو لديك أي مشكلات صحية اليوم.",
+    prompt:
+      "يرجى التحقق مما إذا كنت قد تناولت كميات مفرطة من الكحول في اليوم السابق أو لديك أي مشكلات صحية اليوم.",
     statusGood: "لا توجد مشكلات",
     statusBad: "توجد مشكلات",
     prev: "السابق",
@@ -557,7 +558,8 @@ const ar: Translations = {
   tbmReportScreen: {
     title: "إنشاء تقرير TBM",
     notice: {
-      description: " ·  لا يمكن كتابة سجل التعليم إلا لأنشطة TBM قيد التقدم.\n ·  سيؤدي إكمال سجل التعليم إلى إنهاء نشاط TBM تلقائياً.\n ·  يجب إرفاق صورة واحدة على الأقل من الموقع.",
+      description:
+        " ·  لا يمكن كتابة سجل التعليم إلا لأنشطة TBM قيد التقدم.\n ·  سيؤدي إكمال سجل التعليم إلى إنهاء نشاط TBM تلقائياً.\n ·  يجب إرفاق صورة واحدة على الأقل من الموقع.",
     },
     activityName: {
       label: "نشاط TBM",
@@ -585,7 +587,8 @@ const ar: Translations = {
     sitePhotos: {
       label: "صور الموقع",
       addButton: "إضافة صورة",
-      guide: "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
+      guide:
+        "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
       preview: "A preview will be shown when you add an image.",
     },
     submit: "إنشاء التقرير",
@@ -630,7 +633,6 @@ const ar: Translations = {
     },
     submit: "Create",
   },
-
 
   tbmDetailScreen: {
     title: "تفاصيل نشاط TBM",

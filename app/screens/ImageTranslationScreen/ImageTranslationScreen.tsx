@@ -1,16 +1,7 @@
 import { FC, useState } from "react"
-import {
-  View,
-  ViewStyle,
-  TextStyle,
-  TouchableOpacity,
-} from "react-native"
+import { View, ViewStyle, TextStyle, TouchableOpacity } from "react-native"
+import { IconChevronDown, IconCamera, IconPhoto } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import {
-  IconChevronDown,
-  IconCamera,
-  IconPhoto,
-} from "@tabler/icons-react-native"
 
 import { LanguagePickerModal } from "@/components/LanguagePickerModal"
 import { StackScreen } from "@/components/StackScreen"
@@ -35,8 +26,7 @@ export const ImageTranslationScreen: FC<ImageTranslationScreenProps> = ({ naviga
   const getLangSubtitle = (key: LanguageKey) =>
     translate(`imageTranslationScreen:languageSubtitles.${key}` as any)
 
-  const getLangFlag = (key: LanguageKey): string =>
-    LANGUAGES.find((l) => l.key === key)?.flag ?? ""
+  const getLangFlag = (key: LanguageKey): string => LANGUAGES.find((l) => l.key === key)?.flag ?? ""
 
   return (
     <>
@@ -61,7 +51,11 @@ export const ImageTranslationScreen: FC<ImageTranslationScreenProps> = ({ naviga
         <View style={[$bottomArea, { paddingBottom: bottom + 16 }]}>
           <View style={$langRow}>
             <Text text={translate("imageTranslationScreen:languageLabel")} style={$langLabel} />
-            <TouchableOpacity style={$langBtn} onPress={() => setLangMenuVisible(true)} activeOpacity={0.7}>
+            <TouchableOpacity
+              style={$langBtn}
+              onPress={() => setLangMenuVisible(true)}
+              activeOpacity={0.7}
+            >
               <Text text={getLangFlag(targetLanguage)} style={$langFlag} />
               <Text text={getLangLabel(targetLanguage)} style={$langBtnText} numberOfLines={1} />
               <IconChevronDown size={14} color={colors.blue} strokeWidth={2.5} />

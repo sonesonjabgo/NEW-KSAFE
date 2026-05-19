@@ -8,13 +8,14 @@ import {
   ActivityIndicator,
 } from "react-native"
 import { ChevronDown, Volume2, Mic, Square } from "lucide-react-native"
-import RotateIcon from "@assets/icons/voice/rotate.svg"
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
   runOnJS,
 } from "react-native-reanimated"
+
+import RotateIcon from "@assets/icons/voice/rotate.svg"
 
 import { LanguagePickerModal } from "@/components/LanguagePickerModal"
 import { StackScreen } from "@/components/StackScreen"
@@ -66,8 +67,7 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
     }
   }
 
-  const getLabel = (key: LanguageKey) =>
-    translate(`voiceTranslationScreen:languages.${key}` as any)
+  const getLabel = (key: LanguageKey) => translate(`voiceTranslationScreen:languages.${key}` as any)
 
   const getSubtitle = (key: LanguageKey) =>
     translate(`voiceTranslationScreen:languageSubtitles.${key}` as any)
@@ -81,10 +81,7 @@ export const VoiceTranslationScreen: FC<VoiceTranslationScreenProps> = ({ naviga
         onBack={() => navigation.goBack()}
         contentBg={colors.screenBg}
         rightSlot={
-          <TouchableOpacity
-            style={$flipButton}
-            onPress={() => setIsFlipped((prev) => !prev)}
-          >
+          <TouchableOpacity style={$flipButton} onPress={() => setIsFlipped((prev) => !prev)}>
             <RotateIcon style={{ transform: [{ scaleY: isFlipped ? -1 : 1 }] }} />
           </TouchableOpacity>
         }

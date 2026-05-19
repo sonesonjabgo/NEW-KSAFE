@@ -256,7 +256,8 @@ const fr: Translations = {
       sectionTitle: "Permissions de l'Application",
       camera: {
         title: "Appareil Photo",
-        description: "Numérisation de codes QR, photos de traduction par IA, enregistrement d'urgence en cas de danger",
+        description:
+          "Numérisation de codes QR, photos de traduction par IA, enregistrement d'urgence en cas de danger",
         button: "Autoriser",
       },
       microphone: {
@@ -266,7 +267,8 @@ const fr: Translations = {
       },
       photo: {
         title: "Photos/Bibliothèque",
-        description: "Évaluation des risques par IA, traduction d'images, matériaux de formation TBM/rapports",
+        description:
+          "Évaluation des risques par IA, traduction d'images, matériaux de formation TBM/rapports",
         button: "Autoriser",
       },
       notification: {
@@ -493,7 +495,8 @@ const fr: Translations = {
   tbmJoinHealthScreen: {
     title: "Rejoindre TBM",
     heading: "Vérification de santé",
-    prompt: "Veuillez confirmer si vous avez consommé de l'alcool excessivement la veille ou si vous avez des problèmes de santé aujourd'hui.",
+    prompt:
+      "Veuillez confirmer si vous avez consommé de l'alcool excessivement la veille ou si vous avez des problèmes de santé aujourd'hui.",
     statusGood: "Aucun problème",
     statusBad: "Problème présent",
     prev: "Précédent",
@@ -556,7 +559,8 @@ const fr: Translations = {
         heading: "Comment ça fonctionne",
         step1: "Confirmez le périmètre de travail du jour et les participants.",
         step2: "Partagez les principaux risques et mesures de sécurité.",
-        step3: "Vérifiez la santé des travailleurs, les équipements de protection et tout changement sur le site.",
+        step3:
+          "Vérifiez la santé des travailleurs, les équipements de protection et tout changement sur le site.",
         step4: "Passez en revue le contenu, puis complétez la participation TBM et signez.",
       },
       close: "Fermer",
@@ -566,7 +570,8 @@ const fr: Translations = {
   tbmReportScreen: {
     title: "Génération de rapport TBM",
     notice: {
-      description: " ·  Le journal éducatif ne peut être rédigé que pour les activités TBM en cours.\n ·  La finalisation du journal mettra automatiquement fin à l'activité TBM.\n ·  Au moins une photo du site doit être jointe.",
+      description:
+        " ·  Le journal éducatif ne peut être rédigé que pour les activités TBM en cours.\n ·  La finalisation du journal mettra automatiquement fin à l'activité TBM.\n ·  Au moins une photo du site doit être jointe.",
     },
     activityName: {
       label: "Activité TBM",
@@ -594,7 +599,8 @@ const fr: Translations = {
     sitePhotos: {
       label: "Photos du site",
       addButton: "Ajouter une photo",
-      guide: "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
+      guide:
+        "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
       preview: "A preview will be shown when you add an image.",
     },
     submit: "Générer le rapport",
@@ -639,7 +645,6 @@ const fr: Translations = {
     },
     submit: "Create",
   },
-
 
   tbmDetailScreen: {
     title: "Détail de l'activité TBM",

@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
 import { TouchableOpacity, View, ViewStyle, TextStyle } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { IconChevronLeft } from "@tabler/icons-react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { Text } from "@/components/Text"
 import { colors } from "@/theme/colors"

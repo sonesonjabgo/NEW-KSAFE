@@ -1,12 +1,8 @@
 import { FC, useCallback, useMemo, useState } from "react"
-import {
-  FlatList,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { FlatList, TextInput, TouchableOpacity, View } from "react-native"
 import { IconSearch } from "@tabler/icons-react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+
 import TbmEmptyImage from "@assets/images/tbm-empty.svg"
 
 import { StackScreen } from "@/components/StackScreen"
@@ -15,8 +11,8 @@ import { translate } from "@/i18n/translate"
 import { AppStackScreenProps } from "@/navigators/navigationTypes"
 
 import { MOCK_EDUCATION_MATERIALS } from "./mockData"
-import { EducationMaterial, EducationSubcategory } from "./types"
 import * as S from "./styles"
+import { EducationMaterial, EducationSubcategory } from "./types"
 
 type EducationSelectScreenProps = AppStackScreenProps<"EducationSelect">
 
@@ -65,9 +61,7 @@ export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigati
   const hasSourceData = sourceData.length > 0
 
   const toggleItem = useCallback((id: number) => {
-    setSelectedIds((prev) =>
-      prev.includes(id) ? prev.filter((v) => v !== id) : [...prev, id],
-    )
+    setSelectedIds((prev) => (prev.includes(id) ? prev.filter((v) => v !== id) : [...prev, id]))
   }, [])
 
   const handleConfirm = useCallback(() => {
@@ -101,7 +95,10 @@ export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigati
         >
           <View style={S.$cardTopRow}>
             <View style={[S.$cardBadge, { backgroundColor: badgeColor.bg }]}>
-              <Text text={item.subcategory} style={[S.$cardBadgeText, { color: badgeColor.text }]} />
+              <Text
+                text={item.subcategory}
+                style={[S.$cardBadgeText, { color: badgeColor.text }]}
+              />
             </View>
             <View style={S.$cardTopRight}>
               <Text text={item.datetime} style={S.$cardDate} />
@@ -136,10 +133,7 @@ export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigati
                 activeOpacity={0.7}
                 onPress={() => handleSourceTabChange(index as 0 | 1 | 2)}
               >
-                <Text
-                  text={label}
-                  style={[S.$sourceTabText, isActive && S.$sourceTabTextActive]}
-                />
+                <Text text={label} style={[S.$sourceTabText, isActive && S.$sourceTabTextActive]} />
               </TouchableOpacity>
             )
           })}
@@ -187,19 +181,13 @@ export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigati
               data={filtered}
               keyExtractor={(item) => String(item.id)}
               renderItem={renderItem}
-              contentContainerStyle={[
-                S.$listContent,
-                filtered.length === 0 && { flex: 1 },
-              ]}
+              contentContainerStyle={[S.$listContent, filtered.length === 0 && { flex: 1 }]}
               showsVerticalScrollIndicator={false}
               keyboardShouldPersistTaps="handled"
               ListEmptyComponent={
                 <View style={S.$emptyContainer}>
                   <TbmEmptyImage width={150} height={162} />
-                  <Text
-                    text={translate("educationSelectScreen:emptyText")}
-                    style={S.$emptyText}
-                  />
+                  <Text text={translate("educationSelectScreen:emptyText")} style={S.$emptyText} />
                 </View>
               }
             />
@@ -207,10 +195,7 @@ export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigati
         ) : (
           <View style={S.$emptyContainer}>
             <TbmEmptyImage width={150} height={162} />
-            <Text
-              text={translate("educationSelectScreen:emptyText")}
-              style={S.$emptyText}
-            />
+            <Text text={translate("educationSelectScreen:emptyText")} style={S.$emptyText} />
           </View>
         )}
       </View>

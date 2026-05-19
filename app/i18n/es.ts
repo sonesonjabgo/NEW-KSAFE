@@ -256,7 +256,8 @@ const es: Translations = {
       sectionTitle: "Permisos de la Aplicación",
       camera: {
         title: "Cámara",
-        description: "Escaneo de código QR, fotos de traducción por IA, grabación de emergencia de peligro",
+        description:
+          "Escaneo de código QR, fotos de traducción por IA, grabación de emergencia de peligro",
         button: "Permitir",
       },
       microphone: {
@@ -266,7 +267,8 @@ const es: Translations = {
       },
       photo: {
         title: "Fotos/Biblioteca",
-        description: "Evaluación de riesgos de IA, traducción de imágenes, materiales de capacitación TBM/informes",
+        description:
+          "Evaluación de riesgos de IA, traducción de imágenes, materiales de capacitación TBM/informes",
         button: "Permitir",
       },
       notification: {
@@ -493,7 +495,8 @@ const es: Translations = {
   tbmJoinHealthScreen: {
     title: "Unirse al TBM",
     heading: "Verificación de salud",
-    prompt: "Confirme si consumió alcohol en exceso el día anterior o tiene algún problema de salud hoy.",
+    prompt:
+      "Confirme si consumió alcohol en exceso el día anterior o tiene algún problema de salud hoy.",
     statusGood: "Sin problemas",
     statusBad: "Con problemas",
     prev: "Anterior",
@@ -556,7 +559,8 @@ const es: Translations = {
         heading: "Cómo funciona",
         step1: "Confirme el alcance del trabajo del día y los participantes.",
         step2: "Comparta los principales peligros y medidas de seguridad.",
-        step3: "Verifique la salud de los trabajadores, el equipo de protección y cualquier cambio en el sitio.",
+        step3:
+          "Verifique la salud de los trabajadores, el equipo de protección y cualquier cambio en el sitio.",
         step4: "Revise el contenido, luego complete la participación en el TBM y firme.",
       },
       close: "Cerrar",
@@ -566,7 +570,8 @@ const es: Translations = {
   tbmReportScreen: {
     title: "Generación de Informe TBM",
     notice: {
-      description: " ·  Solo se puede redactar el registro educativo para actividades TBM en curso.\n ·  Al completar el registro, la actividad TBM finalizará automáticamente.\n ·  Se debe adjuntar al menos una foto del sitio.",
+      description:
+        " ·  Solo se puede redactar el registro educativo para actividades TBM en curso.\n ·  Al completar el registro, la actividad TBM finalizará automáticamente.\n ·  Se debe adjuntar al menos una foto del sitio.",
     },
     activityName: {
       label: "Actividad TBM",
@@ -594,7 +599,8 @@ const es: Translations = {
     sitePhotos: {
       label: "Fotos del sitio",
       addButton: "Agregar foto",
-      guide: "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
+      guide:
+        "At least 1 site photo must be registered.\nYou can attach a minimum of 1 and a maximum of 5 photos.",
       preview: "A preview will be shown when you add an image.",
     },
     submit: "Generar informe",
@@ -639,7 +645,6 @@ const es: Translations = {
     },
     submit: "Create",
   },
-
 
   tbmDetailScreen: {
     title: "Detalle de Actividad TBM",

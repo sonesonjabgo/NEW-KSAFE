@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react"
 import { FlatList, Modal, ScrollView, TouchableOpacity, View } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { IconAlertCircle, IconCheck, IconInfoCircle } from "@tabler/icons-react-native"
 import Animated, {
   runOnJS,
@@ -8,6 +7,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import TbmEmptyImage from "@assets/images/tbm-empty.svg"
 
@@ -120,7 +120,11 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
 
           <View style={S.$buttonDivider} />
           <View style={[S.$buttonRow, { paddingBottom: insets.bottom + 28 }]}>
-            <TouchableOpacity style={S.$prevBtn} activeOpacity={0.75} onPress={() => navigation.goBack()}>
+            <TouchableOpacity
+              style={S.$prevBtn}
+              activeOpacity={0.75}
+              onPress={() => navigation.goBack()}
+            >
               <Text text={translate("tbmJoinScreen:prev")} style={S.$prevBtnText} />
             </TouchableOpacity>
             <TouchableOpacity style={S.$nextBtn} activeOpacity={0.75} onPress={handleNext}>
@@ -152,40 +156,76 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
       >
         <View style={S.$modalWrap}>
           <Animated.View style={[S.$modalOverlay, overlayAnimStyle]}>
-            <TouchableOpacity style={S.$modalOverlayTouch} activeOpacity={1} onPress={closeInfoModal} />
+            <TouchableOpacity
+              style={S.$modalOverlayTouch}
+              activeOpacity={1}
+              onPress={closeInfoModal}
+            />
           </Animated.View>
 
-          <Animated.View style={[S.$modalContainer, sheetAnimStyle, { paddingBottom: insets.bottom + 20 }]}>
+          <Animated.View
+            style={[S.$modalContainer, sheetAnimStyle, { paddingBottom: insets.bottom + 20 }]}
+          >
             <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
               <View style={S.$modalSection}>
                 <View style={S.$modalHeaderRow}>
                   <IconInfoCircle size={24} color="#1062D8" />
-                  <Text text={translate("tbmJoinScreen:infoModal.title")} style={S.$modalTitleText} />
+                  <Text
+                    text={translate("tbmJoinScreen:infoModal.title")}
+                    style={S.$modalTitleText}
+                  />
                 </View>
               </View>
 
               <View style={S.$sectionGap} />
 
               <View style={S.$modalSection}>
-                <Text text={translate("tbmJoinScreen:infoModal.meaning.heading")} style={S.$sectionHeading} />
-                <Text text={translate("tbmJoinScreen:infoModal.meaning.body")} style={S.$sectionBody} />
+                <Text
+                  text={translate("tbmJoinScreen:infoModal.meaning.heading")}
+                  style={S.$sectionHeading}
+                />
+                <Text
+                  text={translate("tbmJoinScreen:infoModal.meaning.body")}
+                  style={S.$sectionBody}
+                />
               </View>
 
               <View style={S.$sectionGap} />
 
               <View style={S.$modalSection}>
-                <Text text={translate("tbmJoinScreen:infoModal.importance.heading")} style={S.$sectionHeading} />
-                <Text text={translate("tbmJoinScreen:infoModal.importance.body")} style={S.$sectionBody} />
+                <Text
+                  text={translate("tbmJoinScreen:infoModal.importance.heading")}
+                  style={S.$sectionHeading}
+                />
+                <Text
+                  text={translate("tbmJoinScreen:infoModal.importance.body")}
+                  style={S.$sectionBody}
+                />
               </View>
 
               <View style={S.$sectionGap} />
 
               <View style={S.$modalSection}>
-                <Text text={translate("tbmJoinScreen:infoModal.procedure.heading")} style={S.$sectionHeading} />
-                <Text text={`1.  ${translate("tbmJoinScreen:infoModal.procedure.step1")}`} style={S.$procedureStep} />
-                <Text text={`2.  ${translate("tbmJoinScreen:infoModal.procedure.step2")}`} style={S.$procedureStep} />
-                <Text text={`3.  ${translate("tbmJoinScreen:infoModal.procedure.step3")}`} style={S.$procedureStep} />
-                <Text text={`4.  ${translate("tbmJoinScreen:infoModal.procedure.step4")}`} style={S.$procedureStep} />
+                <Text
+                  text={translate("tbmJoinScreen:infoModal.procedure.heading")}
+                  style={S.$sectionHeading}
+                />
+                <Text
+                  text={`1.  ${translate("tbmJoinScreen:infoModal.procedure.step1")}`}
+                  style={S.$procedureStep}
+                />
+                <Text
+                  text={`2.  ${translate("tbmJoinScreen:infoModal.procedure.step2")}`}
+                  style={S.$procedureStep}
+                />
+                <Text
+                  text={`3.  ${translate("tbmJoinScreen:infoModal.procedure.step3")}`}
+                  style={S.$procedureStep}
+                />
+                <Text
+                  text={`4.  ${translate("tbmJoinScreen:infoModal.procedure.step4")}`}
+                  style={S.$procedureStep}
+                />
               </View>
             </ScrollView>
 
@@ -194,7 +234,10 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
               activeOpacity={0.75}
               onPress={closeInfoModal}
             >
-              <Text text={translate("tbmJoinScreen:infoModal.close")} style={S.$modalCloseBtnText} />
+              <Text
+                text={translate("tbmJoinScreen:infoModal.close")}
+                style={S.$modalCloseBtnText}
+              />
             </TouchableOpacity>
           </Animated.View>
         </View>
