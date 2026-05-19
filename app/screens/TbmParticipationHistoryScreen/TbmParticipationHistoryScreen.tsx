@@ -108,7 +108,7 @@ export const TbmParticipationHistoryScreen: FC<TbmParticipationHistoryScreenProp
             <HistoryCard
               key={item.id}
               item={item}
-              onPress={() => navigation.navigate("TbmDetail", { id: item.id })}
+              onPress={() => navigation.navigate("TbmParticipationHistoryDetail", { id: item.id })}
             />
           ))}
         </View>

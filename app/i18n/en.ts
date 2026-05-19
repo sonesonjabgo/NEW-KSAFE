@@ -828,6 +828,13 @@ const en = {
     workplaceLabel: "Workplace",
   },
 
+  tbmParticipationHistoryDetailScreen: {
+    participationDate: "Participation Date",
+    workDate: "Work Date",
+    workplace: "Workplace",
+    manager: "Manager",
+  },
+
   ...demoEn,
 }
 

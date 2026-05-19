@@ -772,6 +772,12 @@ const ar: Translations = {
     unit: "case(s)",
     workplaceLabel: "Workplace",
   },
+  tbmParticipationHistoryDetailScreen: {
+    participationDate: "Participation Date",
+    workDate: "Work Date",
+    workplace: "Workplace",
+    manager: "Manager",
+  },
 
   ...demoAr,
 }

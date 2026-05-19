@@ -817,6 +817,13 @@ const ko: Translations = {
     workplaceLabel: "사업장",
   },
 
+  tbmParticipationHistoryDetailScreen: {
+    participationDate: "참여 일시",
+    workDate: "작업 일시",
+    workplace: "사업장",
+    manager: "진행 담당",
+  },
+
   ...demoKo,
 }
 
