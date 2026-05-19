@@ -14,6 +14,9 @@ import { EducationPresentationScreen } from "@/screens/EducationPresentationScre
 import { EducationSelectScreen } from "@/screens/EducationSelectScreen/EducationSelectScreen"
 import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
 import { ImageTranslationScreen } from "@/screens/ImageTranslationScreen/ImageTranslationScreen"
+import { ImprovementProposalCreateScreen } from "@/screens/ImprovementProposalCreateScreen/ImprovementProposalCreateScreen"
+import { ImprovementProposalDetailScreen } from "@/screens/ImprovementProposalDetailScreen/ImprovementProposalDetailScreen"
+import { ImprovementProposalListScreen } from "@/screens/ImprovementProposalListScreen/ImprovementProposalListScreen"
 import { LanguageSettingsScreen } from "@/screens/LanguageSettingsScreen"
 import { LoginScreen } from "@/screens/LoginScreen"
 import { MyPageScreen } from "@/screens/MyPageScreen"
@@ -83,6 +86,9 @@ const AppStack = () => {
       <Stack.Screen name="TbmJoinSign" component={TbmJoinSignScreen} />
       <Stack.Screen name="TbmJoinComplete" component={TbmJoinCompleteScreen} />
       <Stack.Screen name="EducationSelect" component={EducationSelectScreen} />
+      <Stack.Screen name="ImprovementProposalList" component={ImprovementProposalListScreen} />
+      <Stack.Screen name="ImprovementProposalCreate" component={ImprovementProposalCreateScreen} />
+      <Stack.Screen name="ImprovementProposalDetail" component={ImprovementProposalDetailScreen} />
     </Stack.Navigator>
   )
 }

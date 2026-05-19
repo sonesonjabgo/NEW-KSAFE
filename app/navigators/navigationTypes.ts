@@ -38,6 +38,9 @@ export type AppStackParamList = {
   TbmJoinSign: { id: number }
   TbmJoinComplete: undefined
   EducationSelect: { initialSelected: number[]; onConfirm: (ids: number[]) => void }
+  ImprovementProposalList: undefined
+  ImprovementProposalCreate: undefined
+  ImprovementProposalDetail: { id: number }
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<

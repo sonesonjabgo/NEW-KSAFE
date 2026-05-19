@@ -11,6 +11,7 @@ import type { WorkerParticipationMenuItem } from "../types"
 interface WorkerParticipationMenuItemComponentProps {
   item: WorkerParticipationMenuItem
   showDivider?: boolean
+  onPress?: () => void
 }
 
 const getIcon = (iconName: string) => {
@@ -23,18 +24,12 @@ const getIcon = (iconName: string) => {
 
 export const WorkerParticipationMenuItemComponent: FC<
   WorkerParticipationMenuItemComponentProps
-> = ({ item, showDivider = true }) => {
+> = ({ item, showDivider = true, onPress }) => {
   const IconComponent = getIcon(item.icon)
 
   return (
     <>
-      <TouchableOpacity
-        style={S.$menuItemContainer}
-        activeOpacity={0.7}
-        onPress={() => {
-          console.log(`${item.title} 클릭`)
-        }}
-      >
+      <TouchableOpacity style={S.$menuItemContainer} activeOpacity={0.7} onPress={onPress}>
         <View style={S.$menuIconContainer}>
           <IconComponent size={24} color="#0B3069" strokeWidth={1.5} />
         </View>

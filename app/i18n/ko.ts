@@ -717,6 +717,98 @@ const ko: Translations = {
     emptyText: "회사 교육자료가 없습니다.",
   },
 
+  improvementProposalDetailScreen: {
+    title: "제안 상세 관리",
+    status: {
+      pending: "대기중",
+      ongoing: "진행중",
+      reflected: "반영완료",
+      rejected: "반영불가",
+    },
+    statusChange: {
+      sectionTitle: "상태 변경 및 처리",
+      ongoingBtn: "진행중",
+      reflectedBtn: "반영완료",
+      rejectedBtn: "반영불가",
+      inputLabel: "처리 내용 입력",
+      pendingMessage: "대기중 상태입니다.\n진행중으로 변경한 뒤 처리할 수 있습니다.",
+    },
+    history: {
+      sectionTitle: "상태 변경 이력",
+      registeredTitle: "제안 등록",
+      registeredDesc: "제안이 접수되었습니다.",
+      ongoingTitle: "진행중",
+      ongoingDesc: "제안 검토가 시작되었습니다.",
+      reflectedTitle: "반영완료",
+      reflectedDesc: "제안이 반영되었습니다.",
+      rejectedTitle: "반영불가",
+      rejectedDesc: "제안을 반영할 수 없습니다.",
+    },
+    editForm: {
+      label: "상세 내용",
+      required: " *",
+      helper: "입력 시 최대 2,000자까지 작성할 수 있습니다.",
+      errorMaxLength: "상세 내용은 최대 2,000자 이하로 입력해주세요.",
+    },
+    edit: "수정하기",
+    delete: "삭제하기",
+    cancel: "취소",
+    save: "저장",
+  },
+
+  improvementProposalCreateScreen: {
+    title: "제안 작성",
+    guide: {
+      title: "작성 가이드",
+      description:
+        "현장의 안전과 업무 효율을 높일 수 있는 아이디어를 자유롭게 제안해주세요. 구체적인 위치와 상황을 적어주시면 좋습니다.",
+    },
+    workplace: {
+      label: "사업장",
+      placeholder: "사업장을 선택해주세요",
+      helper: "사업장 목록에서 사업장을 선택할 수 있습니다.",
+    },
+    detail: {
+      label: "상세 내용",
+      required: " *",
+      placeholder:
+        "어떤 점을 개선하면 좋을까요?\n예시)\n · 문제점: B구역 지하 통로 조명이 너무 어두워 작업 시 위험합니다.\n · 제안: LED 조명 추가 설치 또는 조도 개선을 요청합니다.",
+      helper: "입력 시 최대 2,000자까지 작성할 수 있습니다.",
+      errorMaxLength: "상세 내용은 최대 2,000자 이하로 입력해주세요.",
+    },
+    submit: "제출하기",
+  },
+
+  improvementProposalListScreen: {
+    title: "제도개선 제안",
+    tabs: {
+      all: "전체",
+      pending: "대기중",
+      ongoing: "진행중",
+      reflected: "반영완료",
+      rejected: "반영불가",
+    },
+    summary: {
+      myProposals: "나의 제안",
+      reflected: "반영 완료",
+      unit: "건",
+    },
+    status: {
+      pending: "대기중",
+      ongoing: "진행중",
+      reflected: "반영완료",
+      rejected: "반영불가",
+    },
+    fab: "새 제안 작성",
+    empty: {
+      all: "등록된 제안이 없습니다.",
+      pending: "대기중인 제안이 없습니다.",
+      ongoing: "진행중인 제안이 없습니다.",
+      reflected: "반영완료된 제안이 없습니다.",
+      rejected: "반영불가 처리된 제안이 없습니다.",
+    },
+  },
+
   ...demoKo,
 }
 
