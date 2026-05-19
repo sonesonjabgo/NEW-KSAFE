@@ -58,8 +58,7 @@ export const TbmParticipationHistoryScreen: FC<TbmParticipationHistoryScreenProp
 
 const $content: ViewStyle = {
   flex: 1,
-  padding: 16,
-  paddingTop: 24,
+  padding: 24,
 }
 
 const $row: ViewStyle = {
