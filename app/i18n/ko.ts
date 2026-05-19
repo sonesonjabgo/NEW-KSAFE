@@ -809,6 +809,13 @@ const ko: Translations = {
     toastRegenerate: "보고서 재생성 요청이 접수되었습니다.",
   },
 
+  tbmParticipationHistoryScreen: {
+    title: "TBM 참여 이력",
+    totalParticipation: "전체 참여",
+    cautionResponse: "주의 응답",
+    countUnit: "{{count}}건",
+  },
+
   ...demoKo,
 }
 

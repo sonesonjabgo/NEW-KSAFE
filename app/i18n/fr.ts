@@ -777,6 +777,13 @@ const fr: Translations = {
     toastRegenerate: "Report regeneration request has been submitted.",
   },
 
+  tbmParticipationHistoryScreen: {
+    title: "TBM Participation History",
+    totalParticipation: "Total Participation",
+    cautionResponse: "Caution Response",
+    countUnit: "{{count}} case(s)",
+  },
+
   ...demoFr,
 }
 

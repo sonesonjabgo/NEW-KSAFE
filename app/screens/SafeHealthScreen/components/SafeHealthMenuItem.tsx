@@ -51,6 +51,8 @@ export const SafeHealthMenuItemComponent: FC<SafeHealthMenuItemComponentProps> =
       navigation.navigate("TbmReportInquiry")
     } else if (item.id === 5) {
       navigation.navigate("TbmJoin")
+    } else if (item.id === 6) {
+      navigation.navigate("TbmParticipationHistory")
     } else {
       console.log(`${item.title} 클릭`)
     }

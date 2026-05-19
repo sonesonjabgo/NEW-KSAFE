@@ -22,6 +22,7 @@ import { MyPageScreen } from "@/screens/MyPageScreen"
 import { NotifyScreen } from "@/screens/NotifyScreen"
 import { QrScannerScreen } from "@/screens/QrScannerScreen"
 import { TbmCreateScreen } from "@/screens/TbmCreateScreen/TbmCreateScreen"
+import { TbmParticipationHistoryScreen } from "@/screens/TbmParticipationHistoryScreen/TbmParticipationHistoryScreen"
 import { TbmDetailScreen } from "@/screens/TbmDetailScreen/TbmDetailScreen"
 import { TbmJoinCompleteScreen } from "@/screens/TbmJoinCompleteScreen/TbmJoinCompleteScreen"
 import { TbmJoinHealthScreen } from "@/screens/TbmJoinHealthScreen/TbmJoinHealthScreen"
@@ -90,6 +91,7 @@ const AppStack = () => {
       <Stack.Screen name="EducationMaterialDetail" component={EducationMaterialDetailScreen} />
       <Stack.Screen name="EducationMaterialRegister" component={EducationMaterialRegisterScreen} />
       <Stack.Screen name="EducationSelect" component={EducationSelectScreen} />
+      <Stack.Screen name="TbmParticipationHistory" component={TbmParticipationHistoryScreen} />
     </Stack.Navigator>
   )
 }
