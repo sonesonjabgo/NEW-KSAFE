@@ -7,10 +7,56 @@ import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
 
+import { mockTbmReports } from "./mockData"
 import * as S from "./styles"
-import type { TbmReportInquiryScreenProps } from "./types"
+import type { TbmReportInquiryScreenProps, TbmReportItem, TbmReportStatus } from "./types"
 
-type TabKey = "all" | "requested" | "generating" | "completed" | "failed"
+type TabKey = "all" | TbmReportStatus
+
+const TbmReportCard: FC<{ item: TbmReportItem; onPress: () => void }> = ({ item, onPress }) => {
+  const badgeStyle = {
+    requested: S.$badgeRequested,
+    generating: S.$badgeGenerating,
+    completed: S.$badgeCompleted,
+    failed: S.$badgeFailed,
+  }[item.status]
+
+  const badgeTextStyle = {
+    requested: S.$badgeRequestedText,
+    generating: S.$badgeGeneratingText,
+    completed: S.$badgeCompletedText,
+    failed: S.$badgeFailedText,
+  }[item.status]
+
+  return (
+    <TouchableOpacity style={S.$card} activeOpacity={0.75} onPress={onPress}>
+      {/* 상태 배지 + 날짜 */}
+      <View style={S.$cardTopRow}>
+        <View style={badgeStyle}>
+          <Text text={translate(`tbmReportInquiryScreen:tabs.${item.status}`)} style={badgeTextStyle} />
+        </View>
+        <Text text={item.date} style={S.$cardDate} />
+      </View>
+
+      {/* 제목 + 참여자 */}
+      <Text text={item.title} style={S.$cardTitle} />
+      <Text
+        text={translate("tbmListScreen:participants", { count: item.participants })}
+        style={S.$cardParticipants}
+      />
+
+      {/* 구분선 */}
+      <View style={S.$cardDivider} />
+
+      {/* 작성자 + 현장 */}
+      <View style={S.$cardMetaRow}>
+        <View style={S.$cardAvatar} />
+        <Text text={item.author} style={S.$cardMetaAuthor} numberOfLines={1} />
+        <Text text={` · ${item.location}`} style={S.$cardMetaLocation} numberOfLines={1} />
+      </View>
+    </TouchableOpacity>
+  )
+}
 
 const EmptyState: FC<{ tab: TabKey }> = ({ tab }) => {
   return (
@@ -37,8 +83,13 @@ export const TbmReportInquiryScreen: FC<TbmReportInquiryScreenProps> = ({ naviga
     [],
   )
 
-  // TODO: 실제 데이터 연동 시 필터링 로직 추가
-  const reportData: any[] = []
+  const filteredData = useMemo(
+    () =>
+      activeTab === "all"
+        ? mockTbmReports
+        : mockTbmReports.filter((item) => item.status === activeTab),
+    [activeTab],
+  )
 
   return (
     <StackScreen
@@ -64,13 +115,18 @@ export const TbmReportInquiryScreen: FC<TbmReportInquiryScreenProps> = ({ naviga
         ))}
       </View>
 
-      {/* 리스트 영역 (현재 데이터 없음 상태) */}
-      <FlatList
+      {/* 카드 리스트 */}
+      <FlatList<TbmReportItem>
         style={S.$listContent}
-        data={reportData}
-        keyExtractor={(_, index) => String(index)}
-        contentContainerStyle={[S.$flatListContent, { flex: 1 }]}
-        renderItem={null}
+        data={filteredData}
+        keyExtractor={(item) => String(item.id)}
+        contentContainerStyle={[S.$flatListContent, filteredData.length === 0 && { flex: 1 }]}
+        renderItem={({ item }) => (
+          <TbmReportCard
+            item={item}
+            onPress={() => console.log("보고서 클릭:", item.id)}
+          />
+        )}
         ListEmptyComponent={<EmptyState tab={activeTab} />}
         showsVerticalScrollIndicator={false}
       />
