@@ -781,6 +781,7 @@ const ja: Translations = {
     workDate: "Work Date",
     workplace: "Workplace",
     manager: "Manager",
+    activityContent: "Activity Content",
   },
 
   ...demoJa,

@@ -822,6 +822,7 @@ const ko: Translations = {
     workDate: "작업 일시",
     workplace: "사업장",
     manager: "진행 담당",
+    activityContent: "활동 내용",
   },
 
   ...demoKo,

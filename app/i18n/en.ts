@@ -833,6 +833,7 @@ const en = {
     workDate: "Work Date",
     workplace: "Workplace",
     manager: "Manager",
+    activityContent: "Activity Content",
   },
 
   ...demoEn,

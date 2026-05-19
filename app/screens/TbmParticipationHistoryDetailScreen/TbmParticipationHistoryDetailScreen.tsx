@@ -122,6 +122,16 @@ export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, rou
           </View>
         </View>
 
+        {/* ── 활동 내용 섹션 ── */}
+        <View style={S.$educationHeaderRow}>
+          <Text
+            text={translate("tbmParticipationHistoryDetailScreen:activityContent")}
+            style={S.$educationSectionHeader}
+          />
+          <View style={S.$educationHeaderLine} />
+        </View>
+        <View style={S.$educationCard} />
+
         {/* ── 교육자료 섹션 ── */}
         <View style={S.$educationHeaderRow}>
           <Text
