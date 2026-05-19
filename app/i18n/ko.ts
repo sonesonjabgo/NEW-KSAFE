@@ -717,6 +717,10 @@ const ko: Translations = {
     emptyText: "회사 교육자료가 없습니다.",
   },
 
+  tbmReportInquiryScreen: {
+    title: "TBM 보고서 조회",
+  },
+
   ...demoKo,
 }
 

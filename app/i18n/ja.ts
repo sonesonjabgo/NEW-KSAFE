@@ -678,6 +678,10 @@ const ja: Translations = {
     emptyText: "No educational materials available.",
   },
 
+  tbmReportInquiryScreen: {
+    title: "TBM報告書照会",
+  },
+
   ...demoJa,
 }
 

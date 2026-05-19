@@ -686,6 +686,10 @@ const fr: Translations = {
     emptyText: "No educational materials available.",
   },
 
+  tbmReportInquiryScreen: {
+    title: "TBM Report Inquiry",
+  },
+
   ...demoFr,
 }
 

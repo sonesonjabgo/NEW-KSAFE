@@ -8,7 +8,6 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import Config from "@/config"
-import { useAuth } from "@/context/AuthContext"
 import { AISafetyChatScreen } from "@/screens/AISafetyChatScreen/AISafetyChatScreen"
 import { EducationPresentationScreen } from "@/screens/EducationPresentationScreen/EducationPresentationScreen"
 import { EducationSelectScreen } from "@/screens/EducationSelectScreen/EducationSelectScreen"
@@ -27,6 +26,7 @@ import { TbmJoinInfoScreen } from "@/screens/TbmJoinInfoScreen/TbmJoinInfoScreen
 import { TbmJoinScreen } from "@/screens/TbmJoinScreen/TbmJoinScreen"
 import { TbmJoinSignScreen } from "@/screens/TbmJoinSignScreen/TbmJoinSignScreen"
 import { TbmListScreen } from "@/screens/TbmListScreen/TbmListScreen"
+import { TbmReportInquiryScreen } from "@/screens/TbmReportInquiryScreen/TbmReportInquiryScreen"
 import { TbmReportScreen } from "@/screens/TbmReportScreen/TbmReportScreen"
 import { TextTranslationScreen } from "@/screens/TextTranslationScreen/TextTranslationScreen"
 import { VoiceTranslationScreen } from "@/screens/VoiceTranslationScreen"
@@ -46,8 +46,6 @@ const exitRoutes = Config.exitRoutes
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = () => {
-  const { isAuthenticated } = useAuth()
-
   const {
     theme: { colors },
   } = useAppTheme()
@@ -77,6 +75,7 @@ const AppStack = () => {
       <Stack.Screen name="TbmCreate" component={TbmCreateScreen} />
       <Stack.Screen name="TbmDetail" component={TbmDetailScreen} />
       <Stack.Screen name="TbmReport" component={TbmReportScreen} />
+      <Stack.Screen name="TbmReportInquiry" component={TbmReportInquiryScreen} />
       <Stack.Screen name="TbmJoin" component={TbmJoinScreen} />
       <Stack.Screen name="TbmJoinInfo" component={TbmJoinInfoScreen} />
       <Stack.Screen name="TbmJoinHealth" component={TbmJoinHealthScreen} />

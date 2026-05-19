@@ -110,6 +110,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         Icon: GridTbmReport,
         label: translate("homeScreen:grid.tbmReport.label"),
         sub: translate("homeScreen:grid.tbmReport.sub"),
+        onPress: () => navigation.navigate("TbmReportInquiry"),
       },
       {
         Icon: GridWarning,

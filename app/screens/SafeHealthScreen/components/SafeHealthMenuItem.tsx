@@ -1,5 +1,6 @@
 import { FC } from "react"
 import { TouchableOpacity, View } from "react-native"
+import { useNavigation } from "@react-navigation/native"
 import {
   IconWalk,
   IconBook,
@@ -38,17 +39,24 @@ export const SafeHealthMenuItemComponent: FC<SafeHealthMenuItemComponentProps> =
   item,
   showDivider = true,
 }) => {
+  const navigation = useNavigation<any>()
   const IconComponent = getIcon(item.icon)
+
+  const handlePress = () => {
+    if (item.id === 3) {
+      navigation.navigate("TbmList")
+    } else if (item.id === 4) {
+      navigation.navigate("TbmReportInquiry")
+    } else if (item.id === 5) {
+      navigation.navigate("TbmJoin")
+    } else {
+      console.log(`${item.title} 클릭`)
+    }
+  }
 
   return (
     <>
-      <TouchableOpacity
-        style={S.$menuItemContainer}
-        activeOpacity={0.7}
-        onPress={() => {
-          console.log(`${item.title} 클릭`)
-        }}
-      >
+      <TouchableOpacity style={S.$menuItemContainer} activeOpacity={0.7} onPress={handlePress}>
         <View style={S.$menuIconContainer}>
           <IconComponent size={24} color="#0B3069" strokeWidth={1.5} />
         </View>
