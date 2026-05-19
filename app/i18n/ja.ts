@@ -474,6 +474,91 @@ const ja: Translations = {
     },
   },
 
+  tbmJoinInfoScreen: {
+    title: "TBM参加",
+    sectionInfo: "TBM情報",
+    activityName: "活動名",
+    manager: "担当者",
+    date: "日付",
+    sectionAttachments: "添付ファイル",
+    noAttachments: "添付ファイルはありません。",
+    prev: "前へ",
+    next: "次へ",
+  },
+
+  tbmJoinHealthScreen: {
+    title: "TBM参加",
+    heading: "健康状態確認",
+    prompt: "前日に過度の飲酒をしたか、または本日健康上の問題があるかご確認ください。",
+    statusGood: "異常なし",
+    statusBad: "異常あり",
+    prev: "前へ",
+    next: "次へ",
+    toastMessage: "次のステップに進む前に健康状態を選択してください。",
+    notAllCheckedModal: {
+      title: "健康状態を選択してください。",
+      message: "異常なしまたは異常ありを選択しないと次のステップに進めません。",
+      confirm: "OK",
+    },
+  },
+
+  tbmJoinSignScreen: {
+    title: "TBM参加",
+    heading: "電子署名",
+    description: "下記の領域に署名してください。",
+    signatureArea: "ここに署名",
+    clearLabel: "署名をリセット",
+    prev: "前へ",
+    next: "次へ",
+    noSignatureModal: {
+      title: "署名が必要です。",
+      message: "署名を完了してから次のステップに進んでください。",
+      confirm: "OK",
+    },
+  },
+
+  tbmJoinCompleteScreen: {
+    title: "TBM参加",
+    heading: "TBM参加完了",
+    subtitle: "安全な一日をお過ごしください！",
+    goHome: "完了",
+  },
+
+  tbmJoinScreen: {
+    title: "TBM参加",
+    selectPrompt: "参加するTBMを選択してください",
+    empty: {
+      title: "進行中のTBMがありません。",
+      subtitle: "現在参加できるTBMセッションがありません。",
+    },
+    prev: "前へ",
+    next: "次へ",
+    noSelectionModal: {
+      title: "セッションが選択されていません。",
+      message: "参加するTBMセッションを選択してください。",
+      confirm: "確認",
+    },
+    infoModal: {
+      title: "TBMガイド",
+      meaning: {
+        heading: "TBMとは",
+        body: "TBMとはTool Box Meetingの略称で、作業開始前に当日の作業内容、危険要因、安全対策を一緒に確認する短い安全会議です。",
+      },
+      importance: {
+        heading: "TBMが重要な理由",
+        body: "TBMは作業前に危険要因を事前に共有し、役割分担と保護具の着用を確認することで、事故を防ぐための重要な手順です。",
+      },
+      procedure: {
+        heading: "進行手順",
+        step1: "今日の作業内容と参加者を確認します。",
+        step2: "主な危険要因と安全措置を共有します。",
+        step3: "作業者の健康状態、保護具、現場変更事項を点検します。",
+        step4: "内容を確認した後、TBM参加とサインを行います。",
+      },
+      close: "閉じる",
+    },
+  },
+
   tbmReportScreen: {
     title: "TBMレポート生成",
     notice: {

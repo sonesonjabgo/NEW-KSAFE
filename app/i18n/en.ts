@@ -521,6 +521,91 @@ const en = {
     },
   },
 
+  tbmJoinInfoScreen: {
+    title: "Join TBM",
+    sectionInfo: "TBM Information",
+    activityName: "Activity",
+    manager: "Manager",
+    date: "Date",
+    sectionAttachments: "Attachments",
+    noAttachments: "No attachments.",
+    prev: "Previous",
+    next: "Next",
+  },
+
+  tbmJoinHealthScreen: {
+    title: "Join TBM",
+    heading: "Health Check",
+    prompt: "Please confirm if you consumed excessive alcohol the day before or have any health issues today.",
+    statusGood: "No Issues",
+    statusBad: "Issues Present",
+    prev: "Previous",
+    next: "Next",
+    toastMessage: "Please select your health status before proceeding.",
+    notAllCheckedModal: {
+      title: "Please select your health status.",
+      message: "You must select either No Issues or Issues Present to proceed.",
+      confirm: "OK",
+    },
+  },
+
+  tbmJoinSignScreen: {
+    title: "Join TBM",
+    heading: "Electronic Signature",
+    description: "Please sign in the area below.",
+    signatureArea: "Sign here",
+    clearLabel: "Reset Signature",
+    prev: "Previous",
+    next: "Next",
+    noSignatureModal: {
+      title: "Signature required.",
+      message: "Please complete your signature before proceeding.",
+      confirm: "OK",
+    },
+  },
+
+  tbmJoinCompleteScreen: {
+    title: "Join TBM",
+    heading: "TBM Participation Complete",
+    subtitle: "Have a safe day!",
+    goHome: "Complete",
+  },
+
+  tbmJoinScreen: {
+    title: "Join TBM",
+    selectPrompt: "Please select a TBM to join",
+    empty: {
+      title: "No TBM in progress.",
+      subtitle: "There are no TBM sessions available to join.",
+    },
+    prev: "Previous",
+    next: "Next",
+    noSelectionModal: {
+      title: "No session selected.",
+      message: "Please select a TBM session to join.",
+      confirm: "OK",
+    },
+    infoModal: {
+      title: "TBM Guide",
+      meaning: {
+        heading: "What is TBM?",
+        body: "TBM stands for Tool Box Meeting — a brief pre-work safety briefing where the day's tasks, hazards, and safety measures are reviewed together.",
+      },
+      importance: {
+        heading: "Why TBM Matters",
+        body: "TBM is a critical step to prevent accidents by sharing hazards in advance, clarifying roles, and checking that personal protective equipment is properly worn.",
+      },
+      procedure: {
+        heading: "How It Works",
+        step1: "Confirm today's work scope and participants.",
+        step2: "Share key hazards and safety measures.",
+        step3: "Check worker health, protective equipment, and any site changes.",
+        step4: "Review the content, then complete TBM participation and sign off.",
+      },
+      close: "Close",
+    },
+  },
+
   tbmReportScreen: {
     title: "TBM Report Generation",
     notice: {

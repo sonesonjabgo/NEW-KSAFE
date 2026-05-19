@@ -478,6 +478,91 @@ const fr: Translations = {
     },
   },
 
+  tbmJoinInfoScreen: {
+    title: "Rejoindre TBM",
+    sectionInfo: "Informations TBM",
+    activityName: "Nom de l'activité",
+    manager: "Responsable",
+    date: "Date",
+    sectionAttachments: "Pièces jointes",
+    noAttachments: "Aucune pièce jointe.",
+    prev: "Précédent",
+    next: "Suivant",
+  },
+
+  tbmJoinHealthScreen: {
+    title: "Rejoindre TBM",
+    heading: "Vérification de santé",
+    prompt: "Veuillez confirmer si vous avez consommé de l'alcool excessivement la veille ou si vous avez des problèmes de santé aujourd'hui.",
+    statusGood: "Aucun problème",
+    statusBad: "Problème présent",
+    prev: "Précédent",
+    next: "Suivant",
+    toastMessage: "Veuillez sélectionner votre état de santé avant de continuer.",
+    notAllCheckedModal: {
+      title: "Veuillez sélectionner votre état de santé.",
+      message: "Vous devez sélectionner Aucun problème ou Problème présent pour continuer.",
+      confirm: "OK",
+    },
+  },
+
+  tbmJoinSignScreen: {
+    title: "Rejoindre TBM",
+    heading: "Signature Électronique",
+    description: "Veuillez signer dans la zone ci-dessous.",
+    signatureArea: "Signez ici",
+    clearLabel: "Réinitialiser la signature",
+    prev: "Précédent",
+    next: "Suivant",
+    noSignatureModal: {
+      title: "Signature requise.",
+      message: "Veuillez compléter votre signature avant de continuer.",
+      confirm: "OK",
+    },
+  },
+
+  tbmJoinCompleteScreen: {
+    title: "Rejoindre TBM",
+    heading: "Participation au TBM complétée",
+    subtitle: "Passez une journée en toute sécurité !",
+    goHome: "Terminer",
+  },
+
+  tbmJoinScreen: {
+    title: "Rejoindre TBM",
+    selectPrompt: "Veuillez sélectionner un TBM à rejoindre",
+    empty: {
+      title: "Aucun TBM en cours.",
+      subtitle: "Il n'y a pas de sessions TBM disponibles en ce moment.",
+    },
+    prev: "Précédent",
+    next: "Suivant",
+    noSelectionModal: {
+      title: "Aucune session sélectionnée.",
+      message: "Veuillez sélectionner une session TBM à rejoindre.",
+      confirm: "OK",
+    },
+    infoModal: {
+      title: "Guide TBM",
+      meaning: {
+        heading: "Qu'est-ce que le TBM ?",
+        body: "TBM signifie Tool Box Meeting — une brève réunion de sécurité avant le travail où les tâches de la journée, les risques et les mesures de sécurité sont examinés ensemble.",
+      },
+      importance: {
+        heading: "Pourquoi le TBM est important",
+        body: "Le TBM est une étape essentielle pour prévenir les accidents en partageant les risques à l'avance, en clarifiant les rôles et en vérifiant le port des équipements de protection individuelle.",
+      },
+      procedure: {
+        heading: "Comment ça fonctionne",
+        step1: "Confirmez le périmètre de travail du jour et les participants.",
+        step2: "Partagez les principaux risques et mesures de sécurité.",
+        step3: "Vérifiez la santé des travailleurs, les équipements de protection et tout changement sur le site.",
+        step4: "Passez en revue le contenu, puis complétez la participation TBM et signez.",
+      },
+      close: "Fermer",
+    },
+  },
+
   tbmReportScreen: {
     title: "Génération de rapport TBM",
     notice: {

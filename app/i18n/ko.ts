@@ -513,6 +513,91 @@ const ko: Translations = {
     },
   },
 
+  tbmJoinInfoScreen: {
+    title: "TBM 참여",
+    sectionInfo: "TBM 정보",
+    activityName: "활동명",
+    manager: "담당자",
+    date: "날짜",
+    sectionAttachments: "첨부파일",
+    noAttachments: "첨부된 파일이 없습니다.",
+    prev: "이전",
+    next: "다음",
+  },
+
+  tbmJoinHealthScreen: {
+    title: "TBM 참여",
+    heading: "건강 상태 확인",
+    prompt: "전날, 과음을 하거나 금일 건강 이상여부를\n확인해주세요",
+    statusGood: "이상 없음",
+    statusBad: "이상 있음",
+    prev: "이전",
+    next: "다음",
+    toastMessage: "건강 상태를 선택한 뒤 다음 단계로 진행해주세요.",
+    notAllCheckedModal: {
+      title: "건강 상태를 선택해주세요.",
+      message: "이상 없음 또는 이상 있음을 선택해야\n다음 단계로 진행할 수 있습니다.",
+      confirm: "확인",
+    },
+  },
+
+  tbmJoinSignScreen: {
+    title: "TBM 참여",
+    heading: "전자 서명",
+    description: "아래 영역에 서명을 해주세요",
+    signatureArea: "이곳에 서명해주세요",
+    clearLabel: "서명 초기화",
+    prev: "이전",
+    next: "다음",
+    noSignatureModal: {
+      title: "서명이 필요합니다.",
+      message: "서명을 완료해야 다음 단계로 진행할 수 있습니다.",
+      confirm: "확인",
+    },
+  },
+
+  tbmJoinCompleteScreen: {
+    title: "TBM 참여",
+    heading: "TBM 참여 완료",
+    subtitle: "안전한 하루 되세요!",
+    goHome: "완료",
+  },
+
+  tbmJoinScreen: {
+    title: "TBM 참여",
+    selectPrompt: "참여할 TBM을 선택해주세요",
+    empty: {
+      title: "진행 중인 TBM이 없습니다.",
+      subtitle: "현재 참여할 수 있는 TBM 세션이 없습니다.",
+    },
+    prev: "이전",
+    next: "다음",
+    noSelectionModal: {
+      title: "선택된 세션이 없습니다.",
+      message: "참여할 TBM 세션을 선택해주세요.",
+      confirm: "확인",
+    },
+    infoModal: {
+      title: "TBM 안내",
+      meaning: {
+        heading: "TBM의 뜻",
+        body: "TBM은 Tool Box Meeting의 약자로, 작업 시작 전에 당일 작업 내용과 위험요인, 안전대책을 함께 확인하는 짧은 안전회의입니다.",
+      },
+      importance: {
+        heading: "TBM이 중요한 이유",
+        body: "TBM은 작업 전 위험요인을 미리 공유하고, 역할 분담과 보호구 착용 여부를 확인해 사고를 예방하는 데 중요한 절차입니다.",
+      },
+      procedure: {
+        heading: "진행 절차",
+        step1: "오늘 작업 내용와 참여자를 확인합니다.",
+        step2: "주요 위험요인과 안전조치를 공유합니다.",
+        step3: "작업자 건강 상태, 보호구, 현장 변경사항을 점검합니다.",
+        step4: "내용을 확인한 뒤 TBM 참여와 서명을 진행합니다.",
+      },
+      close: "닫기",
+    },
+  },
+
   tbmReportScreen: {
     title: "TBM 보고서 생성",
     notice: {

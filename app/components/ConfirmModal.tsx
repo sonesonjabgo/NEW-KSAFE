@@ -9,10 +9,10 @@ interface ConfirmModalProps {
   icon: ReactNode
   title: string
   message: string
-  cancelLabel: string
+  cancelLabel?: string
   confirmLabel: string
   confirmBgColor: string
-  onCancel: () => void
+  onCancel?: () => void
   onConfirm: () => void
 }
 
@@ -29,15 +29,17 @@ export const ConfirmModal: FC<ConfirmModalProps> = ({
 }) => {
   return (
     <Modal visible={visible} transparent animationType="fade" statusBarTranslucent>
-      <Pressable style={$overlay} onPress={onCancel}>
+      <Pressable style={$overlay} onPress={onCancel ?? (() => {})}>
         <Pressable onPress={() => {}} style={$card}>
           {icon}
           <Text text={title} style={$title} />
           <Text text={message} style={$message} />
           <View style={$btnRow}>
-            <TouchableOpacity style={$cancelBtn} activeOpacity={0.7} onPress={onCancel}>
-              <Text text={cancelLabel} style={$cancelBtnText} />
-            </TouchableOpacity>
+            {cancelLabel && (
+              <TouchableOpacity style={$cancelBtn} activeOpacity={0.7} onPress={onCancel}>
+                <Text text={cancelLabel} style={$cancelBtnText} />
+              </TouchableOpacity>
+            )}
             <TouchableOpacity
               style={[$confirmBtn, { backgroundColor: confirmBgColor }]}
               activeOpacity={0.8}
