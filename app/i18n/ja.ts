@@ -715,6 +715,7 @@ const ja: Translations = {
     delete: "Delete",
     cancel: "Cancel",
     save: "Save",
+    savedMessage: "Proposal has been updated.",
   },
 
   improvementProposalCreateScreen: {

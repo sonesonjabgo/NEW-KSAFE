@@ -12,6 +12,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { Toast } from "@/components/Toast"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 
@@ -65,6 +66,8 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
   const [editMode, setEditMode] = useState(false)
   const [editContent, setEditContent] = useState("")
   const [contentFocused, setContentFocused] = useState(false)
+  const [toastVisible, setToastVisible] = useState(false)
+  const hideToast = useCallback(() => setToastVisible(false), [])
 
   const hasContentError = editContent.length > 2000
   const isEditValid = useMemo(
@@ -83,6 +86,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
 
   const saveEdit = useCallback(() => {
     console.log("저장:", editContent)
+    setToastVisible(true)
     setEditMode(false)
   }, [editContent])
 
@@ -132,6 +136,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
   // ── Render ──────────────────────────────────────────────────────────────────
 
   return (
+    <>
     <StackScreen
       title={translate("improvementProposalDetailScreen:title")}
       onBack={() => navigation.goBack()}
@@ -320,5 +325,13 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
         </View>
       </KeyboardAvoidingView>
     </StackScreen>
+
+    <Toast
+      visible={toastVisible}
+      message={translate("improvementProposalDetailScreen:savedMessage")}
+      icon={<IconCheck size={16} color="#FFFFFF" strokeWidth={2.5} />}
+      onHide={hideToast}
+    />
+    </>
   )
 }

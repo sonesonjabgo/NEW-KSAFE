@@ -754,6 +754,7 @@ const ko: Translations = {
     delete: "삭제하기",
     cancel: "취소",
     save: "저장",
+    savedMessage: "제안이 수정되었습니다.",
   },
 
   improvementProposalCreateScreen: {
