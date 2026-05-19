@@ -175,9 +175,7 @@ export const EducationMaterialRegisterScreen: FC<EducationMaterialRegisterScreen
               />
             </TouchableOpacity>
             <Text
-              text={translate(
-                "educationMaterialRegisterScreen:educationTitle.includeFileNameDesc",
-              )}
+              text={translate("educationMaterialRegisterScreen:educationTitle.includeFileNameDesc")}
               style={S.$checkboxDesc}
             />
           </View>
@@ -202,7 +200,7 @@ export const EducationMaterialRegisterScreen: FC<EducationMaterialRegisterScreen
             </View>
             <Text
               text={translate("educationMaterialRegisterScreen:content.helper")}
-              style={[S.$helperText, { textAlign: "center" }]}
+              style={[S.$helperText]}
             />
           </View>
         </ScrollView>

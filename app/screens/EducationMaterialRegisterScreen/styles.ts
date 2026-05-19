@@ -79,6 +79,7 @@ export const $helperText: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.medium,
   color: "#979797",
+  paddingHorizontal: 12,
 }
 
 // ── Upload box ────────────────────────────────────────────────────────────────
