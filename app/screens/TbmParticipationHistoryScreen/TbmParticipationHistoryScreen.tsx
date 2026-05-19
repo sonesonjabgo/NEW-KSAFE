@@ -62,7 +62,7 @@ const $content: ViewStyle = {
 
 const $row: ViewStyle = {
   flexDirection: "row",
-  gap: 12,
+  gap: 11,
 }
 
 const $card: ViewStyle = {
@@ -71,7 +71,7 @@ const $card: ViewStyle = {
   backgroundColor: "#FFFFFF",
   borderRadius: 12,
   borderWidth: 1,
-  borderColor: "#E9ECF0",
+  borderColor: "#ECECEC",
   padding: 15,
   alignItems: "flex-start",
   justifyContent: "center",
