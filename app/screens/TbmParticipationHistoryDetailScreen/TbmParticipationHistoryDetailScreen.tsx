@@ -174,23 +174,22 @@ const $infoCard: ViewStyle = {
 
 const $infoRow: ViewStyle = {
   flexDirection: "row",
-  justifyContent: "space-between",
   alignItems: "center",
+  gap: 16,
 }
 
 const $infoLabel: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#606060",
+  width: 64,
 }
 
 const $infoValue: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#191015",
-  flexShrink: 1,
-  textAlign: "right",
-  marginLeft: 12,
+  flex: 1,
 }
 
 const $profileRow: ViewStyle = {
