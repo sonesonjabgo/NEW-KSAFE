@@ -7,6 +7,9 @@ export const MOCK_EDUCATION_MATERIALS: EducationMaterial[] = [
     subcategory: "감전사고",
     datetime: "2026.05.10 14:30",
     source: 0,
+    fileName: "감전사고_예방교육.pdf (23 MB)",
+    author: "이준혁",
+    department: "교육콘텐츠팀",
   },
   {
     id: 2,
@@ -14,6 +17,9 @@ export const MOCK_EDUCATION_MATERIALS: EducationMaterial[] = [
     subcategory: "공통",
     datetime: "2026.05.08 09:00",
     source: 0,
+    fileName: "공통안전점검표.pdf (8 MB)",
+    author: "박소연",
+    department: "안전기획팀",
   },
   {
     id: 3,
@@ -21,6 +27,9 @@ export const MOCK_EDUCATION_MATERIALS: EducationMaterial[] = [
     subcategory: "기계점검보수",
     datetime: "2026.05.05 11:15",
     source: 0,
+    fileName: "기계점검보수절차.pdf (15 MB)",
+    author: "최도현",
+    department: "기술지원팀",
   },
   {
     id: 4,
@@ -28,6 +37,9 @@ export const MOCK_EDUCATION_MATERIALS: EducationMaterial[] = [
     subcategory: "감전사고",
     datetime: "2026.04.28 16:45",
     source: 0,
+    fileName: "전기설비감전위험.pdf (31 MB)",
+    author: "강민지",
+    department: "교육콘텐츠팀",
   },
   {
     id: 5,
@@ -35,6 +47,9 @@ export const MOCK_EDUCATION_MATERIALS: EducationMaterial[] = [
     subcategory: "공통",
     datetime: "2026.04.20 08:30",
     source: 0,
+    fileName: "현장안전규정가이드.pdf (12 MB)",
+    author: "윤서준",
+    department: "안전기획팀",
   },
   {
     id: 6,
@@ -42,6 +57,9 @@ export const MOCK_EDUCATION_MATERIALS: EducationMaterial[] = [
     subcategory: "감전사고",
     datetime: "2026.05.12 10:00",
     source: 2,
+    fileName: "감전위험구역안내.pdf (6 MB)",
+    author: "홍길동",
+    department: "A현장 안전팀",
   },
   {
     id: 7,
@@ -49,6 +67,9 @@ export const MOCK_EDUCATION_MATERIALS: EducationMaterial[] = [
     subcategory: "기계점검보수",
     datetime: "2026.05.03 14:00",
     source: 2,
+    fileName: "기계보수일지.pdf (9 MB)",
+    author: "김영수",
+    department: "B현장 관리팀",
   },
   {
     id: 8,
@@ -56,5 +77,8 @@ export const MOCK_EDUCATION_MATERIALS: EducationMaterial[] = [
     subcategory: "공통",
     datetime: "2026.04.15 09:30",
     source: 2,
+    fileName: "현장안전수칙.pdf (4 MB)",
+    author: "이민아",
+    department: "C현장 안전팀",
   },
 ]

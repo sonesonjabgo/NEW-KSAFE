@@ -706,6 +706,11 @@ const ko: Translations = {
     },
   },
 
+  educationMaterialScreen: {
+    title: "TBM 교육 자료 목록",
+    registerButton: "새 교육자료 등록",
+  },
+
   educationSelectScreen: {
     title: "교육자료 선택",
     sourceTab1: "KS산업안전협회",

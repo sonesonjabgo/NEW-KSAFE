@@ -43,7 +43,9 @@ export const SafeHealthMenuItemComponent: FC<SafeHealthMenuItemComponentProps> =
   const IconComponent = getIcon(item.icon)
 
   const handlePress = () => {
-    if (item.id === 3) {
+    if (item.id === 2) {
+      navigation.navigate("EducationMaterial")
+    } else if (item.id === 3) {
       navigation.navigate("TbmList")
     } else if (item.id === 4) {
       navigation.navigate("TbmReportInquiry")

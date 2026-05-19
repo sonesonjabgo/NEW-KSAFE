@@ -675,6 +675,11 @@ const es: Translations = {
     },
   },
 
+  educationMaterialScreen: {
+    title: "TBM Education Material List",
+    registerButton: "Register New Education Material",
+  },
+
   educationSelectScreen: {
     title: "Select Educational Materials",
     sourceTab1: "KS Safety Association",
