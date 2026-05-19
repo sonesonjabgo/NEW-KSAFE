@@ -14,14 +14,15 @@ const MOCK_CAUTION = 3
 interface StatCardProps {
   label: string
   count: number
+  countColor?: string
 }
 
-const StatCard: FC<StatCardProps> = ({ label, count }) => (
+const StatCard: FC<StatCardProps> = ({ label, count, countColor = "#252525" }) => (
   <View style={$card}>
     <Text text={label} style={$cardLabel} />
     <Text
       text={translate("tbmParticipationHistoryScreen:countUnit", { count })}
-      style={$cardCount}
+      style={[$cardCount, { color: countColor }]}
     />
   </View>
 )
@@ -45,6 +46,7 @@ export const TbmParticipationHistoryScreen: FC<TbmParticipationHistoryScreenProp
           <StatCard
             label={translate("tbmParticipationHistoryScreen:cautionResponse")}
             count={MOCK_CAUTION}
+            countColor={colors.blue}
           />
         </View>
       </View>
@@ -65,26 +67,26 @@ const $row: ViewStyle = {
 
 const $card: ViewStyle = {
   flex: 1,
+  height: 88,
   backgroundColor: "#FFFFFF",
   borderRadius: 12,
   borderWidth: 1,
   borderColor: "#E9ECF0",
-  paddingVertical: 20,
-  paddingHorizontal: 16,
+  padding: 15,
   alignItems: "center",
-  gap: 8,
+  justifyContent: "center",
+  gap: 6,
 }
 
 const $cardLabel: TextStyle = {
-  fontSize: 14,
-  fontFamily: typography.primary.medium,
-  color: colors.navy,
+  fontSize: 15,
+  fontFamily: typography.primary.normal,
+  color: "#574D4A",
   textAlign: "center",
 }
 
 const $cardCount: TextStyle = {
-  fontSize: 28,
+  fontSize: 26,
   fontFamily: typography.primary.bold,
-  color: colors.navy,
   textAlign: "center",
 }
