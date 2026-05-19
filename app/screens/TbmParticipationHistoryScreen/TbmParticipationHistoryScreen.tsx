@@ -51,6 +51,7 @@ export const TbmParticipationHistoryScreen: FC<TbmParticipationHistoryScreenProp
             countColor={colors.blue}
           />
         </View>
+        <View style={$bottomCard} />
       </View>
     </StackScreen>
   )
@@ -104,4 +105,13 @@ const $cardUnit: TextStyle = {
   lineHeight: 15,
   fontFamily: typography.primary.normal,
   color: "#574D4A",
+}
+
+const $bottomCard: ViewStyle = {
+  height: 150,
+  marginTop: 25,
+  backgroundColor: "#FFFFFF",
+  borderRadius: 12,
+  borderWidth: 1,
+  borderColor: "#ECECEC",
 }
