@@ -1,10 +1,10 @@
 import { FC } from "react"
 import { ScrollView, TouchableOpacity, View } from "react-native"
 import {
-  IconBolt,
   IconCalendarTime,
   IconChevronRight,
   IconDownload,
+  IconUpload,
 } from "@tabler/icons-react-native"
 
 import EducationFrame from "@assets/icons/education_frame.svg"
@@ -131,7 +131,7 @@ export const EducationMaterialDetailScreen: FC<EducationMaterialDetailScreenProp
             activeOpacity={0.8}
             onPress={() => console.log("publish:", item.id)}
           >
-            <IconBolt size={20} color="#FFFFFF" />
+            <IconUpload size={20} color="#FFFFFF" />
             <Text
               text={translate("educationMaterialDetailScreen:publishButton")}
               style={S.$publishBtnText}
