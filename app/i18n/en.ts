@@ -521,6 +521,36 @@ const en = {
     },
   },
 
+  tbmJoinScreen: {
+    title: "Join TBM",
+    selectPrompt: "Please select a TBM to join",
+    empty: {
+      title: "No TBM in progress.",
+      subtitle: "There are no TBM sessions available to join.",
+    },
+    prev: "Previous",
+    next: "Next",
+    infoModal: {
+      title: "TBM Guide",
+      meaning: {
+        heading: "What is TBM?",
+        body: "TBM stands for Tool Box Meeting — a brief pre-work safety briefing where the day's tasks, hazards, and safety measures are reviewed together.",
+      },
+      importance: {
+        heading: "Why TBM Matters",
+        body: "TBM is a critical step to prevent accidents by sharing hazards in advance, clarifying roles, and checking that personal protective equipment is properly worn.",
+      },
+      procedure: {
+        heading: "How It Works",
+        step1: "Confirm today's work scope and participants.",
+        step2: "Share key hazards and safety measures.",
+        step3: "Check worker health, protective equipment, and any site changes.",
+        step4: "Review the content, then complete TBM participation and sign off.",
+      },
+      close: "Close",
+    },
+  },
+
   tbmReportScreen: {
     title: "TBM Report Generation",
     notice: {

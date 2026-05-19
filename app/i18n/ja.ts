@@ -474,6 +474,36 @@ const ja: Translations = {
     },
   },
 
+  tbmJoinScreen: {
+    title: "TBM参加",
+    selectPrompt: "参加するTBMを選択してください",
+    empty: {
+      title: "進行中のTBMがありません。",
+      subtitle: "現在参加できるTBMセッションがありません。",
+    },
+    prev: "前へ",
+    next: "次へ",
+    infoModal: {
+      title: "TBMガイド",
+      meaning: {
+        heading: "TBMとは",
+        body: "TBMとはTool Box Meetingの略称で、作業開始前に当日の作業内容、危険要因、安全対策を一緒に確認する短い安全会議です。",
+      },
+      importance: {
+        heading: "TBMが重要な理由",
+        body: "TBMは作業前に危険要因を事前に共有し、役割分担と保護具の着用を確認することで、事故を防ぐための重要な手順です。",
+      },
+      procedure: {
+        heading: "進行手順",
+        step1: "今日の作業内容と参加者を確認します。",
+        step2: "主な危険要因と安全措置を共有します。",
+        step3: "作業者の健康状態、保護具、現場変更事項を点検します。",
+        step4: "内容を確認した後、TBM参加とサインを行います。",
+      },
+      close: "閉じる",
+    },
+  },
+
   tbmReportScreen: {
     title: "TBMレポート生成",
     notice: {

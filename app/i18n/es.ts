@@ -478,6 +478,36 @@ const es: Translations = {
     },
   },
 
+  tbmJoinScreen: {
+    title: "Unirse al TBM",
+    selectPrompt: "Por favor, seleccione un TBM al que unirse",
+    empty: {
+      title: "No hay TBM en progreso.",
+      subtitle: "No hay sesiones TBM disponibles para unirse en este momento.",
+    },
+    prev: "Anterior",
+    next: "Siguiente",
+    infoModal: {
+      title: "Guía TBM",
+      meaning: {
+        heading: "¿Qué es TBM?",
+        body: "TBM significa Tool Box Meeting — una breve reunión de seguridad previa al trabajo donde se revisan las tareas del día, los peligros y las medidas de seguridad.",
+      },
+      importance: {
+        heading: "Por qué es importante el TBM",
+        body: "El TBM es un paso crítico para prevenir accidentes compartiendo los peligros con anticipación, aclarando roles y verificando que el equipo de protección personal se use correctamente.",
+      },
+      procedure: {
+        heading: "Cómo funciona",
+        step1: "Confirme el alcance del trabajo del día y los participantes.",
+        step2: "Comparta los principales peligros y medidas de seguridad.",
+        step3: "Verifique la salud de los trabajadores, el equipo de protección y cualquier cambio en el sitio.",
+        step4: "Revise el contenido, luego complete la participación en el TBM y firme.",
+      },
+      close: "Cerrar",
+    },
+  },
+
   tbmReportScreen: {
     title: "Generación de Informe TBM",
     notice: {

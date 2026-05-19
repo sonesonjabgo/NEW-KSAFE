@@ -513,6 +513,36 @@ const ko: Translations = {
     },
   },
 
+  tbmJoinScreen: {
+    title: "TBM 참여",
+    selectPrompt: "참여할 TBM을 선택해주세요",
+    empty: {
+      title: "진행 중인 TBM이 없습니다.",
+      subtitle: "현재 참여할 수 있는 TBM 세션이 없습니다.",
+    },
+    prev: "이전",
+    next: "다음",
+    infoModal: {
+      title: "TBM 안내",
+      meaning: {
+        heading: "TBM의 뜻",
+        body: "TBM은 Tool Box Meeting의 약자로, 작업 시작 전에 당일 작업 내용과 위험요인, 안전대책을 함께 확인하는 짧은 안전회의입니다.",
+      },
+      importance: {
+        heading: "TBM이 중요한 이유",
+        body: "TBM은 작업 전 위험요인을 미리 공유하고, 역할 분담과 보호구 착용 여부를 확인해 사고를 예방하는 데 중요한 절차입니다.",
+      },
+      procedure: {
+        heading: "진행 절차",
+        step1: "오늘 작업 내용와 참여자를 확인합니다.",
+        step2: "주요 위험요인과 안전조치를 공유합니다.",
+        step3: "작업자 건강 상태, 보호구, 현장 변경사항을 점검합니다.",
+        step4: "내용을 확인한 뒤 TBM 참여와 서명을 진행합니다.",
+      },
+      close: "닫기",
+    },
+  },
+
   tbmReportScreen: {
     title: "TBM 보고서 생성",
     notice: {
