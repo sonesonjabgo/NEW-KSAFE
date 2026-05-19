@@ -513,6 +513,57 @@ const ko: Translations = {
     },
   },
 
+  tbmJoinInfoScreen: {
+    title: "TBM 참여",
+    sectionInfo: "TBM 정보",
+    activityName: "활동명",
+    manager: "담당자",
+    date: "날짜",
+    sectionAttachments: "첨부파일",
+    noAttachments: "첨부된 파일이 없습니다.",
+    prev: "이전",
+    next: "다음",
+  },
+
+  tbmJoinHealthScreen: {
+    title: "TBM 참여",
+    prompt: "아래 항목을 모두 확인해주세요",
+    items: {
+      item1: "오늘 몸 상태가 양호합니다.",
+      item2: "충분한 수면을 취했습니다.",
+      item3: "현재 음주 상태가 아닙니다.",
+      item4: "안전 보호구를 착용하였습니다.",
+    },
+    prev: "이전",
+    next: "다음",
+    notAllCheckedModal: {
+      title: "모든 항목을 확인해주세요.",
+      message: "건강 상태 항목을 모두 체크해야 다음 단계로 진행할 수 있습니다.",
+      confirm: "확인",
+    },
+  },
+
+  tbmJoinSignScreen: {
+    title: "TBM 참여",
+    prompt: "전자 서명을 해주세요",
+    signatureArea: "이곳에 서명해주세요",
+    clearLabel: "서명 지우기",
+    prev: "이전",
+    next: "다음",
+    noSignatureModal: {
+      title: "서명이 필요합니다.",
+      message: "서명을 완료해야 다음 단계로 진행할 수 있습니다.",
+      confirm: "확인",
+    },
+  },
+
+  tbmJoinCompleteScreen: {
+    title: "TBM 참여",
+    heading: "TBM 참여가 완료되었습니다!",
+    subtitle: "TBM 참여 정보가 성공적으로 기록되었습니다.",
+    goHome: "홈으로 가기",
+  },
+
   tbmJoinScreen: {
     title: "TBM 참여",
     selectPrompt: "참여할 TBM을 선택해주세요",
@@ -522,6 +573,11 @@ const ko: Translations = {
     },
     prev: "이전",
     next: "다음",
+    noSelectionModal: {
+      title: "선택된 세션이 없습니다.",
+      message: "참여할 TBM 세션을 선택해주세요.",
+      confirm: "확인",
+    },
     infoModal: {
       title: "TBM 안내",
       meaning: {

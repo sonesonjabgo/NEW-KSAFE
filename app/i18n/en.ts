@@ -521,6 +521,57 @@ const en = {
     },
   },
 
+  tbmJoinInfoScreen: {
+    title: "Join TBM",
+    sectionInfo: "TBM Information",
+    activityName: "Activity",
+    manager: "Manager",
+    date: "Date",
+    sectionAttachments: "Attachments",
+    noAttachments: "No attachments.",
+    prev: "Previous",
+    next: "Next",
+  },
+
+  tbmJoinHealthScreen: {
+    title: "Join TBM",
+    prompt: "Please confirm all items below",
+    items: {
+      item1: "I am in good physical condition today.",
+      item2: "I have had enough sleep.",
+      item3: "I am not under the influence of alcohol.",
+      item4: "I am wearing the required protective equipment.",
+    },
+    prev: "Previous",
+    next: "Next",
+    notAllCheckedModal: {
+      title: "Please confirm all items.",
+      message: "All health condition items must be checked before proceeding.",
+      confirm: "OK",
+    },
+  },
+
+  tbmJoinSignScreen: {
+    title: "Join TBM",
+    prompt: "Please sign below",
+    signatureArea: "Sign here",
+    clearLabel: "Clear",
+    prev: "Previous",
+    next: "Next",
+    noSignatureModal: {
+      title: "Signature required.",
+      message: "Please complete your signature before proceeding.",
+      confirm: "OK",
+    },
+  },
+
+  tbmJoinCompleteScreen: {
+    title: "Join TBM",
+    heading: "TBM Participation Complete!",
+    subtitle: "Your participation has been successfully recorded.",
+    goHome: "Go to Home",
+  },
+
   tbmJoinScreen: {
     title: "Join TBM",
     selectPrompt: "Please select a TBM to join",
@@ -530,6 +581,11 @@ const en = {
     },
     prev: "Previous",
     next: "Next",
+    noSelectionModal: {
+      title: "No session selected.",
+      message: "Please select a TBM session to join.",
+      confirm: "OK",
+    },
     infoModal: {
       title: "TBM Guide",
       meaning: {

@@ -474,6 +474,57 @@ const ja: Translations = {
     },
   },
 
+  tbmJoinInfoScreen: {
+    title: "TBM参加",
+    sectionInfo: "TBM情報",
+    activityName: "活動名",
+    manager: "担当者",
+    date: "日付",
+    sectionAttachments: "添付ファイル",
+    noAttachments: "添付ファイルはありません。",
+    prev: "前へ",
+    next: "次へ",
+  },
+
+  tbmJoinHealthScreen: {
+    title: "TBM参加",
+    prompt: "以下の項目をすべて確認してください",
+    items: {
+      item1: "今日の体調は良好です。",
+      item2: "十分な睡眠を取りました。",
+      item3: "飲酒状態ではありません。",
+      item4: "必要な安全保護具を着用しています。",
+    },
+    prev: "前へ",
+    next: "次へ",
+    notAllCheckedModal: {
+      title: "すべての項目を確認してください。",
+      message: "健康状態の項目をすべてチェックしないと次のステップに進めません。",
+      confirm: "OK",
+    },
+  },
+
+  tbmJoinSignScreen: {
+    title: "TBM参加",
+    prompt: "下記に署名してください",
+    signatureArea: "ここに署名",
+    clearLabel: "クリア",
+    prev: "前へ",
+    next: "次へ",
+    noSignatureModal: {
+      title: "署名が必要です。",
+      message: "署名を完了してから次のステップに進んでください。",
+      confirm: "OK",
+    },
+  },
+
+  tbmJoinCompleteScreen: {
+    title: "TBM参加",
+    heading: "TBM参加が完了しました！",
+    subtitle: "参加情報が正常に記録されました。",
+    goHome: "ホームへ",
+  },
+
   tbmJoinScreen: {
     title: "TBM参加",
     selectPrompt: "参加するTBMを選択してください",
@@ -483,6 +534,11 @@ const ja: Translations = {
     },
     prev: "前へ",
     next: "次へ",
+    noSelectionModal: {
+      title: "セッションが選択されていません。",
+      message: "参加するTBMセッションを選択してください。",
+      confirm: "確認",
+    },
     infoModal: {
       title: "TBMガイド",
       meaning: {

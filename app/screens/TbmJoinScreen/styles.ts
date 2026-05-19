@@ -86,6 +86,108 @@ export const $nextBtnText: TextStyle = {
   color: "#FFFFFF",
 }
 
+// ── List ──────────────────────────────────────────────────────────────────────
+
+export const $listContent: ViewStyle = {
+  flex: 1,
+}
+
+export const $flatListContent: ViewStyle = {
+  paddingBottom: 12,
+  gap: 22,
+}
+
+export const $card: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  height: 102,
+  backgroundColor: "#FFFFFF",
+  borderRadius: 12,
+  borderWidth: 1,
+  borderColor: "#ECECEC",
+  paddingHorizontal: 16,
+  gap: 22,
+  shadowColor: "#000000",
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.08,
+  shadowRadius: 6,
+  elevation: 3,
+}
+
+export const $cardSelected: ViewStyle = {
+  borderColor: "#1062D8",
+  backgroundColor: "#ECF4FE",
+}
+
+export const $checkbox: ViewStyle = {
+  width: 24,
+  height: 24,
+  borderRadius: 12,
+  borderWidth: 2,
+  borderColor: "#D3D3D3",
+  justifyContent: "center",
+  alignItems: "center",
+  flexShrink: 0,
+}
+
+export const $checkboxSelected: ViewStyle = {
+  width: 24,
+  height: 24,
+  borderRadius: 12,
+  backgroundColor: "#1062D8",
+  justifyContent: "center",
+  alignItems: "center",
+  flexShrink: 0,
+}
+
+export const $cardContent: ViewStyle = {
+  flex: 1,
+  gap: 10,
+}
+
+export const $cardTitle: TextStyle = {
+  fontSize: 15,
+  fontFamily: typography.primary.semiBold,
+  color: "#111111",
+}
+
+export const $cardMeta: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 6,
+}
+
+export const $cardAvatar: ViewStyle = {
+  width: 18,
+  height: 18,
+  borderRadius: 9,
+  backgroundColor: "#E0E0E0",
+  flexShrink: 0,
+}
+
+export const $cardAuthor: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#7B7B7B",
+}
+
+export const $cardDate: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#7B7B7B",
+}
+
+// ── No Selection Modal ────────────────────────────────────────────────────────
+
+export const $noSelectionIconCircle: ViewStyle = {
+  width: 38,
+  height: 38,
+  borderRadius: 19,
+  backgroundColor: "#E3EDFB",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
 // ── Info Modal ────────────────────────────────────────────────────────────────
 
 export const $modalWrap: ViewStyle = {

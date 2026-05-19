@@ -478,6 +478,57 @@ const fr: Translations = {
     },
   },
 
+  tbmJoinInfoScreen: {
+    title: "Rejoindre TBM",
+    sectionInfo: "Informations TBM",
+    activityName: "Nom de l'activité",
+    manager: "Responsable",
+    date: "Date",
+    sectionAttachments: "Pièces jointes",
+    noAttachments: "Aucune pièce jointe.",
+    prev: "Précédent",
+    next: "Suivant",
+  },
+
+  tbmJoinHealthScreen: {
+    title: "Rejoindre TBM",
+    prompt: "Veuillez confirmer tous les éléments ci-dessous",
+    items: {
+      item1: "Mon état de santé est bon aujourd'hui.",
+      item2: "J'ai suffisamment dormi.",
+      item3: "Je ne suis pas sous l'influence de l'alcool.",
+      item4: "Je porte les équipements de protection requis.",
+    },
+    prev: "Précédent",
+    next: "Suivant",
+    notAllCheckedModal: {
+      title: "Veuillez confirmer tous les éléments.",
+      message: "Tous les éléments de l'état de santé doivent être confirmés pour continuer.",
+      confirm: "OK",
+    },
+  },
+
+  tbmJoinSignScreen: {
+    title: "Rejoindre TBM",
+    prompt: "Veuillez signer ci-dessous",
+    signatureArea: "Signez ici",
+    clearLabel: "Effacer",
+    prev: "Précédent",
+    next: "Suivant",
+    noSignatureModal: {
+      title: "Signature requise.",
+      message: "Veuillez compléter votre signature avant de continuer.",
+      confirm: "OK",
+    },
+  },
+
+  tbmJoinCompleteScreen: {
+    title: "Rejoindre TBM",
+    heading: "Participation au TBM complétée !",
+    subtitle: "Votre participation a été enregistrée avec succès.",
+    goHome: "Aller à l'accueil",
+  },
+
   tbmJoinScreen: {
     title: "Rejoindre TBM",
     selectPrompt: "Veuillez sélectionner un TBM à rejoindre",
@@ -487,6 +538,11 @@ const fr: Translations = {
     },
     prev: "Précédent",
     next: "Suivant",
+    noSelectionModal: {
+      title: "Aucune session sélectionnée.",
+      message: "Veuillez sélectionner une session TBM à rejoindre.",
+      confirm: "OK",
+    },
     infoModal: {
       title: "Guide TBM",
       meaning: {

@@ -474,6 +474,57 @@ const hi: Translations = {
     },
   },
 
+  tbmJoinInfoScreen: {
+    title: "TBM में शामिल हों",
+    sectionInfo: "TBM जानकारी",
+    activityName: "गतिविधि का नाम",
+    manager: "प्रबंधक",
+    date: "तारीख",
+    sectionAttachments: "संलग्नक",
+    noAttachments: "कोई संलग्नक नहीं।",
+    prev: "पिछला",
+    next: "अगला",
+  },
+
+  tbmJoinHealthScreen: {
+    title: "TBM में शामिल हों",
+    prompt: "कृपया नीचे दिए गए सभी आइटम की पुष्टि करें",
+    items: {
+      item1: "आज मेरी शारीरिक स्थिति अच्छी है।",
+      item2: "मैंने पर्याप्त नींद ली है।",
+      item3: "मैं शराब के प्रभाव में नहीं हूँ।",
+      item4: "मैंने आवश्यक सुरक्षा उपकरण पहने हुए हैं।",
+    },
+    prev: "पिछला",
+    next: "अगला",
+    notAllCheckedModal: {
+      title: "कृपया सभी आइटम की पुष्टि करें।",
+      message: "आगे बढ़ने के लिए सभी स्वास्थ्य स्थिति आइटम की पुष्टि होनी चाहिए।",
+      confirm: "ठीक है",
+    },
+  },
+
+  tbmJoinSignScreen: {
+    title: "TBM में शामिल हों",
+    prompt: "कृपया नीचे हस्ताक्षर करें",
+    signatureArea: "यहाँ हस्ताक्षर करें",
+    clearLabel: "साफ करें",
+    prev: "पिछला",
+    next: "अगला",
+    noSignatureModal: {
+      title: "हस्ताक्षर आवश्यक है।",
+      message: "आगे बढ़ने से पहले कृपया अपना हस्ताक्षर पूरा करें।",
+      confirm: "ठीक है",
+    },
+  },
+
+  tbmJoinCompleteScreen: {
+    title: "TBM में शामिल हों",
+    heading: "TBM भागीदारी पूर्ण!",
+    subtitle: "आपकी भागीदारी सफलतापूर्वक दर्ज की गई है।",
+    goHome: "होम पर जाएं",
+  },
+
   tbmJoinScreen: {
     title: "TBM में शामिल हों",
     selectPrompt: "कृपया शामिल होने के लिए एक TBM चुनें",
@@ -483,6 +534,11 @@ const hi: Translations = {
     },
     prev: "पिछला",
     next: "अगला",
+    noSelectionModal: {
+      title: "कोई सत्र चयनित नहीं है।",
+      message: "कृपया शामिल होने के लिए एक TBM सत्र चुनें।",
+      confirm: "ठीक है",
+    },
     infoModal: {
       title: "TBM गाइड",
       meaning: {

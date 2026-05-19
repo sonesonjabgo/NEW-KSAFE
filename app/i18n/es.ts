@@ -478,6 +478,57 @@ const es: Translations = {
     },
   },
 
+  tbmJoinInfoScreen: {
+    title: "Unirse al TBM",
+    sectionInfo: "Información del TBM",
+    activityName: "Nombre de la actividad",
+    manager: "Responsable",
+    date: "Fecha",
+    sectionAttachments: "Archivos adjuntos",
+    noAttachments: "No hay archivos adjuntos.",
+    prev: "Anterior",
+    next: "Siguiente",
+  },
+
+  tbmJoinHealthScreen: {
+    title: "Unirse al TBM",
+    prompt: "Por favor, confirme todos los elementos a continuación",
+    items: {
+      item1: "Mi estado de salud es bueno hoy.",
+      item2: "He dormido lo suficiente.",
+      item3: "No estoy bajo la influencia del alcohol.",
+      item4: "Llevo el equipo de protección requerido.",
+    },
+    prev: "Anterior",
+    next: "Siguiente",
+    notAllCheckedModal: {
+      title: "Por favor, confirme todos los elementos.",
+      message: "Debe confirmar todos los elementos de salud para continuar.",
+      confirm: "Aceptar",
+    },
+  },
+
+  tbmJoinSignScreen: {
+    title: "Unirse al TBM",
+    prompt: "Por favor, firme a continuación",
+    signatureArea: "Firme aquí",
+    clearLabel: "Borrar",
+    prev: "Anterior",
+    next: "Siguiente",
+    noSignatureModal: {
+      title: "Se requiere firma.",
+      message: "Por favor, complete su firma antes de continuar.",
+      confirm: "Aceptar",
+    },
+  },
+
+  tbmJoinCompleteScreen: {
+    title: "Unirse al TBM",
+    heading: "¡Participación en TBM completada!",
+    subtitle: "Su participación ha sido registrada con éxito.",
+    goHome: "Ir al inicio",
+  },
+
   tbmJoinScreen: {
     title: "Unirse al TBM",
     selectPrompt: "Por favor, seleccione un TBM al que unirse",
@@ -487,6 +538,11 @@ const es: Translations = {
     },
     prev: "Anterior",
     next: "Siguiente",
+    noSelectionModal: {
+      title: "No hay sesión seleccionada.",
+      message: "Por favor, seleccione una sesión TBM para unirse.",
+      confirm: "Aceptar",
+    },
     infoModal: {
       title: "Guía TBM",
       meaning: {

@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react"
-import { Modal, ScrollView, TouchableOpacity, View } from "react-native"
+import { FlatList, Modal, ScrollView, TouchableOpacity, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { IconInfoCircle } from "@tabler/icons-react-native"
+import { IconAlertCircle, IconCheck, IconInfoCircle } from "@tabler/icons-react-native"
 import Animated, {
   runOnJS,
   useAnimatedStyle,
@@ -11,18 +11,23 @@ import Animated, {
 
 import TbmEmptyImage from "@assets/images/tbm-empty.svg"
 
+import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 
+import { mockTbmJoinData } from "./mockData"
 import * as S from "./styles"
+import type { TbmJoinItem } from "./types"
 
 type TbmJoinScreenProps = AppStackScreenProps<"TbmJoin">
 
 export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
+  const [selectedId, setSelectedId] = useState<number | null>(null)
   const [infoModalVisible, setInfoModalVisible] = useState(false)
+  const [noSelectionModalVisible, setNoSelectionModalVisible] = useState(false)
 
   const overlayOpacity = useSharedValue(0)
   const sheetTranslateY = useSharedValue(600)
@@ -39,12 +44,45 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
     }
   }, [infoModalVisible])
 
-  const closeModal = () => {
+  const closeInfoModal = () => {
     overlayOpacity.value = withTiming(0, { duration: 220 })
     sheetTranslateY.value = withTiming(600, { duration: 300 }, (finished) => {
       if (finished) runOnJS(setInfoModalVisible)(false)
     })
   }
+
+  const handleNext = () => {
+    if (selectedId === null) {
+      setNoSelectionModalVisible(true)
+    } else {
+      navigation.navigate("TbmJoinInfo", { id: selectedId })
+    }
+  }
+
+  const renderCard = ({ item }: { item: TbmJoinItem }) => {
+    const isSelected = selectedId === item.id
+    return (
+      <TouchableOpacity
+        style={[S.$card, isSelected && S.$cardSelected]}
+        activeOpacity={0.75}
+        onPress={() => setSelectedId(isSelected ? null : item.id)}
+      >
+        <View style={isSelected ? S.$checkboxSelected : S.$checkbox}>
+          {isSelected && <IconCheck size={14} color="#FFFFFF" strokeWidth={3} />}
+        </View>
+        <View style={S.$cardContent}>
+          <Text text={item.title} style={S.$cardTitle} numberOfLines={1} />
+          <View style={S.$cardMeta}>
+            <View style={S.$cardAvatar} />
+            <Text text={item.authorName} style={S.$cardAuthor} />
+            <Text text={`· ${item.date}`} style={S.$cardDate} />
+          </View>
+        </View>
+      </TouchableOpacity>
+    )
+  }
+
+  const hasData = mockTbmJoinData.length > 0
 
   return (
     <>
@@ -62,11 +100,22 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
           <View style={S.$container}>
             <Text text={translate("tbmJoinScreen:selectPrompt")} style={S.$selectPrompt} />
 
-            <View style={S.$emptyContainer}>
-              <TbmEmptyImage width={150} height={162} />
-              <Text text={translate("tbmJoinScreen:empty.title")} style={S.$emptyTitle} />
-              <Text text={translate("tbmJoinScreen:empty.subtitle")} style={S.$emptySubtitle} />
-            </View>
+            {hasData ? (
+              <FlatList<TbmJoinItem>
+                style={S.$listContent}
+                data={mockTbmJoinData}
+                keyExtractor={(item) => String(item.id)}
+                contentContainerStyle={S.$flatListContent}
+                renderItem={renderCard}
+                showsVerticalScrollIndicator={false}
+              />
+            ) : (
+              <View style={S.$emptyContainer}>
+                <TbmEmptyImage width={150} height={162} />
+                <Text text={translate("tbmJoinScreen:empty.title")} style={S.$emptyTitle} />
+                <Text text={translate("tbmJoinScreen:empty.subtitle")} style={S.$emptySubtitle} />
+              </View>
+            )}
           </View>
 
           <View style={S.$buttonDivider} />
@@ -74,27 +123,40 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
             <TouchableOpacity style={S.$prevBtn} activeOpacity={0.75} onPress={() => navigation.goBack()}>
               <Text text={translate("tbmJoinScreen:prev")} style={S.$prevBtnText} />
             </TouchableOpacity>
-            <TouchableOpacity style={S.$nextBtn} activeOpacity={0.75} onPress={() => {}}>
+            <TouchableOpacity style={S.$nextBtn} activeOpacity={0.75} onPress={handleNext}>
               <Text text={translate("tbmJoinScreen:next")} style={S.$nextBtnText} />
             </TouchableOpacity>
           </View>
         </View>
       </StackScreen>
 
+      <ConfirmModal
+        visible={noSelectionModalVisible}
+        icon={
+          <View style={S.$noSelectionIconCircle}>
+            <IconAlertCircle size={19} color="#1062D8" />
+          </View>
+        }
+        title={translate("tbmJoinScreen:noSelectionModal.title")}
+        message={translate("tbmJoinScreen:noSelectionModal.message")}
+        confirmLabel={translate("tbmJoinScreen:noSelectionModal.confirm")}
+        confirmBgColor="#1062D8"
+        onConfirm={() => setNoSelectionModalVisible(false)}
+      />
+
       <Modal
         visible={infoModalVisible}
         transparent
         animationType="none"
-        onRequestClose={closeModal}
+        onRequestClose={closeInfoModal}
       >
         <View style={S.$modalWrap}>
           <Animated.View style={[S.$modalOverlay, overlayAnimStyle]}>
-            <TouchableOpacity style={S.$modalOverlayTouch} activeOpacity={1} onPress={closeModal} />
+            <TouchableOpacity style={S.$modalOverlayTouch} activeOpacity={1} onPress={closeInfoModal} />
           </Animated.View>
 
           <Animated.View style={[S.$modalContainer, sheetAnimStyle, { paddingBottom: insets.bottom + 20 }]}>
             <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
-              {/* 섹션 1 */}
               <View style={S.$modalSection}>
                 <View style={S.$modalHeaderRow}>
                   <IconInfoCircle size={24} color="#1062D8" />
@@ -104,7 +166,6 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
 
               <View style={S.$sectionGap} />
 
-              {/* 섹션 2 */}
               <View style={S.$modalSection}>
                 <Text text={translate("tbmJoinScreen:infoModal.meaning.heading")} style={S.$sectionHeading} />
                 <Text text={translate("tbmJoinScreen:infoModal.meaning.body")} style={S.$sectionBody} />
@@ -112,7 +173,6 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
 
               <View style={S.$sectionGap} />
 
-              {/* 섹션 3 */}
               <View style={S.$modalSection}>
                 <Text text={translate("tbmJoinScreen:infoModal.importance.heading")} style={S.$sectionHeading} />
                 <Text text={translate("tbmJoinScreen:infoModal.importance.body")} style={S.$sectionBody} />
@@ -120,7 +180,6 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
 
               <View style={S.$sectionGap} />
 
-              {/* 섹션 4 */}
               <View style={S.$modalSection}>
                 <Text text={translate("tbmJoinScreen:infoModal.procedure.heading")} style={S.$sectionHeading} />
                 <Text text={`1.  ${translate("tbmJoinScreen:infoModal.procedure.step1")}`} style={S.$procedureStep} />
@@ -133,7 +192,7 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
             <TouchableOpacity
               style={S.$modalCloseBtn}
               activeOpacity={0.75}
-              onPress={closeModal}
+              onPress={closeInfoModal}
             >
               <Text text={translate("tbmJoinScreen:infoModal.close")} style={S.$modalCloseBtnText} />
             </TouchableOpacity>

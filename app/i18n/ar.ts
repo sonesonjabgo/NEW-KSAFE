@@ -469,6 +469,57 @@ const ar: Translations = {
     },
   },
 
+  tbmJoinInfoScreen: {
+    title: "الانضمام إلى TBM",
+    sectionInfo: "معلومات TBM",
+    activityName: "اسم النشاط",
+    manager: "المسؤول",
+    date: "التاريخ",
+    sectionAttachments: "المرفقات",
+    noAttachments: "لا توجد مرفقات.",
+    prev: "السابق",
+    next: "التالي",
+  },
+
+  tbmJoinHealthScreen: {
+    title: "الانضمام إلى TBM",
+    prompt: "يرجى تأكيد جميع البنود أدناه",
+    items: {
+      item1: "حالتي الصحية جيدة اليوم.",
+      item2: "حصلت على قدر كافٍ من النوم.",
+      item3: "لست تحت تأثير الكحول.",
+      item4: "أرتدي معدات الوقاية الشخصية المطلوبة.",
+    },
+    prev: "السابق",
+    next: "التالي",
+    notAllCheckedModal: {
+      title: "يرجى تأكيد جميع البنود.",
+      message: "يجب تأكيد جميع بنود الحالة الصحية للمتابعة.",
+      confirm: "موافق",
+    },
+  },
+
+  tbmJoinSignScreen: {
+    title: "الانضمام إلى TBM",
+    prompt: "يرجى التوقيع أدناه",
+    signatureArea: "وقّع هنا",
+    clearLabel: "مسح",
+    prev: "السابق",
+    next: "التالي",
+    noSignatureModal: {
+      title: "التوقيع مطلوب.",
+      message: "يرجى إتمام توقيعك قبل المتابعة.",
+      confirm: "موافق",
+    },
+  },
+
+  tbmJoinCompleteScreen: {
+    title: "الانضمام إلى TBM",
+    heading: "اكتمل الانضمام إلى TBM!",
+    subtitle: "تم تسجيل مشاركتك بنجاح.",
+    goHome: "الذهاب إلى الرئيسية",
+  },
+
   tbmJoinScreen: {
     title: "الانضمام إلى TBM",
     selectPrompt: "يرجى اختيار TBM للانضمام إليه",
@@ -478,6 +529,11 @@ const ar: Translations = {
     },
     prev: "السابق",
     next: "التالي",
+    noSelectionModal: {
+      title: "لم يتم اختيار أي جلسة.",
+      message: "يرجى اختيار جلسة TBM للانضمام إليها.",
+      confirm: "موافق",
+    },
     infoModal: {
       title: "دليل TBM",
       meaning: {
