@@ -73,7 +73,7 @@ const $card: ViewStyle = {
   borderWidth: 1,
   borderColor: "#E9ECF0",
   padding: 15,
-  alignItems: "center",
+  alignItems: "flex-start",
   justifyContent: "center",
   gap: 6,
 }
@@ -82,11 +82,11 @@ const $cardLabel: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.normal,
   color: "#574D4A",
-  textAlign: "center",
+  textAlign: "left",
 }
 
 const $cardCount: TextStyle = {
   fontSize: 26,
   fontFamily: typography.primary.bold,
-  textAlign: "center",
+  textAlign: "left",
 }
