@@ -711,6 +711,31 @@ const ko: Translations = {
     registerButton: "새 교육자료 등록",
   },
 
+  educationMaterialRegisterScreen: {
+    title: "TBM 교육 자료 등록",
+    guide: {
+      title: "작성 가이드",
+      description:
+        "첨부파일을 업로드하고 교육 제목과 내용을 입력하여 새 교육 자료를 등록하세요.",
+    },
+    attachment: {
+      label: "첨부파일",
+      selectButton: "+ 파일 선택",
+      helper: "PDF, DOC 등 교육 자료 파일을 선택하세요.",
+    },
+    educationTitle: {
+      label: "교육 제목",
+      placeholder: "교육 자료 제목을 입력하세요",
+      helper: "교육 제목은 200자까지 입력할 수 있습니다.",
+    },
+    content: {
+      label: "교육 내용",
+      placeholder: "교육 내용을 입력하세요",
+      helper: "교육 내용을 입력하세요. 최대 2,000자.",
+    },
+    submit: "등록하기",
+  },
+
   educationMaterialDetailScreen: {
     title: "TBM 교육 자료 상세",
     sourceKs: "KS산업안전협회",

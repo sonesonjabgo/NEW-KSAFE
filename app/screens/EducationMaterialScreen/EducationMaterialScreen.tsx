@@ -202,7 +202,7 @@ export const EducationMaterialScreen: FC<EducationMaterialScreenProps> = ({ navi
           <TouchableOpacity
             style={S.$registerBtn}
             activeOpacity={0.8}
-            onPress={() => console.log("새 교육자료 등록")}
+            onPress={() => navigation.navigate("EducationMaterialRegister")}
           >
             <IconPlus size={20} color="#FFFFFF" strokeWidth={2} />
             <Text

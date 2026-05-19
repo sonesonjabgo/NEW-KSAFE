@@ -680,6 +680,31 @@ const fr: Translations = {
     registerButton: "Register New Education Material",
   },
 
+  educationMaterialRegisterScreen: {
+    title: "Register TBM Education Material",
+    guide: {
+      title: "Writing Guide",
+      description:
+        "Upload an attachment and enter the education title and content to register a new education material.",
+    },
+    attachment: {
+      label: "Attachment",
+      selectButton: "+ Select File",
+      helper: "Select an education material file such as PDF or DOC.",
+    },
+    educationTitle: {
+      label: "Education Title",
+      placeholder: "Enter the education material title",
+      helper: "Education title can be up to 200 characters.",
+    },
+    content: {
+      label: "Education Content",
+      placeholder: "Enter the education content",
+      helper: "Enter education content. Maximum 2,000 characters.",
+    },
+    submit: "Register",
+  },
+
   educationMaterialDetailScreen: {
     title: "TBM Education Material Detail",
     sourceKs: "KS Industrial Safety Association",
