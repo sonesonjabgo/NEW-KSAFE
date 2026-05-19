@@ -820,6 +820,22 @@ const en = {
     toastRegenerate: "Report regeneration request has been submitted.",
   },
 
+  tbmParticipationHistoryScreen: {
+    title: "TBM Participation History",
+    totalParticipation: "Total Participation",
+    cautionResponse: "Caution Response",
+    unit: "case(s)",
+    workplaceLabel: "Workplace",
+  },
+
+  tbmParticipationHistoryDetailScreen: {
+    participationDate: "Participation Date",
+    workDate: "Work Date",
+    workplace: "Workplace",
+    manager: "Manager",
+    activityContent: "Activity Content",
+  },
+
   ...demoEn,
 }
 
