@@ -686,6 +686,54 @@ const es: Translations = {
     emptyText: "No educational materials available.",
   },
 
+  tbmReportInquiryScreen: {
+    title: "TBM Report Inquiry",
+    tabs: {
+      all: "All",
+      requested: "Requested",
+      generating: "Generating",
+      completed: "Completed",
+      failed: "Failed",
+    },
+    empty: {
+      all: "No reports found.",
+      requested: "No pending reports.",
+      generating: "No reports being generated.",
+      completed: "No completed reports.",
+      failed: "No failed reports.",
+    },
+  },
+
+  tbmReportStatusScreen: {
+    title: "TBM Report Status",
+    regenerate: "Regenerate",
+    sectionReportInfo: "Report Information",
+    sectionProcessStatus: "Processing Status",
+    sectionStatusHistory: "Status History",
+    processName: "Process Name",
+    teamName: "Team/Unit",
+    historyRequestedAt: "Request Date",
+    historyStartedAt: "Processing Start",
+    historyCompletedAt: "Processing Complete",
+    downloadPdf: "Download PDF",
+    sectionRegenerate: "Report Regeneration",
+    regenerateInfoText:
+      "Please enter the items below before\nrequesting report regeneration.",
+    processNameLabel: "Process Name (Optional)",
+    processNamePlaceholder: "e.g. Press",
+    teamNameLabel: "Team/Unit (Optional)",
+    teamNamePlaceholder: "e.g. Team 1",
+    inputDescription: "Optional field. Maximum 50 characters.",
+    cautionTitle: "Caution",
+    cautionItem1: "Regeneration is only available for failed or completed reports.",
+    cautionItem2: "Reports in pending or processing status cannot be regenerated.",
+    cautionItem3: "Regeneration will reset the existing results.",
+    requestRegenerate: "Request Regeneration",
+    regenerateNote: "New regeneration may take some time.",
+    refresh: "Refresh",
+    toastRegenerate: "Report regeneration request has been submitted.",
+  },
+
   ...demoEs,
 }
 
