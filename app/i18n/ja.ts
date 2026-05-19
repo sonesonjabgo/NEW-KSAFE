@@ -699,6 +699,9 @@ const ja: Translations = {
   tbmReportStatusScreen: {
     title: "TBM Report Status",
     regenerate: "Regenerate",
+    sectionReportInfo: "Report Information",
+    sectionProcessStatus: "Processing Status",
+    sectionStatusHistory: "Status History",
   },
 
   ...demoJa,

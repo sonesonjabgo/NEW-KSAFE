@@ -738,6 +738,9 @@ const ko: Translations = {
   tbmReportStatusScreen: {
     title: "TBM 보고서 상태",
     regenerate: "재생성",
+    sectionReportInfo: "보고서 정보",
+    sectionProcessStatus: "처리 상태",
+    sectionStatusHistory: "상태 이력",
   },
 
   ...demoKo,
