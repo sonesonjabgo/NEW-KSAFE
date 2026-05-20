@@ -1107,6 +1107,29 @@ const ko: Translations = {
     },
   },
 
+  hazardRiskDetailScreen: {
+    title: "유해위험개소 상세",
+    infoCard: {
+      locationLabel: "위치",
+      hazardFactorLabel: "위험요인",
+      sitePhotosLabel: "제보사진",
+      noPhotos: "등록된 사진이 없습니다.",
+      managerProfileLabel: "관리자 프로필",
+    },
+    adminSection: {
+      title: "상태 변경 및 처리",
+      noteLabel: "조치 내용 입력",
+      noteHint: "입력 시 최대 2,000자까지 작성할 수 있습니다.",
+      placeholder: {
+        pending: "대기중 상태입니다.\n진행중으로 변경한 뒤 처리할 수 있습니다.",
+        ongoing: "조치완료 또는 불가 상태 선택 시 입력 가능",
+        completed:
+          "어떻게 조치했는지 상세히 입력해주세요 (예: 손잡이 재설치 완료, 전선 보호관 설치 완료)",
+        impossible: "조치가 불가능한 사유를 상세히 입력해주세요.",
+      },
+    },
+  },
+
   ...demoKo,
 }
 

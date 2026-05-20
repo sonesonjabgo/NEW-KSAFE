@@ -1082,6 +1082,30 @@ const fr: Translations = {
     },
   },
 
+  hazardRiskDetailScreen: {
+    title: "Hazard Area Detail",
+    infoCard: {
+      locationLabel: "Location",
+      hazardFactorLabel: "Hazard Factor",
+      sitePhotosLabel: "Site Photos",
+      noPhotos: "No photos registered.",
+      managerProfileLabel: "Manager Profile",
+    },
+    adminSection: {
+      title: "Status Change & Action",
+      noteLabel: "Enter Action Details",
+      noteHint: "Up to 2,000 characters can be entered.",
+      placeholder: {
+        pending:
+          "Status is pending.\nChange to In Progress before taking action.",
+        ongoing: "Input available when Completed or Impossible status is selected",
+        completed:
+          "Please describe the action taken in detail (e.g., handrail reinstalled, cable protector installed)",
+        impossible: "Please describe in detail why the action is not possible.",
+      },
+    },
+  },
+
   ...demoFr,
 }
 

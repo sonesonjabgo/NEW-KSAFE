@@ -32,8 +32,8 @@ const StatusBadge: FC<{ status: HazardStatus }> = ({ status }) => (
 
 // ── Hazard Card ───────────────────────────────────────────────────────────────
 
-const HazardCard: FC<{ item: HazardItem }> = ({ item }) => (
-  <TouchableOpacity style={S.$card} activeOpacity={0.75}>
+const HazardCard: FC<{ item: HazardItem; onPress: () => void }> = ({ item, onPress }) => (
+  <TouchableOpacity style={S.$card} activeOpacity={0.75} onPress={onPress}>
     <View style={S.$cardTopRow}>
       <StatusBadge status={item.status} />
       <Text text={item.date} style={S.$cardDate} />
@@ -163,7 +163,9 @@ export const HazardRiskScreen: FC<HazardRiskScreenProps> = ({ navigation }) => {
         keyExtractor={(item) => String(item.id)}
         ListHeaderComponent={<SummarySection myCount={myCount} completedCount={completedCount} />}
         contentContainerStyle={[S.$listContent, filteredData.length === 0 && S.$flex1]}
-        renderItem={({ item }) => <HazardCard item={item} />}
+        renderItem={({ item }) => (
+          <HazardCard item={item} onPress={() => navigation.navigate("HazardRiskDetail", { id: item.id })} />
+        )}
         ListEmptyComponent={<EmptyState tab={activeTab} />}
         showsVerticalScrollIndicator={false}
       />

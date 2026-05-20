@@ -14,4 +14,12 @@ export interface HazardItem {
   isMyReport: boolean
 }
 
+export interface HazardDetail extends HazardItem {
+  photos: string[]
+  managerName: string
+  managerInitial: string
+  managerAffiliation: string
+}
+
 export interface HazardRiskScreenProps extends AppStackScreenProps<"HazardRiskList"> {}
+export interface HazardRiskDetailScreenProps extends AppStackScreenProps<"HazardRiskDetail"> {}
