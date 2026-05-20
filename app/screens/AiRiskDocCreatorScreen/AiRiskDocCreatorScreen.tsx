@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native"
-import { IconCamera, IconFileExport, IconPhoto } from "@tabler/icons-react-native"
+import { IconCamera, IconFileExport, IconPhoto, IconTrash } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { StackScreen } from "@/components/StackScreen"
@@ -18,7 +18,9 @@ import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 
 import { AiRiskActionButton } from "./components/AiRiskActionButton"
 import { AiRiskEmptyState } from "./components/AiRiskEmptyState"
+import { AiRiskPageCard } from "./components/AiRiskPageCard"
 import { HazardCoordinateToggleCard } from "./components/HazardCoordinateToggleCard"
+import { type AiRiskPage, createMockPage } from "./mockData"
 import * as S from "./styles"
 
 export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">> = ({
@@ -26,8 +28,7 @@ export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">>
 }) => {
   const insets = useSafeAreaInsets()
 
-  // TODO: 카메라/AI 분석 연동 후 setPages로 페이지를 추가
-  const [pages, _setPages] = useState<string[]>([])
+  const [pages, setPages] = useState<AiRiskPage[]>([])
   const [includeHazardCoordinates, setIncludeHazardCoordinates] = useState(true)
 
   // ── Capture Sheet ────────────────────────────────────────────────────────────
@@ -66,23 +67,34 @@ export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">>
     }),
   ).current
 
+  const addMockPage = useCallback(() => {
+    // TODO: 실제 이미지 URI / AI 분석 결과로 교체
+    setPages((prev) => [...prev, createMockPage()])
+  }, [])
+
   const handleTakePhoto = useCallback(() => {
     closeCaptureSheet()
-    // TODO: 카메라 실행 → 이미지 촬영 → AI 위험분석 → 페이지 추가
-    console.log("[AiRisk] 카메라로 촬영 선택")
-  }, [closeCaptureSheet])
+    addMockPage()
+  }, [closeCaptureSheet, addMockPage])
 
   const handleSelectFromAlbum = useCallback(() => {
     closeCaptureSheet()
-    // TODO: 앨범에서 이미지 선택 → AI 위험분석 → 페이지 추가
-    console.log("[AiRisk] 앨범에서 선택 선택")
-  }, [closeCaptureSheet])
+    addMockPage()
+  }, [closeCaptureSheet, addMockPage])
 
-  const canExport = pages.length > 0
+  const handleDeletePage = useCallback((id: string) => {
+    setPages((prev) => prev.filter((p) => p.id !== id))
+  }, [])
+
+  const handleResetAll = useCallback(() => {
+    setPages([])
+  }, [])
 
   const handleExportPdf = () => {
     // TODO: 서명 입력 → PDF 생성 → 내보내기 API 연동
   }
+
+  const canExport = pages.length > 0
 
   return (
     <>
@@ -115,12 +127,35 @@ export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">>
             disabled={!canExport}
           />
 
+          {/* 전체 초기화 버튼 — pages > 0일 때만 표시 */}
+          {pages.length > 0 && (
+            <TouchableOpacity
+              style={S.$resetBtn}
+              activeOpacity={0.8}
+              onPress={handleResetAll}
+            >
+              <IconTrash size={18} color="#E03526" strokeWidth={1.8} />
+              <Text text={translate("aiRiskDocCreatorScreen:resetAll")} style={S.$resetBtnLabel} />
+            </TouchableOpacity>
+          )}
+
           <HazardCoordinateToggleCard
             checked={includeHazardCoordinates}
             onToggle={() => setIncludeHazardCoordinates((prev) => !prev)}
           />
 
-          {pages.length === 0 && <AiRiskEmptyState />}
+          {pages.length === 0 ? (
+            <AiRiskEmptyState />
+          ) : (
+            pages.map((page, index) => (
+              <AiRiskPageCard
+                key={page.id}
+                page={page}
+                pageNumber={index + 1}
+                onDelete={() => handleDeletePage(page.id)}
+              />
+            ))
+          )}
         </ScrollView>
       </StackScreen>
 

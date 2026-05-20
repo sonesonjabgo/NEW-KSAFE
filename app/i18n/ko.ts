@@ -1057,6 +1057,17 @@ const ko: Translations = {
       camera: "카메라로 촬영",
       album: "앨범에서 선택",
     },
+    resetAll: "전체 초기화",
+    page: {
+      title: "페이지 {{number}}",
+      beforeLabel: "개선 전",
+      afterLabel: "개선 후",
+      addImage: "+ 이미지 추가",
+      analyzeButton: "인공지능 분석 요청",
+      hazardTitle: "위험 좌표 상세",
+      hazardEmpty: "표시할 위험 좌표가 없습니다.",
+      analysisPlaceholder: "분석 결과가 여기에 표시됩니다.",
+    },
   },
 
   ...demoKo,

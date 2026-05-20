@@ -1022,6 +1022,17 @@ const hi: Translations = {
       camera: "Take Photo",
       album: "Select from Album",
     },
+    resetAll: "Reset All",
+    page: {
+      title: "Page {{number}}",
+      beforeLabel: "Before",
+      afterLabel: "After",
+      addImage: "+ Add Image",
+      analyzeButton: "Request AI Analysis",
+      hazardTitle: "Hazard Coordinate Details",
+      hazardEmpty: "No hazard coordinates to display.",
+      analysisPlaceholder: "Analysis results will be displayed here.",
+    },
   },
 
   ...demoHi,

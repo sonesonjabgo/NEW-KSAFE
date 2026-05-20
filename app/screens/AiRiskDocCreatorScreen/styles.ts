@@ -102,6 +102,146 @@ export const $toggleDesc: TextStyle = {
   lineHeight: 19,
 }
 
+// ── Reset Button ─────────────────────────────────────────────────────────────
+
+export const $resetBtn: ViewStyle = {
+  height: 51,
+  borderRadius: 10,
+  borderWidth: 1.5,
+  borderColor: "#E03526",
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 8,
+  marginBottom: 12,
+}
+
+export const $resetBtnLabel: TextStyle = {
+  fontSize: 15,
+  fontFamily: typography.primary.semiBold,
+  color: "#E03526",
+}
+
+// ── Page Card ─────────────────────────────────────────────────────────────────
+
+export const $pageCard: ViewStyle = {
+  borderRadius: 13,
+  borderWidth: 1,
+  borderColor: "#ECECEC",
+  paddingHorizontal: 20,
+  paddingVertical: 25,
+  marginBottom: 16,
+  backgroundColor: "#FFFFFF",
+}
+
+export const $pageCardHeader: ViewStyle = {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginBottom: 14,
+}
+
+export const $pageCardTitle: TextStyle = {
+  fontSize: 15,
+  fontFamily: typography.primary.semiBold,
+  color: colors.navy,
+}
+
+export const $imageRow: ViewStyle = {
+  flexDirection: "row",
+  gap: 12,
+  marginBottom: 14,
+}
+
+export const $imageCol: ViewStyle = {
+  flex: 1,
+}
+
+export const $imageLabel: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#888888",
+  marginBottom: 6,
+}
+
+export const $beforeImageBox: ViewStyle = {
+  width: "100%",
+  height: 106,
+  borderRadius: 12,
+  backgroundColor: "#5B8C5A",
+  alignItems: "center",
+  justifyContent: "center",
+  overflow: "hidden",
+}
+
+export const $afterImagePlaceholder: ViewStyle = {
+  width: "100%",
+  height: 106,
+  borderRadius: 12,
+  borderWidth: 1.5,
+  borderColor: "#ECECEC",
+  borderStyle: "dashed",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 4,
+}
+
+export const $afterImagePlaceholderText: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.normal,
+  color: "#AAAAAA",
+}
+
+export const $analyzeBtn: ViewStyle = {
+  height: 51,
+  borderRadius: 10,
+  backgroundColor: colors.blue,
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 8,
+  marginBottom: 16,
+}
+
+export const $analyzeBtnLabel: TextStyle = {
+  fontSize: 15,
+  fontFamily: typography.primary.semiBold,
+  color: "#FFFFFF",
+}
+
+export const $hazardTitle: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.semiBold,
+  color: colors.navy,
+  marginBottom: 4,
+}
+
+export const $hazardEmpty: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#AAAAAA",
+  marginBottom: 10,
+}
+
+export const $analysisBox: ViewStyle = {
+  height: 114,
+  borderWidth: 1,
+  borderColor: "#ECECEC",
+  borderRadius: 9,
+  padding: 16,
+  justifyContent: "space-between",
+}
+
+export const $analysisPlaceholder: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#BBBBBB",
+}
+
+export const $analysisCopyRow: ViewStyle = {
+  alignItems: "flex-end",
+}
+
 // ── Capture Sheet (바텀시트) ───────────────────────────────────────────────────
 
 export const $sheetBackdrop: ViewStyle = {
