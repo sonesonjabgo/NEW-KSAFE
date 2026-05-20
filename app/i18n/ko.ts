@@ -821,6 +821,7 @@ const ko: Translations = {
       errorMaxLength: "상세 내용은 최대 2,000자 이하로 입력해주세요.",
     },
     submit: "제출하기",
+    submitting: "제출중...",
   },
 
   improvementProposalListScreen: {

@@ -38,6 +38,7 @@ export const ImprovementProposalCreateScreen: FC<ImprovementProposalCreateScreen
   const [content, setContent] = useState("")
   const [workplaceModalVisible, setWorkplaceModalVisible] = useState(false)
   const [contentFocused, setContentFocused] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const slideAnim = useRef(new Animated.Value(400)).current
   const fadeAnim = useRef(new Animated.Value(0)).current
 
@@ -82,13 +83,29 @@ export const ImprovementProposalCreateScreen: FC<ImprovementProposalCreateScreen
 
   const hasContentError = content.length > 2000
   const isValid = useMemo(
-    () => content.trim().length > 0 && content.length <= 2000,
-    [content],
+    () => !!workplace && content.trim().length > 0 && content.length <= 2000 && !isSubmitting,
+    [workplace, content, isSubmitting],
   )
 
   const handleSubmit = useCallback(() => {
-    console.log(JSON.stringify({ workplace, content }, null, 2))
-  }, [workplace, content])
+    if (!workplace || !isValid) return
+    setIsSubmitting(true)
+    setTimeout(() => {
+      const now = new Date()
+      const pad = (n: number) => n.toString().padStart(2, "0")
+      const dateStr = `${now.getFullYear()}.${pad(now.getMonth() + 1)}.${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`
+      const proposal = {
+        id: `temp-${Date.now()}`,
+        status: "pending" as const,
+        date: dateStr,
+        content: content.trim(),
+        authorName: "홍길동", // TODO: 추후 로그인 사용자 정보 연동 시 실제 작성자명으로 교체
+        workplace, // TODO: 추후 API 연동 시 실제 사업장 정보로 교체
+      }
+      navigation.navigate("ImprovementProposalDetail", { proposal })
+      setIsSubmitting(false)
+    }, 900)
+  }, [workplace, content, isValid, navigation])
 
   return (
     <>
@@ -198,14 +215,18 @@ export const ImprovementProposalCreateScreen: FC<ImprovementProposalCreateScreen
           {/* 하단 제출 버튼 */}
           <View style={[S.$submitBar, { paddingBottom: insets.bottom + 16 }]}>
             <TouchableOpacity
-              style={[S.$submitBtn, !isValid && S.$submitBtnDisabled]}
+              style={[S.$submitBtn, (!isValid || isSubmitting) && S.$submitBtnDisabled]}
               activeOpacity={0.8}
               onPress={handleSubmit}
-              disabled={!isValid}
+              disabled={!isValid || isSubmitting}
             >
               <Text
-                text={translate("improvementProposalCreateScreen:submit")}
-                style={[S.$submitBtnText, !isValid && S.$submitBtnTextDisabled]}
+                text={
+                  isSubmitting
+                    ? translate("improvementProposalCreateScreen:submitting")
+                    : translate("improvementProposalCreateScreen:submit")
+                }
+                style={[S.$submitBtnText, (!isValid || isSubmitting) && S.$submitBtnTextDisabled]}
               />
             </TouchableOpacity>
           </View>

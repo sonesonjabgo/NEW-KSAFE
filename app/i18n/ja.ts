@@ -782,6 +782,7 @@ const ja: Translations = {
       errorMaxLength: "Please enter details within 2,000 characters.",
     },
     submit: "Submit",
+    submitting: "送信中...",
   },
 
   improvementProposalListScreen: {

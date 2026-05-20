@@ -783,6 +783,7 @@ const hi: Translations = {
       errorMaxLength: "Please enter details within 2,000 characters.",
     },
     submit: "Submit",
+    submitting: "सबमिट हो रहा है...",
   },
 
   improvementProposalListScreen: {

@@ -55,12 +55,25 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
   navigation,
   route,
 }) => {
-  const { id } = route.params
   const { role } = useRole()
   const insets = useSafeAreaInsets()
   const isAdmin = role === "admin"
 
-  const detail = mockProposalDetails[id] ?? mockProposalDetails[1]
+  const routeProposal = route.params?.proposal
+  const fallback = mockProposalDetails[route.params?.id ?? 1] ?? mockProposalDetails[1]
+  const detail = routeProposal
+    ? {
+        ...fallback,
+        id: routeProposal.id,
+        status: routeProposal.status,
+        date: routeProposal.date,
+        content: routeProposal.content,
+        authorName: routeProposal.authorName,
+        authorInitial: routeProposal.authorName.charAt(0),
+        workplace: routeProposal.workplace,
+        statusHistory: [{ id: 1, type: "registered" as const, date: routeProposal.date }],
+      }
+    : fallback
 
   // ── Edit Mode State ─────────────────────────────────────────────────────────
   const [editMode, setEditMode] = useState(false)

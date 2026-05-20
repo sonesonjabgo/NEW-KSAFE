@@ -790,6 +790,7 @@ const fr: Translations = {
       errorMaxLength: "Please enter details within 2,000 characters.",
     },
     submit: "Submit",
+    submitting: "Envoi en cours...",
   },
 
   improvementProposalListScreen: {

@@ -790,6 +790,7 @@ const es: Translations = {
       errorMaxLength: "Please enter details within 2,000 characters.",
     },
     submit: "Submit",
+    submitting: "Enviando...",
   },
 
   improvementProposalListScreen: {

@@ -778,6 +778,7 @@ const ar: Translations = {
       errorMaxLength: "Please enter details within 2,000 characters.",
     },
     submit: "Submit",
+    submitting: "جارٍ الإرسال...",
   },
 
   improvementProposalListScreen: {

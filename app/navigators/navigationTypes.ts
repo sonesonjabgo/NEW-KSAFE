@@ -45,7 +45,19 @@ export type AppStackParamList = {
   EducationSelect: { initialSelected: number[]; onConfirm: (ids: number[]) => void }
   ImprovementProposalList: undefined
   ImprovementProposalCreate: undefined
-  ImprovementProposalDetail: { id: number }
+  ImprovementProposalDetail:
+    | {
+        id?: number
+        proposal?: {
+          id: string
+          status: "pending" | "ongoing" | "reflected" | "rejected"
+          date: string
+          content: string
+          authorName: string
+          workplace: string
+        }
+      }
+    | undefined
   TbmParticipationHistory: undefined
   TbmParticipationHistoryDetail: { id: number }
 }
