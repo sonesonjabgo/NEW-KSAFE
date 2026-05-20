@@ -7,6 +7,7 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
+  // eslint-disable-next-line no-restricted-imports
   TextInput,
   TouchableOpacity,
   View,
@@ -116,7 +117,7 @@ export const ImprovementProposalCreateScreen: FC<ImprovementProposalCreateScreen
         squareTop
       >
         <KeyboardAvoidingView
-          style={{ flex: 1 }}
+          style={S.$flex1}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
           <ScrollView
@@ -148,7 +149,11 @@ export const ImprovementProposalCreateScreen: FC<ImprovementProposalCreateScreen
                 text={translate("improvementProposalCreateScreen:workplace.label")}
                 style={S.$sectionLabel}
               />
-              <TouchableOpacity style={S.$inputRow} activeOpacity={0.7} onPress={openWorkplaceModal}>
+              <TouchableOpacity
+                style={S.$inputRow}
+                activeOpacity={0.7}
+                onPress={openWorkplaceModal}
+              >
                 <Text
                   text={
                     workplace || translate("improvementProposalCreateScreen:workplace.placeholder")

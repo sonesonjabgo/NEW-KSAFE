@@ -5,6 +5,14 @@ import { typography } from "@/theme/typography"
 
 import type { ProposalStatus } from "./types"
 
+export const $flex1: ViewStyle = { flex: 1 }
+
+export const $fabWrapper: ViewStyle = {
+  position: "absolute",
+  right: 20,
+  alignItems: "center",
+}
+
 // ── Tab Bar ───────────────────────────────────────────────────────────────────
 
 export const $tabBarWrapper: ViewStyle = {

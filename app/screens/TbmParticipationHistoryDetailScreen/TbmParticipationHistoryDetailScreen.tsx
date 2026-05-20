@@ -1,5 +1,4 @@
 import { FC } from "react"
-import type { TbmStatus } from "@/screens/TbmListScreen/types"
 import { ScrollView, TouchableOpacity, View, ViewStyle, TextStyle } from "react-native"
 import { IconDownload } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
@@ -9,10 +8,11 @@ import EducationFrame from "@assets/icons/education_frame.svg"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
-import { typography } from "@/theme/typography"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { mockTbmDetails } from "@/screens/TbmDetailScreen/mockData"
 import * as S from "@/screens/TbmDetailScreen/styles"
+import type { TbmStatus } from "@/screens/TbmListScreen/types"
+import { typography } from "@/theme/typography"
 
 interface HistoryDetail {
   participationDate: string
@@ -22,11 +22,36 @@ interface HistoryDetail {
 }
 
 const mockHistoryDetails: Record<number, HistoryDetail> = {
-  1: { participationDate: "2026.02.19 08:30", workDate: "2026.02.19 09:00", workplace: "광교 타워크레인 사업장", managerName: "권 민수" },
-  2: { participationDate: "2026.02.18 09:00", workDate: "2026.02.18 10:00", workplace: "광교 타워크레인 사업장", managerName: "권 민수" },
-  3: { participationDate: "2026.02.17 07:45", workDate: "2026.02.17 08:30", workplace: "광교 타워크레인 사업장", managerName: "권 민수" },
-  4: { participationDate: "2026.02.16 08:15", workDate: "2026.02.16 09:00", workplace: "광교 타워크레인 사업장", managerName: "권 민수" },
-  5: { participationDate: "2026.02.15 09:30", workDate: "2026.02.15 10:00", workplace: "광교 타워크레인 사업장", managerName: "권 민수" },
+  1: {
+    participationDate: "2026.02.19 08:30",
+    workDate: "2026.02.19 09:00",
+    workplace: "광교 타워크레인 사업장",
+    managerName: "권 민수",
+  },
+  2: {
+    participationDate: "2026.02.18 09:00",
+    workDate: "2026.02.18 10:00",
+    workplace: "광교 타워크레인 사업장",
+    managerName: "권 민수",
+  },
+  3: {
+    participationDate: "2026.02.17 07:45",
+    workDate: "2026.02.17 08:30",
+    workplace: "광교 타워크레인 사업장",
+    managerName: "권 민수",
+  },
+  4: {
+    participationDate: "2026.02.16 08:15",
+    workDate: "2026.02.16 09:00",
+    workplace: "광교 타워크레인 사업장",
+    managerName: "권 민수",
+  },
+  5: {
+    participationDate: "2026.02.15 09:30",
+    workDate: "2026.02.15 10:00",
+    workplace: "광교 타워크레인 사업장",
+    managerName: "권 민수",
+  },
 }
 
 const STATUS_LABEL: Record<TbmStatus, "drafting" | "ongoing" | "ended"> = {
@@ -58,6 +83,7 @@ type Props = AppStackScreenProps<"TbmParticipationHistoryDetail">
 export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, route }) => {
   const { id } = route.params
   const insets = useSafeAreaInsets()
+  const scrollPaddingBottom: ViewStyle = { paddingBottom: (insets.bottom || 0) + 24 }
 
   const tbm = mockTbmDetails[id]
   const history = mockHistoryDetails[id]
@@ -74,7 +100,7 @@ export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, rou
       contentBg="#FFFFFF"
     >
       <ScrollView
-        contentContainerStyle={[S.$scrollInner, { gap: 25, paddingBottom: (insets.bottom || 0) + 24 }]}
+        contentContainerStyle={[S.$scrollInner, $scrollGap, scrollPaddingBottom]}
         showsVerticalScrollIndicator={false}
       >
         {/* ── 첫 번째 카드 ── */}
@@ -158,7 +184,6 @@ export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, rou
             </View>
           ))}
         </View>
-
       </ScrollView>
     </StackScreen>
   )
@@ -219,3 +244,5 @@ const $managerName: TextStyle = {
   fontFamily: typography.primary.bold,
   color: "#252525",
 }
+
+const $scrollGap: ViewStyle = { gap: 25 }

@@ -748,7 +748,8 @@ const ja: Translations = {
       ongoingMessage: "完了または不可のステータスを選択時に入力可能。",
       rejectedInputLabel: "不可理由",
       rejectedProcessingPlaceholder: "反映不可の理由を詳しく入力してください。",
-      processingPlaceholder: "実施した対応内容を詳しく入力してください。（例：設備チームの確認後、配置完了）",
+      processingPlaceholder:
+        "実施した対応内容を詳しく入力してください。（例：設備チームの確認後、配置完了）",
     },
     history: {
       sectionTitle: "Status Change History",

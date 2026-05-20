@@ -6,6 +6,8 @@ import { typography } from "@/theme/typography"
 const INPUT_BORDER = "#DDDDDD"
 const DIVIDER = "#E9ECF0"
 
+export const $flex1: ViewStyle = { flex: 1 }
+
 // ── Scroll ────────────────────────────────────────────────────────────────────
 
 export const $scrollContent: ViewStyle = {

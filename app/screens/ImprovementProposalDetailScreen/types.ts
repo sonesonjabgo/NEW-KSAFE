@@ -20,5 +20,4 @@ export interface ImprovementProposalDetail {
   statusHistory: StatusHistoryItem[]
 }
 
-export interface ImprovementProposalDetailScreenProps
-  extends AppStackScreenProps<"ImprovementProposalDetail"> {}
+export interface ImprovementProposalDetailScreenProps extends AppStackScreenProps<"ImprovementProposalDetail"> {}

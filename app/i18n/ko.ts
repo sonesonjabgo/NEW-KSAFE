@@ -787,7 +787,8 @@ const ko: Translations = {
       ongoingMessage: "완료 또는 불가 상태 선택 시 입력 가능",
       rejectedInputLabel: "불가 사유",
       rejectedProcessingPlaceholder: "반영 불가 사유를 상세히 입력해주세요.",
-      processingPlaceholder: "조치한 내용을 상세히 입력해주세요. (예: 설비팀 검토 결과 배치 완료함)",
+      processingPlaceholder:
+        "조치한 내용을 상세히 입력해주세요. (예: 설비팀 검토 결과 배치 완료함)",
     },
     history: {
       sectionTitle: "상태 변경 이력",

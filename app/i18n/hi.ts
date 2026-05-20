@@ -732,7 +732,8 @@ const hi: Translations = {
     },
     alreadyProcessed: "यह प्रस्ताव पहले ही संसाधित हो चुका है।",
     saveProcessingMessage: "प्रसंस्करण नोट्स सहेजे गए हैं।",
-    workerNoEditMessage: "प्रगति में या पहले से संसाधित प्रस्तावों को संपादित या हटाया नहीं जा सकता।",
+    workerNoEditMessage:
+      "प्रगति में या पहले से संसाधित प्रस्तावों को संपादित या हटाया नहीं जा सकता।",
     status: {
       pending: "Pending",
       ongoing: "In Progress",
@@ -749,7 +750,8 @@ const hi: Translations = {
       ongoingMessage: "पूर्ण या अस्वीकृत स्थिति चुनने पर उपलब्ध।",
       rejectedInputLabel: "अस्वीकृति का कारण",
       rejectedProcessingPlaceholder: "कृपया अस्वीकृति का कारण विस्तार से बताएं।",
-      processingPlaceholder: "की गई कार्रवाई का विस्तृत विवरण दें। (उदा. उपकरण टीम की समीक्षा पूरी हुई और व्यवस्था हो गई)",
+      processingPlaceholder:
+        "की गई कार्रवाई का विस्तृत विवरण दें। (उदा. उपकरण टीम की समीक्षा पूरी हुई और व्यवस्था हो गई)",
     },
     history: {
       sectionTitle: "Status Change History",
@@ -785,7 +787,8 @@ const hi: Translations = {
     deletedMessage: "प्रस्ताव हटा दिया गया है।",
     deleteModal: {
       title: "प्रस्ताव हटाएं",
-      message: "क्या आप इस प्रस्ताव को हटाना चाहते हैं?\nहटाए गए प्रस्ताव को पुनः प्राप्त नहीं किया जा सकता।",
+      message:
+        "क्या आप इस प्रस्ताव को हटाना चाहते हैं?\nहटाए गए प्रस्ताव को पुनः प्राप्त नहीं किया जा सकता।",
       cancel: "रद्द करें",
       confirm: "हटाएं",
     },
@@ -969,7 +972,8 @@ const hi: Translations = {
       requirements: {
         title: "समग्र कार्रवाई आवश्यकताएं",
         placeholder: "समग्र कार्रवाई आवश्यकताएं / राय",
-        description: "आप समग्र कार्रवाई आवश्यकताएं दर्ज कर सकते हैं। कृपया 1,000 अक्षरों के भीतर दर्ज करें।",
+        description:
+          "आप समग्र कार्रवाई आवश्यकताएं दर्ज कर सकते हैं। कृपया 1,000 अक्षरों के भीतर दर्ज करें।",
       },
     },
     submitButton: "निरीक्षण जमा करें",

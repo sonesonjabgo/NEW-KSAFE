@@ -744,7 +744,8 @@ const ar: Translations = {
       ongoingMessage: "متاح عند تحديد حالة مكتملة أو مرفوضة.",
       rejectedInputLabel: "سبب الرفض",
       rejectedProcessingPlaceholder: "يرجى توضيح سبب الرفض بالتفصيل.",
-      processingPlaceholder: "يرجى وصف الإجراء المتخذ بالتفصيل. (مثال: اكتمل مراجعة فريق المعدات وتم الترتيب)",
+      processingPlaceholder:
+        "يرجى وصف الإجراء المتخذ بالتفصيل. (مثال: اكتمل مراجعة فريق المعدات وتم الترتيب)",
     },
     history: {
       sectionTitle: "Status Change History",

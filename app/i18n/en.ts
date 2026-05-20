@@ -797,7 +797,8 @@ const en = {
       ongoingMessage: "Available when a completed or rejected status is selected.",
       rejectedInputLabel: "Reason for Rejection",
       rejectedProcessingPlaceholder: "Please describe the reason for rejection in detail.",
-      processingPlaceholder: "Please describe the action taken in detail. (e.g., Equipment team review completed and arrangement done)",
+      processingPlaceholder:
+        "Please describe the action taken in detail. (e.g., Equipment team review completed and arrangement done)",
     },
     history: {
       sectionTitle: "Status Change History",
@@ -833,7 +834,8 @@ const en = {
     deletedMessage: "Proposal has been deleted.",
     deleteModal: {
       title: "Delete Proposal",
-      message: "Are you sure you want to delete this proposal?\nDeleted proposals cannot be recovered.",
+      message:
+        "Are you sure you want to delete this proposal?\nDeleted proposals cannot be recovered.",
       cancel: "Cancel",
       confirm: "Delete",
     },

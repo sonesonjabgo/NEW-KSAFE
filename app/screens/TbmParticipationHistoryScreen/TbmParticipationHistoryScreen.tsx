@@ -4,9 +4,9 @@ import { ScrollView, TouchableOpacity, View, ViewStyle, TextStyle } from "react-
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
+import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
-import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 
 const MOCK_TOTAL = 12
 const MOCK_CAUTION = 3
@@ -20,11 +20,41 @@ interface TbmHistoryItem {
 }
 
 const mockHistoryData: TbmHistoryItem[] = [
-  { id: 1, badge: "정상", date: "2026.02.19 08:30", title: "작업장 순회 점검", workplace: "광교 타워크레인 사업장" },
-  { id: 2, badge: "정상", date: "2026.02.18 09:00", title: "전기설비 안전점검", workplace: "광교 타워크레인 사업장" },
-  { id: 3, badge: "정상", date: "2026.02.17 07:45", title: "고소작업 안전교육", workplace: "광교 타워크레인 사업장" },
-  { id: 4, badge: "정상", date: "2026.02.16 08:15", title: "화학물질 취급 안전점검", workplace: "광교 타워크레인 사업장" },
-  { id: 5, badge: "정상", date: "2026.02.15 09:30", title: "비계 설치 작업 전 TBM", workplace: "광교 타워크레인 사업장" },
+  {
+    id: 1,
+    badge: "정상",
+    date: "2026.02.19 08:30",
+    title: "작업장 순회 점검",
+    workplace: "광교 타워크레인 사업장",
+  },
+  {
+    id: 2,
+    badge: "정상",
+    date: "2026.02.18 09:00",
+    title: "전기설비 안전점검",
+    workplace: "광교 타워크레인 사업장",
+  },
+  {
+    id: 3,
+    badge: "정상",
+    date: "2026.02.17 07:45",
+    title: "고소작업 안전교육",
+    workplace: "광교 타워크레인 사업장",
+  },
+  {
+    id: 4,
+    badge: "정상",
+    date: "2026.02.16 08:15",
+    title: "화학물질 취급 안전점검",
+    workplace: "광교 타워크레인 사업장",
+  },
+  {
+    id: 5,
+    badge: "정상",
+    date: "2026.02.15 09:30",
+    title: "비계 설치 작업 전 TBM",
+    workplace: "광교 타워크레인 사업장",
+  },
 ]
 
 // ── StatCard ──────────────────────────────────────────────
@@ -66,7 +96,10 @@ const HistoryCard: FC<HistoryCardProps> = ({ item, onPress }) => (
     <View style={$historyDivider} />
 
     <View style={$historyBottom}>
-      <Text text={translate("tbmParticipationHistoryScreen:workplaceLabel")} style={$workplaceLabel} />
+      <Text
+        text={translate("tbmParticipationHistoryScreen:workplaceLabel")}
+        style={$workplaceLabel}
+      />
       <Text text={item.workplace} style={$workplaceName} numberOfLines={1} />
     </View>
   </TouchableOpacity>

@@ -2,8 +2,8 @@ import { FC } from "react"
 import { ScrollView, TouchableOpacity, View, TextStyle, ViewStyle } from "react-native"
 import { CircleCheck, CircleAlert } from "lucide-react-native"
 
-import { Text } from "@/components/Text"
 import { StackScreen } from "@/components/StackScreen"
+import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
 import { typography } from "@/theme/typography"
 
@@ -67,10 +67,17 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
         </TouchableOpacity>
       }
     >
-      <ScrollView style={$scroll} contentContainerStyle={$content} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={$scroll}
+        contentContainerStyle={$content}
+        showsVerticalScrollIndicator={false}
+      >
         {/* 점검 요약 카드 */}
         <View style={$summaryCard}>
-          <Text text={translate("patrolDetailScreen:summaryCard.title")} style={$summaryCardTitle} />
+          <Text
+            text={translate("patrolDetailScreen:summaryCard.title")}
+            style={$summaryCardTitle}
+          />
           <View style={$statsRow}>
             <View style={$statsCol}>
               <Text text={String(MOCK_TOTAL)} style={$statNumber} />
@@ -196,10 +203,16 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
             <Text text={translate("patrolDetailScreen:buttons.submit")} style={$btnWhiteText} />
           </TouchableOpacity>
           <TouchableOpacity style={$btnBlue} activeOpacity={0.8}>
-            <Text text={translate("patrolDetailScreen:buttons.editComplete")} style={$btnWhiteText} />
+            <Text
+              text={translate("patrolDetailScreen:buttons.editComplete")}
+              style={$btnWhiteText}
+            />
           </TouchableOpacity>
           <TouchableOpacity style={$btnBlue} activeOpacity={0.8}>
-            <Text text={translate("patrolDetailScreen:buttons.reviewComplete")} style={$btnWhiteText} />
+            <Text
+              text={translate("patrolDetailScreen:buttons.reviewComplete")}
+              style={$btnWhiteText}
+            />
           </TouchableOpacity>
           <TouchableOpacity style={$btnBlue} activeOpacity={0.8}>
             <Text text={translate("patrolDetailScreen:buttons.approve")} style={$btnWhiteText} />
@@ -211,7 +224,10 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
             <Text text={translate("patrolDetailScreen:buttons.delete")} style={$btnRedText} />
           </TouchableOpacity>
           <TouchableOpacity style={$btnOutline} activeOpacity={0.8}>
-            <Text text={translate("patrolDetailScreen:buttons.reportPreview")} style={$btnOutlineText} />
+            <Text
+              text={translate("patrolDetailScreen:buttons.reportPreview")}
+              style={$btnOutlineText}
+            />
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -224,8 +240,6 @@ const { bold, semiBold, medium, normal } = typography.primary
 const $gap4: ViewStyle = { height: 4 }
 const $gap8: ViewStyle = { height: 8 }
 const $gap16: ViewStyle = { height: 16 }
-
-const $screenInner: ViewStyle = { flex: 1 }
 
 const $editButton: TextStyle = {
   fontSize: 15,

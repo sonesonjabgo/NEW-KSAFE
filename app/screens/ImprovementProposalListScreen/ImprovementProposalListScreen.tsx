@@ -119,6 +119,10 @@ export const ImprovementProposalListScreen: FC<ImprovementProposalListScreenProp
   route,
 }) => {
   const insets = useSafeAreaInsets()
+  const fabBottom = useMemo<import("react-native").ViewStyle>(
+    () => ({ bottom: 30 + insets.bottom }),
+    [insets.bottom],
+  )
   const [activeTab, setActiveTab] = useState<TabKey>("all")
   const [deleteToastVisible, setDeleteToastVisible] = useState(false)
   const hideDeleteToast = useCallback(() => setDeleteToastVisible(false), [])
@@ -144,9 +148,8 @@ export const ImprovementProposalListScreen: FC<ImprovementProposalListScreenProp
 
   const reflectedCount = useMemo(
     () =>
-      mockProposalData.filter(
-        (item) => item.status === "reflected" || item.status === "rejected",
-      ).length,
+      mockProposalData.filter((item) => item.status === "reflected" || item.status === "rejected")
+        .length,
     [],
   )
 
@@ -203,7 +206,7 @@ export const ImprovementProposalListScreen: FC<ImprovementProposalListScreenProp
           data={filteredData}
           keyExtractor={(item) => String(item.id)}
           ListHeaderComponent={<SummarySection myCount={myCount} reflectedCount={reflectedCount} />}
-          contentContainerStyle={[S.$listContent, filteredData.length === 0 && { flex: 1 }]}
+          contentContainerStyle={[S.$listContent, filteredData.length === 0 && S.$flex1]}
           renderItem={({ item }) => (
             <ProposalCard
               item={item}
@@ -216,15 +219,7 @@ export const ImprovementProposalListScreen: FC<ImprovementProposalListScreenProp
       </StackScreen>
 
       {/* FAB — StackScreen의 overflow:hidden 밖에 배치 */}
-      <View
-        style={{
-          position: "absolute",
-          right: 20,
-          bottom: 30 + insets.bottom,
-          alignItems: "center",
-        }}
-        pointerEvents="box-none"
-      >
+      <View style={[S.$fabWrapper, fabBottom]} pointerEvents="box-none">
         <TouchableOpacity
           style={S.$fab}
           activeOpacity={0.8}

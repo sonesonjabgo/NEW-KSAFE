@@ -739,7 +739,8 @@ const fr: Translations = {
     },
     alreadyProcessed: "Cette proposition a déjà été traitée.",
     saveProcessingMessage: "Les notes de traitement ont été enregistrées.",
-    workerNoEditMessage: "Les propositions en cours ou déjà traitées ne peuvent pas être modifiées ou supprimées.",
+    workerNoEditMessage:
+      "Les propositions en cours ou déjà traitées ne peuvent pas être modifiées ou supprimées.",
     status: {
       pending: "Pending",
       ongoing: "In Progress",
@@ -756,7 +757,8 @@ const fr: Translations = {
       ongoingMessage: "Disponible lors de la sélection d'un statut terminé ou rejeté.",
       rejectedInputLabel: "Motif de rejet",
       rejectedProcessingPlaceholder: "Veuillez décrire le motif de rejet en détail.",
-      processingPlaceholder: "Décrivez en détail l'action prise. (ex. Révision de l'équipe d'équipement terminée et arrangement effectué)",
+      processingPlaceholder:
+        "Décrivez en détail l'action prise. (ex. Révision de l'équipe d'équipement terminée et arrangement effectué)",
     },
     history: {
       sectionTitle: "Status Change History",
@@ -792,7 +794,8 @@ const fr: Translations = {
     deletedMessage: "La proposition a été supprimée.",
     deleteModal: {
       title: "Supprimer la proposition",
-      message: "Voulez-vous supprimer cette proposition ?\nLes propositions supprimées ne peuvent pas être récupérées.",
+      message:
+        "Voulez-vous supprimer cette proposition ?\nLes propositions supprimées ne peuvent pas être récupérées.",
       cancel: "Annuler",
       confirm: "Supprimer",
     },
@@ -963,12 +966,14 @@ const fr: Translations = {
         placeholder: "Sélectionner le modèle",
         addButton: "Ajouter un élément",
         itemNamePlaceholder: "Nom de l'élément",
-        itemNameDescription: "Exemple: Général, Électrique, Gaz, etc. / Saisissez 1 à 100 caractères",
+        itemNameDescription:
+          "Exemple: Général, Électrique, Gaz, etc. / Saisissez 1 à 100 caractères",
         deleteButton: "Supprimer",
         addCheckButton: "Ajouter un détail d'inspection",
         checkTitle: "Détail d'inspection (Obligatoire)",
         checkNamePlaceholder: "Nom du détail d'inspection",
-        checkDescription: "Exemple: Propreté et ordre du lieu de travail / Saisissez 1 à 200 caractères",
+        checkDescription:
+          "Exemple: Propreté et ordre du lieu de travail / Saisissez 1 à 200 caractères",
         goodButton: "Bon",
         badButton: "Mauvais",
         badNotePlaceholder: "Saisissez la raison de l'état mauvais",

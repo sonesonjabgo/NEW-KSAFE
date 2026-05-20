@@ -739,7 +739,8 @@ const es: Translations = {
     },
     alreadyProcessed: "Esta propuesta ya ha sido procesada.",
     saveProcessingMessage: "Las notas de procesamiento se han guardado.",
-    workerNoEditMessage: "Las propuestas en progreso o ya procesadas no se pueden editar ni eliminar.",
+    workerNoEditMessage:
+      "Las propuestas en progreso o ya procesadas no se pueden editar ni eliminar.",
     status: {
       pending: "Pending",
       ongoing: "In Progress",
@@ -756,7 +757,8 @@ const es: Translations = {
       ongoingMessage: "Disponible al seleccionar un estado completado o rechazado.",
       rejectedInputLabel: "Motivo de rechazo",
       rejectedProcessingPlaceholder: "Por favor, describa el motivo del rechazo en detalle.",
-      processingPlaceholder: "Describa detalladamente la acción tomada. (ej. Revisión del equipo de equipos completada y disposición realizada)",
+      processingPlaceholder:
+        "Describa detalladamente la acción tomada. (ej. Revisión del equipo de equipos completada y disposición realizada)",
     },
     history: {
       sectionTitle: "Status Change History",
@@ -792,7 +794,8 @@ const es: Translations = {
     deletedMessage: "La propuesta ha sido eliminada.",
     deleteModal: {
       title: "Eliminar propuesta",
-      message: "¿Está seguro de que desea eliminar esta propuesta?\nLas propuestas eliminadas no se pueden recuperar.",
+      message:
+        "¿Está seguro de que desea eliminar esta propuesta?\nLas propuestas eliminadas no se pueden recuperar.",
       cancel: "Cancelar",
       confirm: "Eliminar",
     },
@@ -962,12 +965,14 @@ const es: Translations = {
         placeholder: "Seleccionar plantilla",
         addButton: "Agregar elemento",
         itemNamePlaceholder: "Nombre del elemento",
-        itemNameDescription: "Ejemplo: General, Eléctrico, Gas, etc. / Ingrese de 1 a 100 caracteres",
+        itemNameDescription:
+          "Ejemplo: General, Eléctrico, Gas, etc. / Ingrese de 1 a 100 caracteres",
         deleteButton: "Eliminar",
         addCheckButton: "Agregar detalle de inspección",
         checkTitle: "Detalle de inspección (Obligatorio)",
         checkNamePlaceholder: "Nombre del detalle de inspección",
-        checkDescription: "Ejemplo: Limpieza y orden del lugar de trabajo / Ingrese de 1 a 200 caracteres",
+        checkDescription:
+          "Ejemplo: Limpieza y orden del lugar de trabajo / Ingrese de 1 a 200 caracteres",
         goodButton: "Bueno",
         badButton: "Malo",
         badNotePlaceholder: "Ingrese el motivo del estado malo",

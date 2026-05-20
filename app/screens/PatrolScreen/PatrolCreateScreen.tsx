@@ -3,6 +3,7 @@ import {
   Modal,
   Pressable,
   ScrollView,
+  // eslint-disable-next-line no-restricted-imports
   TextInput,
   TouchableOpacity,
   View,
@@ -189,8 +190,7 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation }) 
         >
           <Text
             text={
-              selectedApprover?.name ??
-              translate("patrolCreateScreen:section.approver.placeholder")
+              selectedApprover?.name ?? translate("patrolCreateScreen:section.approver.placeholder")
             }
             style={selectedApprover ? $selectorValue : $selectorPlaceholder}
           />
@@ -219,8 +219,7 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation }) 
         >
           <Text
             text={
-              selectedReviewer?.name ??
-              translate("patrolCreateScreen:section.reviewer.placeholder")
+              selectedReviewer?.name ?? translate("patrolCreateScreen:section.reviewer.placeholder")
             }
             style={selectedReviewer ? $selectorValue : $selectorPlaceholder}
           />
@@ -250,8 +249,7 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation }) 
         >
           <Text
             text={
-              selectedTemplate?.name ??
-              translate("patrolCreateScreen:section.items.placeholder")
+              selectedTemplate?.name ?? translate("patrolCreateScreen:section.items.placeholder")
             }
             style={selectedTemplate ? $selectorValue : $selectorPlaceholder}
           />
@@ -339,9 +337,7 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation }) 
                               isGood ? $statusButtonSelected : $statusButtonUnselected,
                             ]}
                             activeOpacity={0.7}
-                            onPress={() =>
-                              updateCheckCard(item.id, card.id, { status: "good" })
-                            }
+                            onPress={() => updateCheckCard(item.id, card.id, { status: "good" })}
                           >
                             <Text
                               text={translate("patrolCreateScreen:section.items.goodButton")}
@@ -354,9 +350,7 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation }) 
                               !isGood ? $statusButtonSelected : $statusButtonUnselected,
                             ]}
                             activeOpacity={0.7}
-                            onPress={() =>
-                              updateCheckCard(item.id, card.id, { status: "bad" })
-                            }
+                            onPress={() => updateCheckCard(item.id, card.id, { status: "bad" })}
                           >
                             <Text
                               text={translate("patrolCreateScreen:section.items.badButton")}
@@ -463,12 +457,7 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation }) 
       </ScrollView>
 
       {/* Selection Modal */}
-      <Modal
-        visible={modalVisible}
-        transparent
-        animationType="fade"
-        onRequestClose={closeModal}
-      >
+      <Modal visible={modalVisible} transparent animationType="fade" onRequestClose={closeModal}>
         <Pressable style={$modalOverlay} onPress={closeModal}>
           <Pressable style={$modalBox}>
             <Text text={getModalTitle(activeModal)} style={$modalTitle} />
@@ -497,11 +486,7 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation }) 
                 )
               })}
             </ScrollView>
-            <TouchableOpacity
-              style={$modalCancelButton}
-              activeOpacity={0.8}
-              onPress={closeModal}
-            >
+            <TouchableOpacity style={$modalCancelButton} activeOpacity={0.8} onPress={closeModal}>
               <Text
                 text={translate("patrolCreateScreen:modal.cancelButton")}
                 style={$modalCancelText}
@@ -523,16 +508,13 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation }) 
               <Check size={20} color={colors.blue} strokeWidth={2.5} />
             </View>
             <View style={$gap8} />
-            <Text
-              text={translate("patrolCreateScreen:successModal.title")}
-              style={$successTitle}
-            />
-            <View style={{ height: 10 }} />
+            <Text text={translate("patrolCreateScreen:successModal.title")} style={$successTitle} />
+            <View style={$gap10} />
             <Text
               text={translate("patrolCreateScreen:successModal.message")}
               style={$successMessage}
             />
-            <View style={{ height: 14 }} />
+            <View style={$gap14} />
             <TouchableOpacity
               style={$successConfirmButton}
               activeOpacity={0.8}
@@ -567,6 +549,7 @@ const $scrollContent: ViewStyle = {
 const $gap8: ViewStyle = { height: 8 }
 const $gap10: ViewStyle = { height: 10 }
 const $gap12: ViewStyle = { height: 12 }
+const $gap14: ViewStyle = { height: 14 }
 const $gap16: ViewStyle = { height: 16 }
 const $gap23: ViewStyle = { height: 23 }
 const $sectionTop: ViewStyle = { marginTop: 23 }

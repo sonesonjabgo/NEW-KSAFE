@@ -2,8 +2,9 @@ import { FC, ReactNode, useEffect, useMemo, useRef } from "react"
 import { Animated, TextStyle, View, ViewStyle } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
-import { Text } from "./Text"
 import { typography } from "@/theme/typography"
+
+import { Text } from "./Text"
 
 interface ToastProps {
   /** Toast 표시 여부 — true로 바뀌면 애니메이션 시작 */

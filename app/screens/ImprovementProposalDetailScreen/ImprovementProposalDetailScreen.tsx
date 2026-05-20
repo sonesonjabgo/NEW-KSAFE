@@ -3,6 +3,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  // eslint-disable-next-line no-restricted-imports
   TextInput,
   TouchableOpacity,
   View,
@@ -424,7 +425,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
         squareTop
       >
         <KeyboardAvoidingView
-          style={{ flex: 1 }}
+          style={S.$flex1}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
           <ScrollView
@@ -617,7 +618,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                     /* 반영완료 처리된 상태: 읽기 전용 박스 (파란 배경) */
                     <View style={S.$processingReadBox}>
                       <Text text={MOCK_RESULT_CONTENT} style={S.$processingReadText} />
-                      <View style={{ alignItems: "flex-end", marginTop: 8 }}>
+                      <View style={S.$lockRow}>
                         <IconLock size={18} color="#BBBBBB" />
                       </View>
                     </View>
@@ -625,7 +626,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                     /* 반영불가 처리된 상태: 읽기 전용 박스 (빨간 배경) */
                     <View style={S.$processingReadBoxRejected}>
                       <Text text={MOCK_REJECTED_CONTENT} style={S.$processingReadText} />
-                      <View style={{ alignItems: "flex-end", marginTop: 8 }}>
+                      <View style={S.$lockRow}>
                         <IconLock size={18} color="#BBBBBB" />
                       </View>
                     </View>

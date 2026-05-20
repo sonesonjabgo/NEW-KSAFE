@@ -7,6 +7,10 @@ import type { ProposalStatus } from "./types"
 
 const CARD_BORDER = "#E9ECF0"
 
+export const $flex1: ViewStyle = { flex: 1 }
+
+export const $lockRow: ViewStyle = { alignItems: "flex-end", marginTop: 8 }
+
 // ── Scroll ────────────────────────────────────────────────────────────────────
 
 export const $scrollView: ViewStyle = {
