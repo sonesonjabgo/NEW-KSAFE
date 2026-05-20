@@ -102,6 +102,61 @@ export const $toggleDesc: TextStyle = {
   lineHeight: 19,
 }
 
+// ── Capture Sheet (바텀시트) ───────────────────────────────────────────────────
+
+export const $sheetBackdrop: ViewStyle = {
+  backgroundColor: "rgba(0, 0, 0, 0.4)",
+}
+
+export const $sheet: ViewStyle = {
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  right: 0,
+  backgroundColor: "#FFFFFF",
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+}
+
+export const $sheetDragHandleArea: ViewStyle = {
+  alignItems: "center",
+  paddingTop: 12,
+  paddingBottom: 8,
+}
+
+export const $sheetDragHandleBar: ViewStyle = {
+  width: 46,
+  height: 4,
+  borderRadius: 2,
+  backgroundColor: "#B0B0B0",
+}
+
+export const $sheetBtnRow: ViewStyle = {
+  flexDirection: "row",
+  gap: 12,
+  paddingHorizontal: 20,
+  paddingTop: 12,
+}
+
+export const $sheetBtn: ViewStyle = {
+  flex: 1,
+  height: 54,
+  borderRadius: 14,
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 8,
+  backgroundColor: "#F4F6FA",
+  borderWidth: 1,
+  borderColor: "#E5E7EB",
+}
+
+export const $sheetBtnLabel: TextStyle = {
+  fontSize: 15,
+  fontFamily: typography.primary.semiBold,
+  color: colors.navy,
+}
+
 // ── Empty State ───────────────────────────────────────────────────────────────
 
 export const $emptyContainer: ViewStyle = {

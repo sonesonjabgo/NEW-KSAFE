@@ -1053,6 +1053,10 @@ const ko: Translations = {
       title: "등록된 페이지가 없습니다.",
       description: "개선전 이미지를 촬영해 페이지를 추가해주세요.",
     },
+    captureSheet: {
+      camera: "카메라로 촬영",
+      album: "앨범에서 선택",
+    },
   },
 
   ...demoKo,

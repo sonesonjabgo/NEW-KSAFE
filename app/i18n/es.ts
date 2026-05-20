@@ -1027,6 +1027,10 @@ const es: Translations = {
       title: "No pages registered.",
       description: "Capture a before-improvement image to add a page.",
     },
+    captureSheet: {
+      camera: "Take Photo",
+      album: "Select from Album",
+    },
   },
 
   ...demoEs,
