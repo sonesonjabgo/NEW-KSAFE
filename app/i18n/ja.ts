@@ -667,6 +667,49 @@ const ja: Translations = {
     },
   },
 
+  educationMaterialScreen: {
+    title: "TBM Education Material List",
+    registerButton: "Register New Education Material",
+  },
+
+  educationMaterialRegisterScreen: {
+    title: "Register TBM Education Material",
+    guide: {
+      title: "Writing Guide",
+      description:
+        "Register the education title, key content, and attachment all at once so they can be used on-site immediately. Registered materials can be selected together for multiple TBM activities.",
+    },
+    attachment: {
+      label: "Attachment",
+      boxPlaceholder: "filename.format",
+      helper: "Only one allowed file can be registered, up to a maximum of 50MB.",
+    },
+    educationTitle: {
+      label: "Education Title",
+      placeholder: "Enter the education material title",
+      includeFileName: "Use filename as title",
+      includeFileNameDesc: "The selected filename will be reflected in the title field.",
+    },
+    content: {
+      label: "Education Content",
+      placeholder: "Enter the education content",
+      helper: "Description is optional. If provided, up to 10,000 characters can be entered.",
+    },
+    submit: "Register",
+  },
+
+  educationMaterialDetailScreen: {
+    title: "TBM Education Material Detail",
+    sourceKs: "KS Industrial Safety Association",
+    sourceMine: "My Material",
+    statusActive: "Active",
+    statusArchived: "Archived",
+    categoryLabel: "Category:",
+    attachmentLabel: "Attachment",
+    registrantLabel: "Registrant:",
+    publishButton: "Publish After Activation",
+  },
+
   educationSelectScreen: {
     title: "Select Educational Materials",
     sourceTab1: "KS Safety Association",
@@ -770,6 +813,69 @@ const ja: Translations = {
       rejected: "No proposals marked as not reflected.",
     },
   },
+
+  tbmReportInquiryScreen: {
+    title: "TBM報告書照会",
+    tabs: {
+      all: "All",
+      requested: "Requested",
+      generating: "Generating",
+      completed: "Completed",
+      failed: "Failed",
+    },
+    empty: {
+      all: "No reports found.",
+      requested: "No pending reports.",
+      generating: "No reports being generated.",
+      completed: "No completed reports.",
+      failed: "No failed reports.",
+    },
+  },
+
+  tbmReportStatusScreen: {
+    title: "TBM Report Status",
+    regenerate: "Regenerate",
+    sectionReportInfo: "Report Information",
+    sectionProcessStatus: "Processing Status",
+    sectionStatusHistory: "Status History",
+    processName: "Process Name",
+    teamName: "Team/Unit",
+    historyRequestedAt: "Request Date",
+    historyStartedAt: "Processing Start",
+    historyCompletedAt: "Processing Complete",
+    downloadPdf: "Download PDF",
+    sectionRegenerate: "Report Regeneration",
+    regenerateInfoText: "Please enter the items below before\nrequesting report regeneration.",
+    processNameLabel: "Process Name (Optional)",
+    processNamePlaceholder: "e.g. Press",
+    teamNameLabel: "Team/Unit (Optional)",
+    teamNamePlaceholder: "e.g. Team 1",
+    inputDescription: "Optional field. Maximum 50 characters.",
+    cautionTitle: "Caution",
+    cautionItem1: "Regeneration is only available for failed or completed reports.",
+    cautionItem2: "Reports in pending or processing status cannot be regenerated.",
+    cautionItem3: "Regeneration will reset the existing results.",
+    requestRegenerate: "Request Regeneration",
+    regenerateNote: "New regeneration may take some time.",
+    refresh: "Refresh",
+    toastRegenerate: "Report regeneration request has been submitted.",
+  },
+
+  tbmParticipationHistoryScreen: {
+    title: "TBM Participation History",
+    totalParticipation: "Total Participation",
+    cautionResponse: "Caution Response",
+    unit: "case(s)",
+    workplaceLabel: "Workplace",
+  },
+  tbmParticipationHistoryDetailScreen: {
+    participationDate: "Participation Date",
+    workDate: "Work Date",
+    workplace: "Workplace",
+    manager: "Manager",
+    activityContent: "Activity Content",
+  },
+
   ...demoJa,
 }
 

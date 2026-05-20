@@ -706,6 +706,49 @@ const ko: Translations = {
     },
   },
 
+  educationMaterialScreen: {
+    title: "TBM 교육 자료 목록",
+    registerButton: "새 교육자료 등록",
+  },
+
+  educationMaterialRegisterScreen: {
+    title: "TBM 교육 자료 등록",
+    guide: {
+      title: "작성 가이드",
+      description:
+        "현장에서 바로 활용할 수 있도록 교육 제목, 핵심 내용, 첨부파일을 한 번에 등록해주세요. 등록된 자료는 이후 TBM 활동에서 여러 개 선택해 함께 사용할 수 있습니다.",
+    },
+    attachment: {
+      label: "첨부파일",
+      boxPlaceholder: "파일이름.형식",
+      helper: "허용 파일만 1개 등록할 수 있으며 최대 50MB까지 업로드할 수 있습니다.",
+    },
+    educationTitle: {
+      label: "교육 제목",
+      placeholder: "교육 자료 제목을 입력하세요",
+      includeFileName: "파일명을 제목에 그대로 입력",
+      includeFileNameDesc: "선택한 파일명을 제목 칸에 동일하게 반영합니다.",
+    },
+    content: {
+      label: "교육 내용",
+      placeholder: "교육 내용을 입력하세요",
+      helper: "설명은 비워둘 수 있으며, 입력 시 최대 10,000자까지 작성할 수 있습니다.",
+    },
+    submit: "등록하기",
+  },
+
+  educationMaterialDetailScreen: {
+    title: "TBM 교육 자료 상세",
+    sourceKs: "KS산업안전협회",
+    sourceMine: "내가 만든 자료",
+    statusActive: "활성화됨",
+    statusArchived: "보관됨",
+    categoryLabel: "분류:",
+    attachmentLabel: "첨부파일",
+    registrantLabel: "등록자:",
+    publishButton: "활성화 후 게시하기",
+  },
+
   educationSelectScreen: {
     title: "교육자료 선택",
     sourceTab1: "KS산업안전협회",
@@ -808,6 +851,69 @@ const ko: Translations = {
       reflected: "반영완료된 제안이 없습니다.",
       rejected: "반영불가 처리된 제안이 없습니다.",
     },
+  },
+
+  tbmReportInquiryScreen: {
+    title: "TBM 보고서 조회",
+    tabs: {
+      all: "전체",
+      requested: "요청됨",
+      generating: "생성 중",
+      completed: "완료",
+      failed: "실패",
+    },
+    empty: {
+      all: "보고서가 없습니다.",
+      requested: "대기 중인 보고서가 없습니다.",
+      generating: "생성 중인 보고서가 없습니다.",
+      completed: "완료된 보고서가 없습니다.",
+      failed: "실패한 보고서가 없습니다.",
+    },
+  },
+
+  tbmReportStatusScreen: {
+    title: "TBM 보고서 상태",
+    regenerate: "재생성",
+    sectionReportInfo: "보고서 정보",
+    sectionProcessStatus: "처리 상태",
+    sectionStatusHistory: "상태 이력",
+    processName: "공정명",
+    teamName: "팀/반명",
+    historyRequestedAt: "요청 일시",
+    historyStartedAt: "처리 시작",
+    historyCompletedAt: "처리 완료",
+    downloadPdf: "PDF 다운로드",
+    sectionRegenerate: "보고서 재생성",
+    regenerateInfoText: "선택 항목을 입력한 뒤 보고서 재생성을\n요청할 수 있습니다.",
+    processNameLabel: "공정명 (선택)",
+    processNamePlaceholder: "예:프레스",
+    teamNameLabel: "팀/반명 (선택)",
+    teamNamePlaceholder: "예:1반",
+    inputDescription: "선택 입력 항목입니다. 최대 50자까지 입력할 수 있습니다.",
+    cautionTitle: "주의사항",
+    cautionItem1: "실패 또는 완료 상태에서만 재생성할 수 있습니다.",
+    cautionItem2: "대기 또는 처리 중인 보고서는 재생성할 수 없습니다.",
+    cautionItem3: "재생성 시 기존 결과가 초기화됩니다.",
+    requestRegenerate: "재생성 요청",
+    regenerateNote: "신규 재생성을 위해 시간이 소요됩니다",
+    refresh: "새로고침",
+    toastRegenerate: "보고서 재생성 요청이 접수되었습니다.",
+  },
+
+  tbmParticipationHistoryScreen: {
+    title: "TBM 참여 이력",
+    totalParticipation: "전체 참여",
+    cautionResponse: "주의 응답",
+    unit: "건",
+    workplaceLabel: "사업장",
+  },
+
+  tbmParticipationHistoryDetailScreen: {
+    participationDate: "참여 일시",
+    workDate: "작업 일시",
+    workplace: "사업장",
+    manager: "진행 담당",
+    activityContent: "활동 내용",
   },
 
   ...demoKo,

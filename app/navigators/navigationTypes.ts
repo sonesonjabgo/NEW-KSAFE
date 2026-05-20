@@ -32,15 +32,22 @@ export type AppStackParamList = {
   TbmCreate: undefined
   TbmDetail: { id: number }
   TbmReport: { id: number }
+  TbmReportInquiry: undefined
+  TbmReportStatus: { id: number }
   TbmJoin: undefined
   TbmJoinInfo: { id: number }
   TbmJoinHealth: { id: number }
   TbmJoinSign: { id: number }
   TbmJoinComplete: undefined
+  EducationMaterial: undefined
+  EducationMaterialDetail: { id: number }
+  EducationMaterialRegister: undefined
   EducationSelect: { initialSelected: number[]; onConfirm: (ids: number[]) => void }
   ImprovementProposalList: undefined
   ImprovementProposalCreate: undefined
   ImprovementProposalDetail: { id: number }
+  TbmParticipationHistory: undefined
+  TbmParticipationHistoryDetail: { id: number }
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<
