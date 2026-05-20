@@ -102,7 +102,7 @@ export const ImprovementProposalCreateScreen: FC<ImprovementProposalCreateScreen
         authorName: "홍길동", // TODO: 추후 로그인 사용자 정보 연동 시 실제 작성자명으로 교체
         workplace, // TODO: 추후 API 연동 시 실제 사업장 정보로 교체
       }
-      navigation.navigate("ImprovementProposalDetail", { proposal })
+      navigation.replace("ImprovementProposalDetail", { proposal })
       setIsSubmitting(false)
     }, 900)
   }, [workplace, content, isValid, navigation])

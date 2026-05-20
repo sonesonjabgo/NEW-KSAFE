@@ -730,6 +730,7 @@ const ja: Translations = {
       dateLabel: "処理日:",
     },
     alreadyProcessed: "この提案はすでに処理済みです。",
+    saveProcessingMessage: "処理内容が保存されました。",
     workerNoEditMessage: "進行中または処理済みの提案は編集・削除できません。",
     status: {
       pending: "Pending",

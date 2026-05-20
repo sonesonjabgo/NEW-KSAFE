@@ -769,6 +769,7 @@ const ko: Translations = {
       dateLabel: "처리일:",
     },
     alreadyProcessed: "이미 처리된 제안입니다",
+    saveProcessingMessage: "처리 내용이 저장되었습니다.",
     workerNoEditMessage: "진행중이거나 처리된 제안은 수정 및 삭제할 수 없습니다.",
     status: {
       pending: "대기중",

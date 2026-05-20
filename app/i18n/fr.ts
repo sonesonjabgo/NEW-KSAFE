@@ -738,6 +738,7 @@ const fr: Translations = {
       dateLabel: "Traité le :",
     },
     alreadyProcessed: "Cette proposition a déjà été traitée.",
+    saveProcessingMessage: "Les notes de traitement ont été enregistrées.",
     workerNoEditMessage: "Les propositions en cours ou déjà traitées ne peuvent pas être modifiées ou supprimées.",
     status: {
       pending: "Pending",

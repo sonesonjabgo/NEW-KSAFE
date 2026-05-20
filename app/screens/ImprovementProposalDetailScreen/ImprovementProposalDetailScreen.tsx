@@ -1,5 +1,4 @@
 import { FC, useCallback, useMemo, useState } from "react"
-import { CommonActions } from "@react-navigation/native"
 import {
   KeyboardAvoidingView,
   Platform,
@@ -8,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native"
+import { CommonActions } from "@react-navigation/native"
 import {
   IconAlertCircle,
   IconCalendar,
@@ -131,6 +131,33 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
   const [processingContent, setProcessingContent] = useState("")
   const [processingFocused, setProcessingFocused] = useState(false)
 
+  // savedResult: 처리 내용 저장 후 결과 (null이면 미저장)
+  const [savedResult, setSavedResult] = useState<{
+    status: "reflected" | "rejected"
+    content: string
+    date: string
+  } | null>(null)
+  const [saveProcessingToastVisible, setSaveProcessingToastVisible] = useState(false)
+  const hideSaveProcessingToast = useCallback(() => setSaveProcessingToastVisible(false), [])
+
+  const handleSaveProcessed = useCallback(() => {
+    // TODO: 추후 API 연동 시 실제 저장 처리
+    if (selectedCard !== "reflected" && selectedCard !== "rejected") return
+    const now = new Date()
+    const pad = (n: number) => n.toString().padStart(2, "0")
+    const dateStr = `${now.getFullYear()}.${pad(now.getMonth() + 1)}.${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`
+    const fallback =
+      selectedCard === "reflected" ? "설비팀 검토 결과 배치 완료함" : "검토 결과 반영이 어렵습니다."
+    const content = processingContent.trim() || fallback
+    setSavedResult({ status: selectedCard, content, date: dateStr })
+    setLocalStatus(selectedCard)
+    setLocalHistory((prev) => [
+      { id: prev.length + 1, type: selectedCard as StatusHistoryType, date: dateStr },
+      ...prev,
+    ])
+    setSaveProcessingToastVisible(true)
+  }, [selectedCard, processingContent])
+
   const handleCardSelect = useCallback(
     (key: "ongoing" | "reflected" | "rejected") => {
       if (localStatus !== "ongoing") return
@@ -244,6 +271,49 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
   }
 
   const displayHistory = useMemo((): DisplayHistoryItem[] => {
+    // 처리 내용 저장 완료 후: localHistory를 최신순으로 정렬해 반영
+    if (savedResult !== null) {
+      const isReflected = savedResult.status === "reflected"
+      const variant = isReflected ? ("reflected" as const) : ("rejected" as const)
+      const orderedHistory = [...localHistory].sort((a, b) => b.id - a.id)
+      return orderedHistory.map((item, index) => {
+        if (index === 0) {
+          return {
+            ...item,
+            title: translate(
+              isReflected
+                ? "improvementProposalDetailScreen:history.reflectedChangeTitle"
+                : "improvementProposalDetailScreen:history.rejectedChangeTitle",
+            ),
+            note: `${translate(
+              isReflected
+                ? "improvementProposalDetailScreen:history.reflectedNote"
+                : "improvementProposalDetailScreen:history.rejectedNote",
+            )} ${MOCK_MANAGER_NAME}`,
+            noteColor: variant,
+            isHighlight: true,
+            highlightVariant: variant,
+          }
+        }
+        if (item.type === "ongoing") {
+          return {
+            ...item,
+            title: translate("improvementProposalDetailScreen:history.ongoingChangeTitle"),
+            note: `${translate("improvementProposalDetailScreen:history.proceedNote")} ${MOCK_MANAGER_NAME}`,
+            noteColor: undefined,
+            isHighlight: false,
+          }
+        }
+        return {
+          ...item,
+          title: HISTORY_TITLE[item.type],
+          note: undefined,
+          noteColor: undefined,
+          isHighlight: false,
+        }
+      })
+    }
+
     // 관리자가 이 화면에서 진행하기를 클릭한 경우
     if (isProceedStarted) {
       return localHistory.map((item, index) => ({
@@ -334,6 +404,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
       isHighlight: false,
     }))
   }, [
+    savedResult,
     isProceedStarted,
     localHistory,
     detail.status,
@@ -427,15 +498,15 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
               </View>
             )}
 
-            {/* 처리 결과 (reflected/rejected 원본 상태 — 역할 무관) */}
-            {(detail.status === "reflected" || detail.status === "rejected") && (
+            {/* 처리 결과 (reflected/rejected 상태 — 원본 또는 저장 후) */}
+            {(localStatus === "reflected" || localStatus === "rejected") && (
               <View style={S.$section}>
                 <SectionHeader
                   title={translate("improvementProposalDetailScreen:result.sectionTitle")}
                 />
                 <View style={S.$resultCard}>
                   <View style={S.$resultHeaderRow}>
-                    {detail.status === "reflected" ? (
+                    {localStatus === "reflected" ? (
                       <View style={S.$resultIconCircle}>
                         <IconCheck size={20} color="#18A24A" strokeWidth={2.5} />
                       </View>
@@ -446,7 +517,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                     )}
                     <Text
                       text={translate(
-                        detail.status === "reflected"
+                        localStatus === "reflected"
                           ? "improvementProposalDetailScreen:result.reflected"
                           : "improvementProposalDetailScreen:result.rejected",
                       )}
@@ -454,7 +525,10 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                     />
                   </View>
                   <Text
-                    text={detail.status === "reflected" ? MOCK_RESULT_CONTENT : MOCK_REJECTED_CONTENT}
+                    text={
+                      savedResult?.content ||
+                      (localStatus === "reflected" ? MOCK_RESULT_CONTENT : MOCK_REJECTED_CONTENT)
+                    }
                     style={S.$resultContent}
                   />
                   <View style={S.$resultDivider} />
@@ -480,8 +554,8 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
               </View>
             )}
 
-            {/* 상태 변경 및 처리 (관리자 전용, 본인 작성 진행중 제외) */}
-            {isAdmin && (!isOwnProposal || detail.status !== "ongoing") && (
+            {/* 상태 변경 및 처리 (관리자 전용, 본인 작성 진행중 / 저장 완료 제외) */}
+            {isAdmin && (!isOwnProposal || detail.status !== "ongoing") && savedResult === null && (
               <View style={S.$section}>
                 <SectionHeader
                   title={translate("improvementProposalDetailScreen:statusChange.sectionTitle")}
@@ -519,15 +593,15 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                   <View style={S.$inputLabelRow}>
                     <Text
                       text={translate(
-                        detail.status === "rejected"
+                        localStatus === "rejected"
                           ? "improvementProposalDetailScreen:statusChange.rejectedInputLabel"
                           : "improvementProposalDetailScreen:statusChange.inputLabel",
                       )}
                       style={S.$inputLabel}
                     />
                     {(selectedCard === "reflected" || selectedCard === "rejected") &&
-                      detail.status !== "reflected" &&
-                      detail.status !== "rejected" && (
+                      localStatus !== "reflected" &&
+                      localStatus !== "rejected" && (
                         <Text
                           text={translate("improvementProposalDetailScreen:editForm.required")}
                           style={
@@ -539,16 +613,16 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                       )}
                   </View>
 
-                  {detail.status === "reflected" ? (
-                    /* 이미 반영완료 처리된 상태: 읽기 전용 박스 (파란 배경) */
+                  {localStatus === "reflected" ? (
+                    /* 반영완료 처리된 상태: 읽기 전용 박스 (파란 배경) */
                     <View style={S.$processingReadBox}>
                       <Text text={MOCK_RESULT_CONTENT} style={S.$processingReadText} />
                       <View style={{ alignItems: "flex-end", marginTop: 8 }}>
                         <IconLock size={18} color="#BBBBBB" />
                       </View>
                     </View>
-                  ) : detail.status === "rejected" ? (
-                    /* 이미 반영불가 처리된 상태: 읽기 전용 박스 (빨간 배경) */
+                  ) : localStatus === "rejected" ? (
+                    /* 반영불가 처리된 상태: 읽기 전용 박스 (빨간 배경) */
                     <View style={S.$processingReadBoxRejected}>
                       <Text text={MOCK_REJECTED_CONTENT} style={S.$processingReadText} />
                       <View style={{ alignItems: "flex-end", marginTop: 8 }}>
@@ -696,13 +770,17 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                     />
                   </TouchableOpacity>
                 </>
-              ) : isOwnProposal && detail.status !== "pending" && (detail.status === "ongoing" || !isAdmin) ? (
+              ) : isOwnProposal &&
+                detail.status !== "pending" &&
+                (detail.status === "ongoing" || !isAdmin) ? (
                 /* 본인 제안 + 진행중(역할 무관) / 처리됨(근로자): 안내 텍스트 */
                 <Text
                   text={translate("improvementProposalDetailScreen:workerNoEditMessage")}
                   style={S.$workerInfoText}
                 />
-              ) : detail.status === "reflected" || detail.status === "rejected" ? (
+              ) : detail.status === "reflected" ||
+                detail.status === "rejected" ||
+                savedResult !== null ? (
                 /* 관리자: 이미 처리 완료된 제안 비활성 버튼 */
                 <View style={S.$proceedBtnDisabled}>
                   <Text
@@ -735,11 +813,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                 <TouchableOpacity
                   style={S.$proceedBtn}
                   activeOpacity={0.8}
-                  onPress={
-                    localStatus === "ongoing"
-                      ? () => console.log("처리 내용 저장 TODO: API 연동 후 처리")
-                      : handleProceed
-                  }
+                  onPress={localStatus === "ongoing" ? handleSaveProcessed : handleProceed}
                 >
                   <Text
                     text={translate(
@@ -761,6 +835,13 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
         message={translate("improvementProposalDetailScreen:savedMessage")}
         icon={<IconCheck size={16} color="#FFFFFF" strokeWidth={2.5} />}
         onHide={hideToast}
+      />
+
+      <Toast
+        visible={saveProcessingToastVisible}
+        message={translate("improvementProposalDetailScreen:saveProcessingMessage")}
+        icon={<IconCheck size={16} color="#FFFFFF" strokeWidth={2.5} />}
+        onHide={hideSaveProcessingToast}
       />
 
       <Toast

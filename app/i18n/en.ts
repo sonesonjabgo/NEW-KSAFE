@@ -779,6 +779,7 @@ const en = {
       dateLabel: "Processed on:",
     },
     alreadyProcessed: "This proposal has already been processed.",
+    saveProcessingMessage: "Processing notes have been saved.",
     workerNoEditMessage: "Proposals in progress or already processed cannot be edited or deleted.",
     status: {
       pending: "Pending",

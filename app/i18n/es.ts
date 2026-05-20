@@ -738,6 +738,7 @@ const es: Translations = {
       dateLabel: "Procesado el:",
     },
     alreadyProcessed: "Esta propuesta ya ha sido procesada.",
+    saveProcessingMessage: "Las notas de procesamiento se han guardado.",
     workerNoEditMessage: "Las propuestas en progreso o ya procesadas no se pueden editar ni eliminar.",
     status: {
       pending: "Pending",

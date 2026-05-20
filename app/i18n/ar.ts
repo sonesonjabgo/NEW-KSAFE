@@ -726,6 +726,7 @@ const ar: Translations = {
       dateLabel: "تاريخ المعالجة:",
     },
     alreadyProcessed: "هذا الاقتراح تمت معالجته بالفعل.",
+    saveProcessingMessage: "تم حفظ ملاحظات المعالجة.",
     workerNoEditMessage: "لا يمكن تعديل أو حذف الاقتراحات قيد التنفيذ أو المعالجة.",
     status: {
       pending: "Pending",

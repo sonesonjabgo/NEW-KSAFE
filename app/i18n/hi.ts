@@ -731,6 +731,7 @@ const hi: Translations = {
       dateLabel: "संसाधन तिथि:",
     },
     alreadyProcessed: "यह प्रस्ताव पहले ही संसाधित हो चुका है।",
+    saveProcessingMessage: "प्रसंस्करण नोट्स सहेजे गए हैं।",
     workerNoEditMessage: "प्रगति में या पहले से संसाधित प्रस्तावों को संपादित या हटाया नहीं जा सकता।",
     status: {
       pending: "Pending",

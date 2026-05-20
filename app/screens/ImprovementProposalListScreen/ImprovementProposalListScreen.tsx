@@ -143,7 +143,10 @@ export const ImprovementProposalListScreen: FC<ImprovementProposalListScreenProp
   const myCount = useMemo(() => mockProposalData.filter((item) => item.isMyProposal).length, [])
 
   const reflectedCount = useMemo(
-    () => mockProposalData.filter((item) => item.status === "reflected").length,
+    () =>
+      mockProposalData.filter(
+        (item) => item.status === "reflected" || item.status === "rejected",
+      ).length,
     [],
   )
 
