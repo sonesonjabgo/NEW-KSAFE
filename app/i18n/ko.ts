@@ -798,6 +798,12 @@ const ko: Translations = {
     cancel: "취소",
     save: "저장",
     savedMessage: "제안이 수정되었습니다.",
+    deleteModal: {
+      title: "제안 삭제",
+      message: "제안을 삭제하시겠습니까?\n삭제된 제안은 복구할 수 없습니다.",
+      cancel: "취소",
+      confirm: "삭제",
+    },
   },
 
   improvementProposalCreateScreen: {

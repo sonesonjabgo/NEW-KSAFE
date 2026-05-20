@@ -7,9 +7,10 @@ import {
   TouchableOpacity,
   View,
 } from "react-native"
-import { IconAlertCircle, IconCheck, IconDots, IconX } from "@tabler/icons-react-native"
+import { IconAlertCircle, IconCheck, IconDots, IconTrash, IconX } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
+import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { Toast } from "@/components/Toast"
@@ -80,6 +81,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
   const [editContent, setEditContent] = useState("")
   const [contentFocused, setContentFocused] = useState(false)
   const [toastVisible, setToastVisible] = useState(false)
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false)
   const hideToast = useCallback(() => setToastVisible(false), [])
 
   const hasContentError = editContent.length > 2000
@@ -326,7 +328,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
               <TouchableOpacity
                 style={S.$deleteBtn}
                 activeOpacity={0.8}
-                onPress={() => console.log("삭제하기")}
+                onPress={() => setDeleteModalVisible(true)}
               >
                 <Text
                   text={translate("improvementProposalDetailScreen:delete")}
@@ -344,6 +346,25 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
       message={translate("improvementProposalDetailScreen:savedMessage")}
       icon={<IconCheck size={16} color="#FFFFFF" strokeWidth={2.5} />}
       onHide={hideToast}
+    />
+
+    <ConfirmModal
+      visible={deleteModalVisible}
+      icon={
+        <View style={S.$modalDeleteIconCircle}>
+          <IconTrash size={26} color="#E03526" />
+        </View>
+      }
+      title={translate("improvementProposalDetailScreen:deleteModal.title")}
+      message={translate("improvementProposalDetailScreen:deleteModal.message")}
+      cancelLabel={translate("improvementProposalDetailScreen:deleteModal.cancel")}
+      confirmLabel={translate("improvementProposalDetailScreen:deleteModal.confirm")}
+      confirmBgColor="#E03526"
+      onCancel={() => setDeleteModalVisible(false)}
+      onConfirm={() => {
+        setDeleteModalVisible(false)
+        navigation.goBack()
+      }}
     />
     </>
   )

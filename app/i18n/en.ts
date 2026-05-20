@@ -808,6 +808,12 @@ const en = {
     cancel: "Cancel",
     save: "Save",
     savedMessage: "Proposal has been updated.",
+    deleteModal: {
+      title: "Delete Proposal",
+      message: "Are you sure you want to delete this proposal?\nDeleted proposals cannot be recovered.",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
   },
 
   improvementProposalCreateScreen: {

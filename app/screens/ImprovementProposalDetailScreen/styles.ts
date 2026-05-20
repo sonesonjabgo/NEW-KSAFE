@@ -391,3 +391,14 @@ export const $editErrorText: TextStyle = {
 export const $saveBtnDisabled: ViewStyle = {
   backgroundColor: "#F3F2F0",
 }
+
+// ── Delete Modal ──────────────────────────────────────────────────────────────
+
+export const $modalDeleteIconCircle: ViewStyle = {
+  width: 52,
+  height: 52,
+  borderRadius: 26,
+  backgroundColor: "#FEEEED",
+  justifyContent: "center",
+  alignItems: "center",
+}

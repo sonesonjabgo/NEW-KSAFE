@@ -767,6 +767,12 @@ const es: Translations = {
     cancel: "Cancel",
     save: "Save",
     savedMessage: "Proposal has been updated.",
+    deleteModal: {
+      title: "Eliminar propuesta",
+      message: "¿Está seguro de que desea eliminar esta propuesta?\nLas propuestas eliminadas no se pueden recuperar.",
+      cancel: "Cancelar",
+      confirm: "Eliminar",
+    },
   },
 
   improvementProposalCreateScreen: {
