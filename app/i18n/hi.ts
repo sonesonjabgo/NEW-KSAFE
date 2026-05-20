@@ -757,6 +757,7 @@ const hi: Translations = {
     },
     edit: "Edit",
     delete: "Delete",
+    proceed: "आगे बढ़ें",
     cancel: "Cancel",
     save: "Save",
     savedMessage: "Proposal has been updated.",

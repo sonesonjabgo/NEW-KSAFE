@@ -764,6 +764,7 @@ const fr: Translations = {
     },
     edit: "Edit",
     delete: "Delete",
+    proceed: "Procéder",
     cancel: "Cancel",
     save: "Save",
     savedMessage: "Proposal has been updated.",

@@ -795,6 +795,7 @@ const ko: Translations = {
     },
     edit: "수정하기",
     delete: "삭제하기",
+    proceed: "진행하기",
     cancel: "취소",
     save: "저장",
     savedMessage: "제안이 수정되었습니다.",

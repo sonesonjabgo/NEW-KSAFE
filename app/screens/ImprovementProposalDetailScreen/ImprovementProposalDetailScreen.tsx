@@ -61,6 +61,9 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
   const insets = useSafeAreaInsets()
   const isAdmin = role === "admin"
 
+  // TODO: 추후 로그인 사용자 정보 연동 시 실제 사용자 이름으로 교체
+  const MOCK_CURRENT_USER = "홍길동"
+
   const routeProposal = route.params?.proposal
   const fallback = mockProposalDetails[route.params?.id ?? 1] ?? mockProposalDetails[1]
   const detail = routeProposal
@@ -76,6 +79,8 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
         statusHistory: [{ id: 1, type: "registered" as const, date: routeProposal.date }],
       }
     : fallback
+
+  const isOwnProposal = detail.authorName === MOCK_CURRENT_USER
 
   // ── Edit Mode State ─────────────────────────────────────────────────────────
   const [editMode, setEditMode] = useState(false)
@@ -153,234 +158,242 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
 
   return (
     <>
-    <StackScreen
-      title={translate("improvementProposalDetailScreen:title")}
-      onBack={() => navigation.goBack()}
-      contentBg="#FFFFFF"
-      squareTop
-    >
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      <StackScreen
+        title={translate("improvementProposalDetailScreen:title")}
+        onBack={() => navigation.goBack()}
+        contentBg="#FFFFFF"
+        squareTop
       >
-        <ScrollView
-          style={S.$scrollView}
-          contentContainerStyle={S.$scrollContent}
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          {editMode ? (
-            /* ── 수정 모드: 상세 내용 입력 ── */
-            <View style={S.$editSection}>
-              <View style={S.$editLabelRow}>
-                <Text
-                  text={translate("improvementProposalDetailScreen:editForm.label")}
-                  style={S.$editLabel}
-                />
-                <Text
-                  text={translate("improvementProposalDetailScreen:editForm.required")}
-                  style={S.$editRequired}
-                />
-              </View>
-              <View
-                style={[
-                  S.$editTextarea,
-                  contentFocused && !hasContentError && S.$editTextareaFocused,
-                  hasContentError && S.$editTextareaError,
-                ]}
-              >
-                <TextInput
-                  style={S.$editTextareaInput}
-                  value={editContent}
-                  onChangeText={setEditContent}
-                  multiline
-                  scrollEnabled={false}
-                  underlineColorAndroid="transparent"
-                  onFocus={() => setContentFocused(true)}
-                  onBlur={() => setContentFocused(false)}
-                />
-              </View>
-              <Text
-                text={translate("improvementProposalDetailScreen:editForm.helper")}
-                style={S.$editHelperText}
-              />
-              {hasContentError && (
-                <View style={S.$editErrorRow}>
-                  <IconAlertCircle size={14} color="#E03C3C" strokeWidth={2} />
+          <ScrollView
+            style={S.$scrollView}
+            contentContainerStyle={S.$scrollContent}
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+          >
+            {editMode ? (
+              /* ── 수정 모드: 상세 내용 입력 ── */
+              <View style={S.$editSection}>
+                <View style={S.$editLabelRow}>
                   <Text
-                    text={translate(
-                      "improvementProposalDetailScreen:editForm.errorMaxLength",
-                    )}
-                    style={S.$editErrorText}
+                    text={translate("improvementProposalDetailScreen:editForm.label")}
+                    style={S.$editLabel}
+                  />
+                  <Text
+                    text={translate("improvementProposalDetailScreen:editForm.required")}
+                    style={S.$editRequired}
                   />
                 </View>
-              )}
-            </View>
-          ) : (
-            /* ── 상세 보기 모드: 제안 정보 카드 ── */
-            <View style={S.$infoCard}>
-              <View style={S.$infoCardTopRow}>
-                <StatusBadge status={detail.status} />
-                <Text text={detail.date} style={S.$infoDate} />
-              </View>
-              <Text text={detail.content} style={S.$infoContent} />
-              <View style={S.$authorRow}>
-                <View style={S.$authorAvatar}>
-                  <Text text={detail.authorInitial} style={S.$authorAvatarText} />
+                <View
+                  style={[
+                    S.$editTextarea,
+                    contentFocused && !hasContentError && S.$editTextareaFocused,
+                    hasContentError && S.$editTextareaError,
+                  ]}
+                >
+                  <TextInput
+                    style={S.$editTextareaInput}
+                    value={editContent}
+                    onChangeText={setEditContent}
+                    multiline
+                    scrollEnabled={false}
+                    underlineColorAndroid="transparent"
+                    onFocus={() => setContentFocused(true)}
+                    onBlur={() => setContentFocused(false)}
+                  />
                 </View>
-                <View style={S.$authorInfo}>
-                  <Text text={detail.authorName} style={S.$authorName} />
-                  <Text text={detail.workplace} style={S.$authorWorkplace} />
-                </View>
-              </View>
-            </View>
-          )}
-
-          {/* 상태 변경 및 처리 (관리자 전용) */}
-          {isAdmin && (
-            <View style={S.$section}>
-              <SectionHeader
-                title={translate(
-                  "improvementProposalDetailScreen:statusChange.sectionTitle",
-                )}
-              />
-              <View style={S.$statusChangeCard}>
-                <View style={S.$statusBtnGroup}>
-                  {STATUS_BUTTONS.map((btn) => (
-                    <View key={btn.key} style={S.$statusBtn}>
-                      <btn.Icon size={20} color="#BBBBBB" strokeWidth={1.5} />
-                      <Text text={btn.label} style={S.$statusBtnText} />
-                    </View>
-                  ))}
-                </View>
-
                 <Text
-                  text={translate(
-                    "improvementProposalDetailScreen:statusChange.inputLabel",
-                  )}
-                  style={S.$inputLabel}
+                  text={translate("improvementProposalDetailScreen:editForm.helper")}
+                  style={S.$editHelperText}
                 />
-                {detail.status === "pending" && (
-                  <View style={S.$pendingMessageBox}>
+                {hasContentError && (
+                  <View style={S.$editErrorRow}>
+                    <IconAlertCircle size={14} color="#E03C3C" strokeWidth={2} />
                     <Text
-                      text={translate(
-                        "improvementProposalDetailScreen:statusChange.pendingMessage",
-                      )}
-                      style={S.$pendingMessageText}
+                      text={translate("improvementProposalDetailScreen:editForm.errorMaxLength")}
+                      style={S.$editErrorText}
                     />
                   </View>
                 )}
               </View>
-            </View>
-          )}
-
-          {/* 상태 변경 이력 */}
-          <View style={S.$section}>
-            <SectionHeader
-              title={translate("improvementProposalDetailScreen:history.sectionTitle")}
-            />
-            {detail.statusHistory.map((item) => (
-              <View key={item.id} style={S.$timelineItem}>
-                <View style={S.$timelineDot}>
-                  <View style={S.$timelineDotInner} />
+            ) : (
+              /* ── 상세 보기 모드: 제안 정보 카드 ── */
+              <View style={S.$infoCard}>
+                <View style={S.$infoCardTopRow}>
+                  <StatusBadge status={detail.status} />
+                  <Text text={detail.date} style={S.$infoDate} />
                 </View>
-                <View style={S.$timelineContent}>
-                  <View style={S.$timelineRow}>
-                    <Text text={HISTORY_TITLE[item.type]} style={S.$timelineTitle} />
-                    <Text text={item.date} style={S.$timelineDate} />
+                <Text text={detail.content} style={S.$infoContent} />
+                <View style={S.$authorRow}>
+                  <View style={S.$authorAvatar}>
+                    <Text text={detail.authorInitial} style={S.$authorAvatarText} />
                   </View>
-                  <Text text={HISTORY_DESC[item.type]} style={S.$timelineDesc} />
+                  <View style={S.$authorInfo}>
+                    <Text text={detail.authorName} style={S.$authorName} />
+                    <Text text={detail.workplace} style={S.$authorWorkplace} />
+                  </View>
                 </View>
               </View>
-            ))}
-          </View>
-        </ScrollView>
+            )}
 
-        {/* 하단 버튼 */}
-        <View style={[S.$bottomBar, { paddingBottom: insets.bottom + 16 }]}>
-          {editMode ? (
-            <>
-              <TouchableOpacity style={S.$editBtn} activeOpacity={0.7} onPress={cancelEdit}>
-                <Text
-                  text={translate("improvementProposalDetailScreen:cancel")}
-                  style={S.$editBtnText}
+            {/* 상태 변경 및 처리 (관리자 전용) */}
+            {isAdmin && (
+              <View style={S.$section}>
+                <SectionHeader
+                  title={translate("improvementProposalDetailScreen:statusChange.sectionTitle")}
                 />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[S.$deleteBtn, !isEditValid && S.$saveBtnDisabled]}
-                activeOpacity={0.8}
-                onPress={saveEdit}
-                disabled={!isEditValid}
-              >
-                <Text
-                  text={translate("improvementProposalDetailScreen:save")}
-                  style={S.$deleteBtnText}
-                />
-              </TouchableOpacity>
-            </>
-          ) : (
-            <>
-              <TouchableOpacity style={S.$editBtn} activeOpacity={0.7} onPress={enterEditMode}>
-                <Text
-                  text={translate("improvementProposalDetailScreen:edit")}
-                  style={S.$editBtnText}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={S.$deleteBtn}
-                activeOpacity={0.8}
-                onPress={() => setDeleteModalVisible(true)}
-              >
-                <Text
-                  text={translate("improvementProposalDetailScreen:delete")}
-                  style={S.$deleteBtnText}
-                />
-              </TouchableOpacity>
-            </>
+                <View style={S.$statusChangeCard}>
+                  <View style={S.$statusBtnGroup}>
+                    {STATUS_BUTTONS.map((btn) => (
+                      <View key={btn.key} style={S.$statusBtn}>
+                        <btn.Icon size={20} color="#BBBBBB" strokeWidth={1.5} />
+                        <Text text={btn.label} style={S.$statusBtnText} />
+                      </View>
+                    ))}
+                  </View>
+
+                  <Text
+                    text={translate("improvementProposalDetailScreen:statusChange.inputLabel")}
+                    style={S.$inputLabel}
+                  />
+                  {detail.status === "pending" && (
+                    <View style={S.$pendingMessageBox}>
+                      <Text
+                        text={translate(
+                          "improvementProposalDetailScreen:statusChange.pendingMessage",
+                        )}
+                        style={S.$pendingMessageText}
+                      />
+                    </View>
+                  )}
+                </View>
+              </View>
+            )}
+
+            {/* 상태 변경 이력 */}
+            <View style={S.$section}>
+              <SectionHeader
+                title={translate("improvementProposalDetailScreen:history.sectionTitle")}
+              />
+              {detail.statusHistory.map((item) => (
+                <View key={item.id} style={S.$timelineItem}>
+                  <View style={S.$timelineDot}>
+                    <View style={S.$timelineDotInner} />
+                  </View>
+                  <View style={S.$timelineContent}>
+                    <View style={S.$timelineRow}>
+                      <Text text={HISTORY_TITLE[item.type]} style={S.$timelineTitle} />
+                      <Text text={item.date} style={S.$timelineDate} />
+                    </View>
+                    <Text text={HISTORY_DESC[item.type]} style={S.$timelineDesc} />
+                  </View>
+                </View>
+              ))}
+            </View>
+          </ScrollView>
+
+          {/* 하단 버튼 — 역할/작성자 조건 분기 */}
+          {(isOwnProposal || isAdmin) && (
+            <View style={[S.$bottomBar, { paddingBottom: insets.bottom + 16 }]}>
+              {editMode ? (
+                /* 수정 모드: 취소 / 저장 */
+                <>
+                  <TouchableOpacity style={S.$editBtn} activeOpacity={0.7} onPress={cancelEdit}>
+                    <Text
+                      text={translate("improvementProposalDetailScreen:cancel")}
+                      style={S.$editBtnText}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[S.$deleteBtn, !isEditValid && S.$saveBtnDisabled]}
+                    activeOpacity={0.8}
+                    onPress={saveEdit}
+                    disabled={!isEditValid}
+                  >
+                    <Text
+                      text={translate("improvementProposalDetailScreen:save")}
+                      style={S.$deleteBtnText}
+                    />
+                  </TouchableOpacity>
+                </>
+              ) : isOwnProposal ? (
+                /* 본인 제안: 수정하기 / 삭제하기 */
+                <>
+                  <TouchableOpacity style={S.$editBtn} activeOpacity={0.7} onPress={enterEditMode}>
+                    <Text
+                      text={translate("improvementProposalDetailScreen:edit")}
+                      style={S.$editBtnText}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={S.$deleteBtn}
+                    activeOpacity={0.8}
+                    onPress={() => setDeleteModalVisible(true)}
+                  >
+                    <Text
+                      text={translate("improvementProposalDetailScreen:delete")}
+                      style={S.$deleteBtnText}
+                    />
+                  </TouchableOpacity>
+                </>
+              ) : (
+                /* 관리자 + 타인 제안: 진행하기 */
+                <TouchableOpacity
+                  style={S.$proceedBtn}
+                  activeOpacity={0.8}
+                  onPress={() => console.log("진행하기 TODO: API 연동 후 처리")}
+                >
+                  <Text
+                    text={translate("improvementProposalDetailScreen:proceed")}
+                    style={S.$proceedBtnText}
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
           )}
-        </View>
-      </KeyboardAvoidingView>
-    </StackScreen>
+        </KeyboardAvoidingView>
+      </StackScreen>
 
-    <Toast
-      visible={toastVisible}
-      message={translate("improvementProposalDetailScreen:savedMessage")}
-      icon={<IconCheck size={16} color="#FFFFFF" strokeWidth={2.5} />}
-      onHide={hideToast}
-    />
+      <Toast
+        visible={toastVisible}
+        message={translate("improvementProposalDetailScreen:savedMessage")}
+        icon={<IconCheck size={16} color="#FFFFFF" strokeWidth={2.5} />}
+        onHide={hideToast}
+      />
 
-    <ConfirmModal
-      visible={deleteModalVisible}
-      icon={
-        <View style={S.$modalDeleteIconCircle}>
-          <IconTrash size={26} color="#E03526" />
-        </View>
-      }
-      title={translate("improvementProposalDetailScreen:deleteModal.title")}
-      message={translate("improvementProposalDetailScreen:deleteModal.message")}
-      cancelLabel={translate("improvementProposalDetailScreen:deleteModal.cancel")}
-      confirmLabel={translate("improvementProposalDetailScreen:deleteModal.confirm")}
-      confirmBgColor="#E03526"
-      onCancel={() => setDeleteModalVisible(false)}
-      onConfirm={() => {
-        setDeleteModalVisible(false)
-        navigation.dispatch((state) => {
-          const routes = state.routes
-            .filter((r) => r.name !== "ImprovementProposalDetail")
-            .map((r) =>
-              r.name === "ImprovementProposalList"
-                ? { ...r, params: { deleted: true } }
-                : r,
-            )
-          const listIndex = routes.findIndex((r) => r.name === "ImprovementProposalList")
-          return CommonActions.reset({
-            ...state,
-            routes,
-            index: listIndex >= 0 ? listIndex : routes.length - 1,
+      <ConfirmModal
+        visible={deleteModalVisible}
+        icon={
+          <View style={S.$modalDeleteIconCircle}>
+            <IconTrash size={26} color="#E03526" />
+          </View>
+        }
+        title={translate("improvementProposalDetailScreen:deleteModal.title")}
+        message={translate("improvementProposalDetailScreen:deleteModal.message")}
+        cancelLabel={translate("improvementProposalDetailScreen:deleteModal.cancel")}
+        confirmLabel={translate("improvementProposalDetailScreen:deleteModal.confirm")}
+        confirmBgColor="#E03526"
+        onCancel={() => setDeleteModalVisible(false)}
+        onConfirm={() => {
+          setDeleteModalVisible(false)
+          navigation.dispatch((state) => {
+            const routes = state.routes
+              .filter((r) => r.name !== "ImprovementProposalDetail")
+              .map((r) =>
+                r.name === "ImprovementProposalList" ? { ...r, params: { deleted: true } } : r,
+              )
+            const listIndex = routes.findIndex((r) => r.name === "ImprovementProposalList")
+            return CommonActions.reset({
+              ...state,
+              routes,
+              index: listIndex >= 0 ? listIndex : routes.length - 1,
+            })
           })
-        })
-      }}
-    />
+        }}
+      />
     </>
   )
 }

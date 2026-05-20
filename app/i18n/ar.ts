@@ -752,6 +752,7 @@ const ar: Translations = {
     },
     edit: "Edit",
     delete: "Delete",
+    proceed: "متابعة",
     cancel: "Cancel",
     save: "Save",
     savedMessage: "Proposal has been updated.",

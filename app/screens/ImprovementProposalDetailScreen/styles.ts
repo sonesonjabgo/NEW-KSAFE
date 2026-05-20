@@ -311,6 +311,21 @@ export const $deleteBtnText: TextStyle = {
   color: "#FFFFFF",
 }
 
+export const $proceedBtn: ViewStyle = {
+  flex: 1,
+  height: 52,
+  borderRadius: 12,
+  backgroundColor: colors.blue,
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+export const $proceedBtnText: TextStyle = {
+  fontSize: 16,
+  fontFamily: typography.primary.bold,
+  color: "#FFFFFF",
+}
+
 // ── Edit Form (수정 모드) ──────────────────────────────────────────────────────
 
 export const $editSection: ViewStyle = {

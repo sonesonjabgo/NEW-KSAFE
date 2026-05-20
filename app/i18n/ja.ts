@@ -756,6 +756,7 @@ const ja: Translations = {
     },
     edit: "Edit",
     delete: "Delete",
+    proceed: "進める",
     cancel: "Cancel",
     save: "Save",
     savedMessage: "Proposal has been updated.",

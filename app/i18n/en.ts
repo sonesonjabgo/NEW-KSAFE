@@ -805,6 +805,7 @@ const en = {
     },
     edit: "Edit",
     delete: "Delete",
+    proceed: "Proceed",
     cancel: "Cancel",
     save: "Save",
     savedMessage: "Proposal has been updated.",
