@@ -8,7 +8,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native"
-import { IconAlertCircle, IconCheck, IconDots, IconTrash, IconX } from "@tabler/icons-react-native"
+import {
+  IconAlertCircle,
+  IconCalendar,
+  IconCheck,
+  IconDots,
+  IconLock,
+  IconTrash,
+  IconX,
+} from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { ConfirmModal } from "@/components/ConfirmModal"
@@ -63,6 +71,15 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
 
   // TODO: 추후 로그인 사용자 정보 연동 시 실제 사용자 이름으로 교체
   const MOCK_CURRENT_USER = "홍길동"
+  // TODO: 추후 실제 처리자 정보 연동 시 교체
+  const MOCK_MANAGER_NAME = "관리자(김영희)"
+  // TODO: 추후 API 연동 시 실제 처리 결과 데이터로 교체
+  const MOCK_RESULT_CONTENT = "설비팀 검토 결과 배치 완료함"
+  const MOCK_RESULT_DATE = "2026.05.19 10:07"
+  const MOCK_RESULT_MANAGER = "김영희"
+  const MOCK_RESULT_MANAGER_INITIAL = "김"
+  // TODO: 추후 API 연동 시 실제 반영불가 사유로 교체
+  const MOCK_REJECTED_CONTENT = "검토 결과 반영이 어렵습니다."
 
   const routeProposal = route.params?.proposal
   const fallback = mockProposalDetails[route.params?.id ?? 1] ?? mockProposalDetails[1]
@@ -90,6 +107,52 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
   const [deleteModalVisible, setDeleteModalVisible] = useState(false)
   const hideToast = useCallback(() => setToastVisible(false), [])
 
+  // ── Proceed State ────────────────────────────────────────────────────────────
+  const [localStatus, setLocalStatus] = useState<ProposalStatus>(detail.status)
+  const [localHistory, setLocalHistory] = useState(detail.statusHistory)
+  const [isProceedStarted, setIsProceedStarted] = useState(false)
+  const [proceedToastVisible, setProceedToastVisible] = useState(false)
+  const hideProceedToast = useCallback(() => setProceedToastVisible(false), [])
+
+  // selectedCard: 상태 변경 카드 선택 상태 (localStatus와 분리)
+  const [selectedCard, setSelectedCard] = useState<"ongoing" | "reflected" | "rejected" | null>(
+    detail.status === "pending"
+      ? null
+      : detail.status === "ongoing"
+        ? "ongoing"
+        : detail.status === "reflected"
+          ? "reflected"
+          : detail.status === "rejected"
+            ? "rejected"
+            : null,
+  )
+
+  // ── Processing Input State ───────────────────────────────────────────────────
+  const [processingContent, setProcessingContent] = useState("")
+  const [processingFocused, setProcessingFocused] = useState(false)
+
+  const handleCardSelect = useCallback(
+    (key: "ongoing" | "reflected" | "rejected") => {
+      if (localStatus !== "ongoing") return
+      setSelectedCard(key)
+    },
+    [localStatus],
+  )
+
+  const handleProceed = useCallback(() => {
+    const now = new Date()
+    const pad = (n: number) => n.toString().padStart(2, "0")
+    const dateStr = `${now.getFullYear()}.${pad(now.getMonth() + 1)}.${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`
+    setLocalStatus("ongoing")
+    setSelectedCard("ongoing")
+    setLocalHistory((prev) => [
+      { id: prev.length + 1, type: "ongoing" as const, date: dateStr },
+      ...prev,
+    ])
+    setIsProceedStarted(true)
+    setProceedToastVisible(true)
+  }, [])
+
   const hasContentError = editContent.length > 2000
   const isEditValid = useMemo(
     () => editContent.trim().length > 0 && editContent.length <= 2000,
@@ -116,19 +179,31 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
   const STATUS_BUTTONS = useMemo(
     () => [
       {
-        key: "ongoing",
+        key: "ongoing" as const,
         Icon: IconDots,
         label: translate("improvementProposalDetailScreen:statusChange.ongoingBtn"),
+        selectedBtnStyle: S.$statusBtnSelectedOngoing,
+        selectedTextStyle: S.$statusBtnTextSelectedOngoing,
+        selectedIconColor: "#18A24A",
+        badgeColor: "#18A24A",
       },
       {
-        key: "reflected",
+        key: "reflected" as const,
         Icon: IconCheck,
         label: translate("improvementProposalDetailScreen:statusChange.reflectedBtn"),
+        selectedBtnStyle: S.$statusBtnSelectedReflected,
+        selectedTextStyle: S.$statusBtnTextSelectedReflected,
+        selectedIconColor: "#1062D8",
+        badgeColor: "#1062D8",
       },
       {
-        key: "rejected",
+        key: "rejected" as const,
         Icon: IconX,
         label: translate("improvementProposalDetailScreen:statusChange.rejectedBtn"),
+        selectedBtnStyle: S.$statusBtnSelectedRejected,
+        selectedTextStyle: S.$statusBtnTextSelectedRejected,
+        selectedIconColor: "#E03526",
+        badgeColor: "#E03526",
       },
     ],
     [],
@@ -153,6 +228,119 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
     }),
     [],
   )
+
+  // ── Display History 계산 ─────────────────────────────────────────────────────
+  // 상태별로 이력 표시 순서와 라벨·노트 버블을 결정한다.
+
+  type DisplayHistoryItem = {
+    id: number
+    type: StatusHistoryType
+    date: string
+    title: string
+    note?: string
+    noteColor?: "ongoing" | "reflected" | "rejected"
+    isHighlight: boolean
+    highlightVariant?: "ongoing" | "reflected" | "rejected"
+  }
+
+  const displayHistory = useMemo((): DisplayHistoryItem[] => {
+    // 관리자가 이 화면에서 진행하기를 클릭한 경우
+    if (isProceedStarted) {
+      return localHistory.map((item, index) => ({
+        ...item,
+        title:
+          index === 0
+            ? translate("improvementProposalDetailScreen:history.ongoingChangeTitle")
+            : HISTORY_TITLE[item.type],
+        note:
+          index === 0
+            ? `${translate("improvementProposalDetailScreen:history.proceedNote")} ${MOCK_MANAGER_NAME}`
+            : undefined,
+        noteColor: index === 0 ? ("ongoing" as const) : undefined,
+        isHighlight: index === 0,
+        highlightVariant: index === 0 ? ("ongoing" as const) : undefined,
+      }))
+    }
+
+    // 진행중으로 이미 들어온 화면: 진행중 변경 + 제안 등록 (역순)
+    if (detail.status === "ongoing") {
+      return [...detail.statusHistory].reverse().map((item, index) => {
+        if (index === 0 && item.type === "ongoing") {
+          return {
+            ...item,
+            title: translate("improvementProposalDetailScreen:history.ongoingChangeTitle"),
+            note: `${translate("improvementProposalDetailScreen:history.proceedNote")} ${MOCK_MANAGER_NAME}`,
+            noteColor: "ongoing" as const,
+            isHighlight: true,
+            highlightVariant: "ongoing" as const,
+          }
+        }
+        return {
+          ...item,
+          title: HISTORY_TITLE[item.type],
+          note: undefined,
+          noteColor: undefined,
+          isHighlight: false,
+        }
+      })
+    }
+
+    // 반영완료 / 반영불가: 역순으로 표시, 최신 항목에 상태별 버블
+    if (detail.status === "reflected" || detail.status === "rejected") {
+      const isReflected = detail.status === "reflected"
+      return [...detail.statusHistory].reverse().map((item, index) => {
+        if (index === 0) {
+          return {
+            ...item,
+            title: translate(
+              isReflected
+                ? "improvementProposalDetailScreen:history.reflectedChangeTitle"
+                : "improvementProposalDetailScreen:history.rejectedChangeTitle",
+            ),
+            note: `${translate(
+              isReflected
+                ? "improvementProposalDetailScreen:history.reflectedNote"
+                : "improvementProposalDetailScreen:history.rejectedNote",
+            )} ${MOCK_MANAGER_NAME}`,
+            noteColor: isReflected ? ("reflected" as const) : ("rejected" as const),
+            isHighlight: true,
+            highlightVariant: isReflected ? ("reflected" as const) : ("rejected" as const),
+          }
+        }
+        if (item.type === "ongoing") {
+          return {
+            ...item,
+            title: translate("improvementProposalDetailScreen:history.ongoingChangeTitle"),
+            note: `${translate("improvementProposalDetailScreen:history.proceedNote")} ${MOCK_MANAGER_NAME}`,
+            noteColor: undefined,
+            isHighlight: false,
+          }
+        }
+        return {
+          ...item,
+          title: HISTORY_TITLE[item.type],
+          note: undefined,
+          noteColor: undefined,
+          isHighlight: false,
+        }
+      })
+    }
+
+    // pending 또는 그 외: 그대로 표시
+    return detail.statusHistory.map((item) => ({
+      ...item,
+      title: HISTORY_TITLE[item.type],
+      note: undefined,
+      isHighlight: false,
+    }))
+  }, [
+    isProceedStarted,
+    localHistory,
+    detail.status,
+    detail.statusHistory,
+    HISTORY_TITLE,
+    MOCK_MANAGER_NAME,
+  ])
 
   // ── Render ──────────────────────────────────────────────────────────────────
 
@@ -223,7 +411,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
               /* ── 상세 보기 모드: 제안 정보 카드 ── */
               <View style={S.$infoCard}>
                 <View style={S.$infoCardTopRow}>
-                  <StatusBadge status={detail.status} />
+                  <StatusBadge status={localStatus} />
                   <Text text={detail.date} style={S.$infoDate} />
                 </View>
                 <Text text={detail.content} style={S.$infoContent} />
@@ -239,6 +427,46 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
               </View>
             )}
 
+            {/* 처리 결과 (반영완료 원본 상태 전용) */}
+            {isAdmin && detail.status === "reflected" && (
+              <View style={S.$section}>
+                <SectionHeader
+                  title={translate("improvementProposalDetailScreen:result.sectionTitle")}
+                />
+                <View style={S.$resultCard}>
+                  <View style={S.$resultHeaderRow}>
+                    <View style={S.$resultIconCircle}>
+                      <IconCheck size={20} color="#18A24A" strokeWidth={2.5} />
+                    </View>
+                    <Text
+                      text={translate("improvementProposalDetailScreen:result.reflected")}
+                      style={S.$resultTitle}
+                    />
+                  </View>
+                  <Text text={MOCK_RESULT_CONTENT} style={S.$resultContent} />
+                  <View style={S.$resultDivider} />
+                  <View style={S.$resultFooterRow}>
+                    <View style={S.$resultDateRow}>
+                      <IconCalendar size={14} color="#888888" />
+                      <Text
+                        text={`${translate("improvementProposalDetailScreen:result.dateLabel")} ${MOCK_RESULT_DATE}`}
+                        style={S.$resultDateText}
+                      />
+                    </View>
+                    <View style={S.$resultManagerRow}>
+                      <View style={S.$resultManagerAvatar}>
+                        <Text
+                          text={MOCK_RESULT_MANAGER_INITIAL}
+                          style={S.$resultManagerAvatarText}
+                        />
+                      </View>
+                      <Text text={MOCK_RESULT_MANAGER} style={S.$resultManagerName} />
+                    </View>
+                  </View>
+                </View>
+              </View>
+            )}
+
             {/* 상태 변경 및 처리 (관리자 전용) */}
             {isAdmin && (
               <View style={S.$section}>
@@ -247,23 +475,115 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                 />
                 <View style={S.$statusChangeCard}>
                   <View style={S.$statusBtnGroup}>
-                    {STATUS_BUTTONS.map((btn) => (
-                      <View key={btn.key} style={S.$statusBtn}>
-                        <btn.Icon size={20} color="#BBBBBB" strokeWidth={1.5} />
-                        <Text text={btn.label} style={S.$statusBtnText} />
-                      </View>
-                    ))}
+                    {STATUS_BUTTONS.map((btn) => {
+                      const isSelected = selectedCard === btn.key
+                      return (
+                        <TouchableOpacity
+                          key={btn.key}
+                          style={[S.$statusBtn, isSelected && btn.selectedBtnStyle]}
+                          activeOpacity={localStatus === "ongoing" ? 0.7 : 1}
+                          onPress={() => handleCardSelect(btn.key)}
+                        >
+                          {isSelected && (
+                            <View style={[S.$statusBtnBadge, { backgroundColor: btn.badgeColor }]}>
+                              <IconCheck size={10} color="#FFFFFF" strokeWidth={3} />
+                            </View>
+                          )}
+                          <btn.Icon
+                            size={20}
+                            color={isSelected ? btn.selectedIconColor : "#C6C6C6"}
+                            strokeWidth={1.5}
+                          />
+                          <Text
+                            text={btn.label}
+                            style={[S.$statusBtnText, isSelected && btn.selectedTextStyle]}
+                          />
+                        </TouchableOpacity>
+                      )
+                    })}
                   </View>
 
-                  <Text
-                    text={translate("improvementProposalDetailScreen:statusChange.inputLabel")}
-                    style={S.$inputLabel}
-                  />
-                  {detail.status === "pending" && (
+                  <View style={S.$inputLabelRow}>
+                    <Text
+                      text={translate(
+                        detail.status === "rejected"
+                          ? "improvementProposalDetailScreen:statusChange.rejectedInputLabel"
+                          : "improvementProposalDetailScreen:statusChange.inputLabel",
+                      )}
+                      style={S.$inputLabel}
+                    />
+                    {(selectedCard === "reflected" || selectedCard === "rejected") &&
+                      detail.status !== "reflected" &&
+                      detail.status !== "rejected" && (
+                        <Text
+                          text={translate("improvementProposalDetailScreen:editForm.required")}
+                          style={
+                            selectedCard === "reflected"
+                              ? S.$inputLabelRequiredBlue
+                              : S.$inputLabelRequired
+                          }
+                        />
+                      )}
+                  </View>
+
+                  {detail.status === "reflected" ? (
+                    /* 이미 반영완료 처리된 상태: 읽기 전용 박스 (파란 배경) */
+                    <View style={S.$processingReadBox}>
+                      <Text text={MOCK_RESULT_CONTENT} style={S.$processingReadText} />
+                      <View style={{ alignItems: "flex-end", marginTop: 8 }}>
+                        <IconLock size={18} color="#BBBBBB" />
+                      </View>
+                    </View>
+                  ) : detail.status === "rejected" ? (
+                    /* 이미 반영불가 처리된 상태: 읽기 전용 박스 (빨간 배경) */
+                    <View style={S.$processingReadBoxRejected}>
+                      <Text text={MOCK_REJECTED_CONTENT} style={S.$processingReadText} />
+                      <View style={{ alignItems: "flex-end", marginTop: 8 }}>
+                        <IconLock size={18} color="#BBBBBB" />
+                      </View>
+                    </View>
+                  ) : selectedCard === "reflected" || selectedCard === "rejected" ? (
+                    /* 반영완료/반영불가 선택 시: 처리 내용 입력 활성화 */
+                    <View>
+                      <View
+                        style={[
+                          S.$processingTextarea,
+                          processingFocused &&
+                            (selectedCard === "rejected"
+                              ? S.$processingTextareaFocusedRejected
+                              : S.$processingTextareaFocused),
+                        ]}
+                      >
+                        <TextInput
+                          style={S.$processingTextareaInput}
+                          value={processingContent}
+                          onChangeText={setProcessingContent}
+                          placeholder={translate(
+                            selectedCard === "rejected"
+                              ? "improvementProposalDetailScreen:statusChange.rejectedProcessingPlaceholder"
+                              : "improvementProposalDetailScreen:statusChange.processingPlaceholder",
+                          )}
+                          placeholderTextColor="#BBBBBB"
+                          multiline
+                          scrollEnabled={false}
+                          underlineColorAndroid="transparent"
+                          onFocus={() => setProcessingFocused(true)}
+                          onBlur={() => setProcessingFocused(false)}
+                        />
+                      </View>
+                      <Text
+                        text={translate("improvementProposalDetailScreen:editForm.helper")}
+                        style={S.$processingHelperText}
+                      />
+                    </View>
+                  ) : (
+                    /* 진행중 또는 대기중 상태: 안내 메시지 */
                     <View style={S.$pendingMessageBox}>
                       <Text
                         text={translate(
-                          "improvementProposalDetailScreen:statusChange.pendingMessage",
+                          localStatus === "ongoing"
+                            ? "improvementProposalDetailScreen:statusChange.ongoingMessage"
+                            : "improvementProposalDetailScreen:statusChange.pendingMessage",
                         )}
                         style={S.$pendingMessageText}
                       />
@@ -278,20 +598,64 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
               <SectionHeader
                 title={translate("improvementProposalDetailScreen:history.sectionTitle")}
               />
-              {detail.statusHistory.map((item) => (
-                <View key={item.id} style={S.$timelineItem}>
-                  <View style={S.$timelineDot}>
-                    <View style={S.$timelineDotInner} />
-                  </View>
-                  <View style={S.$timelineContent}>
-                    <View style={S.$timelineRow}>
-                      <Text text={HISTORY_TITLE[item.type]} style={S.$timelineTitle} />
-                      <Text text={item.date} style={S.$timelineDate} />
+              {displayHistory.map((item, index) => {
+                const isLast = index === displayHistory.length - 1
+                const dotStyle =
+                  item.isHighlight && item.highlightVariant === "reflected"
+                    ? S.$timelineDotActiveReflected
+                    : item.isHighlight && item.highlightVariant === "rejected"
+                      ? S.$timelineDotActiveRejected
+                      : item.isHighlight
+                        ? S.$timelineDotActive
+                        : undefined
+                const dotInnerStyle =
+                  item.isHighlight && item.highlightVariant === "reflected"
+                    ? S.$timelineDotInnerActiveReflected
+                    : item.isHighlight && item.highlightVariant === "rejected"
+                      ? S.$timelineDotInnerActiveRejected
+                      : item.isHighlight
+                        ? S.$timelineDotInnerActive
+                        : undefined
+                const bubbleStyle =
+                  item.noteColor === "reflected"
+                    ? S.$historyNoteBubbleReflected
+                    : item.noteColor === "rejected"
+                      ? S.$historyNoteBubbleRejected
+                      : S.$historyNoteBubble
+                const bubbleTextStyle =
+                  item.noteColor === "reflected"
+                    ? S.$historyNoteBubbleReflectedText
+                    : item.noteColor === "rejected"
+                      ? S.$historyNoteBubbleRejectedText
+                      : S.$historyNoteBubbleText
+                return (
+                  <View key={item.id} style={S.$timelineItem}>
+                    <View style={S.$timelineDotColumn}>
+                      <View style={[S.$timelineDot, dotStyle]}>
+                        <View style={[S.$timelineDotInner, dotInnerStyle]} />
+                      </View>
+                      {!isLast && <View style={S.$timelineConnector} />}
                     </View>
-                    <Text text={HISTORY_DESC[item.type]} style={S.$timelineDesc} />
+                    <View style={S.$timelineContent}>
+                      <View style={S.$timelineRow}>
+                        <Text text={item.title} style={S.$timelineTitle} />
+                        <Text text={item.date} style={S.$timelineDate} />
+                      </View>
+                      {item.note != null ? (
+                        item.noteColor != null ? (
+                          <View style={bubbleStyle}>
+                            <Text text={item.note} style={bubbleTextStyle} />
+                          </View>
+                        ) : (
+                          <Text text={item.note} style={S.$timelineDesc} />
+                        )
+                      ) : (
+                        <Text text={HISTORY_DESC[item.type]} style={S.$timelineDesc} />
+                      )}
+                    </View>
                   </View>
-                </View>
-              ))}
+                )
+              })}
             </View>
           </ScrollView>
 
@@ -319,6 +683,14 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                     />
                   </TouchableOpacity>
                 </>
+              ) : detail.status === "reflected" || detail.status === "rejected" ? (
+                /* 이미 처리 완료된 제안: 비활성 버튼 (소유 여부 무관) */
+                <View style={S.$proceedBtnDisabled}>
+                  <Text
+                    text={translate("improvementProposalDetailScreen:alreadyProcessed")}
+                    style={S.$proceedBtnTextDisabled}
+                  />
+                </View>
               ) : isOwnProposal ? (
                 /* 본인 제안: 수정하기 / 삭제하기 */
                 <>
@@ -340,14 +712,22 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                   </TouchableOpacity>
                 </>
               ) : (
-                /* 관리자 + 타인 제안: 진행하기 */
+                /* 관리자 + 타인 제안: 진행하기 → 처리 내용 저장 */
                 <TouchableOpacity
                   style={S.$proceedBtn}
                   activeOpacity={0.8}
-                  onPress={() => console.log("진행하기 TODO: API 연동 후 처리")}
+                  onPress={
+                    localStatus === "ongoing"
+                      ? () => console.log("처리 내용 저장 TODO: API 연동 후 처리")
+                      : handleProceed
+                  }
                 >
                   <Text
-                    text={translate("improvementProposalDetailScreen:proceed")}
+                    text={translate(
+                      localStatus === "ongoing"
+                        ? "improvementProposalDetailScreen:saveProceeded"
+                        : "improvementProposalDetailScreen:proceed",
+                    )}
                     style={S.$proceedBtnText}
                   />
                 </TouchableOpacity>
@@ -362,6 +742,13 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
         message={translate("improvementProposalDetailScreen:savedMessage")}
         icon={<IconCheck size={16} color="#FFFFFF" strokeWidth={2.5} />}
         onHide={hideToast}
+      />
+
+      <Toast
+        visible={proceedToastVisible}
+        message={translate("improvementProposalDetailScreen:proceedStartedMessage")}
+        icon={<IconCheck size={16} color="#FFFFFF" strokeWidth={2.5} />}
+        onHide={hideProceedToast}
       />
 
       <ConfirmModal

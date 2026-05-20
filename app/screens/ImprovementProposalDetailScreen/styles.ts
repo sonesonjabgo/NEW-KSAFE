@@ -169,10 +169,10 @@ export const $statusBtnGroup: ViewStyle = {
 export const $statusBtn: ViewStyle = {
   flex: 1,
   height: 72,
-  backgroundColor: "#F7F8FA",
+  backgroundColor: "#FBFBFB",
   borderRadius: 8,
-  borderWidth: 1,
-  borderColor: "#E0E0E0",
+  borderWidth: 1.5,
+  borderColor: "#ECECEC",
   justifyContent: "center",
   alignItems: "center",
   gap: 6,
@@ -181,7 +181,53 @@ export const $statusBtn: ViewStyle = {
 export const $statusBtnText: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#BBBBBB",
+  color: "#C6C6C6",
+}
+
+export const $statusBtnSelectedOngoing: ViewStyle = {
+  backgroundColor: "#CFFFE1",
+  borderColor: "#18A24A",
+  borderWidth: 2,
+}
+
+export const $statusBtnTextSelectedOngoing: TextStyle = {
+  color: "#18A24A",
+  fontFamily: typography.primary.semiBold,
+}
+
+export const $statusBtnSelectedReflected: ViewStyle = {
+  backgroundColor: "#EFF4FD",
+  borderColor: "#1062D8",
+  borderWidth: 2,
+}
+
+export const $statusBtnTextSelectedReflected: TextStyle = {
+  color: "#1062D8",
+  fontFamily: typography.primary.semiBold,
+}
+
+export const $statusBtnSelectedRejected: ViewStyle = {
+  backgroundColor: "#FDF7F7",
+  borderColor: "#E03526",
+  borderWidth: 2,
+}
+
+export const $statusBtnTextSelectedRejected: TextStyle = {
+  color: "#E03526",
+  fontFamily: typography.primary.semiBold,
+}
+
+export const $statusBtnBadge: ViewStyle = {
+  position: "absolute",
+  top: -8,
+  right: -8,
+  width: 20,
+  height: 20,
+  borderRadius: 10,
+  justifyContent: "center",
+  alignItems: "center",
+  borderWidth: 2,
+  borderColor: "#FFFFFF",
 }
 
 export const $inputLabel: TextStyle = {
@@ -215,7 +261,20 @@ export const $pendingMessageText: TextStyle = {
 export const $timelineItem: ViewStyle = {
   flexDirection: "row",
   gap: 12,
-  marginBottom: 16,
+  paddingBottom: 16,
+}
+
+export const $timelineDotColumn: ViewStyle = {
+  alignItems: "center",
+  flexShrink: 0,
+}
+
+export const $timelineConnector: ViewStyle = {
+  width: 2,
+  flex: 1,
+  backgroundColor: "#D5D5D5",
+  marginTop: 4,
+  minHeight: 12,
 }
 
 export const $timelineDot: ViewStyle = {
@@ -265,6 +324,31 @@ export const $timelineDesc: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
   color: "#979797",
+}
+
+export const $timelineDotActive: ViewStyle = {
+  backgroundColor: "#D4F5E2",
+}
+
+export const $timelineDotInnerActive: ViewStyle = {
+  backgroundColor: "#18A24A",
+  borderColor: "#18A24A",
+}
+
+export const $historyNoteBubble: ViewStyle = {
+  backgroundColor: "#CFFFE1",
+  borderRadius: 6,
+  paddingHorizontal: 14,
+  paddingVertical: 10,
+  marginTop: 6,
+  alignSelf: "flex-start",
+}
+
+export const $historyNoteBubbleText: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#18A24A",
+  lineHeight: 18,
 }
 
 // ── Bottom Bar ────────────────────────────────────────────────────────────────
@@ -405,6 +489,249 @@ export const $editErrorText: TextStyle = {
 
 export const $saveBtnDisabled: ViewStyle = {
   backgroundColor: "#F3F2F0",
+}
+
+// ── Result Card (처리 결과) ────────────────────────────────────────────────────
+
+export const $resultCard: ViewStyle = {
+  backgroundColor: "#FFFFFF",
+  borderRadius: 12,
+  borderWidth: 1,
+  borderColor: CARD_BORDER,
+  padding: 16,
+  gap: 12,
+}
+
+export const $resultHeaderRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 10,
+}
+
+export const $resultIconCircle: ViewStyle = {
+  width: 36,
+  height: 36,
+  borderRadius: 18,
+  backgroundColor: "#CFFFE1",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+export const $resultTitle: TextStyle = {
+  fontSize: 16,
+  fontFamily: typography.primary.bold,
+  color: "#1A1A1A",
+}
+
+export const $resultContent: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#555555",
+  lineHeight: 22,
+}
+
+export const $resultDivider: ViewStyle = {
+  height: 1,
+  backgroundColor: "#F0F0F0",
+}
+
+export const $resultFooterRow: ViewStyle = {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+}
+
+export const $resultDateRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 5,
+}
+
+export const $resultDateText: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#888888",
+}
+
+export const $resultManagerRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 6,
+}
+
+export const $resultManagerAvatar: ViewStyle = {
+  width: 22,
+  height: 22,
+  borderRadius: 11,
+  backgroundColor: "#F3F2F0",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+export const $resultManagerAvatarText: TextStyle = {
+  fontSize: 10,
+  fontFamily: typography.primary.semiBold,
+  color: "#666666",
+}
+
+export const $resultManagerName: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#1A1A1A",
+}
+
+// ── Processing Input Area ─────────────────────────────────────────────────────
+
+export const $inputLabelRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+}
+
+export const $inputLabelRequired: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.bold,
+  color: "#E03C3C",
+}
+
+export const $processingReadBox: ViewStyle = {
+  borderRadius: 8,
+  borderWidth: 1,
+  borderColor: "#ECECEC",
+  backgroundColor: "#F4F8FD",
+  padding: 14,
+  minHeight: 90,
+  justifyContent: "space-between",
+}
+
+export const $processingReadText: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#555555",
+  lineHeight: 22,
+}
+
+export const $processingTextarea: ViewStyle = {
+  backgroundColor: "#FBFBFB",
+  borderRadius: 8,
+  borderWidth: 1,
+  borderColor: "#DDDDDD",
+  padding: 14,
+  minHeight: 120,
+}
+
+export const $processingTextareaFocused: ViewStyle = {
+  borderColor: "#1062D8",
+  borderWidth: 2,
+  backgroundColor: "#FBFBFB",
+}
+
+export const $processingTextareaFocusedRejected: ViewStyle = {
+  borderColor: "#E03526",
+  borderWidth: 2,
+  backgroundColor: "#FBFBFB",
+}
+
+export const $inputLabelRequiredBlue: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.bold,
+  color: "#1062D8",
+}
+
+export const $processingTextareaInput: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#111111",
+  textAlignVertical: "top",
+  padding: 0,
+  minHeight: 80,
+  lineHeight: 22,
+  outlineWidth: 0,
+}
+
+export const $processingHelperText: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#979797",
+  marginTop: 6,
+}
+
+// ── Reflected Timeline ────────────────────────────────────────────────────────
+
+export const $timelineDotActiveReflected: ViewStyle = {
+  backgroundColor: "#EFF4FD",
+}
+
+export const $timelineDotInnerActiveReflected: ViewStyle = {
+  backgroundColor: "#1062D8",
+  borderColor: "#D2E4FF",
+}
+
+export const $historyNoteBubbleReflected: ViewStyle = {
+  backgroundColor: "#EFF4FD",
+  borderRadius: 6,
+  paddingHorizontal: 14,
+  paddingVertical: 10,
+  marginTop: 6,
+  alignSelf: "flex-start",
+}
+
+export const $historyNoteBubbleReflectedText: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#1062D8",
+  lineHeight: 18,
+}
+
+export const $timelineDotActiveRejected: ViewStyle = {
+  backgroundColor: "#FDE8EB",
+}
+
+export const $timelineDotInnerActiveRejected: ViewStyle = {
+  backgroundColor: "#FF0000",
+  borderColor: "#FFD1CD",
+}
+
+export const $historyNoteBubbleRejected: ViewStyle = {
+  backgroundColor: "#FDE8EB",
+  borderRadius: 6,
+  paddingHorizontal: 14,
+  paddingVertical: 10,
+  marginTop: 6,
+  alignSelf: "flex-start",
+}
+
+export const $historyNoteBubbleRejectedText: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#E03526",
+  lineHeight: 18,
+}
+
+export const $processingReadBoxRejected: ViewStyle = {
+  borderRadius: 8,
+  borderWidth: 1,
+  borderColor: "#ECECEC",
+  backgroundColor: "#FDF7F7",
+  padding: 14,
+  minHeight: 90,
+  justifyContent: "space-between",
+}
+
+// ── Disabled Proceed Button ───────────────────────────────────────────────────
+
+export const $proceedBtnDisabled: ViewStyle = {
+  flex: 1,
+  height: 52,
+  borderRadius: 12,
+  backgroundColor: "#F3F2F0",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+export const $proceedBtnTextDisabled: TextStyle = {
+  fontSize: 16,
+  fontFamily: typography.primary.bold,
+  color: "#FFFFFF",
 }
 
 // ── Delete Modal ──────────────────────────────────────────────────────────────
