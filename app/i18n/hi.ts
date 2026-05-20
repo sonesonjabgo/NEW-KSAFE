@@ -1005,6 +1005,73 @@ const hi: Translations = {
     activityContent: "Activity Content",
   },
 
+  hazardRiskCreateScreen: {
+    title: "खतरे की रिपोर्ट",
+    guide: {
+      title: "लेखन गाइड",
+      description:
+        "कृपया साइट पर पाए गए खतरनाक तत्वों की रिपोर्ट करें। सटीक स्थान और जोखिम कारक बताने से त्वरित कार्रवाई संभव होती है।",
+    },
+    workplace: {
+      label: "कार्यस्थल",
+      placeholder: "कार्यस्थल चुनें",
+      modalTitle: "कार्यस्थल चुनें",
+      helper: "आप सूची से कार्यस्थल चुन सकते हैं।",
+    },
+    location: {
+      label: "स्थान",
+      placeholder: "उदा: दूसरी मंजिल का पूर्वी गलियारा, ज़ोन B कार्यस्थल प्रवेश द्वार",
+      helper: "अधिकतम 200 अक्षर।",
+    },
+    hazardFactor: {
+      label: "जोखिम कारक",
+      placeholder:
+        "कौन से जोखिम कारक हैं?\nउदाहरण:\n · सीढ़ी की रेलिंग ढीली है, जिससे गिरने का खतरा है।\n · उजागर तार बिजली के झटके का खतरा पैदा करते हैं।",
+      helper: "अधिकतम 1,000 अक्षर।",
+    },
+    sitePhotos: {
+      label: "साइट फ़ोटो",
+      addButton: "फ़ोटो जोड़ें",
+      modalTitle: "फ़ोटो जोड़ने का तरीका चुनें",
+      camera: "कैमरे से लें",
+      album: "एल्बम से चुनें",
+      hint: "कृपया ऐसी फ़ोटो जोड़ें जो साइट की स्थिति को स्पष्ट रूप से दर्शाती हों।",
+      guide: "कम से कम 1 साइट फ़ोटो दर्ज करना आवश्यक है।\n1 से 5 फ़ोटो तक संलग्न की जा सकती हैं।",
+      preview: "छवि जोड़ने पर पूर्वावलोकन दिखाया जाएगा।",
+    },
+    submit: "सबमिट करें",
+  },
+
+  hazardRiskScreen: {
+    title: "Hazard Areas",
+    fab: "New Report",
+    summary: {
+      myReports: "My Reports",
+      completed: "Resolved",
+      unit: "item(s)",
+    },
+    tabs: {
+      all: "All",
+      pending: "Pending",
+      ongoing: "In Progress",
+      completed: "Resolved",
+      impossible: "Unresolvable",
+    },
+    status: {
+      pending: "Pending",
+      ongoing: "In Progress",
+      completed: "Resolved",
+      impossible: "Unresolvable",
+    },
+    empty: {
+      all: "No hazard areas registered.",
+      pending: "No pending hazard areas.",
+      ongoing: "No hazard areas in progress.",
+      completed: "No resolved hazard areas.",
+      impossible: "No unresolvable hazard areas.",
+    },
+  },
+
   ...demoHi,
 }
 

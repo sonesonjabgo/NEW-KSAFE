@@ -1001,6 +1001,73 @@ const ja: Translations = {
     activityContent: "Activity Content",
   },
 
+  hazardRiskCreateScreen: {
+    title: "危険箇所報告",
+    guide: {
+      title: "作成ガイド",
+      description:
+        "現場で発見した有害危険要素を報告してください。正確な位置と危険要因を記載することで迅速な対応が可能です。",
+    },
+    workplace: {
+      label: "事業場",
+      placeholder: "事業場を選択してください",
+      modalTitle: "事業場を選択してください",
+      helper: "事業場リストから選択できます。",
+    },
+    location: {
+      label: "場所",
+      placeholder: "例：2階東側廊下、B区域作業場入口など",
+      helper: "最大200文字まで入力できます。",
+    },
+    hazardFactor: {
+      label: "危険要因",
+      placeholder:
+        "どのような危険要因がありますか？\n例：\n · 階段の手すりがぐらついており、転落の危険があります。\n · 電線が露出しており、感電の危険があります。",
+      helper: "最大1,000文字まで入力できます。",
+    },
+    sitePhotos: {
+      label: "現場写真",
+      addButton: "写真を追加",
+      modalTitle: "写真の追加方法を選択",
+      camera: "カメラで撮影",
+      album: "アルバムから選択",
+      hint: "現場の状況を明確に示す写真を追加してください。",
+      guide: "現場写真を最低1枚登録してください。\n1枚から最大5枚まで添付できます。",
+      preview: "画像を追加するとプレビューが表示されます。",
+    },
+    submit: "送信する",
+  },
+
+  hazardRiskScreen: {
+    title: "Hazard Areas",
+    fab: "New Report",
+    summary: {
+      myReports: "My Reports",
+      completed: "Resolved",
+      unit: "item(s)",
+    },
+    tabs: {
+      all: "All",
+      pending: "Pending",
+      ongoing: "In Progress",
+      completed: "Resolved",
+      impossible: "Unresolvable",
+    },
+    status: {
+      pending: "Pending",
+      ongoing: "In Progress",
+      completed: "Resolved",
+      impossible: "Unresolvable",
+    },
+    empty: {
+      all: "No hazard areas registered.",
+      pending: "No pending hazard areas.",
+      ongoing: "No hazard areas in progress.",
+      completed: "No resolved hazard areas.",
+      impossible: "No unresolvable hazard areas.",
+    },
+  },
+
   ...demoJa,
 }
 

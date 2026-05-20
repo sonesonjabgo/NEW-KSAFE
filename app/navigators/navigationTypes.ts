@@ -63,6 +63,8 @@ export type AppStackParamList = {
     | undefined
   TbmParticipationHistory: undefined
   TbmParticipationHistoryDetail: { id: number }
+  HazardRiskList: undefined
+  HazardRiskCreate: undefined
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<

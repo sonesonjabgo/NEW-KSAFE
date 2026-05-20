@@ -1015,6 +1015,73 @@ const fr: Translations = {
     activityContent: "Activity Content",
   },
 
+  hazardRiskCreateScreen: {
+    title: "Signalement de danger",
+    guide: {
+      title: "Guide de rédaction",
+      description:
+        "Veuillez signaler les dangers trouvés sur le site. Indiquer l'emplacement précis et les facteurs de risque permet une intervention rapide.",
+    },
+    workplace: {
+      label: "Lieu de travail",
+      placeholder: "Sélectionnez un lieu de travail",
+      modalTitle: "Sélectionnez un lieu de travail",
+      helper: "Vous pouvez sélectionner un lieu de travail dans la liste.",
+    },
+    location: {
+      label: "Emplacement",
+      placeholder: "Ex : Couloir est du 2e étage, entrée de la zone B",
+      helper: "Jusqu'à 200 caractères.",
+    },
+    hazardFactor: {
+      label: "Facteur de risque",
+      placeholder:
+        "Quels sont les facteurs de risque ?\nExemples :\n · La rampe d'escalier est instable, présentant un risque de chute.\n · Des fils exposés créent un risque d'électrocution.",
+      helper: "Jusqu'à 1 000 caractères.",
+    },
+    sitePhotos: {
+      label: "Photos du site",
+      addButton: "Ajouter une photo",
+      modalTitle: "Sélectionner la méthode photo",
+      camera: "Prendre avec la caméra",
+      album: "Choisir depuis l'album",
+      hint: "Veuillez ajouter des photos montrant clairement les conditions du site.",
+      guide: "Au moins 1 photo du site doit être enregistrée.\nVous pouvez joindre de 1 à 5 photos.",
+      preview: "Un aperçu s'affichera lorsque vous ajouterez une image.",
+    },
+    submit: "Soumettre",
+  },
+
+  hazardRiskScreen: {
+    title: "Hazard Areas",
+    fab: "New Report",
+    summary: {
+      myReports: "My Reports",
+      completed: "Resolved",
+      unit: "item(s)",
+    },
+    tabs: {
+      all: "All",
+      pending: "Pending",
+      ongoing: "In Progress",
+      completed: "Resolved",
+      impossible: "Unresolvable",
+    },
+    status: {
+      pending: "Pending",
+      ongoing: "In Progress",
+      completed: "Resolved",
+      impossible: "Unresolvable",
+    },
+    empty: {
+      all: "No hazard areas registered.",
+      pending: "No pending hazard areas.",
+      ongoing: "No hazard areas in progress.",
+      completed: "No resolved hazard areas.",
+      impossible: "No unresolvable hazard areas.",
+    },
+  },
+
   ...demoFr,
 }
 

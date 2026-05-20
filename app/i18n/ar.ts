@@ -997,6 +997,73 @@ const ar: Translations = {
     activityContent: "Activity Content",
   },
 
+  hazardRiskCreateScreen: {
+    title: "الإبلاغ عن مخاطر",
+    guide: {
+      title: "دليل الكتابة",
+      description:
+        "يرجى الإبلاغ عن المخاطر التي وجدتها في الموقع. تحديد الموقع الدقيق وعوامل الخطر يساعد على اتخاذ إجراءات سريعة.",
+    },
+    workplace: {
+      label: "موقع العمل",
+      placeholder: "اختر موقع العمل",
+      modalTitle: "اختر موقع العمل",
+      helper: "يمكنك اختيار موقع العمل من القائمة.",
+    },
+    location: {
+      label: "الموقع",
+      placeholder: "مثال: الممر الشرقي بالطابق الثاني، مدخل منطقة العمل B",
+      helper: "حتى 200 حرف.",
+    },
+    hazardFactor: {
+      label: "عامل الخطر",
+      placeholder:
+        "ما هي عوامل الخطر الموجودة؟\nأمثلة:\n · درابزين الدرج متقلقل مما يشكل خطر السقوط.\n · أسلاك مكشوفة تشكل خطر الصعق الكهربائي.",
+      helper: "حتى 1,000 حرف.",
+    },
+    sitePhotos: {
+      label: "صور الموقع",
+      addButton: "إضافة صورة",
+      modalTitle: "اختر طريقة إضافة الصورة",
+      camera: "التقاط بالكاميرا",
+      album: "اختيار من الألبوم",
+      hint: "يرجى إضافة صور تُظهر بوضوح أوضاع الموقع.",
+      guide: "يجب تسجيل صورة واحدة على الأقل من الموقع.\nيمكنك إرفاق من 1 إلى 5 صور.",
+      preview: "ستظهر معاينة عند إضافة صورة.",
+    },
+    submit: "إرسال",
+  },
+
+  hazardRiskScreen: {
+    title: "Hazard Areas",
+    fab: "New Report",
+    summary: {
+      myReports: "My Reports",
+      completed: "Resolved",
+      unit: "item(s)",
+    },
+    tabs: {
+      all: "All",
+      pending: "Pending",
+      ongoing: "In Progress",
+      completed: "Resolved",
+      impossible: "Unresolvable",
+    },
+    status: {
+      pending: "Pending",
+      ongoing: "In Progress",
+      completed: "Resolved",
+      impossible: "Unresolvable",
+    },
+    empty: {
+      all: "No hazard areas registered.",
+      pending: "No pending hazard areas.",
+      ongoing: "No hazard areas in progress.",
+      completed: "No resolved hazard areas.",
+      impossible: "No unresolvable hazard areas.",
+    },
+  },
+
   ...demoAr,
 }
 

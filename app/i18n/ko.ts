@@ -1040,6 +1040,73 @@ const ko: Translations = {
     activityContent: "활동 내용",
   },
 
+  hazardRiskCreateScreen: {
+    title: "유해위험개소 제보",
+    guide: {
+      title: "작성 가이드",
+      description:
+        "현장에서 발견한 유해위험요소를\n제보해주세요. 정확한 위치와\n위험요인을 작성하시면 신속한 조치가 가능합니다.",
+    },
+    workplace: {
+      label: "사업장",
+      placeholder: "사업장을 선택해주세요",
+      modalTitle: "사업장을 선택해주세요",
+      helper: "사업장 목록에서 사업장을 선택할 수 있습니다.",
+    },
+    location: {
+      label: "위치",
+      placeholder: "예) 2층 동측 복도, B구역 작업장 입구 등",
+      helper: "입력 시 최대 200자까지 작성할 수 있습니다.",
+    },
+    hazardFactor: {
+      label: "위험요인",
+      placeholder:
+        "어떤 위험요인이 있나요?\n예시)\n · 계단 손잡이가 흔들려 낙상 위험이 있습니다.\n · 전선이 노출되어 감전 위험이 있습니다.",
+      helper: "입력 시 최대 1,000자까지 작성할 수 있습니다.",
+    },
+    sitePhotos: {
+      label: "현장 사진",
+      addButton: "사진 추가",
+      modalTitle: "사진 추가 방법 선택",
+      camera: "카메라로 촬영",
+      album: "앨범에서 선택",
+      hint: "현장 상황을 명확히 보여주는 사진을 추가해주세요.",
+      guide: "현장 사진을 최소 1장 이상 등록해주세요.\n최소 1장에서 최대 5장까지 첨부할 수 있습니다.",
+      preview: "이미지를 추가하면 미리보기가 표시됩니다.",
+    },
+    submit: "제출하기",
+  },
+
+  hazardRiskScreen: {
+    title: "유해위험개소",
+    fab: "새 제보 작성",
+    summary: {
+      myReports: "나의 제보",
+      completed: "조치 완료",
+      unit: "건",
+    },
+    tabs: {
+      all: "전체",
+      pending: "대기중",
+      ongoing: "진행중",
+      completed: "조치완료",
+      impossible: "조치불가",
+    },
+    status: {
+      pending: "대기중",
+      ongoing: "진행중",
+      completed: "조치완료",
+      impossible: "조치불가",
+    },
+    empty: {
+      all: "등록된 유해위험개소가 없습니다.",
+      pending: "대기중인 유해위험개소가 없습니다.",
+      ongoing: "진행중인 유해위험개소가 없습니다.",
+      completed: "조치완료된 유해위험개소가 없습니다.",
+      impossible: "조치불가 처리된 유해위험개소가 없습니다.",
+    },
+  },
+
   ...demoKo,
 }
 
