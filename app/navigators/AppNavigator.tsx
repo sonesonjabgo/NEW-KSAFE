@@ -8,6 +8,7 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import Config from "@/config"
+import { AiRiskDocCreatorScreen } from "@/screens/AiRiskDocCreatorScreen"
 import { AISafetyChatScreen } from "@/screens/AISafetyChatScreen/AISafetyChatScreen"
 import { EducationMaterialDetailScreen } from "@/screens/EducationMaterialDetailScreen/EducationMaterialDetailScreen"
 import { EducationMaterialRegisterScreen } from "@/screens/EducationMaterialRegisterScreen/EducationMaterialRegisterScreen"
@@ -109,6 +110,7 @@ const AppStack = () => {
         name="TbmParticipationHistoryDetail"
         component={TbmParticipationHistoryDetailScreen}
       />
+      <Stack.Screen name="AiRiskDocCreator" component={AiRiskDocCreatorScreen} />
     </Stack.Navigator>
   )
 }

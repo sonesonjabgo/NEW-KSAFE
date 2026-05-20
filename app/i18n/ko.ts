@@ -1040,6 +1040,21 @@ const ko: Translations = {
     activityContent: "활동 내용",
   },
 
+  aiRiskDocCreatorScreen: {
+    title: "AI 위험분석 보고서",
+    pageCount: "총 {{count}}개의 페이지",
+    captureButton: "개선 전 촬영",
+    exportPdfButton: "PDF 내보내기",
+    hazardToggle: {
+      label: "위험 좌표 섹션 포함",
+      description: "체크를 해제하면 화면과 PDF에서 위험 좌표가 표시되지 않습니다.",
+    },
+    emptyState: {
+      title: "등록된 페이지가 없습니다.",
+      description: "개선전 이미지를 촬영해 페이지를 추가해주세요.",
+    },
+  },
+
   ...demoKo,
 }
 

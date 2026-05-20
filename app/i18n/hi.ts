@@ -1005,6 +1005,21 @@ const hi: Translations = {
     activityContent: "Activity Content",
   },
 
+  aiRiskDocCreatorScreen: {
+    title: "AI Risk Analysis Report",
+    pageCount: "Total {{count}} page(s)",
+    captureButton: "Capture Before Improvement",
+    exportPdfButton: "Export PDF",
+    hazardToggle: {
+      label: "Include Hazard Coordinate Section",
+      description: "When unchecked, hazard coordinates will not be displayed on screen and PDF.",
+    },
+    emptyState: {
+      title: "No pages registered.",
+      description: "Capture a before-improvement image to add a page.",
+    },
+  },
+
   ...demoHi,
 }
 
