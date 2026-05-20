@@ -125,6 +125,7 @@ export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">>
             Icon={IconFileExport}
             onPress={handleExportPdf}
             disabled={!canExport}
+            variant="secondary"
           />
 
           {/* 전체 초기화 버튼 — pages > 0일 때만 표시 */}

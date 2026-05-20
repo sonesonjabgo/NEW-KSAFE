@@ -10,6 +10,7 @@ interface AiRiskActionButtonProps {
   Icon: FC<{ size?: number; color?: string; strokeWidth?: number }>
   onPress: () => void
   disabled?: boolean
+  variant?: "primary" | "secondary"
 }
 
 export const AiRiskActionButton: FC<AiRiskActionButtonProps> = ({
@@ -17,14 +18,24 @@ export const AiRiskActionButton: FC<AiRiskActionButtonProps> = ({
   Icon,
   onPress,
   disabled = false,
-}) => (
-  <TouchableOpacity
-    style={[S.$actionBtn, disabled ? S.$actionBtnDisabled : S.$actionBtnActive]}
-    onPress={onPress}
-    disabled={disabled}
-    activeOpacity={0.8}
-  >
-    <Icon size={20} color="#FFFFFF" strokeWidth={2} />
-    <Text text={label} style={S.$actionBtnLabel} />
-  </TouchableOpacity>
-)
+  variant = "primary",
+}) => {
+  const btnStyle =
+    variant === "secondary"
+      ? S.$actionBtnSecondary
+      : disabled
+        ? S.$actionBtnDisabled
+        : S.$actionBtnActive
+
+  return (
+    <TouchableOpacity
+      style={[S.$actionBtn, btnStyle]}
+      onPress={onPress}
+      disabled={disabled}
+      activeOpacity={0.8}
+    >
+      <Icon size={20} color="#FFFFFF" strokeWidth={2} />
+      <Text text={label} style={S.$actionBtnLabel} />
+    </TouchableOpacity>
+  )
+}

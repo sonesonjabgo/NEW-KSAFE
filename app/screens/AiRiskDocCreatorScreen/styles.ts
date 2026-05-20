@@ -46,6 +46,10 @@ export const $actionBtnDisabled: ViewStyle = {
   backgroundColor: "#AAAAAA",
 }
 
+export const $actionBtnSecondary: ViewStyle = {
+  backgroundColor: "#999999",
+}
+
 export const $actionBtnLabel: TextStyle = {
   fontSize: 16,
   fontFamily: typography.primary.bold,
