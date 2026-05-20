@@ -759,6 +759,7 @@ const ja: Translations = {
     cancel: "Cancel",
     save: "Save",
     savedMessage: "Proposal has been updated.",
+    deletedMessage: "提案が削除されました。",
     deleteModal: {
       title: "提案を削除",
       message: "この提案を削除しますか？\n削除した提案は復元できません。",

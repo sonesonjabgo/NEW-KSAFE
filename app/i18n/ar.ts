@@ -755,6 +755,7 @@ const ar: Translations = {
     cancel: "Cancel",
     save: "Save",
     savedMessage: "Proposal has been updated.",
+    deletedMessage: "تم حذف الاقتراح.",
     deleteModal: {
       title: "حذف الاقتراح",
       message: "هل تريد حذف هذا الاقتراح؟\nلا يمكن استعادة الاقتراح بعد الحذف.",

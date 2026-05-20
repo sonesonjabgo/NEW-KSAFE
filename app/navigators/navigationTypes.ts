@@ -43,7 +43,7 @@ export type AppStackParamList = {
   EducationMaterialDetail: { id: number }
   EducationMaterialRegister: undefined
   EducationSelect: { initialSelected: number[]; onConfirm: (ids: number[]) => void }
-  ImprovementProposalList: undefined
+  ImprovementProposalList: { deleted?: boolean } | undefined
   ImprovementProposalCreate: undefined
   ImprovementProposalDetail:
     | {

@@ -760,6 +760,7 @@ const hi: Translations = {
     cancel: "Cancel",
     save: "Save",
     savedMessage: "Proposal has been updated.",
+    deletedMessage: "प्रस्ताव हटा दिया गया है।",
     deleteModal: {
       title: "प्रस्ताव हटाएं",
       message: "क्या आप इस प्रस्ताव को हटाना चाहते हैं?\nहटाए गए प्रस्ताव को पुनः प्राप्त नहीं किया जा सकता।",

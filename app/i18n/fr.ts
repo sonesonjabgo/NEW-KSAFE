@@ -767,6 +767,7 @@ const fr: Translations = {
     cancel: "Cancel",
     save: "Save",
     savedMessage: "Proposal has been updated.",
+    deletedMessage: "La proposition a été supprimée.",
     deleteModal: {
       title: "Supprimer la proposition",
       message: "Voulez-vous supprimer cette proposition ?\nLes propositions supprimées ne peuvent pas être récupérées.",

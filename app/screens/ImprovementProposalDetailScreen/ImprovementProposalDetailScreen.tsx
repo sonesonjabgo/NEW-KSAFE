@@ -1,4 +1,5 @@
 import { FC, useCallback, useMemo, useState } from "react"
+import { CommonActions } from "@react-navigation/native"
 import {
   KeyboardAvoidingView,
   Platform,
@@ -363,7 +364,21 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
       onCancel={() => setDeleteModalVisible(false)}
       onConfirm={() => {
         setDeleteModalVisible(false)
-        navigation.goBack()
+        navigation.dispatch((state) => {
+          const routes = state.routes
+            .filter((r) => r.name !== "ImprovementProposalDetail")
+            .map((r) =>
+              r.name === "ImprovementProposalList"
+                ? { ...r, params: { deleted: true } }
+                : r,
+            )
+          const listIndex = routes.findIndex((r) => r.name === "ImprovementProposalList")
+          return CommonActions.reset({
+            ...state,
+            routes,
+            index: listIndex >= 0 ? listIndex : routes.length - 1,
+          })
+        })
       }}
     />
     </>

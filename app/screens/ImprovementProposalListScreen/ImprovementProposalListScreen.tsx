@@ -1,11 +1,13 @@
-import { FC, useMemo, useState } from "react"
+import { FC, useCallback, useEffect, useMemo, useState } from "react"
 import { FlatList, ScrollView, TouchableOpacity, View } from "react-native"
+import { IconCheck } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import TbmFabIcon from "@assets/images/tbm-fab-icon.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { Toast } from "@/components/Toast"
 import { translate } from "@/i18n/translate"
 
 import { mockProposalData } from "./mockData"
@@ -114,9 +116,18 @@ const EmptyState: FC<{ tab: TabKey }> = ({ tab }) => (
 
 export const ImprovementProposalListScreen: FC<ImprovementProposalListScreenProps> = ({
   navigation,
+  route,
 }) => {
   const insets = useSafeAreaInsets()
   const [activeTab, setActiveTab] = useState<TabKey>("all")
+  const [deleteToastVisible, setDeleteToastVisible] = useState(false)
+  const hideDeleteToast = useCallback(() => setDeleteToastVisible(false), [])
+
+  useEffect(() => {
+    if (!route.params?.deleted) return
+    setDeleteToastVisible(true)
+    navigation.setParams({ deleted: undefined })
+  }, [route.params?.deleted, navigation])
 
   const TABS: { key: TabKey; label: string }[] = useMemo(
     () => [
@@ -146,6 +157,13 @@ export const ImprovementProposalListScreen: FC<ImprovementProposalListScreenProp
 
   return (
     <>
+      <Toast
+        visible={deleteToastVisible}
+        message={translate("improvementProposalDetailScreen:deletedMessage")}
+        icon={<IconCheck size={16} color="#FFFFFF" strokeWidth={2.5} />}
+        onHide={hideDeleteToast}
+      />
+
       <StackScreen
         title={translate("improvementProposalListScreen:title")}
         onBack={() => navigation.goBack()}
