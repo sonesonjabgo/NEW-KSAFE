@@ -779,6 +779,68 @@ const es: Translations = {
 
   patrolScreen: {
     title: "Inspección de ronda del lugar de trabajo",
+    createButton: "Nueva inspección",
+    workplaceSelector: {
+      label: "Lugar de trabajo seleccionado",
+      modalTitle: "Seleccione un lugar de trabajo para ver la lista de inspecciones.",
+    },
+    badge: {
+      underReview: "En revisión",
+      inProgress: "En redacción",
+      approved: "Aprobado",
+    },
+    card: {
+      reviewer: "Revisor",
+      approver: "Aprobador",
+    },
+  },
+  patrolCreateScreen: {
+    title: "Crear inspección de ronda",
+    section: {
+      approver: {
+        title: "Aprobador (Obligatorio)",
+        placeholder: "Seleccionar aprobador",
+        description: "Puede seleccionar un aprobador de la lista de administradores.",
+      },
+      reviewer: {
+        title: "Revisor (Opcional)",
+        placeholder: "Seleccionar revisor",
+        description: "Puede seleccionar un revisor de la lista de administradores (opcional).",
+      },
+      items: {
+        title: "Elementos de inspección (Obligatorio)",
+        placeholder: "Seleccionar plantilla",
+        addButton: "Agregar elemento",
+        itemNamePlaceholder: "Nombre del elemento",
+        itemNameDescription: "Ejemplo: General, Eléctrico, Gas, etc. / Ingrese de 1 a 100 caracteres",
+        deleteButton: "Eliminar",
+        addCheckButton: "Agregar detalle de inspección",
+        checkTitle: "Detalle de inspección (Obligatorio)",
+        checkNamePlaceholder: "Nombre del detalle de inspección",
+        checkDescription: "Ejemplo: Limpieza y orden del lugar de trabajo / Ingrese de 1 a 200 caracteres",
+        goodButton: "Bueno",
+        badButton: "Malo",
+        badNotePlaceholder: "Ingrese el motivo del estado malo",
+        deleteCheckButton: "Eliminar detalle de inspección",
+      },
+      requirements: {
+        title: "Requisitos de acción generales",
+        placeholder: "Requisitos de acción generales / opiniones",
+        description:
+          "Puede ingresar los requisitos de acción generales. Por favor, ingrese dentro de 1,000 caracteres.",
+      },
+    },
+    submitButton: "Enviar inspección",
+    successModal: {
+      title: "Éxito",
+      message: "La inspección se ha creado correctamente.",
+      confirmButton: "Confirmar",
+    },
+    modal: {
+      userTitle: "Seleccionar usuario",
+      templateTitle: "Seleccionar plantilla",
+      cancelButton: "Cancelar",
+    },
   },
 
   ...demoEs,

@@ -771,6 +771,67 @@ const ja: Translations = {
 
   patrolScreen: {
     title: "作業場巡回点検",
+    createButton: "新規点検作成",
+    workplaceSelector: {
+      label: "選択した作業場",
+      modalTitle: "点検リストを確認する作業場を選択してください。",
+    },
+    badge: {
+      underReview: "審査中",
+      inProgress: "作成中",
+      approved: "承認済",
+    },
+    card: {
+      reviewer: "審査者",
+      approver: "承認者",
+    },
+  },
+  patrolCreateScreen: {
+    title: "巡回点検作成",
+    section: {
+      approver: {
+        title: "承認者（必須）",
+        placeholder: "承認者を選択",
+        description: "管理者リストから承認者を選択できます。",
+      },
+      reviewer: {
+        title: "審査者（任意）",
+        placeholder: "審査者を選択",
+        description: "管理者リストから審査者を選択できます（任意）。",
+      },
+      items: {
+        title: "点検項目（必須）",
+        placeholder: "テンプレートを選択",
+        addButton: "項目を追加",
+        itemNamePlaceholder: "項目名",
+        itemNameDescription: "例: 一般、電気、ガスなど / 1～100文字で入力",
+        deleteButton: "削除",
+        addCheckButton: "点検事項を追加",
+        checkTitle: "点検事項（必須）",
+        checkNamePlaceholder: "点検事項名",
+        checkDescription: "例: 作業場の整理・整頓・清潔状態 / 1～200文字で入力",
+        goodButton: "良好",
+        badButton: "不良",
+        badNotePlaceholder: "不良の理由を入力してください",
+        deleteCheckButton: "点検事項を削除",
+      },
+      requirements: {
+        title: "全体的な措置要件",
+        placeholder: "全体的な措置要件 / 意見",
+        description: "全体的な措置要件を入力できます。1,000文字以内で入力してください。",
+      },
+    },
+    submitButton: "点検を提出",
+    successModal: {
+      title: "成功",
+      message: "点検が正常に作成されました。",
+      confirmButton: "確認",
+    },
+    modal: {
+      userTitle: "ユーザーを選択",
+      templateTitle: "テンプレートを選択",
+      cancelButton: "キャンセル",
+    },
   },
 
   ...demoJa,

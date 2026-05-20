@@ -779,6 +779,69 @@ const fr: Translations = {
 
   patrolScreen: {
     title: "Inspection de ronde du lieu de travail",
+    createButton: "Nouvelle inspection",
+    workplaceSelector: {
+      label: "Lieu de travail sélectionné",
+      modalTitle: "Sélectionnez un lieu de travail pour voir la liste d'inspections.",
+    },
+    badge: {
+      underReview: "En révision",
+      inProgress: "En rédaction",
+      approved: "Approuvé",
+    },
+    card: {
+      reviewer: "Réviseur",
+      approver: "Approbateur",
+    },
+  },
+  patrolCreateScreen: {
+    title: "Créer une inspection de ronde",
+    section: {
+      approver: {
+        title: "Approbateur (Obligatoire)",
+        placeholder: "Sélectionner l'approbateur",
+        description: "Vous pouvez sélectionner un approbateur dans la liste des administrateurs.",
+      },
+      reviewer: {
+        title: "Réviseur (Optionnel)",
+        placeholder: "Sélectionner le réviseur",
+        description:
+          "Vous pouvez sélectionner un réviseur dans la liste des administrateurs (optionnel).",
+      },
+      items: {
+        title: "Éléments d'inspection (Obligatoire)",
+        placeholder: "Sélectionner le modèle",
+        addButton: "Ajouter un élément",
+        itemNamePlaceholder: "Nom de l'élément",
+        itemNameDescription: "Exemple: Général, Électrique, Gaz, etc. / Saisissez 1 à 100 caractères",
+        deleteButton: "Supprimer",
+        addCheckButton: "Ajouter un détail d'inspection",
+        checkTitle: "Détail d'inspection (Obligatoire)",
+        checkNamePlaceholder: "Nom du détail d'inspection",
+        checkDescription: "Exemple: Propreté et ordre du lieu de travail / Saisissez 1 à 200 caractères",
+        goodButton: "Bon",
+        badButton: "Mauvais",
+        badNotePlaceholder: "Saisissez la raison de l'état mauvais",
+        deleteCheckButton: "Supprimer le détail d'inspection",
+      },
+      requirements: {
+        title: "Exigences d'action globales",
+        placeholder: "Exigences d'action globales / opinions",
+        description:
+          "Vous pouvez saisir les exigences d'action globales. Veuillez saisir dans la limite de 1 000 caractères.",
+      },
+    },
+    submitButton: "Soumettre l'inspection",
+    successModal: {
+      title: "Succès",
+      message: "L'inspection a été créée avec succès.",
+      confirmButton: "Confirmer",
+    },
+    modal: {
+      userTitle: "Sélectionner l'utilisateur",
+      templateTitle: "Sélectionner le modèle",
+      cancelButton: "Annuler",
+    },
   },
 
   ...demoFr,

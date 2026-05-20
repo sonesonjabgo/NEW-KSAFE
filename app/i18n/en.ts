@@ -822,6 +822,68 @@ const en = {
 
   patrolScreen: {
     title: "Workplace Patrol Inspection",
+    createButton: "New Inspection",
+    workplaceSelector: {
+      label: "Selected Workplace",
+      modalTitle: "Select a workplace to view the inspection list.",
+    },
+    badge: {
+      underReview: "In Review",
+      inProgress: "Drafting",
+      approved: "Approved",
+    },
+    card: {
+      reviewer: "Reviewer",
+      approver: "Approver",
+    },
+  },
+  patrolCreateScreen: {
+    title: "Create Patrol Inspection",
+    section: {
+      approver: {
+        title: "Approver (Required)",
+        placeholder: "Select Approver",
+        description: "You can select an approver from the administrator list.",
+      },
+      reviewer: {
+        title: "Reviewer (Optional)",
+        placeholder: "Select Reviewer",
+        description: "You can select a reviewer from the administrator list (optional).",
+      },
+      items: {
+        title: "Inspection Items (Required)",
+        placeholder: "Select Template",
+        addButton: "Add Item",
+        itemNamePlaceholder: "Item Name",
+        itemNameDescription: "Example: General, Electrical, Gas, etc. / Enter 1~100 characters",
+        deleteButton: "Delete",
+        addCheckButton: "Add Inspection Detail",
+        checkTitle: "Inspection Detail (Required)",
+        checkNamePlaceholder: "Inspection detail name",
+        checkDescription: "Example: Tidiness and cleanliness of workplace / Enter 1~200 characters",
+        goodButton: "Good",
+        badButton: "Bad",
+        badNotePlaceholder: "Enter reason for bad status",
+        deleteCheckButton: "Delete Inspection Detail",
+      },
+      requirements: {
+        title: "Overall Action Requirements",
+        placeholder: "Overall action requirements / opinions",
+        description:
+          "You can enter overall action requirements. Please enter within 1,000 characters.",
+      },
+    },
+    submitButton: "Submit Inspection",
+    successModal: {
+      title: "Success",
+      message: "The inspection has been successfully created.",
+      confirmButton: "Confirm",
+    },
+    modal: {
+      userTitle: "Select User",
+      templateTitle: "Select Template",
+      cancelButton: "Cancel",
+    },
   },
 
   ...demoEn,

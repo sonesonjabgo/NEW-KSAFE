@@ -771,7 +771,68 @@ const hi: Translations = {
   },
 
   patrolScreen: {
-    title: "कार्यस्थल순회 점검",
+    title: "कार्यस्थल गश्त निरीक्षण",
+    createButton: "नई निरीक्षण बनाएं",
+    workplaceSelector: {
+      label: "चयनित कार्यस्थल",
+      modalTitle: "निरीक्षण सूची देखने के लिए कार्यस्थल चुनें।",
+    },
+    badge: {
+      underReview: "समीक्षाधीन",
+      inProgress: "लेखन में",
+      approved: "अनुमोदित",
+    },
+    card: {
+      reviewer: "समीक्षक",
+      approver: "अनुमोदक",
+    },
+  },
+  patrolCreateScreen: {
+    title: "गश्त निरीक्षण बनाएं",
+    section: {
+      approver: {
+        title: "अनुमोदक (आवश्यक)",
+        placeholder: "अनुमोदक चुनें",
+        description: "आप प्रशासक सूची से अनुमोदक चुन सकते हैं।",
+      },
+      reviewer: {
+        title: "समीक्षक (वैकल्पिक)",
+        placeholder: "समीक्षक चुनें",
+        description: "आप प्रशासक सूची से समीक्षक चुन सकते हैं (वैकल्पिक)।",
+      },
+      items: {
+        title: "निरीक्षण आइटम (आवश्यक)",
+        placeholder: "टेम्पलेट चुनें",
+        addButton: "आइटम जोड़ें",
+        itemNamePlaceholder: "आइटम नाम",
+        itemNameDescription: "उदाहरण: सामान्य, विद्युत, गैस, आदि / 1~100 अक्षर दर्ज करें",
+        deleteButton: "हटाएं",
+        addCheckButton: "निरीक्षण विवरण जोड़ें",
+        checkTitle: "निरीक्षण विवरण (आवश्यक)",
+        checkNamePlaceholder: "निरीक्षण विवरण नाम",
+        checkDescription: "उदाहरण: कार्यस्थल की सफाई और व्यवस्था / 1~200 अक्षर दर्ज करें",
+        goodButton: "अच्छा",
+        badButton: "खराब",
+        badNotePlaceholder: "खराब स्थिति का कारण दर्ज करें",
+        deleteCheckButton: "निरीक्षण विवरण हटाएं",
+      },
+      requirements: {
+        title: "समग्र कार्रवाई आवश्यकताएं",
+        placeholder: "समग्र कार्रवाई आवश्यकताएं / राय",
+        description: "आप समग्र कार्रवाई आवश्यकताएं दर्ज कर सकते हैं। कृपया 1,000 अक्षरों के भीतर दर्ज करें।",
+      },
+    },
+    submitButton: "निरीक्षण जमा करें",
+    successModal: {
+      title: "सफलता",
+      message: "निरीक्षण सफलतापूर्वक बनाया गया है।",
+      confirmButton: "पुष्टि करें",
+    },
+    modal: {
+      userTitle: "उपयोगकर्ता चुनें",
+      templateTitle: "टेम्पलेट चुनें",
+      cancelButton: "रद्द करें",
+    },
   },
 
   ...demoHi,

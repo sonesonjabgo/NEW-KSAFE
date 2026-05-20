@@ -767,6 +767,67 @@ const ar: Translations = {
 
   patrolScreen: {
     title: "فحص جولة مكان العمل",
+    createButton: "إنشاء فحص جديد",
+    workplaceSelector: {
+      label: "مكان العمل المحدد",
+      modalTitle: "اختر مكان العمل لعرض قائمة الفحص.",
+    },
+    badge: {
+      underReview: "قيد المراجعة",
+      inProgress: "قيد الكتابة",
+      approved: "موافق عليه",
+    },
+    card: {
+      reviewer: "المراجع",
+      approver: "المعتمد",
+    },
+  },
+  patrolCreateScreen: {
+    title: "إنشاء فحص جولة مكان العمل",
+    section: {
+      approver: {
+        title: "المعتمد (مطلوب)",
+        placeholder: "اختر المعتمد",
+        description: "يمكنك اختيار المعتمد من قائمة المسؤولين.",
+      },
+      reviewer: {
+        title: "المراجع (اختياري)",
+        placeholder: "اختر المراجع",
+        description: "يمكنك اختيار المراجع من قائمة المسؤولين (اختياري).",
+      },
+      items: {
+        title: "بنود الفحص (مطلوب)",
+        placeholder: "اختر القالب",
+        addButton: "إضافة بند",
+        itemNamePlaceholder: "اسم البند",
+        itemNameDescription: "مثال: عام، كهربائي، غاز، إلخ / أدخل من 1 إلى 100 حرف",
+        deleteButton: "حذف",
+        addCheckButton: "إضافة تفاصيل الفحص",
+        checkTitle: "تفاصيل الفحص (مطلوب)",
+        checkNamePlaceholder: "اسم تفاصيل الفحص",
+        checkDescription: "مثال: نظافة وترتيب مكان العمل / أدخل من 1 إلى 200 حرف",
+        goodButton: "جيد",
+        badButton: "سيئ",
+        badNotePlaceholder: "أدخل سبب الحالة السيئة",
+        deleteCheckButton: "حذف تفاصيل الفحص",
+      },
+      requirements: {
+        title: "متطلبات الإجراءات الشاملة",
+        placeholder: "متطلبات الإجراءات الشاملة / آراء",
+        description: "يمكنك إدخال متطلبات الإجراءات الشاملة. يرجى الإدخال في حدود 1,000 حرف.",
+      },
+    },
+    submitButton: "إرسال الفحص",
+    successModal: {
+      title: "نجاح",
+      message: "تم إنشاء الفحص بنجاح.",
+      confirmButton: "تأكيد",
+    },
+    modal: {
+      userTitle: "اختر المستخدم",
+      templateTitle: "اختر القالب",
+      cancelButton: "إلغاء",
+    },
   },
 
   ...demoAr,

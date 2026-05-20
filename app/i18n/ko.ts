@@ -811,6 +811,67 @@ const ko: Translations = {
 
   patrolScreen: {
     title: "작업장 순회 점검",
+    createButton: "새 점검 생성",
+    workplaceSelector: {
+      label: "선택된 작업장",
+      modalTitle: "점검 목록을 확인할 작업장을 선택하세요.",
+    },
+    badge: {
+      underReview: "검토중",
+      inProgress: "작성중",
+      approved: "승인됨",
+    },
+    card: {
+      reviewer: "검토자",
+      approver: "승인자",
+    },
+  },
+  patrolCreateScreen: {
+    title: "작업장 순회 점검 생성",
+    section: {
+      approver: {
+        title: "승인자 (필수)",
+        placeholder: "승인자 선택",
+        description: "관리자 목록에서 승인자를 선택할 수 있습니다.",
+      },
+      reviewer: {
+        title: "검토자 (선택)",
+        placeholder: "검토자 선택",
+        description: "관리자 목록에서 검토자를 선택할 수 있습니다(선택 사항).",
+      },
+      items: {
+        title: "점검 항목 (필수)",
+        placeholder: "템플릿 선택",
+        addButton: "항목 추가",
+        itemNamePlaceholder: "항목 명",
+        itemNameDescription: "예시: 작업장 일반, 전기, 가스 등 / 1~100자 이내로 입력",
+        deleteButton: "삭제",
+        addCheckButton: "점검 사항 추가",
+        checkTitle: "점검 사항 (필수)",
+        checkNamePlaceholder: "점검 사항 이름",
+        checkDescription: "예시: 작업장 내 정리・정돈・청결 상태 / 1~200자 이내로 입력",
+        goodButton: "양호",
+        badButton: "불량",
+        badNotePlaceholder: "불량 사유를 입력하세요",
+        deleteCheckButton: "점검 사항 삭제",
+      },
+      requirements: {
+        title: "전체 조치 요구사항",
+        placeholder: "전체 조치 요구사항 / 의견",
+        description: "전체 조치 요구사항을 입력할 수 있습니다. 최대 1,000자 이내로 입력하세요.",
+      },
+    },
+    submitButton: "점검 제출",
+    successModal: {
+      title: "성공",
+      message: "점검이 성공적으로 생성되었습니다.",
+      confirmButton: "확인",
+    },
+    modal: {
+      userTitle: "사용자 선택",
+      templateTitle: "템플릿 선택",
+      cancelButton: "취소",
+    },
   },
 
   ...demoKo,
