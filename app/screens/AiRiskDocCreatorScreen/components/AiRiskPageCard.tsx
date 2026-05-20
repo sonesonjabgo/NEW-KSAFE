@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { Alert, TouchableOpacity, View } from "react-native"
+import { ActivityIndicator, TouchableOpacity, View } from "react-native"
 import {
   IconCamera,
   IconCopy,
@@ -17,17 +17,17 @@ interface AiRiskPageCardProps {
   page: AiRiskPage
   pageNumber: number
   onDelete: () => void
+  onAnalysisRequest: () => void
+  includeHazardCoordinates: boolean
 }
 
-export const AiRiskPageCard: FC<AiRiskPageCardProps> = ({ page, pageNumber, onDelete }) => {
-  const handleAnalyze = () => {
-    // TODO: AI 위험분석 API 연동
-    Alert.alert(
-      translate("aiRiskDocCreatorScreen:page.analyzeButton"),
-      "해당 기능은 추후 구현 예정입니다.",
-    )
-  }
-
+export const AiRiskPageCard: FC<AiRiskPageCardProps> = ({
+  page,
+  pageNumber,
+  onDelete,
+  onAnalysisRequest,
+  includeHazardCoordinates,
+}) => {
   const handleCopyResult = () => {
     // TODO: 분석 결과 클립보드 복사
     console.log("[AiRisk] 분석 결과 복사 요청")
@@ -38,9 +38,12 @@ export const AiRiskPageCard: FC<AiRiskPageCardProps> = ({ page, pageNumber, onDe
     console.log("[AiRisk] 개선 후 이미지 추가 요청")
   }
 
+  const isAnalyzed = page.analysisStatus === "analyzed"
+  const isAnalyzing = page.analysisStatus === "analyzing"
+
   return (
     <View style={S.$pageCard}>
-      {/* 카드 헤더: 페이지 제목 + 삭제 버튼 */}
+      {/* ── 카드 헤더 ── */}
       <View style={S.$pageCardHeader}>
         <Text
           text={translate("aiRiskDocCreatorScreen:page.title", { number: pageNumber } as any)}
@@ -51,16 +54,14 @@ export const AiRiskPageCard: FC<AiRiskPageCardProps> = ({ page, pageNumber, onDe
         </TouchableOpacity>
       </View>
 
-      {/* 이미지 행: 개선 전 / 개선 후 */}
+      {/* ── 이미지 행: 개선 전 / 개선 후 ── */}
       <View style={S.$imageRow}>
-        {/* 개선 전 */}
         <View style={S.$imageCol}>
           <Text text={translate("aiRiskDocCreatorScreen:page.beforeLabel")} style={S.$imageLabel} />
           {/* TODO: page.beforeImage URI 연동 시 실제 Image 컴포넌트로 교체 */}
           <View style={S.$beforeImageBox} />
         </View>
 
-        {/* 개선 후 */}
         <View style={S.$imageCol}>
           <Text text={translate("aiRiskDocCreatorScreen:page.afterLabel")} style={S.$imageLabel} />
           <TouchableOpacity
@@ -77,24 +78,99 @@ export const AiRiskPageCard: FC<AiRiskPageCardProps> = ({ page, pageNumber, onDe
         </View>
       </View>
 
-      {/* 인공지능 분석 요청 버튼 */}
-      <TouchableOpacity style={S.$analyzeBtn} activeOpacity={0.8} onPress={handleAnalyze}>
-        <IconSparkles size={18} color="#FFFFFF" strokeWidth={1.8} />
-        <Text
-          text={translate("aiRiskDocCreatorScreen:page.analyzeButton")}
-          style={S.$analyzeBtnLabel}
-        />
-      </TouchableOpacity>
+      {/* ── 인공지능 분석 요청 버튼 ── */}
+      {isAnalyzing ? (
+        /* 분석 중: spinner + 연한 파란 배경 */
+        <View style={S.$analyzeBtnAnalyzing}>
+          <ActivityIndicator size="small" color="#FFFFFF" />
+          <Text
+            text={translate("aiRiskDocCreatorScreen:page.analyzeButton")}
+            style={S.$analyzeBtnLabel}
+          />
+        </View>
+      ) : isAnalyzed ? (
+        /* 분석 완료: 동일 스타일로 비활성 표시 */
+        <View style={S.$analyzeBtnAnalyzing}>
+          <IconSparkles size={18} color="#FFFFFF" strokeWidth={1.8} />
+          <Text
+            text={translate("aiRiskDocCreatorScreen:page.analyzeButton")}
+            style={S.$analyzeBtnLabel}
+          />
+        </View>
+      ) : (
+        /* idle: 파란 활성 버튼 */
+        <TouchableOpacity style={S.$analyzeBtn} activeOpacity={0.8} onPress={onAnalysisRequest}>
+          <IconSparkles size={18} color="#FFFFFF" strokeWidth={1.8} />
+          <Text
+            text={translate("aiRiskDocCreatorScreen:page.analyzeButton")}
+            style={S.$analyzeBtnLabel}
+          />
+        </TouchableOpacity>
+      )}
 
-      {/* 위험 좌표 상세 */}
-      <Text text={translate("aiRiskDocCreatorScreen:page.hazardTitle")} style={S.$hazardTitle} />
-      <Text text={translate("aiRiskDocCreatorScreen:page.hazardEmpty")} style={S.$hazardEmpty} />
+      {/* ── 분석 완료 + 위험 좌표 섹션 포함 ── */}
+      {isAnalyzed && includeHazardCoordinates && (
+        <>
+          {/* AI 분석 이미지 (마커 overlay) */}
+          <Text
+            text={translate("aiRiskDocCreatorScreen:page.aiAnalysis")}
+            style={S.$aiAnalysisTitle}
+          />
+          <View style={S.$analysisImageContainer}>
+            {/* TODO: 실제 AI 분석 이미지로 교체 */}
+            <View style={S.$analysisImageMock} />
+            {page.hazards.map((hazard) => (
+              <View
+                key={hazard.id}
+                style={[
+                  S.$hazardMarker,
+                  { left: `${hazard.x}%`, top: `${hazard.y}%` } as object,
+                ]}
+              >
+                <Text text={String(hazard.id)} style={S.$hazardMarkerText} />
+              </View>
+            ))}
+          </View>
 
-      {/* 분석 결과 박스 */}
+          {/* 위험 좌표 상세 리스트 */}
+          <Text
+            text={translate("aiRiskDocCreatorScreen:page.hazardTitle")}
+            style={S.$hazardTitle}
+          />
+          {page.hazards.map((hazard) => (
+            <View key={hazard.id} style={S.$hazardListItem}>
+              <View style={S.$hazardBadge}>
+                <Text text={String(hazard.id)} style={S.$hazardBadgeText} />
+              </View>
+              <Text text={hazard.description} style={S.$hazardItemDesc} />
+            </View>
+          ))}
+        </>
+      )}
+
+      {/* ── idle / analyzing: 위험 좌표 섹션 포함 시 빈 상태 표시 ── */}
+      {!isAnalyzed && includeHazardCoordinates && (
+        <>
+          <Text
+            text={translate("aiRiskDocCreatorScreen:page.hazardTitle")}
+            style={S.$hazardTitle}
+          />
+          <Text
+            text={translate("aiRiskDocCreatorScreen:page.hazardEmpty")}
+            style={S.$hazardEmpty}
+          />
+        </>
+      )}
+
+      {/* ── 분석 결과 박스 (항상 표시) ── */}
       <View style={S.$analysisBox}>
         <Text
-          text={translate("aiRiskDocCreatorScreen:page.analysisPlaceholder")}
-          style={S.$analysisPlaceholder}
+          text={
+            isAnalyzed && page.analysisResult
+              ? page.analysisResult
+              : translate("aiRiskDocCreatorScreen:page.analysisPlaceholder")
+          }
+          style={isAnalyzed && page.analysisResult ? S.$analysisResultText : S.$analysisPlaceholder}
         />
         <View style={S.$analysisCopyRow}>
           <TouchableOpacity onPress={handleCopyResult} activeOpacity={0.7} hitSlop={8}>

@@ -36,6 +36,7 @@ const palette = {
   deepBlue: "#0B3069",
   actionBlue: "#1062D8",
   screenBg: "#F9FAFE",
+  analyzeLoading: "#8BAAEA",
 } as const
 
 export const colors = {
@@ -97,4 +98,8 @@ export const colors = {
    * 기본 화면 배경색 (#F9FAFE).
    */
   screenBg: palette.screenBg,
+  /**
+   * AI 분석 요청 로딩 중 버튼 배경색 (#8BAAEA).
+   */
+  analyzeLoading: palette.analyzeLoading,
 } as const

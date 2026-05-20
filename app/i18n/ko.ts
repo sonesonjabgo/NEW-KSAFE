@@ -1064,6 +1064,7 @@ const ko: Translations = {
       afterLabel: "개선 후",
       addImage: "+ 이미지 추가",
       analyzeButton: "인공지능 분석 요청",
+      aiAnalysis: "AI 분석",
       hazardTitle: "위험 좌표 상세",
       hazardEmpty: "표시할 위험 좌표가 없습니다.",
       analysisPlaceholder: "분석 결과가 여기에 표시됩니다.",

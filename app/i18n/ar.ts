@@ -1021,6 +1021,7 @@ const ar: Translations = {
       afterLabel: "After",
       addImage: "+ Add Image",
       analyzeButton: "Request AI Analysis",
+      aiAnalysis: "AI Analysis",
       hazardTitle: "Hazard Coordinate Details",
       hazardEmpty: "No hazard coordinates to display.",
       analysisPlaceholder: "Analysis results will be displayed here.",

@@ -207,6 +207,17 @@ export const $analyzeBtn: ViewStyle = {
   marginBottom: 16,
 }
 
+export const $analyzeBtnAnalyzing: ViewStyle = {
+  height: 51,
+  borderRadius: 10,
+  backgroundColor: colors.analyzeLoading,
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 8,
+  marginBottom: 16,
+}
+
 export const $analyzeBtnLabel: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.semiBold,
@@ -228,7 +239,7 @@ export const $hazardEmpty: TextStyle = {
 }
 
 export const $analysisBox: ViewStyle = {
-  height: 114,
+  minHeight: 114,
   borderWidth: 1,
   borderColor: "#ECECEC",
   borderRadius: 9,
@@ -242,8 +253,87 @@ export const $analysisPlaceholder: TextStyle = {
   color: "#BBBBBB",
 }
 
+export const $analysisResultText: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: colors.navy,
+  lineHeight: 20,
+}
+
 export const $analysisCopyRow: ViewStyle = {
   alignItems: "flex-end",
+  marginTop: 8,
+}
+
+// ── AI 분석 결과 ──────────────────────────────────────────────────────────────
+
+export const $aiAnalysisTitle: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.semiBold,
+  color: colors.navy,
+  marginBottom: 8,
+}
+
+export const $analysisImageContainer: ViewStyle = {
+  width: "100%",
+  height: 200,
+  borderRadius: 12,
+  overflow: "hidden",
+  marginBottom: 14,
+}
+
+export const $analysisImageMock: ViewStyle = {
+  width: "100%",
+  height: "100%",
+  backgroundColor: "#5B8C5A",
+}
+
+export const $hazardMarker: ViewStyle = {
+  position: "absolute",
+  backgroundColor: "#E03526",
+  borderRadius: 4,
+  paddingHorizontal: 5,
+  paddingVertical: 2,
+  minWidth: 22,
+  alignItems: "center",
+}
+
+export const $hazardMarkerText: TextStyle = {
+  color: "#FFFFFF",
+  fontSize: 11,
+  fontFamily: typography.primary.bold,
+}
+
+// ── 위험 좌표 리스트 ──────────────────────────────────────────────────────────
+
+export const $hazardListItem: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 10,
+  marginBottom: 10,
+}
+
+export const $hazardBadge: ViewStyle = {
+  width: 26,
+  height: 26,
+  borderRadius: 4,
+  backgroundColor: "#E03526",
+  alignItems: "center",
+  justifyContent: "center",
+  flexShrink: 0,
+}
+
+export const $hazardBadgeText: TextStyle = {
+  color: "#FFFFFF",
+  fontSize: 13,
+  fontFamily: typography.primary.bold,
+}
+
+export const $hazardItemDesc: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: colors.navy,
+  flex: 1,
 }
 
 // ── Capture Sheet (바텀시트) ───────────────────────────────────────────────────

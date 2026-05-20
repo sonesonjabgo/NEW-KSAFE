@@ -20,7 +20,7 @@ import { AiRiskActionButton } from "./components/AiRiskActionButton"
 import { AiRiskEmptyState } from "./components/AiRiskEmptyState"
 import { AiRiskPageCard } from "./components/AiRiskPageCard"
 import { HazardCoordinateToggleCard } from "./components/HazardCoordinateToggleCard"
-import { type AiRiskPage, createMockPage } from "./mockData"
+import { MOCK_ANALYSIS_RESULT, MOCK_HAZARDS, type AiRiskPage, createMockPage } from "./mockData"
 import * as S from "./styles"
 
 export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">> = ({
@@ -90,6 +90,28 @@ export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">>
     setPages([])
   }, [])
 
+  const handleAnalysisRequest = useCallback((id: string) => {
+    // mock: analyzing 상태로 변경
+    setPages((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, analysisStatus: "analyzing" as const } : p)),
+    )
+    // TODO: 실제 AI 위험분석 API 연동 시 아래 setTimeout 제거 후 API 호출로 교체
+    setTimeout(() => {
+      setPages((prev) =>
+        prev.map((p) =>
+          p.id === id
+            ? {
+                ...p,
+                analysisStatus: "analyzed" as const,
+                hazards: MOCK_HAZARDS,
+                analysisResult: MOCK_ANALYSIS_RESULT,
+              }
+            : p,
+        ),
+      )
+    }, 1200)
+  }, [])
+
   const handleExportPdf = () => {
     // TODO: 서명 입력 → PDF 생성 → 내보내기 API 연동
   }
@@ -154,6 +176,8 @@ export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">>
                 page={page}
                 pageNumber={index + 1}
                 onDelete={() => handleDeletePage(page.id)}
+                onAnalysisRequest={() => handleAnalysisRequest(page.id)}
+                includeHazardCoordinates={includeHazardCoordinates}
               />
             ))
           )}
