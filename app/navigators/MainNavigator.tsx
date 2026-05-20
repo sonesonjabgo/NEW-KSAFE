@@ -1,4 +1,4 @@
-import { View, ViewStyle, TextStyle } from "react-native"
+import { ViewStyle, TextStyle } from "react-native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import type { SvgProps } from "react-native-svg"
@@ -19,15 +19,10 @@ import type { MainTabParamList } from "./navigationTypes"
 const Tab = createBottomTabNavigator<MainTabParamList>()
 
 const ACTIVE_BLUE = "#214ACC"
-const INACTIVE = "#9AA0AD"
-const ICON_ACTIVE_BG = "#EEF3FC"
+const INACTIVE = "#000000"
 
 function TabIcon({ Icon, focused }: { Icon: React.FC<SvgProps>; focused: boolean }) {
-  return (
-    <View style={focused ? $iconWrapActive : $iconWrap}>
-      <Icon width={22} height={22} color={focused ? ACTIVE_BLUE : INACTIVE} />
-    </View>
-  )
+  return <Icon width={35} height={35} color={focused ? ACTIVE_BLUE : INACTIVE} />
 }
 
 export function MainNavigator() {
@@ -37,7 +32,7 @@ export function MainNavigator() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: [$tabBar, { paddingBottom: Math.max(bottom, 8) }],
+        tabBarStyle: [$tabBar, { height: 82 + bottom, paddingBottom: bottom }],
         tabBarActiveTintColor: ACTIVE_BLUE,
         tabBarInactiveTintColor: INACTIVE,
         tabBarLabelStyle: $tabBarLabel,
@@ -86,7 +81,6 @@ const $tabBar: ViewStyle = {
   backgroundColor: "#FFFFFF",
   borderTopWidth: 1,
   borderTopColor: "#E9ECF0",
-  paddingTop: 8,
   elevation: 10,
   shadowColor: "#000",
   shadowOffset: { width: 0, height: -2 },
@@ -94,20 +88,7 @@ const $tabBar: ViewStyle = {
   shadowRadius: 8,
 }
 
-const $iconWrap: ViewStyle = {
-  width: 36,
-  height: 36,
-  borderRadius: 10,
-  alignItems: "center",
-  justifyContent: "center",
-}
-
-const $iconWrapActive: ViewStyle = {
-  ...$iconWrap,
-  backgroundColor: ICON_ACTIVE_BG,
-}
-
 const $tabBarLabel: TextStyle = {
-  fontSize: 11,
-  fontFamily: typography.primary.normal,
+  fontSize: 13,
+  fontFamily: typography.primary.semiBold,
 }

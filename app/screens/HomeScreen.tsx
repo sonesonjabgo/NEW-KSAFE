@@ -14,6 +14,7 @@ import GridPatrol from "@assets/icons/home/grid_patrol.svg"
 import GridTbmCreate from "@assets/icons/home/grid_tbm_create.svg"
 import GridTbmJoin from "@assets/icons/home/grid_tbm_join.svg"
 import GridTbmReport from "@assets/icons/home/grid_tbm_report.svg"
+import BannerIcon from "@assets/icons/home/banner_icon.svg"
 import GridTranslate from "@assets/icons/home/grid_translate.svg"
 import GridWarning from "@assets/icons/home/grid_warning.svg"
 import GridInterpret from "@assets/icons/home/text-search.svg"
@@ -271,7 +272,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           {/* 기존 교육/발표 참여 안내 배너 (근로자 전용) */}
           {userRole === "worker" && hasExistingEdu && (
             <TouchableOpacity style={$eduBanner} activeOpacity={0.7}>
-              <View style={$eduBannerBar} />
+              <BannerIcon width={34} height={34} color="#0B3069" style={$eduBannerIcon} />
               <View style={$eduBannerContent}>
                 <Text text={translate("homeScreen:edu.title")} style={$eduBannerTitle} />
                 <Text text={translate("homeScreen:edu.description")} style={$eduBannerDesc} />
@@ -754,21 +755,15 @@ const $eduBanner: ViewStyle = {
   backgroundColor: "#EEF3FC",
   borderRadius: 12,
   paddingVertical: 16,
-  paddingRight: 16,
-  paddingLeft: 0,
+  paddingHorizontal: 16,
   marginBottom: 20,
   flexDirection: "row",
   alignItems: "center",
-  overflow: "hidden",
+  gap: 14,
 }
 
-const $eduBannerBar: ViewStyle = {
-  width: 4,
-  borderRadius: 2,
-  backgroundColor: "#214ACC",
-  alignSelf: "stretch",
-  marginLeft: 16,
-  marginRight: 14,
+const $eduBannerIcon: ViewStyle = {
+  flexShrink: 0,
 }
 
 const $eduBannerContent: ViewStyle = {
