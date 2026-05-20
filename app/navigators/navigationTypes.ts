@@ -44,6 +44,23 @@ export type AppStackParamList = {
   EducationMaterialRegister: undefined
   EducationSelect: { initialSelected: number[]; onConfirm: (ids: number[]) => void }
   Patrol: undefined
+  ImprovementProposalList: { deleted?: boolean } | undefined
+  ImprovementProposalCreate: undefined
+  ImprovementProposalDetail:
+    | {
+        id?: number
+        proposal?: {
+          id: string
+          status: "pending" | "ongoing" | "reflected" | "rejected"
+          date: string
+          content: string
+          authorName: string
+          workplace: string
+        }
+      }
+    | undefined
+  TbmParticipationHistory: undefined
+  TbmParticipationHistoryDetail: { id: number }
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<

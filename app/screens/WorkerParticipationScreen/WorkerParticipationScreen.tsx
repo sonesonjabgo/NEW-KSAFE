@@ -9,8 +9,14 @@ import { getMockWorkerParticipationMenus } from "./mock/mockWorkerParticipationM
 import * as S from "./styles"
 import type { WorkerParticipationScreenProps } from "./types"
 
-export const WorkerParticipationScreen: FC<WorkerParticipationScreenProps> = () => {
+export const WorkerParticipationScreen: FC<WorkerParticipationScreenProps> = ({ navigation }) => {
   const mockWorkerParticipationMenus = useMemo(() => getMockWorkerParticipationMenus(), [])
+
+  const handleMenuPress = (id: number) => {
+    if (id === 2) {
+      navigation.navigate("ImprovementProposalList")
+    }
+  }
 
   return (
     <View style={S.$screenContainer}>
@@ -25,6 +31,7 @@ export const WorkerParticipationScreen: FC<WorkerParticipationScreenProps> = () 
               key={item.id}
               item={item}
               showDivider={index < mockWorkerParticipationMenus.length - 1}
+              onPress={() => handleMenuPress(item.id)}
             />
           ))}
         </View>

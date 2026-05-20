@@ -722,6 +722,129 @@ const hi: Translations = {
     emptyText: "No educational materials available.",
   },
 
+  improvementProposalDetailScreen: {
+    title: "Proposal Detail Management",
+    result: {
+      sectionTitle: "प्रसंस्करण परिणाम",
+      reflected: "स्वीकार कर लिया गया है।",
+      rejected: "स्वीकार नहीं किया गया।",
+      dateLabel: "संसाधन तिथि:",
+    },
+    alreadyProcessed: "यह प्रस्ताव पहले ही संसाधित हो चुका है।",
+    saveProcessingMessage: "प्रसंस्करण नोट्स सहेजे गए हैं।",
+    workerNoEditMessage: "प्रगति में या पहले से संसाधित प्रस्तावों को संपादित या हटाया नहीं जा सकता।",
+    status: {
+      pending: "Pending",
+      ongoing: "In Progress",
+      reflected: "Reflected",
+      rejected: "Not Reflected",
+    },
+    statusChange: {
+      sectionTitle: "Status Change & Processing",
+      ongoingBtn: "In Progress",
+      reflectedBtn: "Reflected",
+      rejectedBtn: "Not Reflected",
+      inputLabel: "Processing Notes",
+      pendingMessage: "Status is Pending.\nChange to In Progress before processing.",
+      ongoingMessage: "पूर्ण या अस्वीकृत स्थिति चुनने पर उपलब्ध।",
+      rejectedInputLabel: "अस्वीकृति का कारण",
+      rejectedProcessingPlaceholder: "कृपया अस्वीकृति का कारण विस्तार से बताएं।",
+      processingPlaceholder: "की गई कार्रवाई का विस्तृत विवरण दें। (उदा. उपकरण टीम की समीक्षा पूरी हुई और व्यवस्था हो गई)",
+    },
+    history: {
+      sectionTitle: "Status Change History",
+      registeredTitle: "Proposal Registered",
+      registeredDesc: "Proposal has been received.",
+      ongoingTitle: "In Progress",
+      ongoingChangeTitle: "जारी में बदलाव",
+      ongoingDesc: "Proposal review has started.",
+      reflectedTitle: "Reflected",
+      reflectedChangeTitle: "स्वीकृत प्रसंस्करण",
+      reflectedDesc: "Proposal has been reflected.",
+      rejectedTitle: "Not Reflected",
+      rejectedChangeTitle: "अस्वीकृत प्रसंस्करण",
+      rejectedDesc: "Proposal could not be reflected.",
+      proceedNote: "प्रबंधक नियुक्त -",
+      reflectedNote: "स्वीकृत के रूप में संसाधित -",
+      rejectedNote: "अस्वीकृत के रूप में संसाधित -",
+    },
+    editForm: {
+      label: "Details",
+      required: " *",
+      helper: "You can write up to 2,000 characters.",
+      errorMaxLength: "Please enter details within 2,000 characters.",
+    },
+    edit: "Edit",
+    delete: "Delete",
+    proceed: "आगे बढ़ें",
+    saveProceeded: "प्रसंस्करण नोट्स सहेजें",
+    proceedStartedMessage: "प्रसंस्करण शुरू हो गया है।",
+    cancel: "Cancel",
+    save: "Save",
+    savedMessage: "Proposal has been updated.",
+    deletedMessage: "प्रस्ताव हटा दिया गया है।",
+    deleteModal: {
+      title: "प्रस्ताव हटाएं",
+      message: "क्या आप इस प्रस्ताव को हटाना चाहते हैं?\nहटाए गए प्रस्ताव को पुनः प्राप्त नहीं किया जा सकता।",
+      cancel: "रद्द करें",
+      confirm: "हटाएं",
+    },
+  },
+
+  improvementProposalCreateScreen: {
+    title: "Write Proposal",
+    guide: {
+      title: "Writing Guide",
+      description:
+        "Freely propose ideas to improve safety and work efficiency at the site. It would be helpful to include specific locations and situations.",
+    },
+    workplace: {
+      label: "Workplace",
+      placeholder: "Please select a workplace",
+      helper: "You can select a workplace from the workplace list.",
+    },
+    detail: {
+      label: "Details",
+      required: " *",
+      placeholder:
+        "What would you like to improve?\nExamples)\n · Problem: The lighting in corridor B is too dim, making work dangerous.\n · Proposal: Please add LED lighting or improve the brightness.",
+      helper: "You can write up to 2,000 characters.",
+      errorMaxLength: "Please enter details within 2,000 characters.",
+    },
+    submit: "Submit",
+    submitting: "सबमिट हो रहा है...",
+  },
+
+  improvementProposalListScreen: {
+    title: "Improvement Proposals",
+    tabs: {
+      all: "All",
+      pending: "Pending",
+      ongoing: "In Progress",
+      reflected: "Reflected",
+      rejected: "Not Reflected",
+    },
+    summary: {
+      myProposals: "My Proposals",
+      reflected: "Reflected",
+      unit: "item(s)",
+    },
+    status: {
+      pending: "Pending",
+      ongoing: "In Progress",
+      reflected: "Reflected",
+      rejected: "Not Reflected",
+    },
+    fab: "New Proposal",
+    empty: {
+      all: "No proposals registered.",
+      pending: "No pending proposals.",
+      ongoing: "No proposals in progress.",
+      reflected: "No reflected proposals.",
+      rejected: "No proposals marked as not reflected.",
+    },
+  },
+
   tbmReportInquiryScreen: {
     title: "TBM Report Inquiry",
     tabs: {
@@ -753,8 +876,7 @@ const hi: Translations = {
     historyCompletedAt: "Processing Complete",
     downloadPdf: "Download PDF",
     sectionRegenerate: "Report Regeneration",
-    regenerateInfoText:
-      "Please enter the items below before\nrequesting report regeneration.",
+    regenerateInfoText: "Please enter the items below before\nrequesting report regeneration.",
     processNameLabel: "Process Name (Optional)",
     processNamePlaceholder: "e.g. Press",
     teamNameLabel: "Team/Unit (Optional)",
@@ -772,6 +894,22 @@ const hi: Translations = {
 
   patrolScreen: {
     title: "कार्यस्थल순회 점검",
+  },
+
+  tbmParticipationHistoryScreen: {
+    title: "TBM Participation History",
+    totalParticipation: "Total Participation",
+    cautionResponse: "Caution Response",
+    unit: "case(s)",
+    workplaceLabel: "Workplace",
+  },
+
+  tbmParticipationHistoryDetailScreen: {
+    participationDate: "Participation Date",
+    workDate: "Work Date",
+    workplace: "Workplace",
+    manager: "Manager",
+    activityContent: "Activity Content",
   },
 
   ...demoHi,

@@ -729,6 +729,129 @@ const fr: Translations = {
     emptyText: "No educational materials available.",
   },
 
+  improvementProposalDetailScreen: {
+    title: "Proposal Detail Management",
+    result: {
+      sectionTitle: "Résultat du traitement",
+      reflected: "A été pris en compte.",
+      rejected: "N'a pas été pris en compte.",
+      dateLabel: "Traité le :",
+    },
+    alreadyProcessed: "Cette proposition a déjà été traitée.",
+    saveProcessingMessage: "Les notes de traitement ont été enregistrées.",
+    workerNoEditMessage: "Les propositions en cours ou déjà traitées ne peuvent pas être modifiées ou supprimées.",
+    status: {
+      pending: "Pending",
+      ongoing: "In Progress",
+      reflected: "Reflected",
+      rejected: "Not Reflected",
+    },
+    statusChange: {
+      sectionTitle: "Status Change & Processing",
+      ongoingBtn: "In Progress",
+      reflectedBtn: "Reflected",
+      rejectedBtn: "Not Reflected",
+      inputLabel: "Processing Notes",
+      pendingMessage: "Status is Pending.\nChange to In Progress before processing.",
+      ongoingMessage: "Disponible lors de la sélection d'un statut terminé ou rejeté.",
+      rejectedInputLabel: "Motif de rejet",
+      rejectedProcessingPlaceholder: "Veuillez décrire le motif de rejet en détail.",
+      processingPlaceholder: "Décrivez en détail l'action prise. (ex. Révision de l'équipe d'équipement terminée et arrangement effectué)",
+    },
+    history: {
+      sectionTitle: "Status Change History",
+      registeredTitle: "Proposal Registered",
+      registeredDesc: "Proposal has been received.",
+      ongoingTitle: "In Progress",
+      ongoingChangeTitle: "Passage à En cours",
+      ongoingDesc: "Proposal review has started.",
+      reflectedTitle: "Reflected",
+      reflectedChangeTitle: "Traitement Accepté",
+      reflectedDesc: "Proposal has been reflected.",
+      rejectedTitle: "Not Reflected",
+      rejectedChangeTitle: "Traitement Rejeté",
+      rejectedDesc: "Proposal could not be reflected.",
+      proceedNote: "Responsable assigné -",
+      reflectedNote: "Traité comme accepté -",
+      rejectedNote: "Traité comme rejeté -",
+    },
+    editForm: {
+      label: "Details",
+      required: " *",
+      helper: "You can write up to 2,000 characters.",
+      errorMaxLength: "Please enter details within 2,000 characters.",
+    },
+    edit: "Edit",
+    delete: "Delete",
+    proceed: "Procéder",
+    saveProceeded: "Enregistrer les notes de traitement",
+    proceedStartedMessage: "Le traitement a commencé.",
+    cancel: "Cancel",
+    save: "Save",
+    savedMessage: "Proposal has been updated.",
+    deletedMessage: "La proposition a été supprimée.",
+    deleteModal: {
+      title: "Supprimer la proposition",
+      message: "Voulez-vous supprimer cette proposition ?\nLes propositions supprimées ne peuvent pas être récupérées.",
+      cancel: "Annuler",
+      confirm: "Supprimer",
+    },
+  },
+
+  improvementProposalCreateScreen: {
+    title: "Write Proposal",
+    guide: {
+      title: "Writing Guide",
+      description:
+        "Freely propose ideas to improve safety and work efficiency at the site. It would be helpful to include specific locations and situations.",
+    },
+    workplace: {
+      label: "Workplace",
+      placeholder: "Please select a workplace",
+      helper: "You can select a workplace from the workplace list.",
+    },
+    detail: {
+      label: "Details",
+      required: " *",
+      placeholder:
+        "What would you like to improve?\nExamples)\n · Problem: The lighting in corridor B is too dim, making work dangerous.\n · Proposal: Please add LED lighting or improve the brightness.",
+      helper: "You can write up to 2,000 characters.",
+      errorMaxLength: "Please enter details within 2,000 characters.",
+    },
+    submit: "Submit",
+    submitting: "Envoi en cours...",
+  },
+
+  improvementProposalListScreen: {
+    title: "Improvement Proposals",
+    tabs: {
+      all: "All",
+      pending: "Pending",
+      ongoing: "In Progress",
+      reflected: "Reflected",
+      rejected: "Not Reflected",
+    },
+    summary: {
+      myProposals: "My Proposals",
+      reflected: "Reflected",
+      unit: "item(s)",
+    },
+    status: {
+      pending: "Pending",
+      ongoing: "In Progress",
+      reflected: "Reflected",
+      rejected: "Not Reflected",
+    },
+    fab: "New Proposal",
+    empty: {
+      all: "No proposals registered.",
+      pending: "No pending proposals.",
+      ongoing: "No proposals in progress.",
+      reflected: "No reflected proposals.",
+      rejected: "No proposals marked as not reflected.",
+    },
+  },
+
   tbmReportInquiryScreen: {
     title: "TBM Report Inquiry",
     tabs: {
@@ -760,8 +883,7 @@ const fr: Translations = {
     historyCompletedAt: "Processing Complete",
     downloadPdf: "Download PDF",
     sectionRegenerate: "Report Regeneration",
-    regenerateInfoText:
-      "Please enter the items below before\nrequesting report regeneration.",
+    regenerateInfoText: "Please enter the items below before\nrequesting report regeneration.",
     processNameLabel: "Process Name (Optional)",
     processNamePlaceholder: "e.g. Press",
     teamNameLabel: "Team/Unit (Optional)",
@@ -779,6 +901,22 @@ const fr: Translations = {
 
   patrolScreen: {
     title: "Inspection de ronde du lieu de travail",
+  },
+
+  tbmParticipationHistoryScreen: {
+    title: "TBM Participation History",
+    totalParticipation: "Total Participation",
+    cautionResponse: "Caution Response",
+    unit: "case(s)",
+    workplaceLabel: "Workplace",
+  },
+
+  tbmParticipationHistoryDetailScreen: {
+    participationDate: "Participation Date",
+    workDate: "Work Date",
+    workplace: "Workplace",
+    manager: "Manager",
+    activityContent: "Activity Content",
   },
 
   ...demoFr,

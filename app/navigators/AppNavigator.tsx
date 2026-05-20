@@ -17,12 +17,17 @@ import { EducationSelectScreen } from "@/screens/EducationSelectScreen/Education
 import { PatrolScreen } from "@/screens/PatrolScreen/PatrolScreen"
 import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
 import { ImageTranslationScreen } from "@/screens/ImageTranslationScreen/ImageTranslationScreen"
+import { ImprovementProposalCreateScreen } from "@/screens/ImprovementProposalCreateScreen/ImprovementProposalCreateScreen"
+import { ImprovementProposalDetailScreen } from "@/screens/ImprovementProposalDetailScreen/ImprovementProposalDetailScreen"
+import { ImprovementProposalListScreen } from "@/screens/ImprovementProposalListScreen/ImprovementProposalListScreen"
 import { LanguageSettingsScreen } from "@/screens/LanguageSettingsScreen"
 import { LoginScreen } from "@/screens/LoginScreen"
 import { MyPageScreen } from "@/screens/MyPageScreen"
 import { NotifyScreen } from "@/screens/NotifyScreen"
 import { QrScannerScreen } from "@/screens/QrScannerScreen"
 import { TbmCreateScreen } from "@/screens/TbmCreateScreen/TbmCreateScreen"
+import { TbmParticipationHistoryScreen } from "@/screens/TbmParticipationHistoryScreen/TbmParticipationHistoryScreen"
+import { TbmParticipationHistoryDetailScreen } from "@/screens/TbmParticipationHistoryDetailScreen/TbmParticipationHistoryDetailScreen"
 import { TbmDetailScreen } from "@/screens/TbmDetailScreen/TbmDetailScreen"
 import { TbmJoinCompleteScreen } from "@/screens/TbmJoinCompleteScreen/TbmJoinCompleteScreen"
 import { TbmJoinHealthScreen } from "@/screens/TbmJoinHealthScreen/TbmJoinHealthScreen"
@@ -92,6 +97,14 @@ const AppStack = () => {
       <Stack.Screen name="EducationMaterialRegister" component={EducationMaterialRegisterScreen} />
       <Stack.Screen name="EducationSelect" component={EducationSelectScreen} />
       <Stack.Screen name="Patrol" component={PatrolScreen} />
+      <Stack.Screen name="ImprovementProposalList" component={ImprovementProposalListScreen} />
+      <Stack.Screen name="ImprovementProposalCreate" component={ImprovementProposalCreateScreen} />
+      <Stack.Screen name="ImprovementProposalDetail" component={ImprovementProposalDetailScreen} />
+      <Stack.Screen name="TbmParticipationHistory" component={TbmParticipationHistoryScreen} />
+      <Stack.Screen
+        name="TbmParticipationHistoryDetail"
+        component={TbmParticipationHistoryDetailScreen}
+      />
     </Stack.Navigator>
   )
 }

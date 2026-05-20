@@ -732,8 +732,7 @@ const ko: Translations = {
     content: {
       label: "교육 내용",
       placeholder: "교육 내용을 입력하세요",
-      helper:
-        "설명은 비워둘 수 있으며, 입력 시 최대 10,000자까지 작성할 수 있습니다.",
+      helper: "설명은 비워둘 수 있으며, 입력 시 최대 10,000자까지 작성할 수 있습니다.",
     },
     submit: "등록하기",
   },
@@ -759,6 +758,129 @@ const ko: Translations = {
     confirm: "선택완료 ({{count}}개)",
     confirmNone: "선택완료",
     emptyText: "회사 교육자료가 없습니다.",
+  },
+
+  improvementProposalDetailScreen: {
+    title: "제안 상세 관리",
+    result: {
+      sectionTitle: "처리 결과",
+      reflected: "반영되었습니다",
+      rejected: "반영 불가입니다",
+      dateLabel: "처리일:",
+    },
+    alreadyProcessed: "이미 처리된 제안입니다",
+    saveProcessingMessage: "처리 내용이 저장되었습니다.",
+    workerNoEditMessage: "진행중이거나 처리된 제안은 수정 및 삭제할 수 없습니다.",
+    status: {
+      pending: "대기중",
+      ongoing: "진행중",
+      reflected: "반영완료",
+      rejected: "반영불가",
+    },
+    statusChange: {
+      sectionTitle: "상태 변경 및 처리",
+      ongoingBtn: "진행중",
+      reflectedBtn: "반영완료",
+      rejectedBtn: "반영불가",
+      inputLabel: "처리 내용 입력",
+      pendingMessage: "대기중 상태입니다.\n진행중으로 변경한 뒤 처리할 수 있습니다.",
+      ongoingMessage: "완료 또는 불가 상태 선택 시 입력 가능",
+      rejectedInputLabel: "불가 사유",
+      rejectedProcessingPlaceholder: "반영 불가 사유를 상세히 입력해주세요.",
+      processingPlaceholder: "조치한 내용을 상세히 입력해주세요. (예: 설비팀 검토 결과 배치 완료함)",
+    },
+    history: {
+      sectionTitle: "상태 변경 이력",
+      registeredTitle: "제안 등록",
+      registeredDesc: "제안이 접수되었습니다.",
+      ongoingTitle: "진행중",
+      ongoingChangeTitle: "진행중 변경",
+      ongoingDesc: "제안 검토가 시작되었습니다.",
+      reflectedTitle: "반영완료",
+      reflectedChangeTitle: "반영완료 처리",
+      reflectedDesc: "제안이 반영되었습니다.",
+      rejectedTitle: "반영불가",
+      rejectedChangeTitle: "반영불가 처리",
+      rejectedDesc: "제안을 반영할 수 없습니다.",
+      proceedNote: "담당자가 배정되었습니다 -",
+      reflectedNote: "반영 완료 처리되었습니다 -",
+      rejectedNote: "반영 불가 처리되었습니다 -",
+    },
+    editForm: {
+      label: "상세 내용",
+      required: " *",
+      helper: "입력 시 최대 2,000자까지 작성할 수 있습니다.",
+      errorMaxLength: "상세 내용은 최대 2,000자 이하로 입력해주세요.",
+    },
+    edit: "수정하기",
+    delete: "삭제하기",
+    proceed: "진행하기",
+    saveProceeded: "처리 내용 저장",
+    proceedStartedMessage: "진행이 시작되었습니다.",
+    cancel: "취소",
+    save: "저장",
+    savedMessage: "제안이 수정되었습니다.",
+    deletedMessage: "제안이 삭제되었습니다.",
+    deleteModal: {
+      title: "제안 삭제",
+      message: "제안을 삭제하시겠습니까?\n삭제된 제안은 복구할 수 없습니다.",
+      cancel: "취소",
+      confirm: "삭제",
+    },
+  },
+
+  improvementProposalCreateScreen: {
+    title: "제안 작성",
+    guide: {
+      title: "작성 가이드",
+      description:
+        "현장의 안전과 업무 효율을 높일 수 있는 아이디어를 자유롭게 제안해주세요. 구체적인 위치와 상황을 적어주시면 좋습니다.",
+    },
+    workplace: {
+      label: "사업장",
+      placeholder: "사업장을 선택해주세요",
+      helper: "사업장 목록에서 사업장을 선택할 수 있습니다.",
+    },
+    detail: {
+      label: "상세 내용",
+      required: " *",
+      placeholder:
+        "어떤 점을 개선하면 좋을까요?\n예시)\n · 문제점: B구역 지하 통로 조명이 너무 어두워 작업 시 위험합니다.\n · 제안: LED 조명 추가 설치 또는 조도 개선을 요청합니다.",
+      helper: "입력 시 최대 2,000자까지 작성할 수 있습니다.",
+      errorMaxLength: "상세 내용은 최대 2,000자 이하로 입력해주세요.",
+    },
+    submit: "제출하기",
+    submitting: "제출중...",
+  },
+
+  improvementProposalListScreen: {
+    title: "제도개선 제안",
+    tabs: {
+      all: "전체",
+      pending: "대기중",
+      ongoing: "진행중",
+      reflected: "반영완료",
+      rejected: "반영불가",
+    },
+    summary: {
+      myProposals: "나의 제안",
+      reflected: "반영 완료",
+      unit: "건",
+    },
+    status: {
+      pending: "대기중",
+      ongoing: "진행중",
+      reflected: "반영완료",
+      rejected: "반영불가",
+    },
+    fab: "새 제안 작성",
+    empty: {
+      all: "등록된 제안이 없습니다.",
+      pending: "대기중인 제안이 없습니다.",
+      ongoing: "진행중인 제안이 없습니다.",
+      reflected: "반영완료된 제안이 없습니다.",
+      rejected: "반영불가 처리된 제안이 없습니다.",
+    },
   },
 
   tbmReportInquiryScreen: {
@@ -792,8 +914,7 @@ const ko: Translations = {
     historyCompletedAt: "처리 완료",
     downloadPdf: "PDF 다운로드",
     sectionRegenerate: "보고서 재생성",
-    regenerateInfoText:
-      "선택 항목을 입력한 뒤 보고서 재생성을\n요청할 수 있습니다.",
+    regenerateInfoText: "선택 항목을 입력한 뒤 보고서 재생성을\n요청할 수 있습니다.",
     processNameLabel: "공정명 (선택)",
     processNamePlaceholder: "예:프레스",
     teamNameLabel: "팀/반명 (선택)",
@@ -811,6 +932,22 @@ const ko: Translations = {
 
   patrolScreen: {
     title: "작업장 순회 점검",
+  },
+
+  tbmParticipationHistoryScreen: {
+    title: "TBM 참여 이력",
+    totalParticipation: "전체 참여",
+    cautionResponse: "주의 응답",
+    unit: "건",
+    workplaceLabel: "사업장",
+  },
+
+  tbmParticipationHistoryDetailScreen: {
+    participationDate: "참여 일시",
+    workDate: "작업 일시",
+    workplace: "사업장",
+    manager: "진행 담당",
+    activityContent: "활동 내용",
   },
 
   ...demoKo,

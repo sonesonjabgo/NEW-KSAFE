@@ -721,6 +721,129 @@ const ja: Translations = {
     emptyText: "No educational materials available.",
   },
 
+  improvementProposalDetailScreen: {
+    title: "Proposal Detail Management",
+    result: {
+      sectionTitle: "処理結果",
+      reflected: "反映されました。",
+      rejected: "反映不可となりました。",
+      dateLabel: "処理日:",
+    },
+    alreadyProcessed: "この提案はすでに処理済みです。",
+    saveProcessingMessage: "処理内容が保存されました。",
+    workerNoEditMessage: "進行中または処理済みの提案は編集・削除できません。",
+    status: {
+      pending: "Pending",
+      ongoing: "In Progress",
+      reflected: "Reflected",
+      rejected: "Not Reflected",
+    },
+    statusChange: {
+      sectionTitle: "Status Change & Processing",
+      ongoingBtn: "In Progress",
+      reflectedBtn: "Reflected",
+      rejectedBtn: "Not Reflected",
+      inputLabel: "Processing Notes",
+      pendingMessage: "Status is Pending.\nChange to In Progress before processing.",
+      ongoingMessage: "完了または不可のステータスを選択時に入力可能。",
+      rejectedInputLabel: "不可理由",
+      rejectedProcessingPlaceholder: "反映不可の理由を詳しく入力してください。",
+      processingPlaceholder: "実施した対応内容を詳しく入力してください。（例：設備チームの確認後、配置完了）",
+    },
+    history: {
+      sectionTitle: "Status Change History",
+      registeredTitle: "Proposal Registered",
+      registeredDesc: "Proposal has been received.",
+      ongoingTitle: "In Progress",
+      ongoingChangeTitle: "進行中に変更",
+      ongoingDesc: "Proposal review has started.",
+      reflectedTitle: "Reflected",
+      reflectedChangeTitle: "反映完了処理",
+      reflectedDesc: "Proposal has been reflected.",
+      rejectedTitle: "Not Reflected",
+      rejectedChangeTitle: "反映不可処理",
+      rejectedDesc: "Proposal could not be reflected.",
+      proceedNote: "担当者が配属されました -",
+      reflectedNote: "反映完了として処理されました -",
+      rejectedNote: "反映不可として処理されました -",
+    },
+    editForm: {
+      label: "Details",
+      required: " *",
+      helper: "You can write up to 2,000 characters.",
+      errorMaxLength: "Please enter details within 2,000 characters.",
+    },
+    edit: "Edit",
+    delete: "Delete",
+    proceed: "進める",
+    saveProceeded: "処理内容を保存",
+    proceedStartedMessage: "処理が開始されました。",
+    cancel: "Cancel",
+    save: "Save",
+    savedMessage: "Proposal has been updated.",
+    deletedMessage: "提案が削除されました。",
+    deleteModal: {
+      title: "提案を削除",
+      message: "この提案を削除しますか？\n削除した提案は復元できません。",
+      cancel: "キャンセル",
+      confirm: "削除",
+    },
+  },
+
+  improvementProposalCreateScreen: {
+    title: "Write Proposal",
+    guide: {
+      title: "Writing Guide",
+      description:
+        "Freely propose ideas to improve safety and work efficiency at the site. It would be helpful to include specific locations and situations.",
+    },
+    workplace: {
+      label: "Workplace",
+      placeholder: "Please select a workplace",
+      helper: "You can select a workplace from the workplace list.",
+    },
+    detail: {
+      label: "Details",
+      required: " *",
+      placeholder:
+        "What would you like to improve?\nExamples)\n · Problem: The lighting in corridor B is too dim, making work dangerous.\n · Proposal: Please add LED lighting or improve the brightness.",
+      helper: "You can write up to 2,000 characters.",
+      errorMaxLength: "Please enter details within 2,000 characters.",
+    },
+    submit: "Submit",
+    submitting: "送信中...",
+  },
+
+  improvementProposalListScreen: {
+    title: "Improvement Proposals",
+    tabs: {
+      all: "All",
+      pending: "Pending",
+      ongoing: "In Progress",
+      reflected: "Reflected",
+      rejected: "Not Reflected",
+    },
+    summary: {
+      myProposals: "My Proposals",
+      reflected: "Reflected",
+      unit: "item(s)",
+    },
+    status: {
+      pending: "Pending",
+      ongoing: "In Progress",
+      reflected: "Reflected",
+      rejected: "Not Reflected",
+    },
+    fab: "New Proposal",
+    empty: {
+      all: "No proposals registered.",
+      pending: "No pending proposals.",
+      ongoing: "No proposals in progress.",
+      reflected: "No reflected proposals.",
+      rejected: "No proposals marked as not reflected.",
+    },
+  },
+
   tbmReportInquiryScreen: {
     title: "TBM報告書照会",
     tabs: {
@@ -752,8 +875,7 @@ const ja: Translations = {
     historyCompletedAt: "Processing Complete",
     downloadPdf: "Download PDF",
     sectionRegenerate: "Report Regeneration",
-    regenerateInfoText:
-      "Please enter the items below before\nrequesting report regeneration.",
+    regenerateInfoText: "Please enter the items below before\nrequesting report regeneration.",
     processNameLabel: "Process Name (Optional)",
     processNamePlaceholder: "e.g. Press",
     teamNameLabel: "Team/Unit (Optional)",
@@ -771,6 +893,22 @@ const ja: Translations = {
 
   patrolScreen: {
     title: "作業場巡回点検",
+  },
+
+  tbmParticipationHistoryScreen: {
+    title: "TBM Participation History",
+    totalParticipation: "Total Participation",
+    cautionResponse: "Caution Response",
+    unit: "case(s)",
+    workplaceLabel: "Workplace",
+  },
+
+  tbmParticipationHistoryDetailScreen: {
+    participationDate: "Participation Date",
+    workDate: "Work Date",
+    workplace: "Workplace",
+    manager: "Manager",
+    activityContent: "Activity Content",
   },
 
   ...demoJa,

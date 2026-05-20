@@ -122,6 +122,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         Icon: GridBulb,
         label: translate("homeScreen:grid.suggestion.label"),
         sub: translate("homeScreen:grid.suggestion.sub"),
+        onPress: () => navigation.navigate("ImprovementProposalList"),
       },
     ],
     [navigation],

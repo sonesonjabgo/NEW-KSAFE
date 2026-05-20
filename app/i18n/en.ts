@@ -731,8 +731,7 @@ const en = {
     attachment: {
       label: "Attachment",
       boxPlaceholder: "filename.format",
-      helper:
-        "Only one allowed file can be registered, up to a maximum of 50MB.",
+      helper: "Only one allowed file can be registered, up to a maximum of 50MB.",
     },
     educationTitle: {
       label: "Education Title",
@@ -743,8 +742,7 @@ const en = {
     content: {
       label: "Education Content",
       placeholder: "Enter the education content",
-      helper:
-        "Description is optional. If provided, up to 10,000 characters can be entered.",
+      helper: "Description is optional. If provided, up to 10,000 characters can be entered.",
     },
     submit: "Register",
   },
@@ -770,6 +768,129 @@ const en = {
     confirm: "Complete ({{count}})",
     confirmNone: "Complete",
     emptyText: "No educational materials available.",
+  },
+
+  improvementProposalDetailScreen: {
+    title: "Proposal Detail Management",
+    result: {
+      sectionTitle: "Processing Result",
+      reflected: "Reflected",
+      rejected: "Not Reflected",
+      dateLabel: "Processed on:",
+    },
+    alreadyProcessed: "This proposal has already been processed.",
+    saveProcessingMessage: "Processing notes have been saved.",
+    workerNoEditMessage: "Proposals in progress or already processed cannot be edited or deleted.",
+    status: {
+      pending: "Pending",
+      ongoing: "In Progress",
+      reflected: "Reflected",
+      rejected: "Not Reflected",
+    },
+    statusChange: {
+      sectionTitle: "Status Change & Processing",
+      ongoingBtn: "In Progress",
+      reflectedBtn: "Reflected",
+      rejectedBtn: "Not Reflected",
+      inputLabel: "Processing Notes",
+      pendingMessage: "Status is Pending.\nChange to In Progress before processing.",
+      ongoingMessage: "Available when a completed or rejected status is selected.",
+      rejectedInputLabel: "Reason for Rejection",
+      rejectedProcessingPlaceholder: "Please describe the reason for rejection in detail.",
+      processingPlaceholder: "Please describe the action taken in detail. (e.g., Equipment team review completed and arrangement done)",
+    },
+    history: {
+      sectionTitle: "Status Change History",
+      registeredTitle: "Proposal Registered",
+      registeredDesc: "Proposal has been received.",
+      ongoingTitle: "In Progress",
+      ongoingChangeTitle: "Status Changed to In Progress",
+      ongoingDesc: "Proposal review has started.",
+      reflectedTitle: "Reflected",
+      reflectedChangeTitle: "Reflected Processing",
+      reflectedDesc: "Proposal has been reflected.",
+      rejectedTitle: "Not Reflected",
+      rejectedChangeTitle: "Not Reflected Processing",
+      rejectedDesc: "Proposal could not be reflected.",
+      proceedNote: "Manager assigned -",
+      reflectedNote: "Processed as reflected -",
+      rejectedNote: "Processed as not reflected -",
+    },
+    editForm: {
+      label: "Details",
+      required: " *",
+      helper: "You can write up to 2,000 characters.",
+      errorMaxLength: "Please enter details within 2,000 characters.",
+    },
+    edit: "Edit",
+    delete: "Delete",
+    proceed: "Proceed",
+    saveProceeded: "Save Processing Notes",
+    proceedStartedMessage: "Processing has started.",
+    cancel: "Cancel",
+    save: "Save",
+    savedMessage: "Proposal has been updated.",
+    deletedMessage: "Proposal has been deleted.",
+    deleteModal: {
+      title: "Delete Proposal",
+      message: "Are you sure you want to delete this proposal?\nDeleted proposals cannot be recovered.",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
+  },
+
+  improvementProposalCreateScreen: {
+    title: "Write Proposal",
+    guide: {
+      title: "Writing Guide",
+      description:
+        "Freely propose ideas to improve safety and work efficiency at the site. It would be helpful to include specific locations and situations.",
+    },
+    workplace: {
+      label: "Workplace",
+      placeholder: "Please select a workplace",
+      helper: "You can select a workplace from the workplace list.",
+    },
+    detail: {
+      label: "Details",
+      required: " *",
+      placeholder:
+        "What would you like to improve?\nExamples)\n · Problem: The lighting in corridor B is too dim, making work dangerous.\n · Proposal: Please add LED lighting or improve the brightness.",
+      helper: "You can write up to 2,000 characters.",
+      errorMaxLength: "Please enter details within 2,000 characters.",
+    },
+    submit: "Submit",
+    submitting: "Submitting...",
+  },
+
+  improvementProposalListScreen: {
+    title: "Improvement Proposals",
+    tabs: {
+      all: "All",
+      pending: "Pending",
+      ongoing: "In Progress",
+      reflected: "Reflected",
+      rejected: "Not Reflected",
+    },
+    summary: {
+      myProposals: "My Proposals",
+      reflected: "Reflected",
+      unit: "item(s)",
+    },
+    status: {
+      pending: "Pending",
+      ongoing: "In Progress",
+      reflected: "Reflected",
+      rejected: "Not Reflected",
+    },
+    fab: "New Proposal",
+    empty: {
+      all: "No proposals registered.",
+      pending: "No pending proposals.",
+      ongoing: "No proposals in progress.",
+      reflected: "No reflected proposals.",
+      rejected: "No proposals marked as not reflected.",
+    },
   },
 
   tbmReportInquiryScreen: {
@@ -803,8 +924,7 @@ const en = {
     historyCompletedAt: "Processing Complete",
     downloadPdf: "Download PDF",
     sectionRegenerate: "Report Regeneration",
-    regenerateInfoText:
-      "Please enter the items below before\nrequesting report regeneration.",
+    regenerateInfoText: "Please enter the items below before\nrequesting report regeneration.",
     processNameLabel: "Process Name (Optional)",
     processNamePlaceholder: "e.g. Press",
     teamNameLabel: "Team/Unit (Optional)",
@@ -822,6 +942,22 @@ const en = {
 
   patrolScreen: {
     title: "Workplace Patrol Inspection",
+  },
+
+  tbmParticipationHistoryScreen: {
+    title: "TBM Participation History",
+    totalParticipation: "Total Participation",
+    cautionResponse: "Caution Response",
+    unit: "case(s)",
+    workplaceLabel: "Workplace",
+  },
+
+  tbmParticipationHistoryDetailScreen: {
+    participationDate: "Participation Date",
+    workDate: "Work Date",
+    workplace: "Workplace",
+    manager: "Manager",
+    activityContent: "Activity Content",
   },
 
   ...demoEn,
