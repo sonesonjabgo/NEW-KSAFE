@@ -427,23 +427,36 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
               </View>
             )}
 
-            {/* 처리 결과 (반영완료 원본 상태 전용) */}
-            {isAdmin && detail.status === "reflected" && (
+            {/* 처리 결과 (reflected/rejected 원본 상태 — 역할 무관) */}
+            {(detail.status === "reflected" || detail.status === "rejected") && (
               <View style={S.$section}>
                 <SectionHeader
                   title={translate("improvementProposalDetailScreen:result.sectionTitle")}
                 />
                 <View style={S.$resultCard}>
                   <View style={S.$resultHeaderRow}>
-                    <View style={S.$resultIconCircle}>
-                      <IconCheck size={20} color="#18A24A" strokeWidth={2.5} />
-                    </View>
+                    {detail.status === "reflected" ? (
+                      <View style={S.$resultIconCircle}>
+                        <IconCheck size={20} color="#18A24A" strokeWidth={2.5} />
+                      </View>
+                    ) : (
+                      <View style={S.$resultIconCircleRejected}>
+                        <IconX size={20} color="#E03526" strokeWidth={2.5} />
+                      </View>
+                    )}
                     <Text
-                      text={translate("improvementProposalDetailScreen:result.reflected")}
+                      text={translate(
+                        detail.status === "reflected"
+                          ? "improvementProposalDetailScreen:result.reflected"
+                          : "improvementProposalDetailScreen:result.rejected",
+                      )}
                       style={S.$resultTitle}
                     />
                   </View>
-                  <Text text={MOCK_RESULT_CONTENT} style={S.$resultContent} />
+                  <Text
+                    text={detail.status === "reflected" ? MOCK_RESULT_CONTENT : MOCK_REJECTED_CONTENT}
+                    style={S.$resultContent}
+                  />
                   <View style={S.$resultDivider} />
                   <View style={S.$resultFooterRow}>
                     <View style={S.$resultDateRow}>
@@ -467,8 +480,8 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
               </View>
             )}
 
-            {/* 상태 변경 및 처리 (관리자 전용) */}
-            {isAdmin && (
+            {/* 상태 변경 및 처리 (관리자 전용, 본인 작성 진행중 제외) */}
+            {isAdmin && (!isOwnProposal || detail.status !== "ongoing") && (
               <View style={S.$section}>
                 <SectionHeader
                   title={translate("improvementProposalDetailScreen:statusChange.sectionTitle")}
@@ -683,8 +696,14 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                     />
                   </TouchableOpacity>
                 </>
+              ) : isOwnProposal && detail.status !== "pending" && (detail.status === "ongoing" || !isAdmin) ? (
+                /* 본인 제안 + 진행중(역할 무관) / 처리됨(근로자): 안내 텍스트 */
+                <Text
+                  text={translate("improvementProposalDetailScreen:workerNoEditMessage")}
+                  style={S.$workerInfoText}
+                />
               ) : detail.status === "reflected" || detail.status === "rejected" ? (
-                /* 이미 처리 완료된 제안: 비활성 버튼 (소유 여부 무관) */
+                /* 관리자: 이미 처리 완료된 제안 비활성 버튼 */
                 <View style={S.$proceedBtnDisabled}>
                   <Text
                     text={translate("improvementProposalDetailScreen:alreadyProcessed")}
@@ -692,7 +711,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                   />
                 </View>
               ) : isOwnProposal ? (
-                /* 본인 제안: 수정하기 / 삭제하기 */
+                /* 본인 제안 + 대기중: 수정하기 / 삭제하기 */
                 <>
                   <TouchableOpacity style={S.$editBtn} activeOpacity={0.7} onPress={enterEditMode}>
                     <Text

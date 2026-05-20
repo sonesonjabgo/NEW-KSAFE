@@ -726,9 +726,11 @@ const ja: Translations = {
     result: {
       sectionTitle: "処理結果",
       reflected: "反映されました。",
+      rejected: "反映不可となりました。",
       dateLabel: "処理日:",
     },
     alreadyProcessed: "この提案はすでに処理済みです。",
+    workerNoEditMessage: "進行中または処理済みの提案は編集・削除できません。",
     status: {
       pending: "Pending",
       ongoing: "In Progress",

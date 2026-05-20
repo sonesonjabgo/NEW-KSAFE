@@ -734,9 +734,11 @@ const fr: Translations = {
     result: {
       sectionTitle: "Résultat du traitement",
       reflected: "A été pris en compte.",
+      rejected: "N'a pas été pris en compte.",
       dateLabel: "Traité le :",
     },
     alreadyProcessed: "Cette proposition a déjà été traitée.",
+    workerNoEditMessage: "Les propositions en cours ou déjà traitées ne peuvent pas être modifiées ou supprimées.",
     status: {
       pending: "Pending",
       ongoing: "In Progress",

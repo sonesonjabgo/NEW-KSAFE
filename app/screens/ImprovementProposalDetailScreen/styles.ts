@@ -517,6 +517,15 @@ export const $resultIconCircle: ViewStyle = {
   alignItems: "center",
 }
 
+export const $resultIconCircleRejected: ViewStyle = {
+  width: 36,
+  height: 36,
+  borderRadius: 18,
+  backgroundColor: "#FDE8EB",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
 export const $resultTitle: TextStyle = {
   fontSize: 16,
   fontFamily: typography.primary.bold,
@@ -718,6 +727,15 @@ export const $processingReadBoxRejected: ViewStyle = {
 }
 
 // ── Disabled Proceed Button ───────────────────────────────────────────────────
+
+export const $workerInfoText: TextStyle = {
+  flex: 1,
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#888888",
+  textAlign: "center",
+  lineHeight: 20,
+}
 
 export const $proceedBtnDisabled: ViewStyle = {
   flex: 1,

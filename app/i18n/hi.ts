@@ -727,9 +727,11 @@ const hi: Translations = {
     result: {
       sectionTitle: "प्रसंस्करण परिणाम",
       reflected: "स्वीकार कर लिया गया है।",
+      rejected: "स्वीकार नहीं किया गया।",
       dateLabel: "संसाधन तिथि:",
     },
     alreadyProcessed: "यह प्रस्ताव पहले ही संसाधित हो चुका है।",
+    workerNoEditMessage: "प्रगति में या पहले से संसाधित प्रस्तावों को संपादित या हटाया नहीं जा सकता।",
     status: {
       pending: "Pending",
       ongoing: "In Progress",

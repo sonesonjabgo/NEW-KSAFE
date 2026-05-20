@@ -765,9 +765,11 @@ const ko: Translations = {
     result: {
       sectionTitle: "처리 결과",
       reflected: "반영되었습니다",
+      rejected: "반영 불가입니다",
       dateLabel: "처리일:",
     },
     alreadyProcessed: "이미 처리된 제안입니다",
+    workerNoEditMessage: "진행중이거나 처리된 제안은 수정 및 삭제할 수 없습니다.",
     status: {
       pending: "대기중",
       ongoing: "진행중",

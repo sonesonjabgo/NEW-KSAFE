@@ -775,9 +775,11 @@ const en = {
     result: {
       sectionTitle: "Processing Result",
       reflected: "Reflected",
+      rejected: "Not Reflected",
       dateLabel: "Processed on:",
     },
     alreadyProcessed: "This proposal has already been processed.",
+    workerNoEditMessage: "Proposals in progress or already processed cannot be edited or deleted.",
     status: {
       pending: "Pending",
       ongoing: "In Progress",

@@ -734,9 +734,11 @@ const es: Translations = {
     result: {
       sectionTitle: "Resultado de Procesamiento",
       reflected: "Ha sido reflejado.",
+      rejected: "No fue reflejado.",
       dateLabel: "Procesado el:",
     },
     alreadyProcessed: "Esta propuesta ya ha sido procesada.",
+    workerNoEditMessage: "Las propuestas en progreso o ya procesadas no se pueden editar ni eliminar.",
     status: {
       pending: "Pending",
       ongoing: "In Progress",

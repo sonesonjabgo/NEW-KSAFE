@@ -722,9 +722,11 @@ const ar: Translations = {
     result: {
       sectionTitle: "نتيجة المعالجة",
       reflected: "تم قبوله",
+      rejected: "غير مقبول",
       dateLabel: "تاريخ المعالجة:",
     },
     alreadyProcessed: "هذا الاقتراح تمت معالجته بالفعل.",
+    workerNoEditMessage: "لا يمكن تعديل أو حذف الاقتراحات قيد التنفيذ أو المعالجة.",
     status: {
       pending: "Pending",
       ongoing: "In Progress",
