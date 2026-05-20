@@ -787,6 +787,34 @@ const hi: Translations = {
       approver: "अनुमोदक",
     },
   },
+  patrolDetailScreen: {
+    title: "निरीक्षण विवरण",
+    editButton: "संपादित करें",
+    summaryCard: {
+      title: "निरीक्षण सारांश",
+      total: "कुल",
+      good: "अच्छा",
+      bad: "बुरा",
+    },
+    detailCard: {
+      overallActions: "समग्र कार्रवाई",
+      inspectionItems: "निरीक्षण आइटम",
+      checkItem: {
+        goodBadge: "अच्छा",
+        badBadge: "बुरा",
+        actionLabel: "कार्रवाई",
+      },
+    },
+    buttons: {
+      submit: "जमा करें",
+      editComplete: "संपादन पूर्ण",
+      reviewComplete: "समीक्षा पूर्ण",
+      approve: "अनुमोदन",
+      recall: "वापस लें",
+      delete: "हटाएं",
+      reportPreview: "रिपोर्ट पूर्वावलोकन",
+    },
+  },
   patrolCreateScreen: {
     title: "गश्त निरीक्षण बनाएं",
     section: {

@@ -786,6 +786,34 @@ const ja: Translations = {
       approver: "承認者",
     },
   },
+  patrolDetailScreen: {
+    title: "点検詳細",
+    editButton: "編集",
+    summaryCard: {
+      title: "点検結果サマリー",
+      total: "合計",
+      good: "良好",
+      bad: "不良",
+    },
+    detailCard: {
+      overallActions: "総合措置事項",
+      inspectionItems: "点検項目",
+      checkItem: {
+        goodBadge: "良好",
+        badBadge: "不良",
+        actionLabel: "措置事項",
+      },
+    },
+    buttons: {
+      submit: "提出",
+      editComplete: "修正完了",
+      reviewComplete: "検討完了",
+      approve: "承認",
+      recall: "回収",
+      delete: "削除",
+      reportPreview: "レポートプレビュー",
+    },
+  },
   patrolCreateScreen: {
     title: "巡回点検作成",
     section: {

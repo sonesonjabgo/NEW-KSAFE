@@ -117,11 +117,11 @@ const BADGE_STYLES: Record<PatrolStatus, { bg: string; text: string }> = {
   approved: { bg: "#CFFFE0", text: "#18A24A" },
 }
 
-const PatrolCard: FC<{ item: PatrolItem }> = ({ item }) => {
+const PatrolCard: FC<{ item: PatrolItem; onPress: () => void }> = ({ item, onPress }) => {
   const badge = BADGE_STYLES[item.status]
 
   return (
-    <TouchableOpacity style={$card} activeOpacity={0.75}>
+    <TouchableOpacity style={$card} activeOpacity={0.75} onPress={onPress}>
       {/* 상단: 뱃지 + 날짜 */}
       <View style={[$cardTopRow, $rowGap]}>
         <View style={[$badge, { backgroundColor: badge.bg }]}>
@@ -208,7 +208,12 @@ export const PatrolScreen: FC<PatrolScreenProps> = ({ navigation }) => {
             keyExtractor={(item) => item.id}
             contentContainerStyle={$listContent}
             showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => <PatrolCard item={item} />}
+            renderItem={({ item }) => (
+              <PatrolCard
+                item={item}
+                onPress={() => navigation.navigate("PatrolDetail", { id: item.id })}
+              />
+            )}
           />
         </View>
       </StackScreen>

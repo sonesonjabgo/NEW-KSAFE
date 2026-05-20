@@ -45,6 +45,7 @@ export type AppStackParamList = {
   EducationSelect: { initialSelected: number[]; onConfirm: (ids: number[]) => void }
   Patrol: undefined
   PatrolCreate: undefined
+  PatrolDetail: { id: string }
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<

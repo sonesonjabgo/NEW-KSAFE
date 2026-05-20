@@ -782,6 +782,34 @@ const ar: Translations = {
       approver: "المعتمد",
     },
   },
+  patrolDetailScreen: {
+    title: "تفاصيل الفحص",
+    editButton: "تعديل",
+    summaryCard: {
+      title: "ملخص نتائج الفحص",
+      total: "الكل",
+      good: "جيد",
+      bad: "سيء",
+    },
+    detailCard: {
+      overallActions: "الإجراءات الشاملة",
+      inspectionItems: "عناصر الفحص",
+      checkItem: {
+        goodBadge: "جيد",
+        badBadge: "سيء",
+        actionLabel: "إجراء",
+      },
+    },
+    buttons: {
+      submit: "إرسال",
+      editComplete: "اكتمال التعديل",
+      reviewComplete: "اكتمال المراجعة",
+      approve: "موافقة",
+      recall: "سحب",
+      delete: "حذف",
+      reportPreview: "معاينة التقرير",
+    },
+  },
   patrolCreateScreen: {
     title: "إنشاء فحص جولة مكان العمل",
     section: {

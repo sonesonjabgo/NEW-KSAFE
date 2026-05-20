@@ -826,6 +826,34 @@ const ko: Translations = {
       approver: "승인자",
     },
   },
+  patrolDetailScreen: {
+    title: "점검 상세",
+    editButton: "편집",
+    summaryCard: {
+      title: "점검 결과 요약",
+      total: "전체",
+      good: "양호",
+      bad: "불량",
+    },
+    detailCard: {
+      overallActions: "종합 조치사항",
+      inspectionItems: "점검 항목",
+      checkItem: {
+        goodBadge: "양호",
+        badBadge: "불량",
+        actionLabel: "조치사항",
+      },
+    },
+    buttons: {
+      submit: "제출",
+      editComplete: "수정 완료",
+      reviewComplete: "검토 완료",
+      approve: "승인",
+      recall: "회수",
+      delete: "삭제",
+      reportPreview: "보고서 미리보기",
+    },
+  },
   patrolCreateScreen: {
     title: "작업장 순회 점검 생성",
     section: {

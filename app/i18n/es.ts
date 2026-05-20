@@ -794,6 +794,34 @@ const es: Translations = {
       approver: "Aprobador",
     },
   },
+  patrolDetailScreen: {
+    title: "Detalle de Inspección",
+    editButton: "Editar",
+    summaryCard: {
+      title: "Resumen de Inspección",
+      total: "Total",
+      good: "Bien",
+      bad: "Mal",
+    },
+    detailCard: {
+      overallActions: "Medidas Generales",
+      inspectionItems: "Elementos de Inspección",
+      checkItem: {
+        goodBadge: "Bien",
+        badBadge: "Mal",
+        actionLabel: "Acción",
+      },
+    },
+    buttons: {
+      submit: "Enviar",
+      editComplete: "Edición Completa",
+      reviewComplete: "Revisión Completa",
+      approve: "Aprobar",
+      recall: "Retirar",
+      delete: "Eliminar",
+      reportPreview: "Vista Previa del Informe",
+    },
+  },
   patrolCreateScreen: {
     title: "Crear inspección de ronda",
     section: {

@@ -837,6 +837,34 @@ const en = {
       approver: "Approver",
     },
   },
+  patrolDetailScreen: {
+    title: "Inspection Detail",
+    editButton: "Edit",
+    summaryCard: {
+      title: "Inspection Summary",
+      total: "Total",
+      good: "Good",
+      bad: "Bad",
+    },
+    detailCard: {
+      overallActions: "Overall Action Items",
+      inspectionItems: "Inspection Items",
+      checkItem: {
+        goodBadge: "Good",
+        badBadge: "Bad",
+        actionLabel: "Action",
+      },
+    },
+    buttons: {
+      submit: "Submit",
+      editComplete: "Edit Complete",
+      reviewComplete: "Review Complete",
+      approve: "Approve",
+      recall: "Recall",
+      delete: "Delete",
+      reportPreview: "Report Preview",
+    },
+  },
   patrolCreateScreen: {
     title: "Create Patrol Inspection",
     section: {

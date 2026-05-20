@@ -538,7 +538,7 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation }) 
               activeOpacity={0.8}
               onPress={() => {
                 setSuccessVisible(false)
-                navigation.goBack()
+                navigation.navigate("PatrolDetail", { id: "new" })
               }}
             >
               <Text

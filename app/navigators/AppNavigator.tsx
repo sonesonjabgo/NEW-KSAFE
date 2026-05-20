@@ -15,6 +15,7 @@ import { EducationMaterialScreen } from "@/screens/EducationMaterialScreen/Educa
 import { EducationPresentationScreen } from "@/screens/EducationPresentationScreen/EducationPresentationScreen"
 import { EducationSelectScreen } from "@/screens/EducationSelectScreen/EducationSelectScreen"
 import { PatrolCreateScreen } from "@/screens/PatrolScreen/PatrolCreateScreen"
+import { PatrolDetailScreen } from "@/screens/PatrolScreen/PatrolDetailScreen"
 import { PatrolScreen } from "@/screens/PatrolScreen/PatrolScreen"
 import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
 import { ImageTranslationScreen } from "@/screens/ImageTranslationScreen/ImageTranslationScreen"
@@ -94,6 +95,7 @@ const AppStack = () => {
       <Stack.Screen name="EducationSelect" component={EducationSelectScreen} />
       <Stack.Screen name="Patrol" component={PatrolScreen} />
       <Stack.Screen name="PatrolCreate" component={PatrolCreateScreen} />
+      <Stack.Screen name="PatrolDetail" component={PatrolDetailScreen} />
     </Stack.Navigator>
   )
 }
