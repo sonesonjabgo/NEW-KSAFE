@@ -391,6 +391,67 @@ export const $sheetBtnLabel: TextStyle = {
   color: colors.navy,
 }
 
+// ── Signature Sheet (서명 바텀시트) ───────────────────────────────────────────
+
+export const $signatureInstruction: TextStyle = {
+  fontSize: 15,
+  fontFamily: typography.primary.medium,
+  color: colors.navy,
+  paddingHorizontal: 20,
+  marginTop: 4,
+  marginBottom: 16,
+  lineHeight: 22,
+}
+
+export const $signatureBox: ViewStyle = {
+  marginHorizontal: 20,
+  flex: 1,
+  borderRadius: 13,
+  borderWidth: 1,
+  borderColor: "#ECECEC",
+  backgroundColor: "#FFFFFF",
+  overflow: "hidden",
+}
+
+export const $signatureActionRow: ViewStyle = {
+  flexDirection: "row",
+  gap: 12,
+  paddingHorizontal: 20,
+  paddingTop: 16,
+}
+
+export const $signatureCancelBtn: ViewStyle = {
+  flex: 1,
+  height: 52,
+  borderRadius: 12,
+  borderWidth: 1,
+  borderColor: "#E5E7EB",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: "#FFFFFF",
+}
+
+export const $signatureSaveBtn: ViewStyle = {
+  flex: 1,
+  height: 52,
+  borderRadius: 12,
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: colors.blue,
+}
+
+export const $signatureCancelLabel: TextStyle = {
+  fontSize: 15,
+  fontFamily: typography.primary.semiBold,
+  color: colors.navy,
+}
+
+export const $signatureSaveLabel: TextStyle = {
+  fontSize: 15,
+  fontFamily: typography.primary.semiBold,
+  color: "#FFFFFF",
+}
+
 // ── Empty State ───────────────────────────────────────────────────────────────
 
 export const $emptyContainer: ViewStyle = {

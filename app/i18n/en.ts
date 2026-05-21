@@ -1059,8 +1059,7 @@ const en = {
     exportPdfButton: "Export PDF",
     hazardToggle: {
       label: "Include Hazard Coordinate Section",
-      description:
-        "When unchecked, hazard coordinates will not be displayed on screen and PDF.",
+      description: "When unchecked, hazard coordinates will not be displayed on screen and PDF.",
     },
     emptyState: {
       title: "No pages registered.",
@@ -1071,6 +1070,11 @@ const en = {
       album: "Select from Album",
     },
     resetAll: "Reset All",
+    signature: {
+      instruction: "Sign with your finger in the box, then tap Save.",
+      cancel: "Cancel",
+      save: "Save",
+    },
     page: {
       title: "Page {{number}}",
       beforeLabel: "Before",

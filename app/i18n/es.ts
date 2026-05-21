@@ -1032,6 +1032,11 @@ const es: Translations = {
       album: "Select from Album",
     },
     resetAll: "Reset All",
+    signature: {
+      instruction: "Sign with your finger in the box, then tap Save.",
+      cancel: "Cancel",
+      save: "Save",
+    },
     page: {
       title: "Page {{number}}",
       beforeLabel: "Before",

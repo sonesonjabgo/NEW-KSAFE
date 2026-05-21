@@ -20,6 +20,7 @@ import { AiRiskActionButton } from "./components/AiRiskActionButton"
 import { AiRiskEmptyState } from "./components/AiRiskEmptyState"
 import { AiRiskPageCard } from "./components/AiRiskPageCard"
 import { HazardCoordinateToggleCard } from "./components/HazardCoordinateToggleCard"
+import { SignatureBottomSheet } from "./components/SignatureBottomSheet"
 import { MOCK_ANALYSIS_RESULT, MOCK_HAZARDS, type AiRiskPage, createMockPage } from "./mockData"
 import * as S from "./styles"
 
@@ -35,6 +36,11 @@ export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">>
   const [captureSheetVisible, setCaptureSheetVisible] = useState(false)
   const slideAnim = useRef(new Animated.Value(300)).current
   const fadeAnim = useRef(new Animated.Value(0)).current
+
+  // ── Signature Sheet ───────────────────────────────────────────────────────────
+  const [signSheetVisible, setSignSheetVisible] = useState(false)
+  const signSlideAnim = useRef(new Animated.Value(400)).current
+  const signFadeAnim = useRef(new Animated.Value(0)).current
 
   const openCaptureSheet = useCallback(() => {
     setCaptureSheetVisible(true)
@@ -112,9 +118,32 @@ export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">>
     }, 1200)
   }, [])
 
-  const handleExportPdf = () => {
-    // TODO: 서명 입력 → PDF 생성 → 내보내기 API 연동
-  }
+  const openSignSheet = useCallback(() => {
+    setSignSheetVisible(true)
+    Animated.parallel([
+      Animated.timing(signFadeAnim, { toValue: 1, duration: 200, useNativeDriver: true }),
+      Animated.timing(signSlideAnim, { toValue: 0, duration: 260, useNativeDriver: true }),
+    ]).start()
+  }, [signFadeAnim, signSlideAnim])
+
+  const closeSignSheet = useCallback(() => {
+    Animated.parallel([
+      Animated.timing(signFadeAnim, { toValue: 0, duration: 160, useNativeDriver: true }),
+      Animated.timing(signSlideAnim, { toValue: 400, duration: 200, useNativeDriver: true }),
+    ]).start(() => setSignSheetVisible(false))
+  }, [signFadeAnim, signSlideAnim])
+
+  const handleSignatureSave = useCallback(
+    (_signaturePaths: string[]) => {
+      closeSignSheet()
+      // TODO: _signaturePaths를 PDF 생성 로직에 전달 (실제 PDF 생성 API 연동 시 여기서 처리)
+    },
+    [closeSignSheet],
+  )
+
+  const handleExportPdf = useCallback(() => {
+    openSignSheet()
+  }, [openSignSheet])
 
   const canExport = pages.length > 0
 
@@ -152,11 +181,7 @@ export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">>
 
           {/* 전체 초기화 버튼 — pages > 0일 때만 표시 */}
           {pages.length > 0 && (
-            <TouchableOpacity
-              style={S.$resetBtn}
-              activeOpacity={0.8}
-              onPress={handleResetAll}
-            >
+            <TouchableOpacity style={S.$resetBtn} activeOpacity={0.8} onPress={handleResetAll}>
               <IconTrash size={18} color="#E03526" strokeWidth={1.8} />
               <Text text={translate("aiRiskDocCreatorScreen:resetAll")} style={S.$resetBtnLabel} />
             </TouchableOpacity>
@@ -183,6 +208,15 @@ export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">>
           )}
         </ScrollView>
       </StackScreen>
+
+      {/* 서명 바텀시트 */}
+      <SignatureBottomSheet
+        isVisible={signSheetVisible}
+        fadeAnim={signFadeAnim}
+        slideAnim={signSlideAnim}
+        onClose={closeSignSheet}
+        onSave={handleSignatureSave}
+      />
 
       {/* 촬영 방법 선택 바텀시트 */}
       <Modal
@@ -213,11 +247,7 @@ export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">>
 
             {/* 버튼 2개 */}
             <View style={S.$sheetBtnRow}>
-              <TouchableOpacity
-                style={S.$sheetBtn}
-                activeOpacity={0.7}
-                onPress={handleTakePhoto}
-              >
+              <TouchableOpacity style={S.$sheetBtn} activeOpacity={0.7} onPress={handleTakePhoto}>
                 <IconCamera size={20} color="#1A1A1A" strokeWidth={1.8} />
                 <Text
                   text={translate("aiRiskDocCreatorScreen:captureSheet.camera")}

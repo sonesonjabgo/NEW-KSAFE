@@ -1058,6 +1058,11 @@ const ko: Translations = {
       album: "앨범에서 선택",
     },
     resetAll: "전체 초기화",
+    signature: {
+      instruction: "박스 안에 손가락으로 서명한 뒤 저장을 눌러주세요.",
+      cancel: "취소",
+      save: "저장",
+    },
     page: {
       title: "페이지 {{number}}",
       beforeLabel: "개선 전",
