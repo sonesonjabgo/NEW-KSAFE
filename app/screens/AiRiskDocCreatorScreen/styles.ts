@@ -1,4 +1,4 @@
-import { ImageStyle, TextStyle, ViewStyle } from "react-native"
+import { TextStyle, ViewStyle } from "react-native"
 
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
@@ -165,7 +165,7 @@ export const $imageLabel: TextStyle = {
   marginBottom: 6,
 }
 
-export const $beforeImageBox: ImageStyle = {
+export const $beforeImageBox: ViewStyle = {
   width: "100%",
   height: 106,
   borderRadius: 12,
@@ -276,7 +276,7 @@ export const $analysisImageContainer: ViewStyle = {
   marginBottom: 14,
 }
 
-export const $analysisImageMock: ImageStyle = {
+export const $analysisImageMock: ViewStyle = {
   width: "100%",
   height: "100%",
 }

@@ -1,16 +1,15 @@
-import type { TxKeyPath } from "@/i18n"
+import { FC } from "react"
+import { SvgProps } from "react-native-svg"
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const welcomeAiRiskImage = require("@assets/images/welcome-ai-risk.png")
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const welcomeTbmImage = require("@assets/images/welcome-tbm.png")
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const welcomeTranslateImage = require("@assets/images/welcome-translate.png")
+import WelcomeAiRiskSvg from "@assets/images/welcome-ai-risk.svg"
+import WelcomeTbmSvg from "@assets/images/welcome-tbm.svg"
+import WelcomeTranslateSvg from "@assets/images/welcome-translate.svg"
+
+import type { TxKeyPath } from "@/i18n"
 
 export interface IntroSlideData {
   id: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  image: any
+  SlideImage: FC<SvgProps>
   step: string
   titleTx: TxKeyPath
   descriptionTx: TxKeyPath
@@ -19,21 +18,21 @@ export interface IntroSlideData {
 export const INTRO_SLIDES: IntroSlideData[] = [
   {
     id: "1",
-    image: welcomeTranslateImage,
+    SlideImage: WelcomeTranslateSvg,
     step: "01",
     titleTx: "welcomeIntroScreen:slide1.title",
     descriptionTx: "welcomeIntroScreen:slide1.description",
   },
   {
     id: "2",
-    image: welcomeTbmImage,
+    SlideImage: WelcomeTbmSvg,
     step: "02",
     titleTx: "welcomeIntroScreen:slide2.title",
     descriptionTx: "welcomeIntroScreen:slide2.description",
   },
   {
     id: "3",
-    image: welcomeAiRiskImage,
+    SlideImage: WelcomeAiRiskSvg,
     step: "03",
     titleTx: "welcomeIntroScreen:slide3.title",
     descriptionTx: "welcomeIntroScreen:slide3.description",

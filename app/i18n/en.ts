@@ -167,6 +167,10 @@ const en = {
       homepage: "Homepage",
       privacy: "Privacy Policy",
       terms: "Terms of Service",
+      copyright: "Copyright © KS Industrial Safety Association all rights reserved.",
+      webViewLoading: "Connecting to",
+      webViewLoadingWait: "Please wait a moment",
+      webViewClose: "Close",
     },
     grid: {
       interpret: { label: "1:1 Interpretation", sub: "Real-time interpretation" },
@@ -180,6 +184,13 @@ const en = {
       tbmReport: { label: "TBM Report", sub: "View TBM report" },
       hazard: { label: "Hazard Areas", sub: "View hazard areas" },
       suggestion: { label: "Improvement Proposals", sub: "Submit improvement proposals" },
+    },
+    pushNotificationSheet: {
+      title: "Don't Miss Important Alerts",
+      description:
+        "To receive safety alerts and announcements on time,\nplease allow push notification permission.",
+      allowButton: "Allow Push Notifications",
+      settingsButton: "Change Permission in Settings",
     },
   },
 

@@ -1,6 +1,7 @@
 import { FC } from "react"
-import { ActivityIndicator, Image, TouchableOpacity, View } from "react-native"
+import { ActivityIndicator, TouchableOpacity, View } from "react-native"
 import { IconCamera, IconCopy, IconSparkles, IconTrash } from "@tabler/icons-react-native"
+import AiRiskReportSvg from "@assets/images/ai-risk-report.svg"
 
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
@@ -8,9 +9,6 @@ import { colors } from "@/theme/colors"
 
 import type { AiRiskPage } from "../mockData"
 import * as S from "../styles"
-
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const aiRiskReportImage = require("@assets/images/ai-risk-report.png")
 
 interface AiRiskPageCardProps {
   page: AiRiskPage
@@ -58,7 +56,9 @@ export const AiRiskPageCard: FC<AiRiskPageCardProps> = ({
         <View style={S.$imageCol}>
           <Text text={translate("aiRiskDocCreatorScreen:page.beforeLabel")} style={S.$imageLabel} />
           {/* TODO: page.beforeImage URI 연동 시 실제 이미지 URI로 교체 */}
-          <Image source={aiRiskReportImage} style={S.$beforeImageBox} resizeMode="cover" />
+          <View style={S.$beforeImageBox}>
+            <AiRiskReportSvg width="100%" height="100%" />
+          </View>
         </View>
 
         <View style={S.$imageCol}>
@@ -117,7 +117,7 @@ export const AiRiskPageCard: FC<AiRiskPageCardProps> = ({
           />
           <View style={S.$analysisImageContainer}>
             {/* TODO: 실제 AI 분석 이미지 URI로 교체 */}
-            <Image source={aiRiskReportImage} style={S.$analysisImageMock} resizeMode="cover" />
+            <AiRiskReportSvg width="100%" height="100%" />
             {page.hazards.map((hazard) => (
               <View
                 key={hazard.id}

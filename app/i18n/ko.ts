@@ -167,6 +167,10 @@ const ko: Translations = {
       homepage: "홈페이지",
       privacy: "개인정보처리방침",
       terms: "이용약관",
+      copyright: "Copyright © 케이에스산업안전협회 all rights reserved.",
+      webViewLoading: "에 접속중입니다",
+      webViewLoadingWait: "잠시만 기다려주세요",
+      webViewClose: "닫기",
     },
     grid: {
       interpret: { label: "1:1 통역", sub: "실시간 통역 지원" },
@@ -180,6 +184,12 @@ const ko: Translations = {
       tbmReport: { label: "TBM 보고서", sub: "TBM 보고서 조회" },
       hazard: { label: "유해위험개소", sub: "유해위험개소 조회" },
       suggestion: { label: "제도개선 제안", sub: "제도개선 제안 등록" },
+    },
+    pushNotificationSheet: {
+      title: "중요 알림을 놓치지 마세요",
+      description: "안전 알림과 공지사항을 제때 받으려면\n푸시 알림 권한을 허용해주세요.",
+      allowButton: "푸시 알림 허용하기",
+      settingsButton: "설정에서 권한 변경",
     },
   },
 

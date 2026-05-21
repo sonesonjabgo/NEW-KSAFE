@@ -145,7 +145,15 @@ const es: Translations = {
     },
     edu: { title: "Education", description: "Description" },
     banner: { text: "Safe Environment" },
-    footer: { homepage: "Homepage", privacy: "Privacy", terms: "Terms" },
+    footer: {
+      homepage: "Homepage",
+      privacy: "Privacy",
+      terms: "Terms",
+      copyright: "Copyright © KS Industrial Safety Association all rights reserved.",
+      webViewLoading: "Connecting to",
+      webViewLoadingWait: "Please wait a moment",
+      webViewClose: "Close",
+    },
     grid: {
       interpret: { label: "Interpret", sub: "Interpretation" },
       chatbot: { label: "Chatbot", sub: "Chatbot" },
@@ -158,6 +166,13 @@ const es: Translations = {
       tbmReport: { label: "Report", sub: "Report" },
       hazard: { label: "Hazard", sub: "Hazard" },
       suggestion: { label: "Suggestion", sub: "Suggestion" },
+    },
+    pushNotificationSheet: {
+      title: "Don't Miss Important Alerts",
+      description:
+        "To receive safety alerts and announcements on time,\nplease allow push notification permission.",
+      allowButton: "Allow Push Notifications",
+      settingsButton: "Change Permission in Settings",
     },
   },
   safeBoardScreen: {

@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { Image, TouchableOpacity, View } from "react-native"
+import { TouchableOpacity, View } from "react-native"
 
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
@@ -19,7 +19,7 @@ export const IntroSlide: FC<IntroSlideProps> = ({ slide, currentIndex, total, on
     {/* 이미지~pagination을 하나의 View로 묶어 $slide의 justifyContent: center로 세로 중앙 정렬 */}
     <View style={S.$slideContent}>
       <View style={S.$imageContainer}>
-        <Image source={slide.image} style={S.$slideImage} resizeMode="contain" />
+        <slide.SlideImage width="100%" height="100%" />
       </View>
 
       <View style={S.$stepBadge}>
