@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react"
+import { FC, useCallback, useRef, useState } from "react"
 import { FlatList, TouchableOpacity, View, ViewToken } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -23,6 +23,11 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
     }
   }).current
 
+  const handleDotPress = useCallback((index: number) => {
+    flatListRef.current?.scrollToIndex({ index, animated: true })
+    setCurrentIndex(index)
+  }, [])
+
   const goToLogin = () => {
     navigation.replace("Login")
   }
@@ -38,25 +43,34 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
       </View>
 
       {/* Slides */}
-      <FlatList
-        ref={flatListRef}
-        data={INTRO_SLIDES}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <IntroSlide slide={item} currentIndex={currentIndex} total={INTRO_SLIDES.length} />
-        )}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        bounces={false}
-        getItemLayout={(_, index) => ({
-          length: S.SCREEN_WIDTH,
-          offset: S.SCREEN_WIDTH * index,
-          index,
-        })}
-        viewabilityConfig={viewabilityConfig}
-        onViewableItemsChanged={onViewableItemsChanged}
-      />
+      <View style={S.$slideArea}>
+        <FlatList
+          ref={flatListRef}
+          data={INTRO_SLIDES}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <IntroSlide
+              slide={item}
+              currentIndex={currentIndex}
+              total={INTRO_SLIDES.length}
+              onDotPress={handleDotPress}
+            />
+          )}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          bounces={false}
+          style={S.$slideList}
+          contentContainerStyle={S.$slideListContent}
+          getItemLayout={(_, index) => ({
+            length: S.SCREEN_WIDTH,
+            offset: S.SCREEN_WIDTH * index,
+            index,
+          })}
+          viewabilityConfig={viewabilityConfig}
+          onViewableItemsChanged={onViewableItemsChanged}
+        />
+      </View>
 
       {/* Bottom button */}
       <View style={[S.$bottomContainer, { paddingBottom: insets.bottom + 24 }]}>

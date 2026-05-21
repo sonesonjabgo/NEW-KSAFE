@@ -36,6 +36,9 @@ const palette = {
   deepBlue: "#0B3069",
   actionBlue: "#1062D8",
   screenBg: "#F9FAFE",
+  charcoal: "#3A3A3A",
+  softGray: "#7F7F7F",
+  nearBlack: "#252525",
 } as const
 
 export const colors = {
@@ -97,4 +100,16 @@ export const colors = {
    * 기본 화면 배경색 (#F9FAFE).
    */
   screenBg: palette.screenBg,
+  /**
+   * 인트로 화면 로고 텍스트 색상 (#3A3A3A).
+   */
+  introLogo: palette.charcoal,
+  /**
+   * 인트로 화면 건너뛰기 텍스트 색상 (#7F7F7F).
+   */
+  introSkip: palette.softGray,
+  /**
+   * 인트로 화면 슬라이드 타이틀 색상 (#252525).
+   */
+  introTitle: palette.nearBlack,
 } as const

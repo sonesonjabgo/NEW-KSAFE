@@ -19,13 +19,15 @@ export const $header: ViewStyle = {
   alignItems: "center",
   justifyContent: "space-between",
   paddingHorizontal: 24,
-  paddingBottom: 4,
+  paddingTop: 14,
+  paddingBottom: 8,
+  marginBottom: 45,
 }
 
 export const $logoText: TextStyle = {
   fontSize: 21,
   fontFamily: typography.primary.bold,
-  color: colors.navy,
+  color: colors.introLogo,
   letterSpacing: -0.3,
 }
 
@@ -37,22 +39,43 @@ export const $skipBtn: ViewStyle = {
 export const $skipLabel: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.medium,
-  color: colors.navy,
+  color: colors.introSkip,
 }
 
-// ── Slide ─────────────────────────────────────────────────────────────────────
+// ── Slide Area (헤더~버튼 사이 FlatList 컨테이너) ────────────────────────────
+
+export const $slideArea: ViewStyle = {
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+export const $slideList: ViewStyle = {
+  flex: 1,
+  alignSelf: "stretch",
+}
+
+export const $slideListContent: ViewStyle = {
+  flexGrow: 1,
+}
+
+// ── Slide (FlatList 각 아이템) ────────────────────────────────────────────────
 
 export const $slide: ViewStyle = {
   width: SCREEN_WIDTH,
-  flex: 1,
+  height: "100%",
   alignItems: "center",
   justifyContent: "center",
   paddingHorizontal: 32,
 }
 
+export const $slideContent: ViewStyle = {
+  alignItems: "center",
+}
+
 export const $imageContainer: ViewStyle = {
-  width: SCREEN_WIDTH * 0.64,
-  height: SCREEN_WIDTH * 0.64,
+  width: SCREEN_WIDTH * 0.55,
+  height: SCREEN_WIDTH * 0.55,
   alignItems: "center",
   justifyContent: "center",
   marginBottom: 28,
@@ -70,7 +93,7 @@ export const $stepBadge: ViewStyle = {
   backgroundColor: colors.blue,
   alignItems: "center",
   justifyContent: "center",
-  marginBottom: 16,
+  marginBottom: 22,
 }
 
 export const $stepText: TextStyle = {
@@ -82,15 +105,15 @@ export const $stepText: TextStyle = {
 export const $slideTitle: TextStyle = {
   fontSize: 22,
   fontFamily: typography.primary.bold,
-  color: colors.navy,
+  color: colors.introTitle,
   textAlign: "center",
-  marginBottom: 14,
+  marginBottom: 18,
 }
 
 export const $slideDescription: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.normal,
-  color: "#888888",
+  color: colors.textDim,
   textAlign: "center",
   lineHeight: 23,
 }
