@@ -182,6 +182,9 @@ const en = {
     title: "Safety Board",
     alertButton: "Send Alert",
     workplaceLabel: "Selected Workplace",
+    workplaceModal: {
+      title: "Select Workplace",
+    },
     tabs: {
       all: "Safety Board",
       myPosts: "My Posts",

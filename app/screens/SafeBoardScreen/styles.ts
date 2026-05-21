@@ -185,33 +185,44 @@ export const $floatingButtonText: TextStyle = {
 export const $modalOverlay: ViewStyle = {
   flex: 1,
   backgroundColor: "rgba(0, 0, 0, 0.3)",
-  justifyContent: "center",
-  alignItems: "center",
+  justifyContent: "flex-end",
+}
+
+export const $modalTitle: TextStyle = {
+  fontSize: 17,
+  fontFamily: typography.primary.medium,
+  color: "#000000",
+  paddingHorizontal: 20,
+  marginBottom: 12,
 }
 
 export const $modalContent: ViewStyle = {
   backgroundColor: "#FFFFFF",
-  borderRadius: 12,
-  minWidth: 280,
-  maxWidth: 350,
-  overflow: "hidden",
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+  paddingTop: 36,
+  paddingBottom: 40,
 }
 
 export const $workplaceOption: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-  justifyContent: "space-between",
-  paddingHorizontal: 16,
-  paddingVertical: 14,
-  borderBottomWidth: 1,
-  borderBottomColor: "#F0F0F0",
+  gap: 12,
+  height: 66,
+  paddingHorizontal: 20,
+}
+
+export const $workplaceOptionSelected: ViewStyle = {
+  backgroundColor: "#E5F1FD",
 }
 
 export const $workplaceOptionText: TextStyle = {
-  fontSize: 14,
-  fontWeight: "500",
-  color: "#333333",
-  fontFamily: typography.primary.medium,
   flex: 1,
-  marginRight: 12,
+  fontSize: 17,
+  fontFamily: typography.primary.medium,
+  color: "#000000",
+}
+
+export const $workplaceOptionTextSelected: TextStyle = {
+  color: "#1062D8",
 }

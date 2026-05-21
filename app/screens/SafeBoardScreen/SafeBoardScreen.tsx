@@ -1,6 +1,6 @@
-import { FC, useState } from "react"
-import { FlatList, Modal, Pressable, TouchableOpacity, View } from "react-native"
-import { Bell, ChevronDown, PencilLine, Check } from "lucide-react-native"
+import { FC, useRef, useState } from "react"
+import { Animated, FlatList, Modal, Pressable, TouchableOpacity, View } from "react-native"
+import { Bell, Building, ChevronDown, PencilLine } from "lucide-react-native"
 
 import { Text } from "@/components/Text"
 import { useRole } from "@/context/RoleContext"
@@ -42,6 +42,24 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = () => {
   const [activeTab, setActiveTab] = useState<AdminTab>("all")
   const [selectedWorkplace, setSelectedWorkplace] = useState("서울 한강 레지던스 RC공사 현장")
   const [showWorkplaceModal, setShowWorkplaceModal] = useState(false)
+  const slideAnim = useRef(new Animated.Value(300)).current
+
+  const openModal = () => {
+    setShowWorkplaceModal(true)
+    Animated.timing(slideAnim, {
+      toValue: 0,
+      duration: 250,
+      useNativeDriver: true,
+    }).start()
+  }
+
+  const closeModal = () => {
+    Animated.timing(slideAnim, {
+      toValue: 300,
+      duration: 200,
+      useNativeDriver: true,
+    }).start(() => setShowWorkplaceModal(false))
+  }
 
   const isAdmin = role === "admin"
   const selectedWorkplaceId = getWorkplaceId(selectedWorkplace)
@@ -82,7 +100,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = () => {
             <TouchableOpacity
               style={S.$workplaceSelectorNew}
               activeOpacity={0.6}
-              onPress={() => setShowWorkplaceModal(true)}
+              onPress={openModal}
             >
               <Text
                 text={selectedWorkplace}
@@ -162,28 +180,38 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = () => {
       {/* Workplace Selection Modal */}
       <Modal
         visible={showWorkplaceModal}
-        transparent={true}
+        transparent
         animationType="fade"
-        onRequestClose={() => setShowWorkplaceModal(false)}
+        onRequestClose={closeModal}
       >
-        <Pressable style={S.$modalOverlay} onPress={() => setShowWorkplaceModal(false)}>
-          <View style={S.$modalContent}>
-            {WORKPLACES.map((workplace) => (
-              <TouchableOpacity
-                key={workplace}
-                style={S.$workplaceOption}
-                onPress={() => {
-                  setSelectedWorkplace(workplace)
-                  setShowWorkplaceModal(false)
-                }}
-              >
-                <Text text={workplace} style={S.$workplaceOptionText} numberOfLines={2} />
-                {selectedWorkplace === workplace && (
-                  <Check size={20} color="#0B3069" strokeWidth={2.5} />
-                )}
-              </TouchableOpacity>
-            ))}
-          </View>
+        <Pressable style={S.$modalOverlay} onPress={closeModal}>
+          <Animated.View style={[S.$modalContent, { transform: [{ translateY: slideAnim }] }]}>
+            <Text
+              text={translate("safeBoardScreen:workplaceModal.title")}
+              style={S.$modalTitle}
+            />
+            {WORKPLACES.map((workplace) => {
+              const isSelected = selectedWorkplace === workplace
+              return (
+                <TouchableOpacity
+                  key={workplace}
+                  style={[S.$workplaceOption, isSelected && S.$workplaceOptionSelected]}
+                  activeOpacity={0.7}
+                  onPress={() => {
+                    setSelectedWorkplace(workplace)
+                    closeModal()
+                  }}
+                >
+                  <Building size={20} color={isSelected ? "#1062D8" : "#979797"} strokeWidth={1.8} />
+                  <Text
+                    text={workplace}
+                    style={[S.$workplaceOptionText, isSelected && S.$workplaceOptionTextSelected]}
+                    numberOfLines={2}
+                  />
+                </TouchableOpacity>
+              )
+            })}
+          </Animated.View>
         </Pressable>
       </Modal>
     </View>

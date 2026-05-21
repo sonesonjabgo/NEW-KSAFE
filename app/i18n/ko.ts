@@ -182,6 +182,9 @@ const ko: Translations = {
     title: "안전게시판",
     alertButton: "알림 발송",
     workplaceLabel: "선택된 작업장",
+    workplaceModal: {
+      title: "작업장 선택",
+    },
     tabs: {
       all: "안전게시판",
       myPosts: "내 게시글",

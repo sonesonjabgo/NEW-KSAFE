@@ -159,6 +159,7 @@ const fr: Translations = {
     title: "Board",
     alertButton: "Alert",
     workplaceLabel: "Workplace",
+    workplaceModal: { title: "Select Workplace" },
     tabs: { all: "All", myPosts: "My" },
     empty: "Empty",
     write: "Write",
