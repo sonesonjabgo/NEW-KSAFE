@@ -373,15 +373,20 @@ export const $sheetBtn: ViewStyle = {
   alignItems: "center",
   justifyContent: "center",
   gap: 8,
-  backgroundColor: "#F4F6FA",
+  backgroundColor: "#FFFFFF",
   borderWidth: 1,
-  borderColor: "#E5E7EB",
+  borderColor: "#ECECEC",
+  shadowColor: "#000000",
+  shadowOffset: { width: 0, height: 3 },
+  shadowOpacity: 0.12,
+  shadowRadius: 8,
+  elevation: 5,
 }
 
 export const $sheetBtnLabel: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.semiBold,
-  color: colors.navy,
+  color: colors.analysisResult,
 }
 
 // ── Signature Sheet (서명 바텀시트) ───────────────────────────────────────────
@@ -389,7 +394,7 @@ export const $sheetBtnLabel: TextStyle = {
 export const $signatureInstruction: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.medium,
-  color: colors.navy,
+  color: colors.analysisResult,
   paddingHorizontal: 20,
   marginTop: 4,
   marginBottom: 16,

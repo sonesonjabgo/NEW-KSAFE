@@ -15,6 +15,7 @@ import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
+import { colors } from "@/theme/colors"
 
 import { AiRiskActionButton } from "./components/AiRiskActionButton"
 import { AiRiskEmptyState } from "./components/AiRiskEmptyState"
@@ -248,7 +249,7 @@ export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">>
             {/* 버튼 2개 */}
             <View style={S.$sheetBtnRow}>
               <TouchableOpacity style={S.$sheetBtn} activeOpacity={0.7} onPress={handleTakePhoto}>
-                <IconCamera size={20} color="#1A1A1A" strokeWidth={1.8} />
+                <IconCamera size={20} color={colors.analysisResult} strokeWidth={1.8} />
                 <Text
                   text={translate("aiRiskDocCreatorScreen:captureSheet.camera")}
                   style={S.$sheetBtnLabel}
@@ -260,7 +261,7 @@ export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">>
                 activeOpacity={0.7}
                 onPress={handleSelectFromAlbum}
               >
-                <IconPhoto size={20} color="#1A1A1A" strokeWidth={1.8} />
+                <IconPhoto size={20} color={colors.analysisResult} strokeWidth={1.8} />
                 <Text
                   text={translate("aiRiskDocCreatorScreen:captureSheet.album")}
                   style={S.$sheetBtnLabel}
