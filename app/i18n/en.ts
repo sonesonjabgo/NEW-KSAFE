@@ -454,6 +454,12 @@ const en = {
     emptyTitle: "No Notifications",
     emptyDescription:
       "You have no notifications right now.\nWe'll let you know when new notifications arrive.",
+    mock: {
+      boardNewPost: {
+        title: "A new post has been written on the board.",
+        description: "Check the board of your affiliated workplace!",
+      },
+    },
   },
 
   qrScanner: {

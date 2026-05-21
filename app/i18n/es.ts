@@ -340,6 +340,12 @@ const es: Translations = {
     emptyTitle: "Sin notificaciones",
     emptyDescription:
       "No tienes notificaciones en este momento.\nTe avisaremos cuando lleguen nuevas notificaciones.",
+    mock: {
+      boardNewPost: {
+        title: "A new post has been written on the board.",
+        description: "Check the board of your affiliated workplace!",
+      },
+    },
   },
 
   qrScanner: {
