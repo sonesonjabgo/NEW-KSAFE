@@ -262,6 +262,31 @@ const en = {
     save: "Save",
   },
 
+  safeBoardNotifyScreen: {
+    title: "Send Workplace Push Notification",
+    guide: {
+      title: "Writing Guide",
+      description:
+        "Select one or more workplaces you manage\nand write a notification to deliver\nto site members.",
+    },
+    workplace: {
+      label: "Select Workplace",
+      helper: "Sending to {{selected}} of {{total}} workplaces",
+    },
+    notifyTitle: {
+      label: "Notification Title",
+      placeholder: "Enter a brief title.",
+      helper: "Up to 50 characters.",
+    },
+    content: {
+      label: "Push Notification Content",
+      placeholder: "Enter the notification message to deliver to this workplace.",
+      helper: "Up to 240 characters.",
+    },
+    send: "Send Notification",
+    sendSuccess: "Notification sent.",
+  },
+
   safeHealthScreen: {
     title: "Safety Management",
     menu: {

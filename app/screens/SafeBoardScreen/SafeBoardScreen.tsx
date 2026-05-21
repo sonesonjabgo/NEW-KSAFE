@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef, useState } from "react"
 import { Animated, FlatList, Modal, Pressable, TouchableOpacity, View } from "react-native"
-import { Bell, Building, Check, ChevronDown, PencilLine } from "lucide-react-native"
+import { BellRing, Building, Check, ChevronDown, PencilLine } from "lucide-react-native"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Toast } from "@/components/Toast"
@@ -86,9 +86,9 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
             <TouchableOpacity
               style={S.$bellIconContainer}
               activeOpacity={0.7}
-              onPress={() => console.log("알림 발송")}
+              onPress={() => navigation.navigate("SafeBoardNotify")}
             >
-              <Bell size={20} color="#FFFFFF" strokeWidth={1.8} />
+              <BellRing size={18} color="#FFFFFF" strokeWidth={1.8} />
               <Text text={translate("safeBoardScreen:alertButton")} style={S.$bellText} />
             </TouchableOpacity>
           ) : undefined

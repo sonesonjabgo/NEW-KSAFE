@@ -12,6 +12,7 @@ import { AiRiskDocCreatorScreen } from "@/screens/AiRiskDocCreatorScreen"
 import { AISafetyChatScreen } from "@/screens/AISafetyChatScreen/AISafetyChatScreen"
 import { SafeBoardCreateScreen } from "@/screens/SafeBoardCreateScreen/SafeBoardCreateScreen"
 import { SafeBoardDetailScreen } from "@/screens/SafeBoardDetailScreen/SafeBoardDetailScreen"
+import { SafeBoardNotifyScreen } from "@/screens/SafeBoardNotifyScreen/SafeBoardNotifyScreen"
 import { EducationMaterialDetailScreen } from "@/screens/EducationMaterialDetailScreen/EducationMaterialDetailScreen"
 import { EducationMaterialRegisterScreen } from "@/screens/EducationMaterialRegisterScreen/EducationMaterialRegisterScreen"
 import { EducationMaterialScreen } from "@/screens/EducationMaterialScreen/EducationMaterialScreen"
@@ -124,6 +125,7 @@ const AppStack = () => {
       <Stack.Screen name="HazardRiskDetail" component={HazardRiskDetailScreen} />
       <Stack.Screen name="SafeBoardDetail" component={SafeBoardDetailScreen} />
       <Stack.Screen name="SafeBoardCreate" component={SafeBoardCreateScreen} />
+      <Stack.Screen name="SafeBoardNotify" component={SafeBoardNotifyScreen} />
     </Stack.Navigator>
   )
 }
