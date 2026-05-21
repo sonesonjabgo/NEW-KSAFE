@@ -53,8 +53,8 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
   const { role: userRole, setRole: setUserRole } = useRole()
   const [selectedTab, setSelectedTab] = useState<TabType>("all")
-  // TODO: 추후 실제 API 연동으로 교체
-  const [hasExistingEdu, setHasExistingEdu] = useState(true)
+  // TODO: 추후 "생성된 교육/발표실 존재 여부" API 연동으로 교체
+  const [showEducationBanner, setShowEducationBanner] = useState(false)
   const [webViewModalVisible, setWebViewModalVisible] = useState(false)
   const [selectedUrl, setSelectedUrl] = useState("")
   const [selectedTitle, setSelectedTitle] = useState("")
@@ -104,7 +104,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         Icon: GridEducation,
         label: translate("homeScreen:grid.education.label"),
         sub: translate("homeScreen:grid.education.sub"),
-        onPress: () => navigation.navigate("EducationPresentation"),
+        onPress: () => {
+          setShowEducationBanner(true)
+          navigation.navigate("EducationPresentation")
+        },
       },
       {
         Icon: GridEduJoin,
@@ -200,27 +203,22 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
                 </TouchableOpacity>
               </View>
 
-              {/* 배너 카드 ON/OFF (근로자일 때만 표시) */}
-              {userRole === "worker" && (
-                <View style={$subToggleRow}>
+              {/* 배너 카드 ON/OFF (개발용 토글) */}
+              <View style={$subToggleRow}>
+                <Text text={translate("homeScreen:devToggle.eduBanner")} style={$subToggleLabel} />
+                <TouchableOpacity
+                  style={[$subToggleBtn, showEducationBanner ? $subToggleBtnOn : $subToggleBtnOff]}
+                  onPress={() => setShowEducationBanner(!showEducationBanner)}
+                >
                   <Text
-                    text={translate("homeScreen:devToggle.eduBanner")}
-                    style={$subToggleLabel}
+                    text={showEducationBanner ? "ON" : "OFF"}
+                    style={[
+                      $subToggleText,
+                      showEducationBanner ? $subToggleTextOn : $subToggleTextOff,
+                    ]}
                   />
-                  <TouchableOpacity
-                    style={[$subToggleBtn, hasExistingEdu ? $subToggleBtnOn : $subToggleBtnOff]}
-                    onPress={() => setHasExistingEdu(!hasExistingEdu)}
-                  >
-                    <Text
-                      text={hasExistingEdu ? "ON" : "OFF"}
-                      style={[
-                        $subToggleText,
-                        hasExistingEdu ? $subToggleTextOn : $subToggleTextOff,
-                      ]}
-                    />
-                  </TouchableOpacity>
-                </View>
-              )}
+                </TouchableOpacity>
+              </View>
             </View>
 
             {/* Row 1: Logo + Actions */}
@@ -304,8 +302,8 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
               ))}
             </View>
 
-            {/* 기존 교육/발표 참여 안내 배너 (근로자 전용) */}
-            {userRole === "worker" && hasExistingEdu && (
+            {/* 교육/발표 참여 안내 배너 (교육/발표 메뉴 클릭 시 표시) */}
+            {showEducationBanner && (
               <TouchableOpacity style={$eduBanner} activeOpacity={0.7}>
                 <BannerIcon width={34} height={34} color="#0B3069" style={$eduBannerIcon} />
                 <View style={$eduBannerContent}>
