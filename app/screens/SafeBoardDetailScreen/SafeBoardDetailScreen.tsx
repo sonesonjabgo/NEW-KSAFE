@@ -27,6 +27,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
       title={translate("safeBoardDetailScreen:title")}
       onBack={() => navigation.goBack()}
       contentBg="#F9FAFE"
+      squareTop
     >
       <ScrollView
         contentContainerStyle={$scrollContent}
