@@ -304,6 +304,12 @@ const ko: Translations = {
       },
     },
     logout: "로그아웃",
+    logoutModal: {
+      title: "로그아웃",
+      message: "정말 로그아웃 하시겠습니까?",
+      cancel: "취소",
+      confirm: "로그아웃",
+    },
   },
 
   languageSettings: {
@@ -1071,7 +1077,8 @@ const ko: Translations = {
       camera: "카메라로 촬영",
       album: "앨범에서 선택",
       hint: "현장 상황을 명확히 보여주는 사진을 추가해주세요.",
-      guide: "현장 사진을 최소 1장 이상 등록해주세요.\n최소 1장에서 최대 5장까지 첨부할 수 있습니다.",
+      guide:
+        "현장 사진을 최소 1장 이상 등록해주세요.\n최소 1장에서 최대 5장까지 첨부할 수 있습니다.",
       preview: "이미지를 추가하면 미리보기가 표시됩니다.",
     },
     submit: "제출하기",

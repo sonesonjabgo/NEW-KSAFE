@@ -35,7 +35,6 @@ const $card: ViewStyle = {
   alignItems: "center",
   gap: 16,
   width: "100%",
-  height: 110,
   marginTop: 35,
 }
 
@@ -44,10 +43,12 @@ const $avatar: ViewStyle = {
   height: 64,
   justifyContent: "center",
   alignItems: "center",
+  flexShrink: 0,
 }
 
 const $textArea: ViewStyle = {
   flex: 1,
+  flexDirection: "column",
 }
 
 const $orgName: TextStyle = {
@@ -60,10 +61,12 @@ const $userName: TextStyle = {
   fontSize: 20,
   color: "#FFFFFF",
   fontFamily: typography.primary.bold,
+  marginTop: 1,
 }
 
 const $email: TextStyle = {
   fontSize: 12,
   color: "rgba(255,255,255,0.55)",
   fontFamily: typography.primary.normal,
+  marginTop: 3,
 }
