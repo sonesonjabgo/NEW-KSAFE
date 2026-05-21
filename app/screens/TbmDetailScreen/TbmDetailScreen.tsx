@@ -1,5 +1,5 @@
-import { FC, useCallback, useRef, useState } from "react"
-import { Animated, ScrollView, TouchableOpacity, View } from "react-native"
+import { FC, useState } from "react"
+import { ScrollView, TouchableOpacity, View } from "react-native"
 import {
   IconCalendar,
   IconCheck,
@@ -14,6 +14,7 @@ import EducationFrame from "@assets/icons/education_frame.svg"
 
 import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
+import { Toast } from "@/components/Toast"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
 import type { TbmStatus } from "@/screens/TbmListScreen/types"
@@ -59,16 +60,6 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
   const [startModalVisible, setStartModalVisible] = useState(false)
   const [deleteModalVisible, setDeleteModalVisible] = useState(false)
   const [toastVisible, setToastVisible] = useState(false)
-  const toastAnim = useRef(new Animated.Value(0)).current
-
-  const showToast = useCallback(() => {
-    setToastVisible(true)
-    Animated.sequence([
-      Animated.timing(toastAnim, { toValue: 1, duration: 250, useNativeDriver: true }),
-      Animated.delay(2000),
-      Animated.timing(toastAnim, { toValue: 0, duration: 250, useNativeDriver: true }),
-    ]).start(() => setToastVisible(false))
-  }, [toastAnim])
 
   const badgeStyles = detail ? getBadgeStyles(detail.status) : null
 
@@ -267,20 +258,16 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
         onConfirm={() => {
           setStartModalVisible(false)
           setIsStarted(true)
-          showToast()
+          setToastVisible(true)
         }}
       />
 
-      {toastVisible && (
-        <Animated.View
-          style={[S.$toast, { opacity: toastAnim, top: Math.max(100, insets.top + 60) + 8 }]}
-        >
-          <View style={S.$toastIconCircle}>
-            <IconCheck size={16} color="#FFFFFF" strokeWidth={2.5} />
-          </View>
-          <Text text={translate("tbmDetailScreen:toastStarted")} style={S.$toastText} />
-        </Animated.View>
-      )}
+      <Toast
+        visible={toastVisible}
+        message={translate("tbmDetailScreen:toastStarted")}
+        icon={<IconCheck size={14} color="#FFFFFF" strokeWidth={2.5} />}
+        onHide={() => setToastVisible(false)}
+      />
     </>
   )
 }

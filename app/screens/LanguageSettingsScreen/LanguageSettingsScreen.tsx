@@ -1,9 +1,8 @@
 import { FC, useState } from "react"
-import { FlatList, StatusBar, TouchableOpacity, View } from "react-native"
+import { FlatList, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
-import { IconChevronLeft } from "@tabler/icons-react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
 
+import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import type { TxKeyPath } from "@/i18n"
 import { translate } from "@/i18n/translate"
@@ -36,7 +35,6 @@ const LANGUAGES: Language[] = [
 
 export const LanguageSettingsScreen: FC = () => {
   const navigation = useNavigation()
-  const { top } = useSafeAreaInsets()
   const [selectedId, setSelectedId] = useState("ko")
   const [previewLang, setPreviewLang] = useState("ko")
   const [modalVisible, setModalVisible] = useState(false)
@@ -61,26 +59,7 @@ export const LanguageSettingsScreen: FC = () => {
 
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="#0B3069" />
-
-      <View style={styles.root}>
-        {/* 상단 네이비 헤더 */}
-        <View style={[styles.header, { paddingTop: top + 12 }]}>
-          <TouchableOpacity
-            style={styles.headerIconBtn}
-            activeOpacity={0.7}
-            onPress={() => navigation.goBack()}
-          >
-            <IconChevronLeft size={24} color="#FFFFFF" />
-          </TouchableOpacity>
-
-          <Text style={styles.headerTitle}>{t("languageSettings:title")}</Text>
-
-          {/* 레이아웃 균형용 spacer */}
-          <View style={styles.headerIconBtn} />
-        </View>
-
-        {/* 본문 — 리스트만 스크롤 */}
+      <StackScreen title={t("languageSettings:title")} onBack={() => navigation.goBack()}>
         <View style={styles.body}>
           <FlatList
             data={LANGUAGES}
@@ -99,7 +78,7 @@ export const LanguageSettingsScreen: FC = () => {
             )}
           />
         </View>
-      </View>
+      </StackScreen>
 
       <LanguageChangedModal
         isVisible={modalVisible}

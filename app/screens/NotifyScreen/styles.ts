@@ -1,7 +1,5 @@
 import { StyleSheet } from "react-native"
 
-const NAVY = "#0B3069"
-const WHITE = "#FFFFFF"
 const BODY_BG = "#F9FAFE"
 const CIRCLE_BG = "#E5E7EB"
 const EMPTY_TITLE = "#1A2236"
@@ -44,37 +42,11 @@ export const styles = StyleSheet.create({
     textAlign: "center",
   },
 
-  /* ── 헤더 ── */
-  header: {
-    alignItems: "center",
-    backgroundColor: NAVY,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingBottom: 14,
-    paddingHorizontal: 16,
-  },
+  /* ── 헤더 우측 버튼 ── */
   headerIconBtn: {
     alignItems: "center",
     height: 36,
     justifyContent: "center",
     width: 36,
-  },
-  headerRightActions: {
-    alignItems: "center",
-    flexDirection: "row",
-    gap: 4,
-  },
-  headerTitle: {
-    color: WHITE,
-    flex: 1,
-    fontSize: 17,
-    fontWeight: "600",
-    textAlign: "center",
-  },
-
-  /* ── 루트 ── */
-  root: {
-    backgroundColor: NAVY,
-    flex: 1,
   },
 })
