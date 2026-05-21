@@ -1174,15 +1174,15 @@ const en = {
     },
     slide2: {
       step: "02",
-      title: "TBM Safety Meeting",
+      title: "Integrated TBM Management",
       description:
-        "Strengthen workplace safety with organized TBM meetings.\nCreate, join, and manage reports\nall in one place.",
+        "Check in to TBM with a single QR code scan — no paperwork.\nDigital signatures and reports\ncompleted in one place.",
     },
     slide3: {
       step: "03",
-      title: "AI Hazard Analysis",
+      title: "AI Risk Assessment",
       description:
-        "AI analyzes site images to automatically detect hazards.\nExperience a smarter solution\nfor a safer work environment.",
+        "Just take a photo of the site and AI will analyze hazards\nand generate a report draft for you.",
     },
   },
 
