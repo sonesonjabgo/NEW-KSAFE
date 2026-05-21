@@ -185,12 +185,23 @@ const ko: Translations = {
     workplaceModal: {
       title: "작업장 선택",
     },
+    badge: {
+      companyWide: "회사전체",
+      workplace: "사업장",
+      draft: "임시저장",
+      archived: "보관됨",
+    },
     tabs: {
       all: "안전게시판",
       myPosts: "내 게시글",
     },
     empty: "게시물이 없습니다",
     write: "작성하기",
+  },
+
+  safeBoardDetailScreen: {
+    title: "게시글 상세",
+    authorLabel: "작성자",
   },
 
   safeHealthScreen: {

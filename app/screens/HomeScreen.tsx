@@ -1,11 +1,11 @@
 import { FC, useEffect, useState, useMemo } from "react"
 import { View, ViewStyle, TextStyle, TouchableOpacity, ScrollView, StyleSheet } from "react-native"
-import { Pin, ChevronRight } from "lucide-react-native"
+import { ChevronRight } from "lucide-react-native"
+
+import BoardPin from "@assets/icons/board/board_pin.svg"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import type { SvgProps } from "react-native-svg"
 
-import BoardType1 from "@assets/icons/board/board_type1.svg"
-import BoardType2 from "@assets/icons/board/board_type2.svg"
 import GridBulb from "@assets/icons/home/grid_bulb.svg"
 import GridChatbot from "@assets/icons/home/grid_chatbot.svg"
 import GridEduJoin from "@assets/icons/home/grid_edu_join.svg"
@@ -27,6 +27,7 @@ import { Text } from "@/components/Text"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 import type { MainTabScreenProps } from "@/navigators/navigationTypes"
+import { SafeBoardBadge } from "@/screens/SafeBoardScreen/components/SafeBoardBadge"
 import { typography } from "@/theme/typography"
 
 interface HomeScreenProps extends MainTabScreenProps<"Home"> {}
@@ -330,17 +331,13 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
               {BOARD_ITEMS.map((item, i) => (
                 <TouchableOpacity key={i} style={$boardItem} activeOpacity={0.7}>
                   <View style={$tagWrap}>
-                    {item.tag === "workplace" ? (
-                      <BoardType1 width={44} height={21} />
-                    ) : (
-                      <BoardType2 width={54} height={21} />
-                    )}
+                    <SafeBoardBadge type={item.tag === "workplace" ? "workplace" : "company_wide"} />
                   </View>
                   <View style={$boardItemContent}>
                     <Text text={item.title} style={$boardItemTitle} numberOfLines={1} />
                     <Text text={item.date} style={$boardItemDate} />
                   </View>
-                  {item.pinned && <Pin size={14} color="#C03403" strokeWidth={2.5} />}
+                  {item.pinned && <BoardPin width={20} height={20} />}
                 </TouchableOpacity>
               ))}
             </View>
@@ -678,21 +675,21 @@ const $boardList: ViewStyle = {
 const $boardItem: ViewStyle = {
   flexDirection: "row",
   alignItems: "flex-start",
-  paddingVertical: 14,
+  paddingVertical: 18,
   paddingHorizontal: 16,
-  gap: 8,
+  gap: 12,
   borderBottomWidth: StyleSheet.hairlineWidth,
   borderBottomColor: "#E9ECF0",
 }
 
 const $tagWrap: ViewStyle = {
-  minWidth: 47,
-  maxWidth: 47,
+  width: 50,
+  flexShrink: 0,
 }
 
 const $boardItemContent: ViewStyle = {
   flex: 1,
-  gap: 7,
+  gap: 6,
 }
 
 const $boardItemTitle: TextStyle = {

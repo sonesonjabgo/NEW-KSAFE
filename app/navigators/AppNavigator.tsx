@@ -9,6 +9,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import Config from "@/config"
 import { AISafetyChatScreen } from "@/screens/AISafetyChatScreen/AISafetyChatScreen"
+import { SafeBoardDetailScreen } from "@/screens/SafeBoardDetailScreen/SafeBoardDetailScreen"
 import { EducationMaterialDetailScreen } from "@/screens/EducationMaterialDetailScreen/EducationMaterialDetailScreen"
 import { EducationMaterialRegisterScreen } from "@/screens/EducationMaterialRegisterScreen/EducationMaterialRegisterScreen"
 import { EducationMaterialScreen } from "@/screens/EducationMaterialScreen/EducationMaterialScreen"
@@ -115,6 +116,7 @@ const AppStack = () => {
       <Stack.Screen name="HazardRiskList" component={HazardRiskScreen} />
       <Stack.Screen name="HazardRiskCreate" component={HazardRiskCreateScreen} />
       <Stack.Screen name="HazardRiskDetail" component={HazardRiskDetailScreen} />
+      <Stack.Screen name="SafeBoardDetail" component={SafeBoardDetailScreen} />
     </Stack.Navigator>
   )
 }

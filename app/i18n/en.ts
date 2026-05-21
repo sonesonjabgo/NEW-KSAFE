@@ -185,12 +185,23 @@ const en = {
     workplaceModal: {
       title: "Select Workplace",
     },
+    badge: {
+      companyWide: "Company-wide",
+      workplace: "Workplace",
+      draft: "Draft",
+      archived: "Archived",
+    },
     tabs: {
       all: "Safety Board",
       myPosts: "My Posts",
     },
     empty: "No posts found",
     write: "Write",
+  },
+
+  safeBoardDetailScreen: {
+    title: "Post Detail",
+    authorLabel: "Author",
   },
 
   safeHealthScreen: {

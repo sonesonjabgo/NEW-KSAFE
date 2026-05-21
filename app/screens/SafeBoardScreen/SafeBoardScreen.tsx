@@ -37,7 +37,7 @@ const filterByWorkplace = (posts: SafeBoardItem[], workplaceId: number): SafeBoa
   )
 }
 
-export const SafeBoardScreen: FC<SafeBoardScreenProps> = () => {
+export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation }) => {
   const { role } = useRole()
   const [activeTab, setActiveTab] = useState<AdminTab>("all")
   const [selectedWorkplace, setSelectedWorkplace] = useState("서울 한강 레지던스 RC공사 현장")
@@ -152,6 +152,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = () => {
               showStatus={isAdmin && activeTab === "my"}
               showEditIcon={false}
               showDivider={index < displayData.length - 1}
+              onPress={() => navigation.navigate("SafeBoardDetail", { id: item.id })}
             />
           )}
           keyExtractor={(item) => String(item.id)}

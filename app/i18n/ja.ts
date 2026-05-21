@@ -158,10 +158,13 @@ const ja: Translations = {
     alertButton: "Alert",
     workplaceLabel: "Workplace",
     workplaceModal: { title: "Select Workplace" },
+    badge: { companyWide: "Company-wide", workplace: "Workplace", draft: "Draft", archived: "Archived" },
     tabs: { all: "All", myPosts: "My" },
     empty: "Empty",
     write: "Write",
   },
+  safeBoardDetailScreen: { title: "Post Detail", authorLabel: "Author" },
+
   safeHealthScreen: {
     title: "Health",
     menu: {

@@ -1,52 +1,27 @@
 import { FC } from "react"
 import { View, TouchableOpacity, TextStyle, ViewStyle } from "react-native"
-import { Pin, PencilLine, MapPin } from "lucide-react-native"
+import { PencilLine, MapPin } from "lucide-react-native"
 
-import BoardType1 from "@assets/icons/board/board_type1.svg"
-import BoardType2 from "@assets/icons/board/board_type2.svg"
-import BoardType3 from "@assets/icons/board/board_type3.svg"
-import BoardType4 from "@assets/icons/board/board_type4.svg"
+import BoardPin from "@assets/icons/board/board_pin.svg"
 
 import { Text } from "@/components/Text"
 import { typography } from "@/theme/typography"
 
-import type { SafeBoardItem, ScopeType, StatusType } from "../types"
+import type { SafeBoardItem, StatusType } from "../types"
+import { SafeBoardBadge, SafeBoardBadgeType } from "./SafeBoardBadge"
 
 interface SafeBoardCardProps {
   item: SafeBoardItem
   showStatus?: boolean
   showEditIcon?: boolean
   showDivider?: boolean
+  onPress?: () => void
 }
 
-const getStatusLabel = (status: StatusType): string => {
-  const statusMap: Record<string, string> = {
-    draft: "임시저장",
-    published: "",
-    archived: "보관됨",
-    unread: "",
-    pending_signature: "",
-    completed: "",
-  }
-  return statusMap[status] || ""
-}
-
-function ScopeBadge({ scope }: { scope: ScopeType }) {
-  return scope === "workplace" ? (
-    <BoardType1 width={44} height={21} />
-  ) : (
-    <BoardType2 width={54} height={21} />
-  )
-}
-
-function StatusBadge({ status }: { status: StatusType }) {
-  const label = getStatusLabel(status)
-  if (!label) return null
-  return label === "임시저장" ? (
-    <BoardType3 width={54} height={21} />
-  ) : (
-    <BoardType4 width={44} height={21} />
-  )
+function getStatusBadgeType(status: StatusType): SafeBoardBadgeType | null {
+  if (status === "draft") return "draft"
+  if (status === "archived") return "archived"
+  return null
 }
 
 export const SafeBoardCard: FC<SafeBoardCardProps> = ({
@@ -54,15 +29,18 @@ export const SafeBoardCard: FC<SafeBoardCardProps> = ({
   showStatus = false,
   showEditIcon = false,
   showDivider = true,
+  onPress,
 }) => {
+  const statusBadgeType = showStatus ? getStatusBadgeType(item.status) : null
+
   return (
-    <TouchableOpacity activeOpacity={0.7}>
+    <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
       <View style={$cardContainer}>
         <View style={$contentWrapper}>
           <View style={$mainContent}>
             <View style={$scopeLabelRow}>
-              <ScopeBadge scope={item.scope} />
-              {showStatus && <StatusBadge status={item.status} />}
+              <SafeBoardBadge type={item.scope} />
+              {statusBadgeType && <SafeBoardBadge type={statusBadgeType} />}
             </View>
             <Text text={item.title} style={$titleText} numberOfLines={3} />
             {item.scope === "workplace" ? (
@@ -77,7 +55,7 @@ export const SafeBoardCard: FC<SafeBoardCardProps> = ({
             )}
           </View>
           <View style={$iconContainer}>
-            {item.isPinned && <Pin size={16} color="#0B3069" strokeWidth={2.5} />}
+            {item.isPinned && <BoardPin width={23} height={23} />}
             {showEditIcon && <PencilLine size={16} color="#979797" strokeWidth={2.5} />}
           </View>
         </View>
