@@ -36,6 +36,7 @@ const palette = {
   deepBlue: "#0B3069",
   actionBlue: "#1062D8",
   screenBg: "#F9FAFE",
+  blueTint: "#E3EDFB",
 } as const
 
 export const colors = {
@@ -97,4 +98,8 @@ export const colors = {
    * 기본 화면 배경색 (#F9FAFE).
    */
   screenBg: palette.screenBg,
+  /**
+   * 모달 아이콘 원형 배경색 (#E3EDFB).
+   */
+  modalIconBg: palette.blueTint,
 } as const

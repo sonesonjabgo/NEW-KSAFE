@@ -10,6 +10,7 @@ import {
   TextStyle,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
+import { IconAlertCircle } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import EyeOffSvg from "@assets/icons/login/eye-off.svg"
@@ -18,15 +19,18 @@ import LockSvg from "@assets/icons/login/lock.svg"
 import LogoSvg from "@assets/icons/login/logo-ksafeone.svg"
 import MailSvg from "@assets/icons/login/mail.svg"
 
+import { ConfirmModal } from "@/components/ConfirmModal"
 import { Screen } from "@/components/Screen"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
+import { colors } from "@/theme/colors"
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
 export const LoginScreen: FC<LoginScreenProps> = () => {
   const navigation = useNavigation<any>()
   const [secureText, setSecureText] = useState(true)
+  const [forgotModalVisible, setForgotModalVisible] = useState(false)
   const { height } = useWindowDimensions()
   const { bottom: bottomInset } = useSafeAreaInsets()
 
@@ -109,11 +113,26 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
           <View style={$gap16} />
 
           {/* 비밀번호 찾기 */}
-          <TouchableOpacity onPress={() => {}} style={$forgotWrapper}>
+          <TouchableOpacity onPress={() => setForgotModalVisible(true)} style={$forgotWrapper}>
             <RNText style={$forgotText}>{translate("loginScreen:forgotPassword")}</RNText>
           </TouchableOpacity>
         </View>
       </Screen>
+
+      <ConfirmModal
+        visible={forgotModalVisible}
+        icon={
+          <View style={$modalIconCircle}>
+            <IconAlertCircle size={26} color={colors.blue} strokeWidth={1.8} />
+          </View>
+        }
+        title={translate("loginScreen:forgotPasswordModal.title")}
+        message={translate("loginScreen:forgotPasswordModal.message")}
+        confirmLabel={translate("loginScreen:forgotPasswordModal.confirm")}
+        confirmBgColor={colors.blue}
+        onCancel={() => setForgotModalVisible(false)}
+        onConfirm={() => setForgotModalVisible(false)}
+      />
     </>
   )
 }
@@ -233,3 +252,14 @@ const $screenContent: ViewStyle = { flex: 1 }
 const $gap16: ViewStyle = { height: 16 }
 const $gap24: ViewStyle = { height: 24 }
 const $gap32: ViewStyle = { height: 32 }
+
+// ── 비밀번호 찾기 모달 ─────────────────────────────────────────────────────────
+
+const $modalIconCircle: ViewStyle = {
+  width: 52,
+  height: 52,
+  borderRadius: 26,
+  backgroundColor: colors.modalIconBg,
+  alignItems: "center",
+  justifyContent: "center",
+}
