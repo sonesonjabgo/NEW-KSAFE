@@ -7,13 +7,14 @@ import { typography } from "@/theme/typography"
 export const $bellIconContainer: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
+  flexWrap: "nowrap",
   gap: 6,
 }
 
 export const $bellText: TextStyle = {
   color: "#FFFFFF",
-  fontSize: 13,
-  fontFamily: typography.primary.semiBold,
+  fontSize: 12,
+  fontFamily: typography.primary.medium,
 }
 
 // ── Workplace selector ────────────────────────────────────────────────────────

@@ -56,7 +56,9 @@ export function StackScreen({
           {onBack && <IconChevronLeft size={24} color="#FFFFFF" />}
         </TouchableOpacity>
 
-        <Text text={title} style={$headerTitle} />
+        <View style={$headerTitleContainer} pointerEvents="none">
+          <Text text={title} style={$headerTitle} />
+        </View>
 
         <View style={[$headerSide, $headerSideRight]}>{rightSlot ?? null}</View>
       </View>
@@ -91,11 +93,18 @@ const $headerSide: ViewStyle = {
 }
 
 const $headerSideRight: ViewStyle = {
+  width: "auto",
   alignItems: "flex-end",
 }
 
+const $headerTitleContainer: ViewStyle = {
+  position: "absolute",
+  left: 0,
+  right: 0,
+  alignItems: "center",
+}
+
 const $headerTitle: TextStyle = {
-  flex: 1,
   fontSize: 20,
   fontFamily: typography.primary.semiBold,
   color: "#FFFFFF",
