@@ -185,6 +185,13 @@ const en = {
       hazard: { label: "Hazard Areas", sub: "View hazard areas" },
       suggestion: { label: "Improvement Proposals", sub: "Submit improvement proposals" },
     },
+    pushNotificationSheet: {
+      title: "Don't Miss Important Alerts",
+      description:
+        "To receive safety alerts and announcements on time,\nplease allow push notification permission.",
+      allowButton: "Allow Push Notifications",
+      settingsButton: "Change Permission in Settings",
+    },
   },
 
   safeBoardScreen: {

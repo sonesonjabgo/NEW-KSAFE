@@ -161,6 +161,13 @@ const ar: Translations = {
       hazard: { label: "Hazard", sub: "Hazard" },
       suggestion: { label: "Suggestion", sub: "Suggestion" },
     },
+    pushNotificationSheet: {
+      title: "Don't Miss Important Alerts",
+      description:
+        "To receive safety alerts and announcements on time,\nplease allow push notification permission.",
+      allowButton: "Allow Push Notifications",
+      settingsButton: "Change Permission in Settings",
+    },
   },
   safeBoardScreen: {
     title: "Board",

@@ -32,6 +32,7 @@ import HeaderLang from "@assets/icons/nav/header_lang.svg"
 import HeaderQr from "@assets/icons/nav/header_qr.svg"
 import ProfileSwitch from "@assets/icons/nav/profile_switch.svg"
 
+import { PushNotificationBottomSheet } from "@/components/PushNotificationBottomSheet"
 import { Text } from "@/components/Text"
 import { WebViewModal } from "@/components/WebViewModal"
 import { useRole } from "@/context/RoleContext"
@@ -58,6 +59,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const [webViewModalVisible, setWebViewModalVisible] = useState(false)
   const [selectedUrl, setSelectedUrl] = useState("")
   const [selectedTitle, setSelectedTitle] = useState("")
+  const [pushNotificationVisible, setPushNotificationVisible] = useState(false)
+
+  const handlePushAllow = () => setPushNotificationVisible(false)
+  const handlePushOpenSettings = () => setPushNotificationVisible(false)
 
   const openWebView = (url: string, title: string) => {
     if (Platform.OS === "web") {
@@ -156,6 +161,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
     ],
     [navigation],
   )
+
+  useEffect(() => {
+    setPushNotificationVisible(true)
+  }, [])
 
   useEffect(() => {
     if (userRole === "worker") {
@@ -360,9 +369,13 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
             </View>
 
             {/* Bottom Banner */}
-            <View style={$banner}>
+            <TouchableOpacity
+              style={$banner}
+              activeOpacity={0.85}
+              onPress={() => navigation.navigate("AiRiskDocCreator")}
+            >
               <HomeAiRiskBanner width="100%" height="100%" />
-            </View>
+            </TouchableOpacity>
 
             {/* Footer */}
             <View style={$footer}>
@@ -414,6 +427,13 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         url={selectedUrl}
         title={selectedTitle}
         onClose={() => setWebViewModalVisible(false)}
+      />
+
+      <PushNotificationBottomSheet
+        isVisible={pushNotificationVisible}
+        onAllow={handlePushAllow}
+        onOpenSettings={handlePushOpenSettings}
+        onClose={() => setPushNotificationVisible(false)}
       />
     </>
   )

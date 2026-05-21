@@ -185,6 +185,12 @@ const ko: Translations = {
       hazard: { label: "유해위험개소", sub: "유해위험개소 조회" },
       suggestion: { label: "제도개선 제안", sub: "제도개선 제안 등록" },
     },
+    pushNotificationSheet: {
+      title: "중요 알림을 놓치지 마세요",
+      description: "안전 알림과 공지사항을 제때 받으려면\n푸시 알림 권한을 허용해주세요.",
+      allowButton: "푸시 알림 허용하기",
+      settingsButton: "설정에서 권한 변경",
+    },
   },
 
   safeBoardScreen: {
