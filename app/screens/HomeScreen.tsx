@@ -202,23 +202,6 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
                   />
                 </TouchableOpacity>
               </View>
-
-              {/* 배너 카드 ON/OFF (개발용 토글) */}
-              <View style={$subToggleRow}>
-                <Text text={translate("homeScreen:devToggle.eduBanner")} style={$subToggleLabel} />
-                <TouchableOpacity
-                  style={[$subToggleBtn, showEducationBanner ? $subToggleBtnOn : $subToggleBtnOff]}
-                  onPress={() => setShowEducationBanner(!showEducationBanner)}
-                >
-                  <Text
-                    text={showEducationBanner ? "ON" : "OFF"}
-                    style={[
-                      $subToggleText,
-                      showEducationBanner ? $subToggleTextOn : $subToggleTextOff,
-                    ]}
-                  />
-                </TouchableOpacity>
-              </View>
             </View>
 
             {/* Row 1: Logo + Actions */}
@@ -473,45 +456,6 @@ const $roleToggleRow: ViewStyle = {
   borderRadius: 8,
   padding: 3,
   gap: 4,
-}
-
-const $subToggleRow: ViewStyle = {
-  flexDirection: "row",
-  alignItems: "center",
-  gap: 8,
-}
-
-const $subToggleLabel: TextStyle = {
-  fontSize: 12,
-  fontFamily: typography.primary.medium,
-  color: "rgba(255,255,255,0.6)",
-}
-
-const $subToggleBtn: ViewStyle = {
-  paddingVertical: 4,
-  paddingHorizontal: 14,
-  borderRadius: 6,
-}
-
-const $subToggleBtnOn: ViewStyle = {
-  backgroundColor: "#4CAF50",
-}
-
-const $subToggleBtnOff: ViewStyle = {
-  backgroundColor: "rgba(255,255,255,0.15)",
-}
-
-const $subToggleText: TextStyle = {
-  fontSize: 12,
-  fontFamily: typography.primary.bold,
-}
-
-const $subToggleTextOn: TextStyle = {
-  color: "#FFFFFF",
-}
-
-const $subToggleTextOff: TextStyle = {
-  color: "rgba(255,255,255,0.5)",
 }
 
 const $roleToggleBtn: ViewStyle = {
@@ -822,8 +766,10 @@ const $footerCopyright: TextStyle = {
 }
 
 const $eduBanner: ViewStyle = {
-  backgroundColor: "#EEF3FC",
+  backgroundColor: "#EAF3FF",
   borderRadius: 12,
+  borderWidth: 2,
+  borderColor: "#99C1F7",
   paddingVertical: 16,
   paddingHorizontal: 16,
   marginBottom: 20,
@@ -844,11 +790,11 @@ const $eduBannerContent: ViewStyle = {
 const $eduBannerTitle: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.bold,
-  color: "#1A2236",
+  color: "#0B3069",
 }
 
 const $eduBannerDesc: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#7F848C",
+  color: "#1062D8",
 }
