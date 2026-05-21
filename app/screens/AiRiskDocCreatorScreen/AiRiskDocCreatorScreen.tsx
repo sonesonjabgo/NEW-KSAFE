@@ -182,7 +182,7 @@ export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">>
           {/* 전체 초기화 버튼 — pages > 0일 때만 표시 */}
           {pages.length > 0 && (
             <TouchableOpacity style={S.$resetBtn} activeOpacity={0.8} onPress={handleResetAll}>
-              <IconTrash size={18} color="#E03526" strokeWidth={1.8} />
+              <IconTrash size={20} color="#E03526" strokeWidth={1.8} />
               <Text text={translate("aiRiskDocCreatorScreen:resetAll")} style={S.$resetBtnLabel} />
             </TouchableOpacity>
           )}

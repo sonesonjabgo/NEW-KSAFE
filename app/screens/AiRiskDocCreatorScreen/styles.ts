@@ -1,4 +1,4 @@
-import { TextStyle, ViewStyle } from "react-native"
+import { ImageStyle, TextStyle, ViewStyle } from "react-native"
 
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
@@ -20,8 +20,8 @@ export const $scrollContent: ViewStyle = {
 
 export const $pageCount: TextStyle = {
   fontSize: 16,
-  fontFamily: typography.primary.semiBold,
-  color: colors.navy,
+  fontFamily: typography.primary.medium,
+  color: colors.textDim,
   textAlign: "center",
   marginBottom: 20,
 }
@@ -52,7 +52,7 @@ export const $actionBtnSecondary: ViewStyle = {
 
 export const $actionBtnLabel: TextStyle = {
   fontSize: 16,
-  fontFamily: typography.primary.bold,
+  fontFamily: typography.primary.semiBold,
   color: "#FFFFFF",
 }
 
@@ -62,10 +62,8 @@ export const $toggleCard: ViewStyle = {
   flexDirection: "row",
   alignItems: "flex-start",
   gap: 12,
-  backgroundColor: "#FFFFFF",
+  backgroundColor: colors.toggleCardBg,
   borderRadius: 12,
-  borderWidth: 1,
-  borderColor: "#E5E7EB",
   paddingVertical: 14,
   paddingHorizontal: 16,
   marginTop: 4,
@@ -76,8 +74,7 @@ export const $checkbox: ViewStyle = {
   width: 22,
   height: 22,
   borderRadius: 4,
-  borderWidth: 2,
-  borderColor: colors.blue,
+  backgroundColor: colors.checkboxUnchecked,
   alignItems: "center",
   justifyContent: "center",
   marginTop: 1,
@@ -95,13 +92,13 @@ export const $toggleTextBlock: ViewStyle = {
 export const $toggleLabel: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.semiBold,
-  color: colors.navy,
+  color: colors.toggleLabel,
 }
 
 export const $toggleDesc: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#888888",
+  color: colors.toggleDesc,
   marginTop: 4,
   lineHeight: 19,
 }
@@ -121,7 +118,7 @@ export const $resetBtn: ViewStyle = {
 }
 
 export const $resetBtnLabel: TextStyle = {
-  fontSize: 15,
+  fontSize: 16,
   fontFamily: typography.primary.semiBold,
   color: "#E03526",
 }
@@ -148,7 +145,7 @@ export const $pageCardHeader: ViewStyle = {
 export const $pageCardTitle: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.semiBold,
-  color: colors.navy,
+  color: colors.textDim,
 }
 
 export const $imageRow: ViewStyle = {
@@ -164,17 +161,14 @@ export const $imageCol: ViewStyle = {
 export const $imageLabel: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#888888",
+  color: colors.textDim,
   marginBottom: 6,
 }
 
-export const $beforeImageBox: ViewStyle = {
+export const $beforeImageBox: ImageStyle = {
   width: "100%",
   height: 106,
   borderRadius: 12,
-  backgroundColor: "#5B8C5A",
-  alignItems: "center",
-  justifyContent: "center",
   overflow: "hidden",
 }
 
@@ -227,7 +221,7 @@ export const $analyzeBtnLabel: TextStyle = {
 export const $hazardTitle: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.semiBold,
-  color: colors.navy,
+  color: colors.textDim,
   marginBottom: 4,
 }
 
@@ -250,13 +244,13 @@ export const $analysisBox: ViewStyle = {
 export const $analysisPlaceholder: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#BBBBBB",
+  color: colors.iconMuted,
 }
 
 export const $analysisResultText: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: colors.navy,
+  color: colors.analysisResult,
   lineHeight: 20,
 }
 
@@ -270,7 +264,7 @@ export const $analysisCopyRow: ViewStyle = {
 export const $aiAnalysisTitle: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.semiBold,
-  color: colors.navy,
+  color: colors.textDim,
   marginBottom: 8,
 }
 
@@ -282,20 +276,19 @@ export const $analysisImageContainer: ViewStyle = {
   marginBottom: 14,
 }
 
-export const $analysisImageMock: ViewStyle = {
+export const $analysisImageMock: ImageStyle = {
   width: "100%",
   height: "100%",
-  backgroundColor: "#5B8C5A",
 }
 
 export const $hazardMarker: ViewStyle = {
   position: "absolute",
   backgroundColor: "#E03526",
   borderRadius: 4,
-  paddingHorizontal: 5,
-  paddingVertical: 2,
-  minWidth: 22,
+  width: 22,
+  height: 22,
   alignItems: "center",
+  justifyContent: "center",
 }
 
 export const $hazardMarkerText: TextStyle = {
@@ -332,7 +325,7 @@ export const $hazardBadgeText: TextStyle = {
 export const $hazardItemDesc: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: colors.navy,
+  color: colors.textDim,
   flex: 1,
 }
 

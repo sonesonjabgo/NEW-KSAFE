@@ -1,17 +1,16 @@
 import { FC } from "react"
-import { ActivityIndicator, TouchableOpacity, View } from "react-native"
-import {
-  IconCamera,
-  IconCopy,
-  IconSparkles,
-  IconTrash,
-} from "@tabler/icons-react-native"
+import { ActivityIndicator, Image, TouchableOpacity, View } from "react-native"
+import { IconCamera, IconCopy, IconSparkles, IconTrash } from "@tabler/icons-react-native"
 
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
+import { colors } from "@/theme/colors"
 
 import type { AiRiskPage } from "../mockData"
 import * as S from "../styles"
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const aiRiskReportImage = require("@assets/images/ai-risk-report.png")
 
 interface AiRiskPageCardProps {
   page: AiRiskPage
@@ -58,8 +57,8 @@ export const AiRiskPageCard: FC<AiRiskPageCardProps> = ({
       <View style={S.$imageRow}>
         <View style={S.$imageCol}>
           <Text text={translate("aiRiskDocCreatorScreen:page.beforeLabel")} style={S.$imageLabel} />
-          {/* TODO: page.beforeImage URI 연동 시 실제 Image 컴포넌트로 교체 */}
-          <View style={S.$beforeImageBox} />
+          {/* TODO: page.beforeImage URI 연동 시 실제 이미지 URI로 교체 */}
+          <Image source={aiRiskReportImage} style={S.$beforeImageBox} resizeMode="cover" />
         </View>
 
         <View style={S.$imageCol}>
@@ -117,15 +116,12 @@ export const AiRiskPageCard: FC<AiRiskPageCardProps> = ({
             style={S.$aiAnalysisTitle}
           />
           <View style={S.$analysisImageContainer}>
-            {/* TODO: 실제 AI 분석 이미지로 교체 */}
-            <View style={S.$analysisImageMock} />
+            {/* TODO: 실제 AI 분석 이미지 URI로 교체 */}
+            <Image source={aiRiskReportImage} style={S.$analysisImageMock} resizeMode="cover" />
             {page.hazards.map((hazard) => (
               <View
                 key={hazard.id}
-                style={[
-                  S.$hazardMarker,
-                  { left: `${hazard.x}%`, top: `${hazard.y}%` } as object,
-                ]}
+                style={[S.$hazardMarker, { left: `${hazard.x}%`, top: `${hazard.y}%` } as object]}
               >
                 <Text text={String(hazard.id)} style={S.$hazardMarkerText} />
               </View>
@@ -174,7 +170,7 @@ export const AiRiskPageCard: FC<AiRiskPageCardProps> = ({
         />
         <View style={S.$analysisCopyRow}>
           <TouchableOpacity onPress={handleCopyResult} activeOpacity={0.7} hitSlop={8}>
-            <IconCopy size={18} color="#CCCCCC" strokeWidth={1.5} />
+            <IconCopy size={18} color={colors.iconMuted} strokeWidth={1.5} />
           </TouchableOpacity>
         </View>
       </View>

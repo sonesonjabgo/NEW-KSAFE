@@ -18,7 +18,7 @@ export const HazardCoordinateToggleCard: FC<HazardCoordinateToggleCardProps> = (
 }) => (
   <TouchableOpacity style={S.$toggleCard} activeOpacity={0.8} onPress={onToggle}>
     <View style={[S.$checkbox, checked && S.$checkboxChecked]}>
-      {checked && <IconCheck size={14} color="#FFFFFF" strokeWidth={3} />}
+      <IconCheck size={14} color="#FFFFFF" strokeWidth={3} />
     </View>
     <View style={S.$toggleTextBlock}>
       <Text text={translate("aiRiskDocCreatorScreen:hazardToggle.label")} style={S.$toggleLabel} />
