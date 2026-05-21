@@ -1077,6 +1077,11 @@ const ar: Translations = {
       title: "Status Change & Action",
       noteLabel: "Enter Action Details",
       noteHint: "Up to 2,000 characters can be entered.",
+      sitePhotosLabel: "صور الموقع",
+      sitePhotosHints: {
+        hint1: "يرجى إضافة صور تُظهر بوضوح أوضاع الموقع.",
+        hint2: "إضافة صور الموقع بعد الإجراء يمكن أن ينقل النتائج بوضوح.",
+      },
       placeholder: {
         pending:
           "Status is pending.\nChange to In Progress before taking action.",
@@ -1084,6 +1089,20 @@ const ar: Translations = {
         completed:
           "Please describe the action taken in detail (e.g., handrail reinstalled, cable protector installed)",
         impossible: "Please describe in detail why the action is not possible.",
+      },
+    },
+    statusHistory: {
+      title: "تاريخ الحالة",
+      titles: {
+        pending: "تم تسجيل التقرير",
+        completed: "تم اكتمال الإجراء",
+        impossible: "الإجراء مستحيل",
+      },
+      contents: {
+        pending: "تم استلام التقرير.",
+        completed: "تم اكتمال الإجراء.",
+        impossible: "تمت معالجة الإجراء على أنه مستحيل.",
+        adminSuffix: " - المشرف ({{name}})",
       },
     },
   },

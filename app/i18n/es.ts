@@ -1094,6 +1094,11 @@ const es: Translations = {
       title: "Status Change & Action",
       noteLabel: "Enter Action Details",
       noteHint: "Up to 2,000 characters can be entered.",
+      sitePhotosLabel: "Fotos del sitio",
+      sitePhotosHints: {
+        hint1: "Por favor, agregue fotos que muestren claramente las condiciones del sitio.",
+        hint2: "Agregar fotos del sitio después de la acción puede comunicar claramente los resultados.",
+      },
       placeholder: {
         pending:
           "Status is pending.\nChange to In Progress before taking action.",
@@ -1101,6 +1106,20 @@ const es: Translations = {
         completed:
           "Please describe the action taken in detail (e.g., handrail reinstalled, cable protector installed)",
         impossible: "Please describe in detail why the action is not possible.",
+      },
+    },
+    statusHistory: {
+      title: "Historial de estado",
+      titles: {
+        pending: "Informe registrado",
+        completed: "Acción completada",
+        impossible: "Acción imposible",
+      },
+      contents: {
+        pending: "El informe ha sido recibido.",
+        completed: "La acción ha sido completada.",
+        impossible: "La acción ha sido procesada como imposible.",
+        adminSuffix: " - Administrador ({{name}})",
       },
     },
   },

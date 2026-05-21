@@ -1120,12 +1120,31 @@ const ko: Translations = {
       title: "상태 변경 및 처리",
       noteLabel: "조치 내용 입력",
       noteHint: "입력 시 최대 2,000자까지 작성할 수 있습니다.",
+      sitePhotosLabel: "현장 사진",
+      sitePhotosHints: {
+        hint1: "현장 상황을 명확히 보여주는 사진을 추가해주세요.",
+        hint2: "조치 후 현장 사진을 추가하면 처리 결과를 명확히 전달할 수 있습니다.",
+      },
       placeholder: {
         pending: "대기중 상태입니다.\n진행중으로 변경한 뒤 처리할 수 있습니다.",
         ongoing: "조치완료 또는 불가 상태 선택 시 입력 가능",
         completed:
           "어떻게 조치했는지 상세히 입력해주세요 (예: 손잡이 재설치 완료, 전선 보호관 설치 완료)",
         impossible: "조치가 불가능한 사유를 상세히 입력해주세요.",
+      },
+    },
+    statusHistory: {
+      title: "상태 변경 이력",
+      titles: {
+        pending: "제보 등록",
+        completed: "조치완료 처리",
+        impossible: "조치불가 처리",
+      },
+      contents: {
+        pending: "제보가 접수되었습니다.",
+        completed: "조치 완료 처리되었습니다.",
+        impossible: "조치 불가 처리되었습니다.",
+        adminSuffix: " - 관리자({{name}})",
       },
     },
   },

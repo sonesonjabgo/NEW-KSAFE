@@ -19,6 +19,7 @@ export const mockHazardDetails: Record<number, HazardDetail> = {
     managerName: "김영희",
     managerInitial: "김",
     managerAffiliation: "안전관리팀",
+    history: [{ id: 11, status: "pending", date: "2026.05.18 14:32" }],
   },
   2: {
     id: 2,
@@ -35,6 +36,10 @@ export const mockHazardDetails: Record<number, HazardDetail> = {
     managerName: "박준호",
     managerInitial: "박",
     managerAffiliation: "시설관리팀",
+    history: [
+      { id: 21, status: "pending", date: "2026.05.16 09:15" },
+      { id: 22, status: "ongoing", date: "2026.05.16 10:30" },
+    ],
   },
   3: {
     id: 3,
@@ -51,6 +56,16 @@ export const mockHazardDetails: Record<number, HazardDetail> = {
     managerName: "최지현",
     managerInitial: "최",
     managerAffiliation: "안전관리팀",
+    history: [
+      { id: 31, status: "pending", date: "2026.05.14 11:07" },
+      { id: 32, status: "ongoing", date: "2026.05.14 13:20" },
+      {
+        id: 33,
+        status: "completed",
+        date: "2026.05.15 15:45",
+        note: "손잡이 재설치 완료 및 고정 상태 확인하였습니다.",
+      },
+    ],
   },
   4: {
     id: 4,
@@ -71,6 +86,16 @@ export const mockHazardDetails: Record<number, HazardDetail> = {
     managerName: "이수현",
     managerInitial: "이",
     managerAffiliation: "현장관리팀",
+    history: [
+      { id: 41, status: "pending", date: "2026.05.12 16:48" },
+      { id: 42, status: "ongoing", date: "2026.05.13 09:00" },
+      {
+        id: 43,
+        status: "impossible",
+        date: "2026.05.13 11:30",
+        note: "해당 타일 재고가 없어 현재 자재 주문 중입니다. 자재 입고 후 재시공 예정입니다.",
+      },
+    ],
   },
   5: {
     id: 5,
@@ -87,6 +112,7 @@ export const mockHazardDetails: Record<number, HazardDetail> = {
     managerName: "김영희",
     managerInitial: "김",
     managerAffiliation: "안전관리팀",
+    history: [{ id: 51, status: "pending", date: "2026.05.10 08:53" }],
   },
   6: {
     id: 6,
@@ -103,5 +129,9 @@ export const mockHazardDetails: Record<number, HazardDetail> = {
     managerName: "박준호",
     managerInitial: "박",
     managerAffiliation: "시설관리팀",
+    history: [
+      { id: 61, status: "pending", date: "2026.05.08 13:20" },
+      { id: 62, status: "ongoing", date: "2026.05.09 14:00" },
+    ],
   },
 }

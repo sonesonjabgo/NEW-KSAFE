@@ -1133,6 +1133,11 @@ const en = {
       title: "Status Change & Action",
       noteLabel: "Enter Action Details",
       noteHint: "Up to 2,000 characters can be entered.",
+      sitePhotosLabel: "Site Photos",
+      sitePhotosHints: {
+        hint1: "Please add photos that clearly show the site conditions.",
+        hint2: "Adding site photos after action can clearly communicate the results.",
+      },
       placeholder: {
         pending:
           "Status is pending.\nChange to In Progress before taking action.",
@@ -1140,6 +1145,20 @@ const en = {
         completed:
           "Please describe the action taken in detail (e.g., handrail reinstalled, cable protector installed)",
         impossible: "Please describe in detail why the action is not possible.",
+      },
+    },
+    statusHistory: {
+      title: "Status History",
+      titles: {
+        pending: "Report Registered",
+        completed: "Action Completed",
+        impossible: "Action Impossible",
+      },
+      contents: {
+        pending: "The report has been received.",
+        completed: "The action has been completed.",
+        impossible: "The action has been processed as impossible.",
+        adminSuffix: " - Admin ({{name}})",
       },
     },
   },

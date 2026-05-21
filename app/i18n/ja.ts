@@ -1081,6 +1081,11 @@ const ja: Translations = {
       title: "Status Change & Action",
       noteLabel: "Enter Action Details",
       noteHint: "Up to 2,000 characters can be entered.",
+      sitePhotosLabel: "現場写真",
+      sitePhotosHints: {
+        hint1: "現場の状況を明確に示す写真を追加してください。",
+        hint2: "措置後の現場写真を追加すると、処理結果を明確に伝えることができます。",
+      },
       placeholder: {
         pending:
           "Status is pending.\nChange to In Progress before taking action.",
@@ -1088,6 +1093,20 @@ const ja: Translations = {
         completed:
           "Please describe the action taken in detail (e.g., handrail reinstalled, cable protector installed)",
         impossible: "Please describe in detail why the action is not possible.",
+      },
+    },
+    statusHistory: {
+      title: "ステータス변경이력",
+      titles: {
+        pending: "報告登録",
+        completed: "措置完了処理",
+        impossible: "措置不可処理",
+      },
+      contents: {
+        pending: "報告が受付けられました。",
+        completed: "措置完了処理されました。",
+        impossible: "措置不可処理されました。",
+        adminSuffix: " - 管理者({{name}})",
       },
     },
   },
