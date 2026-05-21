@@ -27,10 +27,21 @@ export const $section: ViewStyle = {
   borderBottomColor: "#E9ECF0",
 }
 
+export const $sectionLabelRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+}
+
 export const $sectionLabel: TextStyle = {
   fontSize: 19,
   fontFamily: typography.primary.semiBold,
   color: colors.navy,
+}
+
+export const $requiredMark: TextStyle = {
+  fontSize: 19,
+  fontFamily: typography.primary.semiBold,
+  color: "#E53E3E",
 }
 
 export const $helperText: TextStyle = {
@@ -85,25 +96,30 @@ export const $guideDesc: TextStyle = {
 
 // ── Workplace checkbox list ───────────────────────────────────────────────────
 
-export const $workplaceList: ViewStyle = {
-  gap: 10,
-}
-
-export const $workplaceItem: ViewStyle = {
-  flexDirection: "row",
-  alignItems: "center",
-  gap: 12,
+export const $workplaceCard: ViewStyle = {
   borderWidth: 1,
   borderColor: INPUT_BORDER,
   borderRadius: 10,
+  overflow: "hidden",
   backgroundColor: "#FFFFFF",
+}
+
+export const $workplaceRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 12,
   paddingVertical: 14,
   paddingHorizontal: 16,
 }
 
-export const $workplaceItemSelected: ViewStyle = {
-  borderColor: "#1062D8",
+export const $workplaceRowSelected: ViewStyle = {
   backgroundColor: "#F0F5FF",
+}
+
+export const $workplaceDivider: ViewStyle = {
+  height: 1,
+  backgroundColor: INPUT_BORDER,
+  marginHorizontal: 16,
 }
 
 export const $checkbox: ViewStyle = {

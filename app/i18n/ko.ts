@@ -270,19 +270,20 @@ const ko: Translations = {
     },
     workplace: {
       label: "사업장 선택",
-      helper: "알림을 보낼 사업장을 하나 이상 선택하세요.",
+      helper: "총 {{total}}개 중 {{selected}}개 사업장에 전송",
     },
     notifyTitle: {
       label: "알림 제목",
-      placeholder: "알림 제목을 입력하세요 (최대 100자)",
-      helper: "간결하고 명확한 제목을 입력하세요.",
+      placeholder: "간단한 제목을 입력하세요.",
+      helper: "최대 50자까지 입력할 수 있습니다.",
     },
     content: {
-      label: "알림 내용",
-      placeholder: "알림 내용을 입력하세요 (최대 1000자)",
-      helper: "구성원에게 전달할 알림 메시지를 작성하세요.",
+      label: "푸시 알림 내용",
+      placeholder: "이 사업장에 전달할 알림 내용을 입력하세요.",
+      helper: "최대 240자까지 입력할 수 있습니다.",
     },
     send: "알림 전송",
+    sendSuccess: "알림을 전송했습니다.",
   },
 
   safeHealthScreen: {

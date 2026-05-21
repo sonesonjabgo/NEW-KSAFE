@@ -271,19 +271,20 @@ const en = {
     },
     workplace: {
       label: "Select Workplace",
-      helper: "Select one or more workplaces to send the notification.",
+      helper: "Sending to {{selected}} of {{total}} workplaces",
     },
     notifyTitle: {
       label: "Notification Title",
-      placeholder: "Enter notification title (max 100 characters)",
-      helper: "Enter a clear and concise title.",
+      placeholder: "Enter a brief title.",
+      helper: "Up to 50 characters.",
     },
     content: {
-      label: "Notification Content",
-      placeholder: "Enter notification content (max 1000 characters)",
-      helper: "Write the notification message to send to members.",
+      label: "Push Notification Content",
+      placeholder: "Enter the notification message to deliver to this workplace.",
+      helper: "Up to 240 characters.",
     },
     send: "Send Notification",
+    sendSuccess: "Notification sent.",
   },
 
   safeHealthScreen: {
