@@ -261,6 +261,30 @@ const ko: Translations = {
     save: "저장",
   },
 
+  safeBoardNotifyScreen: {
+    title: "사업장 푸시 알림 보내기",
+    guide: {
+      title: "작성 가이드",
+      description:
+        "관리 중인 하나 이상의 사업장을\n선택하고 안내 알림을 작성해 현장\n구성원에게 전달하세요.",
+    },
+    workplace: {
+      label: "사업장 선택",
+      helper: "알림을 보낼 사업장을 하나 이상 선택하세요.",
+    },
+    notifyTitle: {
+      label: "알림 제목",
+      placeholder: "알림 제목을 입력하세요 (최대 100자)",
+      helper: "간결하고 명확한 제목을 입력하세요.",
+    },
+    content: {
+      label: "알림 내용",
+      placeholder: "알림 내용을 입력하세요 (최대 1000자)",
+      helper: "구성원에게 전달할 알림 메시지를 작성하세요.",
+    },
+    send: "알림 전송",
+  },
+
   safeHealthScreen: {
     title: "안전관리",
     menu: {
