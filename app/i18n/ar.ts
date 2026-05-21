@@ -1113,6 +1113,29 @@ const ar: Translations = {
     },
   },
 
+  welcomeIntroScreen: {
+    skip: "Skip",
+    start: "Get Started",
+    slide1: {
+      step: "01",
+      title: "Real-Time Multilingual Translation",
+      description:
+        "Communicate smoothly with workers of all nationalities.\nInstant voice and text translation\nfor a safer workplace.",
+    },
+    slide2: {
+      step: "02",
+      title: "Integrated TBM Management",
+      description:
+        "Check in to TBM with a single QR code scan — no paperwork.\nDigital signatures and reports\ncompleted in one place.",
+    },
+    slide3: {
+      step: "03",
+      title: "AI Risk Assessment",
+      description:
+        "Just take a photo of the site and AI will analyze hazards\nand generate a report draft for you.",
+    },
+  },
+
   ...demoAr,
 }
 

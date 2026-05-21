@@ -17,6 +17,7 @@ export type MainTabParamList = {
 
 // App Stack Navigator types
 export type AppStackParamList = {
+  WelcomeIntro: undefined
   Login: undefined
   Main: NavigatorScreenParams<MainTabParamList>
   LanguageSettings: undefined

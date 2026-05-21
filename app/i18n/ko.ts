@@ -1137,7 +1137,8 @@ const ko: Translations = {
       camera: "카메라로 촬영",
       album: "앨범에서 선택",
       hint: "현장 상황을 명확히 보여주는 사진을 추가해주세요.",
-      guide: "현장 사진을 최소 1장 이상 등록해주세요.\n최소 1장에서 최대 5장까지 첨부할 수 있습니다.",
+      guide:
+        "현장 사진을 최소 1장 이상 등록해주세요.\n최소 1장에서 최대 5장까지 첨부할 수 있습니다.",
       preview: "이미지를 추가하면 미리보기가 표시됩니다.",
     },
     submit: "제출하기",
@@ -1212,6 +1213,28 @@ const ko: Translations = {
         impossible: "조치 불가 처리되었습니다.",
         adminSuffix: " - 관리자({{name}})",
       },
+    },
+  },
+
+  welcomeIntroScreen: {
+    skip: "건너뛰기",
+    start: "시작하기",
+    slide1: {
+      step: "01",
+      title: "다국어 실시간 번역",
+      description:
+        "모든 국적의 근로자와 원활하게 소통하세요.\n안전한 현장을 위한 즉각적인 음성 및 텍스트\n번역을 지원합니다.",
+    },
+    slide2: {
+      step: "02",
+      title: "통합 TBM 관리",
+      description:
+        "복잡한 서류 작업 없이 QR 코드 스캔 한 번으로\nTBM을 체크하고\n디지털 서명, 보고서까지 완료하세요.",
+    },
+    slide3: {
+      step: "03",
+      title: "AI 위험성 평가",
+      description: "현장 사진만 찍으면 AI가 위험 요소를 분석하고\n보고서 초안까지 만들어줍니다.",
     },
   },
 
