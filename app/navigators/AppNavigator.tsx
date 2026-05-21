@@ -50,6 +50,9 @@ import { TbmReportStatusScreen } from "@/screens/TbmReportStatusScreen/TbmReport
 import { TextTranslationScreen } from "@/screens/TextTranslationScreen/TextTranslationScreen"
 import { VoiceTranslationScreen } from "@/screens/VoiceTranslationScreen"
 import { WelcomeIntroScreen } from "@/screens/WelcomeIntroScreen"
+import { useEffect } from "react"
+import { useAuth } from "@/context/AuthContext"
+import { useRole } from "@/context/RoleContext"
 import { useAppTheme } from "@/theme/context"
 
 import { MainNavigator } from "./MainNavigator"
@@ -69,10 +72,20 @@ const AppStack = () => {
   const {
     theme: { colors },
   } = useAppTheme()
+  const { isAuthenticated, user } = useAuth()
+  const { setRole } = useRole()
+
+  useEffect(() => {
+    if (user?.role === "workplace_admin") {
+      setRole("admin")
+    } else {
+      setRole("worker")
+    }
+  }, [user?.role, setRole])
 
   return (
     <Stack.Navigator
-      initialRouteName="WelcomeIntro"
+      initialRouteName={isAuthenticated ? "Main" : "WelcomeIntro"}
       screenOptions={{
         headerShown: false,
         navigationBarColor: colors.background,

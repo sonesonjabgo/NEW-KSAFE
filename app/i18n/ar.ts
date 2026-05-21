@@ -50,6 +50,13 @@ const ar: Translations = {
       message: "For password recovery, please contact\nyour administrator.\nPhone: 062-383-0083",
       confirm: "OK",
     },
+    alert: {
+      invalidCredentials: "Invalid email or password.",
+      signInFailed: "Sign in failed. Please try again.",
+      fillFields: "Please fill in all required fields.",
+      passwordLength: "Password must be at least 6 characters.",
+      unauthorizedRole: "This account does not have access.",
+    },
   },
   demoNavigator: {
     componentsTab: "عناصر",

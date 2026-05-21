@@ -7,4 +7,6 @@
  */
 export default {
   API_URL: "https://api.rss2json.com/v1/",
+  SUPABASE_URL: "https://nwiiamodkitslewmdqsj.supabase.co",
+  SUPABASE_ANON_KEY: "sb_publishable_DAsmpTSZpsMGmVRz65ls_Q_j2f6GlDl",
 }

@@ -32,7 +32,7 @@ const MOCK_USER = {
 const ORG_NAME = "KS산업안전협회"
 
 export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) => {
-  const { authEmail, logout } = useAuth()
+  const { user, signOut } = useAuth()
   const { role } = useRole()
   const [notificationEnabled, setNotificationEnabled] = useState(true)
   const [logoutModalVisible, setLogoutModalVisible] = useState(false)
@@ -46,7 +46,7 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
 
   const handleLogoutConfirm = () => {
     setLogoutModalVisible(false)
-    logout()
+    void signOut()
     navigation.reset({ index: 0, routes: [{ name: "Login" }] })
   }
 
@@ -65,7 +65,7 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
           <ProfileCard
             orgName={ORG_NAME}
             userName={mockUser.userName}
-            email={authEmail || mockUser.email}
+            email={user?.email || mockUser.email}
           />
 
           {isWorker && <WorkplaceChip name={translate("myPageScreen:workplace.label")} />}

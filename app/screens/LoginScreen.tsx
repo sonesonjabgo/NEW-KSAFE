@@ -8,10 +8,13 @@ import {
   useWindowDimensions,
   ViewStyle,
   TextStyle,
+  ActivityIndicator,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { IconAlertCircle } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+
+import { useAuth } from "@/context/AuthContext"
 
 import EyeOffSvg from "@assets/icons/login/eye-off.svg"
 import EyeSvg from "@assets/icons/login/eye.svg"
@@ -29,10 +32,44 @@ interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
 export const LoginScreen: FC<LoginScreenProps> = () => {
   const navigation = useNavigation<any>()
+  const { signIn } = useAuth()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
   const [secureText, setSecureText] = useState(true)
   const [forgotModalVisible, setForgotModalVisible] = useState(false)
   const { height } = useWindowDimensions()
   const { bottom: bottomInset } = useSafeAreaInsets()
+
+  const handleLogin = async () => {
+    setErrorMessage("")
+    const trimmedEmail = email.trim()
+
+    if (!trimmedEmail || !password) {
+      setErrorMessage(translate("loginScreen:alert.fillFields"))
+      return
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      setErrorMessage(translate("loginScreen:alert.invalidCredentials"))
+      return
+    }
+    if (password.length < 6) {
+      setErrorMessage(translate("loginScreen:alert.passwordLength"))
+      return
+    }
+
+    setLoading(true)
+    const result = await signIn(trimmedEmail, password)
+    setLoading(false)
+
+    if (result.error) {
+      setErrorMessage(result.error)
+      return
+    }
+
+    navigation.replace("Main")
+  }
 
   return (
     <>
@@ -72,6 +109,9 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
                 placeholderTextColor="#9CA3AF"
                 keyboardType="email-address"
                 autoCapitalize="none"
+                value={email}
+                onChangeText={(v) => { setEmail(v); setErrorMessage("") }}
+                editable={!loading}
               />
             </View>
 
@@ -88,6 +128,9 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
                 placeholder={translate("loginScreen:passwordFieldPlaceholder")}
                 placeholderTextColor="#9CA3AF"
                 secureTextEntry={secureText}
+                value={password}
+                onChangeText={(v) => { setPassword(v); setErrorMessage("") }}
+                editable={!loading}
               />
               <TouchableOpacity onPress={() => setSecureText((v) => !v)} hitSlop={8}>
                 {secureText ? (
@@ -99,15 +142,24 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
             </View>
           </View>
 
+          {!!errorMessage && (
+            <RNText style={$errorText}>{errorMessage}</RNText>
+          )}
+
           <View style={$gap32} />
 
           {/* 로그인 버튼 */}
           <TouchableOpacity
-            style={$loginButton}
-            onPress={() => navigation.navigate("Main")}
+            style={[$loginButton, loading && $loginButtonDisabled]}
+            onPress={handleLogin}
             activeOpacity={0.85}
+            disabled={loading}
           >
-            <RNText style={$loginButtonText}>{translate("loginScreen:logIn")}</RNText>
+            {loading ? (
+              <ActivityIndicator color="#FFFFFF" />
+            ) : (
+              <RNText style={$loginButtonText}>{translate("loginScreen:logIn")}</RNText>
+            )}
           </TouchableOpacity>
 
           <View style={$gap16} />
@@ -220,12 +272,23 @@ const $passwordInput: TextStyle = {
   marginLeft: 8,
 }
 
+const $errorText: TextStyle = {
+  fontSize: 13,
+  color: colors.danger,
+  paddingHorizontal: 20,
+  marginTop: 4,
+}
+
 const $loginButton: ViewStyle = {
   backgroundColor: "#0B3069",
   borderRadius: 12,
   height: 48,
   justifyContent: "center",
   alignItems: "center",
+}
+
+const $loginButtonDisabled: ViewStyle = {
+  opacity: 0.6,
 }
 
 const $loginButtonText: TextStyle = {
