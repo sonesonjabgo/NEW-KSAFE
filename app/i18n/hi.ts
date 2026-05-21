@@ -284,6 +284,12 @@ const hi: Translations = {
       },
     },
     logout: "लॉग आउट",
+    logoutModal: {
+      title: "Log Out",
+      message: "Are you sure you want to log out?",
+      cancel: "Cancel",
+      confirm: "Log Out",
+    },
   },
 
   languageSettings: {
@@ -1099,12 +1105,11 @@ const hi: Translations = {
       sitePhotosLabel: "사이트 फ़ोटो",
       sitePhotosHints: {
         hint1: "कृपया ऐसी फ़ोटो जोड़ें जो साइट की स्थिति को स्पष्ट रूप से दर्शाती हों।",
-        hint2: "कार्रवाई के बाद साइट की तस्वीरें जोड़ने से परिणाम स्पष्ट रूप से संप्रेषित हो सकते हैं।",
+        hint2:
+          "कार्रवाई के बाद साइट की तस्वीरें जोड़ने से परिणाम स्पष्ट रूप से संप्रेषित हो सकते हैं।",
       },
       placeholder: {
-
-        pending:
-          "Status is pending.\nChange to In Progress before taking action.",
+        pending: "Status is pending.\nChange to In Progress before taking action.",
         ongoing: "Input available when Completed or Impossible status is selected",
         completed:
           "Please describe the action taken in detail (e.g., handrail reinstalled, cable protector installed)",

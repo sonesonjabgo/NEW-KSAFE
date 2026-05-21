@@ -288,6 +288,12 @@ const es: Translations = {
       },
     },
     logout: "Cerrar Sesión",
+    logoutModal: {
+      title: "Log Out",
+      message: "Are you sure you want to log out?",
+      cancel: "Cancel",
+      confirm: "Log Out",
+    },
   },
 
   languageSettings: {
@@ -1108,11 +1114,11 @@ const es: Translations = {
       sitePhotosLabel: "Fotos del sitio",
       sitePhotosHints: {
         hint1: "Por favor, agregue fotos que muestren claramente las condiciones del sitio.",
-        hint2: "Agregar fotos del sitio después de la acción puede comunicar claramente los resultados.",
+        hint2:
+          "Agregar fotos del sitio después de la acción puede comunicar claramente los resultados.",
       },
       placeholder: {
-        pending:
-          "Status is pending.\nChange to In Progress before taking action.",
+        pending: "Status is pending.\nChange to In Progress before taking action.",
         ongoing: "Input available when Completed or Impossible status is selected",
         completed:
           "Please describe the action taken in detail (e.g., handrail reinstalled, cable protector installed)",

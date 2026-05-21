@@ -1,5 +1,5 @@
 import { FC, ReactNode } from "react"
-import { View, ViewStyle, TextStyle, TouchableOpacity, Switch } from "react-native"
+import { View, ViewStyle, TextStyle, TouchableOpacity } from "react-native"
 
 import { Text } from "@/components/Text"
 import { typography } from "@/theme/typography"
@@ -41,12 +41,7 @@ export const PermissionItem: FC<PermissionItemProps> = ({
               <Text text={buttonLabel} style={$allowButton} />
             </TouchableOpacity>
           ) : (
-            <Switch
-              value={switchValue}
-              onValueChange={onSwitchChange}
-              trackColor={{ false: "#D9D9D9", true: "#1062D8" }}
-              thumbColor={switchValue ? "#A0C7FF" : "#FFFFFF"}
-            />
+            <CustomToggle value={!!switchValue} onValueChange={onSwitchChange ?? (() => {})} />
           )}
         </View>
       </View>
@@ -54,6 +49,57 @@ export const PermissionItem: FC<PermissionItemProps> = ({
     </>
   )
 }
+
+// ── 커스텀 토글 ───────────────────────────────────────────────────────────────
+
+interface CustomToggleProps {
+  value: boolean
+  onValueChange: (value: boolean) => void
+}
+
+const CustomToggle: FC<CustomToggleProps> = ({ value, onValueChange }) => (
+  <TouchableOpacity
+    onPress={() => onValueChange(!value)}
+    activeOpacity={0.85}
+    style={[$track, value ? $trackOn : $trackOff]}
+  >
+    <View style={[$thumb, value ? $thumbOn : $thumbOff]} />
+  </TouchableOpacity>
+)
+
+const $track: ViewStyle = {
+  width: 52,
+  height: 30,
+  borderRadius: 15,
+  padding: 2,
+  justifyContent: "center",
+}
+
+const $trackOn: ViewStyle = {
+  backgroundColor: "#A0C7FF",
+  alignItems: "flex-end",
+}
+
+const $trackOff: ViewStyle = {
+  backgroundColor: "#D9D9D9",
+  alignItems: "flex-start",
+}
+
+const $thumb: ViewStyle = {
+  width: 26,
+  height: 26,
+  borderRadius: 13,
+}
+
+const $thumbOn: ViewStyle = {
+  backgroundColor: "#1062D8",
+}
+
+const $thumbOff: ViewStyle = {
+  backgroundColor: "#FFFFFF",
+}
+
+// ── Permission Item 스타일 ────────────────────────────────────────────────────
 
 const $container: ViewStyle = {
   flexDirection: "row",

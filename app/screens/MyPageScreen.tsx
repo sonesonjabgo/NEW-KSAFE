@@ -5,112 +5,151 @@ import {
   IconCamera,
   IconChevronLeft,
   IconLogout,
+  IconPower,
   IconMicrophone,
   IconPhoto,
 } from "@tabler/icons-react-native"
 
+import { ConfirmModal } from "@/components/ConfirmModal"
 import { PermissionItem } from "@/components/MyPage/PermissionItem"
 import { ProfileCard } from "@/components/MyPage/ProfileCard"
 import { WorkplaceChip } from "@/components/MyPage/WorkplaceChip"
 import { Text } from "@/components/Text"
 import { useAuth } from "@/context/AuthContext"
+import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
+import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
-
-type Role = "admin" | "worker"
 
 const ICON_COLOR = "#000000"
 
+const MOCK_USER = {
+  admin: { userName: "김관리", email: "admin-5@example.com" },
+  worker: { userName: "김근로", email: "worker-1@example.com" },
+} as const
+
+const ORG_NAME = "KS산업안전협회"
+
 export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) => {
   const { authEmail, logout } = useAuth()
-  const [userRole] = useState<Role>("worker")
+  const { role } = useRole()
   const [notificationEnabled, setNotificationEnabled] = useState(true)
+  const [logoutModalVisible, setLogoutModalVisible] = useState(false)
 
-  const isWorker = userRole === "worker"
+  const isWorker = role === "worker"
+  const mockUser = MOCK_USER[role]
 
   const handleOpenSettings = () => {
     Linking.openSettings()
   }
 
+  const handleLogoutConfirm = () => {
+    setLogoutModalVisible(false)
+    logout()
+    navigation.reset({ index: 0, routes: [{ name: "Login" }] })
+  }
+
   return (
-    <View style={$root}>
-      <View style={$header}>
-        <View style={$headerTop}>
-          <TouchableOpacity style={$backButton} onPress={() => navigation.goBack()}>
-            <IconChevronLeft size={24} color="#FFFFFF" />
-          </TouchableOpacity>
-          <Text text={translate("myPageScreen:title")} style={$headerTitle} />
-          <View style={$headerRight} />
+    <>
+      <View style={$root}>
+        <View style={$header}>
+          <View style={$headerTop}>
+            <TouchableOpacity style={$backButton} onPress={() => navigation.goBack()}>
+              <IconChevronLeft size={24} color="#FFFFFF" />
+            </TouchableOpacity>
+            <Text text={translate("myPageScreen:title")} style={$headerTitle} />
+            <View style={$headerRight} />
+          </View>
+
+          <ProfileCard
+            orgName={ORG_NAME}
+            userName={mockUser.userName}
+            email={authEmail || mockUser.email}
+          />
+
+          {isWorker && <WorkplaceChip name={translate("myPageScreen:workplace.label")} />}
         </View>
 
-        <ProfileCard
-          orgName="KS산업안전협회"
-          userName="김관리"
-          email={authEmail ?? "worker-5@example.com"}
-        />
+        <ScrollView
+          style={$scrollView}
+          contentContainerStyle={$scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={$section}>
+            <Text text={translate("myPageScreen:permissions.sectionTitle")} style={$sectionTitle} />
+            <View style={$permissionCard}>
+              <PermissionItem
+                icon={<IconCamera size={22} color={ICON_COLOR} />}
+                title={translate("myPageScreen:permissions.camera.title")}
+                description={translate("myPageScreen:permissions.camera.description")}
+                type="button"
+                buttonLabel={translate("myPageScreen:permissions.camera.button")}
+                onButtonPress={handleOpenSettings}
+                showDivider
+              />
+              <PermissionItem
+                icon={<IconMicrophone size={22} color={ICON_COLOR} />}
+                title={translate("myPageScreen:permissions.microphone.title")}
+                description={translate("myPageScreen:permissions.microphone.description")}
+                type="button"
+                buttonLabel={translate("myPageScreen:permissions.microphone.button")}
+                onButtonPress={handleOpenSettings}
+                showDivider
+              />
+              <PermissionItem
+                icon={<IconPhoto size={22} color={ICON_COLOR} />}
+                title={translate("myPageScreen:permissions.photo.title")}
+                description={translate("myPageScreen:permissions.photo.description")}
+                type="button"
+                buttonLabel={translate("myPageScreen:permissions.photo.button")}
+                onButtonPress={handleOpenSettings}
+                showDivider
+              />
+              <PermissionItem
+                icon={<IconBell size={22} color={ICON_COLOR} />}
+                title={translate("myPageScreen:permissions.notification.title")}
+                description={translate("myPageScreen:permissions.notification.description")}
+                type="switch"
+                switchValue={notificationEnabled}
+                onSwitchChange={setNotificationEnabled}
+              />
+            </View>
+          </View>
 
-        {isWorker && <WorkplaceChip name={translate("myPageScreen:workplace.label")} />}
+          <TouchableOpacity
+            style={$logoutButton}
+            onPress={() => setLogoutModalVisible(true)}
+            activeOpacity={0.7}
+          >
+            <IconLogout size={20} color="#E53935" />
+            <Text text={translate("myPageScreen:logout")} style={$logoutText} />
+          </TouchableOpacity>
+        </ScrollView>
       </View>
 
-      <ScrollView
-        style={$scrollView}
-        contentContainerStyle={$scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={$section}>
-          <Text text={translate("myPageScreen:permissions.sectionTitle")} style={$sectionTitle} />
-          <View style={$permissionCard}>
-            <PermissionItem
-              icon={<IconCamera size={22} color={ICON_COLOR} />}
-              title={translate("myPageScreen:permissions.camera.title")}
-              description={translate("myPageScreen:permissions.camera.description")}
-              type="button"
-              buttonLabel={translate("myPageScreen:permissions.camera.button")}
-              onButtonPress={handleOpenSettings}
-              showDivider
-            />
-            <PermissionItem
-              icon={<IconMicrophone size={22} color={ICON_COLOR} />}
-              title={translate("myPageScreen:permissions.microphone.title")}
-              description={translate("myPageScreen:permissions.microphone.description")}
-              type="button"
-              buttonLabel={translate("myPageScreen:permissions.microphone.button")}
-              onButtonPress={handleOpenSettings}
-              showDivider
-            />
-            <PermissionItem
-              icon={<IconPhoto size={22} color={ICON_COLOR} />}
-              title={translate("myPageScreen:permissions.photo.title")}
-              description={translate("myPageScreen:permissions.photo.description")}
-              type="button"
-              buttonLabel={translate("myPageScreen:permissions.photo.button")}
-              onButtonPress={handleOpenSettings}
-              showDivider
-            />
-            <PermissionItem
-              icon={<IconBell size={22} color={ICON_COLOR} />}
-              title={translate("myPageScreen:permissions.notification.title")}
-              description={translate("myPageScreen:permissions.notification.description")}
-              type="switch"
-              switchValue={notificationEnabled}
-              onSwitchChange={setNotificationEnabled}
-            />
+      <ConfirmModal
+        visible={logoutModalVisible}
+        icon={
+          <View style={$logoutModalIconCircle}>
+            <IconPower size={26} color={colors.danger} />
           </View>
-        </View>
-
-        <TouchableOpacity style={$logoutButton} onPress={logout} activeOpacity={0.7}>
-          <IconLogout size={20} color="#E53935" />
-          <Text text={translate("myPageScreen:logout")} style={$logoutText} />
-        </TouchableOpacity>
-      </ScrollView>
-    </View>
+        }
+        title={translate("myPageScreen:logoutModal.title")}
+        message={translate("myPageScreen:logoutModal.message")}
+        cancelLabel={translate("myPageScreen:logoutModal.cancel")}
+        confirmLabel={translate("myPageScreen:logoutModal.confirm")}
+        confirmBgColor={colors.danger}
+        onCancel={() => setLogoutModalVisible(false)}
+        onConfirm={handleLogoutConfirm}
+      />
+    </>
   )
 }
 
 const $root: ViewStyle = {
   flex: 1,
-  backgroundColor: "#F5F5F5",
+  backgroundColor: "#F9FAFE",
 }
 
 const $header: ViewStyle = {
@@ -197,4 +236,15 @@ const $logoutText: TextStyle = {
   fontSize: 16,
   fontFamily: typography.primary.semiBold,
   color: "#E53935",
+}
+
+// ── 로그아웃 모달 ─────────────────────────────────────────────────────────────
+
+const $logoutModalIconCircle: ViewStyle = {
+  width: 52,
+  height: 52,
+  borderRadius: 26,
+  backgroundColor: colors.modalIconRedBg,
+  alignItems: "center",
+  justifyContent: "center",
 }

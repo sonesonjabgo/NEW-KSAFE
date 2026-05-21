@@ -40,6 +40,8 @@ const palette = {
   softGray: "#7F7F7F",
   nearBlack: "#252525",
   blueTint: "#E3EDFB",
+  redTint: "#FEEEED",
+  deleteRed: "#E03526",
 } as const
 
 export const colors = {
@@ -117,4 +119,12 @@ export const colors = {
    * 모달 아이콘 원형 배경색 (#E3EDFB).
    */
   modalIconBg: palette.blueTint,
+  /**
+   * 삭제/위험 모달 아이콘 원형 배경색 (#FEEEED).
+   */
+  modalIconRedBg: palette.redTint,
+  /**
+   * 삭제/위험 버튼 및 아이콘 색상 (#E03526).
+   */
+  danger: palette.deleteRed,
 } as const

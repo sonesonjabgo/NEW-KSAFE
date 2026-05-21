@@ -280,6 +280,12 @@ const ar: Translations = {
       },
     },
     logout: "تسجيل خروج",
+    logoutModal: {
+      title: "Log Out",
+      message: "Are you sure you want to log out?",
+      cancel: "Cancel",
+      confirm: "Log Out",
+    },
   },
 
   languageSettings: {
@@ -1094,8 +1100,7 @@ const ar: Translations = {
         hint2: "إضافة صور الموقع بعد الإجراء يمكن أن ينقل النتائج بوضوح.",
       },
       placeholder: {
-        pending:
-          "Status is pending.\nChange to In Progress before taking action.",
+        pending: "Status is pending.\nChange to In Progress before taking action.",
         ongoing: "Input available when Completed or Impossible status is selected",
         completed:
           "Please describe the action taken in detail (e.g., handrail reinstalled, cable protector installed)",

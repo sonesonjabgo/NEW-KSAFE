@@ -284,6 +284,12 @@ const ja: Translations = {
       },
     },
     logout: "ログアウト",
+    logoutModal: {
+      title: "Log Out",
+      message: "Are you sure you want to log out?",
+      cancel: "Cancel",
+      confirm: "Log Out",
+    },
   },
 
   languageSettings: {
@@ -1098,8 +1104,7 @@ const ja: Translations = {
         hint2: "措置後の現場写真を追加すると、処理結果を明確に伝えることができます。",
       },
       placeholder: {
-        pending:
-          "Status is pending.\nChange to In Progress before taking action.",
+        pending: "Status is pending.\nChange to In Progress before taking action.",
         ongoing: "Input available when Completed or Impossible status is selected",
         completed:
           "Please describe the action taken in detail (e.g., handrail reinstalled, cable protector installed)",

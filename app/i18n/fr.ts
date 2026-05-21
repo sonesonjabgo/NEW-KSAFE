@@ -288,6 +288,12 @@ const fr: Translations = {
       },
     },
     logout: "Déconnexion",
+    logoutModal: {
+      title: "Log Out",
+      message: "Are you sure you want to log out?",
+      cancel: "Cancel",
+      confirm: "Log Out",
+    },
   },
 
   languageSettings: {
@@ -1057,7 +1063,8 @@ const fr: Translations = {
       camera: "Prendre avec la caméra",
       album: "Choisir depuis l'album",
       hint: "Veuillez ajouter des photos montrant clairement les conditions du site.",
-      guide: "Au moins 1 photo du site doit être enregistrée.\nVous pouvez joindre de 1 à 5 photos.",
+      guide:
+        "Au moins 1 photo du site doit être enregistrée.\nVous pouvez joindre de 1 à 5 photos.",
       preview: "Un aperçu s'affichera lorsque vous ajouterez une image.",
     },
     submit: "Soumettre",
@@ -1109,11 +1116,11 @@ const fr: Translations = {
       sitePhotosLabel: "Photos du site",
       sitePhotosHints: {
         hint1: "Veuillez ajouter des photos montrant clairement les conditions du site.",
-        hint2: "L'ajout de photos du site après l'action peut communiquer clairement les résultats.",
+        hint2:
+          "L'ajout de photos du site après l'action peut communiquer clairement les résultats.",
       },
       placeholder: {
-        pending:
-          "Status is pending.\nChange to In Progress before taking action.",
+        pending: "Status is pending.\nChange to In Progress before taking action.",
         ongoing: "Input available when Completed or Impossible status is selected",
         completed:
           "Please describe the action taken in detail (e.g., handrail reinstalled, cable protector installed)",

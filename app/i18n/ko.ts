@@ -375,6 +375,12 @@ const ko: Translations = {
       },
     },
     logout: "로그아웃",
+    logoutModal: {
+      title: "로그아웃",
+      message: "정말 로그아웃 하시겠습니까?",
+      cancel: "취소",
+      confirm: "로그아웃",
+    },
   },
 
   languageSettings: {
