@@ -185,12 +185,75 @@ const ko: Translations = {
     workplaceModal: {
       title: "작업장 선택",
     },
+    badge: {
+      companyWide: "회사전체",
+      workplace: "사업장",
+      draft: "임시저장",
+      archived: "보관됨",
+    },
     tabs: {
       all: "안전게시판",
       myPosts: "내 게시글",
     },
     empty: "게시물이 없습니다",
     write: "작성하기",
+    draftSaved: "게시글이 임시저장 되었습니다.",
+  },
+
+  safeBoardDetailScreen: {
+    title: "게시글 상세",
+    authorLabel: "작성자",
+    editButton: "수정",
+    alertOn: "알림 ON",
+    alertOff: "알림 OFF",
+    publishButton: "게시하기",
+    deleteButton: "삭제하기",
+    publishModal: {
+      title: "게시글 게시",
+      message: "이 게시글을 게시하시겠습니까?\n게시 후에는 수정이 제한될 수 있습니다.",
+      cancel: "취소",
+      confirm: "게시",
+    },
+    deleteModal: {
+      title: "게시글 삭제",
+      message: "정말로 이 게시글을 삭제하시겠습니까?",
+      cancel: "취소",
+      confirm: "삭제",
+    },
+  },
+
+  safeBoardCreateScreen: {
+    title: "게시글 작성",
+    guide: {
+      title: "작성 가이드",
+      description: "관리 중인 하나 이상의 사업장을\n선택하고 안내 알림을 작성해 현장\n구성원에게 전달하세요.",
+    },
+    workplace: {
+      label: "사업장 선택",
+      placeholder: "사업장을 선택하세요",
+      helper: "이 게시글이 적용될 사업장을 선택하세요.",
+    },
+    postTitle: {
+      label: "게시글 제목",
+      placeholder: "제목을 입력하세요 (최대 200자)",
+      helper: "명확하고 구체적인 제목을 입력하세요.",
+    },
+    content: {
+      label: "게시글 내용",
+      placeholder: "내용을 입력하세요 (최대 2000자)",
+      helper: "안전 관련 내용을 자세히 작성해 주세요.",
+    },
+    attachment: {
+      label: "첨부파일",
+      card1Text: "(선택 사항) 최대 50MB까지\n업로드할 수 있습니다.",
+      uploadButton: "파일 업로드",
+      noFile: "선택된 파일이 없습니다.",
+    },
+    pushNotification: {
+      label: "푸시 알림 함께 보내기",
+      cardText: "선택 시 게시와 동시에 선택한 사업장 구성원에게 푸시 알림이 전송됩니다.",
+    },
+    save: "저장",
   },
 
   safeHealthScreen: {

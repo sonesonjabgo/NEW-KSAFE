@@ -185,12 +185,76 @@ const en = {
     workplaceModal: {
       title: "Select Workplace",
     },
+    badge: {
+      companyWide: "Company-wide",
+      workplace: "Workplace",
+      draft: "Draft",
+      archived: "Archived",
+    },
     tabs: {
       all: "Safety Board",
       myPosts: "My Posts",
     },
     empty: "No posts found",
     write: "Write",
+    draftSaved: "Post saved as draft.",
+  },
+
+  safeBoardDetailScreen: {
+    title: "Post Detail",
+    authorLabel: "Author",
+    editButton: "Edit",
+    alertOn: "Alert ON",
+    alertOff: "Alert OFF",
+    publishButton: "Publish",
+    deleteButton: "Delete",
+    publishModal: {
+      title: "Publish Post",
+      message: "Are you sure you want to publish this post?\nIt will be visible to workplace members.",
+      cancel: "Cancel",
+      confirm: "Publish",
+    },
+    deleteModal: {
+      title: "Delete Post",
+      message: "Are you sure you want to delete this post?\nDeleted posts cannot be recovered.",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
+  },
+
+  safeBoardCreateScreen: {
+    title: "Write Post",
+    guide: {
+      title: "Writing Guide",
+      description:
+        "Please write clear and accurate content. Posts should be related to workplace safety.",
+    },
+    workplace: {
+      label: "Workplace",
+      placeholder: "Select workplace",
+      helper: "Select the workplace this post applies to.",
+    },
+    postTitle: {
+      label: "Post Title",
+      placeholder: "Enter post title (max 200 characters)",
+      helper: "Enter a clear and descriptive title.",
+    },
+    content: {
+      label: "Post Content",
+      placeholder: "Enter post content (max 2000 characters)",
+      helper: "Describe the safety issue in detail.",
+    },
+    attachment: {
+      label: "Attachments",
+      card1Text: "(Optional) You can upload\nfiles up to 50MB.",
+      uploadButton: "Upload File",
+      noFile: "No files selected.",
+    },
+    pushNotification: {
+      label: "Send Push Notification",
+      cardText: "When selected, a push notification will be sent to all members of the selected workplace upon posting.",
+    },
+    save: "Save",
   },
 
   safeHealthScreen: {
