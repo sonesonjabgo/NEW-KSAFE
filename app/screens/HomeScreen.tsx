@@ -43,8 +43,8 @@ import { typography } from "@/theme/typography"
 interface HomeScreenProps extends MainTabScreenProps<"Home"> {}
 
 const BOARD_ITEMS = [
-  { tag: "workplace", title: "2026년 4월 2일 앱 출시", date: "2026.04.02", pinned: true },
-  { tag: "company", title: "2026년 4월 2일 앱 출시", date: "2026.04.02", pinned: false },
+  { tag: "company", title: "2026년 4월 2일 앱 출시", date: "2026.04.02", pinned: true },
+  { tag: "workplace", title: "2026년 4월 2일 앱 출시", date: "2026.04.02", pinned: false },
 ]
 
 type TabType = "all" | "company" | "workplace"
@@ -355,7 +355,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
                       <Text text={item.title} style={$boardItemTitle} numberOfLines={1} />
                       <Text text={item.date} style={$boardItemDate} />
                     </View>
-                    {item.pinned && <Pin size={14} color="#C03403" strokeWidth={2.5} />}
+                    {item.pinned && <Pin size={14} color="#0B3069" strokeWidth={2.5} />}
                   </TouchableOpacity>
                 ))}
               </View>
@@ -695,7 +695,7 @@ const $boardItem: ViewStyle = {
   alignItems: "flex-start",
   paddingVertical: 14,
   paddingHorizontal: 16,
-  gap: 8,
+  gap: 20,
   borderBottomWidth: StyleSheet.hairlineWidth,
   borderBottomColor: "#E9ECF0",
 }
