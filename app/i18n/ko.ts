@@ -163,6 +163,9 @@ const ko: Translations = {
       privacy: "개인정보처리방침",
       terms: "이용약관",
       copyright: "Copyright © 케이에스산업안전협회 all rights reserved.",
+      webViewLoading: "에 접속중입니다",
+      webViewLoadingWait: "잠시만 기다려주세요",
+      webViewClose: "닫기",
     },
     grid: {
       interpret: { label: "1:1 통역", sub: "실시간 통역 지원" },

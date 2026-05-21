@@ -145,6 +145,9 @@ const es: Translations = {
       privacy: "Privacy",
       terms: "Terms",
       copyright: "Copyright © KS Industrial Safety Association all rights reserved.",
+      webViewLoading: "Connecting to",
+      webViewLoadingWait: "Please wait a moment",
+      webViewClose: "Close",
     },
     grid: {
       interpret: { label: "Interpret", sub: "Interpretation" },

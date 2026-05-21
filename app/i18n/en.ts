@@ -163,6 +163,9 @@ const en = {
       privacy: "Privacy Policy",
       terms: "Terms of Service",
       copyright: "Copyright © KS Industrial Safety Association all rights reserved.",
+      webViewLoading: "Connecting to",
+      webViewLoadingWait: "Please wait a moment",
+      webViewClose: "Close",
     },
     grid: {
       interpret: { label: "1:1 Interpretation", sub: "Real-time interpretation" },

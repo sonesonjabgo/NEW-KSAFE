@@ -1,7 +1,7 @@
 import { FC, useEffect, useState, useMemo } from "react"
 import {
-  Image,
-  ImageStyle,
+  Linking,
+  Platform,
   View,
   ViewStyle,
   TextStyle,
@@ -27,19 +27,18 @@ import GridTbmJoin from "@assets/icons/home/grid_tbm_join.svg"
 import GridTbmReport from "@assets/icons/home/grid_tbm_report.svg"
 import GridTranslate from "@assets/icons/home/grid_translate.svg"
 import GridWarning from "@assets/icons/home/grid_warning.svg"
+import HomeAiRiskBanner from "@assets/icons/home/home_ai_risk_banner.svg"
 import HeaderBell from "@assets/icons/nav/header_bell.svg"
 import HeaderLang from "@assets/icons/nav/header_lang.svg"
 import HeaderQr from "@assets/icons/nav/header_qr.svg"
 import ProfileSwitch from "@assets/icons/nav/profile_switch.svg"
 
 import { Text } from "@/components/Text"
+import { WebViewModal } from "@/components/WebViewModal"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 import type { MainTabScreenProps } from "@/navigators/navigationTypes"
 import { typography } from "@/theme/typography"
-
-// eslint-disable-next-line @typescript-eslint/no-require-imports
-const aiBannerImage = require("@assets/icons/home/home_ai_risk_banner.png")
 
 interface HomeScreenProps extends MainTabScreenProps<"Home"> {}
 
@@ -56,6 +55,19 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const [selectedTab, setSelectedTab] = useState<TabType>("all")
   // TODO: 추후 실제 API 연동으로 교체
   const [hasExistingEdu, setHasExistingEdu] = useState(true)
+  const [webViewModalVisible, setWebViewModalVisible] = useState(false)
+  const [selectedUrl, setSelectedUrl] = useState("")
+  const [selectedTitle, setSelectedTitle] = useState("")
+
+  const openWebView = (url: string, title: string) => {
+    if (Platform.OS === "web") {
+      Linking.openURL(url)
+      return
+    }
+    setSelectedUrl(url)
+    setSelectedTitle(title)
+    setWebViewModalVisible(true)
+  }
 
   const TABS: TabType[] = useMemo(() => ["all", "company", "workplace"], [])
 
@@ -155,228 +167,276 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
       : [...GRID_ITEMS.slice(0, 6), ...GRID_ITEMS.slice(9)]
 
   return (
-    <View style={$root}>
-      <ScrollView
-        style={$scrollView}
-        contentContainerStyle={$scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
-        {/* ── Header (blue background) ── */}
-        <View style={[$header, { paddingTop: insets.top + 12 }]}>
-          {/* ── 임시 개발용 토글 영역 ── */}
-          <View style={$devToggleArea}>
-            {/* 역할 전환 */}
-            <View style={$roleToggleRow}>
-              <TouchableOpacity
-                style={[$roleToggleBtn, userRole === "admin" && $roleToggleBtnActive]}
-                onPress={() => setUserRole("admin")}
-              >
-                <Text
-                  text={translate("homeScreen:role.admin")}
-                  style={[$roleToggleText, userRole === "admin" && $roleToggleTextActive]}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[$roleToggleBtn, userRole === "worker" && $roleToggleBtnActive]}
-                onPress={() => setUserRole("worker")}
-              >
-                <Text
-                  text={translate("homeScreen:role.worker")}
-                  style={[$roleToggleText, userRole === "worker" && $roleToggleTextActive]}
-                />
-              </TouchableOpacity>
-            </View>
-
-            {/* 배너 카드 ON/OFF (근로자일 때만 표시) */}
-            {userRole === "worker" && (
-              <View style={$subToggleRow}>
-                <Text text={translate("homeScreen:devToggle.eduBanner")} style={$subToggleLabel} />
+    <>
+      <View style={$root}>
+        <ScrollView
+          style={$scrollView}
+          contentContainerStyle={$scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          {/* ── Header (blue background) ── */}
+          <View style={[$header, { paddingTop: insets.top + 12 }]}>
+            {/* ── 임시 개발용 토글 영역 ── */}
+            <View style={$devToggleArea}>
+              {/* 역할 전환 */}
+              <View style={$roleToggleRow}>
                 <TouchableOpacity
-                  style={[$subToggleBtn, hasExistingEdu ? $subToggleBtnOn : $subToggleBtnOff]}
-                  onPress={() => setHasExistingEdu(!hasExistingEdu)}
+                  style={[$roleToggleBtn, userRole === "admin" && $roleToggleBtnActive]}
+                  onPress={() => setUserRole("admin")}
                 >
                   <Text
-                    text={hasExistingEdu ? "ON" : "OFF"}
-                    style={[$subToggleText, hasExistingEdu ? $subToggleTextOn : $subToggleTextOff]}
+                    text={translate("homeScreen:role.admin")}
+                    style={[$roleToggleText, userRole === "admin" && $roleToggleTextActive]}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[$roleToggleBtn, userRole === "worker" && $roleToggleBtnActive]}
+                  onPress={() => setUserRole("worker")}
+                >
+                  <Text
+                    text={translate("homeScreen:role.worker")}
+                    style={[$roleToggleText, userRole === "worker" && $roleToggleTextActive]}
                   />
                 </TouchableOpacity>
               </View>
-            )}
+
+              {/* 배너 카드 ON/OFF (근로자일 때만 표시) */}
+              {userRole === "worker" && (
+                <View style={$subToggleRow}>
+                  <Text
+                    text={translate("homeScreen:devToggle.eduBanner")}
+                    style={$subToggleLabel}
+                  />
+                  <TouchableOpacity
+                    style={[$subToggleBtn, hasExistingEdu ? $subToggleBtnOn : $subToggleBtnOff]}
+                    onPress={() => setHasExistingEdu(!hasExistingEdu)}
+                  >
+                    <Text
+                      text={hasExistingEdu ? "ON" : "OFF"}
+                      style={[
+                        $subToggleText,
+                        hasExistingEdu ? $subToggleTextOn : $subToggleTextOff,
+                      ]}
+                    />
+                  </TouchableOpacity>
+                </View>
+              )}
+            </View>
+
+            {/* Row 1: Logo + Actions */}
+            <View style={$titleRow}>
+              <View>
+                <Text text="K-SAFEONE" style={$appTitle} />
+                <Text text={translate("homeScreen:orgName")} style={$appSub} />
+              </View>
+              <View style={$headerActions}>
+                <TouchableOpacity
+                  style={$headerAction}
+                  onPress={() => navigation.navigate("QrScanner")}
+                >
+                  <View style={$headerIconWrap}>
+                    <HeaderQr width={20} height={20} />
+                  </View>
+                  <Text text={translate("homeScreen:header.qrScan")} style={$headerActionLabel} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={$headerAction}
+                  onPress={() => navigation.navigate("Notify")}
+                >
+                  <View style={$headerIconWrap}>
+                    <HeaderBell width={22} height={22} color="white" />
+                  </View>
+                  <Text
+                    text={translate("homeScreen:header.notification")}
+                    style={$headerActionLabel}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={$headerAction}
+                  onPress={() => navigation.navigate("LanguageSettings")}
+                >
+                  <View style={$headerIconWrap}>
+                    <HeaderLang width={22} height={22} />
+                  </View>
+                  <Text text={translate("homeScreen:header.language")} style={$headerActionLabel} />
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
 
-          {/* Row 1: Logo + Actions */}
-          <View style={$titleRow}>
-            <View>
-              <Text text="K-SAFEONE" style={$appTitle} />
-              <Text text={translate("homeScreen:orgName")} style={$appSub} />
-            </View>
-            <View style={$headerActions}>
-              <TouchableOpacity
-                style={$headerAction}
-                onPress={() => navigation.navigate("QrScanner")}
-              >
-                <View style={$headerIconWrap}>
-                  <HeaderQr width={20} height={20} />
-                </View>
-                <Text text={translate("homeScreen:header.qrScan")} style={$headerActionLabel} />
-              </TouchableOpacity>
-              <TouchableOpacity style={$headerAction} onPress={() => navigation.navigate("Notify")}>
-                <View style={$headerIconWrap}>
-                  <HeaderBell width={22} height={22} color="white" />
-                </View>
+          {/* ── Body (white rounded) ── */}
+          <View style={$body}>
+            {/* Greeting + Avatar */}
+            <View style={$greetRow}>
+              <View style={$greetLeft}>
                 <Text
-                  text={translate("homeScreen:header.notification")}
-                  style={$headerActionLabel}
+                  text={translate("homeScreen:greeting.name", { name: "김영희" })}
+                  style={$greetBold}
                 />
-              </TouchableOpacity>
+                <Text text={translate("homeScreen:greeting.message")} style={$greetMsg} />
+              </View>
               <TouchableOpacity
-                style={$headerAction}
-                onPress={() => navigation.navigate("LanguageSettings")}
-              >
-                <View style={$headerIconWrap}>
-                  <HeaderLang width={22} height={22} />
-                </View>
-                <Text text={translate("homeScreen:header.language")} style={$headerActionLabel} />
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-
-        {/* ── Body (white rounded) ── */}
-        <View style={$body}>
-          {/* Greeting + Avatar */}
-          <View style={$greetRow}>
-            <View style={$greetLeft}>
-              <Text
-                text={translate("homeScreen:greeting.name", { name: "김영희" })}
-                style={$greetBold}
-              />
-              <Text text={translate("homeScreen:greeting.message")} style={$greetMsg} />
-            </View>
-            <TouchableOpacity
-              style={$avatar}
-              activeOpacity={0.7}
-              onPress={() => navigation.navigate("MyPage")}
-            >
-              <ProfileSwitch width={52} height={52} />
-            </TouchableOpacity>
-          </View>
-
-          {/* Feature Grid */}
-          <View style={$grid}>
-            {visibleGridItems.map((item, i) => (
-              <TouchableOpacity
-                key={i}
-                style={$gridCell}
+                style={$avatar}
                 activeOpacity={0.7}
-                onPress={item.onPress}
+                onPress={() => navigation.navigate("MyPage")}
               >
-                <View style={$gridIconWrap}>
-                  <item.Icon width={item.iconSize ?? 36} height={item.iconSize ?? 36} />
-                </View>
-                <View style={$gridTextWrap}>
-                  <Text text={item.label} style={$gridLabel} numberOfLines={1} />
-                  <Text text={item.sub} style={$gridSub} numberOfLines={1} />
-                </View>
-              </TouchableOpacity>
-            ))}
-          </View>
-
-          {/* 기존 교육/발표 참여 안내 배너 (근로자 전용) */}
-          {userRole === "worker" && hasExistingEdu && (
-            <TouchableOpacity style={$eduBanner} activeOpacity={0.7}>
-              <BannerIcon width={34} height={34} color="#0B3069" style={$eduBannerIcon} />
-              <View style={$eduBannerContent}>
-                <Text text={translate("homeScreen:edu.title")} style={$eduBannerTitle} />
-                <Text text={translate("homeScreen:edu.description")} style={$eduBannerDesc} />
-              </View>
-              <ChevronRight size={16} color="#7F848C" strokeWidth={2} />
-            </TouchableOpacity>
-          )}
-
-          {/* Board Section */}
-          <View style={$boardSection}>
-            <View style={$boardHeader}>
-              <Text text={translate("homeScreen:board.title")} style={$boardTitle} />
-              <TouchableOpacity
-                style={$boardMoreBtn}
-                onPress={() => navigation.navigate("SafeBoard")}
-              >
-                <Text text={translate("homeScreen:board.viewMore")} style={$boardMoreText} />
-                <ChevronRight size={12} color="#7F848C" strokeWidth={2} />
+                <ProfileSwitch width={52} height={52} />
               </TouchableOpacity>
             </View>
 
-            {/* Tabs — 관리자만 표시 */}
-            {userRole === "admin" && (
-              <View style={$tabRow}>
-                {TABS.map((tab) => {
-                  const tabLabels: Record<TabType, string> = {
-                    all: translate("homeScreen:board.tabs.all"),
-                    company: translate("homeScreen:board.tabs.company"),
-                    workplace: translate("homeScreen:board.tabs.workplace"),
-                  }
-                  return (
-                    <TouchableOpacity
-                      key={tab}
-                      style={$tabItem}
-                      onPress={() => setSelectedTab(tab)}
-                      activeOpacity={0.7}
-                    >
-                      <Text
-                        text={tabLabels[tab]}
-                        style={[
-                          $tabLabel,
-                          selectedTab === tab ? $tabLabelActive : $tabLabelInactive,
-                        ]}
-                      />
-                      {selectedTab === tab && <View style={$tabLine} />}
-                    </TouchableOpacity>
-                  )
-                })}
-              </View>
-            )}
-
-            {/* Board Items */}
-            <View style={$boardList}>
-              {BOARD_ITEMS.map((item, i) => (
-                <TouchableOpacity key={i} style={$boardItem} activeOpacity={0.7}>
-                  <View style={$tagWrap}>
-                    {item.tag === "workplace" ? (
-                      <BoardType1 width={44} height={21} />
-                    ) : (
-                      <BoardType2 width={54} height={21} />
-                    )}
+            {/* Feature Grid */}
+            <View style={$grid}>
+              {visibleGridItems.map((item, i) => (
+                <TouchableOpacity
+                  key={i}
+                  style={$gridCell}
+                  activeOpacity={0.7}
+                  onPress={item.onPress}
+                >
+                  <View style={$gridIconWrap}>
+                    <item.Icon width={item.iconSize ?? 36} height={item.iconSize ?? 36} />
                   </View>
-                  <View style={$boardItemContent}>
-                    <Text text={item.title} style={$boardItemTitle} numberOfLines={1} />
-                    <Text text={item.date} style={$boardItemDate} />
+                  <View style={$gridTextWrap}>
+                    <Text text={item.label} style={$gridLabel} numberOfLines={1} />
+                    <Text text={item.sub} style={$gridSub} numberOfLines={1} />
                   </View>
-                  {item.pinned && <Pin size={14} color="#C03403" strokeWidth={2.5} />}
                 </TouchableOpacity>
               ))}
             </View>
-          </View>
 
-          {/* Bottom Banner */}
-          <View style={$banner}>
-            <Image source={aiBannerImage} style={$bannerImage} resizeMode="cover" />
-          </View>
+            {/* 기존 교육/발표 참여 안내 배너 (근로자 전용) */}
+            {userRole === "worker" && hasExistingEdu && (
+              <TouchableOpacity style={$eduBanner} activeOpacity={0.7}>
+                <BannerIcon width={34} height={34} color="#0B3069" style={$eduBannerIcon} />
+                <View style={$eduBannerContent}>
+                  <Text text={translate("homeScreen:edu.title")} style={$eduBannerTitle} />
+                  <Text text={translate("homeScreen:edu.description")} style={$eduBannerDesc} />
+                </View>
+                <ChevronRight size={16} color="#7F848C" strokeWidth={2} />
+              </TouchableOpacity>
+            )}
 
-          {/* Footer */}
-          <View style={$footer}>
-            <View style={$footerLinks}>
-              <Text text={translate("homeScreen:footer.homepage")} style={$footerLink} />
-              <Text text="|" style={$footerSep} />
-              <Text text={translate("homeScreen:footer.privacy")} style={$footerLink} />
-              <Text text="|" style={$footerSep} />
-              <Text text={translate("homeScreen:footer.terms")} style={$footerLink} />
+            {/* Board Section */}
+            <View style={$boardSection}>
+              <View style={$boardHeader}>
+                <Text text={translate("homeScreen:board.title")} style={$boardTitle} />
+                <TouchableOpacity
+                  style={$boardMoreBtn}
+                  onPress={() => navigation.navigate("SafeBoard")}
+                >
+                  <Text text={translate("homeScreen:board.viewMore")} style={$boardMoreText} />
+                  <ChevronRight size={12} color="#7F848C" strokeWidth={2} />
+                </TouchableOpacity>
+              </View>
+
+              {/* Tabs — 관리자만 표시 */}
+              {userRole === "admin" && (
+                <View style={$tabRow}>
+                  {TABS.map((tab) => {
+                    const tabLabels: Record<TabType, string> = {
+                      all: translate("homeScreen:board.tabs.all"),
+                      company: translate("homeScreen:board.tabs.company"),
+                      workplace: translate("homeScreen:board.tabs.workplace"),
+                    }
+                    return (
+                      <TouchableOpacity
+                        key={tab}
+                        style={$tabItem}
+                        onPress={() => setSelectedTab(tab)}
+                        activeOpacity={0.7}
+                      >
+                        <Text
+                          text={tabLabels[tab]}
+                          style={[
+                            $tabLabel,
+                            selectedTab === tab ? $tabLabelActive : $tabLabelInactive,
+                          ]}
+                        />
+                        {selectedTab === tab && <View style={$tabLine} />}
+                      </TouchableOpacity>
+                    )
+                  })}
+                </View>
+              )}
+
+              {/* Board Items */}
+              <View style={$boardList}>
+                {BOARD_ITEMS.map((item, i) => (
+                  <TouchableOpacity key={i} style={$boardItem} activeOpacity={0.7}>
+                    <View style={$tagWrap}>
+                      {item.tag === "workplace" ? (
+                        <BoardType1 width={44} height={21} />
+                      ) : (
+                        <BoardType2 width={54} height={21} />
+                      )}
+                    </View>
+                    <View style={$boardItemContent}>
+                      <Text text={item.title} style={$boardItemTitle} numberOfLines={1} />
+                      <Text text={item.date} style={$boardItemDate} />
+                    </View>
+                    {item.pinned && <Pin size={14} color="#C03403" strokeWidth={2.5} />}
+                  </TouchableOpacity>
+                ))}
+              </View>
             </View>
-            <Text text={translate("homeScreen:footer.copyright")} style={$footerCopyright} />
+
+            {/* Bottom Banner */}
+            <View style={$banner}>
+              <HomeAiRiskBanner width="100%" height="100%" />
+            </View>
+
+            {/* Footer */}
+            <View style={$footer}>
+              <View style={$footerLinks}>
+                <TouchableOpacity
+                  activeOpacity={0.6}
+                  onPress={() =>
+                    openWebView(
+                      "https://www.kscenter.co.kr/",
+                      translate("homeScreen:footer.homepage"),
+                    )
+                  }
+                >
+                  <Text text={translate("homeScreen:footer.homepage")} style={$footerLink} />
+                </TouchableOpacity>
+                <Text text="|" style={$footerSep} />
+                <TouchableOpacity
+                  activeOpacity={0.6}
+                  onPress={() =>
+                    openWebView(
+                      "https://k-safeone.co.kr/policy/privacy",
+                      translate("homeScreen:footer.privacy"),
+                    )
+                  }
+                >
+                  <Text text={translate("homeScreen:footer.privacy")} style={$footerLink} />
+                </TouchableOpacity>
+                <Text text="|" style={$footerSep} />
+                <TouchableOpacity
+                  activeOpacity={0.6}
+                  onPress={() =>
+                    openWebView(
+                      "https://k-safeone.co.kr/policy/terms",
+                      translate("homeScreen:footer.terms"),
+                    )
+                  }
+                >
+                  <Text text={translate("homeScreen:footer.terms")} style={$footerLink} />
+                </TouchableOpacity>
+              </View>
+              <Text text={translate("homeScreen:footer.copyright")} style={$footerCopyright} />
+            </View>
           </View>
-        </View>
-      </ScrollView>
-    </View>
+        </ScrollView>
+      </View>
+
+      <WebViewModal
+        visible={webViewModalVisible}
+        url={selectedUrl}
+        title={selectedTitle}
+        onClose={() => setWebViewModalVisible(false)}
+      />
+    </>
   )
 }
 
@@ -728,11 +788,6 @@ const $banner: ViewStyle = {
   borderRadius: 10,
   overflow: "hidden",
   aspectRatio: 930 / 398,
-}
-
-const $bannerImage: ImageStyle = {
-  width: "100%",
-  height: "100%",
 }
 
 const $footer: ViewStyle = {
