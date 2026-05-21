@@ -435,6 +435,12 @@ const ko: Translations = {
     title: "알림",
     emptyTitle: "알림이 없습니다",
     emptyDescription: "현재 받은 알림이 없습니다.\n새로운 알림이 도착하면 알려드리겠습니다.",
+    mock: {
+      boardNewPost: {
+        title: "게시판에 새로운 글이 작성되었습니다.",
+        description: "소속 사업장의 게시판을 확인해보세요!",
+      },
+    },
   },
 
   qrScanner: {
