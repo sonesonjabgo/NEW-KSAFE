@@ -169,9 +169,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation }) => {
         <TouchableOpacity
           style={S.$floatingButton}
           activeOpacity={0.8}
-          onPress={() => {
-            console.log("작성하기")
-          }}
+          onPress={() => navigation.navigate("SafeBoardCreate")}
         >
           <PencilLine size={20} color="#FFFFFF" strokeWidth={1.8} />
           <Text text={translate("safeBoardScreen:write")} style={S.$floatingButtonText} />

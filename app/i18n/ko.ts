@@ -204,6 +204,41 @@ const ko: Translations = {
     authorLabel: "작성자",
   },
 
+  safeBoardCreateScreen: {
+    title: "게시글 작성",
+    guide: {
+      title: "작성 가이드",
+      description: "관리 중인 하나 이상의 사업장을\n선택하고 안내 알림을 작성해 현장\n구성원에게 전달하세요.",
+    },
+    workplace: {
+      label: "사업장 선택",
+      placeholder: "사업장을 선택하세요",
+      helper: "이 게시글이 적용될 사업장을 선택하세요.",
+    },
+    postTitle: {
+      label: "게시글 제목",
+      placeholder: "제목을 입력하세요 (최대 200자)",
+      helper: "명확하고 구체적인 제목을 입력하세요.",
+    },
+    content: {
+      label: "게시글 내용",
+      placeholder: "내용을 입력하세요 (최대 2000자)",
+      helper: "안전 관련 내용을 자세히 작성해 주세요.",
+    },
+    attachment: {
+      label: "첨부파일",
+      card1Text: "(선택 사항) 최대 50MB까지\n업로드할 수 있습니다.",
+      uploadButton: "파일 업로드",
+      noFile: "선택된 파일이 없습니다.",
+    },
+    pushNotification: {
+      label: "푸시 알림 함께 보내기",
+      description: "선택한 사업장의 모든 구성원에게 푸시 알림을 발송합니다.",
+      helper: "게시글 등록 시 구성원에게 알림이 전송됩니다.",
+    },
+    save: "저장",
+  },
+
   safeHealthScreen: {
     title: "안전관리",
     menu: {

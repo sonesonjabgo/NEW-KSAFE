@@ -67,6 +67,7 @@ export type AppStackParamList = {
   HazardRiskCreate: undefined
   HazardRiskDetail: { id: number }
   SafeBoardDetail: { id: number }
+  SafeBoardCreate: undefined
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<

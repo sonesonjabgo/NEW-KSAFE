@@ -164,6 +164,7 @@ const ja: Translations = {
     write: "Write",
   },
   safeBoardDetailScreen: { title: "Post Detail", authorLabel: "Author" },
+  safeBoardCreateScreen: { title: "Write Post", guide: { title: "Writing Guide", description: "Please write clear and accurate content." }, workplace: { label: "Workplace", placeholder: "Select workplace", helper: "Select the workplace this post applies to." }, postTitle: { label: "Post Title", placeholder: "Enter post title (max 200 characters)", helper: "Enter a clear and descriptive title." }, content: { label: "Post Content", placeholder: "Enter post content (max 2000 characters)", helper: "Describe the safety issue in detail." }, attachment: { label: "Attachments", card1Text: "(Optional) You can upload\nfiles up to 50MB.", uploadButton: "Upload File", noFile: "No files selected." }, pushNotification: { label: "Send Push Notification", description: "Send a push notification to all members of the selected workplace.", helper: "Members will receive a notification when this post is published." }, save: "Save" },
 
   safeHealthScreen: {
     title: "Health",
