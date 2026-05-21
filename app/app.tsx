@@ -41,7 +41,7 @@ export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 const prefix = Linking.createURL("/")
 const config = {
   screens: {
-    Login: {
+    WelcomeIntro: {
       path: "",
     },
   },
@@ -54,7 +54,6 @@ const config = {
  */
 export function App() {
   const {
-    initialNavigationState,
     onNavigationStateChange,
     isRestored: isNavigationStateRestored,
   } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
@@ -93,7 +92,6 @@ export function App() {
               <ThemeProvider>
                 <AppNavigator
                   linking={linking}
-                  initialState={initialNavigationState}
                   onStateChange={onNavigationStateChange}
                 />
               </ThemeProvider>

@@ -27,29 +27,6 @@ export const styles = StyleSheet.create({
     paddingTop: 20,
   },
 
-  /* ── 헤더 ── */
-  header: {
-    alignItems: "center",
-    backgroundColor: NAVY,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingBottom: 14,
-    paddingHorizontal: 16,
-  },
-  headerIconBtn: {
-    alignItems: "center",
-    height: 36,
-    justifyContent: "center",
-    width: 36,
-  },
-  headerTitle: {
-    color: WHITE,
-    flex: 1,
-    fontSize: 17,
-    fontWeight: "600",
-    textAlign: "center",
-  },
-
   /* ── 언어 항목 ── */
   item: {
     alignItems: "center",
@@ -145,11 +122,5 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "700",
     marginTop: 4,
-  },
-
-  /* ── 루트 ── */
-  root: {
-    backgroundColor: NAVY,
-    flex: 1,
   },
 })

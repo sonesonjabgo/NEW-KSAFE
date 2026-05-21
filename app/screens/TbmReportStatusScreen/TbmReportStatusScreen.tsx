@@ -1,9 +1,10 @@
-import { FC, useCallback, useRef, useState } from "react"
-import { Animated, ScrollView, TextInput, TouchableOpacity, View, TextStyle } from "react-native"
+import { FC, useState } from "react"
+import { ScrollView, TextInput, TouchableOpacity, View, TextStyle } from "react-native"
 import { IconAlertTriangle, IconCheck, IconDownload, IconRefresh } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { StackScreen } from "@/components/StackScreen"
+import { Toast } from "@/components/Toast"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
 import { mockTbmReports } from "@/screens/TbmReportInquiryScreen/mockData"
@@ -29,18 +30,8 @@ export const TbmReportStatusScreen: FC<TbmReportStatusScreenProps> = ({ navigati
   const [regenerateProcessName, setRegenerateProcessName] = useState("")
   const [regenerateTeamName, setRegenerateTeamName] = useState("")
   const [toastVisible, setToastVisible] = useState(false)
-  const toastAnim = useRef(new Animated.Value(0)).current
 
   const detail = mockTbmReports.find((r) => r.id === id)
-
-  const showToast = useCallback(() => {
-    setToastVisible(true)
-    Animated.sequence([
-      Animated.timing(toastAnim, { toValue: 1, duration: 250, useNativeDriver: true }),
-      Animated.delay(2000),
-      Animated.timing(toastAnim, { toValue: 0, duration: 250, useNativeDriver: true }),
-    ]).start(() => setToastVisible(false))
-  }, [toastAnim])
 
   const handleRegenerate = () => {
     setIsRegenerateVisible((prev) => !prev)
@@ -54,7 +45,7 @@ export const TbmReportStatusScreen: FC<TbmReportStatusScreenProps> = ({ navigati
     console.log("재생성 요청:", id, { regenerateProcessName, regenerateTeamName })
     setIsRegenerateVisible(false)
     setIsRefreshMode(true)
-    showToast()
+    setToastVisible(true)
   }
 
   const handleRefresh = () => {
@@ -296,16 +287,12 @@ export const TbmReportStatusScreen: FC<TbmReportStatusScreenProps> = ({ navigati
         </View>
       </StackScreen>
 
-      {toastVisible && (
-        <Animated.View
-          style={[S.$toast, { opacity: toastAnim, top: Math.max(100, insets.top + 60) + 8 }]}
-        >
-          <View style={S.$toastIconCircle}>
-            <IconCheck size={16} color="#FFFFFF" strokeWidth={2.5} />
-          </View>
-          <Text text={translate("tbmReportStatusScreen:toastRegenerate")} style={S.$toastText} />
-        </Animated.View>
-      )}
+      <Toast
+        visible={toastVisible}
+        message={translate("tbmReportStatusScreen:toastRegenerate")}
+        icon={<IconCheck size={14} color="#FFFFFF" strokeWidth={2.5} />}
+        onHide={() => setToastVisible(false)}
+      />
     </>
   )
 }

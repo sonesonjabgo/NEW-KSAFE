@@ -10,13 +10,14 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack"
 // Main Tab Navigator types
 export type MainTabParamList = {
   Home: undefined
-  SafeBoard: undefined
+  SafeBoard: { showToast?: boolean } | undefined
   SafeHealthMain: undefined
   WorkerParticipation: undefined
 }
 
 // App Stack Navigator types
 export type AppStackParamList = {
+  WelcomeIntro: undefined
   Login: undefined
   Main: NavigatorScreenParams<MainTabParamList>
   LanguageSettings: undefined
@@ -63,9 +64,12 @@ export type AppStackParamList = {
     | undefined
   TbmParticipationHistory: undefined
   TbmParticipationHistoryDetail: { id: number }
+  AiRiskDocCreator: undefined
   HazardRiskList: undefined
   HazardRiskCreate: undefined
   HazardRiskDetail: { id: number }
+  SafeBoardDetail: { id: number }
+  SafeBoardCreate: undefined
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<

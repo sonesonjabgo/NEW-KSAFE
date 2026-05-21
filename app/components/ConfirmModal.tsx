@@ -14,6 +14,10 @@ interface ConfirmModalProps {
   confirmBgColor: string
   onCancel?: () => void
   onConfirm: () => void
+  cardStyle?: ViewStyle
+  messageStyle?: TextStyle
+  confirmBtnStyle?: ViewStyle
+  confirmBtnTextStyle?: TextStyle
 }
 
 export const ConfirmModal: FC<ConfirmModalProps> = ({
@@ -26,14 +30,18 @@ export const ConfirmModal: FC<ConfirmModalProps> = ({
   confirmBgColor,
   onCancel,
   onConfirm,
+  cardStyle,
+  messageStyle,
+  confirmBtnStyle,
+  confirmBtnTextStyle,
 }) => {
   return (
     <Modal visible={visible} transparent animationType="fade" statusBarTranslucent>
       <Pressable style={$overlay} onPress={onCancel ?? (() => {})}>
-        <Pressable onPress={() => {}} style={$card}>
+        <Pressable onPress={() => {}} style={[$card, cardStyle]}>
           {icon}
           <Text text={title} style={$title} />
-          <Text text={message} style={$message} />
+          <Text text={message} style={[$message, messageStyle]} />
           <View style={$btnRow}>
             {cancelLabel && (
               <TouchableOpacity style={$cancelBtn} activeOpacity={0.7} onPress={onCancel}>
@@ -41,11 +49,11 @@ export const ConfirmModal: FC<ConfirmModalProps> = ({
               </TouchableOpacity>
             )}
             <TouchableOpacity
-              style={[$confirmBtn, { backgroundColor: confirmBgColor }]}
+              style={[$confirmBtn, { backgroundColor: confirmBgColor }, confirmBtnStyle]}
               activeOpacity={0.8}
               onPress={onConfirm}
             >
-              <Text text={confirmLabel} style={$confirmBtnText} />
+              <Text text={confirmLabel} style={[$confirmBtnText, confirmBtnTextStyle]} />
             </TouchableOpacity>
           </View>
         </Pressable>

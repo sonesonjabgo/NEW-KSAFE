@@ -67,27 +67,6 @@ export const $cardLabelSelected: TextStyle = {
   color: "#1062D8",
 }
 
-// ── Toast ─────────────────────────────────────────────────────────────────────
-
-export const $toast: ViewStyle = {
-  flexDirection: "row",
-  alignItems: "center",
-  height: 45,
-  marginHorizontal: 16,
-  marginBottom: 8,
-  paddingHorizontal: 14,
-  backgroundColor: "#FDF1F1",
-  borderRadius: 10,
-  gap: 8,
-}
-
-export const $toastText: TextStyle = {
-  flex: 1,
-  fontSize: 14,
-  fontFamily: typography.primary.semiBold,
-  color: "#F26160",
-}
-
 // ── Buttons ───────────────────────────────────────────────────────────────────
 
 export const $buttonDivider: ViewStyle = {

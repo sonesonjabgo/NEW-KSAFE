@@ -46,6 +46,11 @@ const fr: Translations = {
     tapToLogIn: "Appuyez pour vous connecter!",
     hint: "Hint: you can use any email address and your favorite password :)",
     forgotPassword: "Forgot your password?",
+    forgotPasswordModal: {
+      title: "Notice",
+      message: "For password recovery, please contact\nyour administrator.\nPhone: 062-383-0083",
+      confirm: "OK",
+    },
   },
   demoNavigator: {
     componentsTab: "Composants",
@@ -167,10 +172,16 @@ const fr: Translations = {
     title: "Board",
     alertButton: "Alert",
     workplaceLabel: "Workplace",
+    workplaceModal: { title: "Select Workplace" },
+    badge: { companyWide: "Company-wide", workplace: "Workplace", draft: "Draft", archived: "Archived" },
     tabs: { all: "All", myPosts: "My" },
     empty: "Empty",
     write: "Write",
+    draftSaved: "Post saved as draft.",
   },
+  safeBoardDetailScreen: { title: "Post Detail", authorLabel: "Author", editButton: "Edit", alertOn: "Alert ON", alertOff: "Alert OFF", publishButton: "Publish", deleteButton: "Delete", publishModal: { title: "Publish Post", message: "Are you sure you want to publish this post?", cancel: "Cancel", confirm: "Publish" }, deleteModal: { title: "Delete Post", message: "Are you sure you want to delete this post?", cancel: "Cancel", confirm: "Delete" } },
+  safeBoardCreateScreen: { title: "Write Post", guide: { title: "Writing Guide", description: "Please write clear and accurate content." }, workplace: { label: "Workplace", placeholder: "Select workplace", helper: "Select the workplace this post applies to." }, postTitle: { label: "Post Title", placeholder: "Enter post title (max 200 characters)", helper: "Enter a clear and descriptive title." }, content: { label: "Post Content", placeholder: "Enter post content (max 2000 characters)", helper: "Describe the safety issue in detail." }, attachment: { label: "Attachments", card1Text: "(Optional) You can upload\nfiles up to 50MB.", uploadButton: "Upload File", noFile: "No files selected." }, pushNotification: { label: "Send Push Notification", cardText: "When selected, a push notification will be sent to all members of the selected workplace upon posting." }, save: "Save" },
+
   safeHealthScreen: {
     title: "Health",
     menu: {
@@ -1029,6 +1040,42 @@ const fr: Translations = {
     activityContent: "Activity Content",
   },
 
+  aiRiskDocCreatorScreen: {
+    title: "AI Risk Analysis Report",
+    pageCount: "Total {{count}} page(s)",
+    captureButton: "Capture Before Improvement",
+    exportPdfButton: "Export PDF",
+    hazardToggle: {
+      label: "Include Hazard Coordinate Section",
+      description: "When unchecked, hazard coordinates will not be displayed on screen and PDF.",
+    },
+    emptyState: {
+      title: "No pages registered.",
+      description: "Capture a before-improvement image to add a page.",
+    },
+    captureSheet: {
+      camera: "Take Photo",
+      album: "Select from Album",
+    },
+    resetAll: "Reset All",
+    signature: {
+      instruction: "Sign with your finger in the box, then tap Save.",
+      cancel: "Cancel",
+      save: "Save",
+    },
+    page: {
+      title: "Page {{number}}",
+      beforeLabel: "Before",
+      afterLabel: "After",
+      addImage: "+ Add Image",
+      analyzeButton: "Request AI Analysis",
+      aiAnalysis: "AI Analysis",
+      hazardTitle: "Hazard Coordinate Details",
+      hazardEmpty: "No hazard coordinates to display.",
+      analysisPlaceholder: "Analysis results will be displayed here.",
+    },
+  },
+
   hazardRiskCreateScreen: {
     title: "Signalement de danger",
     guide: {
@@ -1137,6 +1184,29 @@ const fr: Translations = {
         impossible: "L'action a été traitée comme impossible.",
         adminSuffix: " - Administrateur ({{name}})",
       },
+    },
+  },
+
+  welcomeIntroScreen: {
+    skip: "Skip",
+    start: "Get Started",
+    slide1: {
+      step: "01",
+      title: "Real-Time Multilingual Translation",
+      description:
+        "Communicate smoothly with workers of all nationalities.\nInstant voice and text translation\nfor a safer workplace.",
+    },
+    slide2: {
+      step: "02",
+      title: "Integrated TBM Management",
+      description:
+        "Check in to TBM with a single QR code scan — no paperwork.\nDigital signatures and reports\ncompleted in one place.",
+    },
+    slide3: {
+      step: "03",
+      title: "AI Risk Assessment",
+      description:
+        "Just take a photo of the site and AI will analyze hazards\nand generate a report draft for you.",
     },
   },
 

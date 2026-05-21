@@ -8,7 +8,10 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import Config from "@/config"
+import { AiRiskDocCreatorScreen } from "@/screens/AiRiskDocCreatorScreen"
 import { AISafetyChatScreen } from "@/screens/AISafetyChatScreen/AISafetyChatScreen"
+import { SafeBoardCreateScreen } from "@/screens/SafeBoardCreateScreen/SafeBoardCreateScreen"
+import { SafeBoardDetailScreen } from "@/screens/SafeBoardDetailScreen/SafeBoardDetailScreen"
 import { EducationMaterialDetailScreen } from "@/screens/EducationMaterialDetailScreen/EducationMaterialDetailScreen"
 import { EducationMaterialRegisterScreen } from "@/screens/EducationMaterialRegisterScreen/EducationMaterialRegisterScreen"
 import { EducationMaterialScreen } from "@/screens/EducationMaterialScreen/EducationMaterialScreen"
@@ -45,6 +48,7 @@ import { TbmReportScreen } from "@/screens/TbmReportScreen/TbmReportScreen"
 import { TbmReportStatusScreen } from "@/screens/TbmReportStatusScreen/TbmReportStatusScreen"
 import { TextTranslationScreen } from "@/screens/TextTranslationScreen/TextTranslationScreen"
 import { VoiceTranslationScreen } from "@/screens/VoiceTranslationScreen"
+import { WelcomeIntroScreen } from "@/screens/WelcomeIntroScreen"
 import { useAppTheme } from "@/theme/context"
 
 import { MainNavigator } from "./MainNavigator"
@@ -67,6 +71,7 @@ const AppStack = () => {
 
   return (
     <Stack.Navigator
+      initialRouteName="WelcomeIntro"
       screenOptions={{
         headerShown: false,
         navigationBarColor: colors.background,
@@ -75,6 +80,7 @@ const AppStack = () => {
         },
       }}
     >
+      <Stack.Screen name="WelcomeIntro" component={WelcomeIntroScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Main" component={MainNavigator} />
       <Stack.Screen name="LanguageSettings" component={LanguageSettingsScreen} />
@@ -112,9 +118,12 @@ const AppStack = () => {
         name="TbmParticipationHistoryDetail"
         component={TbmParticipationHistoryDetailScreen}
       />
+      <Stack.Screen name="AiRiskDocCreator" component={AiRiskDocCreatorScreen} />
       <Stack.Screen name="HazardRiskList" component={HazardRiskScreen} />
       <Stack.Screen name="HazardRiskCreate" component={HazardRiskCreateScreen} />
       <Stack.Screen name="HazardRiskDetail" component={HazardRiskDetailScreen} />
+      <Stack.Screen name="SafeBoardDetail" component={SafeBoardDetailScreen} />
+      <Stack.Screen name="SafeBoardCreate" component={SafeBoardCreateScreen} />
     </Stack.Navigator>
   )
 }

@@ -19,6 +19,9 @@ export interface SafeBoardItem {
   createdAt: string
   updatedAt: string
   status: StatusType
+  authorName: string
+  authorAffiliation: string
+  content: string
 }
 
 export interface SafeBoardScreenProps extends MainTabScreenProps<"SafeBoard"> {}

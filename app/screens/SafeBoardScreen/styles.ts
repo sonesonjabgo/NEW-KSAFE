@@ -2,51 +2,9 @@ import { ViewStyle, TextStyle } from "react-native"
 
 import { typography } from "@/theme/typography"
 
-export const $screenContainer: ViewStyle = {
-  flex: 1,
-  backgroundColor: "#FFFFFF",
-}
-
-export const $scrollContent: ViewStyle = {
-  flexGrow: 1,
-}
-
-export const $headerContainer: ViewStyle = {
-  backgroundColor: "#0B3069",
-  paddingTop: 20,
-  paddingBottom: 20,
-  paddingHorizontal: 20,
-
-  alignItems: "center",
-  justifyContent: "center",
-}
-
-export const $adminHeaderContainer: ViewStyle = {
-  backgroundColor: "#0B3069",
-  paddingTop: 22,
-  paddingBottom: 22,
-  paddingHorizontal: 20,
-  position: "relative",
-}
-
-export const $adminHeaderContent: ViewStyle = {
-  flexDirection: "row",
-  justifyContent: "center",
-  alignItems: "center",
-}
-
-export const $headerTitle: TextStyle = {
-  color: "#FFFFFF",
-  fontSize: 21,
-  fontWeight: "600",
-  fontFamily: typography.primary.semiBold,
-}
+// ── Header right slot ─────────────────────────────────────────────────────────
 
 export const $bellIconContainer: ViewStyle = {
-  position: "absolute",
-  right: 20,
-  top: "50%",
-  transform: [{ translateY: -12 }],
   flexDirection: "row",
   alignItems: "center",
   gap: 6,
@@ -55,9 +13,10 @@ export const $bellIconContainer: ViewStyle = {
 export const $bellText: TextStyle = {
   color: "#FFFFFF",
   fontSize: 13,
-  fontWeight: "600",
   fontFamily: typography.primary.semiBold,
 }
+
+// ── Workplace selector ────────────────────────────────────────────────────────
 
 export const $workplaceContainer: ViewStyle = {
   backgroundColor: "#FFFFFF",
@@ -69,9 +28,8 @@ export const $workplaceContainer: ViewStyle = {
 
 export const $workplaceLabel: TextStyle = {
   fontSize: 14,
-  fontWeight: "500",
-  color: "#979797",
   fontFamily: typography.primary.medium,
+  color: "#979797",
   marginBottom: 8,
 }
 
@@ -79,16 +37,13 @@ export const $workplaceSelectorNew: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "space-between",
-  paddingVertical: 0,
-  paddingHorizontal: 0,
   backgroundColor: "transparent",
 }
 
 export const $workplaceSelectorTextNew: TextStyle = {
   fontSize: 21,
-  fontWeight: "700",
-  color: "#000000",
   fontFamily: typography.primary.bold,
+  color: "#000000",
   flex: 1,
 }
 
@@ -99,6 +54,8 @@ export const $chevronContainer: ViewStyle = {
   alignItems: "center",
   marginLeft: 8,
 }
+
+// ── Tabs ──────────────────────────────────────────────────────────────────────
 
 export const $tabContainer: ViewStyle = {
   flexDirection: "row",
@@ -123,15 +80,16 @@ export const $activeTab: ViewStyle = {
 
 export const $tabText: TextStyle = {
   fontSize: 14,
-  fontWeight: "600",
-  color: "#979797",
   fontFamily: typography.primary.semiBold,
+  color: "#979797",
 }
 
 export const $activeTabText: TextStyle = {
   color: "#0B3069",
-  fontWeight: "700",
+  fontFamily: typography.primary.bold,
 }
+
+// ── Content / List ────────────────────────────────────────────────────────────
 
 export const $contentContainer: ViewStyle = {
   flex: 1,
@@ -139,7 +97,6 @@ export const $contentContainer: ViewStyle = {
 }
 
 export const $listContainer: ViewStyle = {
-  paddingHorizontal: 0,
   paddingBottom: 24,
 }
 
@@ -155,6 +112,8 @@ export const $emptyText: TextStyle = {
   color: "#999999",
   fontFamily: typography.primary.normal,
 }
+
+// ── Floating button ───────────────────────────────────────────────────────────
 
 export const $floatingButton: ViewStyle = {
   position: "absolute",
@@ -177,41 +136,53 @@ export const $floatingButton: ViewStyle = {
 
 export const $floatingButtonText: TextStyle = {
   fontSize: 11,
-  fontWeight: "600",
-  color: "#FFFFFF",
   fontFamily: typography.primary.semiBold,
+  color: "#FFFFFF",
 }
+
+// ── Workplace modal ───────────────────────────────────────────────────────────
 
 export const $modalOverlay: ViewStyle = {
   flex: 1,
   backgroundColor: "rgba(0, 0, 0, 0.3)",
-  justifyContent: "center",
-  alignItems: "center",
+  justifyContent: "flex-end",
+}
+
+export const $modalTitle: TextStyle = {
+  fontSize: 17,
+  fontFamily: typography.primary.medium,
+  color: "#000000",
+  paddingHorizontal: 20,
+  marginBottom: 12,
 }
 
 export const $modalContent: ViewStyle = {
   backgroundColor: "#FFFFFF",
-  borderRadius: 12,
-  minWidth: 280,
-  maxWidth: 350,
-  overflow: "hidden",
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+  paddingTop: 36,
+  paddingBottom: 40,
 }
 
 export const $workplaceOption: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-  justifyContent: "space-between",
-  paddingHorizontal: 16,
-  paddingVertical: 14,
-  borderBottomWidth: 1,
-  borderBottomColor: "#F0F0F0",
+  gap: 12,
+  height: 66,
+  paddingHorizontal: 20,
+}
+
+export const $workplaceOptionSelected: ViewStyle = {
+  backgroundColor: "#E5F1FD",
 }
 
 export const $workplaceOptionText: TextStyle = {
-  fontSize: 14,
-  fontWeight: "500",
-  color: "#333333",
-  fontFamily: typography.primary.medium,
   flex: 1,
-  marginRight: 12,
+  fontSize: 17,
+  fontFamily: typography.primary.medium,
+  color: "#000000",
+}
+
+export const $workplaceOptionTextSelected: TextStyle = {
+  color: "#1062D8",
 }

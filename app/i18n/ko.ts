@@ -45,6 +45,11 @@ const ko: Translations = {
     tapToLogIn: "눌러서 로그인 하기!",
     hint: "힌트: 가장 좋아하는 암호와 아무란 아무 이메일 주소나 사용할 수 있어요 :)",
     forgotPassword: "비밀번호를 잊으셨나요?",
+    forgotPasswordModal: {
+      title: "알림",
+      message: "비밀번호 찾기는 관리자에게 문의 바랍니다.\n문의전화 : 062-383-0083",
+      confirm: "확인",
+    },
   },
   demoNavigator: {
     componentsTab: "컴포넌트",
@@ -186,12 +191,78 @@ const ko: Translations = {
     title: "안전게시판",
     alertButton: "알림 발송",
     workplaceLabel: "선택된 작업장",
+    workplaceModal: {
+      title: "작업장 선택",
+    },
+    badge: {
+      companyWide: "회사전체",
+      workplace: "사업장",
+      draft: "임시저장",
+      archived: "보관됨",
+    },
     tabs: {
       all: "안전게시판",
       myPosts: "내 게시글",
     },
     empty: "게시물이 없습니다",
     write: "작성하기",
+    draftSaved: "게시글이 임시저장 되었습니다.",
+  },
+
+  safeBoardDetailScreen: {
+    title: "게시글 상세",
+    authorLabel: "작성자",
+    editButton: "수정",
+    alertOn: "알림 ON",
+    alertOff: "알림 OFF",
+    publishButton: "게시하기",
+    deleteButton: "삭제하기",
+    publishModal: {
+      title: "게시글 게시",
+      message: "이 게시글을 게시하시겠습니까?\n게시 후에는 수정이 제한될 수 있습니다.",
+      cancel: "취소",
+      confirm: "게시",
+    },
+    deleteModal: {
+      title: "게시글 삭제",
+      message: "정말로 이 게시글을 삭제하시겠습니까?",
+      cancel: "취소",
+      confirm: "삭제",
+    },
+  },
+
+  safeBoardCreateScreen: {
+    title: "게시글 작성",
+    guide: {
+      title: "작성 가이드",
+      description: "관리 중인 하나 이상의 사업장을\n선택하고 안내 알림을 작성해 현장\n구성원에게 전달하세요.",
+    },
+    workplace: {
+      label: "사업장 선택",
+      placeholder: "사업장을 선택하세요",
+      helper: "이 게시글이 적용될 사업장을 선택하세요.",
+    },
+    postTitle: {
+      label: "게시글 제목",
+      placeholder: "제목을 입력하세요 (최대 200자)",
+      helper: "명확하고 구체적인 제목을 입력하세요.",
+    },
+    content: {
+      label: "게시글 내용",
+      placeholder: "내용을 입력하세요 (최대 2000자)",
+      helper: "안전 관련 내용을 자세히 작성해 주세요.",
+    },
+    attachment: {
+      label: "첨부파일",
+      card1Text: "(선택 사항) 최대 50MB까지\n업로드할 수 있습니다.",
+      uploadButton: "파일 업로드",
+      noFile: "선택된 파일이 없습니다.",
+    },
+    pushNotification: {
+      label: "푸시 알림 함께 보내기",
+      cardText: "선택 시 게시와 동시에 선택한 사업장 구성원에게 푸시 알림이 전송됩니다.",
+    },
+    save: "저장",
   },
 
   safeHealthScreen: {
@@ -1050,6 +1121,42 @@ const ko: Translations = {
     activityContent: "활동 내용",
   },
 
+  aiRiskDocCreatorScreen: {
+    title: "AI 위험분석 보고서",
+    pageCount: "총 {{count}}개의 페이지",
+    captureButton: "개선 전 촬영",
+    exportPdfButton: "PDF 내보내기",
+    hazardToggle: {
+      label: "위험 좌표 섹션 포함",
+      description: "체크를 해제하면 화면과 PDF에서 위험 좌표가 표시되지 않습니다.",
+    },
+    emptyState: {
+      title: "등록된 페이지가 없습니다.",
+      description: "개선전 이미지를 촬영해 페이지를 추가해주세요.",
+    },
+    captureSheet: {
+      camera: "카메라로 촬영",
+      album: "앨범에서 선택",
+    },
+    resetAll: "전체 초기화",
+    signature: {
+      instruction: "박스 안에 손가락으로 서명한 뒤 저장을 눌러주세요.",
+      cancel: "취소",
+      save: "저장",
+    },
+    page: {
+      title: "페이지 {{number}}",
+      beforeLabel: "개선 전",
+      afterLabel: "개선 후",
+      addImage: "+ 이미지 추가",
+      analyzeButton: "인공지능 분석 요청",
+      aiAnalysis: "AI 분석",
+      hazardTitle: "위험 좌표 상세",
+      hazardEmpty: "표시할 위험 좌표가 없습니다.",
+      analysisPlaceholder: "분석 결과가 여기에 표시됩니다.",
+    },
+  },
+
   hazardRiskCreateScreen: {
     title: "유해위험개소 제보",
     guide: {
@@ -1157,6 +1264,28 @@ const ko: Translations = {
         impossible: "조치 불가 처리되었습니다.",
         adminSuffix: " - 관리자({{name}})",
       },
+    },
+  },
+
+  welcomeIntroScreen: {
+    skip: "건너뛰기",
+    start: "시작하기",
+    slide1: {
+      step: "01",
+      title: "다국어 실시간 번역",
+      description:
+        "모든 국적의 근로자와 원활하게 소통하세요.\n안전한 현장을 위한 즉각적인 음성 및 텍스트\n번역을 지원합니다.",
+    },
+    slide2: {
+      step: "02",
+      title: "통합 TBM 관리",
+      description:
+        "복잡한 서류 작업 없이 QR 코드 스캔 한 번으로\nTBM을 체크하고\n디지털 서명, 보고서까지 완료하세요.",
+    },
+    slide3: {
+      step: "03",
+      title: "AI 위험성 평가",
+      description: "현장 사진만 찍으면 AI가 위험 요소를 분석하고\n보고서 초안까지 만들어줍니다.",
     },
   },
 
