@@ -74,27 +74,34 @@ export const Toast: FC<ToastProps> = ({
   const top = Math.max(100, insets.top + 60) + 8
 
   return (
-    <Animated.View style={[$containerStyle, { opacity: anim, top }]}>
-      <View style={$circleStyle}>{icon}</View>
-      <Text text={message} style={$textStyle} />
+    <Animated.View style={[$wrapperBase, { opacity: anim, top }]}>
+      <View style={[$containerStyle]}>
+        <View style={$circleStyle}>{icon}</View>
+        <Text text={message} style={$textStyle} />
+      </View>
     </Animated.View>
   )
 }
 
 // ── Styles ────────────────────────────────────────────────────────────────────
 
-const $toastBase: ViewStyle = {
+const $wrapperBase: ViewStyle = {
   position: "absolute",
-  left: 20,
-  right: 20,
-  height: 45,
+  left: 0,
+  right: 0,
+  alignItems: "center",
+  zIndex: 9999,
+  elevation: 20,
+}
+
+const $toastBase: ViewStyle = {
   borderRadius: 10,
   paddingHorizontal: 16,
+  paddingVertical: 11,
   flexDirection: "row",
   alignItems: "center",
   gap: 12,
-  zIndex: 9999,
-  elevation: 20,
+  maxWidth: "90%",
 }
 
 const $iconCircleBase: ViewStyle = {
@@ -106,7 +113,7 @@ const $iconCircleBase: ViewStyle = {
 }
 
 const $toastTextBase: TextStyle = {
-  flex: 1,
   fontSize: 14,
   fontFamily: typography.primary.semiBold,
+  flexShrink: 1,
 }
