@@ -1,0 +1,140 @@
+import { Dimensions, ImageStyle, TextStyle, ViewStyle } from "react-native"
+
+import { colors } from "@/theme/colors"
+import { typography } from "@/theme/typography"
+
+export const SCREEN_WIDTH = Dimensions.get("window").width
+
+// ── Screen ────────────────────────────────────────────────────────────────────
+
+export const $screen: ViewStyle = {
+  flex: 1,
+  backgroundColor: "#FFFFFF",
+}
+
+// ── Header ────────────────────────────────────────────────────────────────────
+
+export const $header: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+  paddingHorizontal: 24,
+  paddingBottom: 4,
+}
+
+export const $logoText: TextStyle = {
+  fontSize: 21,
+  fontFamily: typography.primary.bold,
+  color: colors.navy,
+  letterSpacing: -0.3,
+}
+
+export const $skipBtn: ViewStyle = {
+  paddingVertical: 6,
+  paddingHorizontal: 4,
+}
+
+export const $skipLabel: TextStyle = {
+  fontSize: 15,
+  fontFamily: typography.primary.medium,
+  color: colors.navy,
+}
+
+// ── Slide ─────────────────────────────────────────────────────────────────────
+
+export const $slide: ViewStyle = {
+  width: SCREEN_WIDTH,
+  flex: 1,
+  alignItems: "center",
+  justifyContent: "center",
+  paddingHorizontal: 32,
+}
+
+export const $imageContainer: ViewStyle = {
+  width: SCREEN_WIDTH * 0.64,
+  height: SCREEN_WIDTH * 0.64,
+  alignItems: "center",
+  justifyContent: "center",
+  marginBottom: 28,
+}
+
+export const $slideImage: ImageStyle = {
+  width: "100%",
+  height: "100%",
+}
+
+export const $stepBadge: ViewStyle = {
+  width: 50,
+  height: 50,
+  borderRadius: 25,
+  backgroundColor: colors.blue,
+  alignItems: "center",
+  justifyContent: "center",
+  marginBottom: 16,
+}
+
+export const $stepText: TextStyle = {
+  fontSize: 17,
+  fontFamily: typography.primary.bold,
+  color: "#FFFFFF",
+}
+
+export const $slideTitle: TextStyle = {
+  fontSize: 22,
+  fontFamily: typography.primary.bold,
+  color: colors.navy,
+  textAlign: "center",
+  marginBottom: 14,
+}
+
+export const $slideDescription: TextStyle = {
+  fontSize: 15,
+  fontFamily: typography.primary.normal,
+  color: "#888888",
+  textAlign: "center",
+  lineHeight: 23,
+}
+
+// ── Pagination ────────────────────────────────────────────────────────────────
+
+export const $paginationRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 6,
+  marginTop: 28,
+}
+
+export const $dot: ViewStyle = {
+  width: 6,
+  height: 6,
+  borderRadius: 3,
+  backgroundColor: "#D0D0D0",
+}
+
+export const $dotActive: ViewStyle = {
+  width: 26,
+  height: 6,
+  borderRadius: 3,
+  backgroundColor: colors.blue,
+}
+
+// ── Bottom ────────────────────────────────────────────────────────────────────
+
+export const $bottomContainer: ViewStyle = {
+  paddingHorizontal: 24,
+}
+
+export const $startBtn: ViewStyle = {
+  height: 56,
+  borderRadius: 14,
+  backgroundColor: colors.blue,
+  alignItems: "center",
+  justifyContent: "center",
+}
+
+export const $startBtnLabel: TextStyle = {
+  fontSize: 17,
+  fontFamily: typography.primary.semiBold,
+  color: "#FFFFFF",
+}

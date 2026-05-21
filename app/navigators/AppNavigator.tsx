@@ -45,6 +45,7 @@ import { TbmReportScreen } from "@/screens/TbmReportScreen/TbmReportScreen"
 import { TbmReportStatusScreen } from "@/screens/TbmReportStatusScreen/TbmReportStatusScreen"
 import { TextTranslationScreen } from "@/screens/TextTranslationScreen/TextTranslationScreen"
 import { VoiceTranslationScreen } from "@/screens/VoiceTranslationScreen"
+import { WelcomeIntroScreen } from "@/screens/WelcomeIntroScreen"
 import { useAppTheme } from "@/theme/context"
 
 import { MainNavigator } from "./MainNavigator"
@@ -67,6 +68,7 @@ const AppStack = () => {
 
   return (
     <Stack.Navigator
+      initialRouteName="WelcomeIntro"
       screenOptions={{
         headerShown: false,
         navigationBarColor: colors.background,
@@ -75,6 +77,7 @@ const AppStack = () => {
         },
       }}
     >
+      <Stack.Screen name="WelcomeIntro" component={WelcomeIntroScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Main" component={MainNavigator} />
       <Stack.Screen name="LanguageSettings" component={LanguageSettingsScreen} />

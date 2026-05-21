@@ -1149,6 +1149,29 @@ const ko: Translations = {
     },
   },
 
+  welcomeIntroScreen: {
+    skip: "건너뛰기",
+    start: "시작하기",
+    slide1: {
+      step: "01",
+      title: "다국어 실시간 번역",
+      description:
+        "모든 국적의 근로자와 원활하게 소통하세요.\n안전한 현장을 위한 즉각적인 음성 및 텍스트\n번역을 지원합니다.",
+    },
+    slide2: {
+      step: "02",
+      title: "TBM 안전 회의",
+      description:
+        "체계적인 TBM 회의로 현장 안전을 강화하세요.\n회의 생성부터 참여, 보고서까지\n한 번에 관리할 수 있습니다.",
+    },
+    slide3: {
+      step: "03",
+      title: "AI 위험 분석",
+      description:
+        "AI가 현장 이미지를 분석해 위험 요소를\n자동으로 파악합니다. 안전한 현장을 위한\n스마트 솔루션을 경험하세요.",
+    },
+  },
+
   ...demoKo,
 }
 

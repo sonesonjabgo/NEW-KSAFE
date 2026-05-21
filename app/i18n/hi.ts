@@ -1116,6 +1116,29 @@ const hi: Translations = {
     },
   },
 
+  welcomeIntroScreen: {
+    skip: "Skip",
+    start: "Get Started",
+    slide1: {
+      step: "01",
+      title: "Real-Time Multilingual Translation",
+      description:
+        "Communicate smoothly with workers of all nationalities.\nInstant voice and text translation\nfor a safer workplace.",
+    },
+    slide2: {
+      step: "02",
+      title: "TBM Safety Meeting",
+      description:
+        "Strengthen workplace safety with organized TBM meetings.\nCreate, join, and manage reports\nall in one place.",
+    },
+    slide3: {
+      step: "03",
+      title: "AI Hazard Analysis",
+      description:
+        "AI analyzes site images to automatically detect hazards.\nExperience a smarter solution\nfor a safer work environment.",
+    },
+  },
+
   ...demoHi,
 }
 
