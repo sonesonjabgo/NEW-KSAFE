@@ -118,6 +118,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         Icon: GridWarning,
         label: translate("homeScreen:grid.hazard.label"),
         sub: translate("homeScreen:grid.hazard.sub"),
+        onPress: () => navigation.navigate("HazardRiskList"),
       },
       {
         Icon: GridBulb,

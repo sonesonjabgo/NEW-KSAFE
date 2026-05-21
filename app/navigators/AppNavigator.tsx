@@ -16,6 +16,9 @@ import { EducationMaterialScreen } from "@/screens/EducationMaterialScreen/Educa
 import { EducationPresentationScreen } from "@/screens/EducationPresentationScreen/EducationPresentationScreen"
 import { EducationSelectScreen } from "@/screens/EducationSelectScreen/EducationSelectScreen"
 import { ErrorBoundary } from "@/screens/ErrorScreen/ErrorBoundary"
+import { HazardRiskCreateScreen } from "@/screens/HazardRiskCreateScreen/HazardRiskCreateScreen"
+import { HazardRiskDetailScreen } from "@/screens/HazardRiskDetailScreen/HazardRiskDetailScreen"
+import { HazardRiskScreen } from "@/screens/HazardRiskScreen/HazardRiskScreen"
 import { ImageTranslationScreen } from "@/screens/ImageTranslationScreen/ImageTranslationScreen"
 import { ImprovementProposalCreateScreen } from "@/screens/ImprovementProposalCreateScreen/ImprovementProposalCreateScreen"
 import { ImprovementProposalDetailScreen } from "@/screens/ImprovementProposalDetailScreen/ImprovementProposalDetailScreen"
@@ -111,6 +114,9 @@ const AppStack = () => {
         component={TbmParticipationHistoryDetailScreen}
       />
       <Stack.Screen name="AiRiskDocCreator" component={AiRiskDocCreatorScreen} />
+      <Stack.Screen name="HazardRiskList" component={HazardRiskScreen} />
+      <Stack.Screen name="HazardRiskCreate" component={HazardRiskCreateScreen} />
+      <Stack.Screen name="HazardRiskDetail" component={HazardRiskDetailScreen} />
     </Stack.Navigator>
   )
 }

@@ -1076,6 +1076,116 @@ const ko: Translations = {
     },
   },
 
+  hazardRiskCreateScreen: {
+    title: "유해위험개소 제보",
+    guide: {
+      title: "작성 가이드",
+      description:
+        "현장에서 발견한 유해위험요소를\n제보해주세요. 정확한 위치와\n위험요인을 작성하시면 신속한 조치가 가능합니다.",
+    },
+    workplace: {
+      label: "사업장",
+      placeholder: "사업장을 선택해주세요",
+      modalTitle: "사업장을 선택해주세요",
+      helper: "사업장 목록에서 사업장을 선택할 수 있습니다.",
+    },
+    location: {
+      label: "위치",
+      placeholder: "예) 2층 동측 복도, B구역 작업장 입구 등",
+      helper: "입력 시 최대 200자까지 작성할 수 있습니다.",
+    },
+    hazardFactor: {
+      label: "위험요인",
+      placeholder:
+        "어떤 위험요인이 있나요?\n예시)\n · 계단 손잡이가 흔들려 낙상 위험이 있습니다.\n · 전선이 노출되어 감전 위험이 있습니다.",
+      helper: "입력 시 최대 1,000자까지 작성할 수 있습니다.",
+    },
+    sitePhotos: {
+      label: "현장 사진",
+      addButton: "사진 추가",
+      modalTitle: "사진 추가 방법 선택",
+      camera: "카메라로 촬영",
+      album: "앨범에서 선택",
+      hint: "현장 상황을 명확히 보여주는 사진을 추가해주세요.",
+      guide:
+        "현장 사진을 최소 1장 이상 등록해주세요.\n최소 1장에서 최대 5장까지 첨부할 수 있습니다.",
+      preview: "이미지를 추가하면 미리보기가 표시됩니다.",
+    },
+    submit: "제출하기",
+  },
+
+  hazardRiskScreen: {
+    title: "유해위험개소",
+    fab: "새 제보 작성",
+    summary: {
+      myReports: "나의 제보",
+      completed: "조치 완료",
+      unit: "건",
+    },
+    tabs: {
+      all: "전체",
+      pending: "대기중",
+      ongoing: "진행중",
+      completed: "조치완료",
+      impossible: "조치불가",
+    },
+    status: {
+      pending: "대기중",
+      ongoing: "진행중",
+      completed: "조치완료",
+      impossible: "조치불가",
+    },
+    empty: {
+      all: "등록된 유해위험개소가 없습니다.",
+      pending: "대기중인 유해위험개소가 없습니다.",
+      ongoing: "진행중인 유해위험개소가 없습니다.",
+      completed: "조치완료된 유해위험개소가 없습니다.",
+      impossible: "조치불가 처리된 유해위험개소가 없습니다.",
+    },
+  },
+
+  hazardRiskDetailScreen: {
+    title: "유해위험개소 상세",
+    infoCard: {
+      locationLabel: "위치",
+      hazardFactorLabel: "위험요인",
+      sitePhotosLabel: "제보사진",
+      noPhotos: "등록된 사진이 없습니다.",
+      managerProfileLabel: "관리자 프로필",
+    },
+    adminSection: {
+      title: "상태 변경 및 처리",
+      noteLabel: "조치 내용 입력",
+      noteHint: "입력 시 최대 2,000자까지 작성할 수 있습니다.",
+      sitePhotosLabel: "현장 사진",
+      sitePhotosHints: {
+        hint1: "현장 상황을 명확히 보여주는 사진을 추가해주세요.",
+        hint2: "조치 후 현장 사진을 추가하면 처리 결과를 명확히 전달할 수 있습니다.",
+      },
+      placeholder: {
+        pending: "대기중 상태입니다.\n진행중으로 변경한 뒤 처리할 수 있습니다.",
+        ongoing: "조치완료 또는 불가 상태 선택 시 입력 가능",
+        completed:
+          "어떻게 조치했는지 상세히 입력해주세요 (예: 손잡이 재설치 완료, 전선 보호관 설치 완료)",
+        impossible: "조치가 불가능한 사유를 상세히 입력해주세요.",
+      },
+    },
+    statusHistory: {
+      title: "상태 변경 이력",
+      titles: {
+        pending: "제보 등록",
+        completed: "조치완료 처리",
+        impossible: "조치불가 처리",
+      },
+      contents: {
+        pending: "제보가 접수되었습니다.",
+        completed: "조치 완료 처리되었습니다.",
+        impossible: "조치 불가 처리되었습니다.",
+        adminSuffix: " - 관리자({{name}})",
+      },
+    },
+  },
+
   ...demoKo,
 }
 

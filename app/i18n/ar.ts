@@ -1033,6 +1033,115 @@ const ar: Translations = {
     },
   },
 
+  hazardRiskCreateScreen: {
+    title: "الإبلاغ عن مخاطر",
+    guide: {
+      title: "دليل الكتابة",
+      description:
+        "يرجى الإبلاغ عن المخاطر التي وجدتها في الموقع. تحديد الموقع الدقيق وعوامل الخطر يساعد على اتخاذ إجراءات سريعة.",
+    },
+    workplace: {
+      label: "موقع العمل",
+      placeholder: "اختر موقع العمل",
+      modalTitle: "اختر موقع العمل",
+      helper: "يمكنك اختيار موقع العمل من القائمة.",
+    },
+    location: {
+      label: "الموقع",
+      placeholder: "مثال: الممر الشرقي بالطابق الثاني، مدخل منطقة العمل B",
+      helper: "حتى 200 حرف.",
+    },
+    hazardFactor: {
+      label: "عامل الخطر",
+      placeholder:
+        "ما هي عوامل الخطر الموجودة؟\nأمثلة:\n · درابزين الدرج متقلقل مما يشكل خطر السقوط.\n · أسلاك مكشوفة تشكل خطر الصعق الكهربائي.",
+      helper: "حتى 1,000 حرف.",
+    },
+    sitePhotos: {
+      label: "صور الموقع",
+      addButton: "إضافة صورة",
+      modalTitle: "اختر طريقة إضافة الصورة",
+      camera: "التقاط بالكاميرا",
+      album: "اختيار من الألبوم",
+      hint: "يرجى إضافة صور تُظهر بوضوح أوضاع الموقع.",
+      guide: "يجب تسجيل صورة واحدة على الأقل من الموقع.\nيمكنك إرفاق من 1 إلى 5 صور.",
+      preview: "ستظهر معاينة عند إضافة صورة.",
+    },
+    submit: "إرسال",
+  },
+
+  hazardRiskScreen: {
+    title: "Hazard Areas",
+    fab: "New Report",
+    summary: {
+      myReports: "My Reports",
+      completed: "Resolved",
+      unit: "item(s)",
+    },
+    tabs: {
+      all: "All",
+      pending: "Pending",
+      ongoing: "In Progress",
+      completed: "Resolved",
+      impossible: "Unresolvable",
+    },
+    status: {
+      pending: "Pending",
+      ongoing: "In Progress",
+      completed: "Resolved",
+      impossible: "Unresolvable",
+    },
+    empty: {
+      all: "No hazard areas registered.",
+      pending: "No pending hazard areas.",
+      ongoing: "No hazard areas in progress.",
+      completed: "No resolved hazard areas.",
+      impossible: "No unresolvable hazard areas.",
+    },
+  },
+
+  hazardRiskDetailScreen: {
+    title: "Hazard Area Detail",
+    infoCard: {
+      locationLabel: "Location",
+      hazardFactorLabel: "Hazard Factor",
+      sitePhotosLabel: "Site Photos",
+      noPhotos: "No photos registered.",
+      managerProfileLabel: "Manager Profile",
+    },
+    adminSection: {
+      title: "Status Change & Action",
+      noteLabel: "Enter Action Details",
+      noteHint: "Up to 2,000 characters can be entered.",
+      sitePhotosLabel: "صور الموقع",
+      sitePhotosHints: {
+        hint1: "يرجى إضافة صور تُظهر بوضوح أوضاع الموقع.",
+        hint2: "إضافة صور الموقع بعد الإجراء يمكن أن ينقل النتائج بوضوح.",
+      },
+      placeholder: {
+        pending: "Status is pending.\nChange to In Progress before taking action.",
+        ongoing: "Input available when Completed or Impossible status is selected",
+        completed:
+          "Please describe the action taken in detail (e.g., handrail reinstalled, cable protector installed)",
+        impossible: "Please describe in detail why the action is not possible.",
+      },
+    },
+    statusHistory: {
+      title: "تاريخ الحالة",
+      titles: {
+        pending: "تم تسجيل التقرير",
+        completed: "تم اكتمال الإجراء",
+        impossible: "الإجراء مستحيل",
+      },
+      contents: {
+        pending: "تم استلام التقرير.",
+        completed: "تم اكتمال الإجراء.",
+        impossible: "تمت معالجة الإجراء على أنه مستحيل.",
+        adminSuffix: " - المشرف ({{name}})",
+      },
+    },
+  },
+
   ...demoAr,
 }
 

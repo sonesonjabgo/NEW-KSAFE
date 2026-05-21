@@ -1051,6 +1051,117 @@ const fr: Translations = {
     },
   },
 
+  hazardRiskCreateScreen: {
+    title: "Signalement de danger",
+    guide: {
+      title: "Guide de rédaction",
+      description:
+        "Veuillez signaler les dangers trouvés sur le site. Indiquer l'emplacement précis et les facteurs de risque permet une intervention rapide.",
+    },
+    workplace: {
+      label: "Lieu de travail",
+      placeholder: "Sélectionnez un lieu de travail",
+      modalTitle: "Sélectionnez un lieu de travail",
+      helper: "Vous pouvez sélectionner un lieu de travail dans la liste.",
+    },
+    location: {
+      label: "Emplacement",
+      placeholder: "Ex : Couloir est du 2e étage, entrée de la zone B",
+      helper: "Jusqu'à 200 caractères.",
+    },
+    hazardFactor: {
+      label: "Facteur de risque",
+      placeholder:
+        "Quels sont les facteurs de risque ?\nExemples :\n · La rampe d'escalier est instable, présentant un risque de chute.\n · Des fils exposés créent un risque d'électrocution.",
+      helper: "Jusqu'à 1 000 caractères.",
+    },
+    sitePhotos: {
+      label: "Photos du site",
+      addButton: "Ajouter une photo",
+      modalTitle: "Sélectionner la méthode photo",
+      camera: "Prendre avec la caméra",
+      album: "Choisir depuis l'album",
+      hint: "Veuillez ajouter des photos montrant clairement les conditions du site.",
+      guide:
+        "Au moins 1 photo du site doit être enregistrée.\nVous pouvez joindre de 1 à 5 photos.",
+      preview: "Un aperçu s'affichera lorsque vous ajouterez une image.",
+    },
+    submit: "Soumettre",
+  },
+
+  hazardRiskScreen: {
+    title: "Hazard Areas",
+    fab: "New Report",
+    summary: {
+      myReports: "My Reports",
+      completed: "Resolved",
+      unit: "item(s)",
+    },
+    tabs: {
+      all: "All",
+      pending: "Pending",
+      ongoing: "In Progress",
+      completed: "Resolved",
+      impossible: "Unresolvable",
+    },
+    status: {
+      pending: "Pending",
+      ongoing: "In Progress",
+      completed: "Resolved",
+      impossible: "Unresolvable",
+    },
+    empty: {
+      all: "No hazard areas registered.",
+      pending: "No pending hazard areas.",
+      ongoing: "No hazard areas in progress.",
+      completed: "No resolved hazard areas.",
+      impossible: "No unresolvable hazard areas.",
+    },
+  },
+
+  hazardRiskDetailScreen: {
+    title: "Hazard Area Detail",
+    infoCard: {
+      locationLabel: "Location",
+      hazardFactorLabel: "Hazard Factor",
+      sitePhotosLabel: "Site Photos",
+      noPhotos: "No photos registered.",
+      managerProfileLabel: "Manager Profile",
+    },
+    adminSection: {
+      title: "Status Change & Action",
+      noteLabel: "Enter Action Details",
+      noteHint: "Up to 2,000 characters can be entered.",
+      sitePhotosLabel: "Photos du site",
+      sitePhotosHints: {
+        hint1: "Veuillez ajouter des photos montrant clairement les conditions du site.",
+        hint2:
+          "L'ajout de photos du site après l'action peut communiquer clairement les résultats.",
+      },
+      placeholder: {
+        pending: "Status is pending.\nChange to In Progress before taking action.",
+        ongoing: "Input available when Completed or Impossible status is selected",
+        completed:
+          "Please describe the action taken in detail (e.g., handrail reinstalled, cable protector installed)",
+        impossible: "Please describe in detail why the action is not possible.",
+      },
+    },
+    statusHistory: {
+      title: "Historique des statuts",
+      titles: {
+        pending: "Rapport enregistré",
+        completed: "Action terminée",
+        impossible: "Action impossible",
+      },
+      contents: {
+        pending: "Le rapport a été reçu.",
+        completed: "L'action a été terminée.",
+        impossible: "L'action a été traitée comme impossible.",
+        adminSuffix: " - Administrateur ({{name}})",
+      },
+    },
+  },
+
   ...demoFr,
 }
 
