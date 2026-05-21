@@ -338,6 +338,12 @@ const ar: Translations = {
     title: "الإشعارات",
     emptyTitle: "لا توجد إشعارات",
     emptyDescription: "لا توجد إشعارات حالياً.\nسنُعلمك عند وصول إشعارات جديدة.",
+    mock: {
+      boardNewPost: {
+        title: "A new post has been written on the board.",
+        description: "Check the board of your affiliated workplace!",
+      },
+    },
   },
 
   qrScanner: {

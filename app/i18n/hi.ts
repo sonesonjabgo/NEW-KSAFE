@@ -342,6 +342,12 @@ const hi: Translations = {
     title: "सूचनाएं",
     emptyTitle: "कोई सूचना नहीं",
     emptyDescription: "अभी कोई सूचना नहीं है।\nजब नई सूचनाएं आएंगी तो हम आपको बताएंगे।",
+    mock: {
+      boardNewPost: {
+        title: "A new post has been written on the board.",
+        description: "Check the board of your affiliated workplace!",
+      },
+    },
   },
 
   qrScanner: {

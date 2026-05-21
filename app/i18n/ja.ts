@@ -342,6 +342,12 @@ const ja: Translations = {
     title: "通知",
     emptyTitle: "通知はありません",
     emptyDescription: "現在、受け取った通知はありません。\n新しい通知が届いたらお知らせします。",
+    mock: {
+      boardNewPost: {
+        title: "A new post has been written on the board.",
+        description: "Check the board of your affiliated workplace!",
+      },
+    },
   },
 
   qrScanner: {
