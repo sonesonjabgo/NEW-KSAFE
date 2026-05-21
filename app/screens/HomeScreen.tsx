@@ -1,5 +1,14 @@
 import { FC, useEffect, useState, useMemo } from "react"
-import { View, ViewStyle, TextStyle, TouchableOpacity, ScrollView, StyleSheet } from "react-native"
+import {
+  Image,
+  ImageStyle,
+  View,
+  ViewStyle,
+  TextStyle,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+} from "react-native"
 import { Pin, ChevronRight } from "lucide-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import type { SvgProps } from "react-native-svg"
@@ -28,6 +37,9 @@ import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 import type { MainTabScreenProps } from "@/navigators/navigationTypes"
 import { typography } from "@/theme/typography"
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const aiBannerImage = require("@assets/icons/home/home_ai_risk_banner.png")
 
 interface HomeScreenProps extends MainTabScreenProps<"Home"> {}
 
@@ -348,18 +360,19 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
           {/* Bottom Banner */}
           <View style={$banner}>
-            <View style={$bannerInner}>
-              <Text text={translate("homeScreen:banner.text")} style={$bannerText} />
-            </View>
+            <Image source={aiBannerImage} style={$bannerImage} resizeMode="cover" />
           </View>
 
           {/* Footer */}
           <View style={$footer}>
-            <Text text={translate("homeScreen:footer.homepage")} style={$footerLink} />
-            <Text text="|" style={$footerSep} />
-            <Text text={translate("homeScreen:footer.privacy")} style={$footerLink} />
-            <Text text="|" style={$footerSep} />
-            <Text text={translate("homeScreen:footer.terms")} style={$footerLink} />
+            <View style={$footerLinks}>
+              <Text text={translate("homeScreen:footer.homepage")} style={$footerLink} />
+              <Text text="|" style={$footerSep} />
+              <Text text={translate("homeScreen:footer.privacy")} style={$footerLink} />
+              <Text text="|" style={$footerSep} />
+              <Text text={translate("homeScreen:footer.terms")} style={$footerLink} />
+            </View>
+            <Text text={translate("homeScreen:footer.copyright")} style={$footerCopyright} />
           </View>
         </View>
       </ScrollView>
@@ -714,42 +727,45 @@ const $boardItemDate: TextStyle = {
 const $banner: ViewStyle = {
   borderRadius: 10,
   overflow: "hidden",
-  height: 111,
-  backgroundColor: "#D0DDF7",
+  aspectRatio: 930 / 398,
 }
 
-const $bannerInner: ViewStyle = {
-  flex: 1,
-  alignItems: "center",
-  justifyContent: "center",
-  paddingHorizontal: 20,
-}
-
-const $bannerText: TextStyle = {
-  fontSize: 15,
-  fontFamily: typography.primary.semiBold,
-  color: BLUE,
-  textAlign: "center",
+const $bannerImage: ImageStyle = {
+  width: "100%",
+  height: "100%",
 }
 
 const $footer: ViewStyle = {
+  alignItems: "center",
+  marginTop: 19,
+  paddingBottom: 40,
+  gap: 8,
+}
+
+const $footerLinks: ViewStyle = {
   flexDirection: "row",
   justifyContent: "center",
   alignItems: "center",
-  marginTop: 19,
   gap: 20,
-  paddingBottom: 40,
 }
 
 const $footerLink: TextStyle = {
-  fontSize: 11,
+  fontSize: 13,
   color: "#7F848C",
   fontFamily: typography.primary.normal,
 }
 
 const $footerSep: TextStyle = {
-  fontSize: 11,
+  fontSize: 13,
   color: "#CFD0D3",
+}
+
+const $footerCopyright: TextStyle = {
+  fontSize: 10,
+  color: "#B0B3B8",
+  fontFamily: typography.primary.normal,
+  textAlign: "center",
+  marginTop: 25,
 }
 
 const $eduBanner: ViewStyle = {

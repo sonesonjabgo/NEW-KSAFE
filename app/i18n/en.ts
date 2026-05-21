@@ -162,6 +162,7 @@ const en = {
       homepage: "Homepage",
       privacy: "Privacy Policy",
       terms: "Terms of Service",
+      copyright: "Copyright © KS Industrial Safety Association all rights reserved.",
     },
     grid: {
       interpret: { label: "1:1 Interpretation", sub: "Real-time interpretation" },

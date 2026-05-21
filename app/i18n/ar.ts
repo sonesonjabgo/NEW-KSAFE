@@ -134,7 +134,12 @@ const ar: Translations = {
     },
     edu: { title: "Education", description: "Description" },
     banner: { text: "Safe Environment" },
-    footer: { homepage: "Homepage", privacy: "Privacy", terms: "Terms" },
+    footer: {
+      homepage: "Homepage",
+      privacy: "Privacy",
+      terms: "Terms",
+      copyright: "Copyright © KS Industrial Safety Association all rights reserved.",
+    },
     grid: {
       interpret: { label: "Interpret", sub: "Interpretation" },
       chatbot: { label: "Chatbot", sub: "Chatbot" },
