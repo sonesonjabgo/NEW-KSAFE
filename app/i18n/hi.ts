@@ -45,6 +45,11 @@ const hi: Translations = {
     tapToLogIn: "लॉग इन करने के लिए टैप करें!",
     hint: "Hint: you can use any email address and your favorite password :)",
     forgotPassword: "Forgot your password?",
+    forgotPasswordModal: {
+      title: "Notice",
+      message: "For password recovery, please contact\nyour administrator.\nPhone: 062-383-0083",
+      confirm: "OK",
+    },
   },
   demoNavigator: {
     componentsTab: "कंपोनेंट्स",

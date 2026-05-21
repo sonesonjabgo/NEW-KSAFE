@@ -45,6 +45,11 @@ const ko: Translations = {
     tapToLogIn: "눌러서 로그인 하기!",
     hint: "힌트: 가장 좋아하는 암호와 아무란 아무 이메일 주소나 사용할 수 있어요 :)",
     forgotPassword: "비밀번호를 잊으셨나요?",
+    forgotPasswordModal: {
+      title: "알림",
+      message: "비밀번호 찾기는 관리자에게 문의 바랍니다.\n문의전화 : 062-383-0083",
+      confirm: "확인",
+    },
   },
   demoNavigator: {
     componentsTab: "컴포넌트",

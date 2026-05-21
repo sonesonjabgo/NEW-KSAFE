@@ -39,6 +39,7 @@ const palette = {
   charcoal: "#3A3A3A",
   softGray: "#7F7F7F",
   nearBlack: "#252525",
+  blueTint: "#E3EDFB",
 } as const
 
 export const colors = {
@@ -112,4 +113,8 @@ export const colors = {
    * 인트로 화면 슬라이드 타이틀 색상 (#252525).
    */
   introTitle: palette.nearBlack,
+  /**
+   * 모달 아이콘 원형 배경색 (#E3EDFB).
+   */
+  modalIconBg: palette.blueTint,
 } as const
