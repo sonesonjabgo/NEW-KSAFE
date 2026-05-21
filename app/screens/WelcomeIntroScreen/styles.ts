@@ -48,24 +48,19 @@ export const $slideArea: ViewStyle = {
   flex: 1,
   justifyContent: "center",
   alignItems: "center",
+  paddingBottom: 48,
 }
 
 export const $slideList: ViewStyle = {
-  flex: 1,
-  alignSelf: "stretch",
-}
-
-export const $slideListContent: ViewStyle = {
-  flexGrow: 1,
+  flexGrow: 0,
+  width: "100%",
 }
 
 // ── Slide (FlatList 각 아이템) ────────────────────────────────────────────────
 
 export const $slide: ViewStyle = {
   width: SCREEN_WIDTH,
-  height: "100%",
   alignItems: "center",
-  justifyContent: "center",
   paddingHorizontal: 32,
 }
 

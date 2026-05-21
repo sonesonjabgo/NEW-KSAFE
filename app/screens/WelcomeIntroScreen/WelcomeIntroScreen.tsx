@@ -15,7 +15,7 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
   const [currentIndex, setCurrentIndex] = useState(0)
   const flatListRef = useRef<FlatList<IntroSlideData>>(null)
 
-  const viewabilityConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current
+  const viewabilityConfig = useRef({ itemVisiblePercentThreshold: 50 }).current
 
   const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: ViewToken[] }) => {
     if (viewableItems.length > 0 && viewableItems[0].index !== null) {
@@ -60,8 +60,8 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
           pagingEnabled
           showsHorizontalScrollIndicator={false}
           bounces={false}
+          extraData={currentIndex}
           style={S.$slideList}
-          contentContainerStyle={S.$slideListContent}
           getItemLayout={(_, index) => ({
             length: S.SCREEN_WIDTH,
             offset: S.SCREEN_WIDTH * index,
