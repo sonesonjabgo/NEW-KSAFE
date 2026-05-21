@@ -13,7 +13,9 @@ export const WorkerParticipationScreen: FC<WorkerParticipationScreenProps> = ({ 
   const mockWorkerParticipationMenus = useMemo(() => getMockWorkerParticipationMenus(), [])
 
   const handleMenuPress = (id: number) => {
-    if (id === 2) {
+    if (id === 1) {
+      navigation.navigate("HazardRiskList")
+    } else if (id === 2) {
       navigation.navigate("ImprovementProposalList")
     }
   }
