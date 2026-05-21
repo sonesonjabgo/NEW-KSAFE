@@ -52,7 +52,7 @@ type TabType = "all" | "company" | "workplace"
 
 export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
-  const { role: userRole, setRole: setUserRole } = useRole()
+  const { role: userRole } = useRole()
   const [selectedTab, setSelectedTab] = useState<TabType>("all")
   // TODO: 추후 "생성된 교육/발표실 존재 여부" API 연동으로 교체
   const [showEducationBanner, setShowEducationBanner] = useState(false)
@@ -188,31 +188,6 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         >
           {/* ── Header (blue background) ── */}
           <View style={[$header, { paddingTop: insets.top + 12 }]}>
-            {/* ── 임시 개발용 토글 영역 ── */}
-            <View style={$devToggleArea}>
-              {/* 역할 전환 */}
-              <View style={$roleToggleRow}>
-                <TouchableOpacity
-                  style={[$roleToggleBtn, userRole === "admin" && $roleToggleBtnActive]}
-                  onPress={() => setUserRole("admin")}
-                >
-                  <Text
-                    text={translate("homeScreen:role.admin")}
-                    style={[$roleToggleText, userRole === "admin" && $roleToggleTextActive]}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[$roleToggleBtn, userRole === "worker" && $roleToggleBtnActive]}
-                  onPress={() => setUserRole("worker")}
-                >
-                  <Text
-                    text={translate("homeScreen:role.worker")}
-                    style={[$roleToggleText, userRole === "worker" && $roleToggleTextActive]}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-
             {/* Row 1: Logo + Actions */}
             <View style={$titleRow}>
               <View>
@@ -459,41 +434,6 @@ const $header: ViewStyle = {
   paddingBottom: 20,
   paddingHorizontal: 20,
   gap: 16,
-}
-
-const $devToggleArea: ViewStyle = {
-  alignItems: "center",
-  gap: 8,
-  marginBottom: 10,
-}
-
-const $roleToggleRow: ViewStyle = {
-  flexDirection: "row",
-  alignSelf: "center",
-  backgroundColor: "rgba(255,255,255,0.15)",
-  borderRadius: 8,
-  padding: 3,
-  gap: 4,
-}
-
-const $roleToggleBtn: ViewStyle = {
-  paddingVertical: 6,
-  paddingHorizontal: 16,
-  borderRadius: 6,
-}
-
-const $roleToggleBtnActive: ViewStyle = {
-  backgroundColor: "#FFFFFF",
-}
-
-const $roleToggleText: TextStyle = {
-  fontSize: 13,
-  fontFamily: typography.primary.semiBold,
-  color: "rgba(255,255,255,0.6)",
-}
-
-const $roleToggleTextActive: TextStyle = {
-  color: "#0B3069",
 }
 
 const $titleRow: ViewStyle = {

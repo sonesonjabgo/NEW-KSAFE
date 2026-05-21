@@ -142,10 +142,6 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
             </View>
           </View>
 
-          {!!errorMessage && (
-            <RNText style={$errorText}>{errorMessage}</RNText>
-          )}
-
           <View style={$gap32} />
 
           {/* 로그인 버튼 */}
