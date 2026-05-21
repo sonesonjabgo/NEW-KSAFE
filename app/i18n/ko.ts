@@ -1117,6 +1117,42 @@ const ko: Translations = {
     activityContent: "활동 내용",
   },
 
+  aiRiskDocCreatorScreen: {
+    title: "AI 위험분석 보고서",
+    pageCount: "총 {{count}}개의 페이지",
+    captureButton: "개선 전 촬영",
+    exportPdfButton: "PDF 내보내기",
+    hazardToggle: {
+      label: "위험 좌표 섹션 포함",
+      description: "체크를 해제하면 화면과 PDF에서 위험 좌표가 표시되지 않습니다.",
+    },
+    emptyState: {
+      title: "등록된 페이지가 없습니다.",
+      description: "개선전 이미지를 촬영해 페이지를 추가해주세요.",
+    },
+    captureSheet: {
+      camera: "카메라로 촬영",
+      album: "앨범에서 선택",
+    },
+    resetAll: "전체 초기화",
+    signature: {
+      instruction: "박스 안에 손가락으로 서명한 뒤 저장을 눌러주세요.",
+      cancel: "취소",
+      save: "저장",
+    },
+    page: {
+      title: "페이지 {{number}}",
+      beforeLabel: "개선 전",
+      afterLabel: "개선 후",
+      addImage: "+ 이미지 추가",
+      analyzeButton: "인공지능 분석 요청",
+      aiAnalysis: "AI 분석",
+      hazardTitle: "위험 좌표 상세",
+      hazardEmpty: "표시할 위험 좌표가 없습니다.",
+      analysisPlaceholder: "분석 결과가 여기에 표시됩니다.",
+    },
+  },
+
   hazardRiskCreateScreen: {
     title: "유해위험개소 제보",
     guide: {

@@ -1,0 +1,276 @@
+import { FC, useCallback, useRef, useState } from "react"
+import {
+  Animated,
+  Modal,
+  PanResponder,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native"
+import { IconCamera, IconFileExport, IconPhoto, IconTrash } from "@tabler/icons-react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+
+import { StackScreen } from "@/components/StackScreen"
+import { Text } from "@/components/Text"
+import { translate } from "@/i18n/translate"
+import type { AppStackScreenProps } from "@/navigators/navigationTypes"
+import { colors } from "@/theme/colors"
+
+import { AiRiskActionButton } from "./components/AiRiskActionButton"
+import { AiRiskEmptyState } from "./components/AiRiskEmptyState"
+import { AiRiskPageCard } from "./components/AiRiskPageCard"
+import { HazardCoordinateToggleCard } from "./components/HazardCoordinateToggleCard"
+import { SignatureBottomSheet } from "./components/SignatureBottomSheet"
+import { MOCK_ANALYSIS_RESULT, MOCK_HAZARDS, type AiRiskPage, createMockPage } from "./mockData"
+import * as S from "./styles"
+
+export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">> = ({
+  navigation,
+}) => {
+  const insets = useSafeAreaInsets()
+
+  const [pages, setPages] = useState<AiRiskPage[]>([])
+  const [includeHazardCoordinates, setIncludeHazardCoordinates] = useState(true)
+
+  // ── Capture Sheet ────────────────────────────────────────────────────────────
+  const [captureSheetVisible, setCaptureSheetVisible] = useState(false)
+  const slideAnim = useRef(new Animated.Value(300)).current
+  const fadeAnim = useRef(new Animated.Value(0)).current
+
+  // ── Signature Sheet ───────────────────────────────────────────────────────────
+  const [signSheetVisible, setSignSheetVisible] = useState(false)
+  const signSlideAnim = useRef(new Animated.Value(400)).current
+  const signFadeAnim = useRef(new Animated.Value(0)).current
+
+  const openCaptureSheet = useCallback(() => {
+    setCaptureSheetVisible(true)
+    Animated.parallel([
+      Animated.timing(fadeAnim, { toValue: 1, duration: 200, useNativeDriver: true }),
+      Animated.timing(slideAnim, { toValue: 0, duration: 260, useNativeDriver: true }),
+    ]).start()
+  }, [fadeAnim, slideAnim])
+
+  const closeCaptureSheet = useCallback(() => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, { toValue: 0, duration: 160, useNativeDriver: true }),
+      Animated.timing(slideAnim, { toValue: 300, duration: 200, useNativeDriver: true }),
+    ]).start(() => setCaptureSheetVisible(false))
+  }, [fadeAnim, slideAnim])
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: (_, gs) => gs.dy > 5 && gs.dy > Math.abs(gs.dx),
+      onPanResponderMove: (_, gs) => {
+        if (gs.dy > 0) slideAnim.setValue(gs.dy)
+      },
+      onPanResponderRelease: (_, gs) => {
+        if (gs.dy > 80 || gs.vy > 0.5) {
+          closeCaptureSheet()
+        } else {
+          Animated.spring(slideAnim, { toValue: 0, useNativeDriver: true }).start()
+        }
+      },
+    }),
+  ).current
+
+  const addMockPage = useCallback(() => {
+    // TODO: 실제 이미지 URI / AI 분석 결과로 교체
+    setPages((prev) => [...prev, createMockPage()])
+  }, [])
+
+  const handleTakePhoto = useCallback(() => {
+    closeCaptureSheet()
+    addMockPage()
+  }, [closeCaptureSheet, addMockPage])
+
+  const handleSelectFromAlbum = useCallback(() => {
+    closeCaptureSheet()
+    addMockPage()
+  }, [closeCaptureSheet, addMockPage])
+
+  const handleDeletePage = useCallback((id: string) => {
+    setPages((prev) => prev.filter((p) => p.id !== id))
+  }, [])
+
+  const handleResetAll = useCallback(() => {
+    setPages([])
+  }, [])
+
+  const handleAnalysisRequest = useCallback((id: string) => {
+    // mock: analyzing 상태로 변경
+    setPages((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, analysisStatus: "analyzing" as const } : p)),
+    )
+    // TODO: 실제 AI 위험분석 API 연동 시 아래 setTimeout 제거 후 API 호출로 교체
+    setTimeout(() => {
+      setPages((prev) =>
+        prev.map((p) =>
+          p.id === id
+            ? {
+                ...p,
+                analysisStatus: "analyzed" as const,
+                hazards: MOCK_HAZARDS,
+                analysisResult: MOCK_ANALYSIS_RESULT,
+              }
+            : p,
+        ),
+      )
+    }, 1200)
+  }, [])
+
+  const openSignSheet = useCallback(() => {
+    setSignSheetVisible(true)
+    Animated.parallel([
+      Animated.timing(signFadeAnim, { toValue: 1, duration: 200, useNativeDriver: true }),
+      Animated.timing(signSlideAnim, { toValue: 0, duration: 260, useNativeDriver: true }),
+    ]).start()
+  }, [signFadeAnim, signSlideAnim])
+
+  const closeSignSheet = useCallback(() => {
+    Animated.parallel([
+      Animated.timing(signFadeAnim, { toValue: 0, duration: 160, useNativeDriver: true }),
+      Animated.timing(signSlideAnim, { toValue: 400, duration: 200, useNativeDriver: true }),
+    ]).start(() => setSignSheetVisible(false))
+  }, [signFadeAnim, signSlideAnim])
+
+  const handleSignatureSave = useCallback(
+    (_signaturePaths: string[]) => {
+      closeSignSheet()
+      // TODO: _signaturePaths를 PDF 생성 로직에 전달 (실제 PDF 생성 API 연동 시 여기서 처리)
+    },
+    [closeSignSheet],
+  )
+
+  const handleExportPdf = useCallback(() => {
+    openSignSheet()
+  }, [openSignSheet])
+
+  const canExport = pages.length > 0
+
+  return (
+    <>
+      <StackScreen
+        title={translate("aiRiskDocCreatorScreen:title")}
+        onBack={() => navigation.goBack()}
+        contentBg="#FFFFFF"
+        squareTop
+      >
+        <ScrollView
+          style={S.$scroll}
+          contentContainerStyle={S.$scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          <Text
+            text={translate("aiRiskDocCreatorScreen:pageCount", { count: pages.length } as any)}
+            style={S.$pageCount}
+          />
+
+          <AiRiskActionButton
+            label={translate("aiRiskDocCreatorScreen:captureButton")}
+            Icon={IconCamera}
+            onPress={openCaptureSheet}
+          />
+
+          <AiRiskActionButton
+            label={translate("aiRiskDocCreatorScreen:exportPdfButton")}
+            Icon={IconFileExport}
+            onPress={handleExportPdf}
+            disabled={!canExport}
+            variant="secondary"
+          />
+
+          {/* 전체 초기화 버튼 — pages > 0일 때만 표시 */}
+          {pages.length > 0 && (
+            <TouchableOpacity style={S.$resetBtn} activeOpacity={0.8} onPress={handleResetAll}>
+              <IconTrash size={20} color="#E03526" strokeWidth={1.8} />
+              <Text text={translate("aiRiskDocCreatorScreen:resetAll")} style={S.$resetBtnLabel} />
+            </TouchableOpacity>
+          )}
+
+          <HazardCoordinateToggleCard
+            checked={includeHazardCoordinates}
+            onToggle={() => setIncludeHazardCoordinates((prev) => !prev)}
+          />
+
+          {pages.length === 0 ? (
+            <AiRiskEmptyState />
+          ) : (
+            pages.map((page, index) => (
+              <AiRiskPageCard
+                key={page.id}
+                page={page}
+                pageNumber={index + 1}
+                onDelete={() => handleDeletePage(page.id)}
+                onAnalysisRequest={() => handleAnalysisRequest(page.id)}
+                includeHazardCoordinates={includeHazardCoordinates}
+              />
+            ))
+          )}
+        </ScrollView>
+      </StackScreen>
+
+      {/* 서명 바텀시트 */}
+      <SignatureBottomSheet
+        isVisible={signSheetVisible}
+        fadeAnim={signFadeAnim}
+        slideAnim={signSlideAnim}
+        onClose={closeSignSheet}
+        onSave={handleSignatureSave}
+      />
+
+      {/* 촬영 방법 선택 바텀시트 */}
+      <Modal
+        visible={captureSheetVisible}
+        transparent
+        animationType="none"
+        onRequestClose={closeCaptureSheet}
+      >
+        <View style={StyleSheet.absoluteFill}>
+          <Animated.View
+            style={[StyleSheet.absoluteFill, S.$sheetBackdrop, { opacity: fadeAnim }]}
+          />
+          <TouchableOpacity
+            style={StyleSheet.absoluteFill}
+            onPress={closeCaptureSheet}
+            activeOpacity={1}
+          />
+          <Animated.View
+            style={[
+              S.$sheet,
+              { paddingBottom: insets.bottom + 16, transform: [{ translateY: slideAnim }] },
+            ]}
+          >
+            {/* 드래그 핸들 */}
+            <View style={S.$sheetDragHandleArea} {...panResponder.panHandlers}>
+              <View style={S.$sheetDragHandleBar} />
+            </View>
+
+            {/* 버튼 2개 */}
+            <View style={S.$sheetBtnRow}>
+              <TouchableOpacity style={S.$sheetBtn} activeOpacity={0.7} onPress={handleTakePhoto}>
+                <IconCamera size={20} color={colors.analysisResult} strokeWidth={1.8} />
+                <Text
+                  text={translate("aiRiskDocCreatorScreen:captureSheet.camera")}
+                  style={S.$sheetBtnLabel}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={S.$sheetBtn}
+                activeOpacity={0.7}
+                onPress={handleSelectFromAlbum}
+              >
+                <IconPhoto size={20} color={colors.analysisResult} strokeWidth={1.8} />
+                <Text
+                  text={translate("aiRiskDocCreatorScreen:captureSheet.album")}
+                  style={S.$sheetBtnLabel}
+                />
+              </TouchableOpacity>
+            </View>
+          </Animated.View>
+        </View>
+      </Modal>
+    </>
+  )
+}

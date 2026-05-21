@@ -64,6 +64,7 @@ export type AppStackParamList = {
     | undefined
   TbmParticipationHistory: undefined
   TbmParticipationHistoryDetail: { id: number }
+  AiRiskDocCreator: undefined
   HazardRiskList: undefined
   HazardRiskCreate: undefined
   HazardRiskDetail: { id: number }

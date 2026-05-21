@@ -344,11 +344,15 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           </View>
 
           {/* Bottom Banner */}
-          <View style={$banner}>
+          <TouchableOpacity
+            style={$banner}
+            activeOpacity={0.85}
+            onPress={() => navigation.navigate("AiRiskDocCreator")}
+          >
             <View style={$bannerInner}>
               <Text text={translate("homeScreen:banner.text")} style={$bannerText} />
             </View>
-          </View>
+          </TouchableOpacity>
 
           {/* Footer */}
           <View style={$footer}>

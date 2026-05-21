@@ -1014,6 +1014,42 @@ const ar: Translations = {
     activityContent: "Activity Content",
   },
 
+  aiRiskDocCreatorScreen: {
+    title: "AI Risk Analysis Report",
+    pageCount: "Total {{count}} page(s)",
+    captureButton: "Capture Before Improvement",
+    exportPdfButton: "Export PDF",
+    hazardToggle: {
+      label: "Include Hazard Coordinate Section",
+      description: "When unchecked, hazard coordinates will not be displayed on screen and PDF.",
+    },
+    emptyState: {
+      title: "No pages registered.",
+      description: "Capture a before-improvement image to add a page.",
+    },
+    captureSheet: {
+      camera: "Take Photo",
+      album: "Select from Album",
+    },
+    resetAll: "Reset All",
+    signature: {
+      instruction: "Sign with your finger in the box, then tap Save.",
+      cancel: "Cancel",
+      save: "Save",
+    },
+    page: {
+      title: "Page {{number}}",
+      beforeLabel: "Before",
+      afterLabel: "After",
+      addImage: "+ Add Image",
+      analyzeButton: "Request AI Analysis",
+      aiAnalysis: "AI Analysis",
+      hazardTitle: "Hazard Coordinate Details",
+      hazardEmpty: "No hazard coordinates to display.",
+      analysisPlaceholder: "Analysis results will be displayed here.",
+    },
+  },
+
   hazardRiskCreateScreen: {
     title: "الإبلاغ عن مخاطر",
     guide: {

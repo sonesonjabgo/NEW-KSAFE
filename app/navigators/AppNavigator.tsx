@@ -8,6 +8,7 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import Config from "@/config"
+import { AiRiskDocCreatorScreen } from "@/screens/AiRiskDocCreatorScreen"
 import { AISafetyChatScreen } from "@/screens/AISafetyChatScreen/AISafetyChatScreen"
 import { SafeBoardCreateScreen } from "@/screens/SafeBoardCreateScreen/SafeBoardCreateScreen"
 import { SafeBoardDetailScreen } from "@/screens/SafeBoardDetailScreen/SafeBoardDetailScreen"
@@ -117,6 +118,7 @@ const AppStack = () => {
         name="TbmParticipationHistoryDetail"
         component={TbmParticipationHistoryDetailScreen}
       />
+      <Stack.Screen name="AiRiskDocCreator" component={AiRiskDocCreatorScreen} />
       <Stack.Screen name="HazardRiskList" component={HazardRiskScreen} />
       <Stack.Screen name="HazardRiskCreate" component={HazardRiskCreateScreen} />
       <Stack.Screen name="HazardRiskDetail" component={HazardRiskDetailScreen} />
