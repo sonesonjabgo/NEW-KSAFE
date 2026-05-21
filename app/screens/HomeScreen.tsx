@@ -683,8 +683,9 @@ const $boardItem: ViewStyle = {
 }
 
 const $tagWrap: ViewStyle = {
-  width: 50,
+  width: 70,
   flexShrink: 0,
+  alignItems: "flex-start",
 }
 
 const $boardItemContent: ViewStyle = {

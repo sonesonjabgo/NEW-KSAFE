@@ -197,11 +197,29 @@ const en = {
     },
     empty: "No posts found",
     write: "Write",
+    draftSaved: "Post saved as draft.",
   },
 
   safeBoardDetailScreen: {
     title: "Post Detail",
     authorLabel: "Author",
+    editButton: "Edit",
+    alertOn: "Alert ON",
+    alertOff: "Alert OFF",
+    publishButton: "Publish",
+    deleteButton: "Delete",
+    publishModal: {
+      title: "Publish Post",
+      message: "Are you sure you want to publish this post?\nIt will be visible to workplace members.",
+      cancel: "Cancel",
+      confirm: "Publish",
+    },
+    deleteModal: {
+      title: "Delete Post",
+      message: "Are you sure you want to delete this post?\nDeleted posts cannot be recovered.",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
   },
 
   safeBoardCreateScreen: {
@@ -234,8 +252,7 @@ const en = {
     },
     pushNotification: {
       label: "Send Push Notification",
-      description: "Send a push notification to all members of the selected workplace.",
-      helper: "Members will receive a notification when this post is published.",
+      cardText: "When selected, a push notification will be sent to all members of the selected workplace upon posting.",
     },
     save: "Save",
   },

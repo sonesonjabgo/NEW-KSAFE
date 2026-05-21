@@ -45,12 +45,12 @@ export const SafeBoardBadge: FC<SafeBoardBadgeProps> = ({ type }) => {
 }
 
 const $badge: ViewStyle = {
-  width: 50,
   height: 20,
   borderWidth: 1,
   borderRadius: 10,
   justifyContent: "center",
   alignItems: "center",
+  paddingHorizontal: 8,
 }
 
 const $badgeText: TextStyle = {

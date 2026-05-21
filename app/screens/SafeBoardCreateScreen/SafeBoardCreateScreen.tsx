@@ -84,7 +84,8 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
 
   const handleSave = useCallback(() => {
     console.log(JSON.stringify({ workplace, title, content, sendPush, attachedFiles }, null, 2))
-  }, [workplace, title, content, sendPush, attachedFiles])
+    navigation.navigate("Main", { screen: "SafeBoard", params: { showToast: true } })
+  }, [workplace, title, content, sendPush, attachedFiles, navigation])
 
   return (
     <>
@@ -198,7 +199,7 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
             </View>
 
             {/* 첨부파일 */}
-            <View style={S.$section}>
+            <View style={[S.$section, { gap: 20 }]}>
               <Text
                 text={translate("safeBoardCreateScreen:attachment.label")}
                 style={S.$sectionLabel}
@@ -246,29 +247,23 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
             </View>
 
             {/* 푸시 알림 함께 보내기 */}
-            <View style={[S.$section, { borderBottomWidth: 0 }]}>
+            <View style={[S.$section, { borderBottomWidth: 0, gap: 20 }]}>
               <Text
                 text={translate("safeBoardCreateScreen:pushNotification.label")}
                 style={S.$sectionLabel}
               />
-              <View style={S.$toggleRow}>
+              <View style={S.$attachCard}>
+                <HeaderBell width={30} height={30} color="#1062D8" />
                 <Text
-                  text={translate("safeBoardCreateScreen:pushNotification.description")}
-                  style={S.$toggleLabel}
+                  text={translate("safeBoardCreateScreen:pushNotification.cardText")}
+                  style={S.$attachCardText}
                 />
-                <TouchableOpacity
-                  activeOpacity={0.8}
-                  onPress={() => setSendPush((v) => !v)}
-                >
+                <TouchableOpacity activeOpacity={0.8} onPress={() => setSendPush((v) => !v)}>
                   <View style={[S.$toggleTrack, sendPush && S.$toggleTrackActive]}>
                     <View style={[S.$toggleThumb, sendPush && S.$toggleThumbActive]} />
                   </View>
                 </TouchableOpacity>
               </View>
-              <Text
-                text={translate("safeBoardCreateScreen:pushNotification.helper")}
-                style={S.$helperText}
-              />
             </View>
           </ScrollView>
 

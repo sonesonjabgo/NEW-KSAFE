@@ -197,11 +197,29 @@ const ko: Translations = {
     },
     empty: "게시물이 없습니다",
     write: "작성하기",
+    draftSaved: "게시글이 임시저장 되었습니다.",
   },
 
   safeBoardDetailScreen: {
     title: "게시글 상세",
     authorLabel: "작성자",
+    editButton: "수정",
+    alertOn: "알림 ON",
+    alertOff: "알림 OFF",
+    publishButton: "게시하기",
+    deleteButton: "삭제하기",
+    publishModal: {
+      title: "게시글 게시",
+      message: "이 게시글을 게시하시겠습니까?\n게시 후에는 수정이 제한될 수 있습니다.",
+      cancel: "취소",
+      confirm: "게시",
+    },
+    deleteModal: {
+      title: "게시글 삭제",
+      message: "정말로 이 게시글을 삭제하시겠습니까?",
+      cancel: "취소",
+      confirm: "삭제",
+    },
   },
 
   safeBoardCreateScreen: {
@@ -233,8 +251,7 @@ const ko: Translations = {
     },
     pushNotification: {
       label: "푸시 알림 함께 보내기",
-      description: "선택한 사업장의 모든 구성원에게 푸시 알림을 발송합니다.",
-      helper: "게시글 등록 시 구성원에게 알림이 전송됩니다.",
+      cardText: "선택 시 게시와 동시에 선택한 사업장 구성원에게 푸시 알림이 전송됩니다.",
     },
     save: "저장",
   },
