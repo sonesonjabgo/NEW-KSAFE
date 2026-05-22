@@ -51,7 +51,7 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
         </TouchableOpacity>
       </View>
 
-      {/* Slides — 이미지/배지/텍스트만 스와이프 */}
+      {/* slideArea: FlatList + pagination을 한 블록으로 세로 중앙 배치 */}
       <View style={S.$slideArea}>
         <FlatList
           ref={flatListRef}
@@ -79,15 +79,15 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
           viewabilityConfig={viewabilityConfig}
           onViewableItemsChanged={onViewableItemsChanged}
         />
-      </View>
 
-      {/* Pagination — FlatList 바깥에 고정, 스와이프해도 위치 불변 */}
-      <View style={[S.$paginationWrapper, isShortHeight && { marginTop: 12, marginBottom: 18 }]}>
-        <IntroPagination
-          total={INTRO_SLIDES.length}
-          currentIndex={currentIndex}
-          onDotPress={handleDotPress}
-        />
+        {/* Pagination — FlatList 바로 아래, 슬라이드와 함께 좌우로 움직이지 않음 */}
+        <View style={[S.$paginationWrapper, isShortHeight && { marginTop: 14 }]}>
+          <IntroPagination
+            total={INTRO_SLIDES.length}
+            currentIndex={currentIndex}
+            onDotPress={handleDotPress}
+          />
+        </View>
       </View>
 
       {/* Bottom button */}
