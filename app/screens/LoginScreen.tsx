@@ -98,6 +98,7 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
         contentContainerStyle={$screenContent}
         preset="fixed"
         safeAreaEdges={["top"]}
+        backgroundColor={colors.navy}
       >
         {/* 상단 네이비 영역 */}
         <View style={[$navySection, $navySectionDynamic]}>
