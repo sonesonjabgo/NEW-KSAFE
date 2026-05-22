@@ -248,6 +248,12 @@ const ko: Translations = {
       cancel: "취소",
       confirm: "삭제",
     },
+    toasts: {
+      publishSuccess: "게시글이 게시되었습니다.",
+      publishError: "게시글 게시에 실패했습니다.",
+      deleteSuccess: "게시글이 삭제되었습니다.",
+      deleteError: "게시글 삭제에 실패했습니다.",
+    },
   },
 
   safeBoardCreateScreen: {

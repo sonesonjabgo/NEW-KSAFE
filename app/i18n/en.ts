@@ -249,6 +249,12 @@ const en = {
       cancel: "Cancel",
       confirm: "Delete",
     },
+    toasts: {
+      publishSuccess: "Post published successfully.",
+      publishError: "Failed to publish post.",
+      deleteSuccess: "Post deleted successfully.",
+      deleteError: "Failed to delete post.",
+    },
   },
 
   safeBoardCreateScreen: {

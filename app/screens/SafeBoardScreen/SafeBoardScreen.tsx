@@ -165,7 +165,10 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = observer(function SafeB
               <TouchableOpacity
                 style={[S.$tab, activeTab === "all" && S.$activeTab]}
                 activeOpacity={0.7}
-                onPress={() => setActiveTab("all")}
+                onPress={() => {
+                  setActiveTab("all")
+                  safeBoardStore.setActiveTab("all")
+                }}
               >
                 <Text
                   text={translate("safeBoardScreen:tabs.all")}
@@ -175,7 +178,10 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = observer(function SafeB
               <TouchableOpacity
                 style={[S.$tab, activeTab === "my" && S.$activeTab]}
                 activeOpacity={0.7}
-                onPress={() => setActiveTab("my")}
+                onPress={() => {
+                  setActiveTab("my")
+                  safeBoardStore.setActiveTab("my")
+                }}
               >
                 <Text
                   text={translate("safeBoardScreen:tabs.myPosts")}

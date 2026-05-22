@@ -1,21 +1,29 @@
-import { FC, useEffect, useState } from "react"
-import { ActivityIndicator, ScrollView, TouchableOpacity, View, ViewStyle, TextStyle } from "react-native"
-import { Bell, Send, Trash2, User } from "lucide-react-native"
+import { FC, useCallback, useEffect, useState } from "react"
+import {
+  ActivityIndicator,
+  ScrollView,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+  TextStyle,
+} from "react-native"
+import { Bell, CheckCircle, Send, Trash2, User, XCircle } from "lucide-react-native"
 import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { Toast } from "@/components/Toast"
+import { useAuth } from "@/context/AuthContext"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 import { useStores } from "@/models"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import {
-  fetchCompanyPostDetail,
-  UserCompanyPostDetailDto,
-} from "@/services/api/safeBoard"
-import { SafeBoardBadge } from "@/screens/SafeBoardScreen/components/SafeBoardBadge"
+  SafeBoardBadge,
+  SafeBoardBadgeType,
+} from "@/screens/SafeBoardScreen/components/SafeBoardBadge"
 import { typography } from "@/theme/typography"
 
 export interface SafeBoardDetailScreenProps extends AppStackScreenProps<"SafeBoardDetail"> {}
@@ -33,38 +41,70 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
   function SafeBoardDetailScreen({ navigation, route }) {
     const { id } = route.params
     const { role } = useRole()
+    const { user } = useAuth()
     const { safeBoardStore } = useStores()
     const insets = useSafeAreaInsets()
 
-    const [post, setPost] = useState<UserCompanyPostDetailDto | null>(null)
-    const [loading, setLoading] = useState(true)
     const [alertOn, setAlertOn] = useState(false)
     const [publishModalVisible, setPublishModalVisible] = useState(false)
     const [deleteModalVisible, setDeleteModalVisible] = useState(false)
+    const [isPublishing, setIsPublishing] = useState(false)
+    const [isDeleting, setIsDeleting] = useState(false)
+    const [toastVisible, setToastVisible] = useState(false)
+    const [toastType, setToastType] = useState<"success" | "error">("success")
+    const [toastMessage, setToastMessage] = useState("")
+
+    const currentPost = safeBoardStore.currentPost
+    const isLoading = safeBoardStore.status === "pending" && !currentPost
 
     const isAdmin = role === "admin"
-    const isMyPost = safeBoardStore.myPosts.some((p) => p.id === id)
-    const canEdit = isAdmin && isMyPost
+    const isCreator = !!user?.id && user.id === currentPost?.createdBy
+    const canEdit = isAdmin && isCreator
 
     useEffect(() => {
-      let cancelled = false
-      setLoading(true)
-      fetchCompanyPostDetail(id)
-        .then((data) => {
-          if (!cancelled) setPost(data)
-        })
-        .catch(() => {
-          if (!cancelled) setPost(null)
-        })
-        .finally(() => {
-          if (!cancelled) setLoading(false)
-        })
+      if (safeBoardStore.activeTab === "my") {
+        safeBoardStore.fetchAdminMyPostDetail(id)
+      } else {
+        safeBoardStore.fetchPostDetail(id)
+      }
       return () => {
-        cancelled = true
+        safeBoardStore.clearCurrentPost()
       }
     }, [id])
 
-    const showStatusBadge = post?.status === "draft" || post?.status === "archived"
+    const showToast = useCallback((type: "success" | "error", message: string) => {
+      setToastType(type)
+      setToastMessage(message)
+      setToastVisible(true)
+    }, [])
+
+    const handlePublish = useCallback(async () => {
+      setPublishModalVisible(false)
+      setIsPublishing(true)
+      try {
+        await safeBoardStore.publishPost(id)
+        showToast("success", translate("safeBoardDetailScreen:toasts.publishSuccess"))
+      } catch {
+        showToast("error", translate("safeBoardDetailScreen:toasts.publishError"))
+      } finally {
+        setIsPublishing(false)
+      }
+    }, [id, safeBoardStore, showToast])
+
+    const handleDelete = useCallback(async () => {
+      setDeleteModalVisible(false)
+      setIsDeleting(true)
+      try {
+        await safeBoardStore.deletePost(id)
+        navigation.goBack()
+      } catch {
+        setIsDeleting(false)
+        showToast("error", translate("safeBoardDetailScreen:toasts.deleteError"))
+      }
+    }, [id, safeBoardStore, navigation, showToast])
+
+    const showStatusBadge =
+      currentPost?.status === "draft" || currentPost?.status === "archived"
 
     return (
       <>
@@ -87,28 +127,33 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
             ) : undefined
           }
         >
-          {loading ? (
+          {isLoading ? (
             <View style={$loadingContainer}>
               <ActivityIndicator size="large" color="#1062D8" />
             </View>
-          ) : !post ? (
+          ) : !currentPost ? (
             <View style={$loadingContainer}>
-              <Text text={translate("safeBoardDetailScreen:loadError")} style={$errorText} />
+              <Text
+                text={translate("safeBoardDetailScreen:loadError")}
+                style={$errorText}
+              />
             </View>
           ) : (
             <View style={$outerContainer}>
               <View style={$card}>
                 <View style={$badgeDateRow}>
                   <View style={$badgeRow}>
-                    <SafeBoardBadge type={post.scope} />
+                    <SafeBoardBadge type={currentPost.scope as SafeBoardBadgeType} />
                     {showStatusBadge && (
-                      <SafeBoardBadge type={post.status === "draft" ? "draft" : "archived"} />
+                      <SafeBoardBadge
+                        type={currentPost.status === "draft" ? "draft" : "archived"}
+                      />
                     )}
                   </View>
-                  <Text text={formatPostDate(post.createdAt)} style={$dateText} />
+                  <Text text={formatPostDate(currentPost.createdAt)} style={$dateText} />
                 </View>
 
-                <Text text={post.title} style={$titleText} />
+                <Text text={currentPost.title} style={$titleText} />
 
                 {canEdit && (
                   <TouchableOpacity
@@ -133,48 +178,62 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
                     <User size={14} color="#606679" strokeWidth={2} />
                   </View>
                   <Text
-                    text={`${translate("safeBoardDetailScreen:authorLabel")} ${post.authorName ?? ""}`}
+                    text={`${translate("safeBoardDetailScreen:authorLabel")} ${currentPost.authorName ?? ""}`}
                     style={$authorText}
                   />
                 </View>
 
                 <View style={$divider} />
 
-                <Text text={post.authorAffiliation ?? ""} style={$affiliationText} />
+                <Text text={currentPost.authorAffiliation ?? ""} style={$affiliationText} />
               </View>
 
               <View style={$contentCard}>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                  <Text text={post.content ?? ""} style={$contentText} />
+                  <Text text={currentPost.content ?? ""} style={$contentText} />
                 </ScrollView>
               </View>
             </View>
           )}
 
-          {canEdit && !loading && post && (
+          {canEdit && !isLoading && currentPost && (
             <View style={[$actionBar, { paddingBottom: insets.bottom + 12 }]}>
-              <TouchableOpacity
-                style={[$actionBtn, $publishBtn]}
-                activeOpacity={0.8}
-                onPress={() => setPublishModalVisible(true)}
-              >
-                <Send size={16} color="#FFFFFF" strokeWidth={2} />
-                <Text
-                  text={translate("safeBoardDetailScreen:publishButton")}
-                  style={$actionBtnText}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[$actionBtn, $deleteBtn]}
-                activeOpacity={0.8}
-                onPress={() => setDeleteModalVisible(true)}
-              >
-                <Trash2 size={16} color="#FFFFFF" strokeWidth={2} />
-                <Text
-                  text={translate("safeBoardDetailScreen:deleteButton")}
-                  style={$actionBtnText}
-                />
-              </TouchableOpacity>
+              {currentPost.status === "draft" && (
+                <TouchableOpacity
+                  style={[$actionBtn, $publishBtn, (isPublishing || isDeleting) && $disabledBtn]}
+                  activeOpacity={0.8}
+                  disabled={isPublishing || isDeleting}
+                  onPress={() => setPublishModalVisible(true)}
+                >
+                  {isPublishing ? (
+                    <ActivityIndicator size="small" color="#FFFFFF" />
+                  ) : (
+                    <Send size={16} color="#FFFFFF" strokeWidth={2} />
+                  )}
+                  <Text
+                    text={translate("safeBoardDetailScreen:publishButton")}
+                    style={$actionBtnText}
+                  />
+                </TouchableOpacity>
+              )}
+              {currentPost.status === "draft" && (
+                <TouchableOpacity
+                  style={[$actionBtn, $deleteBtn, (isPublishing || isDeleting) && $disabledBtn]}
+                  activeOpacity={0.8}
+                  disabled={isPublishing || isDeleting}
+                  onPress={() => setDeleteModalVisible(true)}
+                >
+                  {isDeleting ? (
+                    <ActivityIndicator size="small" color="#FFFFFF" />
+                  ) : (
+                    <Trash2 size={16} color="#FFFFFF" strokeWidth={2} />
+                  )}
+                  <Text
+                    text={translate("safeBoardDetailScreen:deleteButton")}
+                    style={$actionBtnText}
+                  />
+                </TouchableOpacity>
+              )}
             </View>
           )}
         </StackScreen>
@@ -192,10 +251,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
           confirmLabel={translate("safeBoardDetailScreen:publishModal.confirm")}
           confirmBgColor="#1062D8"
           onCancel={() => setPublishModalVisible(false)}
-          onConfirm={() => {
-            setPublishModalVisible(false)
-            console.log("publish", id)
-          }}
+          onConfirm={handlePublish}
         />
 
         <ConfirmModal
@@ -211,10 +267,21 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
           confirmLabel={translate("safeBoardDetailScreen:deleteModal.confirm")}
           confirmBgColor="#E42E2B"
           onCancel={() => setDeleteModalVisible(false)}
-          onConfirm={() => {
-            setDeleteModalVisible(false)
-            console.log("delete", id)
-          }}
+          onConfirm={handleDelete}
+        />
+
+        <Toast
+          visible={toastVisible}
+          message={toastMessage}
+          icon={
+            toastType === "success" ? (
+              <CheckCircle size={14} color="#FFFFFF" strokeWidth={2.5} />
+            ) : (
+              <XCircle size={14} color="#FFFFFF" strokeWidth={2.5} />
+            )
+          }
+          iconCircleColor={toastType === "success" ? "#1062D8" : "#E03526"}
+          onHide={() => setToastVisible(false)}
         />
       </>
     )
@@ -369,6 +436,10 @@ const $publishBtn: ViewStyle = {
 
 const $deleteBtn: ViewStyle = {
   backgroundColor: "#E42E2B",
+}
+
+const $disabledBtn: ViewStyle = {
+  opacity: 0.6,
 }
 
 const $actionBtnText: TextStyle = {
