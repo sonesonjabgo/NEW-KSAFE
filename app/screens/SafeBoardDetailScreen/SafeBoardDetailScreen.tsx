@@ -191,7 +191,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
                   <View style={$authorLeft}>
                     <View style={$avatarCircle}>
                       <Text
-                        text={(currentPost.authorName ?? "?")[0].toUpperCase()}
+                        text={(currentPost.authorName ?? "?").trim()[0] ?? "?"}
                         style={$avatarText}
                       />
                     </View>
