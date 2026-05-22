@@ -26,11 +26,7 @@ export const LanguageChangedModal: FC<Props> = ({
   const { width, isSmallPhone, isTablet } = useResponsive()
 
   // 카드 여백 — tablet은 화면 너비 기반으로 최소 너비 보장
-  const cardMarginH = isSmallPhone
-    ? 24
-    : isTablet
-    ? Math.max(Math.floor(width * 0.15), 60)
-    : 32
+  const cardMarginH = isSmallPhone ? 24 : isTablet ? Math.max(Math.floor(width * 0.15), 60) : 32
   const cardPaddingH = isSmallPhone ? 20 : 24
   const cardPaddingTop = isSmallPhone ? 24 : 32
   const cardPaddingBottom = isSmallPhone ? 20 : 24
@@ -43,6 +39,7 @@ export const LanguageChangedModal: FC<Props> = ({
   // 텍스트
   const titleFontSize = isSmallPhone ? 16 : isTablet ? 20 : 18
   const descFontSize = isSmallPhone ? 13 : 14
+  const descMinHeight = isSmallPhone ? 36 : 44
 
   // 버튼
   const btnMarginTop = isSmallPhone ? 16 : 20
@@ -51,12 +48,13 @@ export const LanguageChangedModal: FC<Props> = ({
 
   return (
     <Modal visible={isVisible} transparent animationType="fade" onRequestClose={onConfirm}>
-      <View style={S.$modalOverlay}>
+      {/* paddingHorizontal로 카드 좌우 여백 고정 → 카드가 항상 동일한 너비 */}
+      <View style={[S.$modalOverlay, { paddingHorizontal: cardMarginH }]}>
         <View
           style={[
             S.$modalCard,
             {
-              marginHorizontal: cardMarginH,
+              alignSelf: "stretch",
               paddingHorizontal: cardPaddingH,
               paddingTop: cardPaddingTop,
               paddingBottom: cardPaddingBottom,
@@ -79,7 +77,9 @@ export const LanguageChangedModal: FC<Props> = ({
 
           <Text style={[S.$modalTitle, { fontSize: titleFontSize, marginTop: 4 }]}>{title}</Text>
 
-          <Text style={[S.$modalDesc, { fontSize: descFontSize, marginTop: 8 }]}>
+          <Text
+            style={[S.$modalDesc, { fontSize: descFontSize, marginTop: 8, minHeight: descMinHeight }]}
+          >
             {description}
           </Text>
 

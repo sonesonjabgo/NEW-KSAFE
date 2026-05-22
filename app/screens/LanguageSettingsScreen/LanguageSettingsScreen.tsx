@@ -2,6 +2,8 @@ import { FC, useState } from "react"
 import { FlatList, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 
+import i18n from "i18next"
+
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import type { TxKeyPath } from "@/i18n"
@@ -16,29 +18,52 @@ type Language = {
   id: string
   flag: string
   locale: string
-  nativeLabel: string
+  nativeName: string // native script only — parenthetical translation is added dynamically
 }
 
 const LANGUAGES: Language[] = [
-  { id: "ko", flag: "🇰🇷", locale: "ko", nativeLabel: "한국어" },
-  { id: "en", flag: "🇺🇸", locale: "en", nativeLabel: "English (영어)" },
-  { id: "zh-Hans", flag: "🇨🇳", locale: "zh-Hans", nativeLabel: "简体中文 (중국어(간체))" },
-  { id: "zh-Hant", flag: "🇹🇼", locale: "zh-Hant", nativeLabel: "繁體中文 (중국어(번체))" },
-  { id: "ru", flag: "🇷🇺", locale: "ru", nativeLabel: "Русский (러시아어)" },
-  { id: "vi", flag: "🇻🇳", locale: "vi", nativeLabel: "Tiếng Việt (베트남어)" },
-  { id: "id", flag: "🇮🇩", locale: "id", nativeLabel: "Bahasa Indonesia (인도네시아어)" },
-  { id: "km", flag: "🇰🇭", locale: "km", nativeLabel: "ភាសាខ្មែរ (크메르어)" },
-  { id: "th", flag: "🇹🇭", locale: "th", nativeLabel: "ไทย (태국어)" },
-  { id: "ur", flag: "🇵🇰", locale: "ur", nativeLabel: "اردو (우르드어)" },
-  { id: "ne", flag: "🇳🇵", locale: "ne", nativeLabel: "नेपाली (네팔어)" },
-  { id: "lo", flag: "🇱🇦", locale: "lo", nativeLabel: "ພາສາລາວ (라오어)" },
+  { id: "ko", flag: "🇰🇷", locale: "ko", nativeName: "한국어" },
+  { id: "en", flag: "🇺🇸", locale: "en", nativeName: "English" },
+  { id: "zh-Hans", flag: "🇨🇳", locale: "zh-Hans", nativeName: "简体中文" },
+  { id: "zh-Hant", flag: "🇹🇼", locale: "zh-Hant", nativeName: "繁體中文" },
+  { id: "ru", flag: "🇷🇺", locale: "ru", nativeName: "Русский" },
+  { id: "vi", flag: "🇻🇳", locale: "vi", nativeName: "Tiếng Việt" },
+  { id: "id", flag: "🇮🇩", locale: "id", nativeName: "Bahasa Indonesia" },
+  { id: "km", flag: "🇰🇭", locale: "km", nativeName: "ភាសាខ្មែរ" },
+  { id: "th", flag: "🇹🇭", locale: "th", nativeName: "ไทย" },
+  { id: "ur", flag: "🇵🇰", locale: "ur", nativeName: "اردو" },
+  { id: "ne", flag: "🇳🇵", locale: "ne", nativeName: "नेपाली" },
+  { id: "lo", flag: "🇱🇦", locale: "lo", nativeName: "ພາສາລາວ" },
 ]
+
+const CONFIRM_TEXT: Record<string, string> = {
+  ko: "확인",
+  en: "OK",
+  "zh-Hans": "确认",
+  "zh-Hant": "確認",
+  zh: "确认",
+  ar: "تأكيد",
+  es: "Confirmar",
+  fr: "Confirmer",
+  hi: "पुष्टि करें",
+  ja: "確認",
+  id: "Konfirmasi",
+  vi: "Xác nhận",
+  th: "ยืนยัน",
+  ru: "Подтвердить",
+  km: "យល់ព្រម",
+  lo: "ຢືນຢັນ",
+  ne: "ठीक छ",
+  ur: "ٹھیک ہے",
+  my: "အတည်ပြုရန်",
+}
 
 export const LanguageSettingsScreen: FC = () => {
   const navigation = useNavigation()
   const [selectedId, setSelectedId] = useState("ko")
   const [previewLang, setPreviewLang] = useState("ko")
   const [modalVisible, setModalVisible] = useState(false)
+  const [currentLanguage, setCurrentLanguage] = useState(i18n.language ?? "ko")
 
   const {
     width,
@@ -61,27 +86,35 @@ export const LanguageSettingsScreen: FC = () => {
   }
 
   const selectedLanguage = LANGUAGES.find((l) => l.id === selectedId)
-  const modalLangName = selectedLanguage?.nativeLabel ?? selectedId
+  const modalLangName = selectedLanguage?.nativeName ?? selectedId
   const modalTitle = t("languageSettings:languageTitle")
   const modalDesc = translate("languageSettings:languageChangeRestart", {
     lng: previewLang,
     language: modalLangName,
   })
-  const modalConfirm = translate("common:ok")
+  const modalConfirm =
+    CONFIRM_TEXT[previewLang] ?? translate("common:ok", { lng: previewLang })
+  const displayLang = currentLanguage.startsWith("ko") ? "ko" : "en"
+
+  const handleConfirm = () => {
+    i18n.changeLanguage(previewLang)
+    setCurrentLanguage(previewLang)
+    setModalVisible(false)
+  }
 
   // 리스트 컨텐츠 패딩 — tablet은 화면 너비 기반으로 중앙 정렬
   const listPaddingH = isSmallPhone
     ? 16
     : isBasePhone
-    ? 20
-    : isLargePhone
-    ? 22
-    : Math.max(Math.floor((width - 560) / 2), 32)
+      ? 20
+      : isLargePhone
+        ? 22
+        : Math.max(Math.floor((width - 560) / 2), 32)
   const listPaddingBottom = isShortHeight
     ? Math.min(Math.floor(height * 0.04), 24)
     : isSmallPhone
-    ? 24
-    : 32
+      ? 24
+      : 32
 
   // 안내 문구
   const guideFontSize = breakpoint === "smallPhone" ? 13 : breakpoint === "tablet" ? 15 : 14
@@ -121,18 +154,25 @@ export const LanguageSettingsScreen: FC = () => {
                 {t("languageSettings:languageDescription")}
               </Text>
             }
-            renderItem={({ item }) => (
-              <LanguageOptionItem
-                label={`${item.flag} ${item.nativeLabel}`}
-                isSelected={selectedId === item.id}
-                onPress={() => handleSelect(item.id, item.locale)}
-                itemHeight={itemHeight}
-                itemPaddingH={itemPaddingH}
-                itemMarginBottom={itemMarginBottom}
-                labelFontSize={itemLabelFontSize}
-                checkIconSize={checkIconSize}
-              />
-            )}
+            renderItem={({ item }) => {
+              const translatedName = translate(
+                `languageSettings:languageNames.${item.id}` as TxKeyPath,
+                { lng: displayLang },
+              )
+              const label = `${item.flag} ${item.nativeName} (${translatedName})`
+              return (
+                <LanguageOptionItem
+                  label={label}
+                  isSelected={selectedId === item.id}
+                  onPress={() => handleSelect(item.id, item.locale)}
+                  itemHeight={itemHeight}
+                  itemPaddingH={itemPaddingH}
+                  itemMarginBottom={itemMarginBottom}
+                  labelFontSize={itemLabelFontSize}
+                  checkIconSize={checkIconSize}
+                />
+              )
+            }}
           />
         </View>
       </StackScreen>
@@ -142,7 +182,7 @@ export const LanguageSettingsScreen: FC = () => {
         title={modalTitle}
         description={modalDesc}
         confirmText={modalConfirm}
-        onConfirm={() => setModalVisible(false)}
+        onConfirm={handleConfirm}
       />
     </>
   )
