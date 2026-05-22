@@ -149,6 +149,7 @@ const hi: Translations = {
       title: "Board",
       viewMore: "More",
       tabs: { all: "All", company: "Company", workplace: "Workplace" },
+      empty: "कोई पोस्ट उपलब्ध नहीं है।",
     },
     edu: { title: "Education", description: "Description" },
     banner: { text: "Safe Environment" },

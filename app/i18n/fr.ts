@@ -151,6 +151,7 @@ const fr: Translations = {
       title: "Board",
       viewMore: "More",
       tabs: { all: "All", company: "Company", workplace: "Workplace" },
+      empty: "Aucune publication disponible.",
     },
     edu: { title: "Education", description: "Description" },
     banner: { text: "Safe Environment" },

@@ -164,6 +164,7 @@ const ko: Translations = {
         company: "회사전체",
         workplace: "사업장",
       },
+      empty: "게시글이 없습니다.",
     },
     edu: {
       title: "기존 교육/발표 참여",

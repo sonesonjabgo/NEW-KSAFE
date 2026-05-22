@@ -149,6 +149,7 @@ const ja: Translations = {
       title: "Board",
       viewMore: "More",
       tabs: { all: "All", company: "Company", workplace: "Workplace" },
+      empty: "投稿がありません。",
     },
     edu: { title: "Education", description: "Description" },
     banner: { text: "Safe Environment" },

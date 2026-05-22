@@ -164,6 +164,7 @@ const en = {
         company: "Company",
         workplace: "Workplace",
       },
+      empty: "No posts available.",
     },
     edu: {
       title: "Join Existing Education/Presentation",

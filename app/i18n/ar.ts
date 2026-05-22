@@ -145,6 +145,7 @@ const ar: Translations = {
       title: "Board",
       viewMore: "More",
       tabs: { all: "All", company: "Company", workplace: "Workplace" },
+      empty: "لا توجد منشورات.",
     },
     edu: { title: "Education", description: "Description" },
     banner: { text: "Safe Environment" },
