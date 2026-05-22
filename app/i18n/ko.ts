@@ -50,6 +50,12 @@ const ko: Translations = {
       message: "비밀번호 찾기는 관리자에게 문의 바랍니다.\n문의전화 : 062-383-0083",
       confirm: "확인",
     },
+    validation: {
+      required: "이메일과 비밀번호를 입력해주세요.",
+      invalidEmail: "유효한 이메일 주소를 입력해주세요.",
+      passwordTooShort: "비밀번호는 최소 6자 이상이어야 합니다.",
+      invalidCredentials: "이메일 또는 비밀번호를 확인해주세요.",
+    },
   },
   demoNavigator: {
     componentsTab: "컴포넌트",

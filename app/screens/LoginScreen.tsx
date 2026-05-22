@@ -31,6 +31,12 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
   const navigation = useNavigation<any>()
   const [secureText, setSecureText] = useState(true)
   const [forgotModalVisible, setForgotModalVisible] = useState(false)
+  const [isEmailFocused, setIsEmailFocused] = useState(false)
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [emailError, setEmailError] = useState("")
+  const [passwordError, setPasswordError] = useState("")
   const { bottom: bottomInset } = useSafeAreaInsets()
   const {
     width,
@@ -95,7 +101,9 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
   const $gapM: ViewStyle = { height: gapMedH }
   const $gapL: ViewStyle = { height: gapLargeH }
   const $controlDynamic: ViewStyle = { height: controlHeight }
-  const $textInputDynamic: TextStyle = { height: controlHeight }
+  // borderWidth:2 차감 후 내부 공간(controlHeight - 4)에 맞춰 TextInput 높이 설정
+  // → TextInput이 래퍼 내부를 초과하지 않아 시각적 경계 아티팩트 방지
+  const $textInputDynamic: TextStyle = { height: controlHeight - 4 }
 
   // isSmallPhone 로고 영역 텍스트 축소
   const $brandNameDynamic: TextStyle = isSmallPhone ? { fontSize: 18 } : {}
@@ -104,6 +112,32 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
   // 모달 가로 크기 — breakpoint별 조정
   const modalWidth = isTablet ? 400 : isLargePhone ? 360 : isSmallPhone ? 290 : 330
   const $modalCardDynamic: ViewStyle = { width: modalWidth }
+
+  const EMAIL_REGEX = /\S+@\S+\.\S+/
+
+  const handleLogin = () => {
+    let emailErr = ""
+    let passwordErr = ""
+
+    if (!email) {
+      emailErr = translate("loginScreen:validation.required")
+    } else if (!EMAIL_REGEX.test(email)) {
+      emailErr = translate("loginScreen:validation.invalidEmail")
+    }
+
+    if (!password) {
+      passwordErr = translate("loginScreen:validation.required")
+    } else if (password.length < 6) {
+      passwordErr = translate("loginScreen:validation.passwordTooShort")
+    }
+
+    setEmailError(emailErr)
+    setPasswordError(passwordErr)
+
+    // TODO: 실제 로그인 연동 시 (emailErr || passwordErr) 조건에서 return 처리
+    // TODO: API 로그인 실패 응답 시 setPasswordError(translate("loginScreen:validation.invalidCredentials"))
+    navigation.navigate("Main")
+  }
 
   return (
     <>
@@ -137,7 +171,14 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
               <RNText style={$label}>
                 {translate("loginScreen:emailFieldLabel")} <RNText style={$required}>*</RNText>
               </RNText>
-              <View style={[$inputRow, $controlDynamic]}>
+              <View
+                style={[
+                  $inputRow,
+                  $controlDynamic,
+                  isEmailFocused && $inputRowFocused,
+                  !isEmailFocused && !!emailError && $inputRowError,
+                ]}
+              >
                 <MailSvg width={18} height={18} color="#9CA3AF" style={$inputIcon} />
                 <TextInput
                   style={[$textInput, $textInputDynamic]}
@@ -145,8 +186,23 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
                   placeholderTextColor="#9CA3AF"
                   keyboardType="email-address"
                   autoCapitalize="none"
+                  underlineColorAndroid="transparent"
+                  value={email}
+                  onChangeText={setEmail}
+                  onFocus={() => setIsEmailFocused(true)}
+                  onBlur={() => {
+                    setIsEmailFocused(false)
+                    if (!email) {
+                      setEmailError(translate("loginScreen:validation.required"))
+                    } else if (!EMAIL_REGEX.test(email)) {
+                      setEmailError(translate("loginScreen:validation.invalidEmail"))
+                    } else {
+                      setEmailError("")
+                    }
+                  }}
                 />
               </View>
+              {!isEmailFocused && !!emailError && <RNText style={$errorText}>{emailError}</RNText>}
 
               <View style={$gapM} />
 
@@ -154,13 +210,34 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
               <RNText style={$label}>
                 {translate("loginScreen:passwordFieldLabel")} <RNText style={$required}>*</RNText>
               </RNText>
-              <View style={[$inputRow, $controlDynamic]}>
+              <View
+                style={[
+                  $inputRow,
+                  $controlDynamic,
+                  isPasswordFocused && $inputRowFocused,
+                  !isPasswordFocused && !!passwordError && $inputRowError,
+                ]}
+              >
                 <LockSvg width={18} height={18} color="#9CA3AF" style={$inputIcon} />
                 <TextInput
                   style={[$textInput, $passwordInput, $textInputDynamic]}
                   placeholder={translate("loginScreen:passwordFieldPlaceholder")}
                   placeholderTextColor="#9CA3AF"
                   secureTextEntry={secureText}
+                  underlineColorAndroid="transparent"
+                  value={password}
+                  onChangeText={setPassword}
+                  onFocus={() => setIsPasswordFocused(true)}
+                  onBlur={() => {
+                    setIsPasswordFocused(false)
+                    if (!password) {
+                      setPasswordError(translate("loginScreen:validation.required"))
+                    } else if (password.length < 6) {
+                      setPasswordError(translate("loginScreen:validation.passwordTooShort"))
+                    } else {
+                      setPasswordError("")
+                    }
+                  }}
                 />
                 <TouchableOpacity onPress={() => setSecureText((v) => !v)} hitSlop={8}>
                   {secureText ? (
@@ -170,6 +247,9 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
                   )}
                 </TouchableOpacity>
               </View>
+              {!isPasswordFocused && !!passwordError && (
+                <RNText style={$errorText}>{passwordError}</RNText>
+              )}
             </View>
 
             <View style={$gapL} />
@@ -177,7 +257,7 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
             {/* 로그인 버튼 */}
             <TouchableOpacity
               style={[$loginButton, $controlDynamic]}
-              onPress={() => navigation.navigate("Main")}
+              onPress={handleLogin}
               activeOpacity={0.85}
             >
               <RNText style={$loginButtonText}>{translate("loginScreen:logIn")}</RNText>
@@ -282,12 +362,34 @@ const $required: TextStyle = {
 }
 
 // height는 $controlDynamic에서 주입
+// borderWidth 항상 유지 — focused 시 borderColor만 변경해 레이아웃 쉬프트 방지
+// overflow: "hidden" — TextInput 네이티브 포커스 링이 래퍼 경계 밖으로 삐져나오지 않도록 클리핑
+// paddingHorizontal: 12→10으로 borderWidth 2 보정
 const $inputRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
   backgroundColor: "#F5F5F5",
   borderRadius: 12,
-  paddingHorizontal: 12,
+  paddingHorizontal: 10,
+  borderWidth: 2,
+  borderColor: "transparent",
+  overflow: "hidden",
+}
+
+const $inputRowFocused: ViewStyle = {
+  borderColor: colors.blue,
+  backgroundColor: colors.toggleCardBg,
+}
+
+// error > focused > default 우선순위: JSX에서 !!error 조건을 마지막에 적용
+const $inputRowError: ViewStyle = {
+  borderColor: colors.danger,
+}
+
+const $errorText: TextStyle = {
+  fontSize: 12,
+  color: colors.danger,
+  marginTop: 4,
 }
 
 const $inputIcon: ViewStyle = {
@@ -295,15 +397,18 @@ const $inputIcon: ViewStyle = {
 }
 
 // height는 $textInputDynamic에서 주입
+// borderWidth: 0 명시 — 플랫폼별 시스템 focus 테두리 억제
 const $textInput: TextStyle = {
   flex: 1,
   fontSize: 14,
   color: "#111827",
+  backgroundColor: "transparent",
+  borderWidth: 0,
+  outlineStyle: "none" as any,
+  outlineWidth: 0,
 }
 
-const $passwordInput: TextStyle = {
-  marginLeft: 8,
-}
+const $passwordInput: TextStyle = {}
 
 // height는 $controlDynamic에서 주입
 const $loginButton: ViewStyle = {
