@@ -40,12 +40,21 @@ export const $skipLabel: TextStyle = {
   color: colors.introSkip,
 }
 
-// ── Slide Area (헤더~버튼 사이 FlatList 컨테이너) ────────────────────────────
+// ── Slide Area (헤더~버튼 사이 영역) ──────────────────────────────────────────
 
+// 헤더~버튼 사이 남은 공간 전체를 차지하며, slideGroup을 세로/가로 중앙 정렬
 export const $slideArea: ViewStyle = {
   flex: 1,
   justifyContent: "center",
   alignItems: "center",
+}
+
+// FlatList + paginationWrapper를 하나의 콘텐츠 묶음으로 감싸는 wrapper
+// slideArea가 이 단일 블록을 중앙 정렬함
+export const $slideGroup: ViewStyle = {
+  width: "100%",
+  alignItems: "center",
+  justifyContent: "center",
 }
 
 export const $slideList: ViewStyle = {

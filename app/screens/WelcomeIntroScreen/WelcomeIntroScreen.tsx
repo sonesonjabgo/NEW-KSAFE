@@ -60,42 +60,45 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
         </TouchableOpacity>
       </View>
 
-      {/* slideArea: FlatList + pagination을 한 블록으로 세로 중앙 배치 */}
+      {/* slideArea: 헤더~버튼 사이 남은 공간, slideGroup을 세로 중앙 정렬 */}
       <View style={S.$slideArea}>
-        <FlatList
-          ref={flatListRef}
-          data={INTRO_SLIDES}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <IntroSlide
-              slide={item}
-              screenWidth={width}
-              isSmallPhone={isSmallPhone}
-              isTablet={isTablet}
-              isShortHeight={isShortHeight}
-            />
-          )}
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          bounces={false}
-          style={S.$slideList}
-          getItemLayout={(_, index) => ({
-            length: width,
-            offset: width * index,
-            index,
-          })}
-          viewabilityConfig={viewabilityConfig}
-          onViewableItemsChanged={onViewableItemsChanged}
-        />
-
-        {/* Pagination — FlatList 바로 아래, 슬라이드와 함께 좌우로 움직이지 않음 */}
-        <View style={[S.$paginationWrapper, isShortHeight && { marginTop: 16 }]}>
-          <IntroPagination
-            total={INTRO_SLIDES.length}
-            currentIndex={currentIndex}
-            onDotPress={handleDotPress}
+        {/* slideGroup: FlatList + pagination을 하나의 콘텐츠 묶음으로 통합 */}
+        <View style={S.$slideGroup}>
+          <FlatList
+            ref={flatListRef}
+            data={INTRO_SLIDES}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <IntroSlide
+                slide={item}
+                screenWidth={width}
+                isSmallPhone={isSmallPhone}
+                isTablet={isTablet}
+                isShortHeight={isShortHeight}
+              />
+            )}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            bounces={false}
+            style={S.$slideList}
+            getItemLayout={(_, index) => ({
+              length: width,
+              offset: width * index,
+              index,
+            })}
+            viewabilityConfig={viewabilityConfig}
+            onViewableItemsChanged={onViewableItemsChanged}
           />
+
+          {/* Pagination — slideGroup 안 FlatList 바로 아래, 슬라이드와 좌우로 움직이지 않음 */}
+          <View style={[S.$paginationWrapper, isShortHeight && { marginTop: 16 }]}>
+            <IntroPagination
+              total={INTRO_SLIDES.length}
+              currentIndex={currentIndex}
+              onDotPress={handleDotPress}
+            />
+          </View>
         </View>
       </View>
 
