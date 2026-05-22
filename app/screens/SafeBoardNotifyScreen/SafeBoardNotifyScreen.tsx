@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useState } from "react"
+import { useCallback, useMemo, useState } from "react"
 import {
   KeyboardAvoidingView,
   Platform,
@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native"
 import { Check } from "lucide-react-native"
+import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import HeaderBell from "@assets/icons/nav/header_bell.svg"
@@ -16,20 +17,18 @@ import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { Toast } from "@/components/Toast"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 import { AppStackScreenProps } from "@/navigators/navigationTypes"
 
 import * as S from "./styles"
 
 type SafeBoardNotifyScreenProps = AppStackScreenProps<"SafeBoardNotify">
 
-const MOCK_WORKPLACES = [
-  "서울 한강 레지던스 RC공사 현장",
-  "부산 센텀 물류센터 현장",
-  "대구 산업단지 신축 현장",
-]
-
-export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigation }) => {
+export const SafeBoardNotifyScreen = observer(function SafeBoardNotifyScreen({
+  navigation,
+}: SafeBoardNotifyScreenProps) {
   const insets = useSafeAreaInsets()
+  const { workplaceStore } = useStores()
 
   const [selectedWorkplaces, setSelectedWorkplaces] = useState<string[]>([])
   const [notifyTitle, setNotifyTitle] = useState("")
@@ -99,20 +98,20 @@ export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigati
               style={S.$sectionLabel}
             />
             <View style={S.$workplaceCard}>
-              {MOCK_WORKPLACES.map((workplace) => {
-                const isSelected = selectedWorkplaces.includes(workplace)
+              {workplaceStore.workplaces.map((wp) => {
+                const isSelected = selectedWorkplaces.includes(wp.id)
                 return (
-                  <View key={workplace}>
+                  <View key={wp.id}>
                     <TouchableOpacity
                       style={[S.$workplaceRow, isSelected && S.$workplaceRowSelected]}
                       activeOpacity={0.7}
-                      onPress={() => toggleWorkplace(workplace)}
+                      onPress={() => toggleWorkplace(wp.id)}
                     >
                       <View style={[S.$checkbox, isSelected && S.$checkboxSelected]}>
                         {isSelected && <Check size={13} color="#FFFFFF" strokeWidth={3} />}
                       </View>
                       <Text
-                        text={workplace}
+                        text={wp.workplaceName}
                         style={[S.$workplaceItemText, isSelected && S.$workplaceItemTextSelected]}
                         numberOfLines={2}
                       />
@@ -123,7 +122,7 @@ export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigati
             </View>
             <Text
               text={translate("safeBoardNotifyScreen:workplace.helper", {
-                total: MOCK_WORKPLACES.length,
+                total: workplaceStore.workplaces.length,
                 selected: selectedWorkplaces.length,
               })}
               style={S.$helperText}
@@ -207,4 +206,4 @@ export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigati
     />
     </>
   )
-}
+})

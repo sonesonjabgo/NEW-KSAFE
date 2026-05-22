@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useRef, useState } from "react"
+import { useCallback, useMemo, useRef, useState } from "react"
 import {
   Animated,
   KeyboardAvoidingView,
@@ -12,6 +12,7 @@ import {
 } from "react-native"
 import { IconChevronDown } from "@tabler/icons-react-native"
 import { X } from "lucide-react-native"
+import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import BoardClip from "@assets/icons/board/board_clip.svg"
@@ -20,20 +21,18 @@ import HeaderBell from "@assets/icons/nav/header_bell.svg"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 import { AppStackScreenProps } from "@/navigators/navigationTypes"
 
 import * as S from "./styles"
 
 type SafeBoardCreateScreenProps = AppStackScreenProps<"SafeBoardCreate">
 
-const MOCK_WORKPLACES = [
-  "서울 한강 레지던스 RC공사 현장",
-  "부산 센텀 물류센터 현장",
-  "대구 산업단지 신축 현장",
-]
-
-export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigation }) => {
+export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
+  navigation,
+}: SafeBoardCreateScreenProps) {
   const insets = useSafeAreaInsets()
+  const { workplaceStore } = useStores()
 
   const [workplace, setWorkplace] = useState("")
   const [title, setTitle] = useState("")
@@ -306,14 +305,14 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
               { paddingBottom: insets.bottom + 16, transform: [{ translateY: slideAnim }] },
             ]}
           >
-            {MOCK_WORKPLACES.map((wp) => (
+            {workplaceStore.workplaces.map((wp) => (
               <TouchableOpacity
-                key={wp}
+                key={wp.id}
                 style={S.$modalItem}
-                onPress={() => handleSelectWorkplace(wp)}
+                onPress={() => handleSelectWorkplace(wp.workplaceName)}
                 activeOpacity={0.7}
               >
-                <Text text={wp} style={S.$modalItemText} />
+                <Text text={wp.workplaceName} style={S.$modalItemText} />
               </TouchableOpacity>
             ))}
           </Animated.View>
@@ -321,4 +320,4 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
       </Modal>
     </>
   )
-}
+})

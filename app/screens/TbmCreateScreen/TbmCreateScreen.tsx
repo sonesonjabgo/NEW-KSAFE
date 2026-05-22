@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useRef, useState } from "react"
+import { useCallback, useMemo, useRef, useState } from "react"
 import {
   Animated,
   KeyboardAvoidingView,
@@ -12,6 +12,7 @@ import {
 } from "react-native"
 import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker"
 import { IconChevronDown } from "@tabler/icons-react-native"
+import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import EducationFrame from "@assets/icons/education_frame.svg"
@@ -20,18 +21,12 @@ import HeaderBell from "@assets/icons/nav/header_bell.svg"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 import { AppStackScreenProps } from "@/navigators/navigationTypes"
 
 import * as S from "./styles"
 
 type TbmCreateScreenProps = AppStackScreenProps<"TbmCreate">
-
-const MOCK_WORKPLACES = [
-  "서울 영등포구 레미안스 비즈타워",
-  "부산 해운대구 센텀시티",
-  "경기 화성시 동탄산업단지 A동",
-  "인천 연수구 송도동 건설현장",
-]
 
 function formatDate(d: Date): string {
   const yyyy = d.getFullYear()
@@ -42,8 +37,11 @@ function formatDate(d: Date): string {
   return `${yyyy}.${mm}.${dd} ${hh}:${min}`
 }
 
-export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
+export const TbmCreateScreen = observer(function TbmCreateScreen({
+  navigation,
+}: TbmCreateScreenProps) {
   const insets = useSafeAreaInsets()
+  const { workplaceStore } = useStores()
 
   const [selectedEducationIds, setSelectedEducationIds] = useState<number[]>([])
   const [workplace, setWorkplace] = useState("")
@@ -368,14 +366,14 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
               { paddingBottom: insets.bottom + 16, transform: [{ translateY: slideAnim }] },
             ]}
           >
-            {MOCK_WORKPLACES.map((wp) => (
+            {workplaceStore.workplaces.map((wp) => (
               <TouchableOpacity
-                key={wp}
+                key={wp.id}
                 style={S.$modalItem}
-                onPress={() => handleSelectWorkplace(wp)}
+                onPress={() => handleSelectWorkplace(wp.workplaceName)}
                 activeOpacity={0.7}
               >
-                <Text text={wp} style={S.$modalItemText} />
+                <Text text={wp.workplaceName} style={S.$modalItemText} />
               </TouchableOpacity>
             ))}
           </Animated.View>
@@ -425,4 +423,4 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
       )}
     </>
   )
-}
+})
