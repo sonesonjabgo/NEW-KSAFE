@@ -47,31 +47,38 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
   const isCompact = isSmallPhone || isShortHeight
 
   // ── 네이비 영역 높이 (breakpoint별 비율) ─────────────────────────────────────
+  // isSmallPhone: 0.36→0.39으로 네이비 영역 소폭 확대 → 흰 카드 자동으로 짧아짐
   const navySectionHeight = isTablet
     ? Math.min(height * 0.38, 300)
     : isShortHeight
       ? height * 0.34
       : isSmallPhone
-        ? height * 0.36
+        ? height * 0.39
         : isLargePhone
           ? height * 0.42
           : height * 0.4 // isBasePhone 기본 기준
 
   // ── 반응형 계산값 ─────────────────────────────────────────────────────────────
-  const logoSize = isTablet ? 96 : isCompact ? 64 : 80
-  const logoGap = isCompact ? 6 : 9
+  // isSmallPhone과 isShortHeight를 분리 — isSmallPhone은 로고/텍스트도 추가 축소
+  const logoSize = isTablet ? 96 : isSmallPhone ? 60 : isShortHeight ? 64 : 80
+  const logoGap = isSmallPhone ? 5 : isShortHeight ? 6 : 9
 
-  const cardPaddingTop = isCompact ? 24 : 32
+  // tablet: form이 살짝 아래에 위치하도록 paddingTop 크게
+  // isSmallPhone: 카드 자체를 줄이므로 paddingTop은 자연스러운 수준으로 유지
+  const cardPaddingTop = isTablet ? 48 : isSmallPhone ? 28 : isShortHeight ? 24 : 32
   // tablet: 내부 콘텐츠 maxWidth 480 기준으로 좌우 padding 확대 → 중앙 정렬 효과
   const cardPaddingHorizontal = isTablet ? Math.max(24, (width - 480) / 2) : 24
 
-  const formBoxPadding = isCompact ? 14 : 20
-  const gapSmallH = isCompact ? 10 : 16
-  const gapMedH = isCompact ? 16 : 24
-  const gapLargeH = isCompact ? 20 : 32
+  // isSmallPhone: 카드 내부 세로 간격을 isShortHeight보다 더 타이트하게 압축
+  const gapSmallH = isSmallPhone ? 16 : isCompact ? 10 : 16
+  const gapMedH = isSmallPhone ? 12 : isCompact ? 16 : 24
+  const gapLargeH = isSmallPhone ? 16 : isCompact ? 20 : 32
 
   // 입력 필드 / 버튼 공통 높이
   const controlHeight = isCompact ? 44 : 48
+
+  // isSmallPhone: paddingBottom도 압축해 카드 하단 여백 최소화
+  const cardPaddingBottom = isSmallPhone ? Math.max(bottomInset, 16) : Math.max(bottomInset, 24)
 
   // ── Pre-computed dynamic styles (react-native/no-inline-styles 준수) ─────────
   const $navySectionDynamic: ViewStyle = { height: navySectionHeight }
@@ -79,16 +86,24 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
   // paddingHorizontal은 $cardContentDynamic으로 분리 — card outer width에 영향 없음
   const $cardDynamic: ViewStyle = {
     paddingTop: cardPaddingTop,
-    paddingBottom: Math.max(bottomInset, 24),
+    paddingBottom: cardPaddingBottom,
   }
-  // 카드 내부 콘텐츠의 좌우 여백 — tablet은 크게 잡아 maxWidth 480 중앙 정렬 효과
-  const $cardContentDynamic: ViewStyle = { paddingHorizontal: cardPaddingHorizontal }
-  const $formBoxDynamic: ViewStyle = { padding: formBoxPadding }
+  const $cardContentDynamic: ViewStyle = {
+    paddingHorizontal: cardPaddingHorizontal,
+  }
   const $gapS: ViewStyle = { height: gapSmallH }
   const $gapM: ViewStyle = { height: gapMedH }
   const $gapL: ViewStyle = { height: gapLargeH }
   const $controlDynamic: ViewStyle = { height: controlHeight }
   const $textInputDynamic: TextStyle = { height: controlHeight }
+
+  // isSmallPhone 로고 영역 텍스트 축소
+  const $brandNameDynamic: TextStyle = isSmallPhone ? { fontSize: 18 } : {}
+  const $taglineDynamic: TextStyle = isSmallPhone ? { fontSize: 12 } : {}
+
+  // 모달 가로 크기 — breakpoint별 조정
+  const modalWidth = isTablet ? 400 : isLargePhone ? 360 : isSmallPhone ? 290 : 330
+  const $modalCardDynamic: ViewStyle = { width: modalWidth }
 
   return (
     <>
@@ -104,8 +119,8 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
         <View style={[$navySection, $navySectionDynamic]}>
           <View style={[$logoContainer, $logoContainerDynamic]}>
             <LogoSvg width={logoSize} height={logoSize} style={$logoImage} />
-            <RNText style={$brandName}>K-SAFEONE</RNText>
-            <RNText style={$tagline}>{translate("loginScreen:tagline")}</RNText>
+            <RNText style={[$brandName, $brandNameDynamic]}>K-SAFEONE</RNText>
+            <RNText style={[$tagline, $taglineDynamic]}>{translate("loginScreen:tagline")}</RNText>
           </View>
         </View>
 
@@ -116,8 +131,8 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
 
             <View style={$gapM} />
 
-            {/* 입력 폼 박스 */}
-            <View style={[$formBox, $formBoxDynamic]}>
+            {/* 입력 폼 박스 — paddingHorizontal 없음: input 너비 = loginButton 너비 */}
+            <View style={$formBox}>
               {/* 이메일 필드 */}
               <RNText style={$label}>
                 {translate("loginScreen:emailFieldLabel")} <RNText style={$required}>*</RNText>
@@ -180,6 +195,7 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
 
       <ConfirmModal
         visible={forgotModalVisible}
+        cardStyle={$modalCardDynamic}
         icon={
           <View style={$modalIconCircle}>
             <IconAlertCircle size={26} color={colors.blue} strokeWidth={1.8} />
@@ -310,6 +326,7 @@ const $forgotWrapper: ViewStyle = {
 const $forgotText: TextStyle = {
   fontSize: 14,
   color: "#6B7280",
+  textDecorationLine: "underline",
 }
 
 // padding은 $formBoxDynamic에서 주입
