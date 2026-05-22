@@ -12,8 +12,10 @@ import {
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
+import { colors } from "@/theme/colors"
+import { useResponsive } from "@/theme/responsive"
 
-import { styles } from "./styles"
+import * as S from "./styles"
 
 type NotificationItem = {
   id: string
@@ -25,6 +27,17 @@ type NotificationItem = {
 
 export const NotifyScreen: FC = () => {
   const navigation = useNavigation()
+
+  const {
+    width,
+    height,
+    isSmallPhone,
+    isBasePhone,
+    isLargePhone,
+    isTablet,
+    isShortHeight,
+    breakpoint,
+  } = useResponsive()
 
   const [notifications, setNotifications] = useState<NotificationItem[]>(() => [
     {
@@ -53,23 +66,58 @@ export const NotifyScreen: FC = () => {
     setNotifications([])
   }
 
+  // 리스트 영역 padding / gap
+  const listPaddingH = isSmallPhone ? 16 : isBasePhone ? 22 : isLargePhone ? 24 : 32
+  const listPaddingTop = isSmallPhone || isShortHeight ? 12 : 17
+  const listPaddingBottom = isSmallPhone || isShortHeight ? 24 : 32
+  const listGap = isSmallPhone || isShortHeight ? 12 : isBasePhone ? 17 : isLargePhone ? 18 : 16
+
+  // 카드 padding
+  const cardPaddingH = isSmallPhone ? 12 : isLargePhone || isTablet ? 18 : 16
+  const cardPaddingV = isSmallPhone || isShortHeight ? 10 : isLargePhone || isTablet ? 16 : 14
+
+  // 아이콘 원형 크기
+  const circleSize = isSmallPhone ? 32 : isLargePhone || isTablet ? 42 : 38
+  const iconSize = isSmallPhone ? 15 : isLargePhone || isTablet ? 20 : 18
+
+  // 카드 텍스트 크기 — breakpoint 직접 사용
+  const titleFontSize =
+    breakpoint === "smallPhone" ? 13 : breakpoint === "largePhone" || breakpoint === "tablet" ? 15 : 14
+  const descFontSize = isSmallPhone ? 12 : 14
+  const timeFontSize = isSmallPhone ? 11 : 13
+
+  // Empty State 크기
+  const emptyCircleSize = isShortHeight
+    ? Math.min(Math.floor(height * 0.12), 96)
+    : isSmallPhone
+    ? 96
+    : isTablet
+    ? 140
+    : 120
+  const emptyCircleMarginBottom = isSmallPhone || isShortHeight ? 16 : isTablet ? 28 : 24
+  const emptyIconSize = isSmallPhone ? 36 : isTablet ? 52 : 44
+  const emptyTitleFontSize = isSmallPhone ? 15 : isTablet ? 20 : 17
+  const emptyTitleMarginBottom = isSmallPhone ? 8 : 10
+  const emptyDescFontSize = isSmallPhone ? 12 : isTablet ? 14 : 13
+  const emptyPaddingH = isSmallPhone ? 32 : isTablet ? Math.max(Math.floor((width - 700) / 2 + 48), 48) : 40
+
   return (
     <StackScreen
       title={translate("notify:title")}
       onBack={() => navigation.goBack()}
-      contentBg="#F9FAFE"
+      contentBg={colors.screenBg}
       squareTop
       rightSlot={
-        <View style={styles.headerActions}>
+        <View style={S.$headerActions}>
           <TouchableOpacity
-            style={styles.headerIconBtn}
+            style={S.$headerIconBtn}
             activeOpacity={0.7}
             onPress={handleMarkAllRead}
           >
-            <IconChecks size={22} color={hasUnread ? "#1062D8" : "#FFFFFF"} />
+            <IconChecks size={22} color={hasUnread ? colors.blue : "#FFFFFF"} />
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.headerIconBtn}
+            style={S.$headerIconBtn}
             activeOpacity={0.7}
             onPress={handleDeleteAll}
           >
@@ -78,35 +126,84 @@ export const NotifyScreen: FC = () => {
         </View>
       }
     >
-      <View style={styles.body}>
+      <View style={S.$body}>
         {notifications.length === 0 ? (
-          <View style={styles.emptyContainer}>
-            <View style={styles.emptyState}>
-              <View style={styles.emptyCircle}>
-                <IconBellOff size={44} color="#9CA3AF" strokeWidth={1.5} />
+          /* ── Empty State ── */
+          <View style={S.$emptyContainer}>
+            <View style={[S.$emptyState, { paddingHorizontal: emptyPaddingH }]}>
+              <View
+                style={[
+                  S.$emptyCircle,
+                  {
+                    width: emptyCircleSize,
+                    height: emptyCircleSize,
+                    borderRadius: emptyCircleSize / 2,
+                    marginBottom: emptyCircleMarginBottom,
+                  },
+                ]}
+              >
+                <IconBellOff size={emptyIconSize} color="#9CA3AF" strokeWidth={1.5} />
               </View>
-              <Text style={styles.emptyTitle}>{translate("notify:emptyTitle")}</Text>
-              <Text style={styles.emptyDesc}>{translate("notify:emptyDescription")}</Text>
+              <Text
+                style={[
+                  S.$emptyTitle,
+                  { fontSize: emptyTitleFontSize, marginBottom: emptyTitleMarginBottom },
+                ]}
+              >
+                {translate("notify:emptyTitle")}
+              </Text>
+              <Text style={[S.$emptyDesc, { fontSize: emptyDescFontSize }]}>
+                {translate("notify:emptyDescription")}
+              </Text>
             </View>
           </View>
         ) : (
+          /* ── 알림 리스트 ── */
           <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styles.listArea}>
+            <View
+              style={[
+                S.$listArea,
+                {
+                  paddingHorizontal: listPaddingH,
+                  paddingTop: listPaddingTop,
+                  paddingBottom: listPaddingBottom,
+                  gap: listGap,
+                },
+                isTablet ? S.$listAreaTablet : undefined,
+              ]}
+            >
               {notifications.map((item) => (
-                <View key={item.id} style={[styles.card, item.isRead && styles.cardRead]}>
-                  <View style={[styles.cardIconCircle, item.isRead && styles.cardIconCircleRead]}>
+                <View
+                  key={item.id}
+                  style={[
+                    S.$card,
+                    item.isRead ? S.$cardRead : undefined,
+                    { paddingHorizontal: cardPaddingH, paddingVertical: cardPaddingV },
+                  ]}
+                >
+                  <View
+                    style={[
+                      S.$cardIconCircle,
+                      item.isRead ? S.$cardIconCircleRead : undefined,
+                      { width: circleSize, height: circleSize, borderRadius: circleSize / 2 },
+                    ]}
+                  >
                     {item.isRead ? (
-                      <IconBell size={18} color="#1062D8" strokeWidth={1.5} />
+                      <IconBell size={iconSize} color={colors.blue} strokeWidth={1.5} />
                     ) : (
-                      <IconBellFilled size={18} color="#FFFFFF" />
+                      <IconBellFilled size={iconSize} color="#FFFFFF" />
                     )}
                   </View>
-                  <View style={styles.cardContent}>
-                    <Text style={styles.cardTitle}>{item.title}</Text>
-                    <Text style={styles.cardDesc}>{item.description}</Text>
-                    <Text style={styles.cardTime}>{item.time}</Text>
+
+                  <View style={S.$cardContent}>
+                    <Text style={[S.$cardTitle, { fontSize: titleFontSize }]}>{item.title}</Text>
+                    <Text style={[S.$cardDesc, { fontSize: descFontSize }]}>
+                      {item.description}
+                    </Text>
+                    <Text style={[S.$cardTime, { fontSize: timeFontSize }]}>{item.time}</Text>
                   </View>
-                  {!item.isRead && <View style={styles.unreadDot} />}
+
+                  {!item.isRead && <View style={S.$unreadDot} />}
                 </View>
               ))}
             </View>
