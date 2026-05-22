@@ -16,7 +16,16 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
   const insets = useSafeAreaInsets()
   const [currentIndex, setCurrentIndex] = useState(0)
   const flatListRef = useRef<FlatList<IntroSlideData>>(null)
-  const { width, isSmallPhone, isTablet, isShortHeight } = useResponsive()
+  const {
+    width,
+    height,
+    isSmallPhone,
+    isBasePhone,
+    isLargePhone,
+    isTablet,
+    isShortHeight,
+    breakpoint,
+  } = useResponsive()
 
   const viewabilityConfig = useRef({ itemVisiblePercentThreshold: 50 }).current
 
