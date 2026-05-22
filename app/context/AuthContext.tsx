@@ -17,6 +17,7 @@ import { resolvePrimaryRole, UserRole } from "@/utils/roles"
 type AuthUser = {
   id: string
   email?: string
+  name?: string
   role: UserRole
 }
 
@@ -65,9 +66,16 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const deriveUser = useCallback(
     (sessionUser?: Session["user"] | null, candidateToken?: string | null): AuthUser | undefined => {
       if (!sessionUser) return undefined
+      const metadata = sessionUser.user_metadata ?? {}
       return {
         id: sessionUser.id,
         email: sessionUser.email,
+        name:
+          (metadata.name as string | undefined) ??
+          (metadata.fullName as string | undefined) ??
+          (metadata.displayName as string | undefined) ??
+          (metadata.username as string | undefined) ??
+          undefined,
         role: resolvePrimaryRole(candidateToken ?? token),
       }
     },

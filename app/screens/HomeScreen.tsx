@@ -35,6 +35,7 @@ import ProfileSwitch from "@assets/icons/nav/profile_switch.svg"
 import { PushNotificationBottomSheet } from "@/components/PushNotificationBottomSheet"
 import { Text } from "@/components/Text"
 import { WebViewModal } from "@/components/WebViewModal"
+import { useAuth } from "@/context/AuthContext"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 import type { MainTabScreenProps } from "@/navigators/navigationTypes"
@@ -52,6 +53,7 @@ type TabType = "all" | "company" | "workplace"
 
 export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
+  const { user } = useAuth()
   const { role: userRole } = useRole()
   const [selectedTab, setSelectedTab] = useState<TabType>("all")
   // TODO: 추후 "생성된 교육/발표실 존재 여부" API 연동으로 교체
@@ -235,7 +237,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
             <View style={$greetRow}>
               <View style={$greetLeft}>
                 <Text
-                  text={translate("homeScreen:greeting.name", { name: "김영희" })}
+                  text={translate("homeScreen:greeting.name", { name: user?.name ?? "" })}
                   style={$greetBold}
                 />
                 <Text text={translate("homeScreen:greeting.message")} style={$greetMsg} />

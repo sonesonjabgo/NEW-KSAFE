@@ -24,11 +24,6 @@ import { typography } from "@/theme/typography"
 
 const ICON_COLOR = "#000000"
 
-const MOCK_USER = {
-  admin: { userName: "김관리", email: "admin-5@example.com" },
-  worker: { userName: "김근로", email: "worker-1@example.com" },
-} as const
-
 const ORG_NAME = "KS산업안전협회"
 
 export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) => {
@@ -38,7 +33,6 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
   const [logoutModalVisible, setLogoutModalVisible] = useState(false)
 
   const isWorker = role === "worker"
-  const mockUser = MOCK_USER[role]
 
   const handleOpenSettings = () => {
     Linking.openSettings()
@@ -64,8 +58,8 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
 
           <ProfileCard
             orgName={ORG_NAME}
-            userName={mockUser.userName}
-            email={user?.email || mockUser.email}
+            userName={user?.name ?? ""}
+            email={user?.email ?? ""}
           />
 
           {isWorker && <WorkplaceChip name={translate("myPageScreen:workplace.label")} />}
