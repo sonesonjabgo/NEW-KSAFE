@@ -50,8 +50,8 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
       <View
         style={[
           S.$header,
-          isSmallPhone && { marginBottom: 24 },
-          isShortHeight && { marginBottom: 16 },
+          isSmallPhone && { marginBottom: 14 },
+          isShortHeight && { marginBottom: 10 },
         ]}
       >
         <Text text="K-SAFEONE" style={S.$logoText} />

@@ -19,7 +19,7 @@ export const $header: ViewStyle = {
   paddingHorizontal: 24,
   paddingTop: 14,
   paddingBottom: 8,
-  marginBottom: 45,
+  marginBottom: 20,
 }
 
 export const $logoText: TextStyle = {
