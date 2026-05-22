@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
+import { useResponsive } from "@/theme/responsive"
 
 import { IntroSlide } from "./components/IntroSlide"
 import { INTRO_SLIDES, IntroSlideData } from "./mockData"
@@ -14,6 +15,7 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
   const insets = useSafeAreaInsets()
   const [currentIndex, setCurrentIndex] = useState(0)
   const flatListRef = useRef<FlatList<IntroSlideData>>(null)
+  const { width, isSmallPhone, isTablet } = useResponsive()
 
   const viewabilityConfig = useRef({ itemVisiblePercentThreshold: 50 }).current
 
@@ -35,7 +37,7 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
   return (
     <View style={[S.$screen, { paddingTop: insets.top }]}>
       {/* Header */}
-      <View style={S.$header}>
+      <View style={[S.$header, isSmallPhone && { marginBottom: 24 }]}>
         <Text text="K-SAFEONE" style={S.$logoText} />
         <TouchableOpacity style={S.$skipBtn} activeOpacity={0.7} onPress={goToLogin}>
           <Text text={translate("welcomeIntroScreen:skip")} style={S.$skipLabel} />
@@ -54,6 +56,9 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
               currentIndex={currentIndex}
               total={INTRO_SLIDES.length}
               onDotPress={handleDotPress}
+              screenWidth={width}
+              isSmallPhone={isSmallPhone}
+              isTablet={isTablet}
             />
           )}
           horizontal
@@ -63,8 +68,8 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
           extraData={currentIndex}
           style={S.$slideList}
           getItemLayout={(_, index) => ({
-            length: S.SCREEN_WIDTH,
-            offset: S.SCREEN_WIDTH * index,
+            length: width,
+            offset: width * index,
             index,
           })}
           viewabilityConfig={viewabilityConfig}
@@ -74,7 +79,11 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
 
       {/* Bottom button */}
       <View style={[S.$bottomContainer, { paddingBottom: insets.bottom + 24 }]}>
-        <TouchableOpacity style={S.$startBtn} activeOpacity={0.85} onPress={goToLogin}>
+        <TouchableOpacity
+          style={[S.$startBtn, isSmallPhone && { height: 50 }]}
+          activeOpacity={0.85}
+          onPress={goToLogin}
+        >
           <Text text={translate("welcomeIntroScreen:start")} style={S.$startBtnLabel} />
         </TouchableOpacity>
       </View>

@@ -1,9 +1,7 @@
-import { Dimensions, TextStyle, ViewStyle } from "react-native"
+import { TextStyle, ViewStyle } from "react-native"
 
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
-
-export const SCREEN_WIDTH = Dimensions.get("window").width
 
 // ── Screen ────────────────────────────────────────────────────────────────────
 
@@ -58,22 +56,8 @@ export const $slideList: ViewStyle = {
 
 // ── Slide (FlatList 각 아이템) ────────────────────────────────────────────────
 
-export const $slide: ViewStyle = {
-  width: SCREEN_WIDTH,
-  alignItems: "center",
-  paddingHorizontal: 32,
-}
-
 export const $slideContent: ViewStyle = {
   alignItems: "center",
-}
-
-export const $imageContainer: ViewStyle = {
-  width: SCREEN_WIDTH * 0.55,
-  height: SCREEN_WIDTH * 0.55,
-  alignItems: "center",
-  justifyContent: "center",
-  marginBottom: 28,
 }
 
 export const $stepBadge: ViewStyle = {
