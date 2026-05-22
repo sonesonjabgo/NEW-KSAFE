@@ -1,6 +1,5 @@
-import { ViewStyle, TextStyle } from "react-native"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { ViewStyle, TextStyle, View, TouchableOpacity } from "react-native"
+import { createBottomTabNavigator, BottomTabBarProps } from "@react-navigation/bottom-tabs"
 import type { SvgProps } from "react-native-svg"
 
 import NavBoard from "@assets/icons/nav/nav_board.svg"
@@ -8,6 +7,7 @@ import NavHome from "@assets/icons/nav/nav_home.svg"
 import NavSafety from "@assets/icons/nav/nav_safety.svg"
 import NavWorker from "@assets/icons/nav/nav_worker.svg"
 
+import { Text } from "@/components/Text"
 import { HomeScreen } from "@/screens/HomeScreen"
 import { SafeBoardScreen } from "@/screens/SafeBoardScreen/SafeBoardScreen"
 import { SafeHealthMainScreen } from "@/screens/SafeHealthScreen/SafeHealthMainScreen"
@@ -25,18 +25,56 @@ function TabIcon({ Icon, focused }: { Icon: React.FC<SvgProps>; focused: boolean
   return <Icon width={35} height={35} color={focused ? ACTIVE_BLUE : INACTIVE} />
 }
 
-export function MainNavigator() {
-  const { bottom } = useSafeAreaInsets()
+function CustomTabBar({ state, descriptors, navigation, insets }: BottomTabBarProps) {
+  const bottom = insets.bottom
 
   return (
+    <View style={[$tabBarOuter, { paddingBottom: bottom, height: 82 + bottom }]}>
+      <View style={$tabBarRow}>
+        {state.routes.map((route, index) => {
+          const { options } = descriptors[route.key]
+          const focused = state.index === index
+          const color = focused ? ACTIVE_BLUE : INACTIVE
+          const label =
+            typeof options.tabBarLabel === "string" ? options.tabBarLabel : route.name
+
+          const onPress = () => {
+            const event = navigation.emit({
+              type: "tabPress",
+              target: route.key,
+              canPreventDefault: true,
+            })
+            if (!focused && !event.defaultPrevented) {
+              navigation.navigate(route.name)
+            }
+          }
+
+          return (
+            <TouchableOpacity
+              key={route.key}
+              onPress={onPress}
+              style={$tabItem}
+              activeOpacity={0.7}
+              accessibilityRole="button"
+              accessibilityState={{ selected: focused }}
+            >
+              {options.tabBarIcon?.({ focused, color, size: 35 })}
+              <Text style={[$tabLabel, { color }]} numberOfLines={1}>
+                {label}
+              </Text>
+            </TouchableOpacity>
+          )
+        })}
+      </View>
+    </View>
+  )
+}
+
+export function MainNavigator() {
+  return (
     <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarStyle: [$tabBar, { height: 82 + bottom, paddingBottom: bottom }],
-        tabBarActiveTintColor: ACTIVE_BLUE,
-        tabBarInactiveTintColor: INACTIVE,
-        tabBarLabelStyle: $tabBarLabel,
-      }}
+      tabBar={(props) => <CustomTabBar {...props} />}
+      screenOptions={{ headerShown: false }}
     >
       <Tab.Screen
         name="Home"
@@ -77,7 +115,7 @@ export function MainNavigator() {
   )
 }
 
-const $tabBar: ViewStyle = {
+const $tabBarOuter: ViewStyle = {
   backgroundColor: "#FFFFFF",
   borderTopWidth: 1,
   borderTopColor: "#E9ECF0",
@@ -88,7 +126,24 @@ const $tabBar: ViewStyle = {
   shadowRadius: 8,
 }
 
-const $tabBarLabel: TextStyle = {
+const $tabBarRow: ViewStyle = {
+  flex: 1,
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: 8,
+}
+
+const $tabItem: ViewStyle = {
+  alignItems: "center",
+  justifyContent: "center",
+  paddingHorizontal: 12,
+  minWidth: 70,
+}
+
+const $tabLabel: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.semiBold,
+  marginTop: 2,
+  textAlign: "center",
 }

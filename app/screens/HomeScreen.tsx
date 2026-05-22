@@ -191,6 +191,12 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
       ? GRID_ITEMS.slice(0, 9)
       : [...GRID_ITEMS.slice(0, 6), ...GRID_ITEMS.slice(9)]
 
+  // 안전게시판 탭 필터 — 관리자: 탭 기준 필터, 근로자: 전체 표시
+  const filteredBoardItems = useMemo(() => {
+    if (userRole !== "admin" || selectedTab === "all") return BOARD_ITEMS
+    return BOARD_ITEMS.filter((item) => item.tag === selectedTab)
+  }, [selectedTab, userRole])
+
   // ── Responsive computed styles ────────────────────────────────────────────
 
   // Header
@@ -379,7 +385,11 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
             {/* 교육/발표 참여 안내 배너 (교육/발표 메뉴 클릭 시 표시) */}
             {showEducationBanner && (
-              <TouchableOpacity style={$eduBanner} activeOpacity={0.7}>
+              <TouchableOpacity
+                style={$eduBanner}
+                activeOpacity={0.7}
+                onPress={() => navigation.navigate("EducationPresentation")}
+              >
                 <BannerIcon width={34} height={34} color="#0B3069" style={$eduBannerIcon} />
                 <View style={$eduBannerContent}>
                   <Text text={translate("homeScreen:edu.title")} style={$eduBannerTitle} />
@@ -434,11 +444,12 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
               {/* Board Items */}
               <View style={$boardList}>
-                {BOARD_ITEMS.map((item, i) => (
+                {filteredBoardItems.map((item, i) => (
                   <TouchableOpacity
                     key={i}
                     style={[$boardItem, $boardItemDynamic]}
                     activeOpacity={0.7}
+                    onPress={() => navigation.navigate("SafeBoard")}
                   >
                     <View style={[$tagWrap, $tagWrapDynamic]}>
                       <SafeBoardBadge
