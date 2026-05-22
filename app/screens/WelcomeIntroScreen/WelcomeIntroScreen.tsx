@@ -7,6 +7,7 @@ import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { useResponsive } from "@/theme/responsive"
 
+import { IntroPagination } from "./components/IntroPagination"
 import { IntroSlide } from "./components/IntroSlide"
 import { INTRO_SLIDES, IntroSlideData } from "./mockData"
 import * as S from "./styles"
@@ -15,7 +16,7 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
   const insets = useSafeAreaInsets()
   const [currentIndex, setCurrentIndex] = useState(0)
   const flatListRef = useRef<FlatList<IntroSlideData>>(null)
-  const { width, isSmallPhone, isTablet } = useResponsive()
+  const { width, isSmallPhone, isTablet, isShortHeight } = useResponsive()
 
   const viewabilityConfig = useRef({ itemVisiblePercentThreshold: 50 }).current
 
@@ -37,14 +38,20 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
   return (
     <View style={[S.$screen, { paddingTop: insets.top }]}>
       {/* Header */}
-      <View style={[S.$header, isSmallPhone && { marginBottom: 24 }]}>
+      <View
+        style={[
+          S.$header,
+          isSmallPhone && { marginBottom: 24 },
+          isShortHeight && { marginBottom: 16 },
+        ]}
+      >
         <Text text="K-SAFEONE" style={S.$logoText} />
         <TouchableOpacity style={S.$skipBtn} activeOpacity={0.7} onPress={goToLogin}>
           <Text text={translate("welcomeIntroScreen:skip")} style={S.$skipLabel} />
         </TouchableOpacity>
       </View>
 
-      {/* Slides */}
+      {/* Slides — 이미지/배지/텍스트만 스와이프 */}
       <View style={S.$slideArea}>
         <FlatList
           ref={flatListRef}
@@ -53,19 +60,16 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
           renderItem={({ item }) => (
             <IntroSlide
               slide={item}
-              currentIndex={currentIndex}
-              total={INTRO_SLIDES.length}
-              onDotPress={handleDotPress}
               screenWidth={width}
               isSmallPhone={isSmallPhone}
               isTablet={isTablet}
+              isShortHeight={isShortHeight}
             />
           )}
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
           bounces={false}
-          extraData={currentIndex}
           style={S.$slideList}
           getItemLayout={(_, index) => ({
             length: width,
@@ -77,10 +81,21 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
         />
       </View>
 
+      {/* Pagination — FlatList 바깥에 고정, 스와이프해도 위치 불변 */}
+      <View style={[S.$paginationWrapper, isShortHeight && { paddingVertical: 10 }]}>
+        <IntroPagination
+          total={INTRO_SLIDES.length}
+          currentIndex={currentIndex}
+          onDotPress={handleDotPress}
+        />
+      </View>
+
       {/* Bottom button */}
-      <View style={[S.$bottomContainer, { paddingBottom: insets.bottom + 24 }]}>
+      <View
+        style={[S.$bottomContainer, { paddingBottom: insets.bottom + (isShortHeight ? 16 : 24) }]}
+      >
         <TouchableOpacity
-          style={[S.$startBtn, isSmallPhone && { height: 50 }]}
+          style={[S.$startBtn, (isSmallPhone || isShortHeight) && { height: 50 }]}
           activeOpacity={0.85}
           onPress={goToLogin}
         >

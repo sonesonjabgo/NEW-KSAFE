@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { TouchableOpacity, View, ViewStyle } from "react-native"
+import { View, ViewStyle } from "react-native"
 
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
@@ -9,27 +9,26 @@ import * as S from "../styles"
 
 interface IntroSlideProps {
   slide: IntroSlideData
-  currentIndex: number
-  total: number
-  onDotPress?: (index: number) => void
   screenWidth: number
   isSmallPhone: boolean
   isTablet: boolean
+  isShortHeight: boolean
 }
 
 export const IntroSlide: FC<IntroSlideProps> = ({
   slide,
-  currentIndex,
-  total,
-  onDotPress,
   screenWidth,
   isSmallPhone,
   isTablet,
+  isShortHeight,
 }) => {
+  // isShortHeight가 세로 공간 부족을 우선 처리, isSmallPhone은 가로 기준
   const imageSize = isTablet
-    ? Math.min(screenWidth * 0.40, 280)
+    ? Math.min(screenWidth * 0.4, 280)
+    : isShortHeight
+    ? screenWidth * 0.4
     : isSmallPhone
-    ? screenWidth * 0.50
+    ? screenWidth * 0.5
     : screenWidth * 0.55
 
   const $slideStyle: ViewStyle = {
@@ -43,23 +42,35 @@ export const IntroSlide: FC<IntroSlideProps> = ({
     height: imageSize,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: isSmallPhone ? 18 : 28,
+    marginBottom: isShortHeight ? 14 : isSmallPhone ? 18 : 28,
   }
 
   const $contentStyle: ViewStyle = isTablet
     ? { ...S.$slideContent, maxWidth: 560, width: "100%", alignSelf: "center" }
     : S.$slideContent
 
-  // breakpoint별 textBlock minHeight:
-  //   smallPhone — title 2줄(25×2=50) + marginBottom 12 + description 3줄(21×3=63) → 128
-  //   base/large — title 2줄(29×2=58) + marginBottom 18 + description 4줄(23×4=92) → 170
-  //   tablet    — maxWidth 560 내에서 base와 같은 폰트, 줄 수 여유 추가 → 180
-  const textBlockMinHeight = isSmallPhone ? 128 : isTablet ? 180 : 170
+  // breakpoint + isShortHeight별 textBlock minHeight
+  //   isShortHeight       — title 2줄(29×2=58) + mb 10 + desc 2줄(22×2=44) → 112 → 120
+  //   isShortHeight+small — 위 기준에서 작은 폰트 적용 → 100
+  //   smallPhone          — title 2줄(25×2=50) + mb 12 + desc 3줄(21×3=63) → 125 → 128
+  //   base/large          — title 2줄(29×2=58) + mb 18 + desc 4줄(23×4=92) → 168 → 170
+  //   tablet              — maxWidth 560 내 base 폰트, 여유 포함 → 180
+  const textBlockMinHeight = isShortHeight
+    ? isSmallPhone
+      ? 100
+      : 120
+    : isSmallPhone
+    ? 128
+    : isTablet
+    ? 180
+    : 170
 
   const $textBlockStyle: ViewStyle = {
     ...S.$textBlock,
     minHeight: textBlockMinHeight,
   }
+
+  const badgeSize = isSmallPhone || isShortHeight ? 44 : 50
 
   return (
     <View style={$slideStyle}>
@@ -71,52 +82,40 @@ export const IntroSlide: FC<IntroSlideProps> = ({
         <View
           style={[
             S.$stepBadge,
-            isSmallPhone && { width: 44, height: 44, borderRadius: 22, marginBottom: 16 },
+            {
+              width: badgeSize,
+              height: badgeSize,
+              borderRadius: badgeSize / 2,
+              marginBottom: isShortHeight ? 10 : isSmallPhone ? 16 : 22,
+            },
           ]}
         >
           <Text
             text={slide.step}
-            style={[S.$stepText, isSmallPhone && { fontSize: 15 }]}
+            style={[S.$stepText, (isSmallPhone || isShortHeight) && { fontSize: 15 }]}
           />
         </View>
 
-        {/* title + description을 고정 높이 블록으로 감싸 pagination 위치 고정 */}
         <View style={$textBlockStyle}>
           <Text
             text={translate(slide.titleTx)}
-            style={[S.$slideTitle, isSmallPhone && { fontSize: 19, marginBottom: 12 }]}
+            style={[
+              S.$slideTitle,
+              isShortHeight && { fontSize: 20, marginBottom: 10 },
+              !isShortHeight && isSmallPhone && { fontSize: 19, marginBottom: 12 },
+            ]}
           />
           <Text
             text={translate(slide.descriptionTx)}
-            style={[S.$slideDescription, isSmallPhone && { fontSize: 14, lineHeight: 21 }]}
-            numberOfLines={isSmallPhone ? 3 : 4}
+            style={[
+              S.$slideDescription,
+              isShortHeight && { fontSize: 14, lineHeight: 22 },
+              !isShortHeight && isSmallPhone && { fontSize: 14, lineHeight: 21 },
+            ]}
+            numberOfLines={isShortHeight ? 3 : isSmallPhone ? 3 : 4}
           />
         </View>
-
-        <InlinePagination
-          total={total}
-          currentIndex={currentIndex}
-          onDotPress={onDotPress}
-          isSmallPhone={isSmallPhone}
-        />
       </View>
     </View>
   )
 }
-
-interface InlinePaginationProps {
-  total: number
-  currentIndex: number
-  onDotPress?: (index: number) => void
-  isSmallPhone: boolean
-}
-
-const InlinePagination: FC<InlinePaginationProps> = ({ total, currentIndex, onDotPress, isSmallPhone }) => (
-  <View style={[S.$paginationRow, isSmallPhone && { marginTop: 20 }]}>
-    {Array.from({ length: total }).map((_, i) => (
-      <TouchableOpacity key={i} onPress={() => onDotPress?.(i)} activeOpacity={0.7} hitSlop={8}>
-        <View style={i === currentIndex ? S.$dotActive : S.$dot} />
-      </TouchableOpacity>
-    ))}
-  </View>
-)

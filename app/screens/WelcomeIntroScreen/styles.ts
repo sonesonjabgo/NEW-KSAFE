@@ -46,7 +46,6 @@ export const $slideArea: ViewStyle = {
   flex: 1,
   justifyContent: "center",
   alignItems: "center",
-  paddingBottom: 48,
 }
 
 export const $slideList: ViewStyle = {
@@ -101,12 +100,17 @@ export const $slideDescription: TextStyle = {
 
 // ── Pagination ────────────────────────────────────────────────────────────────
 
+// FlatList 바깥에 고정 배치되는 pagination 컨테이너
+export const $paginationWrapper: ViewStyle = {
+  paddingVertical: 16,
+  alignItems: "center",
+}
+
 export const $paginationRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "center",
   gap: 6,
-  marginTop: 28,
 }
 
 export const $dot: ViewStyle = {
