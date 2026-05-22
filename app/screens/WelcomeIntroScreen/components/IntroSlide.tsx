@@ -49,21 +49,21 @@ export const IntroSlide: FC<IntroSlideProps> = ({
     ? { ...S.$slideContent, maxWidth: 560, width: "100%", alignSelf: "center" }
     : S.$slideContent
 
-  // breakpoint + isShortHeight별 textBlock minHeight
-  //   isShortHeight       — title 2줄(29×2=58) + mb 10 + desc 2줄(22×2=44) → 112 → 120
-  //   isShortHeight+small — 위 기준에서 작은 폰트 적용 → 100
+  // breakpoint + isShortHeight별 textBlock minHeight (numberOfLines=3 기준)
+  //   isShortHeight+small — title 2줄(25×2=50) + mb 10 + desc 2줄(21×2=42) → 102 → 104
+  //   isShortHeight       — title 2줄(29×2=58) + mb 10 + desc 2줄(22×2=44) → 112 → 116
   //   smallPhone          — title 2줄(25×2=50) + mb 12 + desc 3줄(21×3=63) → 125 → 128
-  //   base/large          — title 2줄(29×2=58) + mb 18 + desc 4줄(23×4=92) → 168 → 170
-  //   tablet              — maxWidth 560 내 base 폰트, 여유 포함 → 180
+  //   base/large          — title 2줄(29×2=58) + mb 18 + desc 3줄(23×3=69) → 145 → 148
+  //   tablet              — maxWidth 560 내 base 폰트, 여유 포함 → 160
   const textBlockMinHeight = isShortHeight
     ? isSmallPhone
-      ? 100
-      : 120
+      ? 104
+      : 116
     : isSmallPhone
     ? 128
     : isTablet
-    ? 180
-    : 170
+    ? 160
+    : 148
 
   const $textBlockStyle: ViewStyle = {
     ...S.$textBlock,
@@ -86,7 +86,8 @@ export const IntroSlide: FC<IntroSlideProps> = ({
               width: badgeSize,
               height: badgeSize,
               borderRadius: badgeSize / 2,
-              marginBottom: isShortHeight ? 10 : isSmallPhone ? 16 : 22,
+              // isShortHeight: 10→14으로 badge-title 간격 확보
+              marginBottom: isShortHeight ? 14 : isSmallPhone ? 16 : 22,
             },
           ]}
         >
@@ -112,7 +113,7 @@ export const IntroSlide: FC<IntroSlideProps> = ({
               isShortHeight && { fontSize: 14, lineHeight: 22 },
               !isShortHeight && isSmallPhone && { fontSize: 14, lineHeight: 21 },
             ]}
-            numberOfLines={isShortHeight ? 3 : isSmallPhone ? 3 : 4}
+            numberOfLines={3}
           />
         </View>
       </View>

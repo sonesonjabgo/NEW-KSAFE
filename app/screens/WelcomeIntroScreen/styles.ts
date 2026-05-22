@@ -101,9 +101,10 @@ export const $slideDescription: TextStyle = {
 // ── Pagination ────────────────────────────────────────────────────────────────
 
 // slideArea 안 FlatList 아래 고정 — (FlatList + pagination) 블록 전체가 slideArea 내 세로 중앙 배치됨
+// marginTop: 상세 설명과의 간격 기준 (버튼과의 간격은 slideArea centering이 담당)
 export const $paginationWrapper: ViewStyle = {
   width: "100%",
-  marginTop: 20,
+  marginTop: 24,
   alignItems: "center",
 }
 
