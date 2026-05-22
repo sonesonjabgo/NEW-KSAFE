@@ -208,8 +208,10 @@ const en = {
     title: "Safety Board",
     alertButton: "Send Alert",
     workplaceLabel: "Selected Workplace",
+    allWorkplaces: "All Workplaces",
     workplaceModal: {
       title: "Select Workplace",
+      allOption: "All",
     },
     badge: {
       companyWide: "Company-wide",

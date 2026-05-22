@@ -1,7 +1,9 @@
 import { flow, Instance, SnapshotOut, types } from "mobx-state-tree"
 
 import {
+  fetchAdminMyPosts,
   fetchUserCompanyPosts,
+  MyCompanyPostListItemDto,
   UserCompanyPostListItemDto,
   UserCompanyPostListResponseDto,
 } from "@/services/api/safeBoard"
@@ -27,12 +29,13 @@ export const SafeBoardStoreModel = types
   .model("SafeBoardStore")
   .props({
     boards: types.optional(types.array(CompanyPostModel), []),
+    myPosts: types.optional(types.array(CompanyPostModel), []),
     boardError: types.maybeNull(types.string),
   })
   .actions(withSetPropAction)
   .extend(withStatus)
   .actions((self) => ({
-    fetchBoardPosts: flow(function* loadBoardPosts() {
+    fetchBoardPosts: flow(function* loadBoardPosts(workplaceId?: string) {
       self.setStatus("pending")
       self.boardError = null
 
@@ -45,6 +48,7 @@ export const SafeBoardStoreModel = types
           const response: UserCompanyPostListResponseDto = yield fetchUserCompanyPosts({
             cursor,
             limit: 100,
+            workplaceId: workplaceId ?? null,
           })
 
           items.push(...(response.items ?? []))
@@ -71,8 +75,30 @@ export const SafeBoardStoreModel = types
       }
     }),
 
+    fetchAdminMyPosts: flow(function* loadMyPosts() {
+      self.setStatus("pending")
+      try {
+        const items: MyCompanyPostListItemDto[] = yield fetchAdminMyPosts()
+        const posts = items.map((post) =>
+          CompanyPostModel.create({
+            ...post,
+            isPinned: post.isPinned ?? false,
+            workplaceId: post.workplaceId ?? null,
+            workplaceName: post.workplaceName ?? null,
+            publishedAt: post.publishedAt ?? null,
+          }),
+        )
+        self.myPosts.replace(posts)
+        self.setStatus("success")
+      } catch (error) {
+        self.setStatus("error")
+        logDevError("Failed to load my posts", error)
+      }
+    }),
+
     resetBoardCache() {
       self.boards.clear()
+      self.myPosts.clear()
       self.boardError = null
       self.resetStatus()
     },

@@ -207,8 +207,10 @@ const ko: Translations = {
     title: "안전게시판",
     alertButton: "알림 발송",
     workplaceLabel: "선택된 작업장",
+    allWorkplaces: "모든 사업장",
     workplaceModal: {
       title: "작업장 선택",
+      allOption: "전체",
     },
     badge: {
       companyWide: "회사전체",

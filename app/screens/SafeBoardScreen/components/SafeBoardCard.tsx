@@ -18,7 +18,7 @@ interface SafeBoardCardProps {
   onPress?: () => void
 }
 
-function getStatusBadgeType(status: StatusType): SafeBoardBadgeType | null {
+function getStatusBadgeType(status: string | null): SafeBoardBadgeType | null {
   if (status === "draft") return "draft"
   if (status === "archived") return "archived"
   return null
@@ -46,7 +46,7 @@ export const SafeBoardCard: FC<SafeBoardCardProps> = ({
             {item.scope === "workplace" ? (
               <View style={$metaRow}>
                 <MapPin size={12} color="#979797" strokeWidth={2.5} />
-                <Text text={item.workplaceName} style={$metaWorkplace} numberOfLines={1} />
+                <Text text={item.workplaceName ?? ""} style={$metaWorkplace} numberOfLines={1} />
                 <Text text=" · " style={$metaText} />
                 <Text text={item.createdAt} style={$metaText} />
               </View>
