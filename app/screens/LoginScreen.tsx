@@ -1,13 +1,12 @@
 import { FC, useState } from "react"
 import {
-  View,
   TextInput,
+  TextStyle,
   TouchableOpacity,
   Text as RNText,
   StatusBar,
-  useWindowDimensions,
+  View,
   ViewStyle,
-  TextStyle,
 } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { IconAlertCircle } from "@tabler/icons-react-native"
@@ -24,6 +23,7 @@ import { Screen } from "@/components/Screen"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { colors } from "@/theme/colors"
+import { useResponsive } from "@/theme/responsive"
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
@@ -31,8 +31,62 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
   const navigation = useNavigation<any>()
   const [secureText, setSecureText] = useState(true)
   const [forgotModalVisible, setForgotModalVisible] = useState(false)
-  const { height } = useWindowDimensions()
   const { bottom: bottomInset } = useSafeAreaInsets()
+  const {
+    width,
+    height,
+    isSmallPhone,
+    isBasePhone: _isBasePhone,
+    isLargePhone,
+    isTablet,
+    isShortHeight,
+    breakpoint: _breakpoint,
+  } = useResponsive()
+
+  // isSmallPhone 또는 isShortHeight → 세로 간격 전반 압축
+  const isCompact = isSmallPhone || isShortHeight
+
+  // ── 네이비 영역 높이 (breakpoint별 비율) ─────────────────────────────────────
+  const navySectionHeight = isTablet
+    ? Math.min(height * 0.38, 300)
+    : isShortHeight
+      ? height * 0.34
+      : isSmallPhone
+        ? height * 0.36
+        : isLargePhone
+          ? height * 0.42
+          : height * 0.4 // isBasePhone 기본 기준
+
+  // ── 반응형 계산값 ─────────────────────────────────────────────────────────────
+  const logoSize = isTablet ? 96 : isCompact ? 64 : 80
+  const logoGap = isCompact ? 6 : 9
+
+  const cardPaddingTop = isCompact ? 24 : 32
+  // tablet: 내부 콘텐츠 maxWidth 480 기준으로 좌우 padding 확대 → 중앙 정렬 효과
+  const cardPaddingHorizontal = isTablet ? Math.max(24, (width - 480) / 2) : 24
+
+  const formBoxPadding = isCompact ? 14 : 20
+  const gapSmallH = isCompact ? 10 : 16
+  const gapMedH = isCompact ? 16 : 24
+  const gapLargeH = isCompact ? 20 : 32
+
+  // 입력 필드 / 버튼 공통 높이
+  const controlHeight = isCompact ? 44 : 48
+
+  // ── Pre-computed dynamic styles (react-native/no-inline-styles 준수) ─────────
+  const $navySectionDynamic: ViewStyle = { height: navySectionHeight }
+  const $logoContainerDynamic: ViewStyle = { gap: logoGap }
+  const $cardDynamic: ViewStyle = {
+    paddingTop: cardPaddingTop,
+    paddingHorizontal: cardPaddingHorizontal,
+    paddingBottom: Math.max(bottomInset, 24),
+  }
+  const $formBoxDynamic: ViewStyle = { padding: formBoxPadding }
+  const $gapS: ViewStyle = { height: gapSmallH }
+  const $gapM: ViewStyle = { height: gapMedH }
+  const $gapL: ViewStyle = { height: gapLargeH }
+  const $controlDynamic: ViewStyle = { height: controlHeight }
+  const $textInputDynamic: TextStyle = { height: controlHeight }
 
   return (
     <>
@@ -44,30 +98,30 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
         safeAreaEdges={["top"]}
       >
         {/* 상단 네이비 영역 */}
-        <View style={[$navySection, { height: height * 0.42 }]}>
-          <View style={$logoContainer}>
-            <LogoSvg width={80} height={80} style={$logoImage} />
+        <View style={[$navySection, $navySectionDynamic]}>
+          <View style={[$logoContainer, $logoContainerDynamic]}>
+            <LogoSvg width={logoSize} height={logoSize} style={$logoImage} />
             <RNText style={$brandName}>K-SAFEONE</RNText>
             <RNText style={$tagline}>{translate("loginScreen:tagline")}</RNText>
           </View>
         </View>
 
         {/* 하단 흰색 카드 */}
-        <View style={[$card, { paddingBottom: Math.max(bottomInset, 24) }]}>
+        <View style={[$card, $cardDynamic]}>
           <RNText style={$cardTitle}>{translate("loginScreen:logIn")}</RNText>
 
-          <View style={$gap24} />
+          <View style={$gapM} />
 
           {/* 입력 폼 박스 */}
-          <View style={$formBox}>
+          <View style={[$formBox, $formBoxDynamic]}>
             {/* 이메일 필드 */}
             <RNText style={$label}>
               {translate("loginScreen:emailFieldLabel")} <RNText style={$required}>*</RNText>
             </RNText>
-            <View style={$inputRow}>
+            <View style={[$inputRow, $controlDynamic]}>
               <MailSvg width={18} height={18} color="#9CA3AF" style={$inputIcon} />
               <TextInput
-                style={$textInput}
+                style={[$textInput, $textInputDynamic]}
                 placeholder={translate("loginScreen:emailFieldPlaceholder")}
                 placeholderTextColor="#9CA3AF"
                 keyboardType="email-address"
@@ -75,16 +129,16 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
               />
             </View>
 
-            <View style={$gap24} />
+            <View style={$gapM} />
 
             {/* 비밀번호 필드 */}
             <RNText style={$label}>
               {translate("loginScreen:passwordFieldLabel")} <RNText style={$required}>*</RNText>
             </RNText>
-            <View style={$inputRow}>
+            <View style={[$inputRow, $controlDynamic]}>
               <LockSvg width={18} height={18} color="#9CA3AF" style={$inputIcon} />
               <TextInput
-                style={[$textInput, $passwordInput]}
+                style={[$textInput, $passwordInput, $textInputDynamic]}
                 placeholder={translate("loginScreen:passwordFieldPlaceholder")}
                 placeholderTextColor="#9CA3AF"
                 secureTextEntry={secureText}
@@ -99,18 +153,18 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
             </View>
           </View>
 
-          <View style={$gap32} />
+          <View style={$gapL} />
 
           {/* 로그인 버튼 */}
           <TouchableOpacity
-            style={$loginButton}
+            style={[$loginButton, $controlDynamic]}
             onPress={() => navigation.navigate("Main")}
             activeOpacity={0.85}
           >
             <RNText style={$loginButtonText}>{translate("loginScreen:logIn")}</RNText>
           </TouchableOpacity>
 
-          <View style={$gap16} />
+          <View style={$gapS} />
 
           {/* 비밀번호 찾기 */}
           <TouchableOpacity onPress={() => setForgotModalVisible(true)} style={$forgotWrapper}>
@@ -137,24 +191,27 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
   )
 }
 
+// ── Static styles ─────────────────────────────────────────────────────────────
+
 const $root: ViewStyle = {
   flex: 1,
-  backgroundColor: "#0B3069",
+  backgroundColor: colors.navy,
 }
+
+const $screenContent: ViewStyle = { flex: 1 }
 
 const $navySection: ViewStyle = {
   justifyContent: "center",
   alignItems: "center",
 }
 
+// gap은 동적 — $logoContainerDynamic에서 주입
 const $logoContainer: ViewStyle = {
   alignItems: "center",
-  gap: 9,
 }
 
+// width/height는 JSX props(logoSize)로 제어 — marginBottom만 유지
 const $logoImage: ViewStyle = {
-  width: 80,
-  height: 80,
   marginBottom: 8,
 }
 
@@ -170,14 +227,13 @@ const $tagline: TextStyle = {
   color: "rgba(255,255,255,0.8)",
 }
 
+// paddingTop / paddingHorizontal / paddingBottom은 $cardDynamic에서 주입
 const $card: ViewStyle = {
   flex: 1,
   backgroundColor: "#FFFFFF",
   borderTopLeftRadius: 24,
   borderTopRightRadius: 24,
   marginTop: -20,
-  paddingHorizontal: 24,
-  paddingTop: 32,
 }
 
 const $cardTitle: TextStyle = {
@@ -193,15 +249,15 @@ const $label: TextStyle = {
 }
 
 const $required: TextStyle = {
-  color: "#EF4444",
+  color: colors.danger,
 }
 
+// height는 $controlDynamic에서 주입
 const $inputRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
   backgroundColor: "#F5F5F5",
   borderRadius: 12,
-  height: 48,
   paddingHorizontal: 12,
 }
 
@@ -209,21 +265,21 @@ const $inputIcon: ViewStyle = {
   marginRight: 8,
 }
 
+// height는 $textInputDynamic에서 주입
 const $textInput: TextStyle = {
   flex: 1,
   fontSize: 14,
   color: "#111827",
-  height: 48,
 }
 
 const $passwordInput: TextStyle = {
   marginLeft: 8,
 }
 
+// height는 $controlDynamic에서 주입
 const $loginButton: ViewStyle = {
-  backgroundColor: "#0B3069",
+  backgroundColor: colors.navy,
   borderRadius: 12,
-  height: 48,
   justifyContent: "center",
   alignItems: "center",
 }
@@ -243,15 +299,10 @@ const $forgotText: TextStyle = {
   color: "#6B7280",
 }
 
+// padding은 $formBoxDynamic에서 주입
 const $formBox: ViewStyle = {
   borderRadius: 16,
-  padding: 20,
 }
-
-const $screenContent: ViewStyle = { flex: 1 }
-const $gap16: ViewStyle = { height: 16 }
-const $gap24: ViewStyle = { height: 24 }
-const $gap32: ViewStyle = { height: 32 }
 
 // ── 비밀번호 찾기 모달 ─────────────────────────────────────────────────────────
 
