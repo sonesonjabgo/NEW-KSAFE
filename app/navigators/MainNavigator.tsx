@@ -2,6 +2,8 @@ import { ViewStyle, TextStyle, View, TouchableOpacity } from "react-native"
 import { createBottomTabNavigator, BottomTabBarProps } from "@react-navigation/bottom-tabs"
 import type { SvgProps } from "react-native-svg"
 
+import { useResponsive } from "@/theme/responsive"
+
 import NavBoard from "@assets/icons/nav/nav_board.svg"
 import NavHome from "@assets/icons/nav/nav_home.svg"
 import NavSafety from "@assets/icons/nav/nav_safety.svg"
@@ -27,10 +29,13 @@ function TabIcon({ Icon, focused }: { Icon: React.FC<SvgProps>; focused: boolean
 
 function CustomTabBar({ state, descriptors, navigation, insets }: BottomTabBarProps) {
   const bottom = insets.bottom
+  const { isSmallPhone, isLargePhone, isTablet } = useResponsive()
+
+  const tabGap = isSmallPhone ? 4 : isLargePhone ? 18 : isTablet ? 22 : 12
 
   return (
     <View style={[$tabBarOuter, { paddingBottom: bottom, height: 82 + bottom }]}>
-      <View style={$tabBarRow}>
+      <View style={[$tabBarRow, { gap: tabGap }]}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key]
           const focused = state.index === index
@@ -131,13 +136,15 @@ const $tabBarRow: ViewStyle = {
   flexDirection: "row",
   justifyContent: "center",
   alignItems: "center",
-  gap: 8,
+  // gap은 breakpoint별로 동적 적용
+  // translateX -4: 텍스트 길이 차이로 인한 시각 편중 보정
+  transform: [{ translateX: -4 }],
 }
 
 const $tabItem: ViewStyle = {
   alignItems: "center",
   justifyContent: "center",
-  paddingHorizontal: 12,
+  paddingHorizontal: 8,
   minWidth: 70,
 }
 
@@ -145,5 +152,6 @@ const $tabLabel: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.semiBold,
   marginTop: 2,
+  width: "100%",
   textAlign: "center",
 }
