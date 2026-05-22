@@ -101,8 +101,10 @@ export const $slideDescription: TextStyle = {
 // ── Pagination ────────────────────────────────────────────────────────────────
 
 // FlatList 바깥에 고정 배치되는 pagination 컨테이너
+// marginTop: 슬라이드 콘텐츠와의 간격 / marginBottom: 하단 버튼과의 간격
 export const $paginationWrapper: ViewStyle = {
-  paddingVertical: 16,
+  marginTop: 16,
+  marginBottom: 28,
   alignItems: "center",
 }
 

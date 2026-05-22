@@ -82,7 +82,7 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
       </View>
 
       {/* Pagination — FlatList 바깥에 고정, 스와이프해도 위치 불변 */}
-      <View style={[S.$paginationWrapper, isShortHeight && { paddingVertical: 10 }]}>
+      <View style={[S.$paginationWrapper, isShortHeight && { marginTop: 12, marginBottom: 18 }]}>
         <IntroPagination
           total={INTRO_SLIDES.length}
           currentIndex={currentIndex}
