@@ -45,6 +45,8 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
     const { safeBoardStore } = useStores()
     const insets = useSafeAreaInsets()
 
+    const [detailLoading, setDetailLoading] = useState(true)
+    const [detailError, setDetailError] = useState(false)
     const [alertOn, setAlertOn] = useState(false)
     const [publishModalVisible, setPublishModalVisible] = useState(false)
     const [deleteModalVisible, setDeleteModalVisible] = useState(false)
@@ -55,18 +57,21 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
     const [toastMessage, setToastMessage] = useState("")
 
     const currentPost = safeBoardStore.currentPost
-    const isLoading = safeBoardStore.status === "pending" && !currentPost
 
     const isAdmin = role === "admin"
     const isCreator = !!user?.id && user.id === currentPost?.createdBy
     const canEdit = isAdmin && isCreator
 
     useEffect(() => {
-      if (safeBoardStore.activeTab === "my") {
-        safeBoardStore.fetchAdminMyPostDetail(id)
-      } else {
-        safeBoardStore.fetchPostDetail(id)
-      }
+      setDetailLoading(true)
+      setDetailError(false)
+      const fetch =
+        safeBoardStore.activeTab === "my"
+          ? safeBoardStore.fetchAdminMyPostDetail(id)
+          : safeBoardStore.fetchPostDetail(id)
+      Promise.resolve(fetch)
+        .catch(() => setDetailError(true))
+        .finally(() => setDetailLoading(false))
       return () => {
         safeBoardStore.clearCurrentPost()
       }
@@ -127,11 +132,11 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
             ) : undefined
           }
         >
-          {isLoading ? (
+          {detailLoading ? (
             <View style={$loadingContainer}>
               <ActivityIndicator size="large" color="#1062D8" />
             </View>
-          ) : !currentPost ? (
+          ) : detailError || !currentPost ? (
             <View style={$loadingContainer}>
               <Text
                 text={translate("safeBoardDetailScreen:loadError")}
@@ -196,7 +201,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
             </View>
           )}
 
-          {canEdit && !isLoading && currentPost && (
+          {canEdit && !detailLoading && currentPost && (
             <View style={[$actionBar, { paddingBottom: insets.bottom + 12 }]}>
               {currentPost.status === "draft" && (
                 <TouchableOpacity
