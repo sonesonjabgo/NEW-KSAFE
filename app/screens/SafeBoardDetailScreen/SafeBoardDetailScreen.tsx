@@ -7,7 +7,7 @@ import {
   ViewStyle,
   TextStyle,
 } from "react-native"
-import { Bell, CheckCircle, Send, Trash2, User, XCircle } from "lucide-react-native"
+import { BellOff, BellRing, CheckCircle, Send, Trash2, XCircle } from "lucide-react-native"
 import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -47,7 +47,6 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
 
     const [detailLoading, setDetailLoading] = useState(true)
     const [detailError, setDetailError] = useState(false)
-    const [alertOn, setAlertOn] = useState(false)
     const [publishModalVisible, setPublishModalVisible] = useState(false)
     const [deleteModalVisible, setDeleteModalVisible] = useState(false)
     const [isPublishing, setIsPublishing] = useState(false)
@@ -146,6 +145,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
           ) : (
             <View style={$outerContainer}>
               <View style={$card}>
+                {/* 뱃지 + 날짜 */}
                 <View style={$badgeDateRow}>
                   <View style={$badgeRow}>
                     <SafeBoardBadge type={currentPost.scope as SafeBoardBadgeType} />
@@ -158,39 +158,53 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
                   <Text text={formatPostDate(currentPost.createdAt)} style={$dateText} />
                 </View>
 
+                {/* 제목 */}
                 <Text text={currentPost.title} style={$titleText} />
 
+                {/* 알람 여부 (관리자 본인 게시글만 표시) */}
                 {canEdit && (
-                  <TouchableOpacity
-                    style={$alertRow}
-                    activeOpacity={0.7}
-                    onPress={() => setAlertOn((v) => !v)}
-                  >
-                    <Bell size={17} color={alertOn ? "#1062D8" : "#56524F"} strokeWidth={2} />
+                  <View style={$alertRow}>
+                    {currentPost.sendNotification ? (
+                      <BellRing size={15} color="#1062D8" strokeWidth={2} />
+                    ) : (
+                      <BellOff size={15} color="#979797" strokeWidth={2} />
+                    )}
                     <Text
                       text={
-                        alertOn
+                        currentPost.sendNotification
                           ? translate("safeBoardDetailScreen:alertOn")
                           : translate("safeBoardDetailScreen:alertOff")
                       }
-                      style={$alertText}
+                      style={[
+                        $alertText,
+                        currentPost.sendNotification && $alertTextActive,
+                      ]}
                     />
-                  </TouchableOpacity>
+                  </View>
                 )}
 
-                <View style={$authorRow}>
-                  <View style={$authorIconWrap}>
-                    <User size={14} color="#606679" strokeWidth={2} />
-                  </View>
-                  <Text
-                    text={`${translate("safeBoardDetailScreen:authorLabel")} ${currentPost.authorName ?? ""}`}
-                    style={$authorText}
-                  />
-                </View>
-
+                {/* 구분선 */}
                 <View style={$divider} />
 
-                <Text text={currentPost.authorAffiliation ?? ""} style={$affiliationText} />
+                {/* 작성자 아바타 + 이름 | 사업장명 */}
+                <View style={$authorFooterRow}>
+                  <View style={$authorLeft}>
+                    <View style={$avatarCircle}>
+                      <Text
+                        text={(currentPost.authorName ?? "?")[0].toUpperCase()}
+                        style={$avatarText}
+                      />
+                    </View>
+                    <Text text={currentPost.authorName ?? ""} style={$authorText} />
+                  </View>
+                  {!!currentPost.workplaceName && (
+                    <Text
+                      text={currentPost.workplaceName}
+                      style={$workplaceText}
+                      numberOfLines={1}
+                    />
+                  )}
+                </View>
               </View>
 
               <View style={$contentCard}>
@@ -367,26 +381,8 @@ const $alertText: TextStyle = {
   color: "#979797",
 }
 
-const $authorRow: ViewStyle = {
-  flexDirection: "row",
-  alignItems: "center",
-  gap: 6,
-  marginBottom: 14,
-}
-
-const $authorIconWrap: ViewStyle = {
-  width: 28,
-  height: 28,
-  borderRadius: 14,
-  backgroundColor: "#F0F2F5",
-  justifyContent: "center",
-  alignItems: "center",
-}
-
-const $authorText: TextStyle = {
-  fontSize: 14,
-  fontFamily: typography.primary.medium,
-  color: "#333333",
+const $alertTextActive: TextStyle = {
+  color: "#1062D8",
 }
 
 const $divider: ViewStyle = {
@@ -395,10 +391,46 @@ const $divider: ViewStyle = {
   marginBottom: 14,
 }
 
-const $affiliationText: TextStyle = {
+const $authorFooterRow: ViewStyle = {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+}
+
+const $authorLeft: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 8,
+  flex: 1,
+}
+
+const $avatarCircle: ViewStyle = {
+  width: 30,
+  height: 30,
+  borderRadius: 15,
+  backgroundColor: "#D6E4FF",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+const $avatarText: TextStyle = {
   fontSize: 13,
+  fontFamily: typography.primary.bold,
+  color: "#1062D8",
+}
+
+const $authorText: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.medium,
+  color: "#333333",
+}
+
+const $workplaceText: TextStyle = {
+  fontSize: 12,
   fontFamily: typography.primary.normal,
   color: "#606679",
+  maxWidth: "45%",
+  textAlign: "right",
 }
 
 const $contentText: TextStyle = {

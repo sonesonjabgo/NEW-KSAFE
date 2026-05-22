@@ -14,6 +14,7 @@ export interface UserCompanyPostDetailDto {
   workplaceName?: string | null
   status?: string | null
   content?: string | null
+  description?: string | null
   authorName?: string | null
   authorAffiliation?: string | null
   createdBy?: string | null
@@ -25,13 +26,14 @@ export interface AdminMyPostDetailDto {
   id: string
   title: string
   scope: "company_wide" | "workplace"
-  content?: string | null
   workplaceId?: string | null
   workplaceName?: string | null
   status: "draft" | "published" | "archived"
   createdBy: string
   authorName?: string | null
   authorAffiliation?: string | null
+  content?: string | null
+  description?: string | null
   sendNotification?: boolean
   createdAt: string
   updatedAt: string
