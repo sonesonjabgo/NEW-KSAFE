@@ -137,8 +137,8 @@ export const SafeBoardStoreModel = types
           "currentPost",
           CompanyPostDetailModel.create({
             id: data.id,
-            title: data.title,
-            scope: data.scope,
+            title: data.title ?? "",
+            scope: data.scope ?? "company_wide",
             content: data.content ?? null,
             workplaceId: data.workplaceId ?? null,
             workplaceName: data.workplaceName ?? null,
@@ -146,8 +146,8 @@ export const SafeBoardStoreModel = types
             createdBy: data.createdBy ?? null,
             authorName: data.authorName ?? null,
             authorAffiliation: data.authorAffiliation ?? null,
-            createdAt: data.createdAt,
-            updatedAt: data.updatedAt,
+            createdAt: data.createdAt ?? "",
+            updatedAt: data.updatedAt ?? data.createdAt ?? "",
             publishedAt: null,
           }),
         )
@@ -155,6 +155,7 @@ export const SafeBoardStoreModel = types
       } catch (error) {
         self.setStatus("error")
         logDevError("Failed to fetch post detail", error)
+        throw error
       }
     }),
 
@@ -166,18 +167,18 @@ export const SafeBoardStoreModel = types
           "currentPost",
           CompanyPostDetailModel.create({
             id: data.id,
-            title: data.title,
-            scope: data.scope,
+            title: data.title ?? "",
+            scope: data.scope ?? "company_wide",
             content: data.content ?? null,
             workplaceId: data.workplaceId ?? null,
             workplaceName: data.workplaceName ?? null,
             status: data.status ?? null,
-            createdBy: data.createdBy,
+            createdBy: data.createdBy ?? null,
             authorName: data.authorName ?? null,
             authorAffiliation: data.authorAffiliation ?? null,
             sendNotification: data.sendNotification ?? false,
-            createdAt: data.createdAt,
-            updatedAt: data.updatedAt,
+            createdAt: data.createdAt ?? "",
+            updatedAt: data.updatedAt ?? data.createdAt ?? "",
             publishedAt: data.publishedAt ?? null,
           }),
         )
@@ -185,6 +186,7 @@ export const SafeBoardStoreModel = types
       } catch (error) {
         self.setStatus("error")
         logDevError("Failed to fetch admin post detail", error)
+        throw error
       }
     }),
 
