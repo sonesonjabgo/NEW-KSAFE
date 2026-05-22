@@ -1,6 +1,7 @@
-import en from "./en"
+import en, { Translations } from "./en"
+import { mergeLocale, type LocaleOverrides } from "./mergeLocale"
 
-const ru = {
+const ruOverrides = {
   languageSettings: {
     languageTitle: "Язык",
     languageDescription: "Мгновенно переключайте язык приложения.",
@@ -11,5 +12,7 @@ const ru = {
     languageNames: en.languageSettings.languageNames,
   },
 }
+
+const ru: Translations = mergeLocale(en, ruOverrides as LocaleOverrides<Translations>)
 
 export default ru

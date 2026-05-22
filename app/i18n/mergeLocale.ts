@@ -2,9 +2,7 @@
  * Deep partial type for locale overrides.
  * Allows providing only the keys you want to override from the base locale.
  */
-export type LocaleOverrides<T> = T extends object
-  ? { [K in keyof T]?: LocaleOverrides<T[K]> }
-  : T
+export type LocaleOverrides<T> = T extends object ? { [K in keyof T]?: LocaleOverrides<T[K]> } : T
 
 /**
  * Deeply merges a base locale with a partial override object.

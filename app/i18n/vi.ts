@@ -1,6 +1,7 @@
-import en from "./en"
+import en, { Translations } from "./en"
+import { mergeLocale, type LocaleOverrides } from "./mergeLocale"
 
-const vi = {
+const viOverrides = {
   languageSettings: {
     languageTitle: "Ngôn ngữ",
     languageDescription: "Thay đổi ngôn ngữ ứng dụng ngay lập tức.",
@@ -11,5 +12,7 @@ const vi = {
     languageNames: en.languageSettings.languageNames,
   },
 }
+
+const vi: Translations = mergeLocale(en, viOverrides as LocaleOverrides<Translations>)
 
 export default vi

@@ -1,6 +1,7 @@
-import en from "./en"
+import en, { Translations } from "./en"
+import { mergeLocale, type LocaleOverrides } from "./mergeLocale"
 
-const lo = {
+const loOverrides = {
   languageSettings: {
     languageTitle: "ພາສາ",
     languageDescription: "ປ່ຽນພາສາແອັບໄດ້ທັນທີ",
@@ -11,5 +12,7 @@ const lo = {
     languageNames: en.languageSettings.languageNames,
   },
 }
+
+const lo: Translations = mergeLocale(en, loOverrides as LocaleOverrides<Translations>)
 
 export default lo

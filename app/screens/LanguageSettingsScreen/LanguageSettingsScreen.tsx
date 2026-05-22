@@ -37,25 +37,25 @@ const LANGUAGES: Language[] = [
 ]
 
 const CONFIRM_TEXT: Record<string, string> = {
-  ko: "확인",
-  en: "OK",
+  "ko": "확인",
+  "en": "OK",
   "zh-Hans": "确认",
   "zh-Hant": "確認",
-  zh: "确认",
-  ar: "تأكيد",
-  es: "Confirmar",
-  fr: "Confirmer",
-  hi: "पुष्टि करें",
-  ja: "確認",
-  id: "Konfirmasi",
-  vi: "Xác nhận",
-  th: "ยืนยัน",
-  ru: "Подтвердить",
-  km: "យល់ព្រម",
-  lo: "ຢືນຢັນ",
-  ne: "ठीक छ",
-  ur: "ٹھیک ہے",
-  my: "အတည်ပြုရန်",
+  "zh": "确认",
+  "ar": "تأكيد",
+  "es": "Confirmar",
+  "fr": "Confirmer",
+  "hi": "पुष्टि करें",
+  "ja": "確認",
+  "id": "Konfirmasi",
+  "vi": "Xác nhận",
+  "th": "ยืนยัน",
+  "ru": "Подтвердить",
+  "km": "យល់ព្រម",
+  "lo": "ຢືນຢັນ",
+  "ne": "ठीक छ",
+  "ur": "ٹھیک ہے",
+  "my": "အတည်ပြုရန်",
 }
 
 export const LanguageSettingsScreen: FC = () => {
@@ -92,8 +92,7 @@ export const LanguageSettingsScreen: FC = () => {
     lng: previewLang,
     language: modalLangName,
   })
-  const modalConfirm =
-    CONFIRM_TEXT[previewLang] ?? translate("common:ok", { lng: previewLang })
+  const modalConfirm = CONFIRM_TEXT[previewLang] ?? translate("common:ok", { lng: previewLang })
   const displayLang = currentLanguage.startsWith("ko") ? "ko" : "en"
 
   const handleConfirm = () => {

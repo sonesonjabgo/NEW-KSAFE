@@ -1,6 +1,7 @@
-import en from "./en"
+import en, { Translations } from "./en"
+import { mergeLocale, type LocaleOverrides } from "./mergeLocale"
 
-const id = {
+const idOverrides = {
   languageSettings: {
     languageTitle: "Bahasa",
     languageDescription: "Ganti bahasa aplikasi secara instan.",
@@ -11,5 +12,7 @@ const id = {
     languageNames: en.languageSettings.languageNames,
   },
 }
+
+const id: Translations = mergeLocale(en, idOverrides as LocaleOverrides<Translations>)
 
 export default id

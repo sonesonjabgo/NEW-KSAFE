@@ -1,6 +1,7 @@
-import en from "./en"
+import en, { Translations } from "./en"
+import { mergeLocale, type LocaleOverrides } from "./mergeLocale"
 
-const ne = {
+const neOverrides = {
   languageSettings: {
     languageTitle: "भाषा",
     languageDescription: "एपको भाषा तुरुन्त परिवर्तन गर्नुहोस्।",
@@ -11,5 +12,7 @@ const ne = {
     languageNames: en.languageSettings.languageNames,
   },
 }
+
+const ne: Translations = mergeLocale(en, neOverrides as LocaleOverrides<Translations>)
 
 export default ne

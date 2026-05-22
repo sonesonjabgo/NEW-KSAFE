@@ -1,6 +1,7 @@
-import en from "./en"
+import en, { Translations } from "./en"
+import { mergeLocale, type LocaleOverrides } from "./mergeLocale"
 
-const ur = {
+const urOverrides = {
   languageSettings: {
     languageTitle: "زبان",
     languageDescription: "ایپ کی زبان فوراً تبدیل کریں۔",
@@ -11,5 +12,7 @@ const ur = {
     languageNames: en.languageSettings.languageNames,
   },
 }
+
+const ur: Translations = mergeLocale(en, urOverrides as LocaleOverrides<Translations>)
 
 export default ur

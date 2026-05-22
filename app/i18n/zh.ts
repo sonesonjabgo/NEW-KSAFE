@@ -1,6 +1,7 @@
-import en from "./en"
+import en, { Translations } from "./en"
+import { mergeLocale, type LocaleOverrides } from "./mergeLocale"
 
-const zh = {
+const zhOverrides = {
   languageSettings: {
     languageTitle: "语言",
     languageDescription: "立即切换应用语言。",
@@ -10,5 +11,7 @@ const zh = {
     languageNames: en.languageSettings.languageNames,
   },
 }
+
+const zh: Translations = mergeLocale(en, zhOverrides as LocaleOverrides<Translations>)
 
 export default zh
