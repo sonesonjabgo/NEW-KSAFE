@@ -16,6 +16,7 @@ export interface UserCompanyPostDetailDto {
   content?: string | null
   description?: string | null
   authorName?: string | null
+  createdByUserName?: string | null
   authorAffiliation?: string | null
   createdBy?: string | null
   createdAt: string
@@ -31,6 +32,7 @@ export interface AdminMyPostDetailDto {
   status: "draft" | "published" | "archived"
   createdBy: string
   authorName?: string | null
+  createdByUserName?: string | null
   authorAffiliation?: string | null
   content?: string | null
   description?: string | null
