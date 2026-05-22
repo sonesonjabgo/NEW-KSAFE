@@ -9,6 +9,7 @@ export interface ResponsiveInfo {
   isBasePhone: boolean
   isLargePhone: boolean
   isTablet: boolean
+  isShortHeight: boolean
   breakpoint: Breakpoint
 }
 
@@ -19,6 +20,7 @@ export function useResponsive(): ResponsiveInfo {
   const isBasePhone = width >= 360 && width < 430
   const isLargePhone = width >= 430 && width < 600
   const isTablet = width >= 600
+  const isShortHeight = height < 700
 
   let breakpoint: Breakpoint
   if (isTablet) {
@@ -38,6 +40,7 @@ export function useResponsive(): ResponsiveInfo {
     isBasePhone,
     isLargePhone,
     isTablet,
+    isShortHeight,
     breakpoint,
   }
 }
