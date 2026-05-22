@@ -76,11 +76,13 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
   // ── Pre-computed dynamic styles (react-native/no-inline-styles 준수) ─────────
   const $navySectionDynamic: ViewStyle = { height: navySectionHeight }
   const $logoContainerDynamic: ViewStyle = { gap: logoGap }
+  // paddingHorizontal은 $cardContentDynamic으로 분리 — card outer width에 영향 없음
   const $cardDynamic: ViewStyle = {
     paddingTop: cardPaddingTop,
-    paddingHorizontal: cardPaddingHorizontal,
     paddingBottom: Math.max(bottomInset, 24),
   }
+  // 카드 내부 콘텐츠의 좌우 여백 — tablet은 크게 잡아 maxWidth 480 중앙 정렬 효과
+  const $cardContentDynamic: ViewStyle = { paddingHorizontal: cardPaddingHorizontal }
   const $formBoxDynamic: ViewStyle = { padding: formBoxPadding }
   const $gapS: ViewStyle = { height: gapSmallH }
   const $gapM: ViewStyle = { height: gapMedH }
@@ -106,70 +108,72 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
           </View>
         </View>
 
-        {/* 하단 흰색 카드 */}
+        {/* 하단 흰색 카드 — width:100%로 항상 전체 너비 보장, paddingHorizontal은 내부 래퍼에서 처리 */}
         <View style={[$card, $cardDynamic]}>
-          <RNText style={$cardTitle}>{translate("loginScreen:logIn")}</RNText>
-
-          <View style={$gapM} />
-
-          {/* 입력 폼 박스 */}
-          <View style={[$formBox, $formBoxDynamic]}>
-            {/* 이메일 필드 */}
-            <RNText style={$label}>
-              {translate("loginScreen:emailFieldLabel")} <RNText style={$required}>*</RNText>
-            </RNText>
-            <View style={[$inputRow, $controlDynamic]}>
-              <MailSvg width={18} height={18} color="#9CA3AF" style={$inputIcon} />
-              <TextInput
-                style={[$textInput, $textInputDynamic]}
-                placeholder={translate("loginScreen:emailFieldPlaceholder")}
-                placeholderTextColor="#9CA3AF"
-                keyboardType="email-address"
-                autoCapitalize="none"
-              />
-            </View>
+          <View style={[$cardContent, $cardContentDynamic]}>
+            <RNText style={$cardTitle}>{translate("loginScreen:logIn")}</RNText>
 
             <View style={$gapM} />
 
-            {/* 비밀번호 필드 */}
-            <RNText style={$label}>
-              {translate("loginScreen:passwordFieldLabel")} <RNText style={$required}>*</RNText>
-            </RNText>
-            <View style={[$inputRow, $controlDynamic]}>
-              <LockSvg width={18} height={18} color="#9CA3AF" style={$inputIcon} />
-              <TextInput
-                style={[$textInput, $passwordInput, $textInputDynamic]}
-                placeholder={translate("loginScreen:passwordFieldPlaceholder")}
-                placeholderTextColor="#9CA3AF"
-                secureTextEntry={secureText}
-              />
-              <TouchableOpacity onPress={() => setSecureText((v) => !v)} hitSlop={8}>
-                {secureText ? (
-                  <EyeOffSvg width={18} height={18} color="#9CA3AF" />
-                ) : (
-                  <EyeSvg width={18} height={18} color="#9CA3AF" />
-                )}
-              </TouchableOpacity>
+            {/* 입력 폼 박스 */}
+            <View style={[$formBox, $formBoxDynamic]}>
+              {/* 이메일 필드 */}
+              <RNText style={$label}>
+                {translate("loginScreen:emailFieldLabel")} <RNText style={$required}>*</RNText>
+              </RNText>
+              <View style={[$inputRow, $controlDynamic]}>
+                <MailSvg width={18} height={18} color="#9CA3AF" style={$inputIcon} />
+                <TextInput
+                  style={[$textInput, $textInputDynamic]}
+                  placeholder={translate("loginScreen:emailFieldPlaceholder")}
+                  placeholderTextColor="#9CA3AF"
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                />
+              </View>
+
+              <View style={$gapM} />
+
+              {/* 비밀번호 필드 */}
+              <RNText style={$label}>
+                {translate("loginScreen:passwordFieldLabel")} <RNText style={$required}>*</RNText>
+              </RNText>
+              <View style={[$inputRow, $controlDynamic]}>
+                <LockSvg width={18} height={18} color="#9CA3AF" style={$inputIcon} />
+                <TextInput
+                  style={[$textInput, $passwordInput, $textInputDynamic]}
+                  placeholder={translate("loginScreen:passwordFieldPlaceholder")}
+                  placeholderTextColor="#9CA3AF"
+                  secureTextEntry={secureText}
+                />
+                <TouchableOpacity onPress={() => setSecureText((v) => !v)} hitSlop={8}>
+                  {secureText ? (
+                    <EyeOffSvg width={18} height={18} color="#9CA3AF" />
+                  ) : (
+                    <EyeSvg width={18} height={18} color="#9CA3AF" />
+                  )}
+                </TouchableOpacity>
+              </View>
             </View>
+
+            <View style={$gapL} />
+
+            {/* 로그인 버튼 */}
+            <TouchableOpacity
+              style={[$loginButton, $controlDynamic]}
+              onPress={() => navigation.navigate("Main")}
+              activeOpacity={0.85}
+            >
+              <RNText style={$loginButtonText}>{translate("loginScreen:logIn")}</RNText>
+            </TouchableOpacity>
+
+            <View style={$gapS} />
+
+            {/* 비밀번호 찾기 */}
+            <TouchableOpacity onPress={() => setForgotModalVisible(true)} style={$forgotWrapper}>
+              <RNText style={$forgotText}>{translate("loginScreen:forgotPassword")}</RNText>
+            </TouchableOpacity>
           </View>
-
-          <View style={$gapL} />
-
-          {/* 로그인 버튼 */}
-          <TouchableOpacity
-            style={[$loginButton, $controlDynamic]}
-            onPress={() => navigation.navigate("Main")}
-            activeOpacity={0.85}
-          >
-            <RNText style={$loginButtonText}>{translate("loginScreen:logIn")}</RNText>
-          </TouchableOpacity>
-
-          <View style={$gapS} />
-
-          {/* 비밀번호 찾기 */}
-          <TouchableOpacity onPress={() => setForgotModalVisible(true)} style={$forgotWrapper}>
-            <RNText style={$forgotText}>{translate("loginScreen:forgotPassword")}</RNText>
-          </TouchableOpacity>
         </View>
       </Screen>
 
@@ -201,6 +205,7 @@ const $root: ViewStyle = {
 const $screenContent: ViewStyle = { flex: 1 }
 
 const $navySection: ViewStyle = {
+  width: "100%",
   justifyContent: "center",
   alignItems: "center",
 }
@@ -227,13 +232,20 @@ const $tagline: TextStyle = {
   color: "rgba(255,255,255,0.8)",
 }
 
-// paddingTop / paddingHorizontal / paddingBottom은 $cardDynamic에서 주입
+// outer: 항상 전체 너비 보장, 배경색·borderRadius 담당. paddingHorizontal은 $cardContent에서 처리
 const $card: ViewStyle = {
+  width: "100%",
+  alignSelf: "stretch",
   flex: 1,
   backgroundColor: "#FFFFFF",
   borderTopLeftRadius: 24,
   borderTopRightRadius: 24,
   marginTop: -20,
+}
+
+// inner: paddingHorizontal만 담당. tablet은 $cardContentDynamic으로 크게 잡아 중앙 정렬
+const $cardContent: ViewStyle = {
+  flex: 1,
 }
 
 const $cardTitle: TextStyle = {
