@@ -8,10 +8,10 @@
 import { ApiResponse, ApisauceInstance, create } from "apisauce"
 
 import Config from "@/config"
-import type { EpisodeItem } from "@/services/api/types"
+import type { EpisodeItem, LanguageItem, UserProfile } from "@/services/api/types"
 
 import { GeneralApiProblem, getGeneralApiProblem } from "./apiProblem"
-import type { ApiConfig, ApiFeedResponse } from "./types"
+import type { ApiConfig, ApiFeedResponse, LanguagesResponse } from "./types"
 
 /**
  * Configuring the apisauce instance.
@@ -75,6 +75,63 @@ export class Api {
       }
       return { kind: "bad-data" }
     }
+  }
+
+  /** 지원 언어 목록 조회 */
+  async getLanguages(
+    token: string,
+  ): Promise<{ kind: "ok"; items: LanguageItem[] } | GeneralApiProblem> {
+    const response = await this.apisauce.get<LanguagesResponse>(
+      "/v1/common/languages",
+      {},
+      { headers: { Authorization: `Bearer ${token}` } },
+    )
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+    try {
+      return { kind: "ok", items: response.data?.items ?? [] }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
+
+  /** 사용자 프로필 조회 */
+  async getUserProfile(
+    token: string,
+  ): Promise<{ kind: "ok"; profile: UserProfile } | GeneralApiProblem> {
+    const response = await this.apisauce.get<UserProfile>(
+      "/v1/common/users/profile",
+      {},
+      { headers: { Authorization: `Bearer ${token}` } },
+    )
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+    try {
+      return { kind: "ok", profile: response.data as UserProfile }
+    } catch {
+      return { kind: "bad-data" }
+    }
+  }
+
+  /** 선호 언어 변경 */
+  async patchPreferredLanguage(
+    token: string,
+    languageId: number,
+  ): Promise<{ kind: "ok" } | GeneralApiProblem> {
+    const response = await this.apisauce.patch(
+      "/v1/common/users/preferred-language",
+      { languageId },
+      { headers: { Authorization: `Bearer ${token}` } },
+    )
+    if (!response.ok) {
+      const problem = getGeneralApiProblem(response)
+      if (problem) return problem
+    }
+    return { kind: "ok" }
   }
 }
 

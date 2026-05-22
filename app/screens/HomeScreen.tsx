@@ -35,6 +35,7 @@ import ProfileSwitch from "@assets/icons/nav/profile_switch.svg"
 import { PushNotificationBottomSheet } from "@/components/PushNotificationBottomSheet"
 import { Text } from "@/components/Text"
 import { WebViewModal } from "@/components/WebViewModal"
+import { LanguageChangedModal } from "@/screens/LanguageSettingsScreen/components/LanguageChangedModal"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 import type { MainTabScreenProps } from "@/navigators/navigationTypes"
@@ -52,10 +53,14 @@ const BOARD_ITEMS = [
 
 type TabType = "all" | "company" | "workplace"
 
-export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
+export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
   const insets = useSafeAreaInsets()
   const { role: userRole, setRole: setUserRole } = useRole()
   const [selectedTab, setSelectedTab] = useState<TabType>("all")
+
+  // 언어 변경 완료 모달 — LanguageSettingsScreen에서 navigation.reset 후 전달
+  const [langModalData] = useState(route.params?.pendingLanguageModal)
+  const [langModalVisible, setLangModalVisible] = useState(!!route.params?.pendingLanguageModal)
   // TODO: 추후 "생성된 교육/발표실 존재 여부" API 연동으로 교체
   const [showEducationBanner, setShowEducationBanner] = useState(false)
   const [webViewModalVisible, setWebViewModalVisible] = useState(false)
@@ -542,6 +547,16 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         onOpenSettings={handlePushOpenSettings}
         onClose={() => setPushNotificationVisible(false)}
       />
+
+      {langModalData && (
+        <LanguageChangedModal
+          isVisible={langModalVisible}
+          title={langModalData.title}
+          description={langModalData.description}
+          confirmText={langModalData.confirmText}
+          onConfirm={() => setLangModalVisible(false)}
+        />
+      )}
     </>
   )
 }

@@ -18,6 +18,13 @@ export const $body: ViewStyle = {
   flex: 1,
 }
 
+/* ── 로딩 컨테이너 ── */
+export const $loadingContainer: ViewStyle = {
+  flex: 1,
+  alignItems: "center",
+  justifyContent: "center",
+}
+
 /* ── 안내 문구 — fontSize/paddingTop/paddingBottom 동적 적용 ── */
 export const $guideText: TextStyle = {
   color: TEXT_GUIDE,

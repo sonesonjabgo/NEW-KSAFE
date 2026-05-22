@@ -8,8 +8,14 @@ import {
 import { NativeStackScreenProps } from "@react-navigation/native-stack"
 
 // Main Tab Navigator types
+export type PendingLanguageModal = {
+  title: string
+  description: string
+  confirmText: string
+}
+
 export type MainTabParamList = {
-  Home: undefined
+  Home: { pendingLanguageModal?: PendingLanguageModal } | undefined
   SafeBoard: { showToast?: boolean } | undefined
   SafeHealthMain: undefined
   WorkerParticipation: undefined
