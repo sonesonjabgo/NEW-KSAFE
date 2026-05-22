@@ -209,9 +209,18 @@ Native Stack 안에 Bottom Tab이 중첩된 구조이다.
 
 ## 9. 상태 관리
 
-React Context API만 사용한다. 새 전역 상태가 필요하면 `app/context/`에 Context를 추가한다. MobX, Redux, Zustand 등 외부 상태 관리 라이브러리를 도입하지 않는다.
+**전역 상태**: MobX State Tree(MST)를 사용한다. 기능별 Store는 `app/models/`에 추가하고 `RootStore`에 등록한다. Redux, Zustand 등 다른 외부 라이브러리는 도입하지 않는다.
+
+**인증 상태**: `AuthContext` (`app/context/AuthContext.tsx`)에서 관리한다. 인증은 MST가 아닌 Context로 유지한다.
+
+**Store 작성 규칙**:
+- 화면 단위 로컬 상태(폼 입력값 등)는 `useState`로 처리한다.
+- 여러 화면에서 공유되거나 앱 생명주기 동안 유지되어야 하는 상태만 Store로 만든다.
+- `observer()`는 MST Store를 구독하는 컴포넌트에만 적용한다.
 
 현재 Context: `AuthContext` (인증 토큰), `RoleContext` (관리자/근로자 역할), `EpisodeContext`
+
+현재 Store: (추가 예정)
 
 ---
 
