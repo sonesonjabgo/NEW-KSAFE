@@ -82,7 +82,7 @@ export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen({ na
   const insets = useSafeAreaInsets()
   const { user, profile } = useAuth()
   const { role: userRole } = useRole()
-  const { safeBoardStore } = useStores()
+  const { safeBoardStore, workplaceStore } = useStores()
   const displayName = profile?.username?.trim() || user?.name?.trim() || ""
   const [selectedTab, setSelectedTab] = useState<TabType>("all")
   // TODO: 추후 "생성된 교육/발표실 존재 여부" API 연동으로 교체
@@ -212,7 +212,10 @@ export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen({ na
     if (hasLoadedBoardRef.current) return
     hasLoadedBoardRef.current = true
     void safeBoardStore.fetchBoardPosts()
-  }, [profile, safeBoardStore])
+    if (!workplaceStore.hasWorkplaces) {
+      void workplaceStore.fetchWorkplaces()
+    }
+  }, [profile, safeBoardStore, workplaceStore])
 
   // 화면 포커스 시 새로고침 (첫 진입 제외)
   useFocusEffect(
@@ -260,7 +263,10 @@ export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen({ na
             <View style={$titleRow}>
               <View>
                 <Text text="K-SAFEONE" style={$appTitle} />
-                <Text text={translate("homeScreen:orgName")} style={$appSub} />
+                <Text
+                  text={workplaceStore.companyName ?? translate("homeScreen:orgName")}
+                  style={$appSub}
+                />
               </View>
               <View style={$headerActions}>
                 <TouchableOpacity

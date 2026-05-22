@@ -286,8 +286,9 @@ const es: Translations = {
 
   myPageScreen: {
     title: "Mi Página",
+    orgName: "Asociación KS de Seguridad Industrial",
     workplace: {
-      label: "Lugar de Trabajo de la Grúa de Torre",
+      label: "Lugar de trabajo",
     },
     permissions: {
       sectionTitle: "Permisos de la Aplicación",

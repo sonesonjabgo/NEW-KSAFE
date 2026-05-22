@@ -394,8 +394,9 @@ const ko: Translations = {
 
   myPageScreen: {
     title: "마이페이지",
+    orgName: "KS산업안전협회",
     workplace: {
-      label: "광교 타워크레인 작업장",
+      label: "작업장",
     },
     permissions: {
       sectionTitle: "앱 권한 설정",

@@ -284,8 +284,9 @@ const ja: Translations = {
 
   myPageScreen: {
     title: "マイページ",
+    orgName: "KS産業安全協会",
     workplace: {
-      label: "広教タワークレーン作業場",
+      label: "作業場",
     },
     permissions: {
       sectionTitle: "アプリ権限設定",

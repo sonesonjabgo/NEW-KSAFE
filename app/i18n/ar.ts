@@ -280,8 +280,9 @@ const ar: Translations = {
 
   myPageScreen: {
     title: "صفحتي",
+    orgName: "جمعية KS للسلامة الصناعية",
     workplace: {
-      label: "موقع عمل برج كرين Gwanggyo",
+      label: "مكان العمل",
     },
     permissions: {
       sectionTitle: "أذونات التطبيق",

@@ -402,8 +402,9 @@ const en = {
 
   myPageScreen: {
     title: "My Page",
+    orgName: "KS Industrial Safety Association",
     workplace: {
-      label: "Gwangyo Tower Crane Workplace",
+      label: "Workplace",
     },
     permissions: {
       sectionTitle: "App Permission Settings",

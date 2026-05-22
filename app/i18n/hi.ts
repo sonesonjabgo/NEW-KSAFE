@@ -284,8 +284,9 @@ const hi: Translations = {
 
   myPageScreen: {
     title: "मेरा पृष्ठ",
+    orgName: "KS औद्योगिक सुरक्षा संघ",
     workplace: {
-      label: "ग्वांগগियो टावर क्रेन वर्कप्लेस",
+      label: "कार्यस्थल",
     },
     permissions: {
       sectionTitle: "ऐप अनुमति",
