@@ -22,8 +22,8 @@ type Language = {
 const LANGUAGES: Language[] = [
   { id: "ko", flag: "🇰🇷", locale: "ko", nativeLabel: "한국어" },
   { id: "en", flag: "🇺🇸", locale: "en", nativeLabel: "English (영어)" },
-  { id: "zhHans", flag: "🇨🇳", locale: "zh-Hans", nativeLabel: "简体中文 (중국어(간체))" },
-  { id: "zhHant", flag: "🇹🇼", locale: "zh-Hant", nativeLabel: "繁體中文 (중국어(번체))" },
+  { id: "zh-Hans", flag: "🇨🇳", locale: "zh-Hans", nativeLabel: "简体中文 (중국어(간체))" },
+  { id: "zh-Hant", flag: "🇹🇼", locale: "zh-Hant", nativeLabel: "繁體中文 (중국어(번체))" },
   { id: "ru", flag: "🇷🇺", locale: "ru", nativeLabel: "Русский (러시아어)" },
   { id: "vi", flag: "🇻🇳", locale: "vi", nativeLabel: "Tiếng Việt (베트남어)" },
   { id: "id", flag: "🇮🇩", locale: "id", nativeLabel: "Bahasa Indonesia (인도네시아어)" },
@@ -62,12 +62,12 @@ export const LanguageSettingsScreen: FC = () => {
 
   const selectedLanguage = LANGUAGES.find((l) => l.id === selectedId)
   const modalLangName = selectedLanguage?.nativeLabel ?? selectedId
-  const modalTitle = t("languageSettings:title")
-  const modalDesc = translate("languageSettings:changedDescription", {
+  const modalTitle = t("languageSettings:languageTitle")
+  const modalDesc = translate("languageSettings:languageChangeRestart", {
     lng: previewLang,
     language: modalLangName,
   })
-  const modalConfirm = t("languageSettings:confirm")
+  const modalConfirm = translate("common:ok")
 
   // 리스트 컨텐츠 패딩 — tablet은 화면 너비 기반으로 중앙 정렬
   const listPaddingH = isSmallPhone
@@ -97,7 +97,7 @@ export const LanguageSettingsScreen: FC = () => {
 
   return (
     <>
-      <StackScreen title={t("languageSettings:title")} onBack={() => navigation.goBack()}>
+      <StackScreen title={t("languageSettings:languageTitle")} onBack={() => navigation.goBack()}>
         <View style={S.$body}>
           <FlatList
             data={LANGUAGES}
@@ -118,7 +118,7 @@ export const LanguageSettingsScreen: FC = () => {
                   },
                 ]}
               >
-                {t("languageSettings:description")}
+                {t("languageSettings:languageDescription")}
               </Text>
             }
             renderItem={({ item }) => (

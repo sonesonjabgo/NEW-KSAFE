@@ -10,14 +10,26 @@ import en, { Translations } from "./en"
 import es from "./es"
 import fr from "./fr"
 import hi from "./hi"
+import id from "./id"
 import ja from "./ja"
+import km from "./km"
+import lo from "./lo"
+import ne from "./ne"
+import ru from "./ru"
+import th from "./th"
+import ur from "./ur"
+import vi from "./vi"
+import zh from "./zh"
+import zhHans from "./zhHans"
+import zhHant from "./zhHant"
 import ko from "./ko"
+import my from "./my"
 
 const fallbackLocale = "en-US"
 
 const systemLocales = Localization.getLocales()
 
-const resources = { ar, en, ko, es, fr, ja, hi }
+const resources = { ar, en, ko, es, fr, hi, id, ja, km, lo, my, ne, ru, th, ur, vi, zh, zhHans, zhHant }
 const supportedTags = Object.keys(resources)
 
 // Checks to see if the device locale matches any of the supported locales
