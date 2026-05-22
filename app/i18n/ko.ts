@@ -56,6 +56,8 @@ const ko: Translations = {
       fillFields: "필수 항목을 입력해 주세요.",
       passwordLength: "비밀번호는 6자 이상이어야 합니다.",
       unauthorizedRole: "접근 권한이 없는 계정입니다.",
+      deactivatedAccount: "비활성화된 계정입니다. 관리자에게 문의해 주세요.",
+      profileLoadFailed: "사용자 정보를 불러오지 못했습니다. 다시 시도해 주세요.",
     },
   },
   demoNavigator: {

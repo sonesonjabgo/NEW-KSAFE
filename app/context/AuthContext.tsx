@@ -90,14 +90,19 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     [token],
   )
 
-  const loadProfile = useCallback(async (accessToken: string) => {
-    try {
-      const data = await fetchMyProfile(accessToken)
-      setProfile(data)
-    } catch (err) {
-      logDevError("Failed to fetch profile", err)
-    }
-  }, [])
+  const loadProfile = useCallback(
+    async (accessToken: string): Promise<{ ok: true; data: MyProfileResponseDto } | { ok: false }> => {
+      try {
+        const data = await fetchMyProfile(accessToken)
+        setProfile(data)
+        return { ok: true, data }
+      } catch (err) {
+        logDevError("Failed to fetch profile", err)
+        return { ok: false }
+      }
+    },
+    [],
+  )
 
   const refreshProfile = useCallback(async () => {
     if (!token) return
@@ -146,10 +151,26 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
         const nextToken = result.data?.session?.access_token
         if (nextToken) {
+          // ① 프로필 로드 — 실패 시 로그인 차단
+          const profileResult = await loadProfile(nextToken)
+          if (!profileResult.ok) {
+            await supabase.auth.signOut({ scope: "local" })
+            const message = translate("loginScreen:alert.profileLoadFailed")
+            setError(message)
+            return { error: message }
+          }
+
+          // ② 비활성화 계정 검사
+          if (!profileResult.data.isActive) {
+            await supabase.auth.signOut({ scope: "local" })
+            const message = translate("loginScreen:alert.deactivatedAccount")
+            setError(message)
+            return { error: message }
+          }
+
           setToken(nextToken)
           const nextUser = deriveUser(result.data?.user, nextToken)
           if (nextUser) setUser(nextUser)
-          void loadProfile(nextToken)
         }
 
         return {}
@@ -169,17 +190,22 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     supabase.auth
       .getSession()
-      .then(({ data: { session }, error: sessionError }) => {
+      .then(async ({ data: { session }, error: sessionError }) => {
         if (sessionError) {
           logDevError("Session error:", sessionError)
           setIsInitialized(true)
           return
         }
         if (session?.access_token) {
-          setToken(session.access_token)
-          const nextUser = deriveUser(session.user, session.access_token)
-          if (nextUser) setUser(nextUser)
-          void loadProfile(session.access_token)
+          const profileResult = await loadProfile(session.access_token)
+          if (profileResult.ok && !profileResult.data.isActive) {
+            // 비활성화 계정 — 세션 파기 후 로그인 화면으로
+            await supabase.auth.signOut({ scope: "local" })
+          } else {
+            setToken(session.access_token)
+            const nextUser = deriveUser(session.user, session.access_token)
+            if (nextUser) setUser(nextUser)
+          }
         }
         setIsInitialized(true)
       })

@@ -56,6 +56,8 @@ const hi: Translations = {
       fillFields: "Please fill in all required fields.",
       passwordLength: "Password must be at least 6 characters.",
       unauthorizedRole: "This account does not have access.",
+      deactivatedAccount: "This account has been deactivated. Please contact your administrator.",
+      profileLoadFailed: "Failed to load user information. Please try again.",
     },
   },
   demoNavigator: {
