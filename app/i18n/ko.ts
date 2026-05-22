@@ -229,6 +229,7 @@ const ko: Translations = {
 
   safeBoardDetailScreen: {
     title: "게시글 상세",
+    loadError: "게시글을 불러오지 못했습니다.",
     authorLabel: "작성자",
     editButton: "수정",
     alertOn: "알림 ON",

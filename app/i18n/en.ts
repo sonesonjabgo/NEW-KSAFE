@@ -230,6 +230,7 @@ const en = {
 
   safeBoardDetailScreen: {
     title: "Post Detail",
+    loadError: "Failed to load post.",
     authorLabel: "Author",
     editButton: "Edit",
     alertOn: "Alert ON",

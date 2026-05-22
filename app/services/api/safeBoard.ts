@@ -5,6 +5,21 @@ import { api } from "./index"
 const COMPANY_POST_ENDPOINT = "/api/v1/user/company-posts"
 const MY_COMPANY_POSTS_ENDPOINT = "/api/v1/user/me/company-posts"
 
+export interface UserCompanyPostDetailDto {
+  id: string
+  title: string
+  scope: "company_wide" | "workplace"
+  isPinned?: boolean
+  workplaceId?: string | null
+  workplaceName?: string | null
+  status?: string | null
+  content?: string | null
+  authorName?: string | null
+  authorAffiliation?: string | null
+  createdAt: string
+  updatedAt: string
+}
+
 export interface UserCompanyPostListItemDto {
   id: string
   title: string
@@ -80,6 +95,40 @@ export async function fetchUserCompanyPosts(params?: {
     nextCursor: typeof data?.nextCursor === "string" ? data.nextCursor : null,
     hasNext: typeof data?.hasNext === "boolean" ? data.hasNext : false,
   }
+}
+
+export async function fetchCompanyPostDetail(id: string): Promise<UserCompanyPostDetailDto> {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
+  const accessToken = session?.access_token
+  if (!accessToken) {
+    throw new Error("Missing authentication token for fetching post detail")
+  }
+
+  const response = await api.apisauce.get<UserCompanyPostDetailDto>(
+    `${COMPANY_POST_ENDPOINT}/${id}`,
+    undefined,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        accept: "application/json",
+      },
+    },
+  )
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to load post detail (${response.status ?? "unknown"}): ${response.problem ?? "unknown"}`,
+    )
+  }
+
+  if (!response.data) {
+    throw new Error("No data received for post detail")
+  }
+
+  return response.data
 }
 
 export async function fetchAdminMyPosts(): Promise<MyCompanyPostListItemDto[]> {
