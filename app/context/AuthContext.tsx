@@ -9,8 +9,10 @@ import {
 } from "react"
 
 import { translate } from "@/i18n/translate"
+import { registerSignOutHandler } from "@/services/api/auth/authSignOutBridge"
 import { supabase } from "@/services/api/auth/supabase"
 import type { Session } from "@/services/api/auth/supabase"
+import { api } from "@/services/api/index"
 import { fetchMyProfile, MyProfileResponseDto } from "@/services/api/profile"
 import { logDevError } from "@/utils/logDevError"
 import { resolvePrimaryRole, UserRole } from "@/utils/roles"
@@ -125,6 +127,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     setUser(undefined)
     setProfile(null)
     setError(null)
+    api.resetRequestBlock()
     try {
       await supabase.auth.signOut({ scope: "local" })
     } catch (err) {
@@ -185,6 +188,12 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     },
     [deriveUser, getAuthErrorMessage, loadProfile, updateAuthLock],
   )
+
+  // api.ts 전역 차단 → AuthContext.signOut 연결
+  useEffect(() => {
+    registerSignOutHandler(signOut)
+    return () => registerSignOutHandler(null)
+  }, [signOut])
 
   // 앱 시작 시 저장된 세션 복원
   useEffect(() => {
