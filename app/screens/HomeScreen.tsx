@@ -53,8 +53,9 @@ type TabType = "all" | "company" | "workplace"
 
 export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
-  const { user } = useAuth()
+  const { user, profile } = useAuth()
   const { role: userRole } = useRole()
+  const displayName = profile?.username?.trim() || user?.name?.trim() || ""
   const [selectedTab, setSelectedTab] = useState<TabType>("all")
   // TODO: 추후 "생성된 교육/발표실 존재 여부" API 연동으로 교체
   const [showEducationBanner, setShowEducationBanner] = useState(false)
@@ -237,7 +238,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
             <View style={$greetRow}>
               <View style={$greetLeft}>
                 <Text
-                  text={translate("homeScreen:greeting.name", { name: user?.name ?? "" })}
+                  text={translate("homeScreen:greeting.name", { name: displayName })}
                   style={$greetBold}
                 />
                 <Text text={translate("homeScreen:greeting.message")} style={$greetMsg} />

@@ -27,7 +27,8 @@ const ICON_COLOR = "#000000"
 const ORG_NAME = "KS산업안전협회"
 
 export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) => {
-  const { user, signOut } = useAuth()
+  const { user, profile, signOut } = useAuth()
+  const displayName = profile?.username?.trim() || user?.name?.trim() || ""
   const { role } = useRole()
   const [notificationEnabled, setNotificationEnabled] = useState(true)
   const [logoutModalVisible, setLogoutModalVisible] = useState(false)
@@ -58,8 +59,8 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
 
           <ProfileCard
             orgName={ORG_NAME}
-            userName={user?.name ?? ""}
-            email={user?.email ?? ""}
+            userName={displayName}
+            email={profile?.email ?? user?.email ?? ""}
           />
 
           {isWorker && <WorkplaceChip name={translate("myPageScreen:workplace.label")} />}

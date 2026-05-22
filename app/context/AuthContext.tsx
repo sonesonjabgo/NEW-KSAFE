@@ -11,6 +11,7 @@ import {
 import { translate } from "@/i18n/translate"
 import { supabase } from "@/services/api/auth/supabase"
 import type { Session } from "@/services/api/auth/supabase"
+import { fetchMyProfile, MyProfileResponseDto } from "@/services/api/profile"
 import { logDevError } from "@/utils/logDevError"
 import { resolvePrimaryRole, UserRole } from "@/utils/roles"
 
@@ -25,22 +26,28 @@ type AuthContextType = {
   isAuthenticated: boolean
   token?: string
   user?: AuthUser
+  profile: MyProfileResponseDto | null
   /** 세션 복원 또는 로그인 처리 중 true */
   authLocked: boolean
   error: string | null
   signIn: (email: string, password: string) => Promise<{ error?: string }>
   signOut: () => Promise<void>
+  refreshProfile: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
   token: undefined,
   user: undefined,
+  profile: null,
   authLocked: false,
   error: null,
   signIn: () => Promise.resolve({}),
   signOut: () => Promise.resolve(),
+  refreshProfile: () => Promise.resolve(),
 })
+
+export { MyProfileResponseDto }
 
 export const useAuth = () => {
   const value = useContext(AuthContext)
@@ -51,6 +58,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [token, setToken] = useState<string | undefined>()
   const [user, setUser] = useState<AuthUser | undefined>()
+  const [profile, setProfile] = useState<MyProfileResponseDto | null>(null)
   const [isInitialized, setIsInitialized] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [authLocked, setAuthLocked] = useState(false)
@@ -82,6 +90,20 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     [token],
   )
 
+  const loadProfile = useCallback(async (accessToken: string) => {
+    try {
+      const data = await fetchMyProfile(accessToken)
+      setProfile(data)
+    } catch (err) {
+      logDevError("Failed to fetch profile", err)
+    }
+  }, [])
+
+  const refreshProfile = useCallback(async () => {
+    if (!token) return
+    await loadProfile(token)
+  }, [loadProfile, token])
+
   const getAuthErrorMessage = useCallback((message?: string) => {
     if (message === "Invalid login credentials") {
       return translate("loginScreen:alert.invalidCredentials")
@@ -96,6 +118,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     updateAuthLock(true)
     setToken(undefined)
     setUser(undefined)
+    setProfile(null)
     setError(null)
     try {
       await supabase.auth.signOut({ scope: "local" })
@@ -126,6 +149,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
           setToken(nextToken)
           const nextUser = deriveUser(result.data?.user, nextToken)
           if (nextUser) setUser(nextUser)
+          void loadProfile(nextToken)
         }
 
         return {}
@@ -138,7 +162,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         updateAuthLock(false)
       }
     },
-    [deriveUser, getAuthErrorMessage, updateAuthLock],
+    [deriveUser, getAuthErrorMessage, loadProfile, updateAuthLock],
   )
 
   // 앱 시작 시 저장된 세션 복원
@@ -155,6 +179,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
           setToken(session.access_token)
           const nextUser = deriveUser(session.user, session.access_token)
           if (nextUser) setUser(nextUser)
+          void loadProfile(session.access_token)
         }
         setIsInitialized(true)
       })
@@ -174,6 +199,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       if (event === "SIGNED_OUT") {
         setToken(undefined)
         setUser(undefined)
+        setProfile(null)
         updateAuthLock(false)
         return
       }
@@ -186,6 +212,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       } else {
         setToken(undefined)
         setUser(undefined)
+        setProfile(null)
         updateAuthLock(false)
       }
     })
@@ -201,10 +228,12 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         isAuthenticated: !authLocked && !!token && isInitialized,
         token,
         user,
+        profile,
         authLocked,
         error,
         signIn,
         signOut,
+        refreshProfile,
       }}
     >
       {isInitialized ? children : null}
