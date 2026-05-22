@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { View, ViewStyle } from "react-native"
+import { TextStyle, View, ViewStyle } from "react-native"
 
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
@@ -26,10 +26,10 @@ export const IntroSlide: FC<IntroSlideProps> = ({
   const imageSize = isTablet
     ? Math.min(screenWidth * 0.4, 280)
     : isShortHeight
-    ? screenWidth * 0.4
-    : isSmallPhone
-    ? screenWidth * 0.5
-    : screenWidth * 0.55
+      ? screenWidth * 0.4
+      : isSmallPhone
+        ? screenWidth * 0.5
+        : screenWidth * 0.55
 
   const $slideStyle: ViewStyle = {
     width: screenWidth,
@@ -60,10 +60,10 @@ export const IntroSlide: FC<IntroSlideProps> = ({
       ? 104
       : 116
     : isSmallPhone
-    ? 128
-    : isTablet
-    ? 160
-    : 148
+      ? 128
+      : isTablet
+        ? 160
+        : 148
 
   const $textBlockStyle: ViewStyle = {
     ...S.$textBlock,
@@ -72,6 +72,31 @@ export const IntroSlide: FC<IntroSlideProps> = ({
 
   const badgeSize = isSmallPhone || isShortHeight ? 44 : 50
 
+  // JSX 인라인 스타일 객체 금지(react-native/no-inline-styles) 준수를 위해 pre-computed 변수로 선언
+  const $badgeStyle: ViewStyle = {
+    ...S.$stepBadge,
+    width: badgeSize,
+    height: badgeSize,
+    borderRadius: badgeSize / 2,
+    // isShortHeight: badge-title 간격 확보
+    marginBottom: isShortHeight ? 14 : isSmallPhone ? 16 : 22,
+  }
+
+  const $stepTextStyle: TextStyle =
+    isSmallPhone || isShortHeight ? { ...S.$stepText, fontSize: 15 } : S.$stepText
+
+  const $titleStyle: TextStyle = isShortHeight
+    ? { ...S.$slideTitle, fontSize: 20, marginBottom: 10 }
+    : isSmallPhone
+      ? { ...S.$slideTitle, fontSize: 19, marginBottom: 12 }
+      : S.$slideTitle
+
+  const $descStyle: TextStyle = isShortHeight
+    ? { ...S.$slideDescription, fontSize: 14, lineHeight: 22 }
+    : isSmallPhone
+      ? { ...S.$slideDescription, fontSize: 14, lineHeight: 21 }
+      : S.$slideDescription
+
   return (
     <View style={$slideStyle}>
       <View style={$contentStyle}>
@@ -79,42 +104,13 @@ export const IntroSlide: FC<IntroSlideProps> = ({
           <slide.SlideImage width="100%" height="100%" />
         </View>
 
-        <View
-          style={[
-            S.$stepBadge,
-            {
-              width: badgeSize,
-              height: badgeSize,
-              borderRadius: badgeSize / 2,
-              // isShortHeight: 10→14으로 badge-title 간격 확보
-              marginBottom: isShortHeight ? 14 : isSmallPhone ? 16 : 22,
-            },
-          ]}
-        >
-          <Text
-            text={slide.step}
-            style={[S.$stepText, (isSmallPhone || isShortHeight) && { fontSize: 15 }]}
-          />
+        <View style={$badgeStyle}>
+          <Text text={slide.step} style={$stepTextStyle} />
         </View>
 
         <View style={$textBlockStyle}>
-          <Text
-            text={translate(slide.titleTx)}
-            style={[
-              S.$slideTitle,
-              isShortHeight && { fontSize: 20, marginBottom: 10 },
-              !isShortHeight && isSmallPhone && { fontSize: 19, marginBottom: 12 },
-            ]}
-          />
-          <Text
-            text={translate(slide.descriptionTx)}
-            style={[
-              S.$slideDescription,
-              isShortHeight && { fontSize: 14, lineHeight: 22 },
-              !isShortHeight && isSmallPhone && { fontSize: 14, lineHeight: 21 },
-            ]}
-            numberOfLines={3}
-          />
+          <Text text={translate(slide.titleTx)} style={$titleStyle} />
+          <Text text={translate(slide.descriptionTx)} style={$descStyle} numberOfLines={3} />
         </View>
       </View>
     </View>

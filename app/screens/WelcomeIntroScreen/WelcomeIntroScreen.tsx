@@ -18,13 +18,13 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
   const flatListRef = useRef<FlatList<IntroSlideData>>(null)
   const {
     width,
-    height,
+    height: _height,
     isSmallPhone,
-    isBasePhone,
-    isLargePhone,
+    isBasePhone: _isBasePhone,
+    isLargePhone: _isLargePhone,
     isTablet,
     isShortHeight,
-    breakpoint,
+    breakpoint: _breakpoint,
   } = useResponsive()
 
   const viewabilityConfig = useRef({ itemVisiblePercentThreshold: 50 }).current
@@ -50,8 +50,8 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
       <View
         style={[
           S.$header,
-          isSmallPhone && { marginBottom: 14 },
-          isShortHeight && { marginBottom: 10 },
+          isSmallPhone && S.$headerSmallPhone,
+          isShortHeight && S.$headerShortHeight,
         ]}
       >
         <Text text="K-SAFEONE" style={S.$logoText} />
@@ -92,7 +92,7 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
           />
 
           {/* Pagination — slideGroup 안 FlatList 바로 아래, 슬라이드와 좌우로 움직이지 않음 */}
-          <View style={[S.$paginationWrapper, isShortHeight && { marginTop: 16 }]}>
+          <View style={[S.$paginationWrapper, isShortHeight && S.$paginationWrapperShortHeight]}>
             <IntroPagination
               total={INTRO_SLIDES.length}
               currentIndex={currentIndex}
@@ -107,7 +107,7 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
         style={[S.$bottomContainer, { paddingBottom: insets.bottom + (isShortHeight ? 16 : 24) }]}
       >
         <TouchableOpacity
-          style={[S.$startBtn, (isSmallPhone || isShortHeight) && { height: 50 }]}
+          style={[S.$startBtn, (isSmallPhone || isShortHeight) && S.$startBtnCompact]}
           activeOpacity={0.85}
           onPress={goToLogin}
         >

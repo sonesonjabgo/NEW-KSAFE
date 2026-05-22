@@ -40,6 +40,10 @@ export const $skipLabel: TextStyle = {
   color: colors.introSkip,
 }
 
+// breakpoint 기준 header marginBottom 오버라이드
+export const $headerSmallPhone: ViewStyle = { marginBottom: 14 }
+export const $headerShortHeight: ViewStyle = { marginBottom: 10 }
+
 // ── Slide Area (헤더~버튼 사이 영역) ──────────────────────────────────────────
 
 // 헤더~버튼 사이 남은 공간 전체를 차지하며, slideGroup을 세로/가로 중앙 정렬
@@ -117,6 +121,8 @@ export const $paginationWrapper: ViewStyle = {
   alignItems: "center",
 }
 
+export const $paginationWrapperShortHeight: ViewStyle = { marginTop: 16 }
+
 export const $paginationRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
@@ -151,6 +157,8 @@ export const $startBtn: ViewStyle = {
   alignItems: "center",
   justifyContent: "center",
 }
+
+export const $startBtnCompact: ViewStyle = { height: 50 }
 
 export const $startBtnLabel: TextStyle = {
   fontSize: 17,
