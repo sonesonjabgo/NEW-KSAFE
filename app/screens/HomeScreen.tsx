@@ -39,6 +39,8 @@ import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 import type { MainTabScreenProps } from "@/navigators/navigationTypes"
 import { SafeBoardBadge } from "@/screens/SafeBoardScreen/components/SafeBoardBadge"
+import { colors } from "@/theme/colors"
+import { useResponsive } from "@/theme/responsive"
 import { typography } from "@/theme/typography"
 
 interface HomeScreenProps extends MainTabScreenProps<"Home"> {}
@@ -60,6 +62,17 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const [selectedUrl, setSelectedUrl] = useState("")
   const [selectedTitle, setSelectedTitle] = useState("")
   const [pushNotificationVisible, setPushNotificationVisible] = useState(false)
+
+  const {
+    width,
+    height: _height,
+    isSmallPhone,
+    isBasePhone: _isBasePhone,
+    isLargePhone: _isLargePhone,
+    isTablet,
+    isShortHeight: _isShortHeight,
+    breakpoint: _breakpoint,
+  } = useResponsive()
 
   const handlePushAllow = () => setPushNotificationVisible(false)
   const handlePushOpenSettings = () => setPushNotificationVisible(false)
@@ -178,6 +191,65 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
       ? GRID_ITEMS.slice(0, 9)
       : [...GRID_ITEMS.slice(0, 6), ...GRID_ITEMS.slice(9)]
 
+  // ── Responsive computed styles ────────────────────────────────────────────
+
+  // Header
+  const $headerDynamic: ViewStyle = {
+    paddingHorizontal: isSmallPhone ? 14 : isTablet ? 28 : 20,
+    paddingBottom: isSmallPhone ? 14 : 20,
+    gap: isSmallPhone ? 10 : 16,
+  }
+  const $appTitleDynamic: TextStyle = { fontSize: isSmallPhone ? 18 : 21 }
+  const $appSubDynamic: TextStyle = { fontSize: isSmallPhone ? 12 : 13 }
+  const $headerActionsDynamic: ViewStyle = { gap: isSmallPhone ? 8 : 14 }
+  const $headerIconWrapDynamic: ViewStyle = isSmallPhone ? { width: 22, height: 22 } : {}
+  const $headerActionLabelDynamic: TextStyle = { fontSize: isSmallPhone ? 10 : 11 }
+
+  // Body
+  // tablet: paddingHorizontal 확대로 content가 640px 이상에서 중앙 정렬되는 효과
+  const $bodyDynamic: ViewStyle = {
+    paddingHorizontal: isTablet ? Math.max(20, (width - 640) / 2) : isSmallPhone ? 14 : 20,
+    paddingTop: isSmallPhone ? 18 : 26,
+  }
+
+  // Greeting
+  const avatarSize = isSmallPhone ? 44 : 52
+
+  const $greetRowDynamic: ViewStyle = { marginBottom: isSmallPhone ? 20 : 30 }
+  const $greetBoldDynamic: TextStyle = isSmallPhone ? { fontSize: 17, lineHeight: 24 } : {}
+  const $greetMsgDynamic: TextStyle = isSmallPhone ? { fontSize: 15, lineHeight: 22 } : {}
+  const $avatarDynamic: ViewStyle = { width: avatarSize, height: avatarSize }
+
+  // Grid — tablet: 4열 / 기본: 3열
+  const gridCellWidth = isTablet ? "25%" : "33.33%"
+  const gridIconWrapSize = isSmallPhone ? 44 : 54
+
+  const $gridDynamic: ViewStyle = { marginBottom: isSmallPhone ? 14 : 20 }
+  const $gridCellDynamic: ViewStyle = {
+    width: gridCellWidth,
+    paddingTop: isSmallPhone ? 5 : 7,
+    paddingBottom: isSmallPhone ? 5 : 7,
+  }
+  const $gridIconWrapDynamic: ViewStyle = isSmallPhone
+    ? { width: gridIconWrapSize, height: gridIconWrapSize }
+    : {}
+  const $gridLabelDynamic: TextStyle = { fontSize: isSmallPhone ? 12 : 13 }
+  const $gridSubDynamic: TextStyle = { fontSize: isSmallPhone ? 10 : 11 }
+
+  // Board
+  const $boardItemDynamic: ViewStyle = isSmallPhone
+    ? { paddingVertical: 14, paddingHorizontal: 12 }
+    : {}
+  const $tagWrapDynamic: ViewStyle = { width: isSmallPhone ? 60 : 70 }
+
+  // Footer
+  const $footerDynamic: ViewStyle = {
+    marginTop: isSmallPhone ? 14 : 19,
+    paddingBottom: isSmallPhone ? 30 : 40,
+  }
+  const $footerLinksDynamic: ViewStyle = { gap: isSmallPhone ? 12 : 20 }
+  const $footerLinkDynamic: TextStyle = { fontSize: isSmallPhone ? 12 : 13 }
+
   return (
     <>
       <View style={$root}>
@@ -187,7 +259,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           showsVerticalScrollIndicator={false}
         >
           {/* ── Header (blue background) ── */}
-          <View style={[$header, { paddingTop: insets.top + 12 }]}>
+          <View style={[$header, $headerDynamic, { paddingTop: insets.top + 12 }]}>
             {/* ── 임시 개발용 토글 영역 ── */}
             <View style={$devToggleArea}>
               {/* 역할 전환 */}
@@ -216,79 +288,90 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
             {/* Row 1: Logo + Actions */}
             <View style={$titleRow}>
               <View>
-                <Text text="K-SAFEONE" style={$appTitle} />
-                <Text text={translate("homeScreen:orgName")} style={$appSub} />
+                <Text text="K-SAFEONE" style={[$appTitle, $appTitleDynamic]} />
+                <Text text={translate("homeScreen:orgName")} style={[$appSub, $appSubDynamic]} />
               </View>
-              <View style={$headerActions}>
+              <View style={[$headerActions, $headerActionsDynamic]}>
                 <TouchableOpacity
                   style={$headerAction}
                   onPress={() => navigation.navigate("QrScanner")}
                 >
-                  <View style={$headerIconWrap}>
+                  <View style={[$headerIconWrap, $headerIconWrapDynamic]}>
                     <HeaderQr width={20} height={20} />
                   </View>
-                  <Text text={translate("homeScreen:header.qrScan")} style={$headerActionLabel} />
+                  <Text
+                    text={translate("homeScreen:header.qrScan")}
+                    style={[$headerActionLabel, $headerActionLabelDynamic]}
+                  />
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={$headerAction}
                   onPress={() => navigation.navigate("Notify")}
                 >
-                  <View style={$headerIconWrap}>
+                  <View style={[$headerIconWrap, $headerIconWrapDynamic]}>
                     <HeaderBell width={22} height={22} color="white" />
                   </View>
                   <Text
                     text={translate("homeScreen:header.notification")}
-                    style={$headerActionLabel}
+                    style={[$headerActionLabel, $headerActionLabelDynamic]}
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={$headerAction}
                   onPress={() => navigation.navigate("LanguageSettings")}
                 >
-                  <View style={$headerIconWrap}>
+                  <View style={[$headerIconWrap, $headerIconWrapDynamic]}>
                     <HeaderLang width={22} height={22} />
                   </View>
-                  <Text text={translate("homeScreen:header.language")} style={$headerActionLabel} />
+                  <Text
+                    text={translate("homeScreen:header.language")}
+                    style={[$headerActionLabel, $headerActionLabelDynamic]}
+                  />
                 </TouchableOpacity>
               </View>
             </View>
           </View>
 
           {/* ── Body (white rounded) ── */}
-          <View style={$body}>
+          <View style={[$body, $bodyDynamic]}>
             {/* Greeting + Avatar */}
-            <View style={$greetRow}>
+            <View style={[$greetRow, $greetRowDynamic]}>
               <View style={$greetLeft}>
                 <Text
                   text={translate("homeScreen:greeting.name", { name: "김영희" })}
-                  style={$greetBold}
+                  style={[$greetBold, $greetBoldDynamic]}
+                  numberOfLines={2}
                 />
-                <Text text={translate("homeScreen:greeting.message")} style={$greetMsg} />
+                <Text
+                  text={translate("homeScreen:greeting.message")}
+                  style={[$greetMsg, $greetMsgDynamic]}
+                  numberOfLines={2}
+                />
               </View>
               <TouchableOpacity
-                style={$avatar}
+                style={[$avatar, $avatarDynamic]}
                 activeOpacity={0.7}
                 onPress={() => navigation.navigate("MyPage")}
               >
-                <ProfileSwitch width={52} height={52} />
+                <ProfileSwitch width={avatarSize} height={avatarSize} />
               </TouchableOpacity>
             </View>
 
             {/* Feature Grid */}
-            <View style={$grid}>
+            <View style={[$grid, $gridDynamic]}>
               {visibleGridItems.map((item, i) => (
                 <TouchableOpacity
                   key={i}
-                  style={$gridCell}
+                  style={[$gridCell, $gridCellDynamic]}
                   activeOpacity={0.7}
                   onPress={item.onPress}
                 >
-                  <View style={$gridIconWrap}>
+                  <View style={[$gridIconWrap, $gridIconWrapDynamic]}>
                     <item.Icon width={item.iconSize ?? 36} height={item.iconSize ?? 36} />
                   </View>
                   <View style={$gridTextWrap}>
-                    <Text text={item.label} style={$gridLabel} numberOfLines={1} />
-                    <Text text={item.sub} style={$gridSub} numberOfLines={1} />
+                    <Text text={item.label} style={[$gridLabel, $gridLabelDynamic]} numberOfLines={1} />
+                    <Text text={item.sub} style={[$gridSub, $gridSubDynamic]} numberOfLines={1} />
                   </View>
                 </TouchableOpacity>
               ))}
@@ -352,8 +435,12 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
               {/* Board Items */}
               <View style={$boardList}>
                 {BOARD_ITEMS.map((item, i) => (
-                  <TouchableOpacity key={i} style={$boardItem} activeOpacity={0.7}>
-                    <View style={$tagWrap}>
+                  <TouchableOpacity
+                    key={i}
+                    style={[$boardItem, $boardItemDynamic]}
+                    activeOpacity={0.7}
+                  >
+                    <View style={[$tagWrap, $tagWrapDynamic]}>
                       <SafeBoardBadge
                         type={item.tag === "workplace" ? "workplace" : "company_wide"}
                       />
@@ -378,8 +465,8 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
             </TouchableOpacity>
 
             {/* Footer */}
-            <View style={$footer}>
-              <View style={$footerLinks}>
+            <View style={[$footer, $footerDynamic]}>
+              <View style={[$footerLinks, $footerLinksDynamic]}>
                 <TouchableOpacity
                   activeOpacity={0.6}
                   onPress={() =>
@@ -389,7 +476,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
                     )
                   }
                 >
-                  <Text text={translate("homeScreen:footer.homepage")} style={$footerLink} />
+                  <Text
+                    text={translate("homeScreen:footer.homepage")}
+                    style={[$footerLink, $footerLinkDynamic]}
+                  />
                 </TouchableOpacity>
                 <Text text="|" style={$footerSep} />
                 <TouchableOpacity
@@ -401,7 +491,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
                     )
                   }
                 >
-                  <Text text={translate("homeScreen:footer.privacy")} style={$footerLink} />
+                  <Text
+                    text={translate("homeScreen:footer.privacy")}
+                    style={[$footerLink, $footerLinkDynamic]}
+                  />
                 </TouchableOpacity>
                 <Text text="|" style={$footerSep} />
                 <TouchableOpacity
@@ -413,7 +506,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
                     )
                   }
                 >
-                  <Text text={translate("homeScreen:footer.terms")} style={$footerLink} />
+                  <Text
+                    text={translate("homeScreen:footer.terms")}
+                    style={[$footerLink, $footerLinkDynamic]}
+                  />
                 </TouchableOpacity>
               </View>
               <Text text={translate("homeScreen:footer.copyright")} style={$footerCopyright} />
@@ -439,11 +535,11 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   )
 }
 
-const BLUE = "#0B3069"
+// ── Static styles ─────────────────────────────────────────────────────────────
 
 const $root: ViewStyle = {
   flex: 1,
-  backgroundColor: BLUE,
+  backgroundColor: colors.navy,
 }
 
 const $scrollView: ViewStyle = {
@@ -455,10 +551,7 @@ const $scrollContent: ViewStyle = {
 }
 
 const $header: ViewStyle = {
-  backgroundColor: BLUE,
-  paddingBottom: 20,
-  paddingHorizontal: 20,
-  gap: 16,
+  backgroundColor: colors.navy,
 }
 
 const $devToggleArea: ViewStyle = {
@@ -493,7 +586,7 @@ const $roleToggleText: TextStyle = {
 }
 
 const $roleToggleTextActive: TextStyle = {
-  color: "#0B3069",
+  color: colors.navy,
 }
 
 const $titleRow: ViewStyle = {
@@ -504,13 +597,11 @@ const $titleRow: ViewStyle = {
 
 const $appTitle: TextStyle = {
   color: "#FFFFFF",
-  fontSize: 21,
   fontFamily: typography.primary.bold,
 }
 
 const $appSub: TextStyle = {
   color: "#FFFFFF",
-  fontSize: 13,
   fontFamily: typography.primary.medium,
   marginTop: 2,
   opacity: 0.9,
@@ -518,7 +609,6 @@ const $appSub: TextStyle = {
 
 const $headerActions: ViewStyle = {
   flexDirection: "row",
-  gap: 14,
   paddingTop: 4,
 }
 
@@ -536,7 +626,6 @@ const $headerIconWrap: ViewStyle = {
 
 const $headerActionLabel: TextStyle = {
   color: "#FFFFFF",
-  fontSize: 11,
   fontFamily: typography.primary.medium,
 }
 
@@ -544,7 +633,6 @@ const $greetRow: ViewStyle = {
   flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",
-  marginBottom: 30,
 }
 
 const $greetLeft: ViewStyle = {
@@ -567,8 +655,6 @@ const $greetMsg: TextStyle = {
 }
 
 const $avatar: ViewStyle = {
-  width: 52,
-  height: 52,
   marginLeft: 16,
 }
 
@@ -576,8 +662,6 @@ const $body: ViewStyle = {
   backgroundColor: "#F9FAFE",
   borderTopLeftRadius: 20,
   borderTopRightRadius: 20,
-  paddingTop: 26,
-  paddingHorizontal: 20,
   flex: 1,
 }
 
@@ -591,14 +675,10 @@ const $grid: ViewStyle = {
   elevation: 3,
   flexDirection: "row",
   flexWrap: "wrap",
-  marginBottom: 20,
   overflow: "hidden",
 }
 
 const $gridCell: ViewStyle = {
-  width: "33.33%",
-  paddingTop: 7,
-  paddingBottom: 7,
   alignItems: "center",
   borderRightWidth: StyleSheet.hairlineWidth,
   borderBottomWidth: StyleSheet.hairlineWidth,
@@ -617,14 +697,12 @@ const $gridTextWrap: ViewStyle = {
 }
 
 const $gridLabel: TextStyle = {
-  fontSize: 13,
   fontFamily: typography.primary.semiBold,
   color: "#1A2236",
   textAlign: "center",
 }
 
 const $gridSub: TextStyle = {
-  fontSize: 11,
   fontFamily: typography.primary.medium,
   color: "#ABABAB",
   textAlign: "center",
@@ -719,7 +797,6 @@ const $boardItem: ViewStyle = {
 }
 
 const $tagWrap: ViewStyle = {
-  width: 70,
   flexShrink: 0,
   alignItems: "flex-start",
 }
@@ -753,8 +830,6 @@ const $banner: ViewStyle = {
 
 const $footer: ViewStyle = {
   alignItems: "center",
-  marginTop: 19,
-  paddingBottom: 40,
   gap: 8,
 }
 
@@ -762,11 +837,9 @@ const $footerLinks: ViewStyle = {
   flexDirection: "row",
   justifyContent: "center",
   alignItems: "center",
-  gap: 20,
 }
 
 const $footerLink: TextStyle = {
-  fontSize: 13,
   color: "#7F848C",
   fontFamily: typography.primary.normal,
 }
@@ -809,7 +882,7 @@ const $eduBannerContent: ViewStyle = {
 const $eduBannerTitle: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.bold,
-  color: "#0B3069",
+  color: colors.navy,
 }
 
 const $eduBannerDesc: TextStyle = {
