@@ -50,6 +50,17 @@ export const IntroSlide: FC<IntroSlideProps> = ({
     ? { ...S.$slideContent, maxWidth: 560, width: "100%", alignSelf: "center" }
     : S.$slideContent
 
+  // breakpoint별 textBlock minHeight:
+  //   smallPhone — title 2줄(25×2=50) + marginBottom 12 + description 3줄(21×3=63) → 128
+  //   base/large — title 2줄(29×2=58) + marginBottom 18 + description 4줄(23×4=92) → 170
+  //   tablet    — maxWidth 560 내에서 base와 같은 폰트, 줄 수 여유 추가 → 180
+  const textBlockMinHeight = isSmallPhone ? 128 : isTablet ? 180 : 170
+
+  const $textBlockStyle: ViewStyle = {
+    ...S.$textBlock,
+    minHeight: textBlockMinHeight,
+  }
+
   return (
     <View style={$slideStyle}>
       <View style={$contentStyle}>
@@ -69,14 +80,18 @@ export const IntroSlide: FC<IntroSlideProps> = ({
           />
         </View>
 
-        <Text
-          text={translate(slide.titleTx)}
-          style={[S.$slideTitle, isSmallPhone && { fontSize: 19, marginBottom: 12 }]}
-        />
-        <Text
-          text={translate(slide.descriptionTx)}
-          style={[S.$slideDescription, isSmallPhone && { fontSize: 14, lineHeight: 21 }]}
-        />
+        {/* title + description을 고정 높이 블록으로 감싸 pagination 위치 고정 */}
+        <View style={$textBlockStyle}>
+          <Text
+            text={translate(slide.titleTx)}
+            style={[S.$slideTitle, isSmallPhone && { fontSize: 19, marginBottom: 12 }]}
+          />
+          <Text
+            text={translate(slide.descriptionTx)}
+            style={[S.$slideDescription, isSmallPhone && { fontSize: 14, lineHeight: 21 }]}
+            numberOfLines={isSmallPhone ? 3 : 4}
+          />
+        </View>
 
         <InlinePagination
           total={total}

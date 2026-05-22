@@ -60,6 +60,13 @@ export const $slideContent: ViewStyle = {
   alignItems: "center",
 }
 
+// title + description을 감싸는 고정 높이 블록 — 슬라이드마다 pagination 위치가 흔들리지 않도록 함
+export const $textBlock: ViewStyle = {
+  width: "100%",
+  alignItems: "center",
+  justifyContent: "flex-start",
+}
+
 export const $stepBadge: ViewStyle = {
   width: 50,
   height: 50,
