@@ -5,6 +5,14 @@ import { api } from "./index"
 const COMPANY_POST_ENDPOINT = "/api/v1/user/company-posts"
 const MY_COMPANY_POSTS_ENDPOINT = "/api/v1/user/me/company-posts"
 
+export interface AttachmentDto {
+  id: string
+  fileName: string
+  fileSize: number | null
+  fileUrl: string | null
+  mimeType: string | null
+}
+
 export interface UserCompanyPostDetailDto {
   id: string
   title: string
@@ -18,7 +26,7 @@ export interface UserCompanyPostDetailDto {
   createdAt: string
   status: "unread" | "pending_signature" | "completed"
   readAt: string | null
-  attachments: unknown[]
+  attachments: AttachmentDto[]
 }
 
 export interface MyPostDetailDto {
@@ -38,7 +46,7 @@ export interface MyPostDetailDto {
   publishedAt: string | null
   isPinned: boolean
   pinnedAt: string | null
-  attachments: unknown[]
+  attachments: AttachmentDto[]
 }
 
 export interface UserCompanyPostListItemDto {

@@ -1,13 +1,14 @@
 import { FC, useCallback, useEffect, useState } from "react"
 import {
   ActivityIndicator,
+  Linking,
   ScrollView,
   TouchableOpacity,
   View,
   ViewStyle,
   TextStyle,
 } from "react-native"
-import { BellOff, BellRing, CheckCircle, Send, Trash2, XCircle } from "lucide-react-native"
+import { BellOff, BellRing, CheckCircle, Download, FileText, Send, Trash2, XCircle } from "lucide-react-native"
 import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -35,6 +36,26 @@ function formatPostDate(dateStr: string): string {
   const mm = String(d.getMonth() + 1).padStart(2, "0")
   const dd = String(d.getDate()).padStart(2, "0")
   return `${yyyy}.${mm}.${dd}`
+}
+
+function formatFileSize(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`
+  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
+}
+
+function formatAttachmentMeta(
+  fileName: string,
+  fileSize: number | null,
+  mimeType: string | null,
+): string {
+  const dotIdx = fileName.lastIndexOf(".")
+  const ext =
+    dotIdx > 0
+      ? fileName.slice(dotIdx + 1).toUpperCase()
+      : (mimeType?.split("/").pop()?.toUpperCase() ?? "")
+  const size = fileSize != null && fileSize > 0 ? formatFileSize(fileSize) : ""
+  return [ext, size].filter(Boolean).join(" · ")
 }
 
 export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
@@ -70,10 +91,10 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
           if (safeBoardStore.activeTab === "my") {
             await safeBoardStore.fetchMyPostDetail(id)
           } else if (isAdmin) {
-            // "전체" 탭: 내 글이면 me 엔드포인트, 아니면 reader 엔드포인트로 폴백
-            try {
+            const isMyPost = safeBoardStore.myPosts.some((p) => p.id === id)
+            if (isMyPost) {
               await safeBoardStore.fetchMyPostDetail(id)
-            } catch {
+            } else {
               await safeBoardStore.fetchPostDetail(id)
             }
           } else {
@@ -160,7 +181,11 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
               />
             </View>
           ) : (
-            <View style={$outerContainer}>
+            <ScrollView
+              style={$outerScrollView}
+              contentContainerStyle={$outerContainer}
+              showsVerticalScrollIndicator={false}
+            >
               <View style={$card}>
                 {/* 뱃지 + 날짜 */}
                 <View style={$badgeDateRow}>
@@ -225,11 +250,55 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
               </View>
 
               <View style={$contentCard}>
-                <ScrollView showsVerticalScrollIndicator={false}>
-                  <Text text={currentPost.description ?? ""} style={$contentText} />
-                </ScrollView>
+                <Text text={currentPost.description ?? ""} style={$contentText} />
               </View>
-            </View>
+
+              {currentPost.attachments.length > 0 && (
+                <View style={$attachmentCard}>
+                  {currentPost.attachments.map((attachment, index) => (
+                    <View key={attachment.id}>
+                      <TouchableOpacity
+                        style={$attachmentRow}
+                        activeOpacity={0.7}
+                        disabled={!attachment.fileUrl}
+                        onPress={() => {
+                          if (attachment.fileUrl) {
+                            void Linking.openURL(attachment.fileUrl)
+                          }
+                        }}
+                      >
+                        <View style={$attachmentIconWrap}>
+                          <FileText size={20} color="#1062D8" strokeWidth={1.8} />
+                        </View>
+                        <View style={$attachmentInfo}>
+                          <Text
+                            text={attachment.fileName}
+                            style={$attachmentName}
+                            numberOfLines={1}
+                          />
+                          <Text
+                            text={formatAttachmentMeta(
+                              attachment.fileName,
+                              attachment.fileSize,
+                              attachment.mimeType,
+                            )}
+                            style={$attachmentMeta}
+                          />
+                        </View>
+                        <Download
+                          size={18}
+                          color={attachment.fileUrl ? "#1062D8" : "#CCCCCC"}
+                          strokeWidth={1.8}
+                        />
+                      </TouchableOpacity>
+                      {index < currentPost.attachments.length - 1 && (
+                        <View style={$attachmentRowDivider} />
+                      )}
+                    </View>
+                  ))}
+                </View>
+              )}
+            </ScrollView>
           )}
 
           {canEdit && !detailLoading && currentPost && (
@@ -324,10 +393,14 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
   },
 )
 
-const $outerContainer: ViewStyle = {
+const $outerScrollView: ViewStyle = {
   flex: 1,
+}
+
+const $outerContainer: ViewStyle = {
   padding: 16,
   gap: 12,
+  paddingBottom: 24,
 }
 
 const $loadingContainer: ViewStyle = {
@@ -348,15 +421,66 @@ const $card: ViewStyle = {
 }
 
 const $contentCard: ViewStyle = {
-  flex: 1,
   backgroundColor: "#FFFFFF",
   borderRadius: 12,
   padding: 20,
+  minHeight: 240,
   shadowColor: "#000000",
   shadowOffset: { width: 0, height: 2 },
   shadowOpacity: 0.05,
   shadowRadius: 8,
   elevation: 2,
+}
+
+const $attachmentCard: ViewStyle = {
+  backgroundColor: "#FFFFFF",
+  borderRadius: 12,
+  paddingVertical: 4,
+  shadowColor: "#000000",
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.05,
+  shadowRadius: 8,
+  elevation: 2,
+}
+
+const $attachmentRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  paddingHorizontal: 20,
+  paddingVertical: 14,
+  gap: 12,
+}
+
+const $attachmentIconWrap: ViewStyle = {
+  width: 36,
+  height: 36,
+  borderRadius: 8,
+  backgroundColor: "#EBF0FA",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+const $attachmentInfo: ViewStyle = {
+  flex: 1,
+  gap: 3,
+}
+
+const $attachmentName: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.medium,
+  color: "#1A1A1A",
+}
+
+const $attachmentMeta: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.normal,
+  color: "#979797",
+}
+
+const $attachmentRowDivider: ViewStyle = {
+  height: 1,
+  backgroundColor: "#F0F2F5",
+  marginHorizontal: 20,
 }
 
 const $badgeDateRow: ViewStyle = {

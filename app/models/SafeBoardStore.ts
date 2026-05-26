@@ -9,6 +9,7 @@ import {
   deleteCompanyPost,
   createCompanyPost,
   updateCompanyPost,
+  AttachmentDto,
   CreateCompanyPostPayload,
   UpdateCompanyPostPayload,
   MyPostDetailDto,
@@ -21,6 +22,14 @@ import { logDevError } from "@/utils/logDevError"
 
 import { withSetPropAction } from "./helpers/withSetPropAction"
 import { withStatus } from "./helpers/withStatus"
+
+const AttachmentModel = types.model("Attachment", {
+  id: types.string,
+  fileName: types.string,
+  fileSize: types.maybeNull(types.number),
+  fileUrl: types.maybeNull(types.string),
+  mimeType: types.maybeNull(types.string),
+})
 
 const CompanyPostDetailModel = types.model("CompanyPostDetail", {
   id: types.identifier,
@@ -36,6 +45,7 @@ const CompanyPostDetailModel = types.model("CompanyPostDetail", {
   createdAt: types.string,
   updatedAt: types.string,
   publishedAt: types.maybeNull(types.string),
+  attachments: types.optional(types.array(AttachmentModel), []),
 })
 
 const CompanyPostModel = types.model("CompanyPost", {
@@ -151,6 +161,13 @@ export const SafeBoardStoreModel = types
             createdAt: data.createdAt,
             updatedAt: data.createdAt,
             publishedAt: null,
+            attachments: (data.attachments ?? []).map((a: AttachmentDto) => ({
+              id: a.id,
+              fileName: a.fileName,
+              fileSize: a.fileSize ?? null,
+              fileUrl: a.fileUrl ?? null,
+              mimeType: a.mimeType ?? null,
+            })),
           }),
         )
         self.setStatus("success")
@@ -181,6 +198,13 @@ export const SafeBoardStoreModel = types
             createdAt: data.createdAt,
             updatedAt: data.updatedAt,
             publishedAt: data.publishedAt,
+            attachments: (data.attachments ?? []).map((a: AttachmentDto) => ({
+              id: a.id,
+              fileName: a.fileName,
+              fileSize: a.fileSize ?? null,
+              fileUrl: a.fileUrl ?? null,
+              mimeType: a.mimeType ?? null,
+            })),
           }),
         )
         self.setStatus("success")
