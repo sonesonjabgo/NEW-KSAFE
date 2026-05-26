@@ -195,7 +195,7 @@ export const TbmAdminStoreModel = types
     fetchSessions: flow(function* (status?: "draft" | "active" | "ended") {
       self.setStatus("pending")
       try {
-        const result: any[] = yield tbmActivityApi.fetchAllCompanyAdminActivities(status)
+        const result: any[] = yield tbmActivityApi.fetchAllMyActivities(status)
         self.sessions.replace(result.map(normalizeListItem))
         self.setStatus("success")
       } catch (error) {
@@ -209,7 +209,7 @@ export const TbmAdminStoreModel = types
     fetchSessionDetail: flow(function* (sessionId: string) {
       self.setStatus("pending")
       try {
-        const result: any = yield tbmActivityApi.fetchCompanyAdminActivityDetail(sessionId)
+        const result: any = yield tbmActivityApi.fetchActivityDetail(sessionId)
         self.setProp("currentSessionDetail", normalizeDetail(result))
         self.setStatus("success")
       } catch (error) {

@@ -2,6 +2,14 @@ import { ViewStyle, TextStyle } from "react-native"
 
 import { typography } from "@/theme/typography"
 
+// ── Loading / Error ───────────────────────────────────────────────────────────
+
+export const $loadingContainer: ViewStyle = {
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
+}
+
 // ── Scroll ────────────────────────────────────────────────────────────────────
 
 export const $scrollInner: ViewStyle = {

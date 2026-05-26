@@ -17,6 +17,15 @@ import type { TbmItem, TbmListScreenProps, TbmStatus } from "./types"
 
 type TabKey = "all" | "작성중" | "진행중" | "종료됨"
 
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr)
+  if (isNaN(d.getTime())) return dateStr
+  const yyyy = d.getFullYear()
+  const mm = String(d.getMonth() + 1).padStart(2, "0")
+  const dd = String(d.getDate()).padStart(2, "0")
+  return `${yyyy}.${mm}.${dd}`
+}
+
 const API_STATUS_MAP: Record<"draft" | "active" | "ended", TbmStatus> = {
   draft: "작성중",
   active: "진행중",
@@ -126,7 +135,7 @@ export const TbmListScreen: FC<TbmListScreenProps> = observer(function TbmListSc
           id: s.id,
           title: s.title,
           status: API_STATUS_MAP[s.status as "draft" | "active" | "ended"],
-          date: s.workDate,
+          date: formatDate(s.workDate),
           participants: s.participantCount,
           author: s.createdByName,
           location: s.workplaceName ?? "",

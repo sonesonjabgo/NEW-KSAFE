@@ -1,5 +1,5 @@
 import { FC, useCallback, useMemo, useState } from "react"
-import { ScrollView, TouchableOpacity, View } from "react-native"
+import { ActivityIndicator, Linking, ScrollView, TouchableOpacity, View } from "react-native"
 import { useFocusEffect } from "@react-navigation/native"
 import {
   IconCalendar,
@@ -24,6 +24,25 @@ import type { TbmStatus } from "@/screens/TbmListScreen/types"
 
 import * as S from "./styles"
 import type { TbmDetailScreenProps } from "./types"
+
+function formatTime(dateStr: string): string {
+  const d = new Date(dateStr)
+  if (isNaN(d.getTime())) return dateStr
+  const hh = String(d.getHours()).padStart(2, "0")
+  const min = String(d.getMinutes()).padStart(2, "0")
+  return `${hh}:${min}`
+}
+
+function formatDateTime(dateStr: string): string {
+  const d = new Date(dateStr)
+  if (isNaN(d.getTime())) return dateStr
+  const yyyy = d.getFullYear()
+  const mm = String(d.getMonth() + 1).padStart(2, "0")
+  const dd = String(d.getDate()).padStart(2, "0")
+  const hh = String(d.getHours()).padStart(2, "0")
+  const min = String(d.getMinutes()).padStart(2, "0")
+  return `${yyyy}.${mm}.${dd} ${hh}:${min}`
+}
 
 function getBadgeStyles(status: TbmStatus) {
   if (status === "작성중") return { badge: S.$badgeDrafting, text: S.$badgeDraftingText }
@@ -62,10 +81,12 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = observer(function TbmDe
   const [toastVisible, setToastVisible] = useState(false)
   const [isActivating, setIsActivating] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
+  const [detailLoading, setDetailLoading] = useState(true)
 
   useFocusEffect(
     useCallback(() => {
-      tbmAdminStore.fetchSessionDetail(id)
+      setDetailLoading(true)
+      tbmAdminStore.fetchSessionDetail(id).finally(() => setDetailLoading(false))
       return () => {
         tbmAdminStore.clearSessionDetail()
       }
@@ -106,8 +127,6 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = observer(function TbmDe
     }
   }, [id, tbmAdminStore, navigation])
 
-  if (!detail || !uiStatus || !badgeStyles) return null
-
   return (
     <>
       <StackScreen
@@ -116,6 +135,11 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = observer(function TbmDe
         squareTop
         contentBg="#FFFFFF"
       >
+        {detailLoading || !detail || !uiStatus || !badgeStyles ? (
+          <View style={S.$loadingContainer}>
+            <ActivityIndicator size="large" color="#1062D8" />
+          </View>
+        ) : (
         <ScrollView
           contentContainerStyle={[S.$scrollInner, { paddingBottom: (insets.bottom || 0) + 24 }]}
           showsVerticalScrollIndicator={false}
@@ -129,7 +153,7 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = observer(function TbmDe
                   style={badgeStyles.text}
                 />
               </View>
-              <Text text={detail.workDate} style={S.$cardDate} />
+              <Text text={formatDateTime(detail.workDate)} style={S.$cardDate} />
             </View>
 
             <Text text={detail.title} style={S.$cardTitle} />
@@ -137,7 +161,7 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = observer(function TbmDe
             <View style={S.$cardWorkDateRow}>
               <IconCalendar size={20} color="#6B7281" />
               <Text
-                text={translate("tbmDetailScreen:workDate", { date: detail.workDate })}
+                text={translate("tbmDetailScreen:workDate", { date: formatDateTime(detail.workDate) })}
                 style={S.$cardWorkDate}
               />
             </View>
@@ -174,9 +198,10 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = observer(function TbmDe
               <Text text={item.title} style={S.$educationCardTitle} numberOfLines={2} />
               <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => console.log("download:", item.id)}
+                disabled={!item.fileUrl}
+                onPress={() => { if (item.fileUrl) void Linking.openURL(item.fileUrl) }}
               >
-                <IconDownload size={20} color="#1062D8" />
+                <IconDownload size={20} color={item.fileUrl ? "#1062D8" : "#CCCCCC"} />
               </TouchableOpacity>
             </View>
           ))}
@@ -214,7 +239,7 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = observer(function TbmDe
                           style={pBadge.text}
                         />
                       </View>
-                      <Text text={p.participatedAt} style={S.$participantTime} />
+                      <Text text={formatTime(p.participatedAt)} style={S.$participantTime} />
                     </View>
                   )
                 })
@@ -270,6 +295,7 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = observer(function TbmDe
             )}
           </View>
         </ScrollView>
+        )}
       </StackScreen>
 
       <ConfirmModal
