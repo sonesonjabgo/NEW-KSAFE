@@ -228,6 +228,80 @@ export async function deleteCompanyPost(id: string): Promise<void> {
   }
 }
 
+export interface CreateCompanyPostPayload {
+  scope: "company_wide" | "workplace"
+  workplaceId?: string | null
+  title: string
+  description: string
+  sendNotification: boolean
+}
+
+export interface UpdateCompanyPostPayload {
+  title?: string
+  description?: string
+  sendNotification?: boolean
+}
+
+export async function createCompanyPost(payload: CreateCompanyPostPayload): Promise<{ id: string }> {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+  const accessToken = session?.access_token
+  if (!accessToken) {
+    throw new Error("Missing authentication token for creating post")
+  }
+
+  const body: Record<string, unknown> = {
+    scope: payload.scope,
+    title: payload.title,
+    description: payload.description,
+    sendNotification: payload.sendNotification,
+  }
+  if (payload.workplaceId) body.workplaceId = payload.workplaceId
+
+  const response = await api.apisauce.post<{ id: string }>(
+    COMPANY_POST_ENDPOINT,
+    body,
+    {
+      headers: { Authorization: `Bearer ${accessToken}`, accept: "application/json" },
+    },
+  )
+
+  if (!response.ok || !response.data?.id) {
+    throw new Error(
+      `Failed to create post (${response.status ?? "unknown"}): ${response.problem ?? "unknown"}`,
+    )
+  }
+  return { id: response.data.id }
+}
+
+export async function updateCompanyPost(
+  id: string,
+  payload: UpdateCompanyPostPayload,
+): Promise<void> {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+  const accessToken = session?.access_token
+  if (!accessToken) {
+    throw new Error("Missing authentication token for updating post")
+  }
+
+  const response = await api.apisauce.patch(
+    `${COMPANY_POST_ENDPOINT}/${id}`,
+    payload,
+    {
+      headers: { Authorization: `Bearer ${accessToken}`, accept: "application/json" },
+    },
+  )
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to update post (${response.status ?? "unknown"}): ${response.problem ?? "unknown"}`,
+    )
+  }
+}
+
 export async function fetchMyPosts(): Promise<MyCompanyPostListItemDto[]> {
   const {
     data: { session },

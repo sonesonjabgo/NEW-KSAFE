@@ -290,6 +290,8 @@ const en = {
       cardText: "When selected, a push notification will be sent to all members of the selected workplace upon posting.",
     },
     save: "Save",
+    titleEdit: "Edit Post",
+    saveError: "Failed to save post. Please try again.",
   },
 
   safeBoardNotifyScreen: {

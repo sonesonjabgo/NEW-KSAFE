@@ -69,7 +69,7 @@ export type AppStackParamList = {
   HazardRiskCreate: undefined
   HazardRiskDetail: { id: number }
   SafeBoardDetail: { id: string }
-  SafeBoardCreate: undefined
+  SafeBoardCreate: { id?: string } | undefined
   SafeBoardNotify: undefined
 }
 

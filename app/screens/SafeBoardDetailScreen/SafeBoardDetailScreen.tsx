@@ -120,7 +120,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
           rightSlot={
             canEdit ? (
               <TouchableOpacity
-                onPress={() => navigation.navigate("SafeBoardCreate")}
+                onPress={() => navigation.navigate("SafeBoardCreate", { id })}
                 activeOpacity={0.7}
               >
                 <Text

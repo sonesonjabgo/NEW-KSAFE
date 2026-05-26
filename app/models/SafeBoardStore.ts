@@ -7,6 +7,10 @@ import {
   fetchUserCompanyPosts,
   publishCompanyPost,
   deleteCompanyPost,
+  createCompanyPost,
+  updateCompanyPost,
+  CreateCompanyPostPayload,
+  UpdateCompanyPostPayload,
   MyPostDetailDto,
   MyCompanyPostListItemDto,
   UserCompanyPostListItemDto,
@@ -223,6 +227,34 @@ export const SafeBoardStoreModel = types
       } catch (error) {
         self.setStatus("error")
         logDevError("Failed to publish post", error)
+        throw error
+      }
+    }),
+
+    createPost: flow(function* createPostAction(payload: CreateCompanyPostPayload) {
+      self.setStatus("pending")
+      try {
+        const result: { id: string } = yield createCompanyPost(payload)
+        yield self.fetchMyPosts()
+        self.setStatus("success")
+        return result.id
+      } catch (error) {
+        self.setStatus("error")
+        logDevError("Failed to create post", error)
+        throw error
+      }
+    }),
+
+    updatePost: flow(function* updatePostAction(postId: string, payload: UpdateCompanyPostPayload) {
+      self.setStatus("pending")
+      try {
+        yield updateCompanyPost(postId, payload)
+        yield self.fetchMyPosts()
+        yield self.fetchMyPostDetail(postId)
+        self.setStatus("success")
+      } catch (error) {
+        self.setStatus("error")
+        logDevError("Failed to update post", error)
         throw error
       }
     }),

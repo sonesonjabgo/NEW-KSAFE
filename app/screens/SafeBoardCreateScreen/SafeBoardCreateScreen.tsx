@@ -1,5 +1,6 @@
-import { useCallback, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
+  ActivityIndicator,
   Animated,
   KeyboardAvoidingView,
   Modal,
@@ -11,15 +12,15 @@ import {
   View,
 } from "react-native"
 import { IconChevronDown } from "@tabler/icons-react-native"
-import { X } from "lucide-react-native"
+import { XCircle } from "lucide-react-native"
 import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
-import BoardClip from "@assets/icons/board/board_clip.svg"
 import HeaderBell from "@assets/icons/nav/header_bell.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { Toast } from "@/components/Toast"
 import { translate } from "@/i18n/translate"
 import { useStores } from "@/models"
 import { AppStackScreenProps } from "@/navigators/navigationTypes"
@@ -28,21 +29,52 @@ import * as S from "./styles"
 
 type SafeBoardCreateScreenProps = AppStackScreenProps<"SafeBoardCreate">
 
+interface SelectedWorkplace {
+  id: string
+  name: string
+}
+
 export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
   navigation,
+  route,
 }: SafeBoardCreateScreenProps) {
   const insets = useSafeAreaInsets()
-  const { workplaceStore } = useStores()
+  const { workplaceStore, safeBoardStore } = useStores()
 
-  const [workplace, setWorkplace] = useState("")
+  const editId = route.params?.id
+  const isEditMode = !!editId
+
+  const [selectedWorkplace, setSelectedWorkplace] = useState<SelectedWorkplace | null>(null)
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [sendPush, setSendPush] = useState(false)
-  const [attachedFiles, setAttachedFiles] = useState<string[]>([])
   const [workplaceModalVisible, setWorkplaceModalVisible] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
+  const [toastVisible, setToastVisible] = useState(false)
+  const [toastMessage, setToastMessage] = useState("")
 
   const slideAnim = useRef(new Animated.Value(400)).current
   const fadeAnim = useRef(new Animated.Value(0)).current
+
+  // 수정 모드: currentPost에서 기존 데이터 pre-fill
+  useEffect(() => {
+    if (!isEditMode) return
+    const post = safeBoardStore.currentPost
+    if (!post) return
+    setTitle(post.title)
+    setContent(post.description ?? "")
+    setSendPush(post.sendNotification ?? false)
+    if (post.workplaceId && post.workplaceName) {
+      setSelectedWorkplace({ id: post.workplaceId, name: post.workplaceName })
+    }
+  }, [isEditMode, safeBoardStore.currentPost])
+
+  // 사업장 목록이 없으면 로드
+  useEffect(() => {
+    if (!workplaceStore.hasWorkplaces) {
+      void workplaceStore.fetchWorkplaces()
+    }
+  }, [])
 
   const openWorkplaceModal = useCallback(() => {
     setWorkplaceModalVisible(true)
@@ -60,36 +92,52 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
   }, [fadeAnim, slideAnim])
 
   const handleSelectWorkplace = useCallback(
-    (wp: string) => {
-      setWorkplace(wp)
+    (wp: SelectedWorkplace) => {
+      setSelectedWorkplace(wp)
       closeWorkplaceModal()
     },
     [closeWorkplaceModal],
   )
 
   const isValid = useMemo(
-    () => !!workplace && !!title.trim() && !!content.trim(),
-    [workplace, title, content],
+    () => !!selectedWorkplace && !!title.trim() && !!content.trim(),
+    [selectedWorkplace, title, content],
   )
 
-  const handleAddFile = useCallback(() => {
-    const mockName = `첨부파일_${attachedFiles.length + 1}.pdf`
-    setAttachedFiles((prev) => [...prev, mockName])
-  }, [attachedFiles.length])
-
-  const handleRemoveFile = useCallback((idx: number) => {
-    setAttachedFiles((prev) => prev.filter((_, i) => i !== idx))
-  }, [])
-
-  const handleSave = useCallback(() => {
-    console.log(JSON.stringify({ workplace, title, content, sendPush, attachedFiles }, null, 2))
-    navigation.navigate("Main", { screen: "SafeBoard", params: { showToast: true } })
-  }, [workplace, title, content, sendPush, attachedFiles, navigation])
+  const handleSave = useCallback(async () => {
+    if (!selectedWorkplace || isSaving) return
+    setIsSaving(true)
+    try {
+      if (isEditMode && editId) {
+        await safeBoardStore.updatePost(editId, {
+          title: title.trim(),
+          description: content.trim(),
+          sendNotification: sendPush,
+        })
+        navigation.goBack()
+      } else {
+        const scope = selectedWorkplace.id ? "workplace" : "company_wide"
+        await safeBoardStore.createPost({
+          scope,
+          workplaceId: selectedWorkplace.id || undefined,
+          title: title.trim(),
+          description: content.trim(),
+          sendNotification: sendPush,
+        })
+        navigation.navigate("Main", { screen: "SafeBoard", params: { showToast: true } })
+      }
+    } catch {
+      setToastMessage(translate("safeBoardCreateScreen:saveError"))
+      setToastVisible(true)
+    } finally {
+      setIsSaving(false)
+    }
+  }, [selectedWorkplace, title, content, sendPush, isSaving, isEditMode, editId, safeBoardStore, navigation])
 
   return (
     <>
       <StackScreen
-        title={translate("safeBoardCreateScreen:title")}
+        title={isEditMode ? translate("safeBoardCreateScreen:titleEdit") : translate("safeBoardCreateScreen:title")}
         onBack={() => navigation.goBack()}
         contentBg="#FFFFFF"
         squareTop
@@ -133,8 +181,8 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
                 onPress={openWorkplaceModal}
               >
                 <Text
-                  text={workplace || translate("safeBoardCreateScreen:workplace.placeholder")}
-                  style={[S.$inputText, !workplace && S.$inputPlaceholder]}
+                  text={selectedWorkplace?.name || translate("safeBoardCreateScreen:workplace.placeholder")}
+                  style={[S.$inputText, !selectedWorkplace && S.$inputPlaceholder]}
                   numberOfLines={1}
                 />
                 <IconChevronDown size={18} color="#AAAAAA" />
@@ -197,54 +245,6 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
               />
             </View>
 
-            {/* 첨부파일 */}
-            <View style={[S.$section, { gap: 20 }]}>
-              <Text
-                text={translate("safeBoardCreateScreen:attachment.label")}
-                style={S.$sectionLabel}
-              />
-              {/* 카드1 */}
-              <View style={S.$attachCard}>
-                <BoardClip width={30} height={30} color="#1062D8" />
-                <Text
-                  text={translate("safeBoardCreateScreen:attachment.card1Text")}
-                  style={S.$attachCardText}
-                />
-                <TouchableOpacity style={S.$attachUploadBtn} activeOpacity={0.7} onPress={handleAddFile}>
-                  <Text
-                    text={translate("safeBoardCreateScreen:attachment.uploadButton")}
-                    style={S.$attachUploadBtnText}
-                  />
-                </TouchableOpacity>
-              </View>
-
-              {/* 카드2 */}
-              {attachedFiles.length === 0 ? (
-                <View style={S.$attachCard2Empty}>
-                  <BoardClip width={20} height={20} color="#48B568" />
-                  <Text
-                    text={translate("safeBoardCreateScreen:attachment.noFile")}
-                    style={S.$attachCard2EmptyText}
-                  />
-                </View>
-              ) : (
-                <View style={S.$attachCard2FileList}>
-                  {attachedFiles.map((file, idx) => (
-                    <View key={idx} style={S.$attachCard2FileRow}>
-                      <BoardClip width={20} height={20} color="#525252" />
-                      <Text text={file} style={S.$attachCard2FileText} numberOfLines={1} />
-                      <TouchableOpacity
-                        onPress={() => handleRemoveFile(idx)}
-                        hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-                      >
-                        <X size={25} color="#525252" strokeWidth={2} />
-                      </TouchableOpacity>
-                    </View>
-                  ))}
-                </View>
-              )}
-            </View>
-
             {/* 푸시 알림 함께 보내기 */}
             <View style={[S.$section, { borderBottomWidth: 0, gap: 20 }]}>
               <Text
@@ -269,19 +269,31 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
           {/* 저장 버튼 */}
           <View style={[S.$submitBar, { paddingBottom: insets.bottom + 16 }]}>
             <TouchableOpacity
-              style={[S.$submitBtn, !isValid && S.$submitBtnDisabled]}
+              style={[S.$submitBtn, (!isValid || isSaving) && S.$submitBtnDisabled]}
               activeOpacity={0.8}
               onPress={handleSave}
-              disabled={!isValid}
+              disabled={!isValid || isSaving}
             >
-              <Text
-                text={translate("safeBoardCreateScreen:save")}
-                style={S.$submitBtnText}
-              />
+              {isSaving ? (
+                <ActivityIndicator size="small" color="#FFFFFF" />
+              ) : (
+                <Text
+                  text={translate("safeBoardCreateScreen:save")}
+                  style={S.$submitBtnText}
+                />
+              )}
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
       </StackScreen>
+
+      <Toast
+        visible={toastVisible}
+        message={toastMessage}
+        icon={<XCircle size={14} color="#FFFFFF" strokeWidth={2.5} />}
+        iconCircleColor="#E03526"
+        onHide={() => setToastVisible(false)}
+      />
 
       {/* 사업장 선택 모달 */}
       <Modal
@@ -309,7 +321,7 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
               <TouchableOpacity
                 key={wp.id}
                 style={S.$modalItem}
-                onPress={() => handleSelectWorkplace(wp.workplaceName)}
+                onPress={() => handleSelectWorkplace({ id: wp.id, name: wp.workplaceName })}
                 activeOpacity={0.7}
               >
                 <Text text={wp.workplaceName} style={S.$modalItemText} />

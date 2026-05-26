@@ -288,6 +288,8 @@ const ko: Translations = {
       cardText: "선택 시 게시와 동시에 선택한 사업장 구성원에게 푸시 알림이 전송됩니다.",
     },
     save: "저장",
+    titleEdit: "게시글 수정",
+    saveError: "저장에 실패했습니다. 다시 시도해주세요.",
   },
 
   safeBoardNotifyScreen: {
