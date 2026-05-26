@@ -99,6 +99,25 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
     [closeWorkplaceModal],
   )
 
+  // SafeBoardScreen 과 동일한 방식: boards에서 전체 사업장 파생 + workplaceStore 보완
+  const availableWorkplaces = useMemo(() => {
+    const seen = new Set<string>()
+    const result: SelectedWorkplace[] = []
+    safeBoardStore.boards.forEach((post) => {
+      if (post.workplaceId && post.workplaceName && !seen.has(post.workplaceId)) {
+        seen.add(post.workplaceId)
+        result.push({ id: post.workplaceId, name: post.workplaceName })
+      }
+    })
+    workplaceStore.workplaces.forEach((wp) => {
+      if (!seen.has(wp.id)) {
+        seen.add(wp.id)
+        result.push({ id: wp.id, name: wp.workplaceName })
+      }
+    })
+    return result
+  }, [safeBoardStore.boards.length, workplaceStore.workplaces.length])
+
   const isValid = useMemo(
     () => !!selectedWorkplace && !!title.trim() && !!content.trim(),
     [selectedWorkplace, title, content],
@@ -317,14 +336,14 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
               { paddingBottom: insets.bottom + 16, transform: [{ translateY: slideAnim }] },
             ]}
           >
-            {workplaceStore.workplaces.map((wp) => (
+            {availableWorkplaces.map((wp) => (
               <TouchableOpacity
                 key={wp.id}
                 style={S.$modalItem}
-                onPress={() => handleSelectWorkplace({ id: wp.id, name: wp.workplaceName })}
+                onPress={() => handleSelectWorkplace(wp)}
                 activeOpacity={0.7}
               >
-                <Text text={wp.workplaceName} style={S.$modalItemText} />
+                <Text text={wp.name} style={S.$modalItemText} />
               </TouchableOpacity>
             ))}
           </Animated.View>
