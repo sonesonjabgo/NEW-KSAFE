@@ -260,6 +260,8 @@ export interface UpdateCompanyPostPayload {
   title?: string
   description?: string
   sendNotification?: boolean
+  newUploadIds?: string[]
+  deleteAttachmentIds?: string[]
 }
 
 export async function createCompanyPost(payload: CreateCompanyPostPayload): Promise<{ id: string }> {
@@ -307,13 +309,17 @@ export async function updateCompanyPost(
     throw new Error("Missing authentication token for updating post")
   }
 
-  const response = await api.apisauce.patch(
-    `${COMPANY_POST_ENDPOINT}/${id}`,
-    payload,
-    {
-      headers: { Authorization: `Bearer ${accessToken}`, accept: "application/json" },
-    },
-  )
+  const body: Record<string, any> = {}
+  if (payload.title !== undefined) body.title = payload.title
+  if (payload.description !== undefined) body.description = payload.description
+  if (payload.sendNotification !== undefined) body.sendNotification = payload.sendNotification
+  if (payload.newUploadIds !== undefined) body.newUploadIds = payload.newUploadIds
+  if (payload.deleteAttachmentIds !== undefined)
+    body.deleteAttachmentIds = payload.deleteAttachmentIds
+
+  const response = await api.apisauce.patch(`${COMPANY_POST_ENDPOINT}/${id}`, body, {
+    headers: { Authorization: `Bearer ${accessToken}`, accept: "application/json" },
+  })
 
   if (!response.ok) {
     throw new Error(

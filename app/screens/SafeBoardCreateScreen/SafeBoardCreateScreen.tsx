@@ -60,6 +60,10 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
   const [sendPush, setSendPush] = useState(false)
   const [attachedFiles, setAttachedFiles] = useState<AttachedFile[]>([])
   const [isUploading, setIsUploading] = useState(false)
+  const [existingAttachments, setExistingAttachments] = useState<
+    Array<{ id: string; fileName: string; fileSize: number | null; mimeType: string | null }>
+  >([])
+  const [deleteAttachmentIds, setDeleteAttachmentIds] = useState<string[]>([])
   const [workplaceModalVisible, setWorkplaceModalVisible] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [toastVisible, setToastVisible] = useState(false)
@@ -78,6 +82,16 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
     if (post.workplaceId && post.workplaceName) {
       setSelectedWorkplace({ id: post.workplaceId, name: post.workplaceName })
     }
+    setExistingAttachments(
+      (post.attachments ?? []).map((a) => ({
+        id: a.id,
+        fileName: a.fileName,
+        fileSize: a.fileSize ?? null,
+        mimeType: a.mimeType ?? null,
+      })),
+    )
+    setDeleteAttachmentIds([])
+    setAttachedFiles([])
   }, [isEditMode, safeBoardStore.currentPost])
 
   const openWorkplaceModal = useCallback(() => {
@@ -152,6 +166,11 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
     setAttachedFiles((prev) => prev.filter((f) => f.uploadId !== uploadId))
   }, [])
 
+  const handleRemoveExisting = useCallback((attachmentId: string) => {
+    setExistingAttachments((prev) => prev.filter((a) => a.id !== attachmentId))
+    setDeleteAttachmentIds((prev) => [...prev, attachmentId])
+  }, [])
+
   const availableWorkplaces = workplaceStore.workplaces
 
   const isValid = useMemo(
@@ -168,6 +187,8 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
           title: title.trim(),
           description: content.trim(),
           sendNotification: sendPush,
+          newUploadIds: attachedFiles.length > 0 ? attachedFiles.map((f) => f.uploadId) : undefined,
+          deleteAttachmentIds: deleteAttachmentIds.length > 0 ? deleteAttachmentIds : undefined,
         })
         navigation.goBack()
       } else {
@@ -188,7 +209,19 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
     } finally {
       setIsSaving(false)
     }
-  }, [selectedWorkplace, title, content, sendPush, attachedFiles, isSaving, isEditMode, editId, safeBoardStore, navigation])
+  }, [
+    selectedWorkplace,
+    title,
+    content,
+    sendPush,
+    attachedFiles,
+    deleteAttachmentIds,
+    isSaving,
+    isEditMode,
+    editId,
+    safeBoardStore,
+    navigation,
+  ])
 
   return (
     <>
@@ -301,66 +334,80 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
               />
             </View>
 
-            {/* 첨부파일 (작성 모드만) */}
-            {!isEditMode && (
-              <View style={[S.$section, { gap: 20 }]}>
+            {/* 첨부파일 */}
+            <View style={[S.$section, { gap: 20 }]}>
+              <Text
+                text={translate("safeBoardCreateScreen:attachment.label")}
+                style={S.$sectionLabel}
+              />
+              <View style={S.$attachCard}>
+                <Paperclip size={28} color="#1062D8" strokeWidth={1.8} />
                 <Text
-                  text={translate("safeBoardCreateScreen:attachment.label")}
-                  style={S.$sectionLabel}
+                  text={translate("safeBoardCreateScreen:attachment.card1Text")}
+                  style={S.$attachCardText}
                 />
-                <View style={S.$attachCard}>
-                  <Paperclip size={28} color="#1062D8" strokeWidth={1.8} />
-                  <Text
-                    text={translate("safeBoardCreateScreen:attachment.card1Text")}
-                    style={S.$attachCardText}
-                  />
-                  <TouchableOpacity
-                    style={S.$attachUploadBtn}
-                    activeOpacity={0.7}
-                    onPress={handlePickFile}
-                    disabled={isUploading}
-                  >
-                    {isUploading ? (
-                      <ActivityIndicator size="small" color="#1062D8" />
-                    ) : (
-                      <Text
-                        text={translate("safeBoardCreateScreen:attachment.uploadButton")}
-                        style={S.$attachUploadBtnText}
-                      />
-                    )}
-                  </TouchableOpacity>
-                </View>
-
-                {attachedFiles.length === 0 ? (
-                  <View style={S.$attachCard2Empty}>
-                    <FileText size={18} color="#979797" strokeWidth={1.8} />
+                <TouchableOpacity
+                  style={S.$attachUploadBtn}
+                  activeOpacity={0.7}
+                  onPress={handlePickFile}
+                  disabled={isUploading}
+                >
+                  {isUploading ? (
+                    <ActivityIndicator size="small" color="#1062D8" />
+                  ) : (
                     <Text
-                      text={translate("safeBoardCreateScreen:attachment.noFile")}
-                      style={S.$attachCard2EmptyText}
+                      text={translate("safeBoardCreateScreen:attachment.uploadButton")}
+                      style={S.$attachUploadBtnText}
                     />
-                  </View>
-                ) : (
-                  <View style={S.$attachCard2FileList}>
-                    {attachedFiles.map((file) => (
-                      <View key={file.uploadId} style={S.$attachCard2FileRow}>
-                        <FileText size={18} color="#1062D8" strokeWidth={1.8} />
-                        <Text
-                          text={file.name}
-                          style={S.$attachCard2FileText}
-                          numberOfLines={1}
-                        />
-                        <TouchableOpacity
-                          activeOpacity={0.7}
-                          onPress={() => handleRemoveFile(file.uploadId)}
-                        >
-                          <X size={18} color="#979797" strokeWidth={2} />
-                        </TouchableOpacity>
-                      </View>
-                    ))}
-                  </View>
-                )}
+                  )}
+                </TouchableOpacity>
               </View>
-            )}
+
+              {existingAttachments.length === 0 && attachedFiles.length === 0 ? (
+                <View style={S.$attachCard2Empty}>
+                  <FileText size={18} color="#979797" strokeWidth={1.8} />
+                  <Text
+                    text={translate("safeBoardCreateScreen:attachment.noFile")}
+                    style={S.$attachCard2EmptyText}
+                  />
+                </View>
+              ) : (
+                <View style={S.$attachCard2FileList}>
+                  {existingAttachments.map((file) => (
+                    <View key={file.id} style={S.$attachCard2FileRow}>
+                      <FileText size={18} color="#1062D8" strokeWidth={1.8} />
+                      <Text
+                        text={file.fileName}
+                        style={S.$attachCard2FileText}
+                        numberOfLines={1}
+                      />
+                      <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={() => handleRemoveExisting(file.id)}
+                      >
+                        <X size={18} color="#979797" strokeWidth={2} />
+                      </TouchableOpacity>
+                    </View>
+                  ))}
+                  {attachedFiles.map((file) => (
+                    <View key={file.uploadId} style={S.$attachCard2FileRow}>
+                      <FileText size={18} color="#1062D8" strokeWidth={1.8} />
+                      <Text
+                        text={file.name}
+                        style={S.$attachCard2FileText}
+                        numberOfLines={1}
+                      />
+                      <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={() => handleRemoveFile(file.uploadId)}
+                      >
+                        <X size={18} color="#979797" strokeWidth={2} />
+                      </TouchableOpacity>
+                    </View>
+                  ))}
+                </View>
+              )}
+            </View>
 
             {/* 푸시 알림 함께 보내기 */}
             <View style={[S.$section, { borderBottomWidth: 0, gap: 20 }]}>
