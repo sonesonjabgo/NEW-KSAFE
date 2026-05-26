@@ -10,18 +10,15 @@ export type StatusType =
   | "archived"
 
 export interface SafeBoardItem {
-  id: number
+  id: string
   title: string
   scope: ScopeType
   isPinned: boolean
-  workplaceId: number
-  workplaceName: string
+  workplaceId: string | null
+  workplaceName: string | null
+  status: string | null
   createdAt: string
   updatedAt: string
-  status: StatusType
-  authorName: string
-  authorAffiliation: string
-  content: string
 }
 
 export interface SafeBoardScreenProps extends MainTabScreenProps<"SafeBoard"> {}

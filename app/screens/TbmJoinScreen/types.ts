@@ -1,5 +1,5 @@
 export interface TbmJoinItem {
-  id: number
+  id: string
   title: string
   authorName: string
   date: string

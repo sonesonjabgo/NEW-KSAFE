@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useRef, useState } from "react"
+import { useCallback, useMemo, useRef, useState } from "react"
 import {
   Animated,
   KeyboardAvoidingView,
@@ -13,6 +13,7 @@ import {
   View,
 } from "react-native"
 import { IconAlertCircle, IconBuilding, IconChevronDown } from "@tabler/icons-react-native"
+import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import HeaderBell from "@assets/icons/nav/header_bell.svg"
@@ -20,21 +21,16 @@ import HeaderBell from "@assets/icons/nav/header_bell.svg"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 
 import * as S from "./styles"
 import type { ImprovementProposalCreateScreenProps } from "./types"
 
-const MOCK_WORKPLACES = [
-  "서울 영등포구 레미안스 비즈타워",
-  "부산 해운대구 센텀시티",
-  "경기 화성시 동탄산업단지 A동",
-  "인천 연수구 송도동 건설현장",
-]
-
-export const ImprovementProposalCreateScreen: FC<ImprovementProposalCreateScreenProps> = ({
+export const ImprovementProposalCreateScreen = observer(function ImprovementProposalCreateScreen({
   navigation,
-}) => {
+}: ImprovementProposalCreateScreenProps) {
   const insets = useSafeAreaInsets()
+  const { workplaceStore } = useStores()
   const [workplace, setWorkplace] = useState("")
   const [content, setContent] = useState("")
   const [workplaceModalVisible, setWorkplaceModalVisible] = useState(false)
@@ -272,21 +268,24 @@ export const ImprovementProposalCreateScreen: FC<ImprovementProposalCreateScreen
             />
 
             {/* 사업장 목록 */}
-            {MOCK_WORKPLACES.map((wp) => (
+            {workplaceStore.workplaces.map((wp) => (
               <TouchableOpacity
-                key={wp}
-                style={[S.$modalItem, workplace === wp && S.$modalItemSelected]}
-                onPress={() => handleSelectWorkplace(wp)}
+                key={wp.id}
+                style={[S.$modalItem, workplace === wp.workplaceName && S.$modalItemSelected]}
+                onPress={() => handleSelectWorkplace(wp.workplaceName)}
                 activeOpacity={0.7}
               >
                 <IconBuilding
                   size={20}
-                  color={workplace === wp ? "#1062D8" : "#AAAAAA"}
+                  color={workplace === wp.workplaceName ? "#1062D8" : "#AAAAAA"}
                   strokeWidth={1.5}
                 />
                 <Text
-                  text={wp}
-                  style={[S.$modalItemText, workplace === wp && S.$modalItemTextSelected]}
+                  text={wp.workplaceName}
+                  style={[
+                    S.$modalItemText,
+                    workplace === wp.workplaceName && S.$modalItemTextSelected,
+                  ]}
                   numberOfLines={1}
                 />
               </TouchableOpacity>
@@ -296,4 +295,4 @@ export const ImprovementProposalCreateScreen: FC<ImprovementProposalCreateScreen
       </Modal>
     </>
   )
-}
+})

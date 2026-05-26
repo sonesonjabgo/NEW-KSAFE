@@ -51,6 +51,15 @@ const ja: Translations = {
       message: "For password recovery, please contact\nyour administrator.\nPhone: 062-383-0083",
       confirm: "OK",
     },
+    alert: {
+      invalidCredentials: "Invalid email or password.",
+      signInFailed: "Sign in failed. Please try again.",
+      fillFields: "Please fill in all required fields.",
+      passwordLength: "Password must be at least 6 characters.",
+      unauthorizedRole: "This account does not have access.",
+      deactivatedAccount: "This account has been deactivated. Please contact your administrator.",
+      profileLoadFailed: "Failed to load user information. Please try again.",
+    },
   },
   demoNavigator: {
     componentsTab: "コンポーネント",
@@ -140,6 +149,7 @@ const ja: Translations = {
       title: "Board",
       viewMore: "More",
       tabs: { all: "All", company: "Company", workplace: "Workplace" },
+      empty: "投稿がありません。",
     },
     edu: { title: "Education", description: "Description" },
     banner: { text: "Safe Environment" },
@@ -177,16 +187,106 @@ const ja: Translations = {
     title: "Board",
     alertButton: "Alert",
     workplaceLabel: "Workplace",
-    workplaceModal: { title: "Select Workplace" },
-    badge: { companyWide: "Company-wide", workplace: "Workplace", draft: "Draft", archived: "Archived" },
+    allWorkplaces: "All Workplaces",
+    workplaceModal: { title: "Select Workplace", allOption: "All" },
+    badge: {
+      companyWide: "Company-wide",
+      workplace: "Workplace",
+      draft: "Draft",
+      archived: "Archived",
+    },
     tabs: { all: "All", myPosts: "My" },
     empty: "Empty",
     write: "Write",
     draftSaved: "Post saved as draft.",
+    notifySent: "Notification sent.",
   },
-  safeBoardDetailScreen: { title: "Post Detail", authorLabel: "Author", editButton: "Edit", alertOn: "Alert ON", alertOff: "Alert OFF", publishButton: "Publish", deleteButton: "Delete", publishModal: { title: "Publish Post", message: "Are you sure you want to publish this post?", cancel: "Cancel", confirm: "Publish" }, deleteModal: { title: "Delete Post", message: "Are you sure you want to delete this post?", cancel: "Cancel", confirm: "Delete" } },
-  safeBoardNotifyScreen: { title: "Send Workplace Push Notification", guide: { title: "Writing Guide", description: "Select one or more workplaces you manage\nand write a notification to deliver\nto site members." }, workplace: { label: "Select Workplace", helper: "Sending to {{selected}} of {{total}} workplaces" }, notifyTitle: { label: "Notification Title", placeholder: "Enter a brief title.", helper: "Up to 50 characters." }, content: { label: "Push Notification Content", placeholder: "Enter the notification message to deliver to this workplace.", helper: "Up to 240 characters." }, send: "Send Notification", sendSuccess: "Notification sent." },
-  safeBoardCreateScreen: { title: "Write Post", guide: { title: "Writing Guide", description: "Please write clear and accurate content." }, workplace: { label: "Workplace", placeholder: "Select workplace", helper: "Select the workplace this post applies to." }, postTitle: { label: "Post Title", placeholder: "Enter post title (max 200 characters)", helper: "Enter a clear and descriptive title." }, content: { label: "Post Content", placeholder: "Enter post content (max 2000 characters)", helper: "Describe the safety issue in detail." }, attachment: { label: "Attachments", card1Text: "(Optional) You can upload\nfiles up to 50MB.", uploadButton: "Upload File", noFile: "No files selected." }, pushNotification: { label: "Send Push Notification", cardText: "When selected, a push notification will be sent to all members of the selected workplace upon posting." }, save: "Save" },
+  safeBoardDetailScreen: {
+    title: "Post Detail",
+    loadError: "Failed to load post.",
+    authorLabel: "Author",
+    editButton: "Edit",
+    alertOn: "Alert ON",
+    alertOff: "Alert OFF",
+    publishButton: "Publish",
+    deleteButton: "Delete",
+    publishModal: {
+      title: "Publish Post",
+      message: "Are you sure you want to publish this post?",
+      cancel: "Cancel",
+      confirm: "Publish",
+    },
+    deleteModal: {
+      title: "Delete Post",
+      message: "Are you sure you want to delete this post?",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
+    toasts: {
+      publishSuccess: "Post published successfully.",
+      publishError: "Failed to publish post.",
+      deleteSuccess: "Post deleted successfully.",
+      deleteError: "Failed to delete post.",
+    },
+  },
+  safeBoardNotifyScreen: {
+    title: "Send Workplace Push Notification",
+    guide: {
+      title: "Writing Guide",
+      description:
+        "Select one or more workplaces you manage\nand write a notification to deliver\nto site members.",
+    },
+    workplace: {
+      label: "Select Workplace",
+      helper: "Sending to {{selected}} of {{total}} workplaces",
+    },
+    notifyTitle: {
+      label: "Notification Title",
+      placeholder: "Enter a brief title.",
+      helper: "Up to 50 characters.",
+    },
+    content: {
+      label: "Push Notification Content",
+      placeholder: "Enter the notification message to deliver to this workplace.",
+      helper: "Up to 240 characters.",
+    },
+    send: "Send Notification",
+    sendSuccess: "Notification sent.",
+  },
+  safeBoardCreateScreen: {
+    title: "Write Post",
+    guide: { title: "Writing Guide", description: "Please write clear and accurate content." },
+    workplace: {
+      label: "Workplace",
+      placeholder: "Select workplace",
+      helper: "Select the workplace this post applies to.",
+    },
+    postTitle: {
+      label: "Post Title",
+      placeholder: "Enter post title (max 200 characters)",
+      helper: "Enter a clear and descriptive title.",
+    },
+    content: {
+      label: "Post Content",
+      placeholder: "Enter post content (max 2000 characters)",
+      helper: "Describe the safety issue in detail.",
+    },
+    attachment: {
+      label: "Attachments",
+      card1Text: "(Optional) You can upload\nfiles up to 50MB.",
+      uploadButton: "Upload File",
+      noFile: "No files selected.",
+      uploadError: "File upload failed. Please try again.",
+    },
+    pushNotification: {
+      label: "Send Push Notification",
+      cardText:
+        "When selected, a push notification will be sent to all members of the selected workplace upon posting.",
+    },
+    save: "Save",
+    titleEdit: "Edit Post",
+    saveError: "Failed to save post. Please try again.",
+  },
 
   safeHealthScreen: {
     title: "Health",
@@ -274,8 +374,9 @@ const ja: Translations = {
 
   myPageScreen: {
     title: "マイページ",
+    orgName: "KS産業安全協会",
     workplace: {
-      label: "広教タワークレーン作業場",
+      label: "作業場",
     },
     permissions: {
       sectionTitle: "アプリ権限設定",
@@ -735,6 +836,8 @@ const ja: Translations = {
       helper: "Description is optional. If provided, up to 10,000 characters can be entered.",
     },
     submit: "Register",
+    submitSuccess: "Material registered successfully.",
+    submitError: "Failed to register material. Please try again.",
   },
 
   educationMaterialDetailScreen: {
@@ -758,6 +861,7 @@ const ja: Translations = {
     confirm: "Complete ({{count}})",
     confirmNone: "Complete",
     emptyText: "No educational materials available.",
+    categoryAll: "All",
   },
 
   improvementProposalDetailScreen: {
@@ -886,6 +990,7 @@ const ja: Translations = {
 
   tbmReportInquiryScreen: {
     title: "TBM報告書照会",
+    untitled: "(No title)",
     tabs: {
       all: "All",
       requested: "Requested",
@@ -1030,6 +1135,8 @@ const ja: Translations = {
     cautionResponse: "Caution Response",
     unit: "case(s)",
     workplaceLabel: "Workplace",
+    statusNormal: "Normal",
+    statusAbnormal: "Caution",
   },
 
   tbmParticipationHistoryDetailScreen: {

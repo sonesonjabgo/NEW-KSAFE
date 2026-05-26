@@ -126,55 +126,62 @@ export const HazardRiskScreen: FC<HazardRiskScreenProps> = ({ navigation }) => {
 
   return (
     <>
-    <StackScreen
-      title={translate("hazardRiskScreen:title")}
-      onBack={() => navigation.goBack()}
-      contentBg="#FFFFFF"
-      squareTop
-    >
-      {/* 탭 바 */}
-      <View style={S.$tabBarWrapper}>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={S.$tabScrollView}
-          contentContainerStyle={S.$tabBarContent}
-          bounces={false}
-        >
-          {TABS.map((tab) => (
-            <TouchableOpacity
-              key={tab.key}
-              style={[S.$tab, activeTab === tab.key && S.$activeTab]}
-              activeOpacity={0.7}
-              onPress={() => setActiveTab(tab.key)}
-            >
-              <Text
-                text={tab.label}
-                style={[S.$tabText, activeTab === tab.key && S.$activeTabText]}
-              />
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
+      <StackScreen
+        title={translate("hazardRiskScreen:title")}
+        onBack={() => navigation.goBack()}
+        contentBg="#FFFFFF"
+        squareTop
+      >
+        {/* 탭 바 */}
+        <View style={S.$tabBarWrapper}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={S.$tabScrollView}
+            contentContainerStyle={S.$tabBarContent}
+            bounces={false}
+          >
+            {TABS.map((tab) => (
+              <TouchableOpacity
+                key={tab.key}
+                style={[S.$tab, activeTab === tab.key && S.$activeTab]}
+                activeOpacity={0.7}
+                onPress={() => setActiveTab(tab.key)}
+              >
+                <Text
+                  text={tab.label}
+                  style={[S.$tabText, activeTab === tab.key && S.$activeTabText]}
+                />
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
 
-      {/* 카드 리스트 */}
-      <FlatList<HazardItem>
-        data={filteredData}
-        keyExtractor={(item) => String(item.id)}
-        ListHeaderComponent={<SummarySection myCount={myCount} completedCount={completedCount} />}
-        contentContainerStyle={[S.$listContent, filteredData.length === 0 && S.$flex1]}
-        renderItem={({ item }) => (
-          <HazardCard item={item} onPress={() => navigation.navigate("HazardRiskDetail", { id: item.id })} />
-        )}
-        ListEmptyComponent={<EmptyState tab={activeTab} />}
-        showsVerticalScrollIndicator={false}
-      />
-    </StackScreen>
+        {/* 카드 리스트 */}
+        <FlatList<HazardItem>
+          data={filteredData}
+          keyExtractor={(item) => String(item.id)}
+          ListHeaderComponent={<SummarySection myCount={myCount} completedCount={completedCount} />}
+          contentContainerStyle={[S.$listContent, filteredData.length === 0 && S.$flex1]}
+          renderItem={({ item }) => (
+            <HazardCard
+              item={item}
+              onPress={() => navigation.navigate("HazardRiskDetail", { id: item.id })}
+            />
+          )}
+          ListEmptyComponent={<EmptyState tab={activeTab} />}
+          showsVerticalScrollIndicator={false}
+        />
+      </StackScreen>
 
-    <TouchableOpacity style={S.$fab} activeOpacity={0.8} onPress={() => navigation.navigate("HazardRiskCreate")}>
-      <PencilLine size={20} color="#FFFFFF" strokeWidth={1.8} />
-      <Text text={translate("hazardRiskScreen:fab")} style={S.$fabText} />
-    </TouchableOpacity>
+      <TouchableOpacity
+        style={S.$fab}
+        activeOpacity={0.8}
+        onPress={() => navigation.navigate("HazardRiskCreate")}
+      >
+        <PencilLine size={20} color="#FFFFFF" strokeWidth={1.8} />
+        <Text text={translate("hazardRiskScreen:fab")} style={S.$fabText} />
+      </TouchableOpacity>
     </>
   )
 }

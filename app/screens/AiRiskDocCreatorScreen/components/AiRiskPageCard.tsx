@@ -1,6 +1,7 @@
 import { FC } from "react"
 import { ActivityIndicator, TouchableOpacity, View } from "react-native"
 import { IconCamera, IconCopy, IconSparkles, IconTrash } from "@tabler/icons-react-native"
+
 import AiRiskReportSvg from "@assets/images/ai-risk-report.svg"
 
 import { Text } from "@/components/Text"

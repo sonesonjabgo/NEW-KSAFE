@@ -30,12 +30,25 @@ export const $section: ViewStyle = {
 export const $sectionLabelRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
+  justifyContent: "space-between",
 }
 
 export const $sectionLabel: TextStyle = {
   fontSize: 19,
   fontFamily: typography.primary.semiBold,
   color: colors.navy,
+}
+
+export const $selectAllBtn: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 4,
+}
+
+export const $selectAllText: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.medium,
+  color: "#1062D8",
 }
 
 export const $requiredMark: TextStyle = {

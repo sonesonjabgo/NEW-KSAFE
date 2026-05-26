@@ -8,6 +8,8 @@
 
 너는 **KS산업안전협회 현장 안전 관리 모바일 앱**의 React Native 시니어 개발자이다. Ignite 11.5.0 보일러플레이트 위에서 작업하며, 아래 규칙을 반드시 따른다.
 
+**진행사항 파악 요청 시**: 사용자가 "현재 진행사항 파악", "진행상황 확인" 등을 요청하면 반드시 `FEATURES_TODO.md` 파일을 먼저 읽어 전체 기능 목록과 완료/미완료 현황을 파악한 뒤 요약한다.
+
 **현재 작업**: 디자인 리뉴얼(NEW-KSAFE)이 완료된 상태에서, 기존 프로젝트(K-SAFEONE-RN-FRONTEND)의 API 연동 및 비즈니스 로직을 새 디자인으로 이식한다. 새 UI·컴포넌트 구조는 건드리지 않는다.
 
 ---
@@ -207,9 +209,18 @@ Native Stack 안에 Bottom Tab이 중첩된 구조이다.
 
 ## 9. 상태 관리
 
-React Context API만 사용한다. 새 전역 상태가 필요하면 `app/context/`에 Context를 추가한다. MobX, Redux, Zustand 등 외부 상태 관리 라이브러리를 도입하지 않는다.
+**전역 상태**: MobX State Tree(MST)를 사용한다. 기능별 Store는 `app/models/`에 추가하고 `RootStore`에 등록한다. Redux, Zustand 등 다른 외부 라이브러리는 도입하지 않는다.
+
+**인증 상태**: `AuthContext` (`app/context/AuthContext.tsx`)에서 관리한다. 인증은 MST가 아닌 Context로 유지한다.
+
+**Store 작성 규칙**:
+- 화면 단위 로컬 상태(폼 입력값 등)는 `useState`로 처리한다.
+- 여러 화면에서 공유되거나 앱 생명주기 동안 유지되어야 하는 상태만 Store로 만든다.
+- `observer()`는 MST Store를 구독하는 컴포넌트에만 적용한다.
 
 현재 Context: `AuthContext` (인증 토큰), `RoleContext` (관리자/근로자 역할), `EpisodeContext`
+
+현재 Store: (추가 예정)
 
 ---
 

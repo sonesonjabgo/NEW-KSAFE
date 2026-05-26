@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { Linking, ScrollView, TouchableOpacity, View, ViewStyle, TextStyle } from "react-native"
 import {
   IconBell,
@@ -9,6 +9,7 @@ import {
   IconMicrophone,
   IconPhoto,
 } from "@tabler/icons-react-native"
+import { observer } from "mobx-react-lite"
 
 import { ConfirmModal } from "@/components/ConfirmModal"
 import { PermissionItem } from "@/components/MyPage/PermissionItem"
@@ -18,27 +19,33 @@ import { Text } from "@/components/Text"
 import { useAuth } from "@/context/AuthContext"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
 const ICON_COLOR = "#000000"
 
-const MOCK_USER = {
-  admin: { userName: "김관리", email: "admin-5@example.com" },
-  worker: { userName: "김근로", email: "worker-1@example.com" },
-} as const
-
-const ORG_NAME = "KS산업안전협회"
-
-export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) => {
-  const { authEmail, logout } = useAuth()
+export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = observer(function MyPageScreen({
+  navigation,
+}) {
+  const { user, profile, signOut } = useAuth()
+  const displayName = profile?.username?.trim() || user?.name?.trim() || ""
   const { role } = useRole()
+  const { workplaceStore } = useStores()
+  const orgName = workplaceStore.companyName ?? translate("myPageScreen:orgName")
+  const workplaceName =
+    workplaceStore.primaryWorkplace?.workplaceName ?? translate("myPageScreen:workplace.label")
   const [notificationEnabled, setNotificationEnabled] = useState(true)
   const [logoutModalVisible, setLogoutModalVisible] = useState(false)
 
   const isWorker = role === "worker"
-  const mockUser = MOCK_USER[role]
+
+  useEffect(() => {
+    if (!workplaceStore.hasWorkplaces && workplaceStore.status !== "pending") {
+      void workplaceStore.fetchWorkplaces()
+    }
+  }, [workplaceStore])
 
   const handleOpenSettings = () => {
     Linking.openSettings()
@@ -46,7 +53,7 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
 
   const handleLogoutConfirm = () => {
     setLogoutModalVisible(false)
-    logout()
+    void signOut()
     navigation.reset({ index: 0, routes: [{ name: "Login" }] })
   }
 
@@ -63,12 +70,12 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
           </View>
 
           <ProfileCard
-            orgName={ORG_NAME}
-            userName={mockUser.userName}
-            email={authEmail || mockUser.email}
+            orgName={orgName}
+            userName={displayName}
+            email={profile?.email ?? user?.email ?? ""}
           />
 
-          {isWorker && <WorkplaceChip name={translate("myPageScreen:workplace.label")} />}
+          {isWorker && <WorkplaceChip name={workplaceName} />}
         </View>
 
         <ScrollView
@@ -145,7 +152,7 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
       />
     </>
   )
-}
+})
 
 const $root: ViewStyle = {
   flex: 1,

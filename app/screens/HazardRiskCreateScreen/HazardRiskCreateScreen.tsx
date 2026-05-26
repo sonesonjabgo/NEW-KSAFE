@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo, useRef, useState } from "react"
+import { useCallback, useMemo, useRef, useState } from "react"
 import {
   Animated,
   Image,
@@ -13,30 +13,28 @@ import {
 } from "react-native"
 import { IconAlertCircle, IconChevronDown } from "@tabler/icons-react-native"
 import { Building } from "lucide-react-native"
+import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
+import HeaderBell from "@assets/icons/nav/header_bell.svg"
 import Pic1 from "@assets/icons/pic1.svg"
 import Pic2 from "@assets/icons/pic2.svg"
-import HeaderBell from "@assets/icons/nav/header_bell.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 import { AppStackScreenProps } from "@/navigators/navigationTypes"
 
 import * as S from "./styles"
 
 type HazardRiskCreateScreenProps = AppStackScreenProps<"HazardRiskCreate">
 
-const MOCK_WORKPLACES = [
-  "서울 영등포구 레미안스 비즈타워",
-  "부산 해운대구 센텀시티",
-  "경기 화성시 동탄산업단지 A동",
-  "인천 연수구 송도동 건설현장",
-]
-
-export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ navigation }) => {
+export const HazardRiskCreateScreen = observer(function HazardRiskCreateScreen({
+  navigation,
+}: HazardRiskCreateScreenProps) {
   const insets = useSafeAreaInsets()
+  const { workplaceStore } = useStores()
 
   const [workplace, setWorkplace] = useState("")
   const [location, setLocation] = useState("")
@@ -54,8 +52,8 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
   }, [slideAnim])
 
   const closeWorkplaceModal = useCallback(() => {
-    Animated.timing(slideAnim, { toValue: 300, duration: 200, useNativeDriver: true }).start(
-      () => setWorkplaceModalVisible(false),
+    Animated.timing(slideAnim, { toValue: 300, duration: 200, useNativeDriver: true }).start(() =>
+      setWorkplaceModalVisible(false),
     )
   }, [slideAnim])
 
@@ -128,7 +126,11 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
                 text={translate("hazardRiskCreateScreen:workplace.label")}
                 style={S.$sectionLabel}
               />
-              <TouchableOpacity style={S.$inputRow} activeOpacity={0.7} onPress={openWorkplaceModal}>
+              <TouchableOpacity
+                style={S.$inputRow}
+                activeOpacity={0.7}
+                onPress={openWorkplaceModal}
+              >
                 <Text
                   text={workplace || translate("hazardRiskCreateScreen:workplace.placeholder")}
                   style={[S.$inputText, !workplace && S.$inputPlaceholder]}
@@ -270,18 +272,22 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
               text={translate("hazardRiskCreateScreen:workplace.modalTitle")}
               style={S.$modalTitle}
             />
-            {MOCK_WORKPLACES.map((wp) => {
-              const isSelected = workplace === wp
+            {workplaceStore.workplaces.map((wp) => {
+              const isSelected = workplace === wp.workplaceName
               return (
                 <TouchableOpacity
-                  key={wp}
+                  key={wp.id}
                   style={[S.$workplaceOption, isSelected && S.$workplaceOptionSelected]}
                   activeOpacity={0.7}
-                  onPress={() => handleSelectWorkplace(wp)}
+                  onPress={() => handleSelectWorkplace(wp.workplaceName)}
                 >
-                  <Building size={20} color={isSelected ? "#1062D8" : "#979797"} strokeWidth={1.8} />
+                  <Building
+                    size={20}
+                    color={isSelected ? "#1062D8" : "#979797"}
+                    strokeWidth={1.8}
+                  />
                   <Text
-                    text={wp}
+                    text={wp.workplaceName}
                     style={[S.$workplaceOptionText, isSelected && S.$workplaceOptionTextSelected]}
                     numberOfLines={2}
                   />
@@ -309,7 +315,10 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
             <TouchableOpacity
               style={S.$workplaceOption}
               activeOpacity={0.7}
-              onPress={() => { console.log("카메라"); closePhotoModal() }}
+              onPress={() => {
+                console.log("카메라")
+                closePhotoModal()
+              }}
             >
               <Text
                 text={translate("hazardRiskCreateScreen:sitePhotos.camera")}
@@ -319,7 +328,10 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
             <TouchableOpacity
               style={S.$workplaceOption}
               activeOpacity={0.7}
-              onPress={() => { console.log("앨범"); closePhotoModal() }}
+              onPress={() => {
+                console.log("앨범")
+                closePhotoModal()
+              }}
             >
               <Text
                 text={translate("hazardRiskCreateScreen:sitePhotos.album")}
@@ -331,4 +343,4 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
       </Modal>
     </>
   )
-}
+})

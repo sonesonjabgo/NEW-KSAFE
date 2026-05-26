@@ -1,189 +1,407 @@
-import { FC, useState } from "react"
-import { ScrollView, TouchableOpacity, View, ViewStyle, TextStyle } from "react-native"
-import { Bell, Send, Trash2, User } from "lucide-react-native"
+import { FC, useCallback, useEffect, useState } from "react"
+import {
+  ActivityIndicator,
+  Linking,
+  ScrollView,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+  TextStyle,
+} from "react-native"
+import {
+  BellOff,
+  BellRing,
+  CheckCircle,
+  Download,
+  FileText,
+  Send,
+  Trash2,
+  XCircle,
+} from "lucide-react-native"
+import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { Toast } from "@/components/Toast"
+import { useAuth } from "@/context/AuthContext"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
-import { SafeBoardBadge } from "@/screens/SafeBoardScreen/components/SafeBoardBadge"
-import { mockSafeBoardData, mockMyPosts } from "@/screens/SafeBoardScreen/mock/mockSafeBoardData"
+import {
+  SafeBoardBadge,
+  SafeBoardBadgeType,
+} from "@/screens/SafeBoardScreen/components/SafeBoardBadge"
 import { typography } from "@/theme/typography"
 
 export interface SafeBoardDetailScreenProps extends AppStackScreenProps<"SafeBoardDetail"> {}
 
-const allMockItems = [...mockSafeBoardData, ...mockMyPosts]
+function formatPostDate(dateStr: string): string {
+  const d = new Date(dateStr)
+  if (isNaN(d.getTime())) return dateStr
+  const yyyy = d.getFullYear()
+  const mm = String(d.getMonth() + 1).padStart(2, "0")
+  const dd = String(d.getDate()).padStart(2, "0")
+  return `${yyyy}.${mm}.${dd}`
+}
 
-export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigation, route }) => {
-  const { id } = route.params
-  const { role } = useRole()
-  const insets = useSafeAreaInsets()
-  const [alertOn, setAlertOn] = useState(false)
-  const [publishModalVisible, setPublishModalVisible] = useState(false)
-  const [deleteModalVisible, setDeleteModalVisible] = useState(false)
+function formatFileSize(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`
+  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
+}
 
-  const item = allMockItems.find((p) => p.id === id)
-  if (!item) return null
+function formatAttachmentMeta(
+  fileName: string,
+  fileSize: number | null,
+  mimeType: string | null,
+): string {
+  const dotIdx = fileName.lastIndexOf(".")
+  const ext =
+    dotIdx > 0
+      ? fileName.slice(dotIdx + 1).toUpperCase()
+      : (mimeType?.split("/").pop()?.toUpperCase() ?? "")
+  const size = fileSize != null && fileSize > 0 ? formatFileSize(fileSize) : ""
+  return [ext, size].filter(Boolean).join(" · ")
+}
 
-  const isAdmin = role === "admin"
-  const isMyPost = mockMyPosts.some((p) => p.id === id)
-  const canEdit = isAdmin && isMyPost
+export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
+  function SafeBoardDetailScreen({ navigation, route }) {
+    const { id } = route.params
+    const { role } = useRole()
+    const { user } = useAuth()
+    const { safeBoardStore } = useStores()
+    const insets = useSafeAreaInsets()
 
-  const showStatusBadge = item.status === "draft" || item.status === "archived"
+    const [detailLoading, setDetailLoading] = useState(true)
+    const [detailError, setDetailError] = useState(false)
+    const [publishModalVisible, setPublishModalVisible] = useState(false)
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false)
+    const [isPublishing, setIsPublishing] = useState(false)
+    const [isDeleting, setIsDeleting] = useState(false)
+    const [toastVisible, setToastVisible] = useState(false)
+    const [toastType, setToastType] = useState<"success" | "error">("success")
+    const [toastMessage, setToastMessage] = useState("")
 
-  return (
-    <>
-      <StackScreen
-        title={translate("safeBoardDetailScreen:title")}
-        onBack={() => navigation.goBack()}
-        contentBg="#F9FAFE"
-        squareTop
-        rightSlot={
-          canEdit ? (
-            <TouchableOpacity
-              onPress={() => navigation.navigate("SafeBoardCreate")}
-              activeOpacity={0.7}
-            >
-              <Text
-                text={translate("safeBoardDetailScreen:editButton")}
-                style={$editButtonText}
-              />
-            </TouchableOpacity>
-          ) : undefined
+    const currentPost = safeBoardStore.currentPost
+
+    const isAdmin = role === "admin"
+    const isCreator = !!user?.id && user.id === currentPost?.createdBy
+    const canEdit = isAdmin && isCreator && currentPost?.status === "draft"
+
+    useEffect(() => {
+      setDetailLoading(true)
+      setDetailError(false)
+
+      const loadDetail = async () => {
+        try {
+          if (isAdmin && safeBoardStore.myPosts.some((p) => p.id === id)) {
+            await safeBoardStore.fetchMyPostDetail(id)
+          } else {
+            await safeBoardStore.fetchPostDetail(id)
+          }
+        } catch {
+          setDetailError(true)
+        } finally {
+          setDetailLoading(false)
         }
-      >
-        <View style={$outerContainer}>
-          {/* 게시글 정보 카드 */}
-          <View style={$card}>
-            <View style={$badgeDateRow}>
-              <View style={$badgeRow}>
-                <SafeBoardBadge type={item.scope} />
-                {showStatusBadge && (
-                  <SafeBoardBadge type={item.status === "draft" ? "draft" : "archived"} />
-                )}
-              </View>
-              <Text text={item.createdAt} style={$dateText} />
-            </View>
+      }
 
-            <Text text={item.title} style={$titleText} />
+      void loadDetail()
 
-            {canEdit && (
+      return () => {
+        safeBoardStore.clearCurrentPost()
+      }
+    }, [id])
+
+    const showToast = useCallback((type: "success" | "error", message: string) => {
+      setToastType(type)
+      setToastMessage(message)
+      setToastVisible(true)
+    }, [])
+
+    const handlePublish = useCallback(async () => {
+      setPublishModalVisible(false)
+      setIsPublishing(true)
+      try {
+        await safeBoardStore.publishPost(id)
+        showToast("success", translate("safeBoardDetailScreen:toasts.publishSuccess"))
+      } catch {
+        showToast("error", translate("safeBoardDetailScreen:toasts.publishError"))
+      } finally {
+        setIsPublishing(false)
+      }
+    }, [id, safeBoardStore, showToast])
+
+    const handleDelete = useCallback(async () => {
+      setDeleteModalVisible(false)
+      setIsDeleting(true)
+      try {
+        await safeBoardStore.deletePost(id)
+        navigation.goBack()
+      } catch {
+        setIsDeleting(false)
+        showToast("error", translate("safeBoardDetailScreen:toasts.deleteError"))
+      }
+    }, [id, safeBoardStore, navigation, showToast])
+
+    const showStatusBadge = currentPost?.status === "draft" || currentPost?.status === "archived"
+
+    return (
+      <>
+        <StackScreen
+          title={translate("safeBoardDetailScreen:title")}
+          onBack={() => navigation.goBack()}
+          contentBg="#F9FAFE"
+          squareTop
+          rightSlot={
+            canEdit ? (
               <TouchableOpacity
-                style={$alertRow}
+                onPress={() => navigation.navigate("SafeBoardCreate", { id })}
                 activeOpacity={0.7}
-                onPress={() => setAlertOn((v) => !v)}
               >
-                <Bell size={17} color={alertOn ? "#1062D8" : "#56524F"} strokeWidth={2} />
                 <Text
-                  text={
-                    alertOn
-                      ? translate("safeBoardDetailScreen:alertOn")
-                      : translate("safeBoardDetailScreen:alertOff")
-                  }
-                  style={$alertText}
+                  text={translate("safeBoardDetailScreen:editButton")}
+                  style={$editButtonText}
                 />
               </TouchableOpacity>
-            )}
-
-            <View style={$authorRow}>
-              <View style={$authorIconWrap}>
-                <User size={14} color="#606679" strokeWidth={2} />
-              </View>
-              <Text
-                text={`${translate("safeBoardDetailScreen:authorLabel")} ${item.authorName}`}
-                style={$authorText}
-              />
+            ) : undefined
+          }
+        >
+          {detailLoading ? (
+            <View style={$loadingContainer}>
+              <ActivityIndicator size="large" color="#1062D8" />
             </View>
+          ) : detailError || !currentPost ? (
+            <View style={$loadingContainer}>
+              <Text text={translate("safeBoardDetailScreen:loadError")} style={$errorText} />
+            </View>
+          ) : (
+            <ScrollView
+              style={$outerScrollView}
+              contentContainerStyle={$outerContainer}
+              showsVerticalScrollIndicator={false}
+            >
+              <View style={$card}>
+                {/* 뱃지 + 날짜 */}
+                <View style={$badgeDateRow}>
+                  <View style={$badgeRow}>
+                    <SafeBoardBadge type={currentPost.scope as SafeBoardBadgeType} />
+                    {showStatusBadge && (
+                      <SafeBoardBadge
+                        type={currentPost.status === "draft" ? "draft" : "archived"}
+                      />
+                    )}
+                  </View>
+                  <Text text={formatPostDate(currentPost.createdAt)} style={$dateText} />
+                </View>
 
-            <View style={$divider} />
+                {/* 제목 */}
+                <Text text={currentPost.title} style={$titleText} />
 
-            <Text text={item.authorAffiliation} style={$affiliationText} />
-          </View>
+                {/* 알람 여부 (관리자 본인 게시글만 표시) */}
+                {canEdit && (
+                  <View style={$alertRow}>
+                    {currentPost.sendNotification ? (
+                      <BellRing size={15} color="#1062D8" strokeWidth={2} />
+                    ) : (
+                      <BellOff size={15} color="#979797" strokeWidth={2} />
+                    )}
+                    <Text
+                      text={
+                        currentPost.sendNotification
+                          ? translate("safeBoardDetailScreen:alertOn")
+                          : translate("safeBoardDetailScreen:alertOff")
+                      }
+                      style={[$alertText, currentPost.sendNotification && $alertTextActive]}
+                    />
+                  </View>
+                )}
 
-          {/* 게시글 내용 카드 — 나머지 공간 전체 */}
-          <View style={$contentCard}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <Text text={item.content} style={$contentText} />
+                {/* 구분선 */}
+                <View style={$divider} />
+
+                {/* 작성자 아바타 + 이름 | 사업장명 */}
+                <View style={$authorFooterRow}>
+                  <View style={$authorLeft}>
+                    <View style={$avatarCircle}>
+                      <Text
+                        text={(currentPost.createdByUserName ?? "?").trim()[0] ?? "?"}
+                        style={$avatarText}
+                      />
+                    </View>
+                    <Text text={currentPost.createdByUserName ?? ""} style={$authorText} />
+                  </View>
+                  {!!currentPost.workplaceName && (
+                    <Text
+                      text={currentPost.workplaceName}
+                      style={$workplaceText}
+                      numberOfLines={1}
+                    />
+                  )}
+                </View>
+              </View>
+
+              <View style={$contentCard}>
+                <Text text={currentPost.description ?? ""} style={$contentText} />
+              </View>
+
+              {currentPost.attachments.length > 0 && (
+                <View style={$attachmentCard}>
+                  {currentPost.attachments.map((attachment, index) => (
+                    <View key={attachment.id}>
+                      <TouchableOpacity
+                        style={$attachmentRow}
+                        activeOpacity={0.7}
+                        disabled={!attachment.fileUrl}
+                        onPress={() => {
+                          if (attachment.fileUrl) {
+                            void Linking.openURL(attachment.fileUrl)
+                          }
+                        }}
+                      >
+                        <View style={$attachmentIconWrap}>
+                          <FileText size={20} color="#1062D8" strokeWidth={1.8} />
+                        </View>
+                        <View style={$attachmentInfo}>
+                          <Text
+                            text={attachment.fileName}
+                            style={$attachmentName}
+                            numberOfLines={1}
+                          />
+                          <Text
+                            text={formatAttachmentMeta(
+                              attachment.fileName,
+                              attachment.fileSize,
+                              attachment.mimeType,
+                            )}
+                            style={$attachmentMeta}
+                          />
+                        </View>
+                        <Download
+                          size={18}
+                          color={attachment.fileUrl ? "#1062D8" : "#CCCCCC"}
+                          strokeWidth={1.8}
+                        />
+                      </TouchableOpacity>
+                      {index < currentPost.attachments.length - 1 && (
+                        <View style={$attachmentRowDivider} />
+                      )}
+                    </View>
+                  ))}
+                </View>
+              )}
             </ScrollView>
-          </View>
-        </View>
+          )}
 
-        {canEdit && (
-          <View style={[$actionBar, { paddingBottom: insets.bottom + 12 }]}>
-            <TouchableOpacity
-              style={[$actionBtn, $publishBtn]}
-              activeOpacity={0.8}
-              onPress={() => setPublishModalVisible(true)}
-            >
-              <Send size={16} color="#FFFFFF" strokeWidth={2} />
-              <Text
-                text={translate("safeBoardDetailScreen:publishButton")}
-                style={$actionBtnText}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[$actionBtn, $deleteBtn]}
-              activeOpacity={0.8}
-              onPress={() => setDeleteModalVisible(true)}
-            >
-              <Trash2 size={16} color="#FFFFFF" strokeWidth={2} />
-              <Text
-                text={translate("safeBoardDetailScreen:deleteButton")}
-                style={$actionBtnText}
-              />
-            </TouchableOpacity>
-          </View>
-        )}
-      </StackScreen>
+          {canEdit && !detailLoading && currentPost && (
+            <View style={[$actionBar, { paddingBottom: insets.bottom + 12 }]}>
+              {currentPost.status === "draft" && (
+                <TouchableOpacity
+                  style={[$actionBtn, $publishBtn, (isPublishing || isDeleting) && $disabledBtn]}
+                  activeOpacity={0.8}
+                  disabled={isPublishing || isDeleting}
+                  onPress={() => setPublishModalVisible(true)}
+                >
+                  {isPublishing ? (
+                    <ActivityIndicator size="small" color="#FFFFFF" />
+                  ) : (
+                    <Send size={16} color="#FFFFFF" strokeWidth={2} />
+                  )}
+                  <Text
+                    text={translate("safeBoardDetailScreen:publishButton")}
+                    style={$actionBtnText}
+                  />
+                </TouchableOpacity>
+              )}
+              {currentPost.status === "draft" && (
+                <TouchableOpacity
+                  style={[$actionBtn, $deleteBtn, (isPublishing || isDeleting) && $disabledBtn]}
+                  activeOpacity={0.8}
+                  disabled={isPublishing || isDeleting}
+                  onPress={() => setDeleteModalVisible(true)}
+                >
+                  {isDeleting ? (
+                    <ActivityIndicator size="small" color="#FFFFFF" />
+                  ) : (
+                    <Trash2 size={16} color="#FFFFFF" strokeWidth={2} />
+                  )}
+                  <Text
+                    text={translate("safeBoardDetailScreen:deleteButton")}
+                    style={$actionBtnText}
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
+          )}
+        </StackScreen>
 
-      <ConfirmModal
-        visible={publishModalVisible}
-        icon={
-          <View style={$publishIconCircle}>
-            <Send size={26} color="#1062D8" strokeWidth={2} />
-          </View>
-        }
-        title={translate("safeBoardDetailScreen:publishModal.title")}
-        message={translate("safeBoardDetailScreen:publishModal.message")}
-        cancelLabel={translate("safeBoardDetailScreen:publishModal.cancel")}
-        confirmLabel={translate("safeBoardDetailScreen:publishModal.confirm")}
-        confirmBgColor="#1062D8"
-        onCancel={() => setPublishModalVisible(false)}
-        onConfirm={() => {
-          setPublishModalVisible(false)
-          console.log("publish", id)
-        }}
-      />
+        <ConfirmModal
+          visible={publishModalVisible}
+          icon={
+            <View style={$publishIconCircle}>
+              <Send size={26} color="#1062D8" strokeWidth={2} />
+            </View>
+          }
+          title={translate("safeBoardDetailScreen:publishModal.title")}
+          message={translate("safeBoardDetailScreen:publishModal.message")}
+          cancelLabel={translate("safeBoardDetailScreen:publishModal.cancel")}
+          confirmLabel={translate("safeBoardDetailScreen:publishModal.confirm")}
+          confirmBgColor="#1062D8"
+          onCancel={() => setPublishModalVisible(false)}
+          onConfirm={handlePublish}
+        />
 
-      <ConfirmModal
-        visible={deleteModalVisible}
-        icon={
-          <View style={$deleteIconCircle}>
-            <Trash2 size={26} color="#E42E2B" strokeWidth={2} />
-          </View>
-        }
-        title={translate("safeBoardDetailScreen:deleteModal.title")}
-        message={translate("safeBoardDetailScreen:deleteModal.message")}
-        cancelLabel={translate("safeBoardDetailScreen:deleteModal.cancel")}
-        confirmLabel={translate("safeBoardDetailScreen:deleteModal.confirm")}
-        confirmBgColor="#E42E2B"
-        onCancel={() => setDeleteModalVisible(false)}
-        onConfirm={() => {
-          setDeleteModalVisible(false)
-          console.log("delete", id)
-        }}
-      />
-    </>
-  )
+        <ConfirmModal
+          visible={deleteModalVisible}
+          icon={
+            <View style={$deleteIconCircle}>
+              <Trash2 size={26} color="#E42E2B" strokeWidth={2} />
+            </View>
+          }
+          title={translate("safeBoardDetailScreen:deleteModal.title")}
+          message={translate("safeBoardDetailScreen:deleteModal.message")}
+          cancelLabel={translate("safeBoardDetailScreen:deleteModal.cancel")}
+          confirmLabel={translate("safeBoardDetailScreen:deleteModal.confirm")}
+          confirmBgColor="#E42E2B"
+          onCancel={() => setDeleteModalVisible(false)}
+          onConfirm={handleDelete}
+        />
+
+        <Toast
+          visible={toastVisible}
+          message={toastMessage}
+          icon={
+            toastType === "success" ? (
+              <CheckCircle size={14} color="#FFFFFF" strokeWidth={2.5} />
+            ) : (
+              <XCircle size={14} color="#FFFFFF" strokeWidth={2.5} />
+            )
+          }
+          iconCircleColor={toastType === "success" ? "#1062D8" : "#E03526"}
+          onHide={() => setToastVisible(false)}
+        />
+      </>
+    )
+  },
+)
+
+const $outerScrollView: ViewStyle = {
+  flex: 1,
 }
 
 const $outerContainer: ViewStyle = {
-  flex: 1,
   padding: 16,
   gap: 12,
+  paddingBottom: 24,
+}
+
+const $loadingContainer: ViewStyle = {
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
 }
 
 const $card: ViewStyle = {
@@ -198,15 +416,66 @@ const $card: ViewStyle = {
 }
 
 const $contentCard: ViewStyle = {
-  flex: 1,
   backgroundColor: "#FFFFFF",
   borderRadius: 12,
   padding: 20,
+  minHeight: 240,
   shadowColor: "#000000",
   shadowOffset: { width: 0, height: 2 },
   shadowOpacity: 0.05,
   shadowRadius: 8,
   elevation: 2,
+}
+
+const $attachmentCard: ViewStyle = {
+  backgroundColor: "#FFFFFF",
+  borderRadius: 12,
+  paddingVertical: 4,
+  shadowColor: "#000000",
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.05,
+  shadowRadius: 8,
+  elevation: 2,
+}
+
+const $attachmentRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  paddingHorizontal: 20,
+  paddingVertical: 14,
+  gap: 12,
+}
+
+const $attachmentIconWrap: ViewStyle = {
+  width: 36,
+  height: 36,
+  borderRadius: 8,
+  backgroundColor: "#EBF0FA",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+const $attachmentInfo: ViewStyle = {
+  flex: 1,
+  gap: 3,
+}
+
+const $attachmentName: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.medium,
+  color: "#1A1A1A",
+}
+
+const $attachmentMeta: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.normal,
+  color: "#979797",
+}
+
+const $attachmentRowDivider: ViewStyle = {
+  height: 1,
+  backgroundColor: "#F0F2F5",
+  marginHorizontal: 20,
 }
 
 const $badgeDateRow: ViewStyle = {
@@ -248,26 +517,8 @@ const $alertText: TextStyle = {
   color: "#979797",
 }
 
-const $authorRow: ViewStyle = {
-  flexDirection: "row",
-  alignItems: "center",
-  gap: 6,
-  marginBottom: 14,
-}
-
-const $authorIconWrap: ViewStyle = {
-  width: 28,
-  height: 28,
-  borderRadius: 14,
-  backgroundColor: "#F0F2F5",
-  justifyContent: "center",
-  alignItems: "center",
-}
-
-const $authorText: TextStyle = {
-  fontSize: 14,
-  fontFamily: typography.primary.medium,
-  color: "#333333",
+const $alertTextActive: TextStyle = {
+  color: "#1062D8",
 }
 
 const $divider: ViewStyle = {
@@ -276,10 +527,46 @@ const $divider: ViewStyle = {
   marginBottom: 14,
 }
 
-const $affiliationText: TextStyle = {
+const $authorFooterRow: ViewStyle = {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+}
+
+const $authorLeft: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 8,
+  flex: 1,
+}
+
+const $avatarCircle: ViewStyle = {
+  width: 30,
+  height: 30,
+  borderRadius: 15,
+  backgroundColor: "#D6E4FF",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+const $avatarText: TextStyle = {
   fontSize: 13,
+  fontFamily: typography.primary.bold,
+  color: "#1062D8",
+}
+
+const $authorText: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.medium,
+  color: "#333333",
+}
+
+const $workplaceText: TextStyle = {
+  fontSize: 12,
   fontFamily: typography.primary.normal,
   color: "#606679",
+  maxWidth: "45%",
+  textAlign: "right",
 }
 
 const $contentText: TextStyle = {
@@ -287,6 +574,12 @@ const $contentText: TextStyle = {
   fontFamily: typography.primary.normal,
   color: "#333333",
   lineHeight: 24,
+}
+
+const $errorText: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#979797",
 }
 
 const $editButtonText: TextStyle = {
@@ -316,6 +609,10 @@ const $publishBtn: ViewStyle = {
 
 const $deleteBtn: ViewStyle = {
   backgroundColor: "#E42E2B",
+}
+
+const $disabledBtn: ViewStyle = {
+  opacity: 0.6,
 }
 
 const $actionBtnText: TextStyle = {

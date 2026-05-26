@@ -1,55 +1,75 @@
-import { FC, useEffect, useRef, useState } from "react"
+import { FC, useEffect, useMemo, useRef, useState } from "react"
 import { Animated, FlatList, Modal, Pressable, TouchableOpacity, View } from "react-native"
 import { BellRing, Building, Check, ChevronDown, PencilLine } from "lucide-react-native"
+import { observer } from "mobx-react-lite"
 
 import { StackScreen } from "@/components/StackScreen"
-import { Toast } from "@/components/Toast"
 import { Text } from "@/components/Text"
+import { Toast } from "@/components/Toast"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 
 import { SafeBoardCard } from "./components/SafeBoardCard"
-import { mockMyPosts, mockSafeBoardData } from "./mock/mockSafeBoardData"
 import * as S from "./styles"
-import type { SafeBoardItem, SafeBoardScreenProps } from "./types"
+import type { SafeBoardItem, SafeBoardScreenProps, ScopeType } from "./types"
 
 type AdminTab = "all" | "my"
 
-const mockWorkerWorkplaceId = 1
-
-const WORKPLACES = [
-  "서울 한강 레지던스 RC공사 현장",
-  "부산 센텀 물류센터 현장",
-  "대구 산업단지 신축 현장",
-]
-
-const getWorkplaceId = (workplaceName: string): number => {
-  const workplaceMap: Record<string, number> = {
-    "서울 한강 레지던스 RC공사 현장": 1,
-    "부산 센텀 물류센터 현장": 2,
-    "대구 산업단지 신축 현장": 3,
-  }
-  return workplaceMap[workplaceName] ?? 1
+function formatPostDate(dateStr: string): string {
+  const d = new Date(dateStr)
+  if (isNaN(d.getTime())) return dateStr
+  const yyyy = d.getFullYear()
+  const mm = String(d.getMonth() + 1).padStart(2, "0")
+  const dd = String(d.getDate()).padStart(2, "0")
+  return `${yyyy}.${mm}.${dd}`
 }
 
-const filterByWorkplace = (posts: SafeBoardItem[], workplaceId: number): SafeBoardItem[] => {
-  return posts.filter(
-    (post) => post.scope === "company_wide" || Number(post.workplaceId) === workplaceId,
-  )
-}
-
-export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route }) => {
+export const SafeBoardScreen: FC<SafeBoardScreenProps> = observer(function SafeBoardScreen({
+  navigation,
+  route,
+}) {
   const { role } = useRole()
+  const { safeBoardStore, workplaceStore } = useStores()
   const [activeTab, setActiveTab] = useState<AdminTab>("all")
-  const [selectedWorkplace, setSelectedWorkplace] = useState("서울 한강 레지던스 RC공사 현장")
+  const [selectedWorkplaceId, setSelectedWorkplaceId] = useState<string>("")
   const [showWorkplaceModal, setShowWorkplaceModal] = useState(false)
   const [toastVisible, setToastVisible] = useState(false)
+  const [toastMessage, setToastMessage] = useState(translate("safeBoardScreen:draftSaved"))
   const slideAnim = useRef(new Animated.Value(300)).current
+
+  const isAdmin = role === "admin"
+
+  const availableWorkplaces = workplaceStore.workplaces
+
+  useEffect(() => {
+    if (isAdmin) {
+      safeBoardStore.fetchBoardPosts()
+      safeBoardStore.fetchMyPosts()
+      workplaceStore.fetchWorkplaces()
+    } else if (!workplaceStore.hasWorkplaces) {
+      workplaceStore.fetchWorkplaces()
+    } else {
+      safeBoardStore.fetchBoardPosts(workplaceStore.primaryWorkplace?.id ?? undefined)
+    }
+  }, [])
+
+  // Non-admin: when workplaces finish loading, kick off the post fetch.
+  useEffect(() => {
+    if (!isAdmin && workplaceStore.workplaces.length > 0 && safeBoardStore.boards.length === 0) {
+      safeBoardStore.fetchBoardPosts(workplaceStore.primaryWorkplace?.id ?? undefined)
+    }
+  }, [workplaceStore.workplaces.length])
 
   useEffect(() => {
     if (route.params?.showToast) {
+      const msg =
+        route.params.toastType === "notify"
+          ? translate("safeBoardScreen:notifySent")
+          : translate("safeBoardScreen:draftSaved")
+      setToastMessage(msg)
       setToastVisible(true)
-      navigation.setParams({ showToast: false })
+      navigation.setParams({ showToast: false, toastType: undefined })
     }
   }, [route.params?.showToast, navigation])
 
@@ -59,21 +79,41 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
   }
 
   const closeModal = () => {
-    Animated.timing(slideAnim, { toValue: 300, duration: 200, useNativeDriver: true }).start(
-      () => setShowWorkplaceModal(false),
+    Animated.timing(slideAnim, { toValue: 300, duration: 200, useNativeDriver: true }).start(() =>
+      setShowWorkplaceModal(false),
     )
   }
 
-  const isAdmin = role === "admin"
-  const selectedWorkplaceId = getWorkplaceId(selectedWorkplace)
-  const filterWorkplaceId = isAdmin ? selectedWorkplaceId : mockWorkerWorkplaceId
+  const selectedWorkplaceName = selectedWorkplaceId
+    ? (availableWorkplaces.find((w) => w.id === selectedWorkplaceId)?.workplaceName ?? "")
+    : translate("safeBoardScreen:allWorkplaces")
+  const filterWorkplaceId = isAdmin
+    ? selectedWorkplaceId
+    : (workplaceStore.primaryWorkplace?.id ?? "")
 
-  const baseData: SafeBoardItem[] = isAdmin && activeTab === "my" ? mockMyPosts : mockSafeBoardData
-  const filteredData = filterByWorkplace(baseData, filterWorkplaceId)
-  const displayData = filteredData.sort((a, b) => {
-    if (a.isPinned !== b.isPinned) return a.isPinned ? -1 : 1
-    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  })
+  const sourceData = isAdmin && activeTab === "my" ? safeBoardStore.myPosts : safeBoardStore.boards
+
+  const displayData: SafeBoardItem[] = sourceData
+    .filter((post) => {
+      if (isAdmin && !filterWorkplaceId) return true
+      return post.scope === "company_wide" || post.workplaceId === filterWorkplaceId
+    })
+    .slice()
+    .sort((a, b) => {
+      if (a.isPinned !== b.isPinned) return a.isPinned ? -1 : 1
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    })
+    .map((post) => ({
+      id: post.id,
+      title: post.title,
+      scope: post.scope as ScopeType,
+      isPinned: post.isPinned,
+      workplaceId: post.workplaceId,
+      workplaceName: post.workplaceName,
+      status: post.status,
+      createdAt: formatPostDate(post.createdAt),
+      updatedAt: post.updatedAt,
+    }))
 
   return (
     <>
@@ -97,17 +137,14 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
         {isAdmin && (
           <>
             <View style={S.$workplaceContainer}>
-              <Text
-                text={translate("safeBoardScreen:workplaceLabel")}
-                style={S.$workplaceLabel}
-              />
+              <Text text={translate("safeBoardScreen:workplaceLabel")} style={S.$workplaceLabel} />
               <TouchableOpacity
                 style={S.$workplaceSelectorNew}
                 activeOpacity={0.6}
                 onPress={openModal}
               >
                 <Text
-                  text={selectedWorkplace}
+                  text={selectedWorkplaceName}
                   style={S.$workplaceSelectorTextNew}
                   numberOfLines={1}
                 />
@@ -121,7 +158,10 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
               <TouchableOpacity
                 style={[S.$tab, activeTab === "all" && S.$activeTab]}
                 activeOpacity={0.7}
-                onPress={() => setActiveTab("all")}
+                onPress={() => {
+                  setActiveTab("all")
+                  safeBoardStore.setActiveTab("all")
+                }}
               >
                 <Text
                   text={translate("safeBoardScreen:tabs.all")}
@@ -131,7 +171,10 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
               <TouchableOpacity
                 style={[S.$tab, activeTab === "my" && S.$activeTab]}
                 activeOpacity={0.7}
-                onPress={() => setActiveTab("my")}
+                onPress={() => {
+                  setActiveTab("my")
+                  safeBoardStore.setActiveTab("my")
+                }}
               >
                 <Text
                   text={translate("safeBoardScreen:tabs.myPosts")}
@@ -154,7 +197,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
                 onPress={() => navigation.navigate("SafeBoardDetail", { id: item.id })}
               />
             )}
-            keyExtractor={(item) => String(item.id)}
+            keyExtractor={(item) => item.id}
             contentContainerStyle={S.$listContainer}
             ListEmptyComponent={
               <View style={S.$emptyContainer}>
@@ -166,7 +209,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
 
         <Toast
           visible={toastVisible}
-          message={translate("safeBoardScreen:draftSaved")}
+          message={toastMessage}
           icon={<Check size={14} color="#FFFFFF" strokeWidth={2.5} />}
           onHide={() => setToastVisible(false)}
         />
@@ -191,19 +234,37 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
       >
         <Pressable style={S.$modalOverlay} onPress={closeModal}>
           <Animated.View style={[S.$modalContent, { transform: [{ translateY: slideAnim }] }]}>
-            <Text
-              text={translate("safeBoardScreen:workplaceModal.title")}
-              style={S.$modalTitle}
-            />
-            {WORKPLACES.map((workplace) => {
-              const isSelected = selectedWorkplace === workplace
+            <Text text={translate("safeBoardScreen:workplaceModal.title")} style={S.$modalTitle} />
+            <TouchableOpacity
+              style={[S.$workplaceOption, !selectedWorkplaceId && S.$workplaceOptionSelected]}
+              activeOpacity={0.7}
+              onPress={() => {
+                setSelectedWorkplaceId("")
+                closeModal()
+              }}
+            >
+              <Building
+                size={20}
+                color={!selectedWorkplaceId ? "#1062D8" : "#979797"}
+                strokeWidth={1.8}
+              />
+              <Text
+                text={translate("safeBoardScreen:workplaceModal.allOption")}
+                style={[
+                  S.$workplaceOptionText,
+                  !selectedWorkplaceId && S.$workplaceOptionTextSelected,
+                ]}
+              />
+            </TouchableOpacity>
+            {availableWorkplaces.map((wp) => {
+              const isSelected = selectedWorkplaceId === wp.id
               return (
                 <TouchableOpacity
-                  key={workplace}
+                  key={wp.id}
                   style={[S.$workplaceOption, isSelected && S.$workplaceOptionSelected]}
                   activeOpacity={0.7}
                   onPress={() => {
-                    setSelectedWorkplace(workplace)
+                    setSelectedWorkplaceId(wp.id)
                     closeModal()
                   }}
                 >
@@ -213,11 +274,8 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
                     strokeWidth={1.8}
                   />
                   <Text
-                    text={workplace}
-                    style={[
-                      S.$workplaceOptionText,
-                      isSelected && S.$workplaceOptionTextSelected,
-                    ]}
+                    text={wp.workplaceName}
+                    style={[S.$workplaceOptionText, isSelected && S.$workplaceOptionTextSelected]}
                     numberOfLines={2}
                   />
                 </TouchableOpacity>
@@ -228,4 +286,4 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
       </Modal>
     </>
   )
-}
+})

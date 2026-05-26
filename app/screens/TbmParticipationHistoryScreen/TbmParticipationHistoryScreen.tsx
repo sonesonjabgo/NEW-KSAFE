@@ -1,61 +1,25 @@
-import { FC } from "react"
+import { FC, useCallback } from "react"
 import { ScrollView, TouchableOpacity, View, ViewStyle, TextStyle } from "react-native"
+import { useFocusEffect } from "@react-navigation/native"
+import { format, parseISO } from "date-fns"
+import { observer } from "mobx-react-lite"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
-const MOCK_TOTAL = 12
-const MOCK_CAUTION = 3
-
-interface TbmHistoryItem {
-  id: number
-  badge: string
-  date: string
-  title: string
-  workplace: string
+function formatDateTime(iso?: string | null): string {
+  if (!iso) return "-"
+  try {
+    return format(parseISO(iso), "yyyy.MM.dd HH:mm")
+  } catch {
+    return iso
+  }
 }
-
-const mockHistoryData: TbmHistoryItem[] = [
-  {
-    id: 1,
-    badge: "정상",
-    date: "2026.02.19 08:30",
-    title: "작업장 순회 점검",
-    workplace: "광교 타워크레인 사업장",
-  },
-  {
-    id: 2,
-    badge: "정상",
-    date: "2026.02.18 09:00",
-    title: "전기설비 안전점검",
-    workplace: "광교 타워크레인 사업장",
-  },
-  {
-    id: 3,
-    badge: "정상",
-    date: "2026.02.17 07:45",
-    title: "고소작업 안전교육",
-    workplace: "광교 타워크레인 사업장",
-  },
-  {
-    id: 4,
-    badge: "정상",
-    date: "2026.02.16 08:15",
-    title: "화학물질 취급 안전점검",
-    workplace: "광교 타워크레인 사업장",
-  },
-  {
-    id: 5,
-    badge: "정상",
-    date: "2026.02.15 09:30",
-    title: "비계 설치 작업 전 TBM",
-    workplace: "광교 타워크레인 사업장",
-  },
-]
 
 // ── StatCard ──────────────────────────────────────────────
 
@@ -78,20 +42,25 @@ const StatCard: FC<StatCardProps> = ({ label, count, countColor = "#252525" }) =
 // ── HistoryCard ───────────────────────────────────────────
 
 interface HistoryCardProps {
-  item: TbmHistoryItem
+  id: string
+  badge: string
+  badgeIsNormal: boolean
+  date: string
+  title: string
+  workplace: string
   onPress: () => void
 }
 
-const HistoryCard: FC<HistoryCardProps> = ({ item, onPress }) => (
+const HistoryCard: FC<HistoryCardProps> = ({ badge, badgeIsNormal, date, title, workplace, onPress }) => (
   <TouchableOpacity style={$historyCard} activeOpacity={0.75} onPress={onPress}>
     <View style={$historyTop}>
-      <View style={$badge}>
-        <Text text={item.badge} style={$badgeText} />
+      <View style={[[$badge, !badgeIsNormal && $badgeCaution]]}>
+        <Text text={badge} style={[$badgeText, !badgeIsNormal && $badgeCautionText]} />
       </View>
-      <Text text={item.date} style={$historyDate} />
+      <Text text={date} style={$historyDate} />
     </View>
 
-    <Text text={item.title} style={$historyTitle} numberOfLines={2} />
+    <Text text={title} style={$historyTitle} numberOfLines={2} />
 
     <View style={$historyDivider} />
 
@@ -100,7 +69,7 @@ const HistoryCard: FC<HistoryCardProps> = ({ item, onPress }) => (
         text={translate("tbmParticipationHistoryScreen:workplaceLabel")}
         style={$workplaceLabel}
       />
-      <Text text={item.workplace} style={$workplaceName} numberOfLines={1} />
+      <Text text={workplace} style={$workplaceName} numberOfLines={1} />
     </View>
   </TouchableOpacity>
 )
@@ -109,46 +78,68 @@ const HistoryCard: FC<HistoryCardProps> = ({ item, onPress }) => (
 
 type TbmParticipationHistoryScreenProps = AppStackScreenProps<"TbmParticipationHistory">
 
-export const TbmParticipationHistoryScreen: FC<TbmParticipationHistoryScreenProps> = ({
-  navigation,
-}) => {
-  return (
-    <StackScreen
-      title={translate("tbmParticipationHistoryScreen:title")}
-      onBack={() => navigation.goBack()}
-      squareTop
-      contentBg="#FFFFFF"
-    >
-      <ScrollView
-        style={$scroll}
-        contentContainerStyle={$content}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={$statRow}>
-          <StatCard
-            label={translate("tbmParticipationHistoryScreen:totalParticipation")}
-            count={MOCK_TOTAL}
-          />
-          <StatCard
-            label={translate("tbmParticipationHistoryScreen:cautionResponse")}
-            count={MOCK_CAUTION}
-            countColor={colors.blue}
-          />
-        </View>
+export const TbmParticipationHistoryScreen: FC<TbmParticipationHistoryScreenProps> = observer(
+  function TbmParticipationHistoryScreen({ navigation }) {
+    const { tbmStore } = useStores()
 
-        <View style={$historyList}>
-          {mockHistoryData.map((item) => (
-            <HistoryCard
-              key={item.id}
-              item={item}
-              onPress={() => navigation.navigate("TbmParticipationHistoryDetail", { id: item.id })}
+    useFocusEffect(
+      useCallback(() => {
+        tbmStore.getParticipations()
+      }, [tbmStore]),
+    )
+
+    const totalCount = tbmStore.participations.length
+    const cautionCount = tbmStore.participations.filter((p) => p.healthStatus === "abnormal").length
+
+    return (
+      <StackScreen
+        title={translate("tbmParticipationHistoryScreen:title")}
+        onBack={() => navigation.goBack()}
+        squareTop
+        contentBg="#FFFFFF"
+      >
+        <ScrollView
+          style={$scroll}
+          contentContainerStyle={$content}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={$statRow}>
+            <StatCard
+              label={translate("tbmParticipationHistoryScreen:totalParticipation")}
+              count={totalCount}
             />
-          ))}
-        </View>
-      </ScrollView>
-    </StackScreen>
-  )
-}
+            <StatCard
+              label={translate("tbmParticipationHistoryScreen:cautionResponse")}
+              count={cautionCount}
+              countColor={colors.blue}
+            />
+          </View>
+
+          <View style={$historyList}>
+            {tbmStore.participations.map((item) => (
+              <HistoryCard
+                key={item.id}
+                id={item.id}
+                badge={
+                  item.healthStatus === "normal"
+                    ? translate("tbmParticipationHistoryScreen:statusNormal")
+                    : translate("tbmParticipationHistoryScreen:statusAbnormal")
+                }
+                badgeIsNormal={item.healthStatus === "normal"}
+                date={formatDateTime(item.participatedAt)}
+                title={item.activityTitle}
+                workplace={item.workplaceName}
+                onPress={() =>
+                  navigation.navigate("TbmParticipationHistoryDetail", { id: item.id })
+                }
+              />
+            ))}
+          </View>
+        </ScrollView>
+      </StackScreen>
+    )
+  },
+)
 
 // ── Styles ────────────────────────────────────────────────
 
@@ -232,10 +223,18 @@ const $badge: ViewStyle = {
   paddingVertical: 2,
 }
 
+const $badgeCaution: ViewStyle = {
+  backgroundColor: "#FFF3CD",
+}
+
 const $badgeText: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.medium,
   color: "#18A24A",
+}
+
+const $badgeCautionText: TextStyle = {
+  color: "#F7A733",
 }
 
 const $historyDate: TextStyle = {

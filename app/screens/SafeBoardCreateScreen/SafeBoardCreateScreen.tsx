@@ -1,96 +1,236 @@
-import { FC, useCallback, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
+  ActivityIndicator,
   Animated,
   KeyboardAvoidingView,
   Modal,
   Platform,
+  Pressable,
   ScrollView,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native"
+import * as DocumentPicker from "expo-document-picker"
 import { IconChevronDown } from "@tabler/icons-react-native"
-import { X } from "lucide-react-native"
+import { Building, FileText, Paperclip, X, XCircle } from "lucide-react-native"
+import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
-import BoardClip from "@assets/icons/board/board_clip.svg"
 import HeaderBell from "@assets/icons/nav/header_bell.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { Toast } from "@/components/Toast"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 import { AppStackScreenProps } from "@/navigators/navigationTypes"
+import { initiateCompanyPostUpload } from "@/services/api/safeBoard"
 
 import * as S from "./styles"
 
 type SafeBoardCreateScreenProps = AppStackScreenProps<"SafeBoardCreate">
 
-const MOCK_WORKPLACES = [
-  "서울 한강 레지던스 RC공사 현장",
-  "부산 센텀 물류센터 현장",
-  "대구 산업단지 신축 현장",
-]
+interface SelectedWorkplace {
+  id: string
+  name: string
+}
 
-export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigation }) => {
+interface AttachedFile {
+  uri: string
+  name: string
+  mimeType: string
+  size: number | null
+  uploadId: string
+}
+
+export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
+  navigation,
+  route,
+}: SafeBoardCreateScreenProps) {
   const insets = useSafeAreaInsets()
+  const { workplaceStore, safeBoardStore } = useStores()
 
-  const [workplace, setWorkplace] = useState("")
+  const editId = route.params?.id
+  const isEditMode = !!editId
+
+  const [selectedWorkplace, setSelectedWorkplace] = useState<SelectedWorkplace | null>(null)
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [sendPush, setSendPush] = useState(false)
-  const [attachedFiles, setAttachedFiles] = useState<string[]>([])
+  const [attachedFiles, setAttachedFiles] = useState<AttachedFile[]>([])
+  const [isUploading, setIsUploading] = useState(false)
+  const [existingAttachments, setExistingAttachments] = useState<
+    Array<{ id: string; fileName: string; fileSize: number | null; mimeType: string | null }>
+  >([])
+  const [deleteAttachmentIds, setDeleteAttachmentIds] = useState<string[]>([])
   const [workplaceModalVisible, setWorkplaceModalVisible] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
+  const [toastVisible, setToastVisible] = useState(false)
+  const [toastMessage, setToastMessage] = useState("")
 
-  const slideAnim = useRef(new Animated.Value(400)).current
-  const fadeAnim = useRef(new Animated.Value(0)).current
+  const slideAnim = useRef(new Animated.Value(300)).current
+
+  // 수정 모드: currentPost에서 기존 데이터 pre-fill
+  useEffect(() => {
+    if (!isEditMode) return
+    const post = safeBoardStore.currentPost
+    if (!post) return
+    setTitle(post.title)
+    setContent(post.description ?? "")
+    setSendPush(post.sendNotification ?? false)
+    if (post.workplaceId && post.workplaceName) {
+      setSelectedWorkplace({ id: post.workplaceId, name: post.workplaceName })
+    }
+    setExistingAttachments(
+      (post.attachments ?? []).map((a) => ({
+        id: a.id,
+        fileName: a.fileName,
+        fileSize: a.fileSize ?? null,
+        mimeType: a.mimeType ?? null,
+      })),
+    )
+    setDeleteAttachmentIds([])
+    setAttachedFiles([])
+  }, [isEditMode, safeBoardStore.currentPost])
 
   const openWorkplaceModal = useCallback(() => {
     setWorkplaceModalVisible(true)
-    Animated.parallel([
-      Animated.timing(fadeAnim, { toValue: 1, duration: 200, useNativeDriver: true }),
-      Animated.timing(slideAnim, { toValue: 0, duration: 260, useNativeDriver: true }),
-    ]).start()
-  }, [fadeAnim, slideAnim])
+    Animated.timing(slideAnim, { toValue: 0, duration: 250, useNativeDriver: true }).start()
+  }, [slideAnim])
 
   const closeWorkplaceModal = useCallback(() => {
-    Animated.parallel([
-      Animated.timing(fadeAnim, { toValue: 0, duration: 160, useNativeDriver: true }),
-      Animated.timing(slideAnim, { toValue: 400, duration: 200, useNativeDriver: true }),
-    ]).start(() => setWorkplaceModalVisible(false))
-  }, [fadeAnim, slideAnim])
+    Animated.timing(slideAnim, { toValue: 300, duration: 200, useNativeDriver: true }).start(() =>
+      setWorkplaceModalVisible(false),
+    )
+  }, [slideAnim])
 
   const handleSelectWorkplace = useCallback(
-    (wp: string) => {
-      setWorkplace(wp)
+    (wp: SelectedWorkplace) => {
+      setSelectedWorkplace(wp)
       closeWorkplaceModal()
     },
     [closeWorkplaceModal],
   )
 
-  const isValid = useMemo(
-    () => !!workplace && !!title.trim() && !!content.trim(),
-    [workplace, title, content],
-  )
+  const handlePickFile = useCallback(async () => {
+    if (isUploading) return
+    try {
+      const result = await DocumentPicker.getDocumentAsync({
+        copyToCacheDirectory: true,
+        multiple: false,
+      })
+      if (result.canceled) return
 
-  const handleAddFile = useCallback(() => {
-    const mockName = `첨부파일_${attachedFiles.length + 1}.pdf`
-    setAttachedFiles((prev) => [...prev, mockName])
-  }, [attachedFiles.length])
+      const asset = result.assets[0]
+      const mimeType = asset.mimeType ?? "application/octet-stream"
+      setIsUploading(true)
 
-  const handleRemoveFile = useCallback((idx: number) => {
-    setAttachedFiles((prev) => prev.filter((_, i) => i !== idx))
+      const { uploadId, signedUrl } = await initiateCompanyPostUpload({
+        fileName: asset.name,
+        contentType: mimeType,
+        fileSize: asset.size ?? undefined,
+      })
+
+      const fileResponse = await fetch(asset.uri)
+      const blob = await fileResponse.blob()
+      const uploadResponse = await fetch(signedUrl, {
+        method: "PUT",
+        headers: { "Content-Type": mimeType },
+        body: blob,
+      })
+
+      if (!uploadResponse.ok) {
+        throw new Error(`File upload failed: ${uploadResponse.status}`)
+      }
+
+      setAttachedFiles((prev) => [
+        ...prev,
+        {
+          uri: asset.uri,
+          name: asset.name,
+          mimeType,
+          size: asset.size ?? null,
+          uploadId,
+        },
+      ])
+    } catch {
+      setToastMessage(translate("safeBoardCreateScreen:attachment.uploadError"))
+      setToastVisible(true)
+    } finally {
+      setIsUploading(false)
+    }
+  }, [isUploading])
+
+  const handleRemoveFile = useCallback((uploadId: string) => {
+    setAttachedFiles((prev) => prev.filter((f) => f.uploadId !== uploadId))
   }, [])
 
-  const handleSave = useCallback(() => {
-    console.log(JSON.stringify({ workplace, title, content, sendPush, attachedFiles }, null, 2))
-    navigation.navigate("Main", { screen: "SafeBoard", params: { showToast: true } })
-  }, [workplace, title, content, sendPush, attachedFiles, navigation])
+  const handleRemoveExisting = useCallback((attachmentId: string) => {
+    setExistingAttachments((prev) => prev.filter((a) => a.id !== attachmentId))
+    setDeleteAttachmentIds((prev) => [...prev, attachmentId])
+  }, [])
+
+  const availableWorkplaces = workplaceStore.workplaces
+
+  const isValid = useMemo(
+    () => !!selectedWorkplace && !!title.trim() && !!content.trim(),
+    [selectedWorkplace, title, content],
+  )
+
+  const handleSave = useCallback(async () => {
+    if (!selectedWorkplace || isSaving) return
+    setIsSaving(true)
+    try {
+      if (isEditMode && editId) {
+        await safeBoardStore.updatePost(editId, {
+          title: title.trim(),
+          description: content.trim(),
+          sendNotification: sendPush,
+          newUploadIds: attachedFiles.length > 0 ? attachedFiles.map((f) => f.uploadId) : undefined,
+          deleteAttachmentIds: deleteAttachmentIds.length > 0 ? deleteAttachmentIds : undefined,
+        })
+        navigation.goBack()
+      } else {
+        const scope = selectedWorkplace.id ? "workplace" : "company_wide"
+        await safeBoardStore.createPost({
+          scope,
+          workplaceId: selectedWorkplace.id || undefined,
+          title: title.trim(),
+          description: content.trim(),
+          sendNotification: sendPush,
+          uploadIds: attachedFiles.map((f) => f.uploadId),
+        })
+        navigation.navigate("Main", { screen: "SafeBoard", params: { showToast: true } })
+      }
+    } catch {
+      setToastMessage(translate("safeBoardCreateScreen:saveError"))
+      setToastVisible(true)
+    } finally {
+      setIsSaving(false)
+    }
+  }, [
+    selectedWorkplace,
+    title,
+    content,
+    sendPush,
+    attachedFiles,
+    deleteAttachmentIds,
+    isSaving,
+    isEditMode,
+    editId,
+    safeBoardStore,
+    navigation,
+  ])
 
   return (
     <>
       <StackScreen
-        title={translate("safeBoardCreateScreen:title")}
+        title={
+          isEditMode
+            ? translate("safeBoardCreateScreen:titleEdit")
+            : translate("safeBoardCreateScreen:title")
+        }
         onBack={() => navigation.goBack()}
         contentBg="#FFFFFF"
         squareTop
@@ -111,10 +251,7 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
                 <HeaderBell width={25} height={25} color="#1062D8" />
               </View>
               <View style={S.$guideTextBlock}>
-                <Text
-                  text={translate("safeBoardCreateScreen:guide.title")}
-                  style={S.$guideTitle}
-                />
+                <Text text={translate("safeBoardCreateScreen:guide.title")} style={S.$guideTitle} />
                 <Text
                   text={translate("safeBoardCreateScreen:guide.description")}
                   style={S.$guideDesc}
@@ -134,8 +271,11 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
                 onPress={openWorkplaceModal}
               >
                 <Text
-                  text={workplace || translate("safeBoardCreateScreen:workplace.placeholder")}
-                  style={[S.$inputText, !workplace && S.$inputPlaceholder]}
+                  text={
+                    selectedWorkplace?.name ||
+                    translate("safeBoardCreateScreen:workplace.placeholder")
+                  }
+                  style={[S.$inputText, !selectedWorkplace && S.$inputPlaceholder]}
                   numberOfLines={1}
                 />
                 <IconChevronDown size={18} color="#AAAAAA" />
@@ -204,25 +344,32 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
                 text={translate("safeBoardCreateScreen:attachment.label")}
                 style={S.$sectionLabel}
               />
-              {/* 카드1 */}
               <View style={S.$attachCard}>
-                <BoardClip width={30} height={30} color="#1062D8" />
+                <Paperclip size={28} color="#1062D8" strokeWidth={1.8} />
                 <Text
                   text={translate("safeBoardCreateScreen:attachment.card1Text")}
                   style={S.$attachCardText}
                 />
-                <TouchableOpacity style={S.$attachUploadBtn} activeOpacity={0.7} onPress={handleAddFile}>
-                  <Text
-                    text={translate("safeBoardCreateScreen:attachment.uploadButton")}
-                    style={S.$attachUploadBtnText}
-                  />
+                <TouchableOpacity
+                  style={S.$attachUploadBtn}
+                  activeOpacity={0.7}
+                  onPress={handlePickFile}
+                  disabled={isUploading}
+                >
+                  {isUploading ? (
+                    <ActivityIndicator size="small" color="#1062D8" />
+                  ) : (
+                    <Text
+                      text={translate("safeBoardCreateScreen:attachment.uploadButton")}
+                      style={S.$attachUploadBtnText}
+                    />
+                  )}
                 </TouchableOpacity>
               </View>
 
-              {/* 카드2 */}
-              {attachedFiles.length === 0 ? (
+              {existingAttachments.length === 0 && attachedFiles.length === 0 ? (
                 <View style={S.$attachCard2Empty}>
-                  <BoardClip width={20} height={20} color="#48B568" />
+                  <FileText size={18} color="#979797" strokeWidth={1.8} />
                   <Text
                     text={translate("safeBoardCreateScreen:attachment.noFile")}
                     style={S.$attachCard2EmptyText}
@@ -230,15 +377,27 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
                 </View>
               ) : (
                 <View style={S.$attachCard2FileList}>
-                  {attachedFiles.map((file, idx) => (
-                    <View key={idx} style={S.$attachCard2FileRow}>
-                      <BoardClip width={20} height={20} color="#525252" />
-                      <Text text={file} style={S.$attachCard2FileText} numberOfLines={1} />
+                  {existingAttachments.map((file) => (
+                    <View key={file.id} style={S.$attachCard2FileRow}>
+                      <FileText size={18} color="#1062D8" strokeWidth={1.8} />
+                      <Text text={file.fileName} style={S.$attachCard2FileText} numberOfLines={1} />
                       <TouchableOpacity
-                        onPress={() => handleRemoveFile(idx)}
-                        hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+                        activeOpacity={0.7}
+                        onPress={() => handleRemoveExisting(file.id)}
                       >
-                        <X size={25} color="#525252" strokeWidth={2} />
+                        <X size={18} color="#979797" strokeWidth={2} />
+                      </TouchableOpacity>
+                    </View>
+                  ))}
+                  {attachedFiles.map((file) => (
+                    <View key={file.uploadId} style={S.$attachCard2FileRow}>
+                      <FileText size={18} color="#1062D8" strokeWidth={1.8} />
+                      <Text text={file.name} style={S.$attachCard2FileText} numberOfLines={1} />
+                      <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={() => handleRemoveFile(file.uploadId)}
+                      >
+                        <X size={18} color="#979797" strokeWidth={2} />
                       </TouchableOpacity>
                     </View>
                   ))}
@@ -270,55 +429,69 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
           {/* 저장 버튼 */}
           <View style={[S.$submitBar, { paddingBottom: insets.bottom + 16 }]}>
             <TouchableOpacity
-              style={[S.$submitBtn, !isValid && S.$submitBtnDisabled]}
+              style={[S.$submitBtn, (!isValid || isSaving || isUploading) && S.$submitBtnDisabled]}
               activeOpacity={0.8}
               onPress={handleSave}
-              disabled={!isValid}
+              disabled={!isValid || isSaving || isUploading}
             >
-              <Text
-                text={translate("safeBoardCreateScreen:save")}
-                style={S.$submitBtnText}
-              />
+              {isSaving ? (
+                <ActivityIndicator size="small" color="#FFFFFF" />
+              ) : (
+                <Text text={translate("safeBoardCreateScreen:save")} style={S.$submitBtnText} />
+              )}
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
       </StackScreen>
 
+      <Toast
+        visible={toastVisible}
+        message={toastMessage}
+        icon={<XCircle size={14} color="#FFFFFF" strokeWidth={2.5} />}
+        iconCircleColor="#E03526"
+        onHide={() => setToastVisible(false)}
+      />
+
       {/* 사업장 선택 모달 */}
       <Modal
         visible={workplaceModalVisible}
         transparent
-        animationType="none"
+        animationType="fade"
         onRequestClose={closeWorkplaceModal}
       >
-        <View style={StyleSheet.absoluteFill}>
-          <Animated.View
-            style={[StyleSheet.absoluteFill, S.$modalBackdrop, { opacity: fadeAnim }]}
-          />
-          <TouchableOpacity
-            style={StyleSheet.absoluteFill}
-            onPress={closeWorkplaceModal}
-            activeOpacity={1}
-          />
+        <Pressable style={S.$modalOverlay} onPress={closeWorkplaceModal}>
           <Animated.View
             style={[
-              S.$modalSheet,
+              S.$modalContent,
               { paddingBottom: insets.bottom + 16, transform: [{ translateY: slideAnim }] },
             ]}
           >
-            {MOCK_WORKPLACES.map((wp) => (
-              <TouchableOpacity
-                key={wp}
-                style={S.$modalItem}
-                onPress={() => handleSelectWorkplace(wp)}
-                activeOpacity={0.7}
-              >
-                <Text text={wp} style={S.$modalItemText} />
-              </TouchableOpacity>
-            ))}
+            <Text text={translate("safeBoardCreateScreen:workplace.label")} style={S.$modalTitle} />
+            {availableWorkplaces.map((wp) => {
+              const isSelected = selectedWorkplace?.id === wp.id
+              return (
+                <TouchableOpacity
+                  key={wp.id}
+                  style={[S.$workplaceOption, isSelected && S.$workplaceOptionSelected]}
+                  activeOpacity={0.7}
+                  onPress={() => handleSelectWorkplace({ id: wp.id, name: wp.workplaceName })}
+                >
+                  <Building
+                    size={20}
+                    color={isSelected ? "#1062D8" : "#979797"}
+                    strokeWidth={1.8}
+                  />
+                  <Text
+                    text={wp.workplaceName}
+                    style={[S.$workplaceOptionText, isSelected && S.$workplaceOptionTextSelected]}
+                    numberOfLines={2}
+                  />
+                </TouchableOpacity>
+              )
+            })}
           </Animated.View>
-        </View>
+        </Pressable>
       </Modal>
     </>
   )
-}
+})

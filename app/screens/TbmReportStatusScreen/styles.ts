@@ -312,4 +312,3 @@ export const $bottomNote: TextStyle = {
   textAlign: "center",
   marginBottom: 10,
 }
-

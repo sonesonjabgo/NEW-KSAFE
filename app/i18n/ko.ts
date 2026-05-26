@@ -50,6 +50,15 @@ const ko: Translations = {
       message: "비밀번호 찾기는 관리자에게 문의 바랍니다.\n문의전화 : 062-383-0083",
       confirm: "확인",
     },
+    alert: {
+      invalidCredentials: "이메일 또는 비밀번호가 올바르지 않습니다.",
+      signInFailed: "로그인에 실패했습니다. 다시 시도해 주세요.",
+      fillFields: "필수 항목을 입력해 주세요.",
+      passwordLength: "비밀번호는 6자 이상이어야 합니다.",
+      unauthorizedRole: "접근 권한이 없는 계정입니다.",
+      deactivatedAccount: "비활성화된 계정입니다. 관리자에게 문의해 주세요.",
+      profileLoadFailed: "사용자 정보를 불러오지 못했습니다. 다시 시도해 주세요.",
+    },
   },
   demoNavigator: {
     componentsTab: "컴포넌트",
@@ -155,6 +164,7 @@ const ko: Translations = {
         company: "회사전체",
         workplace: "사업장",
       },
+      empty: "게시글이 없습니다.",
     },
     edu: {
       title: "기존 교육/발표 참여",
@@ -196,9 +206,11 @@ const ko: Translations = {
   safeBoardScreen: {
     title: "안전게시판",
     alertButton: "알림 발송",
-    workplaceLabel: "선택된 작업장",
+    workplaceLabel: "선택된 사업장",
+    allWorkplaces: "모든 사업장",
     workplaceModal: {
-      title: "작업장 선택",
+      title: "사업장 선택",
+      allOption: "전체",
     },
     badge: {
       companyWide: "회사전체",
@@ -213,10 +225,12 @@ const ko: Translations = {
     empty: "게시물이 없습니다",
     write: "작성하기",
     draftSaved: "게시글이 임시저장 되었습니다.",
+    notifySent: "알림을 전송했습니다.",
   },
 
   safeBoardDetailScreen: {
     title: "게시글 상세",
+    loadError: "게시글을 불러오지 못했습니다.",
     authorLabel: "작성자",
     editButton: "수정",
     alertOn: "알림 ON",
@@ -235,13 +249,20 @@ const ko: Translations = {
       cancel: "취소",
       confirm: "삭제",
     },
+    toasts: {
+      publishSuccess: "게시글이 게시되었습니다.",
+      publishError: "게시글 게시에 실패했습니다.",
+      deleteSuccess: "게시글이 삭제되었습니다.",
+      deleteError: "게시글 삭제에 실패했습니다.",
+    },
   },
 
   safeBoardCreateScreen: {
     title: "게시글 작성",
     guide: {
       title: "작성 가이드",
-      description: "관리 중인 하나 이상의 사업장을\n선택하고 안내 알림을 작성해 현장\n구성원에게 전달하세요.",
+      description:
+        "선택한 사업장 구성원에게 공지사항을 공유하세요. 제목과 본문을 입력하고 필요하면 파일을 첨부하거나 푸시 알림을 전송할 수 있습니다.",
     },
     workplace: {
       label: "사업장 선택",
@@ -263,12 +284,15 @@ const ko: Translations = {
       card1Text: "(선택 사항) 최대 50MB까지\n업로드할 수 있습니다.",
       uploadButton: "파일 업로드",
       noFile: "선택된 파일이 없습니다.",
+      uploadError: "파일 업로드에 실패했습니다. 다시 시도해주세요.",
     },
     pushNotification: {
       label: "푸시 알림 함께 보내기",
       cardText: "선택 시 게시와 동시에 선택한 사업장 구성원에게 푸시 알림이 전송됩니다.",
     },
     save: "저장",
+    titleEdit: "게시글 수정",
+    saveError: "저장에 실패했습니다. 다시 시도해주세요.",
   },
 
   safeBoardNotifyScreen: {
@@ -384,8 +408,9 @@ const ko: Translations = {
 
   myPageScreen: {
     title: "마이페이지",
+    orgName: "KS산업안전협회",
     workplace: {
-      label: "광교 타워크레인 작업장",
+      label: "작업장",
     },
     permissions: {
       sectionTitle: "앱 권한 설정",
@@ -853,6 +878,8 @@ const ko: Translations = {
       helper: "설명은 비워둘 수 있으며, 입력 시 최대 10,000자까지 작성할 수 있습니다.",
     },
     submit: "등록하기",
+    submitSuccess: "교육 자료가 등록되었습니다.",
+    submitError: "교육 자료 등록에 실패했습니다. 다시 시도해주세요.",
   },
 
   educationMaterialDetailScreen: {
@@ -876,6 +903,7 @@ const ko: Translations = {
     confirm: "선택완료 ({{count}}개)",
     confirmNone: "선택완료",
     emptyText: "회사 교육자료가 없습니다.",
+    categoryAll: "전체",
   },
 
   improvementProposalDetailScreen: {
@@ -1004,6 +1032,7 @@ const ko: Translations = {
 
   tbmReportInquiryScreen: {
     title: "TBM 보고서 조회",
+    untitled: "(제목 없음)",
     tabs: {
       all: "전체",
       requested: "요청됨",
@@ -1148,6 +1177,8 @@ const ko: Translations = {
     cautionResponse: "주의 응답",
     unit: "건",
     workplaceLabel: "사업장",
+    statusNormal: "정상",
+    statusAbnormal: "주의",
   },
 
   tbmParticipationHistoryDetailScreen: {

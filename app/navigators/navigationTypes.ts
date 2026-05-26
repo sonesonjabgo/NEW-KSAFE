@@ -10,7 +10,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack"
 // Main Tab Navigator types
 export type MainTabParamList = {
   Home: undefined
-  SafeBoard: { showToast?: boolean } | undefined
+  SafeBoard: { showToast?: boolean; toastType?: "notify" } | undefined
   SafeHealthMain: undefined
   WorkerParticipation: undefined
 }
@@ -31,19 +31,19 @@ export type AppStackParamList = {
   EducationPresentation: undefined
   TbmList: undefined
   TbmCreate: undefined
-  TbmDetail: { id: number }
-  TbmReport: { id: number }
+  TbmDetail: { id: string }
+  TbmReport: { id: string }
   TbmReportInquiry: undefined
-  TbmReportStatus: { id: number }
+  TbmReportStatus: { id: string }
   TbmJoin: undefined
-  TbmJoinInfo: { id: number }
-  TbmJoinHealth: { id: number }
-  TbmJoinSign: { id: number }
+  TbmJoinInfo: { id: string }
+  TbmJoinHealth: { id: string }
+  TbmJoinSign: { id: string }
   TbmJoinComplete: undefined
   EducationMaterial: undefined
-  EducationMaterialDetail: { id: number }
+  EducationMaterialDetail: { id: string; source?: "platform" | "company" | "mine" }
   EducationMaterialRegister: undefined
-  EducationSelect: { initialSelected: number[]; onConfirm: (ids: number[]) => void }
+  EducationSelect: { initialSelected: string[]; onConfirm: (ids: string[]) => void }
   Patrol: undefined
   PatrolCreate: undefined
   PatrolDetail: { id: string }
@@ -63,13 +63,13 @@ export type AppStackParamList = {
       }
     | undefined
   TbmParticipationHistory: undefined
-  TbmParticipationHistoryDetail: { id: number }
+  TbmParticipationHistoryDetail: { id: string }
   AiRiskDocCreator: undefined
   HazardRiskList: undefined
   HazardRiskCreate: undefined
   HazardRiskDetail: { id: number }
-  SafeBoardDetail: { id: number }
-  SafeBoardCreate: undefined
+  SafeBoardDetail: { id: string }
+  SafeBoardCreate: { id?: string } | undefined
   SafeBoardNotify: undefined
 }
 

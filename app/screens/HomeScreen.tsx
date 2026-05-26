@@ -1,15 +1,18 @@
-import { FC, useEffect, useState, useMemo } from "react"
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
+  ActivityIndicator,
   Linking,
   Platform,
-  View,
-  ViewStyle,
+  StyleSheet,
   TextStyle,
   TouchableOpacity,
+  View,
+  ViewStyle,
   ScrollView,
-  StyleSheet,
 } from "react-native"
+import { useFocusEffect } from "@react-navigation/native"
 import { ChevronRight } from "lucide-react-native"
+import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import type { SvgProps } from "react-native-svg"
 
@@ -35,27 +38,58 @@ import ProfileSwitch from "@assets/icons/nav/profile_switch.svg"
 import { PushNotificationBottomSheet } from "@/components/PushNotificationBottomSheet"
 import { Text } from "@/components/Text"
 import { WebViewModal } from "@/components/WebViewModal"
+import { useAuth } from "@/context/AuthContext"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 import type { MainTabScreenProps } from "@/navigators/navigationTypes"
 import { SafeBoardBadge } from "@/screens/SafeBoardScreen/components/SafeBoardBadge"
+import { fetchActivePresentation } from "@/services/api/presentation"
+import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
+import { formatDate } from "@/utils/formatDate"
 
 interface HomeScreenProps extends MainTabScreenProps<"Home"> {}
 
-const BOARD_ITEMS = [
-  { tag: "company", title: "2026년 4월 2일 앱 출시", date: "2026.04.02", pinned: true },
-  { tag: "workplace", title: "2026년 4월 2일 앱 출시", date: "2026.04.02", pinned: false },
-]
-
 type TabType = "all" | "company" | "workplace"
 
-export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
+const HOME_SAFE_BOARD_LIMIT = 5
+
+const getScopedBoardPosts = (
+  posts: {
+    id: string
+    title: string
+    scope: "company_wide" | "workplace"
+    isPinned: boolean
+    createdAt: string
+  }[],
+  tab: TabType,
+  limit = HOME_SAFE_BOARD_LIMIT,
+) => {
+  const filtered = posts.filter((p) => {
+    if (tab === "all") return true
+    if (tab === "company") return p.scope === "company_wide"
+    return p.scope === "workplace"
+  })
+  return [...filtered]
+    .sort((a, b) => {
+      if (a.isPinned !== b.isPinned) return a.isPinned ? -1 : 1
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    })
+    .slice(0, limit)
+}
+
+export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen({ navigation }) {
   const insets = useSafeAreaInsets()
-  const { role: userRole, setRole: setUserRole } = useRole()
+  const { user, profile } = useAuth()
+  const { role: userRole } = useRole()
+  const { safeBoardStore, workplaceStore } = useStores()
+  const displayName = profile?.username?.trim() || user?.name?.trim() || ""
   const [selectedTab, setSelectedTab] = useState<TabType>("all")
-  // TODO: 추후 "생성된 교육/발표실 존재 여부" API 연동으로 교체
   const [showEducationBanner, setShowEducationBanner] = useState(false)
+
+  const hasLoadedBoardRef = useRef(false)
+  const skipNextBoardFocusRefreshRef = useRef(true)
   const [webViewModalVisible, setWebViewModalVisible] = useState(false)
   const [selectedUrl, setSelectedUrl] = useState("")
   const [selectedTitle, setSelectedTitle] = useState("")
@@ -109,10 +143,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         Icon: GridEducation,
         label: translate("homeScreen:grid.education.label"),
         sub: translate("homeScreen:grid.education.sub"),
-        onPress: () => {
-          setShowEducationBanner(true)
-          navigation.navigate("EducationPresentation")
-        },
+        onPress: () => navigation.navigate("EducationPresentation"),
       },
       {
         Icon: GridEduJoin,
@@ -172,11 +203,50 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
     }
   }, [userRole])
 
+  // 최초 1회 로드
+  useEffect(() => {
+    if (!profile) return
+    if (hasLoadedBoardRef.current) return
+    hasLoadedBoardRef.current = true
+    void safeBoardStore.fetchBoardPosts()
+    if (!workplaceStore.hasWorkplaces) {
+      void workplaceStore.fetchWorkplaces()
+    }
+    fetchActivePresentation().then((result) => setShowEducationBanner(result !== null))
+  }, [profile, safeBoardStore, workplaceStore])
+
+  // 화면 포커스 시 새로고침 (첫 진입 제외) + 발표 세션 확인
+  useFocusEffect(
+    useCallback(() => {
+      if (!profile) return
+      if (skipNextBoardFocusRefreshRef.current) {
+        skipNextBoardFocusRefreshRef.current = false
+        if (safeBoardStore.boards.length > 0 || safeBoardStore.status === "pending") return
+      }
+      if (safeBoardStore.status === "pending") return
+      void safeBoardStore.fetchBoardPosts()
+      fetchActivePresentation().then((result) => setShowEducationBanner(result !== null))
+    }, [profile, safeBoardStore]),
+  )
+
   // 관리자: 인덱스 0~8 (9개) / 근로자: 인덱스 0~5 + 9~10 (8개)
   const visibleGridItems =
     userRole === "admin"
       ? GRID_ITEMS.slice(0, 9)
       : [...GRID_ITEMS.slice(0, 6), ...GRID_ITEMS.slice(9)]
+
+  const activeBoardPosts = getScopedBoardPosts(
+    safeBoardStore.boards.map((b) => ({
+      id: b.id,
+      title: b.title,
+      scope: b.scope as "company_wide" | "workplace",
+      isPinned: b.isPinned,
+      createdAt: b.createdAt,
+    })),
+    userRole === "worker" ? "all" : selectedTab,
+  )
+
+  const isBoardLoading = safeBoardStore.status === "pending"
 
   return (
     <>
@@ -188,36 +258,14 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         >
           {/* ── Header (blue background) ── */}
           <View style={[$header, { paddingTop: insets.top + 12 }]}>
-            {/* ── 임시 개발용 토글 영역 ── */}
-            <View style={$devToggleArea}>
-              {/* 역할 전환 */}
-              <View style={$roleToggleRow}>
-                <TouchableOpacity
-                  style={[$roleToggleBtn, userRole === "admin" && $roleToggleBtnActive]}
-                  onPress={() => setUserRole("admin")}
-                >
-                  <Text
-                    text={translate("homeScreen:role.admin")}
-                    style={[$roleToggleText, userRole === "admin" && $roleToggleTextActive]}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[$roleToggleBtn, userRole === "worker" && $roleToggleBtnActive]}
-                  onPress={() => setUserRole("worker")}
-                >
-                  <Text
-                    text={translate("homeScreen:role.worker")}
-                    style={[$roleToggleText, userRole === "worker" && $roleToggleTextActive]}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-
             {/* Row 1: Logo + Actions */}
             <View style={$titleRow}>
               <View>
                 <Text text="K-SAFEONE" style={$appTitle} />
-                <Text text={translate("homeScreen:orgName")} style={$appSub} />
+                <Text
+                  text={workplaceStore.companyName ?? translate("homeScreen:orgName")}
+                  style={$appSub}
+                />
               </View>
               <View style={$headerActions}>
                 <TouchableOpacity
@@ -260,7 +308,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
             <View style={$greetRow}>
               <View style={$greetLeft}>
                 <Text
-                  text={translate("homeScreen:greeting.name", { name: "김영희" })}
+                  text={translate("homeScreen:greeting.name", { name: displayName })}
                   style={$greetBold}
                 />
                 <Text text={translate("homeScreen:greeting.message")} style={$greetMsg} />
@@ -294,9 +342,13 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
               ))}
             </View>
 
-            {/* 교육/발표 참여 안내 배너 (교육/발표 메뉴 클릭 시 표시) */}
+            {/* 교육/발표 참여 안내 배너 (진행 중인 발표 세션 존재 시 표시) */}
             {showEducationBanner && (
-              <TouchableOpacity style={$eduBanner} activeOpacity={0.7}>
+              <TouchableOpacity
+                style={$eduBanner}
+                activeOpacity={0.7}
+                onPress={() => navigation.navigate("EducationPresentation")}
+              >
                 <BannerIcon width={34} height={34} color="#0B3069" style={$eduBannerIcon} />
                 <View style={$eduBannerContent}>
                   <Text text={translate("homeScreen:edu.title")} style={$eduBannerTitle} />
@@ -351,20 +403,36 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
               {/* Board Items */}
               <View style={$boardList}>
-                {BOARD_ITEMS.map((item, i) => (
-                  <TouchableOpacity key={i} style={$boardItem} activeOpacity={0.7}>
-                    <View style={$tagWrap}>
-                      <SafeBoardBadge
-                        type={item.tag === "workplace" ? "workplace" : "company_wide"}
-                      />
-                    </View>
-                    <View style={$boardItemContent}>
-                      <Text text={item.title} style={$boardItemTitle} numberOfLines={1} />
-                      <Text text={item.date} style={$boardItemDate} />
-                    </View>
-                    {item.pinned && <BoardPin width={20} height={20} />}
-                  </TouchableOpacity>
-                ))}
+                {isBoardLoading ? (
+                  <View style={$boardEmpty}>
+                    <ActivityIndicator size="small" color={colors.blue} />
+                  </View>
+                ) : activeBoardPosts.length === 0 ? (
+                  <View style={$boardEmpty}>
+                    <Text text={translate("homeScreen:board.empty")} style={$boardEmptyText} />
+                  </View>
+                ) : (
+                  activeBoardPosts.map((item) => (
+                    <TouchableOpacity
+                      key={item.id}
+                      style={$boardItem}
+                      activeOpacity={0.7}
+                      onPress={() => navigation.navigate("SafeBoardDetail", { id: item.id })}
+                    >
+                      <View style={$tagWrap}>
+                        <SafeBoardBadge type={item.scope} />
+                      </View>
+                      <View style={$boardItemContent}>
+                        <Text text={item.title} style={$boardItemTitle} numberOfLines={1} />
+                        <Text
+                          text={formatDate(item.createdAt, "yyyy.MM.dd")}
+                          style={$boardItemDate}
+                        />
+                      </View>
+                      {item.isPinned && <BoardPin width={20} height={20} />}
+                    </TouchableOpacity>
+                  ))
+                )}
               </View>
             </View>
 
@@ -437,7 +505,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
       />
     </>
   )
-}
+})
 
 const BLUE = "#0B3069"
 
@@ -459,41 +527,6 @@ const $header: ViewStyle = {
   paddingBottom: 20,
   paddingHorizontal: 20,
   gap: 16,
-}
-
-const $devToggleArea: ViewStyle = {
-  alignItems: "center",
-  gap: 8,
-  marginBottom: 10,
-}
-
-const $roleToggleRow: ViewStyle = {
-  flexDirection: "row",
-  alignSelf: "center",
-  backgroundColor: "rgba(255,255,255,0.15)",
-  borderRadius: 8,
-  padding: 3,
-  gap: 4,
-}
-
-const $roleToggleBtn: ViewStyle = {
-  paddingVertical: 6,
-  paddingHorizontal: 16,
-  borderRadius: 6,
-}
-
-const $roleToggleBtnActive: ViewStyle = {
-  backgroundColor: "#FFFFFF",
-}
-
-const $roleToggleText: TextStyle = {
-  fontSize: 13,
-  fontFamily: typography.primary.semiBold,
-  color: "rgba(255,255,255,0.6)",
-}
-
-const $roleToggleTextActive: TextStyle = {
-  color: "#0B3069",
 }
 
 const $titleRow: ViewStyle = {
@@ -804,6 +837,19 @@ const $eduBannerIcon: ViewStyle = {
 const $eduBannerContent: ViewStyle = {
   flex: 1,
   gap: 4,
+}
+
+const $boardEmpty: ViewStyle = {
+  paddingVertical: 24,
+  alignItems: "center",
+  justifyContent: "center",
+}
+
+const $boardEmptyText: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.normal,
+  color: "#ABABAB",
+  textAlign: "center",
 }
 
 const $eduBannerTitle: TextStyle = {

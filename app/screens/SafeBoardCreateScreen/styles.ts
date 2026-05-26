@@ -286,30 +286,46 @@ export const $submitBtnText: TextStyle = {
 
 // ── Workplace modal ───────────────────────────────────────────────────────────
 
-export const $modalBackdrop: ViewStyle = {
-  backgroundColor: "rgba(0, 0, 0, 0.4)",
+export const $modalOverlay: ViewStyle = {
+  flex: 1,
+  backgroundColor: "rgba(0, 0, 0, 0.3)",
+  justifyContent: "flex-end",
 }
 
-export const $modalSheet: ViewStyle = {
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  right: 0,
+export const $modalContent: ViewStyle = {
   backgroundColor: "#FFFFFF",
   borderTopLeftRadius: 20,
   borderTopRightRadius: 20,
-  paddingTop: 8,
+  paddingTop: 36,
 }
 
-export const $modalItem: ViewStyle = {
-  paddingVertical: 16,
+export const $modalTitle: TextStyle = {
+  fontSize: 17,
+  fontFamily: typography.primary.medium,
+  color: "#000000",
   paddingHorizontal: 20,
-  borderBottomWidth: 1,
-  borderBottomColor: "#EEEEEE",
+  marginBottom: 12,
 }
 
-export const $modalItemText: TextStyle = {
-  fontSize: 15,
-  fontFamily: typography.primary.normal,
-  color: "#111111",
+export const $workplaceOption: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 12,
+  height: 66,
+  paddingHorizontal: 20,
+}
+
+export const $workplaceOptionSelected: ViewStyle = {
+  backgroundColor: "#E5F1FD",
+}
+
+export const $workplaceOptionText: TextStyle = {
+  flex: 1,
+  fontSize: 17,
+  fontFamily: typography.primary.medium,
+  color: "#000000",
+}
+
+export const $workplaceOptionTextSelected: TextStyle = {
+  color: "#1062D8",
 }

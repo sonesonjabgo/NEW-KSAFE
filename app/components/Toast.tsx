@@ -75,7 +75,7 @@ export const Toast: FC<ToastProps> = ({
 
   return (
     <Animated.View style={[$wrapperBase, { opacity: anim, top }]}>
-      <View style={[$containerStyle]}>
+      <View style={$containerStyle}>
         <View style={$circleStyle}>{icon}</View>
         <Text text={message} style={$textStyle} />
       </View>

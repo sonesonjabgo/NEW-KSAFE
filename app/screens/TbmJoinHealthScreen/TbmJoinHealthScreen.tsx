@@ -1,12 +1,14 @@
 import { FC, useState } from "react"
 import { TouchableOpacity, View } from "react-native"
 import { IconAlertCircle } from "@tabler/icons-react-native"
+import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { StackScreen } from "@/components/StackScreen"
-import { Toast } from "@/components/Toast"
 import { Text } from "@/components/Text"
+import { Toast } from "@/components/Toast"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 
 import * as S from "./styles"
@@ -15,19 +17,22 @@ type TbmJoinHealthScreenProps = AppStackScreenProps<"TbmJoinHealth">
 
 type HealthStatus = "good" | "bad" | null
 
-export const TbmJoinHealthScreen: FC<TbmJoinHealthScreenProps> = ({ navigation, route }) => {
-  const insets = useSafeAreaInsets()
-  const { id } = route.params
-  const [status, setStatus] = useState<HealthStatus>(null)
-  const [toastVisible, setToastVisible] = useState(false)
+export const TbmJoinHealthScreen: FC<TbmJoinHealthScreenProps> = observer(
+  function TbmJoinHealthScreen({ navigation, route }) {
+    const insets = useSafeAreaInsets()
+    const { id } = route.params
+    const { tbmStore } = useStores()
+    const [status, setStatus] = useState<HealthStatus>(null)
+    const [toastVisible, setToastVisible] = useState(false)
 
-  const handleNext = () => {
-    if (status === null) {
-      setToastVisible(true)
-    } else {
-      navigation.navigate("TbmJoinSign", { id })
+    const handleNext = () => {
+      if (status === null) {
+        setToastVisible(true)
+      } else {
+        tbmStore.setHealthStatus(status === "good" ? "normal" : "abnormal")
+        navigation.navigate("TbmJoinSign", { id })
+      }
     }
-  }
 
   return (
     <>
@@ -95,4 +100,5 @@ export const TbmJoinHealthScreen: FC<TbmJoinHealthScreenProps> = ({ navigation, 
       />
     </>
   )
-}
+},
+)
