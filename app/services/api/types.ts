@@ -34,6 +34,34 @@ export interface ApiFeedResponse {
   items: EpisodeItem[]
 }
 
+/* ── 언어 설정 API ── */
+
+export interface LanguageItem {
+  id: number
+  code: string
+  name: string
+  displayName: string
+  nativeName: string
+  sortOrder: number
+}
+
+export interface LanguagesResponse {
+  items: LanguageItem[]
+}
+
+export interface UserProfile {
+  email: string
+  username: string
+  phone: string
+  role: string
+  isActive: boolean
+  isProfileCompleted: boolean
+  isFcmTokenRegistered: boolean
+  preferredLanguageCode: string
+}
+
+/* ── API 설정 ── */
+
 /**
  * The options used to configure apisauce.
  */

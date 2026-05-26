@@ -1,0 +1,236 @@
+import en, { Translations } from "./en"
+import { mergeLocale, type LocaleOverrides } from "./mergeLocale"
+
+const ruOverrides = {
+  mainTab: {
+    home: "Главная",
+    safeBoard: "Доска безопасности",
+    safeHealth: "Управление безопасностью",
+    workerParticipation: "Участие работников",
+  },
+  loginScreen: {
+    tagline: "Партнёр по безопасности на рабочем месте",
+    forgotPassword: "Забыли пароль?",
+    forgotPasswordModal: {
+      title: "Уведомление",
+      message: "Для восстановления пароля обратитесь\nк вашему администратору.\nТел: 062-383-0083",
+      confirm: "ОК",
+    },
+    validation: {
+      required: "Введите адрес электронной почты и пароль.",
+      invalidEmail: "Введите действительный адрес электронной почты.",
+      passwordTooShort: "Пароль должен содержать не менее 6 символов.",
+      invalidCredentials: "Проверьте адрес электронной почты или пароль.",
+    },
+  },
+  homeScreen: {
+    orgName: "KS산업안전협회",
+    header: { qrScan: "Сканировать QR", notification: "Уведомления", language: "Язык" },
+    greeting: { message: "Желаем безопасного дня!", name: "{{name}}," },
+    role: { admin: "Администратор", worker: "Работник" },
+    board: {
+      title: "Доска",
+      viewMore: "Ещё",
+      tabs: { all: "Все", company: "Компания", workplace: "Рабочее место" },
+    },
+    grid: {
+      interpret: { label: "Перевод", sub: "Помощь переводчика" },
+      chatbot: { label: "Чат-бот", sub: "AI чат" },
+      translate: { label: "Перевод", sub: "Перевод текста" },
+      education: { label: "Обучение", sub: "Учебные материалы" },
+      eduJoin: { label: "Участие в обучении", sub: "Участие в обучении" },
+      tbmJoin: { label: "Участие в TBM", sub: "Участие в TBM" },
+      patrol: { label: "Обход", sub: "Проверка объекта" },
+      tbmCreate: { label: "Создать TBM", sub: "Создать TBM" },
+      tbmReport: { label: "Отчёт TBM", sub: "Создать отчёт" },
+      hazard: { label: "Опасность", sub: "Сообщить об опасности" },
+      suggestion: { label: "Предложение", sub: "Подать предложение" },
+    },
+    pushNotificationSheet: {
+      title: "Не пропустите важные оповещения",
+      description:
+        "Чтобы своевременно получать оповещения безопасности,\nразрешите push-уведомления.",
+      allowButton: "Разрешить push-уведомления",
+      settingsButton: "Изменить разрешение в настройках",
+    },
+    aiRiskBanner: {
+      title: "Анализ рисков ИИ",
+      description: "Анализируйте опасности и создавайте отчёты через камеру",
+      action: "Перейти",
+    },
+  },
+  safeBoardScreen: {
+    title: "Доска безопасности",
+    alertButton: "Тревога",
+    workplaceLabel: "Рабочее место",
+    workplaceModal: { title: "Выбрать рабочее место" },
+    badge: {
+      companyWide: "Вся компания",
+      workplace: "Рабочее место",
+      draft: "Черновик",
+      archived: "Архив",
+    },
+    tabs: { all: "Все", myPosts: "Мои" },
+    empty: "Нет публикаций",
+    write: "Написать",
+    draftSaved: "Публикация сохранена как черновик.",
+  },
+  safeHealthScreen: {
+    title: "Управление безопасностью",
+    menu: {
+      patrol: { title: "Обход", description: "Проверка безопасности объекта" },
+      educationMaterial: { title: "Учебные материалы", description: "Материалы TBM" },
+      tbmManage: { title: "Управление TBM", description: "Создание и управление" },
+      tbmReport: { title: "Отчёты", description: "Созданные отчёты" },
+      tbmJoin: { title: "Участие в TBM", description: "Участие через QR" },
+      tbmHistory: { title: "История", description: "История участия в TBM" },
+      tbmJoinWorker: { title: "Участие в TBM", description: "Участие в текущем TBM" },
+      statusView: { title: "Статус", description: "Статус безопасности" },
+    },
+  },
+  workerParticipationScreen: {
+    title: "Участие работников",
+    menu: {
+      hazard: { title: "Сообщить об опасности", description: "Сообщить об опасных зонах" },
+      suggestion: { title: "Предложение по улучшению", description: "Подать предложение" },
+    },
+  },
+  voiceTranslationScreen: {
+    title: "Голосовой перевод разговора",
+    flipScreen: "Перевернуть",
+    listening: "Слушаю...",
+    speakNow: "Говорите",
+    languageMenu: { title: "Распознанный язык" },
+    languageSubtitles: {
+      korean: "(Корейский)",
+      english: "(Английский)",
+      chineseSimplified: "(Китайский упрощённый)",
+      chineseTraditional: "(Китайский традиционный)",
+      russian: "",
+      vietnamese: "(Вьетнамский)",
+      indonesian: "(Индонезийский)",
+      khmer: "(Кхмерский)",
+      thai: "(Тайский)",
+      urdu: "(Урду)",
+      nepali: "(Непальский)",
+      lao: "(Лаосский)",
+      japanese: "(Японский)",
+      french: "(Французский)",
+      spanish: "(Испанский)",
+    },
+  },
+  aiSafetyChatScreen: {
+    title: "AI Ассистент безопасности",
+    aiName: "AI Ассистент безопасности",
+    welcomeMessage: "Здравствуйте! Я AI-ассистент по промышленной безопасности.",
+    inputPlaceholder: "Введите сообщение...",
+    inputHint: "Обязательно. Напишите от 2 до 1 000 символов.",
+    deleteDialog: {
+      title: "Удалить переписку",
+      message: "Вы уверены, что хотите удалить всю историю переписки?",
+      confirm: "Удалить",
+      cancel: "Отмена",
+    },
+    suggestedQuestions: {
+      q1: "Объясните общие правила безопасности на строительной площадке",
+      q2: "Каковы правила безопасности при работе на высоте?",
+      q3: "Какова процедура экстренного реагирования при пожаре?",
+    },
+  },
+  myPageScreen: {
+    logoutModal: {
+      title: "Выйти",
+      message: "Вы уверены, что хотите выйти?",
+      cancel: "Отмена",
+      confirm: "Выйти",
+    },
+  },
+  notify: {
+    mock: {
+      boardNewPost: {
+        title: "На доске появилась новая публикация.",
+        description: "Проверьте доску вашего рабочего места!",
+      },
+    },
+  },
+  educationPresentationScreen: {
+    title: "Обучение/Презентация",
+    inviteButton: "Пригласить",
+  },
+  tbmListScreen: {
+    title: "Список мероприятий TBM",
+    tabs: { all: "Все", drafting: "В разработке", ongoing: "В процессе", ended: "Завершено" },
+    status: { drafting: "В разработке", ongoing: "В процессе", ended: "Завершено" },
+    participants: "{{count}} участников",
+    fab: "Создать новое мероприятие",
+    empty: {
+      drafting: "Нет мероприятий TBM в разработке.",
+      ongoing: "Нет мероприятий TBM в процессе.",
+      ended: "Нет завершённых мероприятий TBM.",
+      all: "Нет мероприятий TBM.",
+    },
+  },
+  welcomeIntroScreen: {
+    skip: "Пропустить",
+    start: "Начать",
+    slide1: {
+      step: "01",
+      title: "Перевод на несколько языков в реальном времени",
+      description:
+        "Общайтесь с работниками любой национальности.\nМгновенный перевод голоса и текста\nдля более безопасного рабочего места.",
+    },
+    slide2: {
+      step: "02",
+      title: "Интегрированное управление TBM",
+      description:
+        "Отметьтесь на TBM одним сканированием QR — без бумаг.\nЦифровые подписи и отчёты\nв одном месте.",
+    },
+    slide3: {
+      step: "03",
+      title: "Оценка рисков с помощью AI",
+      description:
+        "Сфотографируйте объект, и AI проанализирует опасности\nи создаст черновик отчёта.",
+    },
+  },
+  languageSettings: {
+    languageTitle: "Язык",
+    languageDescription: "Мгновенно переключайте язык приложения.",
+    languageChangeSuccess: "Язык изменён на {{language}}.",
+    languageChangeRestart:
+      "Язык изменён на {{language}}.\nПриложение будет перезапущено для применения изменений.",
+    languageChangeError: "Не удалось изменить язык. Пожалуйста, попробуйте снова.",
+    languageNames: {
+      "en": "Английский",
+      "ko": "Корейский",
+      "zh": "Китайский",
+      "zh-Hans": "Китайский (упрощённый)",
+      "zh-Hant": "Китайский (традиционный)",
+      "ja": "Японский",
+      "es": "Испанский",
+      "fr": "Французский",
+      "de": "Немецкий",
+      "it": "Итальянский",
+      "ru": "Русский",
+      "ar": "Арабский",
+      "hi": "Хинди",
+      "th": "Тайский",
+      "vi": "Вьетнамский",
+      "id": "Индонезийский",
+      "km": "Кхмерский",
+      "ur": "Урду",
+      "ne": "Непальский",
+      "lo": "Лаосский",
+      "my": "Бирманский",
+      "yue": "Кантонский",
+      "pt": "Португальский",
+      "pt-BR": "Португальский (Бразилия)",
+      "ta": "Тамильский",
+      "te": "Телугу",
+      "uk": "Украинский",
+    },
+  },
+}
+
+const ru: Translations = mergeLocale(en, ruOverrides as LocaleOverrides<Translations>)
+
+export default ru

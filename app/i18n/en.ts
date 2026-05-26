@@ -138,6 +138,13 @@ const en = {
     },
   },
 
+  mainTab: {
+    home: "Home",
+    safeBoard: "Safety Board",
+    safeHealth: "Safety Management",
+    workerParticipation: "Worker Participation",
+  },
+
   homeScreen: {
     orgName: "KS Industrial Safety Association",
     header: {
@@ -173,6 +180,11 @@ const en = {
     banner: {
       text: "Safe Working Environment with K-SAFEONE",
     },
+    aiRiskBanner: {
+      title: "AI Hazard Analysis",
+      description: "Analyze hazards and generate reports via camera",
+      action: "Go",
+    },
     footer: {
       homepage: "Homepage",
       privacy: "Privacy Policy",
@@ -186,7 +198,7 @@ const en = {
       interpret: { label: "1:1 Interpretation", sub: "Real-time interpretation" },
       chatbot: { label: "AI Safety Chatbot", sub: "Safety Q&A / Consultation" },
       translate: { label: "Multilingual Translation", sub: "Language translation" },
-      education: { label: "Education/Presentation", sub: "Present educational materials" },
+      education: { label: "Education/\nPresentation", sub: "Present educational materials" },
       eduJoin: { label: "Join Education", sub: "Join education/presentation" },
       tbmJoin: { label: "Join TBM", sub: "Join safety inspection meeting" },
       patrol: { label: "Site Patrol", sub: "Patrol and record" },
@@ -453,25 +465,40 @@ const en = {
   },
 
   languageSettings: {
-    title: "Language Settings",
-    description: "Change the app language right away.",
-    changedTitle: "Language Settings",
-    changedDescription:
-      "The language has been changed to {{language}}.\nThe app will restart to apply the changes.",
-    confirm: "Confirm",
-    languages: {
-      ko: "Korean (한국어)",
-      en: "English",
-      zhHans: "Simplified Chinese (简体中文)",
-      zhHant: "Traditional Chinese (繁體中文)",
-      ru: "Russian (Русский)",
-      vi: "Vietnamese (Tiếng Việt)",
-      id: "Indonesian (Bahasa Indonesia)",
-      km: "Khmer (ភាសាខ្មែរ)",
-      th: "Thai (ไทย)",
-      ur: "Urdu (اردو)",
-      ne: "Nepali (नेपाली)",
-      lo: "Lao (ພາສາລາວ)",
+    languageTitle: "Language",
+    languageDescription: "Switch the app language instantly.",
+    languageChangeSuccess: "Language changed to {{language}}.",
+    languageChangeRestart:
+      "Language changed to {{language}}.\nThe app will restart to apply the update.",
+    languageChangeError: "Unable to change language. Please try again.",
+    languageNames: {
+      "en": "English",
+      "ko": "Korean",
+      "zh": "Chinese",
+      "zh-Hans": "Chinese (Simplified)",
+      "zh-Hant": "Chinese (Traditional)",
+      "yue": "Cantonese",
+      "pt": "Portuguese",
+      "pt-BR": "Portuguese (Brazil)",
+      "ja": "Japanese",
+      "es": "Spanish",
+      "fr": "French",
+      "de": "German",
+      "it": "Italian",
+      "ru": "Russian",
+      "ar": "Arabic",
+      "hi": "Hindi",
+      "ta": "Tamil",
+      "te": "Telugu",
+      "th": "Thai",
+      "uk": "Ukrainian",
+      "vi": "Vietnamese",
+      "id": "Indonesian",
+      "km": "Khmer",
+      "ur": "Urdu",
+      "ne": "Nepali",
+      "lo": "Lao",
+      "my": "Burmese",
     },
   },
 

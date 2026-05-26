@@ -68,7 +68,11 @@ const exitRoutes = Config.exitRoutes
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
-const AppStack = () => {
+type AppStackProps = {
+  initialRouteName: keyof AppStackParamList
+}
+
+const AppStack = ({ initialRouteName }: AppStackProps) => {
   const {
     theme: { colors },
   } = useAppTheme()
@@ -85,7 +89,7 @@ const AppStack = () => {
 
   return (
     <Stack.Navigator
-      initialRouteName={isAuthenticated ? "Main" : "WelcomeIntro"}
+      initialRouteName={initialRouteName}
       screenOptions={{
         headerShown: false,
         navigationBarColor: colors.background,
@@ -143,7 +147,11 @@ const AppStack = () => {
   )
 }
 
-export const AppNavigator = (props: NavigationProps) => {
+type AppNavigatorProps = NavigationProps & {
+  initialRouteName: keyof AppStackParamList
+}
+
+export const AppNavigator = ({ initialRouteName, ...props }: AppNavigatorProps) => {
   const { navigationTheme } = useAppTheme()
 
   useBackButtonHandler((routeName) => exitRoutes.includes(routeName))
@@ -151,7 +159,7 @@ export const AppNavigator = (props: NavigationProps) => {
   return (
     <NavigationContainer ref={navigationRef} theme={navigationTheme} {...props}>
       <ErrorBoundary catchErrors={Config.catchErrors}>
-        <AppStack />
+        <AppStack initialRouteName={initialRouteName} />
       </ErrorBoundary>
     </NavigationContainer>
   )

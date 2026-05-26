@@ -1,9 +1,7 @@
-import { Dimensions, TextStyle, ViewStyle } from "react-native"
+import { TextStyle, ViewStyle } from "react-native"
 
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
-
-export const SCREEN_WIDTH = Dimensions.get("window").width
 
 // ── Screen ────────────────────────────────────────────────────────────────────
 
@@ -21,7 +19,7 @@ export const $header: ViewStyle = {
   paddingHorizontal: 24,
   paddingTop: 14,
   paddingBottom: 8,
-  marginBottom: 45,
+  marginBottom: 20,
 }
 
 export const $logoText: TextStyle = {
@@ -42,13 +40,25 @@ export const $skipLabel: TextStyle = {
   color: colors.introSkip,
 }
 
-// ── Slide Area (헤더~버튼 사이 FlatList 컨테이너) ────────────────────────────
+// breakpoint 기준 header marginBottom 오버라이드
+export const $headerSmallPhone: ViewStyle = { marginBottom: 14 }
+export const $headerShortHeight: ViewStyle = { marginBottom: 10 }
 
+// ── Slide Area (헤더~버튼 사이 영역) ──────────────────────────────────────────
+
+// 헤더~버튼 사이 남은 공간 전체를 차지하며, slideGroup을 세로/가로 중앙 정렬
 export const $slideArea: ViewStyle = {
   flex: 1,
   justifyContent: "center",
   alignItems: "center",
-  paddingBottom: 48,
+}
+
+// FlatList + paginationWrapper를 하나의 콘텐츠 묶음으로 감싸는 wrapper
+// slideArea가 이 단일 블록을 중앙 정렬함
+export const $slideGroup: ViewStyle = {
+  width: "100%",
+  alignItems: "center",
+  justifyContent: "center",
 }
 
 export const $slideList: ViewStyle = {
@@ -58,22 +68,15 @@ export const $slideList: ViewStyle = {
 
 // ── Slide (FlatList 각 아이템) ────────────────────────────────────────────────
 
-export const $slide: ViewStyle = {
-  width: SCREEN_WIDTH,
-  alignItems: "center",
-  paddingHorizontal: 32,
-}
-
 export const $slideContent: ViewStyle = {
   alignItems: "center",
 }
 
-export const $imageContainer: ViewStyle = {
-  width: SCREEN_WIDTH * 0.55,
-  height: SCREEN_WIDTH * 0.55,
+// title + description을 감싸는 고정 높이 블록 — 슬라이드마다 pagination 위치가 흔들리지 않도록 함
+export const $textBlock: ViewStyle = {
+  width: "100%",
   alignItems: "center",
-  justifyContent: "center",
-  marginBottom: 28,
+  justifyContent: "flex-start",
 }
 
 export const $stepBadge: ViewStyle = {
@@ -110,12 +113,21 @@ export const $slideDescription: TextStyle = {
 
 // ── Pagination ────────────────────────────────────────────────────────────────
 
+// slideArea 안 FlatList 아래 고정 — (FlatList + pagination) 블록 전체가 slideArea 내 세로 중앙 배치됨
+// marginTop: 상세 설명과의 간격 기준 (버튼과의 간격은 slideArea centering이 담당)
+export const $paginationWrapper: ViewStyle = {
+  width: "100%",
+  marginTop: 24,
+  alignItems: "center",
+}
+
+export const $paginationWrapperShortHeight: ViewStyle = { marginTop: 16 }
+
 export const $paginationRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "center",
   gap: 6,
-  marginTop: 28,
 }
 
 export const $dot: ViewStyle = {
@@ -145,6 +157,8 @@ export const $startBtn: ViewStyle = {
   alignItems: "center",
   justifyContent: "center",
 }
+
+export const $startBtnCompact: ViewStyle = { height: 50 }
 
 export const $startBtnLabel: TextStyle = {
   fontSize: 17,

@@ -1,10 +1,12 @@
-import { StyleSheet } from "react-native"
+import { ViewStyle, TextStyle } from "react-native"
 
-const NAVY = "#0B3069"
+import { colors } from "@/theme/colors"
+import { typography } from "@/theme/typography"
+
+// 테마 토큰에 없는 디자인 전용 색상
 const NAVY_LIGHT = "#2E5386"
 const WHITE = "#FFFFFF"
 const WHITE_85 = "rgba(255,255,255,0.85)"
-const CONTENT_BG = "#F9FAFE"
 const BORDER_LIGHT = "#E5E7EB"
 const ACCENT_BLUE = "#2563EB"
 const TEXT_GRAY = "#374151"
@@ -18,282 +20,302 @@ const INACTIVE_TEXT = "#9CA3AF"
 const REQUIRED_RED = "#EF4444"
 const TEXT_DARK = "#1F2937"
 const HELPER_COLOR = "#6B7280"
-const CORNER_SIZE = 24
-const CORNER_THICKNESS = 4
-const CORNER_COLOR = NAVY
 
-export const styles = StyleSheet.create({
-  /* ── 코드 입력 필드 ── */
-  codeInput: {
-    borderColor: GRAY_MEDIUM,
-    borderRadius: 10,
-    borderWidth: 1,
-    color: TEXT_DARK,
-    fontSize: 15,
-    marginBottom: 8,
-    paddingHorizontal: 14,
-    paddingVertical: 14,
-  },
+export const CORNER_THICKNESS = 4
 
-  /* ── 하단 콘텐츠 영역 ── */
-  contentArea: {
-    backgroundColor: CONTENT_BG,
-    borderTopLeftRadius: 26,
-    borderTopRightRadius: 26,
-    flex: 1,
-    gap: 14,
-    paddingBottom: 32,
-    paddingHorizontal: 20,
-    paddingTop: 24,
-  },
+/* ── 루트 ── */
+export const $root: ViewStyle = {
+  backgroundColor: colors.navy,
+  flex: 1,
+}
 
-  /* QR 프레임 모서리 */
-  cornerBL: {
-    borderBottomLeftRadius: 4,
-    borderBottomWidth: CORNER_THICKNESS,
-    borderColor: CORNER_COLOR,
-    borderLeftWidth: CORNER_THICKNESS,
-    bottom: 0,
-    height: CORNER_SIZE,
-    left: 0,
-    position: "absolute",
-    width: CORNER_SIZE,
-  },
-  cornerBR: {
-    borderBottomRightRadius: 4,
-    borderBottomWidth: CORNER_THICKNESS,
-    borderColor: CORNER_COLOR,
-    borderRightWidth: CORNER_THICKNESS,
-    bottom: 0,
-    height: CORNER_SIZE,
-    position: "absolute",
-    right: 0,
-    width: CORNER_SIZE,
-  },
-  cornerTL: {
-    borderColor: CORNER_COLOR,
-    borderLeftWidth: CORNER_THICKNESS,
-    borderTopLeftRadius: 4,
-    borderTopWidth: CORNER_THICKNESS,
-    height: CORNER_SIZE,
-    left: 0,
-    position: "absolute",
-    top: 0,
-    width: CORNER_SIZE,
-  },
-  cornerTR: {
-    borderColor: CORNER_COLOR,
-    borderRightWidth: CORNER_THICKNESS,
-    borderTopRightRadius: 4,
-    borderTopWidth: CORNER_THICKNESS,
-    height: CORNER_SIZE,
-    position: "absolute",
-    right: 0,
-    top: 0,
-    width: CORNER_SIZE,
-  },
+/* ── 헤더 (StackScreen 기준과 동일) ── */
+export const $header: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+  paddingHorizontal: 20,
+  paddingBottom: 14,
+  minHeight: 100,
+}
 
-  /* ── 바텀시트 핸들바 ── */
-  handle: {
-    alignSelf: "center",
-    backgroundColor: HANDLE_COLOR,
-    borderRadius: 4,
-    height: 4,
-    marginBottom: 20,
-    width: 46,
-  },
+export const $headerSide: ViewStyle = {
+  width: 44,
+  height: 36,
+  justifyContent: "center",
+  alignItems: "flex-start",
+}
 
-  /* ── 헤더 ── */
-  header: {
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    paddingBottom: 12,
-    paddingHorizontal: 16,
-  },
-  headerDesc: {
-    color: WHITE_85,
-    fontSize: 14,
-    lineHeight: 22,
-    textAlign: "center",
-  },
-  /* ── 헤더 설명 ── */
-  headerDescContainer: {
-    alignItems: "center",
-    paddingBottom: 24,
-    paddingHorizontal: 24,
-  },
-  headerIconBtn: {
-    alignItems: "center",
-    height: 36,
-    justifyContent: "center",
-    width: 36,
-  },
-  headerTitle: {
-    color: WHITE,
-    flex: 1,
-    fontSize: 17,
-    fontWeight: "600",
-    textAlign: "center",
-  },
+export const $headerTitleContainer: ViewStyle = {
+  position: "absolute",
+  left: 0,
+  right: 0,
+  alignItems: "center",
+}
 
-  /* ── 바텀시트 도움말 텍스트 ── */
-  helperText: {
-    color: HELPER_COLOR,
-    fontSize: 13,
-    lineHeight: 20,
-    marginBottom: 24,
-  },
+export const $headerTitle: TextStyle = {
+  color: WHITE,
+  fontSize: 20,
+  fontFamily: typography.primary.semiBold,
+  textAlign: "center",
+}
 
-  /* ── 회의 참여 버튼 ── */
-  joinBtn: {
-    alignItems: "center",
-    borderRadius: 12,
-    paddingVertical: 16,
-  },
-  joinBtnActive: {
-    backgroundColor: NAVY,
-  },
-  joinBtnInactive: {
-    backgroundColor: INACTIVE_BTN,
-  },
-  joinBtnText: {
-    fontSize: 16,
-    fontWeight: "600",
-  },
-  joinBtnTextActive: {
-    color: WHITE,
-  },
-  joinBtnTextInactive: {
-    color: INACTIVE_TEXT,
-  },
+/* ── 키보드 버튼 (우측 슬롯) ── */
+export const $keyboardBtn: ViewStyle = {
+  alignItems: "center",
+  backgroundColor: NAVY_LIGHT,
+  borderRadius: 8,
+  height: 36,
+  justifyContent: "center",
+  width: 36,
+}
 
-  keyboardBtn: {
-    alignItems: "center",
-    backgroundColor: NAVY_LIGHT,
-    borderRadius: 8,
-    height: 36,
-    justifyContent: "center",
-    width: 36,
-  },
+/* ── 헤더 설명 ── */
+export const $headerDescContainer: ViewStyle = {
+  alignItems: "center",
+  paddingHorizontal: 24,
+  // paddingBottom: 동적 적용
+}
 
-  /* ── 언어 카드 ── */
-  languageCard: {
-    alignItems: "center",
-    backgroundColor: WHITE,
-    borderColor: BORDER_LIGHT,
-    borderRadius: 14,
-    borderWidth: 1,
-    flexDirection: "row",
-    gap: 10,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-  },
-  languageHighlight: {
-    color: ACCENT_BLUE,
-    fontWeight: "500",
-  },
-  languageText: {
-    color: TEXT_GRAY,
-    fontSize: 14,
-  },
+export const $headerDesc: TextStyle = {
+  color: WHITE_85,
+  textAlign: "center",
+  // fontSize / lineHeight: 동적 적용
+}
 
-  /* ── 딤 오버레이 ── */
-  overlay: {
-    flex: 1,
-    justifyContent: "flex-end",
-  },
-  overlayBg: {
-    backgroundColor: OVERLAY_BG,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
-    right: 0,
-    top: 0,
-  },
-  overlayDismiss: {
-    flex: 1,
-  },
+/* ── 하단 콘텐츠 영역 ── */
+export const $contentArea: ViewStyle = {
+  backgroundColor: colors.screenBg,
+  borderTopLeftRadius: 26,
+  borderTopRightRadius: 26,
+  flex: 1,
+  paddingBottom: 32,
+  // paddingHorizontal / paddingTop: 동적 적용
+}
 
-  /* 카메라 권한 배너 */
-  permissionBanner: {
-    alignItems: "center",
-    alignSelf: "stretch",
-    backgroundColor: WARNING_BG,
-    borderRadius: 10,
-    flexDirection: "row",
-    gap: 6,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-  },
-  permissionText: {
-    color: WARNING_TEXT,
-    flex: 1,
-    fontSize: 13,
-    lineHeight: 18,
-  },
+/* ── 콘텐츠 내부 래퍼 (gap + 태블릿 maxWidth) ── */
+export const $contentInner: ViewStyle = {
+  flex: 1,
+  gap: 14,
+}
 
-  /* QR 프레임 */
-  qrFrameWrapper: {
-    alignItems: "center",
-    height: 220,
-    justifyContent: "center",
-    position: "relative",
-    width: 220,
-  },
+export const $contentInnerTablet: ViewStyle = {
+  maxWidth: 520,
+  alignSelf: "center",
+  width: "100%",
+}
 
-  /* ── 필수 표시 ── */
-  required: {
-    color: REQUIRED_RED,
-    fontSize: 15,
-  },
+/* ── QR 스캔 카드 ── */
+export const $scanCard: ViewStyle = {
+  alignItems: "center",
+  backgroundColor: WHITE,
+  borderColor: BORDER_LIGHT,
+  borderRadius: 22,
+  borderWidth: 1,
+  gap: 16,
+  // padding: 동적 적용
+}
 
-  /* 다시 시도 버튼 */
-  retryBtn: {
-    alignItems: "center",
-    alignSelf: "stretch",
-    backgroundColor: NAVY,
-    borderRadius: 12,
-    paddingVertical: 15,
-  },
-  retryBtnText: {
-    color: WHITE,
-    fontSize: 15,
-    fontWeight: "600",
-  },
+/* QR 프레임 — width/height 동적 적용 */
+export const $qrFrameWrapper: ViewStyle = {
+  alignItems: "center",
+  justifyContent: "center",
+  position: "relative",
+}
 
-  /* ── 루트 ── */
-  root: {
-    backgroundColor: NAVY,
-    flex: 1,
-  },
+/* QR 프레임 모서리 — width/height 동적 적용 */
+export const $cornerTL: ViewStyle = {
+  borderColor: colors.navy,
+  borderLeftWidth: CORNER_THICKNESS,
+  borderTopLeftRadius: 4,
+  borderTopWidth: CORNER_THICKNESS,
+  left: 0,
+  position: "absolute",
+  top: 0,
+}
 
-  /* ── QR 스캔 카드 ── */
-  scanCard: {
-    alignItems: "center",
-    backgroundColor: WHITE,
-    borderColor: BORDER_LIGHT,
-    borderRadius: 22,
-    borderWidth: 1,
-    gap: 16,
-    paddingBottom: 24,
-    paddingHorizontal: 20,
-    paddingTop: 24,
-  },
+export const $cornerTR: ViewStyle = {
+  borderColor: colors.navy,
+  borderRightWidth: CORNER_THICKNESS,
+  borderTopRightRadius: 4,
+  borderTopWidth: CORNER_THICKNESS,
+  position: "absolute",
+  right: 0,
+  top: 0,
+}
 
-  /* ── 바텀시트 ── */
-  sheet: {
-    backgroundColor: WHITE,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    paddingBottom: 32,
-    paddingHorizontal: 20,
-    paddingTop: 12,
-  },
-  sheetDesc: {
-    color: TEXT_DARK,
-    fontSize: 15,
-    lineHeight: 22,
-    marginBottom: 16,
-  },
-})
+export const $cornerBL: ViewStyle = {
+  borderBottomLeftRadius: 4,
+  borderBottomWidth: CORNER_THICKNESS,
+  borderColor: colors.navy,
+  borderLeftWidth: CORNER_THICKNESS,
+  bottom: 0,
+  left: 0,
+  position: "absolute",
+}
+
+export const $cornerBR: ViewStyle = {
+  borderBottomRightRadius: 4,
+  borderBottomWidth: CORNER_THICKNESS,
+  borderColor: colors.navy,
+  borderRightWidth: CORNER_THICKNESS,
+  bottom: 0,
+  position: "absolute",
+  right: 0,
+}
+
+/* ── 카메라 권한 배너 ── */
+export const $permissionBanner: ViewStyle = {
+  alignItems: "center",
+  alignSelf: "stretch",
+  backgroundColor: WARNING_BG,
+  borderRadius: 10,
+  flexDirection: "row",
+  gap: 6,
+  paddingHorizontal: 12,
+  paddingVertical: 10,
+}
+
+export const $permissionText: TextStyle = {
+  color: WARNING_TEXT,
+  flex: 1,
+  lineHeight: 18,
+  // fontSize: 동적 적용
+}
+
+/* ── 다시 시도 버튼 ── */
+export const $retryBtn: ViewStyle = {
+  alignItems: "center",
+  alignSelf: "stretch",
+  backgroundColor: colors.navy,
+  borderRadius: 12,
+  // paddingVertical: 동적 적용
+}
+
+export const $retryBtnText: TextStyle = {
+  color: WHITE,
+  fontWeight: "600",
+  // fontSize: 동적 적용
+}
+
+/* ── 언어 카드 ── */
+export const $languageCard: ViewStyle = {
+  alignItems: "center",
+  backgroundColor: WHITE,
+  borderColor: BORDER_LIGHT,
+  borderRadius: 14,
+  borderWidth: 1,
+  flexDirection: "row",
+  gap: 10,
+  paddingHorizontal: 16,
+  // paddingVertical: 동적 적용
+}
+
+export const $languageText: TextStyle = {
+  color: TEXT_GRAY,
+  // fontSize: 동적 적용
+}
+
+export const $languageHighlight: TextStyle = {
+  color: ACCENT_BLUE,
+  fontWeight: "500",
+}
+
+/* ── 딤 오버레이 ── */
+export const $overlay: ViewStyle = {
+  flex: 1,
+  justifyContent: "flex-end",
+}
+
+export const $overlayBg: ViewStyle = {
+  backgroundColor: OVERLAY_BG,
+  bottom: 0,
+  left: 0,
+  position: "absolute",
+  right: 0,
+  top: 0,
+}
+
+export const $overlayDismiss: ViewStyle = {
+  flex: 1,
+}
+
+/* ── 바텀시트 ── */
+export const $sheet: ViewStyle = {
+  backgroundColor: WHITE,
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+  paddingBottom: 32,
+  paddingHorizontal: 20,
+  paddingTop: 12,
+}
+
+export const $handle: ViewStyle = {
+  alignSelf: "center",
+  backgroundColor: HANDLE_COLOR,
+  borderRadius: 4,
+  height: 4,
+  marginBottom: 20,
+  width: 46,
+}
+
+export const $sheetDesc: TextStyle = {
+  color: TEXT_DARK,
+  fontSize: 15,
+  lineHeight: 22,
+  marginBottom: 16,
+}
+
+/* ── 코드 입력 필드 ── */
+export const $codeInput: TextStyle = {
+  borderColor: GRAY_MEDIUM,
+  borderRadius: 10,
+  borderWidth: 1,
+  color: TEXT_DARK,
+  fontSize: 15,
+  marginBottom: 8,
+  paddingHorizontal: 14,
+  paddingVertical: 14,
+}
+
+/* ── 도움말 텍스트 ── */
+export const $helperText: TextStyle = {
+  color: HELPER_COLOR,
+  fontSize: 13,
+  lineHeight: 20,
+  marginBottom: 24,
+}
+
+/* ── 회의 참여 버튼 ── */
+export const $joinBtn: ViewStyle = {
+  alignItems: "center",
+  borderRadius: 12,
+  paddingVertical: 16,
+}
+
+export const $joinBtnActive: ViewStyle = {
+  backgroundColor: colors.navy,
+}
+
+export const $joinBtnInactive: ViewStyle = {
+  backgroundColor: INACTIVE_BTN,
+}
+
+export const $joinBtnText: TextStyle = {
+  fontSize: 16,
+  fontWeight: "600",
+}
+
+export const $joinBtnTextActive: TextStyle = {
+  color: WHITE,
+}
+
+export const $joinBtnTextInactive: TextStyle = {
+  color: INACTIVE_TEXT,
+}
+
+/* ── 필수 표시 ── */
+export const $required: TextStyle = {
+  color: REQUIRED_RED,
+  fontSize: 15,
+}

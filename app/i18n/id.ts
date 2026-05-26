@@ -1,0 +1,237 @@
+import en, { Translations } from "./en"
+import { mergeLocale, type LocaleOverrides } from "./mergeLocale"
+
+const idOverrides = {
+  mainTab: {
+    home: "Beranda",
+    safeBoard: "Papan Keamanan",
+    safeHealth: "Manajemen Keselamatan",
+    workerParticipation: "Partisipasi Pekerja",
+  },
+  loginScreen: {
+    tagline: "Mitra Keselamatan Tempat Kerja",
+    forgotPassword: "Lupa kata sandi?",
+    forgotPasswordModal: {
+      title: "Pemberitahuan",
+      message:
+        "Untuk pemulihan kata sandi, silakan hubungi\nadministrator Anda.\nTelp: 062-383-0083",
+      confirm: "OK",
+    },
+    validation: {
+      required: "Harap masukkan email dan kata sandi Anda.",
+      invalidEmail: "Harap masukkan alamat email yang valid.",
+      passwordTooShort: "Kata sandi minimal 6 karakter.",
+      invalidCredentials: "Periksa email atau kata sandi Anda.",
+    },
+  },
+  homeScreen: {
+    orgName: "KS산업안전협회",
+    header: { qrScan: "Pindai QR", notification: "Notifikasi", language: "Bahasa" },
+    greeting: { message: "Semoga hari yang aman!", name: "{{name}}," },
+    role: { admin: "Admin", worker: "Pekerja" },
+    board: {
+      title: "Papan",
+      viewMore: "Selengkapnya",
+      tabs: { all: "Semua", company: "Perusahaan", workplace: "Tempat Kerja" },
+    },
+    grid: {
+      interpret: { label: "Interpretasi", sub: "Dukungan Interpretasi" },
+      chatbot: { label: "Chatbot", sub: "AI Chat" },
+      translate: { label: "Terjemahan", sub: "Terjemahan Teks" },
+      education: { label: "Pendidikan", sub: "Materi Pendidikan" },
+      eduJoin: { label: "Ikut Edu", sub: "Ikut Pendidikan" },
+      tbmJoin: { label: "Ikut TBM", sub: "Ikut TBM" },
+      patrol: { label: "Patroli", sub: "Inspeksi Lapangan" },
+      tbmCreate: { label: "Buat TBM", sub: "Buat TBM" },
+      tbmReport: { label: "Laporan TBM", sub: "Buat Laporan" },
+      hazard: { label: "Bahaya", sub: "Laporkan Bahaya" },
+      suggestion: { label: "Saran", sub: "Ajukan Saran" },
+    },
+    pushNotificationSheet: {
+      title: "Jangan Lewatkan Peringatan Penting",
+      description:
+        "Untuk menerima peringatan keselamatan tepat waktu,\naktifkan izin notifikasi push.",
+      allowButton: "Izinkan Notifikasi Push",
+      settingsButton: "Ubah Izin di Pengaturan",
+    },
+    aiRiskBanner: {
+      title: "Analisis Bahaya AI",
+      description: "Analisis bahaya dan buat laporan melalui kamera",
+      action: "Buka",
+    },
+  },
+  safeBoardScreen: {
+    title: "Papan Keamanan",
+    alertButton: "Peringatan",
+    workplaceLabel: "Tempat Kerja",
+    workplaceModal: { title: "Pilih Tempat Kerja" },
+    badge: {
+      companyWide: "Seluruh Perusahaan",
+      workplace: "Tempat Kerja",
+      draft: "Draf",
+      archived: "Diarsipkan",
+    },
+    tabs: { all: "Semua", myPosts: "Posting Saya" },
+    empty: "Tidak ada posting",
+    write: "Tulis",
+    draftSaved: "Posting disimpan sebagai draf.",
+  },
+  safeHealthScreen: {
+    title: "Manajemen Keselamatan",
+    menu: {
+      patrol: { title: "Patroli", description: "Inspeksi keselamatan lapangan" },
+      educationMaterial: { title: "Materi Edu", description: "Materi pendidikan TBM" },
+      tbmManage: { title: "Kelola TBM", description: "Buat & kelola aktivitas" },
+      tbmReport: { title: "Laporan", description: "Laporan yang dihasilkan" },
+      tbmJoin: { title: "Ikut TBM", description: "Bergabung via QR" },
+      tbmHistory: { title: "Riwayat", description: "Riwayat partisipasi TBM" },
+      tbmJoinWorker: { title: "Ikut TBM", description: "Bergabung TBM saat ini" },
+      statusView: { title: "Status", description: "Status keselamatan lapangan" },
+    },
+  },
+  workerParticipationScreen: {
+    title: "Partisipasi Pekerja",
+    menu: {
+      hazard: { title: "Laporkan Bahaya", description: "Laporkan area berbahaya" },
+      suggestion: { title: "Saran Perbaikan", description: "Ajukan ide perbaikan" },
+    },
+  },
+  voiceTranslationScreen: {
+    title: "Terjemahan Percakapan Suara",
+    flipScreen: "Balik",
+    listening: "Mendengarkan...",
+    speakNow: "Silakan berbicara",
+    languageMenu: { title: "Bahasa yang Dikenali" },
+    languageSubtitles: {
+      korean: "(Korea)",
+      english: "(Inggris)",
+      chineseSimplified: "(Cina Sederhana)",
+      chineseTraditional: "(Cina Tradisional)",
+      russian: "(Rusia)",
+      vietnamese: "(Vietnam)",
+      indonesian: "",
+      khmer: "(Khmer)",
+      thai: "(Thai)",
+      urdu: "(Urdu)",
+      nepali: "(Nepali)",
+      lao: "(Lao)",
+      japanese: "(Jepang)",
+      french: "(Prancis)",
+      spanish: "(Spanyol)",
+    },
+  },
+  aiSafetyChatScreen: {
+    title: "Asisten Keselamatan AI",
+    aiName: "Asisten Keselamatan AI",
+    welcomeMessage: "Halo! Saya adalah Asisten AI Keselamatan Industri.",
+    inputPlaceholder: "Masukkan pesan...",
+    inputHint: "Wajib diisi. Tulis antara 2 hingga 1.000 karakter.",
+    deleteDialog: {
+      title: "Hapus Percakapan",
+      message: "Apakah Anda yakin ingin menghapus semua riwayat percakapan?",
+      confirm: "Hapus",
+      cancel: "Batal",
+    },
+    suggestedQuestions: {
+      q1: "Jelaskan peraturan keselamatan umum di lokasi konstruksi",
+      q2: "Apa aturan keselamatan untuk bekerja di ketinggian?",
+      q3: "Apa prosedur tanggap darurat jika terjadi kebakaran?",
+    },
+  },
+  myPageScreen: {
+    logoutModal: {
+      title: "Keluar",
+      message: "Apakah Anda yakin ingin keluar?",
+      cancel: "Batal",
+      confirm: "Keluar",
+    },
+  },
+  notify: {
+    mock: {
+      boardNewPost: {
+        title: "Postingan baru telah dibuat di papan.",
+        description: "Periksa papan tempat kerja Anda!",
+      },
+    },
+  },
+  educationPresentationScreen: {
+    title: "Pendidikan/Presentasi",
+    inviteButton: "Undang",
+  },
+  tbmListScreen: {
+    title: "Daftar Kegiatan TBM",
+    tabs: { all: "Semua", drafting: "Sedang Ditulis", ongoing: "Berlangsung", ended: "Selesai" },
+    status: { drafting: "Sedang Ditulis", ongoing: "Berlangsung", ended: "Selesai" },
+    participants: "{{count}} peserta",
+    fab: "Buat Kegiatan Baru",
+    empty: {
+      drafting: "Tidak ada TBM yang sedang ditulis.",
+      ongoing: "Tidak ada TBM yang sedang berlangsung.",
+      ended: "Tidak ada TBM yang telah selesai.",
+      all: "Tidak ada kegiatan TBM.",
+    },
+  },
+  welcomeIntroScreen: {
+    skip: "Lewati",
+    start: "Mulai",
+    slide1: {
+      step: "01",
+      title: "Terjemahan Multibahasa Real-Time",
+      description:
+        "Berkomunikasi lancar dengan pekerja dari semua negara.\nTerjemahan suara dan teks instan\nuntuk tempat kerja yang lebih aman.",
+    },
+    slide2: {
+      step: "02",
+      title: "Manajemen TBM Terpadu",
+      description:
+        "Check-in TBM dengan satu scan QR — tanpa kertas.\nTanda tangan digital dan laporan\ndiselesaikan di satu tempat.",
+    },
+    slide3: {
+      step: "03",
+      title: "Penilaian Risiko AI",
+      description:
+        "Cukup foto lokasi dan AI akan menganalisis bahaya\nserta membuat draf laporan untuk Anda.",
+    },
+  },
+  languageSettings: {
+    languageTitle: "Bahasa",
+    languageDescription: "Ganti bahasa aplikasi secara instan.",
+    languageChangeSuccess: "Bahasa telah diubah ke {{language}}.",
+    languageChangeRestart:
+      "Bahasa telah diubah ke {{language}}.\nAplikasi akan dimulai ulang untuk menerapkan perubahan.",
+    languageChangeError: "Gagal mengubah bahasa. Silakan coba lagi.",
+    languageNames: {
+      "en": "Inggris",
+      "ko": "Korea",
+      "zh": "Mandarin",
+      "zh-Hans": "Mandarin (Sederhana)",
+      "zh-Hant": "Mandarin (Tradisional)",
+      "ja": "Jepang",
+      "es": "Spanyol",
+      "fr": "Prancis",
+      "de": "Jerman",
+      "it": "Italia",
+      "ru": "Rusia",
+      "ar": "Arab",
+      "hi": "Hindi",
+      "th": "Thai",
+      "vi": "Vietnam",
+      "id": "Indonesia",
+      "km": "Khmer",
+      "ur": "Urdu",
+      "ne": "Nepal",
+      "lo": "Laos",
+      "my": "Burma",
+      "yue": "Kanton",
+      "pt": "Portugis",
+      "pt-BR": "Portugis (Brasil)",
+      "ta": "Tamil",
+      "te": "Telugu",
+      "uk": "Ukraina",
+    },
+  },
+}
+
+const id: Translations = mergeLocale(en, idOverrides as LocaleOverrides<Translations>)
+
+export default id

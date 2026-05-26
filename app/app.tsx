@@ -18,13 +18,14 @@ if (__DEV__) {
 }
 import "./utils/gestureHandler"
 
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useFonts } from "expo-font"
 import * as Linking from "expo-linking"
 import { KeyboardProvider } from "react-native-keyboard-controller"
 import { initialWindowMetrics, SafeAreaProvider } from "react-native-safe-area-context"
 
 import { GluestackUIProvider } from "./components/ui/gluestack-ui-provider"
+import { HAS_LAUNCHED_KEY } from "./constants/storageKeys"
 import { AuthProvider } from "./context/AuthContext"
 import { RoleProvider } from "./context/RoleContext"
 import { initI18n } from "./i18n"
@@ -61,6 +62,13 @@ export function App() {
   const [isI18nInitialized, setIsI18nInitialized] = useState(false)
   const { rehydrated, rootStore } = useInitialRootStore()
 
+  // MMKV는 동기 API — Navigator 렌더 전에 한 번만 읽어 초기 라우트 결정
+  const initialRoute = useMemo(() => {
+    const value = storage.loadString(HAS_LAUNCHED_KEY)
+    console.log("[App] HAS_LAUNCHED_KEY →", JSON.stringify(value))
+    return value === "true" ? ("Main" as const) : ("WelcomeIntro" as const)
+  }, [])
+
   useEffect(() => {
     initI18n()
       .then(() => setIsI18nInitialized(true))
@@ -90,7 +98,11 @@ export function App() {
             <AuthProvider>
               <RoleProvider>
                 <ThemeProvider>
-                  <AppNavigator linking={linking} onStateChange={onNavigationStateChange} />
+                  <AppNavigator
+                    initialRouteName={initialRoute}
+                    linking={linking}
+                    onStateChange={onNavigationStateChange}
+                  />
                 </ThemeProvider>
               </RoleProvider>
             </AuthProvider>

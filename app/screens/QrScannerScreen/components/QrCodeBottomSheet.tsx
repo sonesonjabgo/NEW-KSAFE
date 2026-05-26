@@ -11,7 +11,7 @@ import {
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
 
-import { styles } from "../styles"
+import * as S from "../styles"
 
 interface Props {
   isVisible: boolean
@@ -65,30 +65,27 @@ export const QrCodeBottomSheet: FC<Props> = ({ isVisible, onClose }) => {
 
   return (
     <Modal visible={modalVisible} transparent animationType="none" onRequestClose={onClose}>
-      <View style={styles.overlay}>
+      <View style={S.$overlay}>
         {/* 딤 배경: 전체 화면 고정, fade 애니메이션 */}
-        <Animated.View
-          style={[styles.overlayBg, { opacity: overlayOpacity }]}
-          pointerEvents="none"
-        />
+        <Animated.View style={[S.$overlayBg, { opacity: overlayOpacity }]} pointerEvents="none" />
 
         {/* 딤 영역 탭 시 닫힘 */}
-        <TouchableOpacity style={styles.overlayDismiss} activeOpacity={1} onPress={onClose} />
+        <TouchableOpacity style={S.$overlayDismiss} activeOpacity={1} onPress={onClose} />
 
         {/* 바텀시트: 하단에서 슬라이드 업 */}
-        <Animated.View style={[styles.sheet, { transform: [{ translateY: sheetTranslateY }] }]}>
+        <Animated.View style={[S.$sheet, { transform: [{ translateY: sheetTranslateY }] }]}>
           {/* 핸들바 */}
-          <View style={styles.handle} />
+          <View style={S.$handle} />
 
           {/* 안내 문구 */}
-          <Text style={styles.sheetDesc}>
+          <Text style={S.$sheetDesc}>
             {translate("qrScanner:enterCode")}
-            <Text style={styles.required}> *</Text>
+            <Text style={S.$required}> *</Text>
           </Text>
 
           {/* 코드 입력 */}
           <TextInput
-            style={styles.codeInput}
+            style={S.$codeInput}
             placeholder={translate("qrScanner:codePlaceholder")}
             placeholderTextColor="#9CA3AF"
             value={accessCode}
@@ -98,21 +95,16 @@ export const QrCodeBottomSheet: FC<Props> = ({ isVisible, onClose }) => {
           />
 
           {/* 설명 문구 */}
-          <Text style={styles.helperText}>{translate("qrScanner:enterCodeDescription")}</Text>
+          <Text style={S.$helperText}>{translate("qrScanner:enterCodeDescription")}</Text>
 
           {/* 회의 참여하기 버튼 */}
           <TouchableOpacity
-            style={[styles.joinBtn, isReady ? styles.joinBtnActive : styles.joinBtnInactive]}
+            style={[S.$joinBtn, isReady ? S.$joinBtnActive : S.$joinBtnInactive]}
             activeOpacity={0.85}
             disabled={!isReady}
             onPress={() => console.log(accessCode)}
           >
-            <Text
-              style={[
-                styles.joinBtnText,
-                isReady ? styles.joinBtnTextActive : styles.joinBtnTextInactive,
-              ]}
-            >
+            <Text style={[S.$joinBtnText, isReady ? S.$joinBtnTextActive : S.$joinBtnTextInactive]}>
               {translate("qrScanner:joinMeeting")}
             </Text>
           </TouchableOpacity>

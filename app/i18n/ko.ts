@@ -138,6 +138,13 @@ const ko: Translations = {
     },
   },
 
+  mainTab: {
+    home: "홈",
+    safeBoard: "안전게시판",
+    safeHealth: "안전관리",
+    workerParticipation: "근로자 참여",
+  },
+
   homeScreen: {
     orgName: "KS산업안전협회",
     header: {
@@ -172,6 +179,11 @@ const ko: Translations = {
     },
     banner: {
       text: "K-SAFEONE과 함께하는 안전한 작업환경",
+    },
+    aiRiskBanner: {
+      title: "인공지능 위험분석",
+      description: "카메라 촬영으로 위험 요소 분석 및 보고서 생성",
+      action: "바로가기",
     },
     footer: {
       homepage: "홈페이지",
@@ -444,25 +456,40 @@ const ko: Translations = {
   },
 
   languageSettings: {
-    title: "언어 설정",
-    description: "앱 언어를 바로 변경하세요.",
-    changedTitle: "언어 설정",
-    changedDescription:
+    languageTitle: "언어 설정",
+    languageDescription: "앱 언어를 바로 변경하세요.",
+    languageChangeSuccess: "언어가 {{language}}(으)로 변경되었습니다.",
+    languageChangeRestart:
       "언어가 {{language}}(으)로 변경되었습니다.\n변경 사항 적용을 위해 앱을 다시 시작합니다.",
-    confirm: "확인",
-    languages: {
-      ko: "한국어",
-      en: "English (영어)",
-      zhHans: "简体中文 (중국어(간체))",
-      zhHant: "繁體中文 (중국어(번체))",
-      ru: "Русский (러시아어)",
-      vi: "Tiếng Việt (베트남어)",
-      id: "Bahasa Indonesia (인도네시아어)",
-      km: "ភាសាខ្មែរ (크메르어)",
-      th: "ไทย (태국어)",
-      ur: "اردو (우르드어)",
-      ne: "नेपाली (네팔어)",
-      lo: "ພາສາລາວ (라오어)",
+    languageChangeError: "언어를 변경하지 못했습니다. 다시 시도해주세요.",
+    languageNames: {
+      "en": "영어",
+      "ko": "한국어",
+      "zh": "중국어",
+      "zh-Hans": "중국어(간체)",
+      "zh-Hant": "중국어(번체)",
+      "yue": "광둥어",
+      "pt": "포르투갈어",
+      "pt-BR": "포르투갈어(브라질)",
+      "ja": "일본어",
+      "es": "스페인어",
+      "fr": "프랑스어",
+      "de": "독일어",
+      "it": "이탈리아어",
+      "ru": "러시아어",
+      "ar": "아랍어",
+      "hi": "힌디어",
+      "ta": "타밀어",
+      "te": "텔루구어",
+      "th": "태국어",
+      "uk": "우크라이나어",
+      "vi": "베트남어",
+      "id": "인도네시아어",
+      "km": "크메르어",
+      "ur": "우르두어",
+      "ne": "네팔어",
+      "lo": "라오어",
+      "my": "미얀마어",
     },
   },
 
