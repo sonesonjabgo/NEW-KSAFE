@@ -38,7 +38,13 @@ export const LanguageOptionItem: FC<Props> = ({
     onPress={onPress}
   >
     <View style={S.$itemContent}>
-      <Text style={[S.$itemLabel, { fontSize: labelFontSize }]}>{label}</Text>
+      <Text
+        style={[S.$itemLabel, { fontSize: labelFontSize }]}
+        numberOfLines={1}
+        ellipsizeMode="tail"
+      >
+        {label}
+      </Text>
     </View>
     {isSelected && <IconCheck size={checkIconSize} color={colors.navy} strokeWidth={2.5} />}
   </TouchableOpacity>

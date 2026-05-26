@@ -1,9 +1,8 @@
 import { FC, useEffect, useState } from "react"
 import { ActivityIndicator, FlatList, View } from "react-native"
-import { useNavigation } from "@react-navigation/native"
 import { reloadAppAsync } from "expo"
+import { useNavigation } from "@react-navigation/native"
 import { IconAlertCircle } from "@tabler/icons-react-native"
-
 import i18n from "i18next"
 
 import { StackScreen } from "@/components/StackScreen"
@@ -11,7 +10,7 @@ import { Text } from "@/components/Text"
 import { Toast } from "@/components/Toast"
 import { useAuth } from "@/context/AuthContext"
 import type { TxKeyPath } from "@/i18n"
-import { persistChangeLanguage, toI18nKey } from "@/i18n"
+import { fromI18nKey, persistChangeLanguage, toI18nKey } from "@/i18n"
 import { translate } from "@/i18n/translate"
 import { api } from "@/services/api"
 import { colors } from "@/theme/colors"
@@ -102,8 +101,8 @@ export const LanguageSettingsScreen: FC = () => {
   /* ── 상태 ── */
   const [languages, setLanguages] = useState<Language[]>(FALLBACK_LANGUAGES)
   const [isLoading, setIsLoading] = useState(true)
-  // i18n.language가 이미 MMKV 저장값 또는 "ko"로 초기화되어 있으므로 그대로 사용
-  const initialLang = i18n.language ?? "ko"
+  // i18n.language는 i18n 키(zhHans)이므로 BCP-47 코드(zh-Hans)로 역변환해 selectedId와 통일
+  const initialLang = fromI18nKey(i18n.language ?? "ko")
   const [selectedId, setSelectedId] = useState(initialLang)
   const [prevSelectedId, setPrevSelectedId] = useState(initialLang)
   const [previewLang, setPreviewLang] = useState(initialLang)

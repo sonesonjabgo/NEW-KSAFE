@@ -10,9 +10,9 @@ import {
   StyleSheet,
 } from "react-native"
 import { ChevronRight } from "lucide-react-native"
+import { useTranslation } from "react-i18next"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import type { SvgProps } from "react-native-svg"
-import { useTranslation } from "react-i18next"
 
 import BoardPin from "@assets/icons/board/board_pin.svg"
 import BannerIcon from "@assets/icons/home/banner_icon.svg"
@@ -36,10 +36,10 @@ import ProfileSwitch from "@assets/icons/nav/profile_switch.svg"
 import { PushNotificationBottomSheet } from "@/components/PushNotificationBottomSheet"
 import { Text } from "@/components/Text"
 import { WebViewModal } from "@/components/WebViewModal"
-import { LanguageChangedModal } from "@/screens/LanguageSettingsScreen/components/LanguageChangedModal"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 import type { MainTabScreenProps } from "@/navigators/navigationTypes"
+import { LanguageChangedModal } from "@/screens/LanguageSettingsScreen/components/LanguageChangedModal"
 import { SafeBoardBadge } from "@/screens/SafeBoardScreen/components/SafeBoardBadge"
 import { colors } from "@/theme/colors"
 import { useResponsive } from "@/theme/responsive"
@@ -240,8 +240,9 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
   const $gridDynamic: ViewStyle = { marginBottom: isSmallPhone ? 14 : 20 }
   const $gridCellDynamic: ViewStyle = {
     width: gridCellWidth,
-    paddingTop: isSmallPhone ? 5 : 7,
-    paddingBottom: isSmallPhone ? 5 : 7,
+    paddingTop: isSmallPhone ? 10 : 14,
+    paddingBottom: isSmallPhone ? 10 : 14,
+    paddingHorizontal: isSmallPhone ? 4 : 6,
   }
   const $gridIconWrapDynamic: ViewStyle = isSmallPhone
     ? { width: gridIconWrapSize, height: gridIconWrapSize }
@@ -253,7 +254,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
   const $boardItemDynamic: ViewStyle = isSmallPhone
     ? { paddingVertical: 14, paddingHorizontal: 12 }
     : {}
-  const $tagWrapDynamic: ViewStyle = { width: isSmallPhone ? 60 : 70 }
+  const $tagWrapDynamic: ViewStyle = {}
 
   // Footer
   const $footerDynamic: ViewStyle = {
@@ -302,7 +303,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
             <View style={$titleRow}>
               <View>
                 <Text text="K-SAFEONE" style={[$appTitle, $appTitleDynamic]} />
-                <Text text={translate("homeScreen:orgName")} style={[$appSub, $appSubDynamic]} />
+                <Text text="KS산업안전협회" style={[$appSub, $appSubDynamic]} />
               </View>
               <View style={[$headerActions, $headerActionsDynamic]}>
                 <TouchableOpacity
@@ -315,6 +316,8 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
                   <Text
                     text={translate("homeScreen:header.qrScan")}
                     style={[$headerActionLabel, $headerActionLabelDynamic]}
+                    numberOfLines={2}
+                    ellipsizeMode="tail"
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -327,6 +330,8 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
                   <Text
                     text={translate("homeScreen:header.notification")}
                     style={[$headerActionLabel, $headerActionLabelDynamic]}
+                    numberOfLines={2}
+                    ellipsizeMode="tail"
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -339,6 +344,8 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
                   <Text
                     text={translate("homeScreen:header.language")}
                     style={[$headerActionLabel, $headerActionLabelDynamic]}
+                    numberOfLines={2}
+                    ellipsizeMode="tail"
                   />
                 </TouchableOpacity>
               </View>
@@ -383,8 +390,18 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
                     <item.Icon width={item.iconSize ?? 36} height={item.iconSize ?? 36} />
                   </View>
                   <View style={$gridTextWrap}>
-                    <Text text={item.label} style={[$gridLabel, $gridLabelDynamic]} numberOfLines={1} />
-                    <Text text={item.sub} style={[$gridSub, $gridSubDynamic]} numberOfLines={1} />
+                    <Text
+                      text={item.label}
+                      style={[$gridLabel, $gridLabelDynamic]}
+                      numberOfLines={2}
+                      ellipsizeMode="tail"
+                    />
+                    <Text
+                      text={item.sub}
+                      style={[$gridSub, $gridSubDynamic]}
+                      numberOfLines={2}
+                      ellipsizeMode="tail"
+                    />
                   </View>
                 </TouchableOpacity>
               ))}
@@ -441,6 +458,8 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
                             $tabLabel,
                             selectedTab === tab ? $tabLabelActive : $tabLabelInactive,
                           ]}
+                          numberOfLines={1}
+                          ellipsizeMode="tail"
                         />
                         {selectedTab === tab && <View style={$tabLine} />}
                       </TouchableOpacity>
@@ -643,6 +662,8 @@ const $headerActions: ViewStyle = {
 const $headerAction: ViewStyle = {
   alignItems: "center",
   gap: 4,
+  maxWidth: 65,
+  overflow: "hidden",
 }
 
 const $headerIconWrap: ViewStyle = {
@@ -650,11 +671,14 @@ const $headerIconWrap: ViewStyle = {
   height: 24,
   justifyContent: "center",
   alignItems: "center",
+  flexShrink: 0,
 }
 
 const $headerActionLabel: TextStyle = {
   color: "#FFFFFF",
   fontFamily: typography.primary.medium,
+  textAlign: "center",
+  width: "100%",
 }
 
 const $greetRow: ViewStyle = {
@@ -708,9 +732,11 @@ const $grid: ViewStyle = {
 
 const $gridCell: ViewStyle = {
   alignItems: "center",
+  justifyContent: "flex-start",
   borderRightWidth: StyleSheet.hairlineWidth,
   borderBottomWidth: StyleSheet.hairlineWidth,
   borderColor: "#E9ECF0",
+  minHeight: 116,
 }
 
 const $gridIconWrap: ViewStyle = {
@@ -718,22 +744,33 @@ const $gridIconWrap: ViewStyle = {
   height: 54,
   justifyContent: "center",
   alignItems: "center",
+  flexShrink: 0,
+  marginBottom: 6,
 }
 
 const $gridTextWrap: ViewStyle = {
   alignItems: "center",
+  alignSelf: "stretch",
+  minWidth: 0,
+  overflow: "hidden",
 }
 
 const $gridLabel: TextStyle = {
   fontFamily: typography.primary.semiBold,
   color: "#1A2236",
   textAlign: "center",
+  flexShrink: 1,
+  flexWrap: "wrap",
+  lineHeight: 16,
 }
 
 const $gridSub: TextStyle = {
   fontFamily: typography.primary.medium,
   color: "#ABABAB",
   textAlign: "center",
+  flexShrink: 1,
+  flexWrap: "wrap",
+  lineHeight: 13,
 }
 
 const $boardSection: ViewStyle = {
@@ -775,13 +812,17 @@ const $tabItem: ViewStyle = {
   flex: 1,
   alignItems: "center",
   paddingVertical: 10,
+  paddingHorizontal: 6,
   position: "relative",
+  overflow: "hidden",
 }
 
 const $tabLabel: TextStyle = {
-  fontSize: 14,
+  fontSize: 13,
   fontFamily: typography.primary.semiBold,
   textAlign: "center",
+  flexShrink: 1,
+  minWidth: 0,
 }
 
 const $tabLabelActive: TextStyle = {
@@ -827,6 +868,8 @@ const $boardItem: ViewStyle = {
 const $tagWrap: ViewStyle = {
   flexShrink: 0,
   alignItems: "flex-start",
+  maxWidth: 120,
+  overflow: "hidden",
 }
 
 const $boardItemContent: ViewStyle = {
@@ -840,6 +883,8 @@ const $boardItemTitle: TextStyle = {
   color: "#000000",
   lineHeight: 12,
   includeFontPadding: false,
+  flexShrink: 1,
+  minWidth: 0,
 }
 
 const $boardItemDate: TextStyle = {

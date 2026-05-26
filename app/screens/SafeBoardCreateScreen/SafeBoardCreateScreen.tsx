@@ -111,10 +111,7 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
                 <HeaderBell width={25} height={25} color="#1062D8" />
               </View>
               <View style={S.$guideTextBlock}>
-                <Text
-                  text={translate("safeBoardCreateScreen:guide.title")}
-                  style={S.$guideTitle}
-                />
+                <Text text={translate("safeBoardCreateScreen:guide.title")} style={S.$guideTitle} />
                 <Text
                   text={translate("safeBoardCreateScreen:guide.description")}
                   style={S.$guideDesc}
@@ -211,7 +208,11 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
                   text={translate("safeBoardCreateScreen:attachment.card1Text")}
                   style={S.$attachCardText}
                 />
-                <TouchableOpacity style={S.$attachUploadBtn} activeOpacity={0.7} onPress={handleAddFile}>
+                <TouchableOpacity
+                  style={S.$attachUploadBtn}
+                  activeOpacity={0.7}
+                  onPress={handleAddFile}
+                >
                   <Text
                     text={translate("safeBoardCreateScreen:attachment.uploadButton")}
                     style={S.$attachUploadBtnText}
@@ -275,10 +276,7 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
               onPress={handleSave}
               disabled={!isValid}
             >
-              <Text
-                text={translate("safeBoardCreateScreen:save")}
-                style={S.$submitBtnText}
-              />
+              <Text text={translate("safeBoardCreateScreen:save")} style={S.$submitBtnText} />
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>

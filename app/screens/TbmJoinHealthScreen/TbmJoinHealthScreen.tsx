@@ -4,8 +4,8 @@ import { IconAlertCircle } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { StackScreen } from "@/components/StackScreen"
-import { Toast } from "@/components/Toast"
 import { Text } from "@/components/Text"
+import { Toast } from "@/components/Toast"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 

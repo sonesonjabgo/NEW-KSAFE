@@ -33,7 +33,10 @@ const TbmReportCard: FC<{ item: TbmReportItem; onPress: () => void }> = ({ item,
       {/* 상태 배지 + 날짜 */}
       <View style={S.$cardTopRow}>
         <View style={badgeStyle}>
-          <Text text={translate(`tbmReportInquiryScreen:tabs.${item.status}`)} style={badgeTextStyle} />
+          <Text
+            text={translate(`tbmReportInquiryScreen:tabs.${item.status}`)}
+            style={badgeTextStyle}
+          />
         </View>
         <Text text={item.date} style={S.$cardDate} />
       </View>

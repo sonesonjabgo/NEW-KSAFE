@@ -15,9 +15,9 @@ import { IconAlertCircle, IconChevronDown } from "@tabler/icons-react-native"
 import { Building } from "lucide-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
+import HeaderBell from "@assets/icons/nav/header_bell.svg"
 import Pic1 from "@assets/icons/pic1.svg"
 import Pic2 from "@assets/icons/pic2.svg"
-import HeaderBell from "@assets/icons/nav/header_bell.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -54,8 +54,8 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
   }, [slideAnim])
 
   const closeWorkplaceModal = useCallback(() => {
-    Animated.timing(slideAnim, { toValue: 300, duration: 200, useNativeDriver: true }).start(
-      () => setWorkplaceModalVisible(false),
+    Animated.timing(slideAnim, { toValue: 300, duration: 200, useNativeDriver: true }).start(() =>
+      setWorkplaceModalVisible(false),
     )
   }, [slideAnim])
 
@@ -128,7 +128,11 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
                 text={translate("hazardRiskCreateScreen:workplace.label")}
                 style={S.$sectionLabel}
               />
-              <TouchableOpacity style={S.$inputRow} activeOpacity={0.7} onPress={openWorkplaceModal}>
+              <TouchableOpacity
+                style={S.$inputRow}
+                activeOpacity={0.7}
+                onPress={openWorkplaceModal}
+              >
                 <Text
                   text={workplace || translate("hazardRiskCreateScreen:workplace.placeholder")}
                   style={[S.$inputText, !workplace && S.$inputPlaceholder]}
@@ -279,7 +283,11 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
                   activeOpacity={0.7}
                   onPress={() => handleSelectWorkplace(wp)}
                 >
-                  <Building size={20} color={isSelected ? "#1062D8" : "#979797"} strokeWidth={1.8} />
+                  <Building
+                    size={20}
+                    color={isSelected ? "#1062D8" : "#979797"}
+                    strokeWidth={1.8}
+                  />
                   <Text
                     text={wp}
                     style={[S.$workplaceOptionText, isSelected && S.$workplaceOptionTextSelected]}
@@ -309,7 +317,10 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
             <TouchableOpacity
               style={S.$workplaceOption}
               activeOpacity={0.7}
-              onPress={() => { console.log("카메라"); closePhotoModal() }}
+              onPress={() => {
+                console.log("카메라")
+                closePhotoModal()
+              }}
             >
               <Text
                 text={translate("hazardRiskCreateScreen:sitePhotos.camera")}
@@ -319,7 +330,10 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
             <TouchableOpacity
               style={S.$workplaceOption}
               activeOpacity={0.7}
-              onPress={() => { console.log("앨범"); closePhotoModal() }}
+              onPress={() => {
+                console.log("앨범")
+                closePhotoModal()
+              }}
             >
               <Text
                 text={translate("hazardRiskCreateScreen:sitePhotos.album")}

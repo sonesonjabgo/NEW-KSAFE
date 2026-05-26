@@ -48,7 +48,8 @@ const fr: Translations = {
     forgotPassword: "Mot de passe oublié ?",
     forgotPasswordModal: {
       title: "Avis",
-      message: "Pour la récupération de mot de passe, veuillez contacter\nvotre administrateur.\nTél : 062-383-0083",
+      message:
+        "Pour la récupération de mot de passe, veuillez contacter\nvotre administrateur.\nTél : 062-383-0083",
       confirm: "OK",
     },
     validation: {
@@ -251,7 +252,10 @@ const fr: Translations = {
   },
   safeBoardCreateScreen: {
     title: "Écrire une publication",
-    guide: { title: "Guide de rédaction", description: "Veuillez rédiger un contenu clair et précis." },
+    guide: {
+      title: "Guide de rédaction",
+      description: "Veuillez rédiger un contenu clair et précis.",
+    },
     workplace: {
       label: "Lieu de travail",
       placeholder: "Sélectionner le lieu de travail",
@@ -284,12 +288,21 @@ const fr: Translations = {
   safeHealthScreen: {
     title: "Gestion de la sécurité",
     menu: {
-      patrol: { title: "Ronde d'inspection", description: "Enregistrer la ronde d'inspection du lieu de travail" },
-      educationMaterial: { title: "Matériel éducatif", description: "Gérer le matériel éducatif TBM" },
+      patrol: {
+        title: "Ronde d'inspection",
+        description: "Enregistrer la ronde d'inspection du lieu de travail",
+      },
+      educationMaterial: {
+        title: "Matériel éducatif",
+        description: "Gérer le matériel éducatif TBM",
+      },
       tbmManage: { title: "Gestion TBM", description: "Voir/créer des activités TBM" },
       tbmReport: { title: "Rapport TBM", description: "Générer un rapport TBM" },
       tbmJoin: { title: "Rejoindre TBM", description: "Rejoindre une réunion TBM" },
-      tbmHistory: { title: "Historique TBM", description: "Voir l'historique de participation TBM" },
+      tbmHistory: {
+        title: "Historique TBM",
+        description: "Voir l'historique de participation TBM",
+      },
       tbmJoinWorker: { title: "Rejoindre TBM", description: "Rejoindre une réunion TBM" },
       statusView: { title: "Statut", description: "Voir le statut des rapports TBM" },
     },
@@ -298,7 +311,10 @@ const fr: Translations = {
     title: "Participation des travailleurs",
     menu: {
       hazard: { title: "Zones dangereuses", description: "Signaler les zones dangereuses" },
-      suggestion: { title: "Suggestions d'amélioration", description: "Enregistrer des suggestions d'amélioration" },
+      suggestion: {
+        title: "Suggestions d'amélioration",
+        description: "Enregistrer des suggestions d'amélioration",
+      },
     },
   },
 
@@ -785,7 +801,8 @@ const fr: Translations = {
       statusBadge: "Statut de sélection",
       multipleBadge: "Plusieurs sélections autorisées",
       countText: "{{count}} élément(s) sélectionné(s)",
-      countHelper: "Accédez à la confirmation de sélection pour ajouter ou modifier les matériaux éducatifs.",
+      countHelper:
+        "Accédez à la confirmation de sélection pour ajouter ou modifier les matériaux éducatifs.",
       selectButton: "+ Sélectionner les matériaux éducatifs",
     },
     submit: "Créer",
@@ -846,7 +863,8 @@ const fr: Translations = {
     content: {
       label: "Contenu éducatif",
       placeholder: "Entrez le contenu éducatif",
-      helper: "La description est facultative. Si fournie, jusqu'à 10 000 caractères peuvent être saisis.",
+      helper:
+        "La description est facultative. Si fournie, jusqu'à 10 000 caractères peuvent être saisis.",
     },
     submit: "Enregistrer",
   },
@@ -1031,7 +1049,8 @@ const fr: Translations = {
     historyCompletedAt: "Traitement terminé",
     downloadPdf: "Télécharger PDF",
     sectionRegenerate: "Régénération du rapport",
-    regenerateInfoText: "Veuillez saisir les éléments ci-dessous avant\nde demander la régénération du rapport.",
+    regenerateInfoText:
+      "Veuillez saisir les éléments ci-dessous avant\nde demander la régénération du rapport.",
     processNameLabel: "Nom du processus (facultatif)",
     processNamePlaceholder: "ex. Presse",
     teamNameLabel: "Équipe/Unité (facultatif)",
@@ -1039,7 +1058,8 @@ const fr: Translations = {
     inputDescription: "Champ facultatif. Maximum 50 caractères.",
     cautionTitle: "Attention",
     cautionItem1: "La régénération n'est disponible que pour les rapports échoués ou terminés.",
-    cautionItem2: "Les rapports en attente ou en cours de traitement ne peuvent pas être régénérés.",
+    cautionItem2:
+      "Les rapports en attente ou en cours de traitement ne peuvent pas être régénérés.",
     cautionItem3: "La régénération réinitialisera les résultats existants.",
     requestRegenerate: "Demander une régénération",
     regenerateNote: "Une nouvelle régénération peut prendre un certain temps.",
@@ -1167,7 +1187,8 @@ const fr: Translations = {
     exportPdfButton: "Exporter PDF",
     hazardToggle: {
       label: "Inclure la section des coordonnées de danger",
-      description: "Si décoché, les coordonnées de danger ne seront pas affichées à l'écran et dans le PDF.",
+      description:
+        "Si décoché, les coordonnées de danger ne seront pas affichées à l'écran et dans le PDF.",
     },
     emptyState: {
       title: "Aucune page enregistrée.",

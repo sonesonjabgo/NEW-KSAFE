@@ -227,8 +227,7 @@ const ja: Translations = {
     title: "作業場プッシュ通知送信",
     guide: {
       title: "作成ガイド",
-      description:
-        "管理する作業場を1つ以上選択し、\n現場メンバーに届ける通知を作成してください。",
+      description: "管理する作業場を1つ以上選択し、\n現場メンバーに届ける通知を作成してください。",
     },
     workplace: {
       label: "作業場を選択",
@@ -273,8 +272,7 @@ const ja: Translations = {
     },
     pushNotification: {
       label: "プッシュ通知を送信",
-      cardText:
-        "選択時、投稿後に選択した作業場の全メンバーにプッシュ通知が送信されます。",
+      cardText: "選択時、投稿後に選択した作業場の全メンバーにプッシュ通知が送信されます。",
     },
     save: "保存",
   },
@@ -736,8 +734,7 @@ const ja: Translations = {
     sitePhotos: {
       label: "現場写真",
       addButton: "写真を追加",
-      guide:
-        "現場写真を最低1枚登録してください。\n1枚から最大5枚まで添付できます。",
+      guide: "現場写真を最低1枚登録してください。\n1枚から最大5枚まで添付できます。",
       preview: "画像を追加するとプレビューが表示されます。",
     },
     submit: "レポートを生成する",
@@ -1309,8 +1306,7 @@ const ja: Translations = {
     slide3: {
       step: "03",
       title: "AIリスク評価",
-      description:
-        "現場の写真を撮るだけで、AIが危険を分析し\nレポートの下書きを\n自動生成します。",
+      description: "現場の写真を撮るだけで、AIが危険を分析し\nレポートの下書きを\n自動生成します。",
     },
   },
 

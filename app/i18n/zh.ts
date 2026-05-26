@@ -48,8 +48,7 @@ const zhOverrides = {
     },
     pushNotificationSheet: {
       title: "不要错过重要通知",
-      description:
-        "为了及时接收安全警报和通知，\n请允许推送通知权限。",
+      description: "为了及时接收安全警报和通知，\n请允许推送通知权限。",
       allowButton: "允许推送通知",
       settingsButton: "在设置中更改权限",
     },
@@ -171,20 +170,17 @@ const zhOverrides = {
     slide1: {
       step: "01",
       title: "实时多语言翻译",
-      description:
-        "与所有国籍的工人顺畅沟通。\n即时语音和文字翻译\n打造更安全的工作场所。",
+      description: "与所有国籍的工人顺畅沟通。\n即时语音和文字翻译\n打造更安全的工作场所。",
     },
     slide2: {
       step: "02",
       title: "一体化TBM管理",
-      description:
-        "只需扫一次QR码即可签到TBM — 无需纸质文件。\n数字签名和报告\n在一处完成。",
+      description: "只需扫一次QR码即可签到TBM — 无需纸质文件。\n数字签名和报告\n在一处完成。",
     },
     slide3: {
       step: "03",
       title: "AI风险评估",
-      description:
-        "只需拍摄现场照片，AI将分析危险因素\n并自动生成报告草稿。",
+      description: "只需拍摄现场照片，AI将分析危险因素\n并自动生成报告草稿。",
     },
   },
   languageSettings: {

@@ -48,8 +48,7 @@ const viOverrides = {
     },
     pushNotificationSheet: {
       title: "Đừng bỏ lỡ các thông báo quan trọng",
-      description:
-        "Để nhận thông báo an toàn đúng giờ,\nvui lòng cho phép thông báo đẩy.",
+      description: "Để nhận thông báo an toàn đúng giờ,\nvui lòng cho phép thông báo đẩy.",
       allowButton: "Cho phép thông báo đẩy",
       settingsButton: "Thay đổi quyền trong Cài đặt",
     },

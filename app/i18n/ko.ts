@@ -135,6 +135,13 @@ const ko: Translations = {
     },
   },
 
+  mainTab: {
+    home: "홈",
+    safeBoard: "안전게시판",
+    safeHealth: "안전관리",
+    workerParticipation: "근로자 참여",
+  },
+
   homeScreen: {
     orgName: "KS산업안전협회",
     header: {

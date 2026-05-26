@@ -52,6 +52,8 @@ const $badge: ViewStyle = {
   alignItems: "center",
   paddingHorizontal: 8,
   paddingVertical: 0,
+  maxWidth: "100%",
+  overflow: "hidden",
 }
 
 const $badgeText: TextStyle = {

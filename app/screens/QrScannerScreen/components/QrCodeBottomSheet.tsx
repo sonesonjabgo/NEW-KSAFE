@@ -67,10 +67,7 @@ export const QrCodeBottomSheet: FC<Props> = ({ isVisible, onClose }) => {
     <Modal visible={modalVisible} transparent animationType="none" onRequestClose={onClose}>
       <View style={S.$overlay}>
         {/* 딤 배경: 전체 화면 고정, fade 애니메이션 */}
-        <Animated.View
-          style={[S.$overlayBg, { opacity: overlayOpacity }]}
-          pointerEvents="none"
-        />
+        <Animated.View style={[S.$overlayBg, { opacity: overlayOpacity }]} pointerEvents="none" />
 
         {/* 딤 영역 탭 시 닫힘 */}
         <TouchableOpacity style={S.$overlayDismiss} activeOpacity={1} onPress={onClose} />
@@ -107,9 +104,7 @@ export const QrCodeBottomSheet: FC<Props> = ({ isVisible, onClose }) => {
             disabled={!isReady}
             onPress={() => console.log(accessCode)}
           >
-            <Text
-              style={[S.$joinBtnText, isReady ? S.$joinBtnTextActive : S.$joinBtnTextInactive]}
-            >
+            <Text style={[S.$joinBtnText, isReady ? S.$joinBtnTextActive : S.$joinBtnTextInactive]}>
               {translate("qrScanner:joinMeeting")}
             </Text>
           </TouchableOpacity>

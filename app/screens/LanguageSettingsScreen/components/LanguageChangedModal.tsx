@@ -78,7 +78,10 @@ export const LanguageChangedModal: FC<Props> = ({
           <Text style={[S.$modalTitle, { fontSize: titleFontSize, marginTop: 4 }]}>{title}</Text>
 
           <Text
-            style={[S.$modalDesc, { fontSize: descFontSize, marginTop: 8, minHeight: descMinHeight }]}
+            style={[
+              S.$modalDesc,
+              { fontSize: descFontSize, marginTop: 8, minHeight: descMinHeight },
+            ]}
           >
             {description}
           </Text>

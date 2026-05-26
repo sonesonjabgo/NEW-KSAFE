@@ -3,8 +3,8 @@ import { Animated, FlatList, Modal, Pressable, TouchableOpacity, View } from "re
 import { BellRing, Building, Check, ChevronDown, PencilLine } from "lucide-react-native"
 
 import { StackScreen } from "@/components/StackScreen"
-import { Toast } from "@/components/Toast"
 import { Text } from "@/components/Text"
+import { Toast } from "@/components/Toast"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 
@@ -59,8 +59,8 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
   }
 
   const closeModal = () => {
-    Animated.timing(slideAnim, { toValue: 300, duration: 200, useNativeDriver: true }).start(
-      () => setShowWorkplaceModal(false),
+    Animated.timing(slideAnim, { toValue: 300, duration: 200, useNativeDriver: true }).start(() =>
+      setShowWorkplaceModal(false),
     )
   }
 
@@ -97,10 +97,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
         {isAdmin && (
           <>
             <View style={S.$workplaceContainer}>
-              <Text
-                text={translate("safeBoardScreen:workplaceLabel")}
-                style={S.$workplaceLabel}
-              />
+              <Text text={translate("safeBoardScreen:workplaceLabel")} style={S.$workplaceLabel} />
               <TouchableOpacity
                 style={S.$workplaceSelectorNew}
                 activeOpacity={0.6}
@@ -191,10 +188,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
       >
         <Pressable style={S.$modalOverlay} onPress={closeModal}>
           <Animated.View style={[S.$modalContent, { transform: [{ translateY: slideAnim }] }]}>
-            <Text
-              text={translate("safeBoardScreen:workplaceModal.title")}
-              style={S.$modalTitle}
-            />
+            <Text text={translate("safeBoardScreen:workplaceModal.title")} style={S.$modalTitle} />
             {WORKPLACES.map((workplace) => {
               const isSelected = selectedWorkplace === workplace
               return (
@@ -214,10 +208,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
                   />
                   <Text
                     text={workplace}
-                    style={[
-                      S.$workplaceOptionText,
-                      isSelected && S.$workplaceOptionTextSelected,
-                    ]}
+                    style={[S.$workplaceOptionText, isSelected && S.$workplaceOptionTextSelected]}
                     numberOfLines={2}
                   />
                 </TouchableOpacity>

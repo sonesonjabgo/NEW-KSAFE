@@ -13,7 +13,8 @@ const idOverrides = {
     forgotPassword: "Lupa kata sandi?",
     forgotPasswordModal: {
       title: "Pemberitahuan",
-      message: "Untuk pemulihan kata sandi, silakan hubungi\nadministrator Anda.\nTelp: 062-383-0083",
+      message:
+        "Untuk pemulihan kata sandi, silakan hubungi\nadministrator Anda.\nTelp: 062-383-0083",
       confirm: "OK",
     },
     validation: {

@@ -4,10 +4,6 @@ import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
 import "intl-pluralrules"
 
-import { loadString, saveString } from "../utils/storage"
-
-export const LANGUAGE_STORAGE_KEY = "i18n.lng"
-
 // if English isn't your default language, move Translations to the appropriate language file.
 import ar from "./ar"
 import en, { Translations } from "./en"
@@ -17,7 +13,9 @@ import hi from "./hi"
 import id from "./id"
 import ja from "./ja"
 import km from "./km"
+import ko from "./ko"
 import lo from "./lo"
+import my from "./my"
 import ne from "./ne"
 import ru from "./ru"
 import th from "./th"
@@ -26,10 +24,11 @@ import vi from "./vi"
 import zh from "./zh"
 import zhHans from "./zhHans"
 import zhHant from "./zhHant"
-import ko from "./ko"
-import my from "./my"
+import { loadString, saveString } from "../utils/storage"
 
-const fallbackLocale = "en-US"
+export const LANGUAGE_STORAGE_KEY = "i18n.lng"
+
+const _fallbackLocale = "en-US"
 
 const systemLocales = Localization.getLocales()
 
@@ -105,6 +104,12 @@ export const initI18n = async () => {
 export const toI18nKey = (bcp47Code: string): string => {
   const map: Record<string, string> = { "zh-Hans": "zhHans", "zh-Hant": "zhHant" }
   return map[bcp47Code] ?? bcp47Code
+}
+
+/** i18n 리소스 키 → BCP-47 코드 역변환. selectedId/previewLang 초기화 시 사용. */
+export const fromI18nKey = (i18nKey: string): string => {
+  const map: Record<string, string> = { zhHans: "zh-Hans", zhHant: "zh-Hant" }
+  return map[i18nKey] ?? i18nKey
 }
 
 /** 언어 변경 + MMKV 영구 저장. bcp47Code는 "ko", "zh-Hans" 등 BCP-47 코드를 받아 자동 변환. */

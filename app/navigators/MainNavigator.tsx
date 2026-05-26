@@ -1,8 +1,7 @@
 import { ViewStyle, TextStyle, View, TouchableOpacity } from "react-native"
 import { createBottomTabNavigator, BottomTabBarProps } from "@react-navigation/bottom-tabs"
+import { useTranslation } from "react-i18next"
 import type { SvgProps } from "react-native-svg"
-
-import { useResponsive } from "@/theme/responsive"
 
 import NavBoard from "@assets/icons/nav/nav_board.svg"
 import NavHome from "@assets/icons/nav/nav_home.svg"
@@ -10,10 +9,12 @@ import NavSafety from "@assets/icons/nav/nav_safety.svg"
 import NavWorker from "@assets/icons/nav/nav_worker.svg"
 
 import { Text } from "@/components/Text"
+import { translate } from "@/i18n/translate"
 import { HomeScreen } from "@/screens/HomeScreen"
 import { SafeBoardScreen } from "@/screens/SafeBoardScreen/SafeBoardScreen"
 import { SafeHealthMainScreen } from "@/screens/SafeHealthScreen/SafeHealthMainScreen"
 import { WorkerParticipationScreen } from "@/screens/WorkerParticipationScreen/WorkerParticipationScreen"
+import { useResponsive } from "@/theme/responsive"
 import { typography } from "@/theme/typography"
 
 import type { MainTabParamList } from "./navigationTypes"
@@ -40,8 +41,7 @@ function CustomTabBar({ state, descriptors, navigation, insets }: BottomTabBarPr
           const { options } = descriptors[route.key]
           const focused = state.index === index
           const color = focused ? ACTIVE_BLUE : INACTIVE
-          const label =
-            typeof options.tabBarLabel === "string" ? options.tabBarLabel : route.name
+          const label = typeof options.tabBarLabel === "string" ? options.tabBarLabel : route.name
 
           const onPress = () => {
             const event = navigation.emit({
@@ -76,6 +76,9 @@ function CustomTabBar({ state, descriptors, navigation, insets }: BottomTabBarPr
 }
 
 export function MainNavigator() {
+  // useTranslation()으로 languageChanged 이벤트를 구독 → 언어 변경 시 리렌더링 → translate() 재평가
+  useTranslation()
+
   return (
     <Tab.Navigator
       tabBar={(props) => <CustomTabBar {...props} />}
@@ -85,7 +88,7 @@ export function MainNavigator() {
         name="Home"
         component={HomeScreen}
         options={{
-          tabBarLabel: "홈",
+          tabBarLabel: translate("mainTab:home"),
           tabBarIcon: ({ focused }) => <TabIcon Icon={NavHome} focused={focused} />,
         }}
       />
@@ -94,7 +97,7 @@ export function MainNavigator() {
         name="SafeBoard"
         component={SafeBoardScreen}
         options={{
-          tabBarLabel: "안전게시판",
+          tabBarLabel: translate("mainTab:safeBoard"),
           tabBarIcon: ({ focused }) => <TabIcon Icon={NavBoard} focused={focused} />,
         }}
       />
@@ -103,7 +106,7 @@ export function MainNavigator() {
         name="SafeHealthMain"
         component={SafeHealthMainScreen}
         options={{
-          tabBarLabel: "안전관리",
+          tabBarLabel: translate("mainTab:safeHealth"),
           tabBarIcon: ({ focused }) => <TabIcon Icon={NavSafety} focused={focused} />,
         }}
       />
@@ -112,7 +115,7 @@ export function MainNavigator() {
         name="WorkerParticipation"
         component={WorkerParticipationScreen}
         options={{
-          tabBarLabel: "근로자 참여",
+          tabBarLabel: translate("mainTab:workerParticipation"),
           tabBarIcon: ({ focused }) => <TabIcon Icon={NavWorker} focused={focused} />,
         }}
       />
@@ -143,9 +146,10 @@ const $tabBarRow: ViewStyle = {
 
 const $tabItem: ViewStyle = {
   alignItems: "center",
+  flex: 1,
   justifyContent: "center",
+  overflow: "hidden",
   paddingHorizontal: 8,
-  minWidth: 70,
 }
 
 const $tabLabel: TextStyle = {

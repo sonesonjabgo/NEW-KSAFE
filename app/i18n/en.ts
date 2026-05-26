@@ -135,6 +135,13 @@ const en = {
     },
   },
 
+  mainTab: {
+    home: "Home",
+    safeBoard: "Safety Board",
+    safeHealth: "Safety Management",
+    workerParticipation: "Worker Participation",
+  },
+
   homeScreen: {
     orgName: "KS Industrial Safety Association",
     header: {

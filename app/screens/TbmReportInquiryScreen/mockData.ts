@@ -54,9 +54,7 @@ export const mockTbmReports: TbmReportItem[] = [
     processName: "현장 순회 점검",
     teamName: "A팀 2반",
     requestedAt: "2026.05.19 09:30",
-    history: [
-      { status: "requested", time: "2026.05.19 09:30", description: "보고서 생성 요청" },
-    ],
+    history: [{ status: "requested", time: "2026.05.19 09:30", description: "보고서 생성 요청" }],
   },
   {
     id: 4,
@@ -75,7 +73,11 @@ export const mockTbmReports: TbmReportItem[] = [
     history: [
       { status: "requested", time: "2026.05.14 11:00", description: "보고서 생성 요청" },
       { status: "generating", time: "2026.05.14 11:05", description: "AI 보고서 분석 중" },
-      { status: "failed", time: "2026.05.14 11:10", description: "이미지 인식 실패로 인한 생성 오류" },
+      {
+        status: "failed",
+        time: "2026.05.14 11:10",
+        description: "이미지 인식 실패로 인한 생성 오류",
+      },
     ],
   },
   {

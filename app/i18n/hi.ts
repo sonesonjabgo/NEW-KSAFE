@@ -47,7 +47,8 @@ const hi: Translations = {
     forgotPassword: "पासवर्ड भूल गए?",
     forgotPasswordModal: {
       title: "सूचना",
-      message: "पासवर्ड पुनः प्राप्त करने के लिए, कृपया अपने\nप्रशासक से संपर्क करें।\nफ़ोन: 062-383-0083",
+      message:
+        "पासवर्ड पुनः प्राप्त करने के लिए, कृपया अपने\nप्रशासक से संपर्क करें।\nफ़ोन: 062-383-0083",
       confirm: "ठीक है",
     },
     validation: {
@@ -283,7 +284,10 @@ const hi: Translations = {
     title: "सुरक्षा प्रबंधन",
     menu: {
       patrol: { title: "गश्त निरीक्षण", description: "कार्यस्थल गश्त निरीक्षण दर्ज करें" },
-      educationMaterial: { title: "शैक्षिक सामग्री", description: "TBM शैक्षिक सामग्री प्रबंधित करें" },
+      educationMaterial: {
+        title: "शैक्षिक सामग्री",
+        description: "TBM शैक्षिक सामग्री प्रबंधित करें",
+      },
       tbmManage: { title: "TBM प्रबंधन", description: "TBM गतिविधियां देखें/बनाएं" },
       tbmReport: { title: "TBM रिपोर्ट", description: "TBM रिपोर्ट बनाएं" },
       tbmJoin: { title: "TBM में शामिल हों", description: "TBM बैठक में शामिल हों" },

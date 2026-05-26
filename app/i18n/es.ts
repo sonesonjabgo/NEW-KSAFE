@@ -156,7 +156,10 @@ const es: Translations = {
       viewMore: "Ver más",
       tabs: { all: "Todo", company: "Toda la empresa", workplace: "Lugar de trabajo" },
     },
-    edu: { title: "Unirse a educación/presentación existente", description: "Ya existe una sala de educación/presentación creada." },
+    edu: {
+      title: "Unirse a educación/presentación existente",
+      description: "Ya existe una sala de educación/presentación creada.",
+    },
     banner: { text: "Un entorno de trabajo seguro con K-SAFEONE" },
     footer: {
       homepage: "Sitio web",
@@ -182,7 +185,8 @@ const es: Translations = {
     },
     pushNotificationSheet: {
       title: "No se pierda las alertas importantes",
-      description: "Para recibir alertas de seguridad y avisos a tiempo,\npor favor permita las notificaciones push.",
+      description:
+        "Para recibir alertas de seguridad y avisos a tiempo,\npor favor permita las notificaciones push.",
       allowButton: "Permitir notificaciones push",
       settingsButton: "Cambiar permiso en ajustes",
     },
@@ -287,13 +291,28 @@ const es: Translations = {
   safeHealthScreen: {
     title: "Gestión de seguridad",
     menu: {
-      patrol: { title: "Ronda de inspección", description: "Registrar ronda de inspección del lugar de trabajo" },
-      educationMaterial: { title: "Materiales educativos", description: "Ver y registrar materiales educativos" },
+      patrol: {
+        title: "Ronda de inspección",
+        description: "Registrar ronda de inspección del lugar de trabajo",
+      },
+      educationMaterial: {
+        title: "Materiales educativos",
+        description: "Ver y registrar materiales educativos",
+      },
       tbmManage: { title: "Gestión de TBM", description: "Gestionar y crear actividades TBM" },
-      tbmReport: { title: "Informe TBM", description: "Verificar estado del informe y descargar PDF" },
+      tbmReport: {
+        title: "Informe TBM",
+        description: "Verificar estado del informe y descargar PDF",
+      },
       tbmJoin: { title: "Unirse a TBM", description: "Unirse a la reunión de otro supervisor" },
-      tbmHistory: { title: "Historial de participación TBM", description: "Ver historial de reuniones TBM participadas" },
-      tbmJoinWorker: { title: "Unirse a TBM", description: "Unirse a la reunión de otro supervisor" },
+      tbmHistory: {
+        title: "Historial de participación TBM",
+        description: "Ver historial de reuniones TBM participadas",
+      },
+      tbmJoinWorker: {
+        title: "Unirse a TBM",
+        description: "Unirse a la reunión de otro supervisor",
+      },
       statusView: { title: "Ver estado", description: "Verificar el estado actual de TBM" },
     },
   },
@@ -301,7 +320,10 @@ const es: Translations = {
     title: "Participación de trabajadores",
     menu: {
       hazard: { title: "Zonas de riesgo", description: "Registrar zonas peligrosas" },
-      suggestion: { title: "Sugerencias de mejora", description: "Registrar sugerencias de mejora" },
+      suggestion: {
+        title: "Sugerencias de mejora",
+        description: "Registrar sugerencias de mejora",
+      },
     },
   },
 
@@ -352,7 +374,8 @@ const es: Translations = {
   aiSafetyChatScreen: {
     title: "Asistente AI de seguridad industrial",
     aiName: "Asistente AI de seguridad industrial",
-    welcomeMessage: "¡Hola! Soy el Asistente AI de Seguridad Industrial.\nSi tienes alguna pregunta sobre la seguridad en obras de construcción, no dudes en preguntar.",
+    welcomeMessage:
+      "¡Hola! Soy el Asistente AI de Seguridad Industrial.\nSi tienes alguna pregunta sobre la seguridad en obras de construcción, no dudes en preguntar.",
     inputPlaceholder: "Escribe un mensaje...",
     inputHint: "Obligatorio. Por favor escribe entre 2 y 1,000 caracteres.",
     deleteDialog: {
@@ -747,8 +770,7 @@ const es: Translations = {
     sitePhotos: {
       label: "Fotos del sitio",
       addButton: "Agregar foto",
-      guide:
-        "Se debe registrar al menos 1 foto del sitio.\nPuede adjuntar de 1 a 5 fotos.",
+      guide: "Se debe registrar al menos 1 foto del sitio.\nPuede adjuntar de 1 a 5 fotos.",
       preview: "Se mostrará una vista previa al agregar una imagen.",
     },
     submit: "Generar informe",
@@ -849,7 +871,8 @@ const es: Translations = {
     content: {
       label: "Contenido educativo",
       placeholder: "Ingrese el contenido educativo",
-      helper: "La descripción es opcional. Si se proporciona, se pueden ingresar hasta 10,000 caracteres.",
+      helper:
+        "La descripción es opcional. Si se proporciona, se pueden ingresar hasta 10,000 caracteres.",
     },
     submit: "Registrar",
   },
@@ -1034,7 +1057,8 @@ const es: Translations = {
     historyCompletedAt: "Procesamiento completado",
     downloadPdf: "Descargar PDF",
     sectionRegenerate: "Regeneración de informe",
-    regenerateInfoText: "Por favor ingrese los elementos a continuación\nantes de solicitar la regeneración del informe.",
+    regenerateInfoText:
+      "Por favor ingrese los elementos a continuación\nantes de solicitar la regeneración del informe.",
     processNameLabel: "Nombre del proceso (opcional)",
     processNamePlaceholder: "Ej: Prensa",
     teamNameLabel: "Equipo/Unidad (opcional)",

@@ -82,7 +82,11 @@ export const NotifyScreen: FC = () => {
 
   // 카드 텍스트 크기 — breakpoint 직접 사용
   const titleFontSize =
-    breakpoint === "smallPhone" ? 13 : breakpoint === "largePhone" || breakpoint === "tablet" ? 15 : 14
+    breakpoint === "smallPhone"
+      ? 13
+      : breakpoint === "largePhone" || breakpoint === "tablet"
+        ? 15
+        : 14
   const descFontSize = isSmallPhone ? 12 : 14
   const timeFontSize = isSmallPhone ? 11 : 13
 
@@ -90,16 +94,20 @@ export const NotifyScreen: FC = () => {
   const emptyCircleSize = isShortHeight
     ? Math.min(Math.floor(height * 0.12), 96)
     : isSmallPhone
-    ? 96
-    : isTablet
-    ? 140
-    : 120
+      ? 96
+      : isTablet
+        ? 140
+        : 120
   const emptyCircleMarginBottom = isSmallPhone || isShortHeight ? 16 : isTablet ? 28 : 24
   const emptyIconSize = isSmallPhone ? 36 : isTablet ? 52 : 44
   const emptyTitleFontSize = isSmallPhone ? 15 : isTablet ? 20 : 17
   const emptyTitleMarginBottom = isSmallPhone ? 8 : 10
   const emptyDescFontSize = isSmallPhone ? 12 : isTablet ? 14 : 13
-  const emptyPaddingH = isSmallPhone ? 32 : isTablet ? Math.max(Math.floor((width - 700) / 2 + 48), 48) : 40
+  const emptyPaddingH = isSmallPhone
+    ? 32
+    : isTablet
+      ? Math.max(Math.floor((width - 700) / 2 + 48), 48)
+      : 40
 
   return (
     <StackScreen
@@ -116,11 +124,7 @@ export const NotifyScreen: FC = () => {
           >
             <IconChecks size={22} color={hasUnread ? colors.blue : "#FFFFFF"} />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={S.$headerIconBtn}
-            activeOpacity={0.7}
-            onPress={handleDeleteAll}
-          >
+          <TouchableOpacity style={S.$headerIconBtn} activeOpacity={0.7} onPress={handleDeleteAll}>
             <IconTrash size={22} color="#FFFFFF" />
           </TouchableOpacity>
         </View>

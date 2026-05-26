@@ -8,13 +8,8 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import Config from "@/config"
-import { HAS_LAUNCHED_KEY } from "@/constants/storageKeys"
-import { loadString } from "@/utils/storage"
 import { AiRiskDocCreatorScreen } from "@/screens/AiRiskDocCreatorScreen"
 import { AISafetyChatScreen } from "@/screens/AISafetyChatScreen/AISafetyChatScreen"
-import { SafeBoardCreateScreen } from "@/screens/SafeBoardCreateScreen/SafeBoardCreateScreen"
-import { SafeBoardDetailScreen } from "@/screens/SafeBoardDetailScreen/SafeBoardDetailScreen"
-import { SafeBoardNotifyScreen } from "@/screens/SafeBoardNotifyScreen/SafeBoardNotifyScreen"
 import { EducationMaterialDetailScreen } from "@/screens/EducationMaterialDetailScreen/EducationMaterialDetailScreen"
 import { EducationMaterialRegisterScreen } from "@/screens/EducationMaterialRegisterScreen/EducationMaterialRegisterScreen"
 import { EducationMaterialScreen } from "@/screens/EducationMaterialScreen/EducationMaterialScreen"
@@ -36,6 +31,9 @@ import { PatrolCreateScreen } from "@/screens/PatrolScreen/PatrolCreateScreen"
 import { PatrolDetailScreen } from "@/screens/PatrolScreen/PatrolDetailScreen"
 import { PatrolScreen } from "@/screens/PatrolScreen/PatrolScreen"
 import { QrScannerScreen } from "@/screens/QrScannerScreen"
+import { SafeBoardCreateScreen } from "@/screens/SafeBoardCreateScreen/SafeBoardCreateScreen"
+import { SafeBoardDetailScreen } from "@/screens/SafeBoardDetailScreen/SafeBoardDetailScreen"
+import { SafeBoardNotifyScreen } from "@/screens/SafeBoardNotifyScreen/SafeBoardNotifyScreen"
 import { TbmCreateScreen } from "@/screens/TbmCreateScreen/TbmCreateScreen"
 import { TbmDetailScreen } from "@/screens/TbmDetailScreen/TbmDetailScreen"
 import { TbmJoinCompleteScreen } from "@/screens/TbmJoinCompleteScreen/TbmJoinCompleteScreen"
@@ -67,15 +65,14 @@ const exitRoutes = Config.exitRoutes
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
-const AppStack = () => {
+type AppStackProps = {
+  initialRouteName: keyof AppStackParamList
+}
+
+const AppStack = ({ initialRouteName }: AppStackProps) => {
   const {
     theme: { colors },
   } = useAppTheme()
-
-  // HAS_LAUNCHED_KEY가 true면 WelcomeIntro 스킵 → Main/Home
-  // 인증 연동 후: isAuthenticated ? "Main" : "Login" 으로 교체
-  // TODO: 인증 연동 완료 후 Login 거치도록 수정
-  const initialRouteName = loadString(HAS_LAUNCHED_KEY) === "true" ? "Main" : "WelcomeIntro"
 
   return (
     <Stack.Navigator
@@ -137,7 +134,11 @@ const AppStack = () => {
   )
 }
 
-export const AppNavigator = (props: NavigationProps) => {
+type AppNavigatorProps = NavigationProps & {
+  initialRouteName: keyof AppStackParamList
+}
+
+export const AppNavigator = ({ initialRouteName, ...props }: AppNavigatorProps) => {
   const { navigationTheme } = useAppTheme()
 
   useBackButtonHandler((routeName) => exitRoutes.includes(routeName))
@@ -145,7 +146,7 @@ export const AppNavigator = (props: NavigationProps) => {
   return (
     <NavigationContainer ref={navigationRef} theme={navigationTheme} {...props}>
       <ErrorBoundary catchErrors={Config.catchErrors}>
-        <AppStack />
+        <AppStack initialRouteName={initialRouteName} />
       </ErrorBoundary>
     </NavigationContainer>
   )

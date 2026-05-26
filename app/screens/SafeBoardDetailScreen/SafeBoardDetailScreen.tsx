@@ -47,10 +47,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
               onPress={() => navigation.navigate("SafeBoardCreate")}
               activeOpacity={0.7}
             >
-              <Text
-                text={translate("safeBoardDetailScreen:editButton")}
-                style={$editButtonText}
-              />
+              <Text text={translate("safeBoardDetailScreen:editButton")} style={$editButtonText} />
             </TouchableOpacity>
           ) : undefined
         }
@@ -130,10 +127,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
               onPress={() => setDeleteModalVisible(true)}
             >
               <Trash2 size={16} color="#FFFFFF" strokeWidth={2} />
-              <Text
-                text={translate("safeBoardDetailScreen:deleteButton")}
-                style={$actionBtnText}
-              />
+              <Text text={translate("safeBoardDetailScreen:deleteButton")} style={$actionBtnText} />
             </TouchableOpacity>
           </View>
         )}

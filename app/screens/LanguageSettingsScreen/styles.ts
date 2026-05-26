@@ -48,8 +48,10 @@ export const $itemSelected: ViewStyle = {
 
 export const $itemContent: ViewStyle = {
   alignItems: "center",
+  flex: 1,
   flexDirection: "row",
   gap: 10,
+  overflow: "hidden",
 }
 
 /* fontSize 동적 적용 */

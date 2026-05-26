@@ -39,12 +39,12 @@ export const QrScannerScreen: FC = () => {
   const qrFrameSize = isShortHeight
     ? Math.min(Math.floor(height * 0.27), 200)
     : isSmallPhone
-    ? 180
-    : isBasePhone
-    ? 220
-    : isLargePhone
-    ? 240
-    : Math.min(Math.floor(width * 0.4), 260) // isTablet
+      ? 180
+      : isBasePhone
+        ? 220
+        : isLargePhone
+          ? 240
+          : Math.min(Math.floor(width * 0.4), 260) // isTablet
 
   // 모서리 브래킷 크기
   const cornerSize = isSmallPhone ? 20 : isTablet ? 28 : 24
@@ -169,9 +169,7 @@ export const QrScannerScreen: FC = () => {
               <IconLanguageHiragana size={20} color="#4B5563" />
               <Text style={[S.$languageText, { fontSize: langFontSize }]}>
                 {translate("qrScanner:languageLabel")}{" "}
-                <Text style={S.$languageHighlight}>
-                  · {translate("qrScanner:currentLanguage")}
-                </Text>
+                <Text style={S.$languageHighlight}>· {translate("qrScanner:currentLanguage")}</Text>
               </Text>
             </View>
           </View>
