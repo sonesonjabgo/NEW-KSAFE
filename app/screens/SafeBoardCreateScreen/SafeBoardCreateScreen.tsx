@@ -39,7 +39,7 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
   route,
 }: SafeBoardCreateScreenProps) {
   const insets = useSafeAreaInsets()
-  const { safeBoardStore } = useStores()
+  const { workplaceStore, safeBoardStore } = useStores()
 
   const editId = route.params?.id
   const isEditMode = !!editId
@@ -88,18 +88,7 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
     [closeWorkplaceModal],
   )
 
-  // 목록 페이지와 동일하게 boards에서만 파생
-  const availableWorkplaces = useMemo(() => {
-    const seen = new Set<string>()
-    const result: SelectedWorkplace[] = []
-    safeBoardStore.boards.forEach((post) => {
-      if (post.workplaceId && post.workplaceName && !seen.has(post.workplaceId)) {
-        seen.add(post.workplaceId)
-        result.push({ id: post.workplaceId, name: post.workplaceName })
-      }
-    })
-    return result
-  }, [safeBoardStore.boards.length])
+  const availableWorkplaces = workplaceStore.workplaces
 
   const isValid = useMemo(
     () => !!selectedWorkplace && !!title.trim() && !!content.trim(),
@@ -322,7 +311,7 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
                   key={wp.id}
                   style={[S.$workplaceOption, isSelected && S.$workplaceOptionSelected]}
                   activeOpacity={0.7}
-                  onPress={() => handleSelectWorkplace(wp)}
+                  onPress={() => handleSelectWorkplace({ id: wp.id, name: wp.workplaceName })}
                 >
                   <Building
                     size={20}
@@ -330,7 +319,7 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
                     strokeWidth={1.8}
                   />
                   <Text
-                    text={wp.name}
+                    text={wp.workplaceName}
                     style={[S.$workplaceOptionText, isSelected && S.$workplaceOptionTextSelected]}
                     numberOfLines={2}
                   />

@@ -39,26 +39,15 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = observer(function SafeB
 
   const isAdmin = role === "admin"
 
-  // Derive available workplaces from board posts so admin sees all company workplaces,
-  // not just the ones the current user is personally assigned to via workplaceStore.
-  const availableWorkplaces = useMemo(() => {
-    const seen = new Set<string>()
-    const result: Array<{ id: string; workplaceName: string }> = []
-    safeBoardStore.boards.forEach((post) => {
-      if (post.workplaceId && post.workplaceName && !seen.has(post.workplaceId)) {
-        seen.add(post.workplaceId)
-        result.push({ id: post.workplaceId, workplaceName: post.workplaceName })
-      }
-    })
-    return result
-  }, [safeBoardStore.boards.length])
+  const availableWorkplaces = workplaceStore.workplaces
 
-  // Admin: fetch ALL posts once so we can derive the full workplace list from them.
-  // Non-admin: fetch workplaces first (for primaryWorkplace), then fetch posts.
   useEffect(() => {
     if (isAdmin) {
       safeBoardStore.fetchBoardPosts()
       safeBoardStore.fetchMyPosts()
+      if (!workplaceStore.hasWorkplaces) {
+        workplaceStore.fetchWorkplaces()
+      }
     } else if (!workplaceStore.hasWorkplaces) {
       workplaceStore.fetchWorkplaces()
     } else {
