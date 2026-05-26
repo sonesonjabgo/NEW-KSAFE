@@ -713,6 +713,7 @@ const $grid: ViewStyle = {
 
 const $gridCell: ViewStyle = {
   alignItems: "center",
+  justifyContent: "flex-start",
   borderRightWidth: isRTL ? 0 : StyleSheet.hairlineWidth,
   borderLeftWidth: isRTL ? StyleSheet.hairlineWidth : 0,
   borderBottomWidth: StyleSheet.hairlineWidth,
