@@ -226,6 +226,7 @@ const en = {
     empty: "No posts found",
     write: "Write",
     draftSaved: "Post saved as draft.",
+    notifySent: "Notification sent.",
   },
 
   safeBoardDetailScreen: {

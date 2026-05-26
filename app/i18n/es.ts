@@ -196,6 +196,7 @@ const es: Translations = {
     empty: "Empty",
     write: "Write",
     draftSaved: "Post saved as draft.",
+    notifySent: "Notification sent.",
   },
   safeBoardDetailScreen: { title: "Post Detail", loadError: "Failed to load post.", authorLabel: "Author", editButton: "Edit", alertOn: "Alert ON", alertOff: "Alert OFF", publishButton: "Publish", deleteButton: "Delete", publishModal: { title: "Publish Post", message: "Are you sure you want to publish this post?", cancel: "Cancel", confirm: "Publish" }, deleteModal: { title: "Delete Post", message: "Are you sure you want to delete this post?", cancel: "Cancel", confirm: "Delete" }, toasts: { publishSuccess: "Post published successfully.", publishError: "Failed to publish post.", deleteSuccess: "Post deleted successfully.", deleteError: "Failed to delete post." } },
   safeBoardNotifyScreen: { title: "Send Workplace Push Notification", guide: { title: "Writing Guide", description: "Select one or more workplaces you manage\nand write a notification to deliver\nto site members." }, workplace: { label: "Select Workplace", helper: "Sending to {{selected}} of {{total}} workplaces" }, notifyTitle: { label: "Notification Title", placeholder: "Enter a brief title.", helper: "Up to 50 characters." }, content: { label: "Push Notification Content", placeholder: "Enter the notification message to deliver to this workplace.", helper: "Up to 240 characters." }, send: "Send Notification", sendSuccess: "Notification sent." },

@@ -35,6 +35,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = observer(function SafeB
   const [selectedWorkplaceId, setSelectedWorkplaceId] = useState<string>("")
   const [showWorkplaceModal, setShowWorkplaceModal] = useState(false)
   const [toastVisible, setToastVisible] = useState(false)
+  const [toastMessage, setToastMessage] = useState(translate("safeBoardScreen:draftSaved"))
   const slideAnim = useRef(new Animated.Value(300)).current
 
   const isAdmin = role === "admin"
@@ -62,8 +63,13 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = observer(function SafeB
 
   useEffect(() => {
     if (route.params?.showToast) {
+      const msg =
+        route.params.toastType === "notify"
+          ? translate("safeBoardScreen:notifySent")
+          : translate("safeBoardScreen:draftSaved")
+      setToastMessage(msg)
       setToastVisible(true)
-      navigation.setParams({ showToast: false })
+      navigation.setParams({ showToast: false, toastType: undefined })
     }
   }, [route.params?.showToast, navigation])
 
@@ -203,7 +209,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = observer(function SafeB
 
         <Toast
           visible={toastVisible}
-          message={translate("safeBoardScreen:draftSaved")}
+          message={toastMessage}
           icon={<Check size={14} color="#FFFFFF" strokeWidth={2.5} />}
           onHide={() => setToastVisible(false)}
         />

@@ -225,6 +225,7 @@ const ko: Translations = {
     empty: "게시물이 없습니다",
     write: "작성하기",
     draftSaved: "게시글이 임시저장 되었습니다.",
+    notifySent: "알림을 전송했습니다.",
   },
 
   safeBoardDetailScreen: {

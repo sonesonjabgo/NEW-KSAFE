@@ -17,7 +17,6 @@ import HeaderBell from "@assets/icons/nav/header_bell.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
-import { Toast } from "@/components/Toast"
 import { translate } from "@/i18n/translate"
 import { useStores } from "@/models"
 import { AppStackScreenProps } from "@/navigators/navigationTypes"
@@ -35,7 +34,6 @@ export const SafeBoardNotifyScreen = observer(function SafeBoardNotifyScreen({
   const [selectedWorkplaces, setSelectedWorkplaces] = useState<string[]>([])
   const [notifyTitle, setNotifyTitle] = useState("")
   const [content, setContent] = useState("")
-  const [toastVisible, setToastVisible] = useState(false)
   const [isSending, setIsSending] = useState(false)
 
   // 컴포넌트 진입 시 사업장 목록이 없으면 로드
@@ -87,11 +85,7 @@ export const SafeBoardNotifyScreen = observer(function SafeBoardNotifyScreen({
         body: content.trim(),
       })
 
-      setToastVisible(true)
-      // 토스트 표시 후 잠시 뒤에 이동
-      setTimeout(() => {
-        navigation.goBack()
-      }, 1500)
+      navigation.navigate("Main", { screen: "SafeBoard", params: { showToast: true, toastType: "notify" } })
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "알림 전송에 실패했습니다."
       Alert.alert("전송 실패", errorMessage)
@@ -101,8 +95,7 @@ export const SafeBoardNotifyScreen = observer(function SafeBoardNotifyScreen({
   }, [isValid, selectedWorkplaces, notifyTitle, content, safeBoardStore, navigation])
 
   return (
-    <>
-      <StackScreen
+    <StackScreen
         title={translate("safeBoardNotifyScreen:title")}
         onBack={() => navigation.goBack()}
         contentBg="#FFFFFF"
@@ -274,13 +267,6 @@ export const SafeBoardNotifyScreen = observer(function SafeBoardNotifyScreen({
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
-      </StackScreen>
-      <Toast
-        visible={toastVisible}
-        message={translate("safeBoardNotifyScreen:sendSuccess")}
-        icon={<Check size={14} color="#FFFFFF" strokeWidth={2.5} />}
-        onHide={() => setToastVisible(false)}
-      />
-    </>
+    </StackScreen>
   )
 })

@@ -10,7 +10,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack"
 // Main Tab Navigator types
 export type MainTabParamList = {
   Home: undefined
-  SafeBoard: { showToast?: boolean } | undefined
+  SafeBoard: { showToast?: boolean; toastType?: "notify" } | undefined
   SafeHealthMain: undefined
   WorkerParticipation: undefined
 }
