@@ -6,6 +6,7 @@ const USER_TBM_REPORT_JOB_ENDPOINT = "/api/v1/user/tbm-report-jobs"
 const USER_TBM_PARTICIPATION_ENDPOINT = "/api/v1/user/tbm-participations"
 const COMPANY_ADMIN_TBM_ACTIVITY_ENDPOINT = "/api/v1/company-admin/tbm-activities"
 const EDUCATION_MATERIAL_ENDPOINT = "/api/v1/user/education-materials"
+const EDUCATION_MATERIAL_CATEGORY_ENDPOINT = "/api/v1/user/education-material-categories"
 
 export interface CursorListResponse<TItem> {
   items: TItem[]
@@ -179,6 +180,40 @@ export interface EducationMaterialDetailDto {
   file: { name: string; url: string; size: number; mimeType: string }
   createdAt: string
   updatedAt: string
+}
+
+export interface EducationMaterialCategoryItemDto {
+  id: string
+  name: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface PlatformEducationMaterialListItemDto {
+  id: string
+  title: string
+  categoryId: string | null
+  categoryName: string | null
+  fileName: string
+  fileSize: number
+  mimeType: string
+  createdAt: string
+}
+
+export interface CompanyEducationMaterialListItemDto {
+  id: string
+  title: string
+  createdByName: string
+  fileName: string
+  fileSize: number
+  mimeType: string
+  createdAt: string
+}
+
+export interface CreateEducationMaterialRequestDto {
+  title: string
+  uploadId: string
+  description?: string
 }
 
 class TbmActivityApi {
@@ -446,6 +481,85 @@ class TbmActivityApi {
     return response.data!
   }
 
+  async fetchEducationMaterialCategories(): Promise<{
+    items: EducationMaterialCategoryItemDto[]
+  }> {
+    const headers = await this.getAuthHeaders()
+    const response = await api.apisauce.get<{ items: EducationMaterialCategoryItemDto[] }>(
+      EDUCATION_MATERIAL_CATEGORY_ENDPOINT,
+      undefined,
+      { headers },
+    )
+    if (!response.ok) throw new Error("Failed to fetch education material categories")
+    return response.data ?? { items: [] }
+  }
+
+  async fetchPlatformEducationMaterials(params?: {
+    search?: string
+    categoryId?: string
+  }): Promise<{ items: PlatformEducationMaterialListItemDto[]; nextCursor: string | null; hasNext: boolean }> {
+    const allItems = await this.fetchAllPages<PlatformEducationMaterialListItemDto>(
+      async (cursor) => {
+        const headers = await this.getAuthHeaders()
+        const query: Record<string, unknown> = { limit: 100 }
+        if (params?.search) query.search = params.search
+        if (params?.categoryId) query.categoryId = params.categoryId
+        if (cursor) query.cursor = cursor
+        const response = await api.apisauce.get<CursorListResponse<PlatformEducationMaterialListItemDto>>(
+          `${EDUCATION_MATERIAL_ENDPOINT}/platform`,
+          query,
+          { headers },
+        )
+        if (!response.ok) throw new Error("Failed to fetch platform education materials")
+        return response.data!
+      },
+    )
+    return { items: allItems, nextCursor: null, hasNext: false }
+  }
+
+  async fetchCompanyEducationMaterials(params?: {
+    search?: string
+  }): Promise<{ items: CompanyEducationMaterialListItemDto[]; nextCursor: string | null; hasNext: boolean }> {
+    const allItems = await this.fetchAllPages<CompanyEducationMaterialListItemDto>(
+      async (cursor) => {
+        const headers = await this.getAuthHeaders()
+        const query: Record<string, unknown> = { limit: 100 }
+        if (params?.search) query.search = params.search
+        if (cursor) query.cursor = cursor
+        const response = await api.apisauce.get<CursorListResponse<CompanyEducationMaterialListItemDto>>(
+          `${EDUCATION_MATERIAL_ENDPOINT}/company`,
+          query,
+          { headers },
+        )
+        if (!response.ok) throw new Error("Failed to fetch company education materials")
+        return response.data!
+      },
+    )
+    return { items: allItems, nextCursor: null, hasNext: false }
+  }
+
+  async fetchMyEducationMaterials(): Promise<{
+    items: CompanyEducationMaterialListItemDto[]
+    nextCursor: string | null
+    hasNext: boolean
+  }> {
+    const allItems = await this.fetchAllPages<CompanyEducationMaterialListItemDto>(
+      async (cursor) => {
+        const headers = await this.getAuthHeaders()
+        const query: Record<string, unknown> = { limit: 100 }
+        if (cursor) query.cursor = cursor
+        const response = await api.apisauce.get<CursorListResponse<CompanyEducationMaterialListItemDto>>(
+          `${EDUCATION_MATERIAL_ENDPOINT}/my`,
+          query,
+          { headers },
+        )
+        if (!response.ok) throw new Error("Failed to fetch my education materials")
+        return response.data!
+      },
+    )
+    return { items: allItems, nextCursor: null, hasNext: false }
+  }
+
   async fetchEducationMaterialDetail(materialId: string): Promise<EducationMaterialDetailDto> {
     const headers = await this.getAuthHeaders()
     const response = await api.apisauce.get<EducationMaterialDetailDto>(
@@ -454,6 +568,59 @@ class TbmActivityApi {
       { headers },
     )
     if (!response.ok) throw new Error("Failed to fetch education material detail")
+    return response.data!
+  }
+
+  async uploadEducationMaterialFileUrl(
+    payload: UploadInitiateRequestDto,
+  ): Promise<UploadInitiateResponseDto> {
+    const headers = await this.getAuthHeaders()
+    const response = await api.apisauce.post<UploadInitiateResponseDto>(
+      `${EDUCATION_MATERIAL_ENDPOINT}/upload-url`,
+      payload,
+      { headers },
+    )
+    if (!response.ok) throw new Error("Failed to get education material upload url")
+    return response.data!
+  }
+
+  async createEducationMaterial(
+    payload: CreateEducationMaterialRequestDto,
+  ): Promise<EducationMaterialDetailDto> {
+    const headers = await this.getAuthHeaders()
+    const response = await api.apisauce.post<EducationMaterialDetailDto>(
+      EDUCATION_MATERIAL_ENDPOINT,
+      payload,
+      { headers },
+    )
+    if (!response.ok) {
+      const body = response.data as any
+      const error = new Error(body?.message || "Failed to create education material") as any
+      if (body?.code) error.code = body.code
+      throw error
+    }
+    return response.data!
+  }
+
+  async archiveEducationMaterial(materialId: string): Promise<EducationMaterialDetailDto> {
+    const headers = await this.getAuthHeaders()
+    const response = await api.apisauce.patch<EducationMaterialDetailDto>(
+      `${EDUCATION_MATERIAL_ENDPOINT}/${materialId}/archive`,
+      undefined,
+      { headers },
+    )
+    if (!response.ok) throw new Error("Failed to archive education material")
+    return response.data!
+  }
+
+  async restoreEducationMaterial(materialId: string): Promise<EducationMaterialDetailDto> {
+    const headers = await this.getAuthHeaders()
+    const response = await api.apisauce.patch<EducationMaterialDetailDto>(
+      `${EDUCATION_MATERIAL_ENDPOINT}/${materialId}/restore`,
+      undefined,
+      { headers },
+    )
+    if (!response.ok) throw new Error("Failed to restore education material")
     return response.data!
   }
 

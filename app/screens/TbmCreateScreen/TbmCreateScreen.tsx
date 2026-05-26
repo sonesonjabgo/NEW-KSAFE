@@ -43,7 +43,7 @@ export const TbmCreateScreen = observer(function TbmCreateScreen({
   const insets = useSafeAreaInsets()
   const { workplaceStore, tbmAdminStore } = useStores()
 
-  const [selectedEducationIds, setSelectedEducationIds] = useState<number[]>([])
+  const [selectedEducationIds, setSelectedEducationIds] = useState<string[]>([])
   const [workplace, setWorkplace] = useState("")
   const [workplaceId, setWorkplaceId] = useState("")
   const [selectedDate, setSelectedDate] = useState(() => new Date())
@@ -165,6 +165,7 @@ export const TbmCreateScreen = observer(function TbmCreateScreen({
         title,
         content,
         workDate: selectedDate.toISOString().split("T")[0],
+        materialIds: selectedEducationIds.length > 0 ? selectedEducationIds : undefined,
       })
       navigation.goBack()
     } catch {

@@ -1,5 +1,6 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
 
+import { createEducationStoreDefaultModel } from "./EducationStore"
 import { createSafeBoardStoreDefaultModel } from "./SafeBoardStore"
 import { createTbmAdminStoreDefaultModel } from "./TbmAdminStore"
 import { createTbmStoreDefaultModel } from "./TbmStore"
@@ -10,6 +11,7 @@ export const RootStoreModel = types.model("RootStore").props({
   workplaceStore: createWorkplaceStoreDefaultModel(),
   tbmAdminStore: createTbmAdminStoreDefaultModel(),
   tbmStore: createTbmStoreDefaultModel(),
+  educationStore: createEducationStoreDefaultModel(),
 })
 
 export interface RootStore extends Instance<typeof RootStoreModel> {}

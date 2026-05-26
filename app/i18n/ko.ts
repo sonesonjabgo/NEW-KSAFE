@@ -878,6 +878,8 @@ const ko: Translations = {
       helper: "설명은 비워둘 수 있으며, 입력 시 최대 10,000자까지 작성할 수 있습니다.",
     },
     submit: "등록하기",
+    submitSuccess: "교육 자료가 등록되었습니다.",
+    submitError: "교육 자료 등록에 실패했습니다. 다시 시도해주세요.",
   },
 
   educationMaterialDetailScreen: {
@@ -901,6 +903,7 @@ const ko: Translations = {
     confirm: "선택완료 ({{count}}개)",
     confirmNone: "선택완료",
     emptyText: "회사 교육자료가 없습니다.",
+    categoryAll: "전체",
   },
 
   improvementProposalDetailScreen: {

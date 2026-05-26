@@ -844,6 +844,8 @@ const es: Translations = {
       helper: "Description is optional. If provided, up to 10,000 characters can be entered.",
     },
     submit: "Register",
+    submitSuccess: "Material registered successfully.",
+    submitError: "Failed to register material. Please try again.",
   },
 
   educationMaterialDetailScreen: {
@@ -867,6 +869,7 @@ const es: Translations = {
     confirm: "Complete ({{count}})",
     confirmNone: "Complete",
     emptyText: "No educational materials available.",
+    categoryAll: "All",
   },
 
   improvementProposalDetailScreen: {

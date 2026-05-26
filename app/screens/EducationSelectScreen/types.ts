@@ -1,15 +1,13 @@
-export type EducationSubcategory = "감전사고" | "공통" | "기계점검보수"
+export type EducationSource = "platform" | "company" | "mine"
 
-export interface EducationMaterial {
-  id: number
+export interface EducationListItem {
+  id: string
   title: string
-  subcategory: EducationSubcategory
-  datetime: string
-  source: 0 | 1 | 2
+  categoryName: string | null
+  createdAt: string
+  source: EducationSource
   fileName: string
-  author: string
-  department: string
-  isActive: boolean
-  startDate: string
-  endDate: string
+  fileSize: number
+  mimeType: string
+  createdByName: string | null
 }

@@ -41,9 +41,9 @@ export type AppStackParamList = {
   TbmJoinSign: { id: string }
   TbmJoinComplete: undefined
   EducationMaterial: undefined
-  EducationMaterialDetail: { id: number }
+  EducationMaterialDetail: { id: string; source?: "platform" | "company" | "mine" }
   EducationMaterialRegister: undefined
-  EducationSelect: { initialSelected: number[]; onConfirm: (ids: number[]) => void }
+  EducationSelect: { initialSelected: string[]; onConfirm: (ids: string[]) => void }
   Patrol: undefined
   PatrolCreate: undefined
   PatrolDetail: { id: string }
