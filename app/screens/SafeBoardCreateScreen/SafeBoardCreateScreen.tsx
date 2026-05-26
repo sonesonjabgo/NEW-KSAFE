@@ -5,14 +5,14 @@ import {
   KeyboardAvoidingView,
   Modal,
   Platform,
+  Pressable,
   ScrollView,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native"
 import { IconChevronDown } from "@tabler/icons-react-native"
-import { XCircle } from "lucide-react-native"
+import { Building, XCircle } from "lucide-react-native"
 import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -53,8 +53,7 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
   const [toastVisible, setToastVisible] = useState(false)
   const [toastMessage, setToastMessage] = useState("")
 
-  const slideAnim = useRef(new Animated.Value(400)).current
-  const fadeAnim = useRef(new Animated.Value(0)).current
+  const slideAnim = useRef(new Animated.Value(300)).current
 
   // 수정 모드: currentPost에서 기존 데이터 pre-fill
   useEffect(() => {
@@ -78,18 +77,14 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
 
   const openWorkplaceModal = useCallback(() => {
     setWorkplaceModalVisible(true)
-    Animated.parallel([
-      Animated.timing(fadeAnim, { toValue: 1, duration: 200, useNativeDriver: true }),
-      Animated.timing(slideAnim, { toValue: 0, duration: 260, useNativeDriver: true }),
-    ]).start()
-  }, [fadeAnim, slideAnim])
+    Animated.timing(slideAnim, { toValue: 0, duration: 250, useNativeDriver: true }).start()
+  }, [slideAnim])
 
   const closeWorkplaceModal = useCallback(() => {
-    Animated.parallel([
-      Animated.timing(fadeAnim, { toValue: 0, duration: 160, useNativeDriver: true }),
-      Animated.timing(slideAnim, { toValue: 400, duration: 200, useNativeDriver: true }),
-    ]).start(() => setWorkplaceModalVisible(false))
-  }, [fadeAnim, slideAnim])
+    Animated.timing(slideAnim, { toValue: 300, duration: 200, useNativeDriver: true }).start(() =>
+      setWorkplaceModalVisible(false),
+    )
+  }, [slideAnim])
 
   const handleSelectWorkplace = useCallback(
     (wp: SelectedWorkplace) => {
@@ -318,36 +313,44 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
       <Modal
         visible={workplaceModalVisible}
         transparent
-        animationType="none"
+        animationType="fade"
         onRequestClose={closeWorkplaceModal}
       >
-        <View style={StyleSheet.absoluteFill}>
-          <Animated.View
-            style={[StyleSheet.absoluteFill, S.$modalBackdrop, { opacity: fadeAnim }]}
-          />
-          <TouchableOpacity
-            style={StyleSheet.absoluteFill}
-            onPress={closeWorkplaceModal}
-            activeOpacity={1}
-          />
+        <Pressable style={S.$modalOverlay} onPress={closeWorkplaceModal}>
           <Animated.View
             style={[
-              S.$modalSheet,
+              S.$modalContent,
               { paddingBottom: insets.bottom + 16, transform: [{ translateY: slideAnim }] },
             ]}
           >
-            {availableWorkplaces.map((wp) => (
-              <TouchableOpacity
-                key={wp.id}
-                style={S.$modalItem}
-                onPress={() => handleSelectWorkplace(wp)}
-                activeOpacity={0.7}
-              >
-                <Text text={wp.name} style={S.$modalItemText} />
-              </TouchableOpacity>
-            ))}
+            <Text
+              text={translate("safeBoardCreateScreen:workplace.label")}
+              style={S.$modalTitle}
+            />
+            {availableWorkplaces.map((wp) => {
+              const isSelected = selectedWorkplace?.id === wp.id
+              return (
+                <TouchableOpacity
+                  key={wp.id}
+                  style={[S.$workplaceOption, isSelected && S.$workplaceOptionSelected]}
+                  activeOpacity={0.7}
+                  onPress={() => handleSelectWorkplace(wp)}
+                >
+                  <Building
+                    size={20}
+                    color={isSelected ? "#1062D8" : "#979797"}
+                    strokeWidth={1.8}
+                  />
+                  <Text
+                    text={wp.name}
+                    style={[S.$workplaceOptionText, isSelected && S.$workplaceOptionTextSelected]}
+                    numberOfLines={2}
+                  />
+                </TouchableOpacity>
+              )
+            })}
           </Animated.View>
-        </View>
+        </Pressable>
       </Modal>
     </>
   )
