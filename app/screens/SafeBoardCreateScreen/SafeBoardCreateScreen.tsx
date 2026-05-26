@@ -39,7 +39,7 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
   route,
 }: SafeBoardCreateScreenProps) {
   const insets = useSafeAreaInsets()
-  const { workplaceStore, safeBoardStore } = useStores()
+  const { safeBoardStore } = useStores()
 
   const editId = route.params?.id
   const isEditMode = !!editId
@@ -68,12 +68,6 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
     }
   }, [isEditMode, safeBoardStore.currentPost])
 
-  // HomeScreen에서 이미 로드되지만, 혹시 비어있으면 안전망으로 재fetch
-  useEffect(() => {
-    if (!workplaceStore.hasWorkplaces) {
-      void workplaceStore.fetchWorkplaces()
-    }
-  }, [])
 
   const openWorkplaceModal = useCallback(() => {
     setWorkplaceModalVisible(true)
@@ -94,7 +88,7 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
     [closeWorkplaceModal],
   )
 
-  // SafeBoardScreen 과 동일한 방식: boards에서 전체 사업장 파생 + workplaceStore 보완
+  // 목록 페이지와 동일하게 boards에서만 파생
   const availableWorkplaces = useMemo(() => {
     const seen = new Set<string>()
     const result: SelectedWorkplace[] = []
@@ -104,14 +98,8 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
         result.push({ id: post.workplaceId, name: post.workplaceName })
       }
     })
-    workplaceStore.workplaces.forEach((wp) => {
-      if (!seen.has(wp.id)) {
-        seen.add(wp.id)
-        result.push({ id: wp.id, name: wp.workplaceName })
-      }
-    })
     return result
-  }, [safeBoardStore.boards.length, workplaceStore.workplaces.length])
+  }, [safeBoardStore.boards.length])
 
   const isValid = useMemo(
     () => !!selectedWorkplace && !!title.trim() && !!content.trim(),
