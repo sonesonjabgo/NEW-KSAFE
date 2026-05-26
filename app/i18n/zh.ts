@@ -52,6 +52,11 @@ const zhOverrides = {
       allowButton: "允许推送通知",
       settingsButton: "在设置中更改权限",
     },
+    aiRiskBanner: {
+      title: "AI危險分析",
+      description: "透過相機分析危險因素並生成報告",
+      action: "前往",
+    },
   },
   safeBoardScreen: {
     title: "安全公告板",

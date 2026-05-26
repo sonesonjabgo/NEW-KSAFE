@@ -53,6 +53,11 @@ const myOverrides = {
       allowButton: "ပုရ်ရှ် အကြောင်းကြားချက် ခွင့်ပြုရန်",
       settingsButton: "ဆက်တင်တွင် ခွင့်ပြုချက် ပြောင်းရန်",
     },
+    aiRiskBanner: {
+      title: "AI အန္တရာယ် ခွဲခြမ်းစိတ်ဖြာ",
+      description: "ကင်မရာဖြင့် အန္တရာယ် ခွဲခြမ်းစိတ်ဖြာ၍ အစီရင်ခံစာ ဖန်တီး",
+      action: "သွား",
+    },
   },
   safeBoardScreen: {
     title: "ဘေးကင်းရေး ဘုတ်",

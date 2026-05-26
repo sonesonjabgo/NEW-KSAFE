@@ -155,6 +155,11 @@ const ar: Translations = {
       description: "توجد غرفة تعليم/عرض تم إنشاؤها مسبقاً.",
     },
     banner: { text: "بيئة عمل آمنة مع K-SAFEONE" },
+    aiRiskBanner: {
+      title: "تحليل المخاطر بالذكاء الاصطناعي",
+      description: "تحليل المخاطر وإنشاء التقارير عبر الكاميرا",
+      action: "انتقال",
+    },
     footer: {
       homepage: "الموقع الإلكتروني",
       privacy: "سياسة الخصوصية",

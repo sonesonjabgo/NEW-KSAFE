@@ -176,6 +176,11 @@ const ko: Translations = {
     banner: {
       text: "K-SAFEONE과 함께하는 안전한 작업환경",
     },
+    aiRiskBanner: {
+      title: "인공지능 위험분석",
+      description: "카메라 촬영으로 위험 요소 분석 및 보고서 생성",
+      action: "바로가기",
+    },
     footer: {
       homepage: "홈페이지",
       privacy: "개인정보처리방침",

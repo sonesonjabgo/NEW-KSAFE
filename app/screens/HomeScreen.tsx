@@ -235,13 +235,13 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
 
   // Grid — tablet: 4열 / 기본: 3열
   const gridCellWidth = isTablet ? "25%" : "33.33%"
-  const gridIconWrapSize = isSmallPhone ? 44 : 54
+  const gridIconWrapSize = isSmallPhone ? 38 : 46
 
   const $gridDynamic: ViewStyle = { marginBottom: isSmallPhone ? 14 : 20 }
   const $gridCellDynamic: ViewStyle = {
     width: gridCellWidth,
-    paddingTop: isSmallPhone ? 10 : 14,
-    paddingBottom: isSmallPhone ? 10 : 14,
+    paddingTop: isSmallPhone ? 16 : 13,
+    paddingBottom: isSmallPhone ? 16 : 13,
     paddingHorizontal: isSmallPhone ? 4 : 6,
   }
   const $gridIconWrapDynamic: ViewStyle = isSmallPhone
@@ -249,6 +249,11 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
     : {}
   const $gridLabelDynamic: TextStyle = { fontSize: isSmallPhone ? 12 : 13 }
   const $gridSubDynamic: TextStyle = { fontSize: isSmallPhone ? 10 : 11 }
+
+  // Banner
+  const $bannerOverlayTitleDynamic: TextStyle = { fontSize: isTablet ? 18 : 14 }
+  const $bannerOverlayDescDynamic: TextStyle = { fontSize: isTablet ? 12 : 9, lineHeight: isTablet ? 18 : 14 }
+  const $bannerOverlayActionTextDynamic: TextStyle = { fontSize: isTablet ? 14 : 11 }
 
   // Board
   const $boardItemDynamic: ViewStyle = isSmallPhone
@@ -261,8 +266,8 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
     marginTop: isSmallPhone ? 14 : 19,
     paddingBottom: isSmallPhone ? 30 : 40,
   }
-  const $footerLinksDynamic: ViewStyle = { gap: isSmallPhone ? 12 : 20 }
-  const $footerLinkDynamic: TextStyle = { fontSize: isSmallPhone ? 12 : 13 }
+  const $footerLinksDynamic: ViewStyle = { gap: isSmallPhone ? 6 : 10 }
+  const $footerLinkDynamic: TextStyle = { fontSize: isSmallPhone ? 10 : 11 }
 
   return (
     <>
@@ -301,7 +306,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
 
             {/* Row 1: Logo + Actions */}
             <View style={$titleRow}>
-              <View>
+              <View style={{ maxWidth: "45%", flexShrink: 1 }}>
                 <Text text="K-SAFEONE" style={[$appTitle, $appTitleDynamic]} />
                 <Text text="KS산업안전협회" style={[$appSub, $appSubDynamic]} />
               </View>
@@ -316,7 +321,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
                   <Text
                     text={translate("homeScreen:header.qrScan")}
                     style={[$headerActionLabel, $headerActionLabelDynamic]}
-                    numberOfLines={2}
+                    numberOfLines={1}
                     ellipsizeMode="tail"
                   />
                 </TouchableOpacity>
@@ -330,7 +335,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
                   <Text
                     text={translate("homeScreen:header.notification")}
                     style={[$headerActionLabel, $headerActionLabelDynamic]}
-                    numberOfLines={2}
+                    numberOfLines={1}
                     ellipsizeMode="tail"
                   />
                 </TouchableOpacity>
@@ -344,7 +349,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
                   <Text
                     text={translate("homeScreen:header.language")}
                     style={[$headerActionLabel, $headerActionLabelDynamic]}
-                    numberOfLines={2}
+                    numberOfLines={1}
                     ellipsizeMode="tail"
                   />
                 </TouchableOpacity>
@@ -498,7 +503,28 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
               activeOpacity={0.85}
               onPress={() => navigation.navigate("AiRiskDocCreator")}
             >
-              <HomeAiRiskBanner width="100%" height="100%" />
+              <View style={$bannerBg}>
+                <HomeAiRiskBanner width="100%" height="100%" />
+              </View>
+              <View style={$bannerOverlay}>
+                <Text
+                  text={translate("homeScreen:aiRiskBanner.title")}
+                  style={[$bannerOverlayTitle, $bannerOverlayTitleDynamic]}
+                  numberOfLines={1}
+                />
+                <Text
+                  text={translate("homeScreen:aiRiskBanner.description")}
+                  style={[$bannerOverlayDesc, $bannerOverlayDescDynamic]}
+                  numberOfLines={2}
+                />
+                <View style={$bannerOverlayAction}>
+                  <Text
+                    text={translate("homeScreen:aiRiskBanner.action")}
+                    style={[$bannerOverlayActionText, $bannerOverlayActionTextDynamic]}
+                  />
+                  <ChevronRight size={12} color="#FFFFFF" strokeWidth={2.5} />
+                </View>
+              </View>
             </TouchableOpacity>
 
             {/* Footer */}
@@ -736,16 +762,16 @@ const $gridCell: ViewStyle = {
   borderRightWidth: StyleSheet.hairlineWidth,
   borderBottomWidth: StyleSheet.hairlineWidth,
   borderColor: "#E9ECF0",
-  minHeight: 116,
+  minHeight: 120,
 }
 
 const $gridIconWrap: ViewStyle = {
-  width: 54,
-  height: 54,
+  width: 46,
+  height: 46,
   justifyContent: "center",
   alignItems: "center",
   flexShrink: 0,
-  marginBottom: 6,
+  marginBottom: 4,
 }
 
 const $gridTextWrap: ViewStyle = {
@@ -771,6 +797,7 @@ const $gridSub: TextStyle = {
   flexShrink: 1,
   flexWrap: "wrap",
   lineHeight: 13,
+  marginTop: 4,
 }
 
 const $boardSection: ViewStyle = {
@@ -898,7 +925,53 @@ const $boardItemDate: TextStyle = {
 const $banner: ViewStyle = {
   borderRadius: 10,
   overflow: "hidden",
-  aspectRatio: 930 / 398,
+  aspectRatio: 465 / 199,
+}
+
+const $bannerBg: ViewStyle = {
+  ...StyleSheet.absoluteFillObject,
+}
+
+const $bannerOverlay: ViewStyle = {
+  position: "absolute",
+  left: "3.2%",
+  top: "13%",
+  bottom: "12.1%",
+  width: "42.4%",
+  justifyContent: "center",
+  paddingHorizontal: 10,
+  gap: 5,
+}
+
+const $bannerOverlayTitle: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.bold,
+  color: "#1A2236",
+}
+
+const $bannerOverlayDesc: TextStyle = {
+  fontSize: 9,
+  fontFamily: typography.primary.normal,
+  color: "#1A2236",
+  lineHeight: 14,
+}
+
+const $bannerOverlayAction: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  backgroundColor: colors.blue,
+  paddingHorizontal: 10,
+  paddingVertical: 5,
+  borderRadius: 20,
+  alignSelf: "flex-start",
+  gap: 3,
+  marginTop: 2,
+}
+
+const $bannerOverlayActionText: TextStyle = {
+  fontSize: 11,
+  fontFamily: typography.primary.semiBold,
+  color: "#FFFFFF",
 }
 
 const $footer: ViewStyle = {
@@ -910,6 +983,7 @@ const $footerLinks: ViewStyle = {
   flexDirection: "row",
   justifyContent: "center",
   alignItems: "center",
+  flexWrap: "wrap",
 }
 
 const $footerLink: TextStyle = {
@@ -918,7 +992,7 @@ const $footerLink: TextStyle = {
 }
 
 const $footerSep: TextStyle = {
-  fontSize: 13,
+  fontSize: 11,
   color: "#CFD0D3",
 }
 

@@ -53,6 +53,11 @@ const neOverrides = {
       allowButton: "पुश सूचना अनुमति दिनुहोस्",
       settingsButton: "सेटिङमा अनुमति परिवर्तन गर्नुहोस्",
     },
+    aiRiskBanner: {
+      title: "AI जोखिम विश्लेषण",
+      description: "क्यामेराद्वारा जोखिम विश्लेषण गरी रिपोर्ट बनाउनुहोस्",
+      action: "जाउ",
+    },
   },
   safeBoardScreen: {
     title: "सुरक्षा बोर्ड",

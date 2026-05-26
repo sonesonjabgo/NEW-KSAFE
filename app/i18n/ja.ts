@@ -156,6 +156,11 @@ const ja: Translations = {
     },
     edu: { title: "教育", description: "説明" },
     banner: { text: "安全な環境" },
+    aiRiskBanner: {
+      title: "AI危険分析",
+      description: "カメラで危険要素を分析しレポートを作成",
+      action: "進む",
+    },
     footer: {
       homepage: "ホームページ",
       privacy: "プライバシー",

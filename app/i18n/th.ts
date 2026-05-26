@@ -52,6 +52,11 @@ const thOverrides = {
       allowButton: "อนุญาตการแจ้งเตือน Push",
       settingsButton: "เปลี่ยนการอนุญาตในการตั้งค่า",
     },
+    aiRiskBanner: {
+      title: "การวิเคราะห์ความเสี่ยง AI",
+      description: "วิเคราะห์อันตรายและสร้างรายงานผ่านกล้อง",
+      action: "ไป",
+    },
   },
   safeBoardScreen: {
     title: "กระดานความปลอดภัย",

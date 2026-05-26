@@ -14,7 +14,6 @@ import { HomeScreen } from "@/screens/HomeScreen"
 import { SafeBoardScreen } from "@/screens/SafeBoardScreen/SafeBoardScreen"
 import { SafeHealthMainScreen } from "@/screens/SafeHealthScreen/SafeHealthMainScreen"
 import { WorkerParticipationScreen } from "@/screens/WorkerParticipationScreen/WorkerParticipationScreen"
-import { useResponsive } from "@/theme/responsive"
 import { typography } from "@/theme/typography"
 
 import type { MainTabParamList } from "./navigationTypes"
@@ -30,13 +29,10 @@ function TabIcon({ Icon, focused }: { Icon: React.FC<SvgProps>; focused: boolean
 
 function CustomTabBar({ state, descriptors, navigation, insets }: BottomTabBarProps) {
   const bottom = insets.bottom
-  const { isSmallPhone, isLargePhone, isTablet } = useResponsive()
-
-  const tabGap = isSmallPhone ? 4 : isLargePhone ? 18 : isTablet ? 22 : 12
 
   return (
     <View style={[$tabBarOuter, { paddingBottom: bottom, height: 82 + bottom }]}>
-      <View style={[$tabBarRow, { gap: tabGap }]}>
+      <View style={$tabBarRow}>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key]
           const focused = state.index === index
@@ -63,10 +59,14 @@ function CustomTabBar({ state, descriptors, navigation, insets }: BottomTabBarPr
               accessibilityRole="button"
               accessibilityState={{ selected: focused }}
             >
-              {options.tabBarIcon?.({ focused, color, size: 35 })}
-              <Text style={[$tabLabel, { color }]} numberOfLines={1}>
-                {label}
-              </Text>
+              <View style={$tabIconWrap}>
+                {options.tabBarIcon?.({ focused, color, size: 35 })}
+              </View>
+              <View style={$tabLabelWrap}>
+                <Text style={[$tabLabel, { color }]} numberOfLines={2}>
+                  {label}
+                </Text>
+              </View>
             </TouchableOpacity>
           )
         })}
@@ -137,11 +137,7 @@ const $tabBarOuter: ViewStyle = {
 const $tabBarRow: ViewStyle = {
   flex: 1,
   flexDirection: "row",
-  justifyContent: "center",
   alignItems: "center",
-  // gap은 breakpoint별로 동적 적용
-  // translateX -4: 텍스트 길이 차이로 인한 시각 편중 보정
-  transform: [{ translateX: -4 }],
 }
 
 const $tabItem: ViewStyle = {
@@ -149,13 +145,27 @@ const $tabItem: ViewStyle = {
   flex: 1,
   justifyContent: "center",
   overflow: "hidden",
-  paddingHorizontal: 8,
+  paddingHorizontal: 4,
+}
+
+const $tabIconWrap: ViewStyle = {
+  height: 36,
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+const $tabLabelWrap: ViewStyle = {
+  height: 30,
+  overflow: "hidden",
+  width: "100%",
+  alignItems: "center",
 }
 
 const $tabLabel: TextStyle = {
-  fontSize: 13,
+  fontSize: 11,
   fontFamily: typography.primary.semiBold,
   marginTop: 2,
   width: "100%",
   textAlign: "center",
+  lineHeight: 14,
 }

@@ -52,6 +52,11 @@ const urOverrides = {
       allowButton: "پش نوٹیفکیشن کی اجازت دیں",
       settingsButton: "سیٹنگز میں اجازت تبدیل کریں",
     },
+    aiRiskBanner: {
+      title: "AI خطرہ تجزیہ",
+      description: "کیمرے سے خطرات کا تجزیہ اور رپورٹ بنائیں",
+      action: "جائیں",
+    },
   },
   safeBoardScreen: {
     title: "حفاظت بورڈ",

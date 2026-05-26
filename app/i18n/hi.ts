@@ -157,6 +157,11 @@ const hi: Translations = {
     },
     edu: { title: "शिक्षा", description: "विवरण" },
     banner: { text: "सुरक्षित वातावरण" },
+    aiRiskBanner: {
+      title: "AI खतरा विश्लेषण",
+      description: "कैमरे से खतरों का विश्लेषण और रिपोर्ट बनाएं",
+      action: "जाएं",
+    },
     footer: {
       homepage: "मुखपृष्ठ",
       privacy: "गोपनीयता",

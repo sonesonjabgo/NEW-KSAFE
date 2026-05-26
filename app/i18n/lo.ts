@@ -52,6 +52,11 @@ const loOverrides = {
       allowButton: "ອະນຸຍາດການແຈ້ງເຕືອນ Push",
       settingsButton: "ປ່ຽນການອະນຸຍາດໃນການຕັ້ງຄ່າ",
     },
+    aiRiskBanner: {
+      title: "ການວິເຄາະອັນຕະລາຍ AI",
+      description: "ວິເຄາະອັນຕະລາຍ ແລະ ສ້າງລາຍງານດ້ວຍກ້ອງ",
+      action: "ໄປ",
+    },
   },
   safeBoardScreen: {
     title: "ກະດານຄວາມປອດໄພ",

@@ -53,6 +53,11 @@ const kmOverrides = {
       allowButton: "អនុញ្ញាតការជូនដំណឹង Push",
       settingsButton: "ផ្លាស់ប្តូរការអនុញ្ញាតក្នុងការកំណត់",
     },
+    aiRiskBanner: {
+      title: "ការវិភាគហានិភ័យ AI",
+      description: "វិភាគហានិភ័យ និងបង្កើតរបាយការណ៍តាមកាមេរ៉ា",
+      action: "ទៅ",
+    },
   },
   safeBoardScreen: {
     title: "បន្ទះសុវត្ថិភាព",

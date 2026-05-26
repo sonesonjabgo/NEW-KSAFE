@@ -159,6 +159,11 @@ const fr: Translations = {
     },
     edu: { title: "Éducation", description: "Description" },
     banner: { text: "Environnement sûr" },
+    aiRiskBanner: {
+      title: "Analyse des Risques IA",
+      description: "Analysez les dangers et générez des rapports par caméra",
+      action: "Aller",
+    },
     footer: {
       homepage: "Accueil",
       privacy: "Confidentialité",

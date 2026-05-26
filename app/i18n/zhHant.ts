@@ -1,4 +1,5 @@
 import en, { Translations } from "./en"
+import zh from "./zh"
 import { mergeLocale, type LocaleOverrides } from "./mergeLocale"
 
 const zhHantOverrides = {
@@ -46,6 +47,7 @@ const zhHantOverrides = {
   },
 }
 
-const zhHant: Translations = mergeLocale(en, zhHantOverrides as LocaleOverrides<Translations>)
+const zhHantBase = mergeLocale(en, zh as LocaleOverrides<Translations>)
+const zhHant: Translations = mergeLocale(zhHantBase, zhHantOverrides as LocaleOverrides<Translations>)
 
 export default zhHant

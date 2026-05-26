@@ -52,6 +52,11 @@ const viOverrides = {
       allowButton: "Cho phép thông báo đẩy",
       settingsButton: "Thay đổi quyền trong Cài đặt",
     },
+    aiRiskBanner: {
+      title: "Phân Tích Nguy Hiểm AI",
+      description: "Phân tích nguy hiểm và tạo báo cáo qua camera",
+      action: "Đi",
+    },
   },
   safeBoardScreen: {
     title: "Bảng an toàn",

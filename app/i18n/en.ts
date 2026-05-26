@@ -176,6 +176,11 @@ const en = {
     banner: {
       text: "Safe Working Environment with K-SAFEONE",
     },
+    aiRiskBanner: {
+      title: "AI Hazard Analysis",
+      description: "Analyze hazards and generate reports via camera",
+      action: "Go",
+    },
     footer: {
       homepage: "Homepage",
       privacy: "Privacy Policy",
@@ -189,7 +194,7 @@ const en = {
       interpret: { label: "1:1 Interpretation", sub: "Real-time interpretation" },
       chatbot: { label: "AI Safety Chatbot", sub: "Safety Q&A / Consultation" },
       translate: { label: "Multilingual Translation", sub: "Language translation" },
-      education: { label: "Education/Presentation", sub: "Present educational materials" },
+      education: { label: "Education/\nPresentation", sub: "Present educational materials" },
       eduJoin: { label: "Join Education", sub: "Join education/presentation" },
       tbmJoin: { label: "Join TBM", sub: "Join safety inspection meeting" },
       patrol: { label: "Site Patrol", sub: "Patrol and record" },

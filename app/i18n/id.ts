@@ -54,6 +54,11 @@ const idOverrides = {
       allowButton: "Izinkan Notifikasi Push",
       settingsButton: "Ubah Izin di Pengaturan",
     },
+    aiRiskBanner: {
+      title: "Analisis Bahaya AI",
+      description: "Analisis bahaya dan buat laporan melalui kamera",
+      action: "Buka",
+    },
   },
   safeBoardScreen: {
     title: "Papan Keamanan",

@@ -161,6 +161,11 @@ const es: Translations = {
       description: "Ya existe una sala de educación/presentación creada.",
     },
     banner: { text: "Un entorno de trabajo seguro con K-SAFEONE" },
+    aiRiskBanner: {
+      title: "Análisis de Riesgos con IA",
+      description: "Analice peligros y genere informes mediante cámara",
+      action: "Ir",
+    },
     footer: {
       homepage: "Sitio web",
       privacy: "Política de privacidad",

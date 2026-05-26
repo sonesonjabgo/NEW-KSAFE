@@ -53,6 +53,11 @@ const ruOverrides = {
       allowButton: "Разрешить push-уведомления",
       settingsButton: "Изменить разрешение в настройках",
     },
+    aiRiskBanner: {
+      title: "Анализ рисков ИИ",
+      description: "Анализируйте опасности и создавайте отчёты через камеру",
+      action: "Перейти",
+    },
   },
   safeBoardScreen: {
     title: "Доска безопасности",
