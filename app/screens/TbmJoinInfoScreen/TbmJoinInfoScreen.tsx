@@ -1,6 +1,8 @@
 import { FC } from "react"
-import { ScrollView, TouchableOpacity, View } from "react-native"
+import { Linking, ScrollView, TouchableOpacity, View } from "react-native"
 import { IconDownload } from "@tabler/icons-react-native"
+import { format, parseISO } from "date-fns"
+import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import EducationFrame from "@assets/icons/education_frame.svg"
@@ -8,17 +10,30 @@ import EducationFrame from "@assets/icons/education_frame.svg"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
-import { mockTbmJoinData } from "@/screens/TbmJoinScreen/mockData"
 
 import * as S from "./styles"
 
 type TbmJoinInfoScreenProps = AppStackScreenProps<"TbmJoinInfo">
 
-export const TbmJoinInfoScreen: FC<TbmJoinInfoScreenProps> = ({ navigation, route }) => {
+function formatDate(iso?: string | null): string {
+  if (!iso) return "-"
+  try {
+    return format(parseISO(iso), "yyyy.MM.dd")
+  } catch {
+    return iso
+  }
+}
+
+export const TbmJoinInfoScreen: FC<TbmJoinInfoScreenProps> = observer(function TbmJoinInfoScreen({
+  navigation,
+  route,
+}) {
   const insets = useSafeAreaInsets()
   const { id } = route.params
-  const tbm = mockTbmJoinData.find((item) => item.id === id)
+  const { tbmStore } = useStores()
+  const session = tbmStore.selectedSession
 
   return (
     <StackScreen
@@ -40,14 +55,14 @@ export const TbmJoinInfoScreen: FC<TbmJoinInfoScreenProps> = ({ navigation, rout
             <View style={S.$cardTexts}>
               <Text text={translate("tbmJoinInfoScreen:sectionInfo")} style={S.$cardTitle} />
               <Text
-                text={`${tbm?.authorName ?? "-"}  ·  ${tbm?.date ?? "-"}`}
+                text={`${session?.createdByName ?? "-"}  ·  ${formatDate(session?.workDate)}`}
                 style={S.$cardSubtitle}
               />
             </View>
           </View>
 
           {/* TBM 제목 */}
-          <Text text={tbm?.title ?? "-"} style={S.$title} />
+          <Text text={session?.title ?? "-"} style={S.$title} />
 
           {/* 첨부파일 */}
           <View>
@@ -55,11 +70,29 @@ export const TbmJoinInfoScreen: FC<TbmJoinInfoScreenProps> = ({ navigation, rout
               text={translate("tbmJoinInfoScreen:sectionAttachments")}
               style={S.$attachHeading}
             />
-            <View style={S.$attachCard}>
-              <EducationFrame width={22} height={22} color="#1062D8" />
-              <Text text="해빙기 안전수칙.pdf" style={S.$attachName} numberOfLines={1} />
-              <IconDownload size={20} color="#1062D8" />
-            </View>
+            {(session?.materials ?? []).length > 0 ? (
+              session?.materials.map((mat) => (
+                <TouchableOpacity
+                  key={mat.id}
+                  style={S.$attachCard}
+                  activeOpacity={0.7}
+                  onPress={() => Linking.openURL(mat.fileUrl).catch(() => {})}
+                >
+                  <EducationFrame width={22} height={22} color="#1062D8" />
+                  <Text text={mat.title} style={S.$attachName} numberOfLines={1} />
+                  <IconDownload size={20} color="#1062D8" />
+                </TouchableOpacity>
+              ))
+            ) : (
+              <View style={S.$attachCard}>
+                <EducationFrame width={22} height={22} color="#1062D8" />
+                <Text
+                  text={translate("tbmJoinInfoScreen:noAttachments")}
+                  style={S.$attachName}
+                  numberOfLines={1}
+                />
+              </View>
+            )}
           </View>
         </ScrollView>
 
@@ -83,4 +116,4 @@ export const TbmJoinInfoScreen: FC<TbmJoinInfoScreenProps> = ({ navigation, rout
       </View>
     </StackScreen>
   )
-}
+})

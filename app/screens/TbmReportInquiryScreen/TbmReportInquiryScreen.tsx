@@ -1,17 +1,36 @@
-import { FC, useMemo, useState } from "react"
+import { FC, useCallback, useMemo, useState } from "react"
 import { FlatList, TouchableOpacity, View } from "react-native"
+import { useFocusEffect } from "@react-navigation/native"
+import { format, parseISO } from "date-fns"
+import { observer } from "mobx-react-lite"
 
 import TbmEmptyImage from "@assets/images/tbm-empty.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 
-import { mockTbmReports } from "./mockData"
 import * as S from "./styles"
 import type { TbmReportInquiryScreenProps, TbmReportItem, TbmReportStatus } from "./types"
 
 type TabKey = "all" | TbmReportStatus
+
+const API_STATUS_MAP: Record<"pending" | "processing" | "completed" | "failed", TbmReportStatus> = {
+  pending: "requested",
+  processing: "generating",
+  completed: "completed",
+  failed: "failed",
+}
+
+function formatDate(isoString?: string | null): string {
+  if (!isoString) return ""
+  try {
+    return format(parseISO(isoString), "yyyy.MM.dd")
+  } catch {
+    return isoString
+  }
+}
 
 const TbmReportCard: FC<{ item: TbmReportItem; onPress: () => void }> = ({ item, onPress }) => {
   const badgeStyle = {
@@ -72,67 +91,93 @@ const EmptyState: FC<{ tab: TabKey }> = ({ tab }) => {
   )
 }
 
-export const TbmReportInquiryScreen: FC<TbmReportInquiryScreenProps> = ({ navigation }) => {
-  const [activeTab, setActiveTab] = useState<TabKey>("all")
+export const TbmReportInquiryScreen: FC<TbmReportInquiryScreenProps> = observer(
+  function TbmReportInquiryScreen({ navigation }) {
+    const [activeTab, setActiveTab] = useState<TabKey>("all")
+    const { tbmAdminStore } = useStores()
 
-  const TABS: { key: TabKey; label: string }[] = useMemo(
-    () => [
-      { key: "all", label: translate("tbmReportInquiryScreen:tabs.all") },
-      { key: "requested", label: translate("tbmReportInquiryScreen:tabs.requested") },
-      { key: "generating", label: translate("tbmReportInquiryScreen:tabs.generating") },
-      { key: "completed", label: translate("tbmReportInquiryScreen:tabs.completed") },
-      { key: "failed", label: translate("tbmReportInquiryScreen:tabs.failed") },
-    ],
-    [],
-  )
+    useFocusEffect(
+      useCallback(() => {
+        tbmAdminStore.fetchMyReportJobs()
+      }, [tbmAdminStore]),
+    )
 
-  const filteredData = useMemo(
-    () =>
-      activeTab === "all"
-        ? mockTbmReports
-        : mockTbmReports.filter((item) => item.status === activeTab),
-    [activeTab],
-  )
+    const TABS: { key: TabKey; label: string }[] = useMemo(
+      () => [
+        { key: "all", label: translate("tbmReportInquiryScreen:tabs.all") },
+        { key: "requested", label: translate("tbmReportInquiryScreen:tabs.requested") },
+        { key: "generating", label: translate("tbmReportInquiryScreen:tabs.generating") },
+        { key: "completed", label: translate("tbmReportInquiryScreen:tabs.completed") },
+        { key: "failed", label: translate("tbmReportInquiryScreen:tabs.failed") },
+      ],
+      [],
+    )
 
-  return (
-    <StackScreen
-      title={translate("tbmReportInquiryScreen:title")}
-      onBack={() => navigation.goBack()}
-      squareTop
-      contentBg="#FFFFFF"
-    >
-      {/* 탭 바 */}
-      <View style={S.$tabBar}>
-        {TABS.map((tab) => (
-          <TouchableOpacity
-            key={tab.key}
-            style={[S.$tab, activeTab === tab.key && S.$activeTab]}
-            activeOpacity={0.7}
-            onPress={() => setActiveTab(tab.key)}
-          >
-            <Text
-              text={tab.label}
-              style={[S.$tabText, activeTab === tab.key && S.$activeTabText]}
+    const reportItems = useMemo<TbmReportItem[]>(
+      () =>
+        tbmAdminStore.reportJobs
+          .filter((job) => {
+            if (activeTab === "all") return true
+            const uiStatus = API_STATUS_MAP[job.status as keyof typeof API_STATUS_MAP]
+            return uiStatus === activeTab
+          })
+          .map((job) => ({
+            id: job.id,
+            title: job.activityTitle ?? translate("tbmReportInquiryScreen:untitled"),
+            status: API_STATUS_MAP[job.status as keyof typeof API_STATUS_MAP] ?? "requested",
+            date: formatDate(job.createdAt),
+            participants: job.participantCount ?? 0,
+            author: job.requestedBy ?? "",
+            location: job.workplaceName ?? "",
+            processName: job.processName ?? undefined,
+            teamName: job.teamName ?? undefined,
+            requestedAt: job.createdAt ? formatDate(job.createdAt) : undefined,
+            startedAt: job.startedAt ? formatDate(job.startedAt) : undefined,
+            completedAt: job.completedAt ? formatDate(job.completedAt) : undefined,
+          })),
+      [tbmAdminStore.reportJobs, activeTab],
+    )
+
+    return (
+      <StackScreen
+        title={translate("tbmReportInquiryScreen:title")}
+        onBack={() => navigation.goBack()}
+        squareTop
+        contentBg="#FFFFFF"
+      >
+        {/* 탭 바 */}
+        <View style={S.$tabBar}>
+          {TABS.map((tab) => (
+            <TouchableOpacity
+              key={tab.key}
+              style={[S.$tab, activeTab === tab.key && S.$activeTab]}
+              activeOpacity={0.7}
+              onPress={() => setActiveTab(tab.key)}
+            >
+              <Text
+                text={tab.label}
+                style={[S.$tabText, activeTab === tab.key && S.$activeTabText]}
+              />
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        {/* 카드 리스트 */}
+        <FlatList<TbmReportItem>
+          style={S.$listContent}
+          data={reportItems}
+          keyExtractor={(item) => String(item.id)}
+          contentContainerStyle={[S.$flatListContent, reportItems.length === 0 && { flex: 1 }]}
+          renderItem={({ item }) => (
+            <TbmReportCard
+              item={item}
+              onPress={() => navigation.navigate("TbmReportStatus", { id: item.id })}
             />
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      {/* 카드 리스트 */}
-      <FlatList<TbmReportItem>
-        style={S.$listContent}
-        data={filteredData}
-        keyExtractor={(item) => String(item.id)}
-        contentContainerStyle={[S.$flatListContent, filteredData.length === 0 && { flex: 1 }]}
-        renderItem={({ item }) => (
-          <TbmReportCard
-            item={item}
-            onPress={() => navigation.navigate("TbmReportStatus", { id: item.id })}
-          />
-        )}
-        ListEmptyComponent={<EmptyState tab={activeTab} />}
-        showsVerticalScrollIndicator={false}
-      />
-    </StackScreen>
-  )
-}
+          )}
+          ListEmptyComponent={<EmptyState tab={activeTab} />}
+          showsVerticalScrollIndicator={false}
+        />
+      </StackScreen>
+    )
+  },
+)

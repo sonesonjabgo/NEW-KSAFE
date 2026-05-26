@@ -1,5 +1,7 @@
-import { FC, useMemo, useState } from "react"
+import { FC, useCallback, useMemo, useState } from "react"
 import { FlatList, TouchableOpacity, View } from "react-native"
+import { useFocusEffect } from "@react-navigation/native"
+import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import TbmEmptyImage from "@assets/images/tbm-empty.svg"
@@ -8,12 +10,18 @@ import TbmFabIcon from "@assets/images/tbm-fab-icon.svg"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 
-import { mockTbmData } from "./mockData"
 import * as S from "./styles"
 import type { TbmItem, TbmListScreenProps, TbmStatus } from "./types"
 
 type TabKey = "all" | "작성중" | "진행중" | "종료됨"
+
+const API_STATUS_MAP: Record<"draft" | "active" | "ended", TbmStatus> = {
+  draft: "작성중",
+  active: "진행중",
+  ended: "종료됨",
+}
 
 const TbmCard: FC<{ item: TbmItem; onPress: () => void }> = ({ item, onPress }) => {
   const badgeStyle =
@@ -87,8 +95,11 @@ const EmptyState: FC<{ tab: TabKey }> = ({ tab }) => {
   )
 }
 
-export const TbmListScreen: FC<TbmListScreenProps> = ({ navigation }) => {
+export const TbmListScreen: FC<TbmListScreenProps> = observer(function TbmListScreen({
+  navigation,
+}) {
   const insets = useSafeAreaInsets()
+  const { tbmAdminStore } = useStores()
   const [activeTab, setActiveTab] = useState<TabKey>("all")
 
   const TABS: { key: TabKey; label: string }[] = useMemo(
@@ -101,10 +112,26 @@ export const TbmListScreen: FC<TbmListScreenProps> = ({ navigation }) => {
     [],
   )
 
-  const filteredData = useMemo(
+  useFocusEffect(
+    useCallback(() => {
+      tbmAdminStore.fetchSessions()
+    }, [tbmAdminStore]),
+  )
+
+  const listData = useMemo<TbmItem[]>(
     () =>
-      activeTab === "all" ? mockTbmData : mockTbmData.filter((item) => item.status === activeTab),
-    [activeTab],
+      tbmAdminStore.sessions
+        .filter((s) => activeTab === "all" || API_STATUS_MAP[s.status as "draft" | "active" | "ended"] === activeTab)
+        .map((s) => ({
+          id: s.id,
+          title: s.title,
+          status: API_STATUS_MAP[s.status as "draft" | "active" | "ended"],
+          date: s.workDate,
+          participants: s.participantCount,
+          author: s.createdByName,
+          location: s.workplaceName ?? "",
+        })),
+    [tbmAdminStore.sessions, activeTab],
   )
 
   return (
@@ -135,20 +162,18 @@ export const TbmListScreen: FC<TbmListScreenProps> = ({ navigation }) => {
         {/* 카드 리스트 */}
         <FlatList<TbmItem>
           style={S.$listContent}
-          data={filteredData}
+          data={listData}
           keyExtractor={(item) => String(item.id)}
-          contentContainerStyle={[S.$flatListContent, filteredData.length === 0 && { flex: 1 }]}
+          contentContainerStyle={[S.$flatListContent, listData.length === 0 && { flex: 1 }]}
           renderItem={({ item }) => (
             <TbmCard
               item={item}
-              onPress={() => navigation.navigate("TbmDetail", { id: item.id })}
+              onPress={() => navigation.navigate("TbmDetail", { id: String(item.id) })}
             />
           )}
           ListEmptyComponent={<EmptyState tab={activeTab} />}
           showsVerticalScrollIndicator={false}
         />
-
-        {/* FAB */}
       </StackScreen>
 
       {/* FAB — StackScreen의 overflow:hidden 밖에 배치 */}
@@ -172,4 +197,4 @@ export const TbmListScreen: FC<TbmListScreenProps> = ({ navigation }) => {
       </View>
     </>
   )
-}
+})

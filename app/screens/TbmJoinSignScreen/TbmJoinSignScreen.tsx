@@ -1,6 +1,7 @@
 import { FC, useRef, useState } from "react"
 import { PanResponder, TouchableOpacity, View } from "react-native"
 import { IconAlertCircle, IconRefresh } from "@tabler/icons-react-native"
+import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import Svg, { Path } from "react-native-svg"
 
@@ -8,15 +9,18 @@ import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 
 import * as S from "./styles"
 
 type TbmJoinSignScreenProps = AppStackScreenProps<"TbmJoinSign">
 
-export const TbmJoinSignScreen: FC<TbmJoinSignScreenProps> = ({ navigation, route }) => {
+export const TbmJoinSignScreen: FC<TbmJoinSignScreenProps> = observer(function TbmJoinSignScreen({
+  navigation,
+}) {
   const insets = useSafeAreaInsets()
-  const { id } = route.params
+  const { tbmStore } = useStores()
   const [paths, setPaths] = useState<string[]>([])
   const currentPath = useRef("")
   const isDrawing = useRef(false)
@@ -57,11 +61,17 @@ export const TbmJoinSignScreen: FC<TbmJoinSignScreenProps> = ({ navigation, rout
     isDrawing.current = false
   }
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (!hasSignature) {
       setNoSignModalVisible(true)
     } else {
-      navigation.navigate("TbmJoinComplete")
+      try {
+        tbmStore.setSignature(paths.join(" "))
+        await tbmStore.submitParticipation()
+        navigation.navigate("TbmJoinComplete")
+      } catch {
+        // error handled in store
+      }
     }
   }
 
@@ -140,4 +150,4 @@ export const TbmJoinSignScreen: FC<TbmJoinSignScreenProps> = ({ navigation, rout
       />
     </>
   )
-}
+})

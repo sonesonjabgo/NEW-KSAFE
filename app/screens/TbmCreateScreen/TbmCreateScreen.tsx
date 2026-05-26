@@ -41,10 +41,11 @@ export const TbmCreateScreen = observer(function TbmCreateScreen({
   navigation,
 }: TbmCreateScreenProps) {
   const insets = useSafeAreaInsets()
-  const { workplaceStore } = useStores()
+  const { workplaceStore, tbmAdminStore } = useStores()
 
   const [selectedEducationIds, setSelectedEducationIds] = useState<number[]>([])
   const [workplace, setWorkplace] = useState("")
+  const [workplaceId, setWorkplaceId] = useState("")
   const [selectedDate, setSelectedDate] = useState(() => new Date())
   const [dateTime, setDateTime] = useState(() => formatDate(new Date()))
   const [includeDateInTitle, setIncludeDateInTitle] = useState(false)
@@ -72,13 +73,14 @@ export const TbmCreateScreen = observer(function TbmCreateScreen({
   }, [fadeAnim, slideAnim])
 
   const isValid = useMemo(
-    () => !!workplace && !!dateTime.trim() && !!title.trim(),
-    [workplace, dateTime, title],
+    () => !!workplaceId && !!dateTime.trim() && !!title.trim(),
+    [workplaceId, dateTime, title],
   )
 
   const handleReset = useCallback(() => {
     const now = new Date()
     setWorkplace("")
+    setWorkplaceId("")
     setSelectedDate(now)
     setDateTime(formatDate(now))
     setIncludeDateInTitle(false)
@@ -141,8 +143,9 @@ export const TbmCreateScreen = observer(function TbmCreateScreen({
   }, [])
 
   const handleSelectWorkplace = useCallback(
-    (wp: string) => {
-      setWorkplace(wp)
+    (id: string, name: string) => {
+      setWorkplaceId(id)
+      setWorkplace(name)
       closeWorkplaceModal()
     },
     [closeWorkplaceModal],
@@ -155,11 +158,19 @@ export const TbmCreateScreen = observer(function TbmCreateScreen({
     })
   }, [navigation, selectedEducationIds])
 
-  const handleSubmit = useCallback(() => {
-    console.log(
-      JSON.stringify({ workplace, dateTime, title, content, selectedEducationIds }, null, 2),
-    )
-  }, [workplace, dateTime, title, content, selectedEducationIds])
+  const handleSubmit = useCallback(async () => {
+    try {
+      await tbmAdminStore.createSession({
+        workplaceId,
+        title,
+        content,
+        workDate: selectedDate.toISOString().split("T")[0],
+      })
+      navigation.goBack()
+    } catch {
+      // error handled in store
+    }
+  }, [workplaceId, title, content, selectedDate, tbmAdminStore, navigation])
 
   const resetLabel = useMemo(() => translate("tbmCreateScreen:reset"), [])
 
@@ -370,7 +381,7 @@ export const TbmCreateScreen = observer(function TbmCreateScreen({
               <TouchableOpacity
                 key={wp.id}
                 style={S.$modalItem}
-                onPress={() => handleSelectWorkplace(wp.workplaceName)}
+                onPress={() => handleSelectWorkplace(wp.id, wp.workplaceName)}
                 activeOpacity={0.7}
               >
                 <Text text={wp.workplaceName} style={S.$modalItemText} />

@@ -31,14 +31,14 @@ export type AppStackParamList = {
   EducationPresentation: undefined
   TbmList: undefined
   TbmCreate: undefined
-  TbmDetail: { id: number }
-  TbmReport: { id: number }
+  TbmDetail: { id: string }
+  TbmReport: { id: string }
   TbmReportInquiry: undefined
-  TbmReportStatus: { id: number }
+  TbmReportStatus: { id: string }
   TbmJoin: undefined
-  TbmJoinInfo: { id: number }
-  TbmJoinHealth: { id: number }
-  TbmJoinSign: { id: number }
+  TbmJoinInfo: { id: string }
+  TbmJoinHealth: { id: string }
+  TbmJoinSign: { id: string }
   TbmJoinComplete: undefined
   EducationMaterial: undefined
   EducationMaterialDetail: { id: number }
@@ -63,7 +63,7 @@ export type AppStackParamList = {
       }
     | undefined
   TbmParticipationHistory: undefined
-  TbmParticipationHistoryDetail: { id: number }
+  TbmParticipationHistoryDetail: { id: string }
   AiRiskDocCreator: undefined
   HazardRiskList: undefined
   HazardRiskCreate: undefined

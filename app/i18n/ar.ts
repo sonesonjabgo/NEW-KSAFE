@@ -983,6 +983,7 @@ const ar: Translations = {
 
   tbmReportInquiryScreen: {
     title: "TBM Report Inquiry",
+    untitled: "(No title)",
     tabs: {
       all: "All",
       requested: "Requested",
@@ -1127,6 +1128,8 @@ const ar: Translations = {
     cautionResponse: "Caution Response",
     unit: "case(s)",
     workplaceLabel: "Workplace",
+    statusNormal: "Normal",
+    statusAbnormal: "Caution",
   },
 
   tbmParticipationHistoryDetailScreen: {

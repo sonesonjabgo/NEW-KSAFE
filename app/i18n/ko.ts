@@ -1029,6 +1029,7 @@ const ko: Translations = {
 
   tbmReportInquiryScreen: {
     title: "TBM 보고서 조회",
+    untitled: "(제목 없음)",
     tabs: {
       all: "전체",
       requested: "요청됨",
@@ -1173,6 +1174,8 @@ const ko: Translations = {
     cautionResponse: "주의 응답",
     unit: "건",
     workplaceLabel: "사업장",
+    statusNormal: "정상",
+    statusAbnormal: "주의",
   },
 
   tbmParticipationHistoryDetailScreen: {

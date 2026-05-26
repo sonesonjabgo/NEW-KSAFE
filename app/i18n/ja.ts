@@ -987,6 +987,7 @@ const ja: Translations = {
 
   tbmReportInquiryScreen: {
     title: "TBM報告書照会",
+    untitled: "(No title)",
     tabs: {
       all: "All",
       requested: "Requested",
@@ -1131,6 +1132,8 @@ const ja: Translations = {
     cautionResponse: "Caution Response",
     unit: "case(s)",
     workplaceLabel: "Workplace",
+    statusNormal: "Normal",
+    statusAbnormal: "Caution",
   },
 
   tbmParticipationHistoryDetailScreen: {

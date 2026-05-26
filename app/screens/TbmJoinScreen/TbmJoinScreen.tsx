@@ -1,12 +1,15 @@
-import { FC, useEffect, useState } from "react"
+import { FC, useCallback, useEffect, useMemo, useState } from "react"
 import { FlatList, Modal, ScrollView, TouchableOpacity, View } from "react-native"
 import { IconAlertCircle, IconCheck, IconInfoCircle } from "@tabler/icons-react-native"
+import { useFocusEffect } from "@react-navigation/native"
+import { format, parseISO } from "date-fns"
 import Animated, {
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from "react-native-reanimated"
+import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import TbmEmptyImage from "@assets/images/tbm-empty.svg"
@@ -15,17 +18,20 @@ import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
+import { useStores } from "@/models"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 
-import { mockTbmJoinData } from "./mockData"
 import * as S from "./styles"
 import type { TbmJoinItem } from "./types"
 
 type TbmJoinScreenProps = AppStackScreenProps<"TbmJoin">
 
-export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
+export const TbmJoinScreen: FC<TbmJoinScreenProps> = observer(function TbmJoinScreen({
+  navigation,
+}) {
   const insets = useSafeAreaInsets()
-  const [selectedId, setSelectedId] = useState<number | null>(null)
+  const { tbmStore } = useStores()
+  const [selectedId, setSelectedId] = useState<string | null>(null)
   const [infoModalVisible, setInfoModalVisible] = useState(false)
   const [noSelectionModalVisible, setNoSelectionModalVisible] = useState(false)
 
@@ -36,6 +42,23 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
   const sheetAnimStyle = useAnimatedStyle(() => ({
     transform: [{ translateY: sheetTranslateY.value }],
   }))
+
+  useFocusEffect(
+    useCallback(() => {
+      tbmStore.fetchAvailableActivities()
+    }, [tbmStore]),
+  )
+
+  const tbmItems = useMemo<TbmJoinItem[]>(
+    () =>
+      tbmStore.sessions.map((s) => ({
+        id: s.id,
+        title: s.title,
+        authorName: s.createdByName,
+        date: s.workDate ? format(parseISO(s.workDate), "yyyy.MM.dd") : "",
+      })),
+    [tbmStore.sessions],
+  )
 
   useEffect(() => {
     if (infoModalVisible) {
@@ -55,6 +78,7 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
     if (selectedId === null) {
       setNoSelectionModalVisible(true)
     } else {
+      tbmStore.setSelectedSessionId(selectedId)
       navigation.navigate("TbmJoinInfo", { id: selectedId })
     }
   }
@@ -82,7 +106,7 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
     )
   }
 
-  const hasData = mockTbmJoinData.length > 0
+  const hasData = tbmItems.length > 0
 
   return (
     <>
@@ -103,7 +127,7 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
             {hasData ? (
               <FlatList<TbmJoinItem>
                 style={S.$listContent}
-                data={mockTbmJoinData}
+                data={tbmItems}
                 keyExtractor={(item) => String(item.id)}
                 contentContainerStyle={S.$flatListContent}
                 renderItem={renderCard}
@@ -244,4 +268,4 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
       </Modal>
     </>
   )
-}
+})

@@ -9,7 +9,7 @@ export interface TbmReportHistory {
 }
 
 export interface TbmReportItem {
-  id: number
+  id: string
   title: string
   status: TbmReportStatus
   date: string

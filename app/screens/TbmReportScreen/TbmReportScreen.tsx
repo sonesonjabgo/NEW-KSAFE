@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useCallback, useMemo, useState } from "react"
 import {
   Image,
   KeyboardAvoidingView,
@@ -9,6 +9,7 @@ import {
   View,
 } from "react-native"
 import { IconAlertTriangle, IconCalendar } from "@tabler/icons-react-native"
+import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import Pic1 from "@assets/icons/pic1.svg"
@@ -17,16 +18,20 @@ import Pic2 from "@assets/icons/pic2.svg"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
-import { mockTbmDetails } from "@/screens/TbmDetailScreen/mockData"
+import { useStores } from "@/models"
 
 import * as S from "./styles"
 import type { TbmReportScreenProps } from "./types"
 
-export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route }) => {
+export const TbmReportScreen: FC<TbmReportScreenProps> = observer(function TbmReportScreen({
+  navigation,
+  route,
+}) {
   const { id } = route.params
   const insets = useSafeAreaInsets()
+  const { tbmAdminStore } = useStores()
 
-  const detail = mockTbmDetails[id]
+  const detail = tbmAdminStore.currentSessionDetail
 
   const [processName, setProcessName] = useState("")
   const [teamName, setTeamName] = useState("")
@@ -34,7 +39,27 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
   const [specialNotes, setSpecialNotes] = useState("")
   const [photos, setPhotos] = useState<string[]>([])
 
-  if (!detail) return null
+  const activityTitle = useMemo(
+    () => detail?.title ?? "",
+    [detail],
+  )
+
+  const handleSubmit = useCallback(async () => {
+    try {
+      await tbmAdminStore.createEducationLog(id, {
+        summary: educationSummary,
+        remarks: specialNotes || undefined,
+        uploadIds: [],
+      })
+      await tbmAdminStore.requestActivityReport(id, {
+        processName: processName || undefined,
+        teamName: teamName || undefined,
+      })
+      navigation.navigate("TbmReportInquiry")
+    } catch {
+      // error handled in store
+    }
+  }, [id, educationSummary, specialNotes, processName, teamName, tbmAdminStore, navigation])
 
   return (
     <StackScreen
@@ -74,7 +99,7 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
                   text={translate("tbmReportScreen:activityName.label")}
                   style={S.$activityNameLabel}
                 />
-                <Text text={detail.title} style={S.$activityNameText} />
+                <Text text={activityTitle} style={S.$activityNameText} />
               </View>
               <View style={S.$activityNameCircle}>
                 <IconCalendar size={22} color="#1062D8" />
@@ -203,7 +228,7 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
           <TouchableOpacity
             style={S.$submitBtn}
             activeOpacity={0.8}
-            onPress={() => console.log("보고서 생성:", detail.id)}
+            onPress={handleSubmit}
           >
             <Text text={translate("tbmReportScreen:submit")} style={S.$submitBtnText} />
           </TouchableOpacity>
@@ -211,4 +236,4 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
       </KeyboardAvoidingView>
     </StackScreen>
   )
-}
+})

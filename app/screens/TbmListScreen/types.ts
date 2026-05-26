@@ -5,7 +5,7 @@ import { AppStackParamList } from "@/navigators/navigationTypes"
 export type TbmStatus = "작성중" | "진행중" | "종료됨"
 
 export interface TbmItem {
-  id: number
+  id: string
   title: string
   status: TbmStatus
   date: string

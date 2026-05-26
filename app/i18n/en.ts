@@ -1043,6 +1043,7 @@ const en = {
 
   tbmReportInquiryScreen: {
     title: "TBM Report Inquiry",
+    untitled: "(No title)",
     tabs: {
       all: "All",
       requested: "Requested",
@@ -1188,6 +1189,8 @@ const en = {
     cautionResponse: "Caution Response",
     unit: "case(s)",
     workplaceLabel: "Workplace",
+    statusNormal: "Normal",
+    statusAbnormal: "Caution",
   },
 
   tbmParticipationHistoryDetailScreen: {
