@@ -40,7 +40,7 @@ const urOverrides = {
       education: { label: "تعلیم", sub: "تعلیمی مواد" },
       eduJoin: { label: "تعلیم میں شامل", sub: "تعلیم میں شامل" },
       tbmJoin: { label: "TBM میں شامل", sub: "TBM میں شامل" },
-      patrol: { label: "순회점검", sub: "معائنہ" },
+      patrol: { label: "سائٹ گشت", sub: "معائنہ" },
       tbmCreate: { label: "TBM بنائیں", sub: "TBM بنائیں" },
       tbmReport: { label: "TBM رپورٹ", sub: "رپورٹ بنائیں" },
       hazard: { label: "خطرہ", sub: "خطرہ رپورٹ" },
@@ -77,7 +77,7 @@ const urOverrides = {
   safeHealthScreen: {
     title: "حفاظت انتظام",
     menu: {
-      patrol: { title: "순회점검", description: "حفاظتی معائنہ" },
+      patrol: { title: "سائٹ گشت معائنہ", description: "حفاظتی معائنہ" },
       educationMaterial: { title: "تعلیمی مواد", description: "TBM مواد" },
       tbmManage: { title: "TBM انتظام", description: "بنائیں اور منظم کریں" },
       tbmReport: { title: "رپورٹ", description: "بنائی گئی رپورٹیں" },

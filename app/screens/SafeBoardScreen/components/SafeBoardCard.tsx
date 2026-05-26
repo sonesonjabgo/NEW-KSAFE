@@ -7,6 +7,8 @@ import BoardPin from "@assets/icons/board/board_pin.svg"
 import { Text } from "@/components/Text"
 import { typography } from "@/theme/typography"
 
+import { isRTL } from "@/i18n/rtl"
+
 import type { SafeBoardItem, StatusType } from "../types"
 import { SafeBoardBadge, SafeBoardBadgeType } from "./SafeBoardBadge"
 
@@ -72,18 +74,19 @@ const $cardContainer: ViewStyle = {
 }
 
 const $contentWrapper: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   justifyContent: "space-between",
   alignItems: "flex-start",
 }
 
 const $mainContent: ViewStyle = {
   flex: 1,
-  marginRight: 12,
+  marginRight: isRTL ? 0 : 12,
+  marginLeft: isRTL ? 12 : 0,
 }
 
 const $scopeLabelRow: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   alignItems: "center",
   marginBottom: 10,
   gap: 6,
@@ -100,7 +103,7 @@ const $titleText: TextStyle = {
 }
 
 const $metaRow: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   alignItems: "center",
   gap: 5,
 }

@@ -40,7 +40,7 @@ const thOverrides = {
       education: { label: "การศึกษา", sub: "สื่อการศึกษา" },
       eduJoin: { label: "ร่วมศึกษา", sub: "ร่วมการศึกษา" },
       tbmJoin: { label: "ร่วม TBM", sub: "ร่วม TBM" },
-      patrol: { label: "순회점검", sub: "การตรวจสอบ" },
+      patrol: { label: "ตรวจพื้นที่", sub: "การตรวจสอบ" },
       tbmCreate: { label: "สร้าง TBM", sub: "สร้าง TBM" },
       tbmReport: { label: "รายงาน TBM", sub: "สร้างรายงาน" },
       hazard: { label: "อันตราย", sub: "รายงานอันตราย" },
@@ -77,7 +77,7 @@ const thOverrides = {
   safeHealthScreen: {
     title: "การจัดการความปลอดภัย",
     menu: {
-      patrol: { title: "순회점검", description: "การตรวจสอบความปลอดภัย" },
+      patrol: { title: "ตรวจสอบพื้นที่", description: "การตรวจสอบความปลอดภัย" },
       educationMaterial: { title: "สื่อการศึกษา", description: "สื่อ TBM" },
       tbmManage: { title: "จัดการ TBM", description: "สร้างและจัดการ" },
       tbmReport: { title: "รายงาน", description: "รายงานที่สร้างแล้ว" },

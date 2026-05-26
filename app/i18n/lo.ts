@@ -40,7 +40,7 @@ const loOverrides = {
       education: { label: "ການສຶກສາ", sub: "ວັດສະດຸສຶກສາ" },
       eduJoin: { label: "ຮ່ວມສຶກສາ", sub: "ຮ່ວມສຶກສາ" },
       tbmJoin: { label: "ຮ່ວມ TBM", sub: "ຮ່ວມ TBM" },
-      patrol: { label: "순회점검", sub: "ການກວດກາ" },
+      patrol: { label: "ກວດກາສະຖານທີ່", sub: "ການກວດກາ" },
       tbmCreate: { label: "ສ້າງ TBM", sub: "ສ້າງ TBM" },
       tbmReport: { label: "ລາຍງານ TBM", sub: "ສ້າງລາຍງານ" },
       hazard: { label: "ອັນຕະລາຍ", sub: "ລາຍງານອັນຕະລາຍ" },
@@ -77,7 +77,7 @@ const loOverrides = {
   safeHealthScreen: {
     title: "ການຄຸ້ມຄອງຄວາມປອດໄພ",
     menu: {
-      patrol: { title: "순회점검", description: "ການກວດກາຄວາມປອດໄພ" },
+      patrol: { title: "ກວດກາສະຖານທີ່", description: "ການກວດກາຄວາມປອດໄພ" },
       educationMaterial: { title: "ວັດສະດຸສຶກສາ", description: "ວັດສະດຸ TBM" },
       tbmManage: { title: "ຈັດການ TBM", description: "ສ້າງ & ຈັດການ" },
       tbmReport: { title: "ລາຍງານ", description: "ລາຍງານທີ່ສ້າງແລ້ວ" },

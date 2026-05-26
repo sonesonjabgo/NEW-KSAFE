@@ -41,7 +41,7 @@ const neOverrides = {
       education: { label: "शिक्षा", sub: "शैक्षिक सामग्री" },
       eduJoin: { label: "शिक्षामा सहभागी", sub: "शिक्षामा सहभागी" },
       tbmJoin: { label: "TBM सहभागी", sub: "TBM सहभागी" },
-      patrol: { label: "순회점검", sub: "निरीक्षण" },
+      patrol: { label: "साइट गश्त", sub: "निरीक्षण" },
       tbmCreate: { label: "TBM बनाउनुहोस्", sub: "TBM बनाउनुहोस्" },
       tbmReport: { label: "TBM रिपोर्ट", sub: "रिपोर्ट बनाउनुहोस्" },
       hazard: { label: "खतरा", sub: "खतरा रिपोर्ट" },
@@ -78,7 +78,7 @@ const neOverrides = {
   safeHealthScreen: {
     title: "सुरक्षा व्यवस्थापन",
     menu: {
-      patrol: { title: "순회점검", description: "सुरक्षा निरीक्षण" },
+      patrol: { title: "साइट गश्त निरीक्षण", description: "सुरक्षा निरीक्षण" },
       educationMaterial: { title: "शैक्षिक सामग्री", description: "TBM सामग्री" },
       tbmManage: { title: "TBM व्यवस्थापन", description: "सिर्जना & व्यवस्थापन" },
       tbmReport: { title: "रिपोर्ट", description: "उत्पन्न रिपोर्टहरू" },

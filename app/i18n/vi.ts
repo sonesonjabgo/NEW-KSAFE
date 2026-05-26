@@ -40,7 +40,7 @@ const viOverrides = {
       education: { label: "Đào tạo", sub: "Tài liệu đào tạo" },
       eduJoin: { label: "Tham gia đào tạo", sub: "Tham gia đào tạo" },
       tbmJoin: { label: "Tham gia TBM", sub: "Tham gia TBM" },
-      patrol: { label: "순회점검", sub: "Kiểm tra" },
+      patrol: { label: "Tuần tra", sub: "Kiểm tra" },
       tbmCreate: { label: "Tạo TBM", sub: "Tạo TBM" },
       tbmReport: { label: "Báo cáo TBM", sub: "Tạo báo cáo" },
       hazard: { label: "Nguy hiểm", sub: "Báo cáo nguy hiểm" },
@@ -77,7 +77,7 @@ const viOverrides = {
   safeHealthScreen: {
     title: "Quản lý an toàn",
     menu: {
-      patrol: { title: "순회점검", description: "Kiểm tra an toàn" },
+      patrol: { title: "Tuần tra", description: "Kiểm tra an toàn" },
       educationMaterial: { title: "Tài liệu đào tạo", description: "Tài liệu TBM" },
       tbmManage: { title: "Quản lý TBM", description: "Tạo và quản lý" },
       tbmReport: { title: "Báo cáo", description: "Báo cáo đã tạo" },

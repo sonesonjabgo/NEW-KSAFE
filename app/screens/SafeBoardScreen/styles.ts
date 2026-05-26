@@ -1,11 +1,13 @@
 import { ViewStyle, TextStyle } from "react-native"
 
+import { isRTL } from "@/i18n/rtl"
+
 import { typography } from "@/theme/typography"
 
 // ── Header right slot ─────────────────────────────────────────────────────────
 
 export const $bellIconContainer: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   alignItems: "center",
   flexWrap: "nowrap",
   gap: 6,
@@ -35,7 +37,7 @@ export const $workplaceLabel: TextStyle = {
 }
 
 export const $workplaceSelectorNew: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   alignItems: "center",
   justifyContent: "space-between",
   backgroundColor: "transparent",
@@ -53,13 +55,14 @@ export const $chevronContainer: ViewStyle = {
   height: 36,
   justifyContent: "center",
   alignItems: "center",
-  marginLeft: 8,
+  marginLeft: isRTL ? 0 : 8,
+  marginRight: isRTL ? 8 : 0,
 }
 
 // ── Tabs ──────────────────────────────────────────────────────────────────────
 
 export const $tabContainer: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   backgroundColor: "#FFFFFF",
   borderBottomWidth: 1,
   borderBottomColor: "#E9ECF0",
@@ -119,7 +122,8 @@ export const $emptyText: TextStyle = {
 export const $floatingButton: ViewStyle = {
   position: "absolute",
   bottom: 24,
-  right: 20,
+  right: isRTL ? undefined : 20,
+  left: isRTL ? 20 : undefined,
   width: 80,
   height: 80,
   borderRadius: 40,

@@ -40,7 +40,7 @@ const myOverrides = {
       education: { label: "ပညာရေး", sub: "ပညာရေး ပစ္စည်းများ" },
       eduJoin: { label: "ပညာ ပါဝင်", sub: "ပညာရေး ပါဝင်" },
       tbmJoin: { label: "TBM ပါဝင်", sub: "TBM ပါဝင်" },
-      patrol: { label: "순회점검", sub: "စစ်ဆေးမှု" },
+      patrol: { label: "ကွင်းဆင်းစစ်ဆေး", sub: "စစ်ဆေးမှု" },
       tbmCreate: { label: "TBM ဖန်တီး", sub: "TBM ဖန်တီး" },
       tbmReport: { label: "TBM အစီရင်ခံ", sub: "အစီရင်ခံ ဖန်တီး" },
       hazard: { label: "အန္တရာယ်", sub: "အန္တရာယ် အစီရင်ခံ" },
@@ -78,7 +78,7 @@ const myOverrides = {
   safeHealthScreen: {
     title: "ဘေးကင်းရေး စီမံခန့်ခွဲမှု",
     menu: {
-      patrol: { title: "순회점검", description: "ဘေးကင်းရေး စစ်ဆေးမှု" },
+      patrol: { title: "ကွင်းဆင်းစစ်ဆေးမှု", description: "ဘေးကင်းရေး စစ်ဆေးမှု" },
       educationMaterial: { title: "ပညာရေး ပစ္စည်း", description: "TBM ပစ္စည်းများ" },
       tbmManage: { title: "TBM စီမံ", description: "ဖန်တီး & စီမံ" },
       tbmReport: { title: "အစီရင်ခံ", description: "ဖန်တီးထားသော အစီရင်ခံ" },
