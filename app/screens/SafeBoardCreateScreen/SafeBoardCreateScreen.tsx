@@ -24,6 +24,7 @@ import { Toast } from "@/components/Toast"
 import { translate } from "@/i18n/translate"
 import { useStores } from "@/models"
 import { AppStackScreenProps } from "@/navigators/navigationTypes"
+import { fetchAdminWorkplaces } from "@/services/api/workplace"
 
 import * as S from "./styles"
 
@@ -39,11 +40,12 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
   route,
 }: SafeBoardCreateScreenProps) {
   const insets = useSafeAreaInsets()
-  const { workplaceStore, safeBoardStore } = useStores()
+  const { safeBoardStore } = useStores()
 
   const editId = route.params?.id
   const isEditMode = !!editId
 
+  const [workplaces, setWorkplaces] = useState<SelectedWorkplace[]>([])
   const [selectedWorkplace, setSelectedWorkplace] = useState<SelectedWorkplace | null>(null)
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
@@ -69,11 +71,11 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
     }
   }, [isEditMode, safeBoardStore.currentPost])
 
-  // 사업장 목록이 없으면 로드
+  // 사업장 목록 로드 (admin 전용 엔드포인트)
   useEffect(() => {
-    if (!workplaceStore.hasWorkplaces) {
-      void workplaceStore.fetchWorkplaces()
-    }
+    fetchAdminWorkplaces()
+      .then((items) => setWorkplaces(items.map((w) => ({ id: w.id, name: w.workplaceName }))))
+      .catch(() => {})
   }, [])
 
   const openWorkplaceModal = useCallback(() => {
@@ -317,14 +319,14 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
               { paddingBottom: insets.bottom + 16, transform: [{ translateY: slideAnim }] },
             ]}
           >
-            {workplaceStore.workplaces.map((wp) => (
+            {workplaces.map((wp) => (
               <TouchableOpacity
                 key={wp.id}
                 style={S.$modalItem}
-                onPress={() => handleSelectWorkplace({ id: wp.id, name: wp.workplaceName })}
+                onPress={() => handleSelectWorkplace(wp)}
                 activeOpacity={0.7}
               >
-                <Text text={wp.workplaceName} style={S.$modalItemText} />
+                <Text text={wp.name} style={S.$modalItemText} />
               </TouchableOpacity>
             ))}
           </Animated.View>

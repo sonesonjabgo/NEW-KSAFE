@@ -59,7 +59,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
 
     const isAdmin = role === "admin"
     const isCreator = !!user?.id && user.id === currentPost?.createdBy
-    const canEdit = isAdmin && isCreator
+    const canEdit = isAdmin && isCreator && currentPost?.status === "draft"
 
     useEffect(() => {
       setDetailLoading(true)

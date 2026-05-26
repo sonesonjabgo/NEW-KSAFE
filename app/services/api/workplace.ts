@@ -3,6 +3,7 @@ import { supabase } from "./auth/supabase"
 import { api } from "./index"
 
 const WORKPLACE_ENDPOINT = "/api/v1/user/workplaces/"
+const ADMIN_WORKPLACE_ENDPOINT = "/api/v1/company-admin/workplaces"
 
 export interface CompanyWorkplaceListItemDto {
   id: string
@@ -61,4 +62,38 @@ export async function fetchCompanyWorkplaces(): Promise<CompanyWorkplaceListItem
   }
 
   throw new Error(`Failed to load workplaces (status ${response.status ?? "unknown"})`)
+}
+
+export interface AdminWorkplaceListItemDto {
+  id: string
+  workplaceName: string
+}
+
+export async function fetchAdminWorkplaces(): Promise<AdminWorkplaceListItemDto[]> {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
+  const accessToken = session?.access_token
+  if (!accessToken) {
+    throw new Error("Missing authentication token for fetching admin workplaces")
+  }
+
+  const response = await api.apisauce.get<{ items: AdminWorkplaceListItemDto[] }>(
+    ADMIN_WORKPLACE_ENDPOINT,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        accept: "application/json",
+      },
+    },
+  )
+
+  if (!response.ok) {
+    api.handleAuthFailureResponse(response, "인증이 만료되었습니다. 다시 로그인해주세요.")
+    throw new Error(`Failed to load admin workplaces (status ${response.status ?? "unknown"})`)
+  }
+
+  return Array.isArray(response.data?.items) ? response.data!.items : []
 }
