@@ -32,25 +32,28 @@ export const $root: ViewStyle = {
 
 /* ── 헤더 (StackScreen 기준과 동일) ── */
 export const $header: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   alignItems: "center",
-  justifyContent: "space-between",
   paddingHorizontal: 20,
   paddingBottom: 14,
+  gap: 8,
   minHeight: 100,
 }
 
 export const $headerSide: ViewStyle = {
-  width: 44,
+  width: 36,
   height: 36,
   justifyContent: "center",
-  alignItems: "flex-start",
+  alignItems: "center",
+  flexShrink: 0,
+}
+
+export const $chevronRTL: ViewStyle = {
+  transform: [{ scaleX: -1 }],
 }
 
 export const $headerTitleContainer: ViewStyle = {
-  position: "absolute",
-  left: 0,
-  right: 0,
+  flex: 1,
   alignItems: "center",
 }
 
@@ -84,20 +87,21 @@ export const $headerDesc: TextStyle = {
   // fontSize / lineHeight: 동적 적용
 }
 
-/* ── 하단 콘텐츠 영역 ── */
+/* ── 하단 콘텐츠 영역 (ScrollView style) ── */
 export const $contentArea: ViewStyle = {
   backgroundColor: colors.screenBg,
   borderTopLeftRadius: 26,
   borderTopRightRadius: 26,
   flex: 1,
-  paddingBottom: 32,
-  // paddingHorizontal / paddingTop: 동적 적용
+  // paddingBottom은 contentContainerStyle($contentInner)에서 처리
 }
 
-/* ── 콘텐츠 내부 래퍼 (gap + 태블릿 maxWidth) ── */
+/* ── 콘텐츠 내부 래퍼 (ScrollView contentContainerStyle) ── */
 export const $contentInner: ViewStyle = {
-  flex: 1,
+  flexGrow: 1,
   gap: 14,
+  paddingBottom: 32,
+  // paddingHorizontal / paddingTop: 동적 적용
 }
 
 export const $contentInnerTablet: ViewStyle = {

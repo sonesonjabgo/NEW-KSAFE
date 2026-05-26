@@ -1,5 +1,5 @@
 import { FC, useState } from "react"
-import { StatusBar, TouchableOpacity, View } from "react-native"
+import { ScrollView, StatusBar, TouchableOpacity, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import {
   IconAlertTriangle,
@@ -14,6 +14,7 @@ import { Text } from "@/components/Text"
 import i18n from "i18next"
 
 import { fromI18nKey } from "@/i18n/i18n"
+import { isRTL } from "@/i18n/rtl"
 import { translate } from "@/i18n/translate"
 import { colors } from "@/theme/colors"
 import { useResponsive } from "@/theme/responsive"
@@ -61,7 +62,7 @@ export const QrScannerScreen: FC = () => {
 
   // 스캔 카드 패딩
   const scanCardPaddingH = isSmallPhone ? 14 : 20
-  const scanCardPaddingV = isSmallPhone || isShortHeight ? 14 : 24
+  const scanCardPaddingV = isShortHeight ? 14 : isSmallPhone ? 18 : 24
 
   // 헤더 설명 — breakpoint 직접 사용
   const descFontSize = breakpoint === "smallPhone" ? 13 : breakpoint === "tablet" ? 15 : 14
@@ -84,18 +85,22 @@ export const QrScannerScreen: FC = () => {
       <StatusBar barStyle="light-content" backgroundColor={colors.navy} />
 
       <View style={S.$root}>
-        {/* 상단 네이비 헤더 — StackScreen과 동일한 구조/높이 */}
+        {/* 상단 네이비 헤더 */}
         <View style={[S.$header, { paddingTop: top + 10 }]}>
           <TouchableOpacity
             style={S.$headerSide}
             activeOpacity={0.7}
             onPress={() => navigation.goBack()}
           >
-            <IconChevronLeft size={24} color="#FFFFFF" />
+            <View style={isRTL ? S.$chevronRTL : undefined}>
+              <IconChevronLeft size={24} color="#FFFFFF" />
+            </View>
           </TouchableOpacity>
 
-          <View style={S.$headerTitleContainer} pointerEvents="none">
-            <Text style={S.$headerTitle}>{translate("qrScanner:title")}</Text>
+          <View style={S.$headerTitleContainer}>
+            <Text style={S.$headerTitle} numberOfLines={2}>
+              {translate("qrScanner:title")}
+            </Text>
           </View>
 
           <TouchableOpacity
@@ -115,70 +120,72 @@ export const QrScannerScreen: FC = () => {
         </View>
 
         {/* 하단 콘텐츠 영역 */}
-        <View
-          style={[
-            S.$contentArea,
+        <ScrollView
+          style={S.$contentArea}
+          contentContainerStyle={[
+            S.$contentInner,
+            isTablet && S.$contentInnerTablet,
             { paddingHorizontal: contentPaddingH, paddingTop: contentPaddingT },
           ]}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
         >
-          <View style={[S.$contentInner, isTablet && S.$contentInnerTablet]}>
-            {/* QR 스캔 카드 */}
-            <View
-              style={[
-                S.$scanCard,
-                {
-                  paddingHorizontal: scanCardPaddingH,
-                  paddingTop: scanCardPaddingV,
-                  paddingBottom: scanCardPaddingV,
-                },
-              ]}
-            >
-              {/* QR 스캔 프레임 */}
-              <View style={[S.$qrFrameWrapper, { width: qrFrameSize, height: qrFrameSize }]}>
-                <View style={[S.$cornerTL, { width: cornerSize, height: cornerSize }]} />
-                <View style={[S.$cornerTR, { width: cornerSize, height: cornerSize }]} />
-                <View style={[S.$cornerBL, { width: cornerSize, height: cornerSize }]} />
-                <View style={[S.$cornerBR, { width: cornerSize, height: cornerSize }]} />
+          {/* QR 스캔 카드 */}
+          <View
+            style={[
+              S.$scanCard,
+              {
+                paddingHorizontal: scanCardPaddingH,
+                paddingTop: scanCardPaddingV,
+                paddingBottom: scanCardPaddingV,
+              },
+            ]}
+          >
+            {/* QR 스캔 프레임 */}
+            <View style={[S.$qrFrameWrapper, { width: qrFrameSize, height: qrFrameSize }]}>
+              <View style={[S.$cornerTL, { width: cornerSize, height: cornerSize }]} />
+              <View style={[S.$cornerTR, { width: cornerSize, height: cornerSize }]} />
+              <View style={[S.$cornerBL, { width: cornerSize, height: cornerSize }]} />
+              <View style={[S.$cornerBR, { width: cornerSize, height: cornerSize }]} />
 
-                <IconQrcode size={qrIconSize} color="#CACACA" strokeWidth={1.2} />
-              </View>
-
-              {!hasCameraPermission && (
-                <>
-                  {/* 카메라 권한 없음 경고 */}
-                  <View style={S.$permissionBanner}>
-                    <IconAlertTriangle size={16} color="#B45309" />
-                    <Text style={[S.$permissionText, { fontSize: permFontSize }]}>
-                      {translate("qrScanner:permissionRequired")}
-                    </Text>
-                  </View>
-
-                  {/* 다시 시도 버튼 */}
-                  <TouchableOpacity
-                    style={[S.$retryBtn, { paddingVertical: retryPaddingV }]}
-                    activeOpacity={0.85}
-                    onPress={() => setHasCameraPermission(true)}
-                  >
-                    <Text style={[S.$retryBtnText, { fontSize: retryFontSize }]}>
-                      {translate("qrScanner:retry")}
-                    </Text>
-                  </TouchableOpacity>
-                </>
-              )}
+              <IconQrcode size={qrIconSize} color="#CACACA" strokeWidth={1.2} />
             </View>
 
-            {/* 언어 카드 */}
-            <View style={[S.$languageCard, { paddingVertical: langCardPaddingV }]}>
-              <IconLanguageHiragana size={20} color="#4B5563" />
-              <Text style={[S.$languageText, { fontSize: langFontSize }]}>
-                {translate("qrScanner:languageLabel")}{" "}
-                <Text style={S.$languageHighlight}>
-                  · {translate(`languageSettings:languageNames.${fromI18nKey(i18n.language)}` as any)}
-                </Text>
-              </Text>
-            </View>
+            {!hasCameraPermission && (
+              <>
+                {/* 카메라 권한 없음 경고 */}
+                <View style={S.$permissionBanner}>
+                  <IconAlertTriangle size={16} color="#B45309" />
+                  <Text style={[S.$permissionText, { fontSize: permFontSize }]}>
+                    {translate("qrScanner:permissionRequired")}
+                  </Text>
+                </View>
+
+                {/* 다시 시도 버튼 */}
+                <TouchableOpacity
+                  style={[S.$retryBtn, { paddingVertical: retryPaddingV }]}
+                  activeOpacity={0.85}
+                  onPress={() => setHasCameraPermission(true)}
+                >
+                  <Text style={[S.$retryBtnText, { fontSize: retryFontSize }]}>
+                    {translate("qrScanner:retry")}
+                  </Text>
+                </TouchableOpacity>
+              </>
+            )}
           </View>
-        </View>
+
+          {/* 언어 카드 */}
+          <View style={[S.$languageCard, { paddingVertical: langCardPaddingV }]}>
+            <IconLanguageHiragana size={20} color="#4B5563" />
+            <Text style={[S.$languageText, { fontSize: langFontSize }]}>
+              {translate("qrScanner:languageLabel")}{" "}
+              <Text style={S.$languageHighlight}>
+                · {translate(`languageSettings:languageNames.${fromI18nKey(i18n.language)}` as any)}
+              </Text>
+            </Text>
+          </View>
+        </ScrollView>
       </View>
 
       <QrCodeBottomSheet isVisible={isCodeSheetOpen} onClose={() => setIsCodeSheetOpen(false)} />
