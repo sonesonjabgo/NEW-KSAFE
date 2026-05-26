@@ -11,8 +11,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native"
+import * as DocumentPicker from "expo-document-picker"
 import { IconChevronDown } from "@tabler/icons-react-native"
-import { Building, XCircle } from "lucide-react-native"
+import { Building, FileText, Paperclip, X, XCircle } from "lucide-react-native"
 import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -24,6 +25,7 @@ import { Toast } from "@/components/Toast"
 import { translate } from "@/i18n/translate"
 import { useStores } from "@/models"
 import { AppStackScreenProps } from "@/navigators/navigationTypes"
+import { initiateCompanyPostUpload } from "@/services/api/safeBoard"
 
 import * as S from "./styles"
 
@@ -32,6 +34,14 @@ type SafeBoardCreateScreenProps = AppStackScreenProps<"SafeBoardCreate">
 interface SelectedWorkplace {
   id: string
   name: string
+}
+
+interface AttachedFile {
+  uri: string
+  name: string
+  mimeType: string
+  size: number | null
+  uploadId: string
 }
 
 export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
@@ -48,6 +58,8 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [sendPush, setSendPush] = useState(false)
+  const [attachedFiles, setAttachedFiles] = useState<AttachedFile[]>([])
+  const [isUploading, setIsUploading] = useState(false)
   const [workplaceModalVisible, setWorkplaceModalVisible] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
   const [toastVisible, setToastVisible] = useState(false)
@@ -68,7 +80,6 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
     }
   }, [isEditMode, safeBoardStore.currentPost])
 
-
   const openWorkplaceModal = useCallback(() => {
     setWorkplaceModalVisible(true)
     Animated.timing(slideAnim, { toValue: 0, duration: 250, useNativeDriver: true }).start()
@@ -87,6 +98,59 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
     },
     [closeWorkplaceModal],
   )
+
+  const handlePickFile = useCallback(async () => {
+    if (isUploading) return
+    try {
+      const result = await DocumentPicker.getDocumentAsync({
+        copyToCacheDirectory: true,
+        multiple: false,
+      })
+      if (result.canceled) return
+
+      const asset = result.assets[0]
+      const mimeType = asset.mimeType ?? "application/octet-stream"
+      setIsUploading(true)
+
+      const { uploadId, signedUrl } = await initiateCompanyPostUpload({
+        fileName: asset.name,
+        contentType: mimeType,
+        fileSize: asset.size ?? undefined,
+      })
+
+      const fileResponse = await fetch(asset.uri)
+      const blob = await fileResponse.blob()
+      const uploadResponse = await fetch(signedUrl, {
+        method: "PUT",
+        headers: { "Content-Type": mimeType },
+        body: blob,
+      })
+
+      if (!uploadResponse.ok) {
+        throw new Error(`File upload failed: ${uploadResponse.status}`)
+      }
+
+      setAttachedFiles((prev) => [
+        ...prev,
+        {
+          uri: asset.uri,
+          name: asset.name,
+          mimeType,
+          size: asset.size ?? null,
+          uploadId,
+        },
+      ])
+    } catch {
+      setToastMessage(translate("safeBoardCreateScreen:attachment.uploadError"))
+      setToastVisible(true)
+    } finally {
+      setIsUploading(false)
+    }
+  }, [isUploading])
+
+  const handleRemoveFile = useCallback((uploadId: string) => {
+    setAttachedFiles((prev) => prev.filter((f) => f.uploadId !== uploadId))
+  }, [])
 
   const availableWorkplaces = workplaceStore.workplaces
 
@@ -114,6 +178,7 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
           title: title.trim(),
           description: content.trim(),
           sendNotification: sendPush,
+          uploadIds: attachedFiles.map((f) => f.uploadId),
         })
         navigation.navigate("Main", { screen: "SafeBoard", params: { showToast: true } })
       }
@@ -123,7 +188,7 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
     } finally {
       setIsSaving(false)
     }
-  }, [selectedWorkplace, title, content, sendPush, isSaving, isEditMode, editId, safeBoardStore, navigation])
+  }, [selectedWorkplace, title, content, sendPush, attachedFiles, isSaving, isEditMode, editId, safeBoardStore, navigation])
 
   return (
     <>
@@ -236,6 +301,67 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
               />
             </View>
 
+            {/* 첨부파일 (작성 모드만) */}
+            {!isEditMode && (
+              <View style={[S.$section, { gap: 20 }]}>
+                <Text
+                  text={translate("safeBoardCreateScreen:attachment.label")}
+                  style={S.$sectionLabel}
+                />
+                <View style={S.$attachCard}>
+                  <Paperclip size={28} color="#1062D8" strokeWidth={1.8} />
+                  <Text
+                    text={translate("safeBoardCreateScreen:attachment.card1Text")}
+                    style={S.$attachCardText}
+                  />
+                  <TouchableOpacity
+                    style={S.$attachUploadBtn}
+                    activeOpacity={0.7}
+                    onPress={handlePickFile}
+                    disabled={isUploading}
+                  >
+                    {isUploading ? (
+                      <ActivityIndicator size="small" color="#1062D8" />
+                    ) : (
+                      <Text
+                        text={translate("safeBoardCreateScreen:attachment.uploadButton")}
+                        style={S.$attachUploadBtnText}
+                      />
+                    )}
+                  </TouchableOpacity>
+                </View>
+
+                {attachedFiles.length === 0 ? (
+                  <View style={S.$attachCard2Empty}>
+                    <FileText size={18} color="#979797" strokeWidth={1.8} />
+                    <Text
+                      text={translate("safeBoardCreateScreen:attachment.noFile")}
+                      style={S.$attachCard2EmptyText}
+                    />
+                  </View>
+                ) : (
+                  <View style={S.$attachCard2FileList}>
+                    {attachedFiles.map((file) => (
+                      <View key={file.uploadId} style={S.$attachCard2FileRow}>
+                        <FileText size={18} color="#1062D8" strokeWidth={1.8} />
+                        <Text
+                          text={file.name}
+                          style={S.$attachCard2FileText}
+                          numberOfLines={1}
+                        />
+                        <TouchableOpacity
+                          activeOpacity={0.7}
+                          onPress={() => handleRemoveFile(file.uploadId)}
+                        >
+                          <X size={18} color="#979797" strokeWidth={2} />
+                        </TouchableOpacity>
+                      </View>
+                    ))}
+                  </View>
+                )}
+              </View>
+            )}
+
             {/* 푸시 알림 함께 보내기 */}
             <View style={[S.$section, { borderBottomWidth: 0, gap: 20 }]}>
               <Text
@@ -260,10 +386,10 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
           {/* 저장 버튼 */}
           <View style={[S.$submitBar, { paddingBottom: insets.bottom + 16 }]}>
             <TouchableOpacity
-              style={[S.$submitBtn, (!isValid || isSaving) && S.$submitBtnDisabled]}
+              style={[S.$submitBtn, (!isValid || isSaving || isUploading) && S.$submitBtnDisabled]}
               activeOpacity={0.8}
               onPress={handleSave}
-              disabled={!isValid || isSaving}
+              disabled={!isValid || isSaving || isUploading}
             >
               {isSaving ? (
                 <ActivityIndicator size="small" color="#FFFFFF" />

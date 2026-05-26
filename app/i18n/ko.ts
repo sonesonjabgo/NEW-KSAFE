@@ -260,7 +260,7 @@ const ko: Translations = {
     title: "게시글 작성",
     guide: {
       title: "작성 가이드",
-      description: "관리 중인 하나 이상의 사업장을\n선택하고 안내 알림을 작성해 현장\n구성원에게 전달하세요.",
+      description: "선택한 사업장 구성원에게 공지사항을 공유하세요. 제목과 본문을 입력하고 필요하면 파일을 첨부하거나 푸시 알림을 전송할 수 있습니다.",
     },
     workplace: {
       label: "사업장 선택",
@@ -282,6 +282,7 @@ const ko: Translations = {
       card1Text: "(선택 사항) 최대 50MB까지\n업로드할 수 있습니다.",
       uploadButton: "파일 업로드",
       noFile: "선택된 파일이 없습니다.",
+      uploadError: "파일 업로드에 실패했습니다. 다시 시도해주세요.",
     },
     pushNotification: {
       label: "푸시 알림 함께 보내기",

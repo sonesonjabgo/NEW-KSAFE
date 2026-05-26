@@ -262,7 +262,7 @@ const en = {
     guide: {
       title: "Writing Guide",
       description:
-        "Please write clear and accurate content. Posts should be related to workplace safety.",
+        "Share announcements with members of the selected workplace. Enter a title and content, and optionally attach files or send a push notification.",
     },
     workplace: {
       label: "Workplace",
@@ -284,6 +284,7 @@ const en = {
       card1Text: "(Optional) You can upload\nfiles up to 50MB.",
       uploadButton: "Upload File",
       noFile: "No files selected.",
+      uploadError: "File upload failed. Please try again.",
     },
     pushNotification: {
       label: "Send Push Notification",

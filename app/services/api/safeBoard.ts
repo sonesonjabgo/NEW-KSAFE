@@ -236,12 +236,24 @@ export async function deleteCompanyPost(id: string): Promise<void> {
   }
 }
 
+export interface UploadUrlRequestDto {
+  fileName: string
+  contentType: string
+  fileSize?: number
+}
+
+export interface UploadUrlResponseDto {
+  uploadId: string
+  signedUrl: string
+}
+
 export interface CreateCompanyPostPayload {
   scope: "company_wide" | "workplace"
   workplaceId?: string | null
   title: string
   description: string
   sendNotification: boolean
+  uploadIds?: string[]
 }
 
 export interface UpdateCompanyPostPayload {
@@ -265,6 +277,7 @@ export async function createCompanyPost(payload: CreateCompanyPostPayload): Prom
     sendNotification: payload.sendNotification,
   }
   if (payload.workplaceId) body.workplaceId = payload.workplaceId
+  if (payload.uploadIds?.length) body.uploadIds = payload.uploadIds
 
   const response = await api.apisauce.post<{ id: string }>(
     COMPANY_POST_ENDPOINT,
@@ -338,4 +351,31 @@ export async function fetchMyPosts(): Promise<MyCompanyPostListItemDto[]> {
 
   const data = response.data
   return Array.isArray(data?.items) ? data.items : []
+}
+
+export async function initiateCompanyPostUpload(
+  dto: UploadUrlRequestDto,
+): Promise<UploadUrlResponseDto> {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+  const accessToken = session?.access_token
+  if (!accessToken) {
+    throw new Error("Missing authentication token for uploading file")
+  }
+
+  const response = await api.apisauce.post<UploadUrlResponseDto>(
+    `${COMPANY_POST_ENDPOINT}/upload-url`,
+    dto,
+    {
+      headers: { Authorization: `Bearer ${accessToken}`, accept: "application/json" },
+    },
+  )
+
+  if (!response.ok || !response.data?.uploadId) {
+    throw new Error(
+      `Failed to get upload URL (${response.status ?? "unknown"}): ${response.problem ?? "unknown"}`,
+    )
+  }
+  return response.data
 }
