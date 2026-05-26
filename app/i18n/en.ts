@@ -240,7 +240,8 @@ const en = {
     deleteButton: "Delete",
     publishModal: {
       title: "Publish Post",
-      message: "Are you sure you want to publish this post?\nIt will be visible to workplace members.",
+      message:
+        "Are you sure you want to publish this post?\nIt will be visible to workplace members.",
       cancel: "Cancel",
       confirm: "Publish",
     },
@@ -289,7 +290,8 @@ const en = {
     },
     pushNotification: {
       label: "Send Push Notification",
-      cardText: "When selected, a push notification will be sent to all members of the selected workplace upon posting.",
+      cardText:
+        "When selected, a push notification will be sent to all members of the selected workplace upon posting.",
     },
     save: "Save",
     titleEdit: "Edit Post",

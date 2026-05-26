@@ -1,5 +1,14 @@
 import { FC, useCallback, useRef, useState } from "react"
-import { Animated, Image, Modal, Pressable, ScrollView, TextInput, TouchableOpacity, View } from "react-native"
+import {
+  Animated,
+  Image,
+  Modal,
+  Pressable,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native"
 import { Check, CircleAlert, Ellipsis, X } from "lucide-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -10,12 +19,12 @@ import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
+import type { HazardRiskDetailScreenProps } from "@/screens/HazardRiskScreen/types"
+import type { HazardStatus } from "@/screens/HazardRiskScreen/types"
 import { colors } from "@/theme/colors"
 
 import { mockHazardDetails } from "./mockData"
 import * as S from "./styles"
-import type { HazardRiskDetailScreenProps } from "@/screens/HazardRiskScreen/types"
-import type { HazardStatus } from "@/screens/HazardRiskScreen/types"
 
 const STATUS_BADGE_STYLE: Record<HazardStatus, { bg: string; text: string }> = {
   pending: { bg: "#E5E6E9", text: "#606679" },
@@ -101,10 +110,7 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
       contentBg={colors.screenBg}
       squareTop
     >
-      <ScrollView
-        contentContainerStyle={S.$scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView contentContainerStyle={S.$scrollContent} showsVerticalScrollIndicator={false}>
         {/* 제보 정보 카드 */}
         <View style={S.$infoCard}>
           {/* 뱃지 + 날짜 */}
@@ -202,15 +208,10 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
                       })()}
                       <Text
                         text={translate(`hazardRiskScreen:status.${status}` as any)}
-                        style={[
-                          S.$statusButtonText,
-                          isSelected && { color: btnColor.text },
-                        ]}
+                        style={[S.$statusButtonText, isSelected && { color: btnColor.text }]}
                       />
                       {isSelected && (
-                        <View
-                          style={[S.$selectedBadge, { backgroundColor: btnColor.border }]}
-                        >
+                        <View style={[S.$selectedBadge, { backgroundColor: btnColor.border }]}>
                           <Check size={12} color="#FFFFFF" strokeWidth={3} />
                         </View>
                       )}
@@ -344,15 +345,15 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
                     {/* 왼쪽: 아이콘 + 연결선 */}
                     <View style={S.$historyLeft}>
                       <View
-                          style={[
-                            S.$historyIconOuter,
-                            { backgroundColor: btnColor.bg },
-                            HISTORY_ICON_BORDER[item.status] !== undefined && {
-                              borderWidth: 1.5,
-                              borderColor: HISTORY_ICON_BORDER[item.status],
-                            },
-                          ]}
-                        >
+                        style={[
+                          S.$historyIconOuter,
+                          { backgroundColor: btnColor.bg },
+                          HISTORY_ICON_BORDER[item.status] !== undefined && {
+                            borderWidth: 1.5,
+                            borderColor: HISTORY_ICON_BORDER[item.status],
+                          },
+                        ]}
+                      >
                         <View style={[S.$historyIconInner, { backgroundColor: btnColor.border }]} />
                       </View>
                       {!isLast && <View style={S.$historyLine} />}

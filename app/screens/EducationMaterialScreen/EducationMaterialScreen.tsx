@@ -106,95 +106,95 @@ export const EducationMaterialScreen: FC<EducationMaterialScreenProps> = ({ navi
       contentBg="#FFFFFF"
     >
       <View style={{ flex: 1 }}>
-      {/* 소스 탭 바 */}
-      <View style={Shared.$sourceTabBar}>
-        {sourceTabs.map((label, index) => {
-          const isActive = index === sourceTabIndex
-          return (
-            <TouchableOpacity
-              key={index}
-              style={[Shared.$sourceTab, isActive && Shared.$sourceTabActive]}
-              activeOpacity={0.7}
-              onPress={() => handleSourceTabChange(index as 0 | 1 | 2)}
-            >
-              <Text
-                text={label}
-                style={[Shared.$sourceTabText, isActive && Shared.$sourceTabTextActive]}
-              />
-            </TouchableOpacity>
-          )
-        })}
-      </View>
-
-      {/* 검색 바 — 내가 만든 자료 탭에서는 숨김 */}
-      {sourceTabIndex !== 2 && (
-        <View style={Shared.$searchSection}>
-          <View style={Shared.$searchRow}>
-            <IconSearch size={24} color="#A9AAAC" />
-            <TextInput
-              style={Shared.$searchInput}
-              value={query}
-              onChangeText={setQuery}
-              placeholder={translate("educationSelectScreen:searchPlaceholder")}
-              placeholderTextColor="#ACAEB1"
-              returnKeyType="search"
-            />
-          </View>
-        </View>
-      )}
-
-      {hasSourceData ? (
-        <>
-          {/* 카테고리 탭 — 내가 만든 자료 탭에서는 숨김 */}
-          {sourceTabIndex !== 2 && (
-            <View style={Shared.$categoryRow}>
-              {CATEGORY_TABS.map((cat) => {
-                const isActive = cat === categoryTab
-                return (
-                  <TouchableOpacity
-                    key={cat}
-                    style={[Shared.$categoryChip, isActive && Shared.$categoryChipActive]}
-                    activeOpacity={0.7}
-                    onPress={() => setCategoryTab(cat)}
-                  >
-                    <Text
-                      text={cat}
-                      style={[Shared.$categoryChipText, isActive && Shared.$categoryChipTextActive]}
-                    />
-                  </TouchableOpacity>
-                )
-              })}
-            </View>
-          )}
-
-          {/* 카드 리스트 */}
-          <FlatList
-            data={filtered}
-            keyExtractor={(item) => String(item.id)}
-            renderItem={renderItem}
-            contentContainerStyle={[
-              Shared.$listContent,
-              filtered.length === 0 && { flex: 1 },
-            ]}
-            showsVerticalScrollIndicator={false}
-            keyboardShouldPersistTaps="handled"
-            ListEmptyComponent={
-              <View style={Shared.$emptyContainer}>
-                <TbmEmptyImage width={150} height={162} />
+        {/* 소스 탭 바 */}
+        <View style={Shared.$sourceTabBar}>
+          {sourceTabs.map((label, index) => {
+            const isActive = index === sourceTabIndex
+            return (
+              <TouchableOpacity
+                key={index}
+                style={[Shared.$sourceTab, isActive && Shared.$sourceTabActive]}
+                activeOpacity={0.7}
+                onPress={() => handleSourceTabChange(index as 0 | 1 | 2)}
+              >
                 <Text
-                  text={translate("educationSelectScreen:emptyText")}
-                  style={Shared.$emptyText}
+                  text={label}
+                  style={[Shared.$sourceTabText, isActive && Shared.$sourceTabTextActive]}
                 />
-              </View>
-            }
-          />
-        </>
-      ) : (
-        <View style={Shared.$emptyContainer}>
-          <TbmEmptyImage width={150} height={162} />
-          <Text text={translate("educationSelectScreen:emptyText")} style={Shared.$emptyText} />
+              </TouchableOpacity>
+            )
+          })}
         </View>
-      )}
+
+        {/* 검색 바 — 내가 만든 자료 탭에서는 숨김 */}
+        {sourceTabIndex !== 2 && (
+          <View style={Shared.$searchSection}>
+            <View style={Shared.$searchRow}>
+              <IconSearch size={24} color="#A9AAAC" />
+              <TextInput
+                style={Shared.$searchInput}
+                value={query}
+                onChangeText={setQuery}
+                placeholder={translate("educationSelectScreen:searchPlaceholder")}
+                placeholderTextColor="#ACAEB1"
+                returnKeyType="search"
+              />
+            </View>
+          </View>
+        )}
+
+        {hasSourceData ? (
+          <>
+            {/* 카테고리 탭 — 내가 만든 자료 탭에서는 숨김 */}
+            {sourceTabIndex !== 2 && (
+              <View style={Shared.$categoryRow}>
+                {CATEGORY_TABS.map((cat) => {
+                  const isActive = cat === categoryTab
+                  return (
+                    <TouchableOpacity
+                      key={cat}
+                      style={[Shared.$categoryChip, isActive && Shared.$categoryChipActive]}
+                      activeOpacity={0.7}
+                      onPress={() => setCategoryTab(cat)}
+                    >
+                      <Text
+                        text={cat}
+                        style={[
+                          Shared.$categoryChipText,
+                          isActive && Shared.$categoryChipTextActive,
+                        ]}
+                      />
+                    </TouchableOpacity>
+                  )
+                })}
+              </View>
+            )}
+
+            {/* 카드 리스트 */}
+            <FlatList
+              data={filtered}
+              keyExtractor={(item) => String(item.id)}
+              renderItem={renderItem}
+              contentContainerStyle={[Shared.$listContent, filtered.length === 0 && { flex: 1 }]}
+              showsVerticalScrollIndicator={false}
+              keyboardShouldPersistTaps="handled"
+              ListEmptyComponent={
+                <View style={Shared.$emptyContainer}>
+                  <TbmEmptyImage width={150} height={162} />
+                  <Text
+                    text={translate("educationSelectScreen:emptyText")}
+                    style={Shared.$emptyText}
+                  />
+                </View>
+              }
+            />
+          </>
+        ) : (
+          <View style={Shared.$emptyContainer}>
+            <TbmEmptyImage width={150} height={162} />
+            <Text text={translate("educationSelectScreen:emptyText")} style={Shared.$emptyText} />
+          </View>
+        )}
       </View>
 
       {sourceTabIndex === 2 && (

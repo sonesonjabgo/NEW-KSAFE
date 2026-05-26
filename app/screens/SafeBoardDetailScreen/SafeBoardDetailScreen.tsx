@@ -8,7 +8,16 @@ import {
   ViewStyle,
   TextStyle,
 } from "react-native"
-import { BellOff, BellRing, CheckCircle, Download, FileText, Send, Trash2, XCircle } from "lucide-react-native"
+import {
+  BellOff,
+  BellRing,
+  CheckCircle,
+  Download,
+  FileText,
+  Send,
+  Trash2,
+  XCircle,
+} from "lucide-react-native"
 import { observer } from "mobx-react-lite"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -138,8 +147,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
       }
     }, [id, safeBoardStore, navigation, showToast])
 
-    const showStatusBadge =
-      currentPost?.status === "draft" || currentPost?.status === "archived"
+    const showStatusBadge = currentPost?.status === "draft" || currentPost?.status === "archived"
 
     return (
       <>
@@ -168,10 +176,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
             </View>
           ) : detailError || !currentPost ? (
             <View style={$loadingContainer}>
-              <Text
-                text={translate("safeBoardDetailScreen:loadError")}
-                style={$errorText}
-              />
+              <Text text={translate("safeBoardDetailScreen:loadError")} style={$errorText} />
             </View>
           ) : (
             <ScrollView
@@ -210,10 +215,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
                           ? translate("safeBoardDetailScreen:alertOn")
                           : translate("safeBoardDetailScreen:alertOff")
                       }
-                      style={[
-                        $alertText,
-                        currentPost.sendNotification && $alertTextActive,
-                      ]}
+                      style={[$alertText, currentPost.sendNotification && $alertTextActive]}
                     />
                   </View>
                 )}

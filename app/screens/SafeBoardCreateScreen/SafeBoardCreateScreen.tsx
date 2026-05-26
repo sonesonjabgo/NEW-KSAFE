@@ -226,7 +226,11 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
   return (
     <>
       <StackScreen
-        title={isEditMode ? translate("safeBoardCreateScreen:titleEdit") : translate("safeBoardCreateScreen:title")}
+        title={
+          isEditMode
+            ? translate("safeBoardCreateScreen:titleEdit")
+            : translate("safeBoardCreateScreen:title")
+        }
         onBack={() => navigation.goBack()}
         contentBg="#FFFFFF"
         squareTop
@@ -247,10 +251,7 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
                 <HeaderBell width={25} height={25} color="#1062D8" />
               </View>
               <View style={S.$guideTextBlock}>
-                <Text
-                  text={translate("safeBoardCreateScreen:guide.title")}
-                  style={S.$guideTitle}
-                />
+                <Text text={translate("safeBoardCreateScreen:guide.title")} style={S.$guideTitle} />
                 <Text
                   text={translate("safeBoardCreateScreen:guide.description")}
                   style={S.$guideDesc}
@@ -270,7 +271,10 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
                 onPress={openWorkplaceModal}
               >
                 <Text
-                  text={selectedWorkplace?.name || translate("safeBoardCreateScreen:workplace.placeholder")}
+                  text={
+                    selectedWorkplace?.name ||
+                    translate("safeBoardCreateScreen:workplace.placeholder")
+                  }
                   style={[S.$inputText, !selectedWorkplace && S.$inputPlaceholder]}
                   numberOfLines={1}
                 />
@@ -376,11 +380,7 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
                   {existingAttachments.map((file) => (
                     <View key={file.id} style={S.$attachCard2FileRow}>
                       <FileText size={18} color="#1062D8" strokeWidth={1.8} />
-                      <Text
-                        text={file.fileName}
-                        style={S.$attachCard2FileText}
-                        numberOfLines={1}
-                      />
+                      <Text text={file.fileName} style={S.$attachCard2FileText} numberOfLines={1} />
                       <TouchableOpacity
                         activeOpacity={0.7}
                         onPress={() => handleRemoveExisting(file.id)}
@@ -392,11 +392,7 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
                   {attachedFiles.map((file) => (
                     <View key={file.uploadId} style={S.$attachCard2FileRow}>
                       <FileText size={18} color="#1062D8" strokeWidth={1.8} />
-                      <Text
-                        text={file.name}
-                        style={S.$attachCard2FileText}
-                        numberOfLines={1}
-                      />
+                      <Text text={file.name} style={S.$attachCard2FileText} numberOfLines={1} />
                       <TouchableOpacity
                         activeOpacity={0.7}
                         onPress={() => handleRemoveFile(file.uploadId)}
@@ -441,10 +437,7 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
               {isSaving ? (
                 <ActivityIndicator size="small" color="#FFFFFF" />
               ) : (
-                <Text
-                  text={translate("safeBoardCreateScreen:save")}
-                  style={S.$submitBtnText}
-                />
+                <Text text={translate("safeBoardCreateScreen:save")} style={S.$submitBtnText} />
               )}
             </TouchableOpacity>
           </View>
@@ -473,10 +466,7 @@ export const SafeBoardCreateScreen = observer(function SafeBoardCreateScreen({
               { paddingBottom: insets.bottom + 16, transform: [{ translateY: slideAnim }] },
             ]}
           >
-            <Text
-              text={translate("safeBoardCreateScreen:workplace.label")}
-              style={S.$modalTitle}
-            />
+            <Text text={translate("safeBoardCreateScreen:workplace.label")} style={S.$modalTitle} />
             {availableWorkplaces.map((wp) => {
               const isSelected = selectedWorkplace?.id === wp.id
               return (

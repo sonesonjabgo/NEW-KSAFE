@@ -4,15 +4,15 @@
  * Generally speaking, it will contain an auth flow (registration, login, forgot password)
  * and a "main" flow which the user will use once logged in.
  */
+import { useEffect } from "react"
 import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import Config from "@/config"
+import { useAuth } from "@/context/AuthContext"
+import { useRole } from "@/context/RoleContext"
 import { AiRiskDocCreatorScreen } from "@/screens/AiRiskDocCreatorScreen"
 import { AISafetyChatScreen } from "@/screens/AISafetyChatScreen/AISafetyChatScreen"
-import { SafeBoardCreateScreen } from "@/screens/SafeBoardCreateScreen/SafeBoardCreateScreen"
-import { SafeBoardDetailScreen } from "@/screens/SafeBoardDetailScreen/SafeBoardDetailScreen"
-import { SafeBoardNotifyScreen } from "@/screens/SafeBoardNotifyScreen/SafeBoardNotifyScreen"
 import { EducationMaterialDetailScreen } from "@/screens/EducationMaterialDetailScreen/EducationMaterialDetailScreen"
 import { EducationMaterialRegisterScreen } from "@/screens/EducationMaterialRegisterScreen/EducationMaterialRegisterScreen"
 import { EducationMaterialScreen } from "@/screens/EducationMaterialScreen/EducationMaterialScreen"
@@ -34,6 +34,9 @@ import { PatrolCreateScreen } from "@/screens/PatrolScreen/PatrolCreateScreen"
 import { PatrolDetailScreen } from "@/screens/PatrolScreen/PatrolDetailScreen"
 import { PatrolScreen } from "@/screens/PatrolScreen/PatrolScreen"
 import { QrScannerScreen } from "@/screens/QrScannerScreen"
+import { SafeBoardCreateScreen } from "@/screens/SafeBoardCreateScreen/SafeBoardCreateScreen"
+import { SafeBoardDetailScreen } from "@/screens/SafeBoardDetailScreen/SafeBoardDetailScreen"
+import { SafeBoardNotifyScreen } from "@/screens/SafeBoardNotifyScreen/SafeBoardNotifyScreen"
 import { TbmCreateScreen } from "@/screens/TbmCreateScreen/TbmCreateScreen"
 import { TbmDetailScreen } from "@/screens/TbmDetailScreen/TbmDetailScreen"
 import { TbmJoinCompleteScreen } from "@/screens/TbmJoinCompleteScreen/TbmJoinCompleteScreen"
@@ -50,9 +53,6 @@ import { TbmReportStatusScreen } from "@/screens/TbmReportStatusScreen/TbmReport
 import { TextTranslationScreen } from "@/screens/TextTranslationScreen/TextTranslationScreen"
 import { VoiceTranslationScreen } from "@/screens/VoiceTranslationScreen"
 import { WelcomeIntroScreen } from "@/screens/WelcomeIntroScreen"
-import { useEffect } from "react"
-import { useAuth } from "@/context/AuthContext"
-import { useRole } from "@/context/RoleContext"
 import { useAppTheme } from "@/theme/context"
 
 import { MainNavigator } from "./MainNavigator"

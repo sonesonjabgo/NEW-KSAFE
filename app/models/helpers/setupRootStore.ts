@@ -1,8 +1,9 @@
 import { applySnapshot, IDisposer, onSnapshot } from "mobx-state-tree"
 
+import { logDevError } from "@/utils/logDevError"
+
 import * as storage from "../../utils/storage"
 import { RootStore, RootStoreSnapshot } from "../RootStore"
-import { logDevError } from "@/utils/logDevError"
 
 const ROOT_STATE_STORAGE_KEY = "root-v1"
 

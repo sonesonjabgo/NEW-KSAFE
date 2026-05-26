@@ -74,7 +74,10 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   }, [])
 
   const deriveUser = useCallback(
-    (sessionUser?: Session["user"] | null, candidateToken?: string | null): AuthUser | undefined => {
+    (
+      sessionUser?: Session["user"] | null,
+      candidateToken?: string | null,
+    ): AuthUser | undefined => {
       if (!sessionUser) return undefined
       const metadata = sessionUser.user_metadata ?? {}
       return {
@@ -93,7 +96,9 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   )
 
   const loadProfile = useCallback(
-    async (accessToken: string): Promise<{ ok: true; data: MyProfileResponseDto } | { ok: false }> => {
+    async (
+      accessToken: string,
+    ): Promise<{ ok: true; data: MyProfileResponseDto } | { ok: false }> => {
       try {
         const data = await fetchMyProfile(accessToken)
         setProfile(data)

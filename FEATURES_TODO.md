@@ -40,7 +40,7 @@
 |---|---|---|---|
 | ✅ | 게시글 목록 | `mockSafeBoardData` | 게시글 목록 API (사업장·탭 필터) — `15f1bf5` |
 | ✅ | 내 게시글 탭 | `mockMyPosts` | 내 게시글 목록 API — `15f1bf5` |
-| ⬜ | 알림 발송 | `console.log("알림 발송")` | 전체 알림 발송 API |
+| ✅ | 알림 발송 | API 연동 완료 | 전체 알림 발송 API |
 
 ### 상세 (SafeBoardDetailScreen)
 
@@ -55,9 +55,9 @@
 
 | 상태 | 항목 | 현재 상태 | 구현 내용 |
 |---|---|---|---|
-| ⬜ | 사업장 목록 | `MOCK_WORKPLACES` | 사업장 목록 API |
-| ⬜ | 파일 첨부 | mock 파일명 생성 | 파일 picker + 업로드 API |
-| ⬜ | 임시저장/게시 | `console.log(JSON.stringify(...))` | 게시글 생성 API |
+| ✅ | 사업장 목록 | API 연동 완료 | 사업장 목록 API |
+| ✅ | 파일 첨부 | API 연동 완료 | 파일 picker + 업로드 API |
+| ✅ | 임시저장/게시 | API 연동 완료 | 게시글 생성 API |
 
 ---
 
@@ -82,7 +82,7 @@
 
 | 상태 | 항목 | 현재 상태 | 구현 내용 |
 |---|---|---|---|
-| ⬜ | 사업장 목록 | `MOCK_WORKPLACES` | 사업장 목록 API |
+| ✅ | 사업장 목록 | API 연동 완료 | 사업장 목록 API |
 | ⬜ | TBM 생성 | `console.log(JSON.stringify(...))` | TBM 생성 API |
 
 ### 활동 보고서 (TbmReportScreen)
@@ -147,7 +147,7 @@
 
 | 상태 | 항목 | 현재 상태 | 구현 내용 |
 |---|---|---|---|
-| ⬜ | 사업장 목록 | `MOCK_WORKPLACES` | 사업장 목록 API |
+| ✅ | 사업장 목록 | API 연동 완료 | 사업장 목록 API |
 | ⬜ | 사진 첨부 | `console.log("카메라/앨범")` | 카메라/앨범 picker + 업로드 |
 | ⬜ | 제보 등록 | `console.log(JSON.stringify(...))` | 제보 등록 API |
 
@@ -175,7 +175,7 @@
 
 | 상태 | 항목 | 현재 상태 | 구현 내용 |
 |---|---|---|---|
-| ⬜ | 사업장 목록 | `MOCK_WORKPLACES` | 사업장 목록 API |
+| ✅ | 사업장 목록 | API 연동 완료 | 사업장 목록 API |
 | ⬜ | 작성자명 | `"홍길동"` 하드코딩 | auth context 사용자 이름 |
 | ⬜ | 제안 등록 | 미구현 | 제안 등록 API |
 

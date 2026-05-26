@@ -250,7 +250,10 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = observer(function SafeB
               />
               <Text
                 text={translate("safeBoardScreen:workplaceModal.allOption")}
-                style={[S.$workplaceOptionText, !selectedWorkplaceId && S.$workplaceOptionTextSelected]}
+                style={[
+                  S.$workplaceOptionText,
+                  !selectedWorkplaceId && S.$workplaceOptionTextSelected,
+                ]}
               />
             </TouchableOpacity>
             {availableWorkplaces.map((wp) => {

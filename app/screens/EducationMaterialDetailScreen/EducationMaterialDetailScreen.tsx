@@ -115,14 +115,10 @@ export const EducationMaterialDetailScreen: FC<EducationMaterialDetailScreenProp
           <View style={S.$fileChip}>
             <EducationFrame width={22} height={22} color="#1062D8" />
             <Text text={pureFileName} style={S.$fileChipName} numberOfLines={1} />
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => console.log("download:", item.id)}
-            >
+            <TouchableOpacity activeOpacity={0.7} onPress={() => console.log("download:", item.id)}>
               <IconDownload size={20} color="#1062D8" />
             </TouchableOpacity>
           </View>
-
         </View>
 
         {showPublishButton && (

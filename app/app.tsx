@@ -54,10 +54,8 @@ const config = {
  * @returns {JSX.Element} The rendered `App` component.
  */
 export function App() {
-  const {
-    onNavigationStateChange,
-    isRestored: isNavigationStateRestored,
-  } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
+  const { onNavigationStateChange, isRestored: isNavigationStateRestored } =
+    useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
 
   const [areFontsLoaded, fontLoadError] = useFonts(customFontsToLoad)
   const [isI18nInitialized, setIsI18nInitialized] = useState(false)
@@ -92,10 +90,7 @@ export function App() {
             <AuthProvider>
               <RoleProvider>
                 <ThemeProvider>
-                  <AppNavigator
-                    linking={linking}
-                    onStateChange={onNavigationStateChange}
-                  />
+                  <AppNavigator linking={linking} onStateChange={onNavigationStateChange} />
                 </ThemeProvider>
               </RoleProvider>
             </AuthProvider>

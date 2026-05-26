@@ -14,8 +14,6 @@ import { useNavigation } from "@react-navigation/native"
 import { IconAlertCircle } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
-import { useAuth } from "@/context/AuthContext"
-
 import EyeOffSvg from "@assets/icons/login/eye-off.svg"
 import EyeSvg from "@assets/icons/login/eye.svg"
 import LockSvg from "@assets/icons/login/lock.svg"
@@ -24,6 +22,7 @@ import MailSvg from "@assets/icons/login/mail.svg"
 
 import { ConfirmModal } from "@/components/ConfirmModal"
 import { Screen } from "@/components/Screen"
+import { useAuth } from "@/context/AuthContext"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { colors } from "@/theme/colors"
@@ -110,7 +109,10 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
                 keyboardType="email-address"
                 autoCapitalize="none"
                 value={email}
-                onChangeText={(v) => { setEmail(v); setErrorMessage("") }}
+                onChangeText={(v) => {
+                  setEmail(v)
+                  setErrorMessage("")
+                }}
                 editable={!loading}
               />
             </View>
@@ -129,7 +131,10 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
                 placeholderTextColor="#9CA3AF"
                 secureTextEntry={secureText}
                 value={password}
-                onChangeText={(v) => { setPassword(v); setErrorMessage("") }}
+                onChangeText={(v) => {
+                  setPassword(v)
+                  setErrorMessage("")
+                }}
                 editable={!loading}
               />
               <TouchableOpacity onPress={() => setSecureText((v) => !v)} hitSlop={8}>

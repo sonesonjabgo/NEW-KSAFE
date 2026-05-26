@@ -221,13 +221,9 @@ export async function deleteCompanyPost(id: string): Promise<void> {
     throw new Error("Missing authentication token for deleting post")
   }
 
-  const response = await api.apisauce.delete(
-    `${COMPANY_POST_ENDPOINT}/${id}`,
-    undefined,
-    {
-      headers: { Authorization: `Bearer ${accessToken}`, accept: "application/json" },
-    },
-  )
+  const response = await api.apisauce.delete(`${COMPANY_POST_ENDPOINT}/${id}`, undefined, {
+    headers: { Authorization: `Bearer ${accessToken}`, accept: "application/json" },
+  })
 
   if (!response.ok) {
     throw new Error(
@@ -270,7 +266,9 @@ export interface SendWorkplacePushNotificationPayload {
   body: string
 }
 
-export async function createCompanyPost(payload: CreateCompanyPostPayload): Promise<{ id: string }> {
+export async function createCompanyPost(
+  payload: CreateCompanyPostPayload,
+): Promise<{ id: string }> {
   const {
     data: { session },
   } = await supabase.auth.getSession()
@@ -287,13 +285,9 @@ export async function createCompanyPost(payload: CreateCompanyPostPayload): Prom
   if (payload.workplaceId) body.workplaceId = payload.workplaceId
   if (payload.uploadIds?.length) body.uploadIds = payload.uploadIds
 
-  const response = await api.apisauce.post<{ id: string }>(
-    COMPANY_POST_ENDPOINT,
-    body,
-    {
-      headers: { Authorization: `Bearer ${accessToken}`, accept: "application/json" },
-    },
-  )
+  const response = await api.apisauce.post<{ id: string }>(COMPANY_POST_ENDPOINT, body, {
+    headers: { Authorization: `Bearer ${accessToken}`, accept: "application/json" },
+  })
 
   if (!response.ok || !response.data?.id) {
     throw new Error(
@@ -405,7 +399,7 @@ export async function sendWorkplacePushNotification(
 
   const response = await api.apisauce.post("/api/v1/common/push-notifications/workplace", payload, {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      "Authorization": `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
   })

@@ -191,16 +191,104 @@ const es: Translations = {
     workplaceLabel: "Workplace",
     allWorkplaces: "All Workplaces",
     workplaceModal: { title: "Select Workplace", allOption: "All" },
-    badge: { companyWide: "Company-wide", workplace: "Workplace", draft: "Draft", archived: "Archived" },
+    badge: {
+      companyWide: "Company-wide",
+      workplace: "Workplace",
+      draft: "Draft",
+      archived: "Archived",
+    },
     tabs: { all: "All", myPosts: "My" },
     empty: "Empty",
     write: "Write",
     draftSaved: "Post saved as draft.",
     notifySent: "Notification sent.",
   },
-  safeBoardDetailScreen: { title: "Post Detail", loadError: "Failed to load post.", authorLabel: "Author", editButton: "Edit", alertOn: "Alert ON", alertOff: "Alert OFF", publishButton: "Publish", deleteButton: "Delete", publishModal: { title: "Publish Post", message: "Are you sure you want to publish this post?", cancel: "Cancel", confirm: "Publish" }, deleteModal: { title: "Delete Post", message: "Are you sure you want to delete this post?", cancel: "Cancel", confirm: "Delete" }, toasts: { publishSuccess: "Post published successfully.", publishError: "Failed to publish post.", deleteSuccess: "Post deleted successfully.", deleteError: "Failed to delete post." } },
-  safeBoardNotifyScreen: { title: "Send Workplace Push Notification", guide: { title: "Writing Guide", description: "Select one or more workplaces you manage\nand write a notification to deliver\nto site members." }, workplace: { label: "Select Workplace", helper: "Sending to {{selected}} of {{total}} workplaces" }, notifyTitle: { label: "Notification Title", placeholder: "Enter a brief title.", helper: "Up to 50 characters." }, content: { label: "Push Notification Content", placeholder: "Enter the notification message to deliver to this workplace.", helper: "Up to 240 characters." }, send: "Send Notification", sendSuccess: "Notification sent." },
-  safeBoardCreateScreen: { title: "Write Post", guide: { title: "Writing Guide", description: "Please write clear and accurate content." }, workplace: { label: "Workplace", placeholder: "Select workplace", helper: "Select the workplace this post applies to." }, postTitle: { label: "Post Title", placeholder: "Enter post title (max 200 characters)", helper: "Enter a clear and descriptive title." }, content: { label: "Post Content", placeholder: "Enter post content (max 2000 characters)", helper: "Describe the safety issue in detail." }, attachment: { label: "Attachments", card1Text: "(Optional) You can upload\nfiles up to 50MB.", uploadButton: "Upload File", noFile: "No files selected.", uploadError: "File upload failed. Please try again." }, pushNotification: { label: "Send Push Notification", cardText: "When selected, a push notification will be sent to all members of the selected workplace upon posting." }, save: "Save", titleEdit: "Edit Post", saveError: "Failed to save post. Please try again." },
+  safeBoardDetailScreen: {
+    title: "Post Detail",
+    loadError: "Failed to load post.",
+    authorLabel: "Author",
+    editButton: "Edit",
+    alertOn: "Alert ON",
+    alertOff: "Alert OFF",
+    publishButton: "Publish",
+    deleteButton: "Delete",
+    publishModal: {
+      title: "Publish Post",
+      message: "Are you sure you want to publish this post?",
+      cancel: "Cancel",
+      confirm: "Publish",
+    },
+    deleteModal: {
+      title: "Delete Post",
+      message: "Are you sure you want to delete this post?",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
+    toasts: {
+      publishSuccess: "Post published successfully.",
+      publishError: "Failed to publish post.",
+      deleteSuccess: "Post deleted successfully.",
+      deleteError: "Failed to delete post.",
+    },
+  },
+  safeBoardNotifyScreen: {
+    title: "Send Workplace Push Notification",
+    guide: {
+      title: "Writing Guide",
+      description:
+        "Select one or more workplaces you manage\nand write a notification to deliver\nto site members.",
+    },
+    workplace: {
+      label: "Select Workplace",
+      helper: "Sending to {{selected}} of {{total}} workplaces",
+    },
+    notifyTitle: {
+      label: "Notification Title",
+      placeholder: "Enter a brief title.",
+      helper: "Up to 50 characters.",
+    },
+    content: {
+      label: "Push Notification Content",
+      placeholder: "Enter the notification message to deliver to this workplace.",
+      helper: "Up to 240 characters.",
+    },
+    send: "Send Notification",
+    sendSuccess: "Notification sent.",
+  },
+  safeBoardCreateScreen: {
+    title: "Write Post",
+    guide: { title: "Writing Guide", description: "Please write clear and accurate content." },
+    workplace: {
+      label: "Workplace",
+      placeholder: "Select workplace",
+      helper: "Select the workplace this post applies to.",
+    },
+    postTitle: {
+      label: "Post Title",
+      placeholder: "Enter post title (max 200 characters)",
+      helper: "Enter a clear and descriptive title.",
+    },
+    content: {
+      label: "Post Content",
+      placeholder: "Enter post content (max 2000 characters)",
+      helper: "Describe the safety issue in detail.",
+    },
+    attachment: {
+      label: "Attachments",
+      card1Text: "(Optional) You can upload\nfiles up to 50MB.",
+      uploadButton: "Upload File",
+      noFile: "No files selected.",
+      uploadError: "File upload failed. Please try again.",
+    },
+    pushNotification: {
+      label: "Send Push Notification",
+      cardText:
+        "When selected, a push notification will be sent to all members of the selected workplace upon posting.",
+    },
+    save: "Save",
+    titleEdit: "Edit Post",
+    saveError: "Failed to save post. Please try again.",
+  },
 
   safeHealthScreen: {
     title: "Health",

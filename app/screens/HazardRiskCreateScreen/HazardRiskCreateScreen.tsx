@@ -52,8 +52,8 @@ export const HazardRiskCreateScreen = observer(function HazardRiskCreateScreen({
   }, [slideAnim])
 
   const closeWorkplaceModal = useCallback(() => {
-    Animated.timing(slideAnim, { toValue: 300, duration: 200, useNativeDriver: true }).start(
-      () => setWorkplaceModalVisible(false),
+    Animated.timing(slideAnim, { toValue: 300, duration: 200, useNativeDriver: true }).start(() =>
+      setWorkplaceModalVisible(false),
     )
   }, [slideAnim])
 
@@ -126,7 +126,11 @@ export const HazardRiskCreateScreen = observer(function HazardRiskCreateScreen({
                 text={translate("hazardRiskCreateScreen:workplace.label")}
                 style={S.$sectionLabel}
               />
-              <TouchableOpacity style={S.$inputRow} activeOpacity={0.7} onPress={openWorkplaceModal}>
+              <TouchableOpacity
+                style={S.$inputRow}
+                activeOpacity={0.7}
+                onPress={openWorkplaceModal}
+              >
                 <Text
                   text={workplace || translate("hazardRiskCreateScreen:workplace.placeholder")}
                   style={[S.$inputText, !workplace && S.$inputPlaceholder]}
@@ -277,7 +281,11 @@ export const HazardRiskCreateScreen = observer(function HazardRiskCreateScreen({
                   activeOpacity={0.7}
                   onPress={() => handleSelectWorkplace(wp.workplaceName)}
                 >
-                  <Building size={20} color={isSelected ? "#1062D8" : "#979797"} strokeWidth={1.8} />
+                  <Building
+                    size={20}
+                    color={isSelected ? "#1062D8" : "#979797"}
+                    strokeWidth={1.8}
+                  />
                   <Text
                     text={wp.workplaceName}
                     style={[S.$workplaceOptionText, isSelected && S.$workplaceOptionTextSelected]}
@@ -307,7 +315,10 @@ export const HazardRiskCreateScreen = observer(function HazardRiskCreateScreen({
             <TouchableOpacity
               style={S.$workplaceOption}
               activeOpacity={0.7}
-              onPress={() => { console.log("카메라"); closePhotoModal() }}
+              onPress={() => {
+                console.log("카메라")
+                closePhotoModal()
+              }}
             >
               <Text
                 text={translate("hazardRiskCreateScreen:sitePhotos.camera")}
@@ -317,7 +328,10 @@ export const HazardRiskCreateScreen = observer(function HazardRiskCreateScreen({
             <TouchableOpacity
               style={S.$workplaceOption}
               activeOpacity={0.7}
-              onPress={() => { console.log("앨범"); closePhotoModal() }}
+              onPress={() => {
+                console.log("앨범")
+                closePhotoModal()
+              }}
             >
               <Text
                 text={translate("hazardRiskCreateScreen:sitePhotos.album")}
