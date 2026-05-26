@@ -252,7 +252,6 @@ export async function createCompanyPost(payload: CreateCompanyPostPayload): Prom
   }
 
   const body: Record<string, unknown> = {
-    scope: payload.scope,
     title: payload.title,
     description: payload.description,
     sendNotification: payload.sendNotification,

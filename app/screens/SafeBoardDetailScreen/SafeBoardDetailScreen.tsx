@@ -64,13 +64,30 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
     useEffect(() => {
       setDetailLoading(true)
       setDetailError(false)
-      const fetch =
-        safeBoardStore.activeTab === "my"
-          ? safeBoardStore.fetchMyPostDetail(id)
-          : safeBoardStore.fetchPostDetail(id)
-      Promise.resolve(fetch)
-        .catch(() => setDetailError(true))
-        .finally(() => setDetailLoading(false))
+
+      const loadDetail = async () => {
+        try {
+          if (safeBoardStore.activeTab === "my") {
+            await safeBoardStore.fetchMyPostDetail(id)
+          } else if (isAdmin) {
+            // "전체" 탭: 내 글이면 me 엔드포인트, 아니면 reader 엔드포인트로 폴백
+            try {
+              await safeBoardStore.fetchMyPostDetail(id)
+            } catch {
+              await safeBoardStore.fetchPostDetail(id)
+            }
+          } else {
+            await safeBoardStore.fetchPostDetail(id)
+          }
+        } catch {
+          setDetailError(true)
+        } finally {
+          setDetailLoading(false)
+        }
+      }
+
+      void loadDetail()
+
       return () => {
         safeBoardStore.clearCurrentPost()
       }
