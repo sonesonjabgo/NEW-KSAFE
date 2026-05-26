@@ -58,6 +58,12 @@ const en = {
       deactivatedAccount: "This account has been deactivated. Please contact your administrator.",
       profileLoadFailed: "Failed to load user information. Please try again.",
     },
+    validation: {
+      required: "Please enter your email and password.",
+      invalidEmail: "Please enter a valid email address.",
+      passwordTooShort: "Password must be at least 6 characters.",
+      invalidCredentials: "Please check your email or password.",
+    },
   },
   demoNavigator: {
     componentsTab: "Components",

@@ -41,24 +41,11 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
   const [emailError, setEmailError] = useState("")
   const [passwordError, setPasswordError] = useState("")
   const [loading, setLoading] = useState(false)
-  const [loginError, setLoginError] = useState("")
   const { bottom: bottomInset } = useSafeAreaInsets()
-  const {
-    width,
-    height,
-    isSmallPhone,
-    isBasePhone: _isBasePhone,
-    isLargePhone,
-    isTablet,
-    isShortHeight,
-    breakpoint: _breakpoint,
-  } = useResponsive()
+  const { width, height, isSmallPhone, isLargePhone, isTablet, isShortHeight } = useResponsive()
 
-  // isSmallPhone 또는 isShortHeight → 세로 간격 전반 압축
   const isCompact = isSmallPhone || isShortHeight
 
-  // ── 네이비 영역 높이 (breakpoint별 비율) ─────────────────────────────────────
-  // isSmallPhone: 0.36→0.39으로 네이비 영역 소폭 확대 → 흰 카드 자동으로 짧아짐
   const navySectionHeight = isTablet
     ? Math.min(height * 0.38, 300)
     : isShortHeight
@@ -67,54 +54,33 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
         ? height * 0.39
         : isLargePhone
           ? height * 0.42
-          : height * 0.4 // isBasePhone 기본 기준
+          : height * 0.4
 
-  // ── 반응형 계산값 ─────────────────────────────────────────────────────────────
-  // isSmallPhone과 isShortHeight를 분리 — isSmallPhone은 로고/텍스트도 추가 축소
   const logoSize = isTablet ? 96 : isSmallPhone ? 60 : isShortHeight ? 64 : 80
   const logoGap = isSmallPhone ? 5 : isShortHeight ? 6 : 9
 
-  // tablet: form이 살짝 아래에 위치하도록 paddingTop 크게
-  // isSmallPhone: 카드 자체를 줄이므로 paddingTop은 자연스러운 수준으로 유지
   const cardPaddingTop = isTablet ? 48 : isSmallPhone ? 28 : isShortHeight ? 24 : 32
-  // tablet: 내부 콘텐츠 maxWidth 480 기준으로 좌우 padding 확대 → 중앙 정렬 효과
   const cardPaddingHorizontal = isTablet ? Math.max(24, (width - 480) / 2) : 24
 
-  // isSmallPhone: 카드 내부 세로 간격을 isShortHeight보다 더 타이트하게 압축
   const gapSmallH = isSmallPhone ? 16 : isCompact ? 10 : 16
   const gapMedH = isSmallPhone ? 12 : isCompact ? 16 : 24
   const gapLargeH = isSmallPhone ? 16 : isCompact ? 20 : 32
 
-  // 입력 필드 / 버튼 공통 높이
   const controlHeight = isCompact ? 44 : 48
-
-  // isSmallPhone: paddingBottom도 압축해 카드 하단 여백 최소화
   const cardPaddingBottom = isSmallPhone ? Math.max(bottomInset, 16) : Math.max(bottomInset, 24)
 
-  // ── Pre-computed dynamic styles (react-native/no-inline-styles 준수) ─────────
   const $navySectionDynamic: ViewStyle = { height: navySectionHeight }
   const $logoContainerDynamic: ViewStyle = { gap: logoGap }
-  // paddingHorizontal은 $cardContentDynamic으로 분리 — card outer width에 영향 없음
-  const $cardDynamic: ViewStyle = {
-    paddingTop: cardPaddingTop,
-    paddingBottom: cardPaddingBottom,
-  }
-  const $cardContentDynamic: ViewStyle = {
-    paddingHorizontal: cardPaddingHorizontal,
-  }
+  const $cardDynamic: ViewStyle = { paddingTop: cardPaddingTop, paddingBottom: cardPaddingBottom }
+  const $cardContentDynamic: ViewStyle = { paddingHorizontal: cardPaddingHorizontal }
   const $gapS: ViewStyle = { height: gapSmallH }
   const $gapM: ViewStyle = { height: gapMedH }
   const $gapL: ViewStyle = { height: gapLargeH }
   const $controlDynamic: ViewStyle = { height: controlHeight }
-  // borderWidth:2 차감 후 내부 공간(controlHeight - 4)에 맞춰 TextInput 높이 설정
-  // → TextInput이 래퍼 내부를 초과하지 않아 시각적 경계 아티팩트 방지
   const $textInputDynamic: TextStyle = { height: controlHeight - 4 }
-
-  // isSmallPhone 로고 영역 텍스트 축소
   const $brandNameDynamic: TextStyle = isSmallPhone ? { fontSize: 18 } : {}
   const $taglineDynamic: TextStyle = isSmallPhone ? { fontSize: 12 } : {}
 
-  // 모달 가로 크기 — breakpoint별 조정
   const modalWidth = isTablet ? 400 : isLargePhone ? 360 : isSmallPhone ? 290 : 330
   const $modalCardDynamic: ViewStyle = { width: modalWidth }
 
@@ -123,17 +89,18 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
   const handleLogin = async () => {
     let emailErr = ""
     let passwordErr = ""
+    const trimmedEmail = email.trim()
 
-    if (!email) {
-      emailErr = translate("loginScreen:alert.fillFields")
-    } else if (!EMAIL_REGEX.test(email)) {
-      emailErr = translate("loginScreen:alert.invalidCredentials")
+    if (!trimmedEmail) {
+      emailErr = translate("loginScreen:validation.required")
+    } else if (!EMAIL_REGEX.test(trimmedEmail)) {
+      emailErr = translate("loginScreen:validation.invalidEmail")
     }
 
     if (!password) {
-      passwordErr = translate("loginScreen:alert.fillFields")
+      passwordErr = translate("loginScreen:validation.required")
     } else if (password.length < 6) {
-      passwordErr = translate("loginScreen:alert.passwordLength")
+      passwordErr = translate("loginScreen:validation.passwordTooShort")
     }
 
     setEmailError(emailErr)
@@ -141,13 +108,12 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
 
     if (emailErr || passwordErr) return
 
-    setLoginError("")
     setLoading(true)
     const result = await signIn(email.trim(), password)
     setLoading(false)
 
     if (result.error) {
-      setLoginError(result.error)
+      setPasswordError(translate("loginScreen:validation.invalidCredentials"))
       return
     }
 
@@ -173,14 +139,13 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
           </View>
         </View>
 
-        {/* 하단 흰색 카드 — width:100%로 항상 전체 너비 보장, paddingHorizontal은 내부 래퍼에서 처리 */}
+        {/* 하단 흰색 카드 — paddingHorizontal은 $cardContent 내부 래퍼에서 처리 */}
         <View style={[$card, $cardDynamic]}>
           <View style={[$cardContent, $cardContentDynamic]}>
             <RNText style={$cardTitle}>{translate("loginScreen:logIn")}</RNText>
 
             <View style={$gapM} />
 
-            {/* 입력 폼 박스 — paddingHorizontal 없음: input 너비 = loginButton 너비 */}
             <View style={$formBox}>
               {/* 이메일 필드 */}
               <RNText style={$label}>
@@ -207,14 +172,15 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
                   onFocus={() => setIsEmailFocused(true)}
                   onBlur={() => {
                     setIsEmailFocused(false)
-                    if (!email) {
-                      setEmailError(translate("loginScreen:alert.fillFields"))
-                    } else if (!EMAIL_REGEX.test(email)) {
-                      setEmailError(translate("loginScreen:alert.invalidCredentials"))
+                    if (!email.trim()) {
+                      setEmailError(translate("loginScreen:validation.required"))
+                    } else if (!EMAIL_REGEX.test(email.trim())) {
+                      setEmailError(translate("loginScreen:validation.invalidEmail"))
                     } else {
                       setEmailError("")
                     }
                   }}
+                  editable={!loading}
                 />
               </View>
               {!isEmailFocused && !!emailError && <RNText style={$errorText}>{emailError}</RNText>}
@@ -246,13 +212,14 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
                   onBlur={() => {
                     setIsPasswordFocused(false)
                     if (!password) {
-                      setPasswordError(translate("loginScreen:alert.fillFields"))
+                      setPasswordError(translate("loginScreen:validation.required"))
                     } else if (password.length < 6) {
-                      setPasswordError(translate("loginScreen:alert.passwordLength"))
+                      setPasswordError(translate("loginScreen:validation.passwordTooShort"))
                     } else {
                       setPasswordError("")
                     }
                   }}
+                  editable={!loading}
                 />
                 <TouchableOpacity onPress={() => setSecureText((v) => !v)} hitSlop={8}>
                   {secureText ? (
@@ -268,9 +235,6 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
             </View>
 
             <View style={$gapL} />
-
-            {/* API 로그인 에러 */}
-            {!!loginError && <RNText style={$errorText}>{loginError}</RNText>}
 
             {/* 로그인 버튼 */}
             <TouchableOpacity
@@ -363,7 +327,6 @@ const $card: ViewStyle = {
   marginTop: -20,
 }
 
-// inner: paddingHorizontal만 담당. tablet은 $cardContentDynamic으로 크게 잡아 중앙 정렬
 const $cardContent: ViewStyle = {
   flex: 1,
 }
@@ -404,7 +367,6 @@ const $inputRowFocused: ViewStyle = {
   backgroundColor: colors.toggleCardBg,
 }
 
-// error > focused > default 우선순위: JSX에서 !!error 조건을 마지막에 적용
 const $inputRowError: ViewStyle = {
   borderColor: colors.danger,
 }
