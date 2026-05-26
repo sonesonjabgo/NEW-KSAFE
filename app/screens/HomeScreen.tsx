@@ -272,6 +272,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
   }
   const $footerLinksDynamic: ViewStyle = { gap: isSmallPhone ? 6 : 10 }
   const $footerLinkDynamic: TextStyle = { fontSize: isSmallPhone ? 10 : 11 }
+  const headerTopOffset = isSmallPhone ? 10 : isTablet ? 22 : 18
   const $bannerOverlayTitleDynamic: TextStyle = { fontSize: isTablet ? 18 : 14 }
   const $bannerOverlayDescDynamic: TextStyle = {
     fontSize: isTablet ? 12 : 9,
@@ -288,7 +289,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
           showsVerticalScrollIndicator={false}
         >
           {/* ── Header (blue background) ── */}
-          <View style={[$header, $headerDynamic, { paddingTop: insets.top + 12 }]}>
+          <View style={[$header, $headerDynamic, { paddingTop: insets.top + headerTopOffset }]}>
             {/* Row 1: Logo + Actions */}
             <View style={$titleRow}>
               <View style={{ maxWidth: "45%", flexShrink: 1 }}>
