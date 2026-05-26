@@ -1,13 +1,13 @@
 import { flow, Instance, SnapshotOut, types } from "mobx-state-tree"
 
 import {
-  fetchAdminMyPosts,
-  fetchAdminMyPostDetail as apiFetchAdminMyPostDetail,
+  fetchMyPosts,
+  fetchMyPostDetail as apiFetchMyPostDetail,
   fetchCompanyPostDetail,
   fetchUserCompanyPosts,
   publishCompanyPost,
   deleteCompanyPost,
-  AdminMyPostDetailDto,
+  MyPostDetailDto,
   MyCompanyPostListItemDto,
   UserCompanyPostListItemDto,
   UserCompanyPostDetailDto,
@@ -22,13 +22,12 @@ const CompanyPostDetailModel = types.model("CompanyPostDetail", {
   id: types.identifier,
   title: types.string,
   scope: types.enumeration(["company_wide", "workplace"]),
-  content: types.maybeNull(types.string),
+  description: types.maybeNull(types.string),
   workplaceId: types.maybeNull(types.string),
   workplaceName: types.maybeNull(types.string),
   status: types.maybeNull(types.string),
   createdBy: types.maybeNull(types.string),
-  authorName: types.maybeNull(types.string),
-  authorAffiliation: types.maybeNull(types.string),
+  createdByUserName: types.maybeNull(types.string),
   sendNotification: types.optional(types.boolean, false),
   createdAt: types.string,
   updatedAt: types.string,
@@ -100,10 +99,10 @@ export const SafeBoardStoreModel = types
       }
     }),
 
-    fetchAdminMyPosts: flow(function* loadMyPosts() {
+    fetchMyPosts: flow(function* loadMyPosts() {
       self.setStatus("pending")
       try {
-        const items: MyCompanyPostListItemDto[] = yield fetchAdminMyPosts()
+        const items: MyCompanyPostListItemDto[] = yield fetchMyPosts()
         const posts = items.map((post) =>
           CompanyPostModel.create({
             ...post,
@@ -137,17 +136,16 @@ export const SafeBoardStoreModel = types
           "currentPost",
           CompanyPostDetailModel.create({
             id: data.id,
-            title: data.title ?? "",
+            title: data.title,
             scope: data.scope ?? "company_wide",
-            content: data.content ?? data.description ?? null,
-            workplaceId: data.workplaceId ?? null,
-            workplaceName: data.workplaceName ?? null,
-            status: data.status ?? null,
-            createdBy: data.createdBy ?? null,
-            authorName: data.authorName ?? data.createdByUserName ?? null,
-            authorAffiliation: data.authorAffiliation ?? null,
-            createdAt: data.createdAt ?? "",
-            updatedAt: data.updatedAt ?? data.createdAt ?? "",
+            description: data.description,
+            workplaceId: data.workplaceId,
+            workplaceName: data.workplaceName,
+            status: data.status,
+            createdBy: data.createdBy,
+            createdByUserName: data.createdByUserName,
+            createdAt: data.createdAt,
+            updatedAt: data.createdAt,
             publishedAt: null,
           }),
         )
@@ -159,33 +157,32 @@ export const SafeBoardStoreModel = types
       }
     }),
 
-    fetchAdminMyPostDetail: flow(function* fetchAdminMyPostDetailAction(postId: string) {
+    fetchMyPostDetail: flow(function* fetchMyPostDetailAction(postId: string) {
       self.setStatus("pending")
       try {
-        const data: AdminMyPostDetailDto = yield apiFetchAdminMyPostDetail(postId)
+        const data: MyPostDetailDto = yield apiFetchMyPostDetail(postId)
         self.setProp(
           "currentPost",
           CompanyPostDetailModel.create({
             id: data.id,
-            title: data.title ?? "",
+            title: data.title,
             scope: data.scope ?? "company_wide",
-            content: data.content ?? data.description ?? null,
-            workplaceId: data.workplaceId ?? null,
-            workplaceName: data.workplaceName ?? null,
-            status: data.status ?? null,
-            createdBy: data.createdBy ?? null,
-            authorName: data.authorName ?? data.createdByUserName ?? null,
-            authorAffiliation: data.authorAffiliation ?? null,
-            sendNotification: data.sendNotification ?? false,
-            createdAt: data.createdAt ?? "",
-            updatedAt: data.updatedAt ?? data.createdAt ?? "",
-            publishedAt: data.publishedAt ?? null,
+            description: data.description,
+            workplaceId: data.workplaceId,
+            workplaceName: data.workplaceName,
+            status: data.status,
+            createdBy: data.createdBy,
+            createdByUserName: data.createdByUserName,
+            sendNotification: data.sendNotification,
+            createdAt: data.createdAt,
+            updatedAt: data.updatedAt,
+            publishedAt: data.publishedAt,
           }),
         )
         self.setStatus("success")
       } catch (error) {
         self.setStatus("error")
-        logDevError("Failed to fetch admin post detail", error)
+        logDevError("Failed to fetch my post detail", error)
         throw error
       }
     }),
@@ -206,7 +203,7 @@ export const SafeBoardStoreModel = types
         yield deleteCompanyPost(postId)
         self.setProp("currentPost", null)
         yield self.fetchBoardPosts()
-        yield self.fetchAdminMyPosts()
+        yield self.fetchMyPosts()
         self.setStatus("success")
       } catch (error) {
         self.setStatus("error")
@@ -220,8 +217,8 @@ export const SafeBoardStoreModel = types
       try {
         yield publishCompanyPost(postId)
         yield self.fetchBoardPosts()
-        yield self.fetchAdminMyPosts()
-        yield self.fetchAdminMyPostDetail(postId)
+        yield self.fetchMyPosts()
+        yield self.fetchMyPostDetail(postId)
         self.setStatus("success")
       } catch (error) {
         self.setStatus("error")

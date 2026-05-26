@@ -58,7 +58,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = observer(function SafeB
   useEffect(() => {
     if (isAdmin) {
       safeBoardStore.fetchBoardPosts()
-      safeBoardStore.fetchAdminMyPosts()
+      safeBoardStore.fetchMyPosts()
     } else if (!workplaceStore.hasWorkplaces) {
       workplaceStore.fetchWorkplaces()
     } else {

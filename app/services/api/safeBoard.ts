@@ -9,68 +9,69 @@ export interface UserCompanyPostDetailDto {
   id: string
   title: string
   scope: "company_wide" | "workplace"
-  isPinned?: boolean
-  workplaceId?: string | null
-  workplaceName?: string | null
-  status?: string | null
-  content?: string | null
-  description?: string | null
-  authorName?: string | null
-  createdByUserName?: string | null
-  authorAffiliation?: string | null
-  createdBy?: string | null
+  description: string
+  workplaceId: string | null
+  workplaceName: string | null
+  isRequiredSignature: boolean
+  createdBy: string
+  createdByUserName: string
   createdAt: string
-  updatedAt: string
+  status: "unread" | "pending_signature" | "completed"
+  readAt: string | null
+  attachments: unknown[]
 }
 
-export interface AdminMyPostDetailDto {
+export interface MyPostDetailDto {
   id: string
   title: string
   scope: "company_wide" | "workplace"
-  workplaceId?: string | null
-  workplaceName?: string | null
+  description: string
+  workplaceId: string | null
+  workplaceName: string | null
   status: "draft" | "published" | "archived"
+  isRequiredSignature: boolean
+  sendNotification: boolean
   createdBy: string
-  authorName?: string | null
-  createdByUserName?: string | null
-  authorAffiliation?: string | null
-  content?: string | null
-  description?: string | null
-  sendNotification?: boolean
+  createdByUserName: string
   createdAt: string
   updatedAt: string
-  publishedAt?: string | null
+  publishedAt: string | null
+  isPinned: boolean
+  pinnedAt: string | null
+  attachments: unknown[]
 }
 
 export interface UserCompanyPostListItemDto {
   id: string
   title: string
   scope: "company_wide" | "workplace"
-  isPinned?: boolean
-  workplaceId?: string | null
-  workplaceName?: string | null
+  workplaceId: string | null
+  workplaceName: string | null
   createdAt: string
   updatedAt: string
-  status?: string | null
+  status: string | null
+  isPinned: boolean
+  pinnedAt: string | null
 }
 
 export interface UserCompanyPostListResponseDto {
   items: UserCompanyPostListItemDto[]
-  nextCursor?: string | null
-  hasNext?: boolean
+  nextCursor: string | null
+  hasNext: boolean
 }
 
 export interface MyCompanyPostListItemDto {
   id: string
   title: string
   scope: "company_wide" | "workplace"
-  isPinned?: boolean
-  workplaceId?: string | null
-  workplaceName?: string | null
+  workplaceId: string | null
+  workplaceName: string | null
   status: "draft" | "published" | "archived"
   createdAt: string
   updatedAt: string
-  publishedAt?: string | null
+  publishedAt: string | null
+  isPinned: boolean
+  pinnedAt: string | null
 }
 
 export async function fetchUserCompanyPosts(params?: {
@@ -153,16 +154,16 @@ export async function fetchCompanyPostDetail(id: string): Promise<UserCompanyPos
   return response.data
 }
 
-export async function fetchAdminMyPostDetail(id: string): Promise<AdminMyPostDetailDto> {
+export async function fetchMyPostDetail(id: string): Promise<MyPostDetailDto> {
   const {
     data: { session },
   } = await supabase.auth.getSession()
   const accessToken = session?.access_token
   if (!accessToken) {
-    throw new Error("Missing authentication token for fetching admin post detail")
+    throw new Error("Missing authentication token for fetching my post detail")
   }
 
-  const response = await api.apisauce.get<AdminMyPostDetailDto>(
+  const response = await api.apisauce.get<MyPostDetailDto>(
     `${MY_COMPANY_POSTS_ENDPOINT}/${id}`,
     undefined,
     {
@@ -172,10 +173,10 @@ export async function fetchAdminMyPostDetail(id: string): Promise<AdminMyPostDet
 
   if (!response.ok) {
     throw new Error(
-      `Failed to load admin post detail (${response.status ?? "unknown"}): ${response.problem ?? "unknown"}`,
+      `Failed to load my post detail (${response.status ?? "unknown"}): ${response.problem ?? "unknown"}`,
     )
   }
-  if (!response.data) throw new Error("No data received for admin post detail")
+  if (!response.data) throw new Error("No data received for my post detail")
   return response.data
 }
 
@@ -227,7 +228,7 @@ export async function deleteCompanyPost(id: string): Promise<void> {
   }
 }
 
-export async function fetchAdminMyPosts(): Promise<MyCompanyPostListItemDto[]> {
+export async function fetchMyPosts(): Promise<MyCompanyPostListItemDto[]> {
   const {
     data: { session },
   } = await supabase.auth.getSession()

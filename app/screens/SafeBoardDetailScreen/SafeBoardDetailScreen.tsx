@@ -66,7 +66,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
       setDetailError(false)
       const fetch =
         safeBoardStore.activeTab === "my"
-          ? safeBoardStore.fetchAdminMyPostDetail(id)
+          ? safeBoardStore.fetchMyPostDetail(id)
           : safeBoardStore.fetchPostDetail(id)
       Promise.resolve(fetch)
         .catch(() => setDetailError(true))
@@ -191,11 +191,11 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
                   <View style={$authorLeft}>
                     <View style={$avatarCircle}>
                       <Text
-                        text={(currentPost.authorName ?? "?").trim()[0] ?? "?"}
+                        text={(currentPost.createdByUserName ?? "?").trim()[0] ?? "?"}
                         style={$avatarText}
                       />
                     </View>
-                    <Text text={currentPost.authorName ?? ""} style={$authorText} />
+                    <Text text={currentPost.createdByUserName ?? ""} style={$authorText} />
                   </View>
                   {!!currentPost.workplaceName && (
                     <Text
@@ -209,7 +209,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
 
               <View style={$contentCard}>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                  <Text text={currentPost.content ?? ""} style={$contentText} />
+                  <Text text={currentPost.description ?? ""} style={$contentText} />
                 </ScrollView>
               </View>
             </View>
