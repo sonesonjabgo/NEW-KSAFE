@@ -19,6 +19,10 @@ export const AuthProvider: FC<PropsWithChildren<AuthProviderProps>> = ({ childre
   const [authToken, setAuthToken] = useMMKVString("AuthProvider.authToken")
   const [authEmail, setAuthEmail] = useMMKVString("AuthProvider.authEmail")
 
+  // TODO: 인증 연동 완료 후 아래 블록을 복원:
+  // 로그인/앱 재시작 시 GET /api/v1/common/users/profile → preferredLanguageCode → persistChangeLanguage()
+  // 현재는 401 Unauthorized로 실패하므로 비활성화. 언어는 MMKV 저장값 또는 ko 기본값 사용.
+
   const logout = useCallback(() => {
     setAuthToken(undefined)
     setAuthEmail("")

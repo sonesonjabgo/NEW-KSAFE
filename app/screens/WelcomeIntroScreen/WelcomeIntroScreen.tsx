@@ -3,9 +3,11 @@ import { FlatList, TouchableOpacity, View, ViewToken } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { Text } from "@/components/Text"
+import { HAS_LAUNCHED_KEY } from "@/constants/storageKeys"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { useResponsive } from "@/theme/responsive"
+import { saveString } from "@/utils/storage"
 
 import { IntroPagination } from "./components/IntroPagination"
 import { IntroSlide } from "./components/IntroSlide"
@@ -41,6 +43,7 @@ export const WelcomeIntroScreen: FC<AppStackScreenProps<"WelcomeIntro">> = ({ na
   }, [])
 
   const goToLogin = () => {
+    saveString(HAS_LAUNCHED_KEY, "true")
     navigation.replace("Login")
   }
 

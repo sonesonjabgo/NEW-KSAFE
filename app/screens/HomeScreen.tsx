@@ -12,6 +12,7 @@ import {
 import { ChevronRight } from "lucide-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import type { SvgProps } from "react-native-svg"
+import { useTranslation } from "react-i18next"
 
 import BoardPin from "@assets/icons/board/board_pin.svg"
 import BannerIcon from "@assets/icons/home/banner_icon.svg"
@@ -55,6 +56,7 @@ type TabType = "all" | "company" | "workplace"
 
 export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
   const insets = useSafeAreaInsets()
+  const { i18n } = useTranslation()
   const { role: userRole, setRole: setUserRole } = useRole()
   const [selectedTab, setSelectedTab] = useState<TabType>("all")
 
@@ -177,7 +179,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
         onPress: () => navigation.navigate("ImprovementProposalList"),
       },
     ],
-    [navigation],
+    [navigation, i18n.language],
   )
 
   useEffect(() => {

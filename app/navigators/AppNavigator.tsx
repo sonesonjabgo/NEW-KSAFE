@@ -8,6 +8,8 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import Config from "@/config"
+import { HAS_LAUNCHED_KEY } from "@/constants/storageKeys"
+import { loadString } from "@/utils/storage"
 import { AiRiskDocCreatorScreen } from "@/screens/AiRiskDocCreatorScreen"
 import { AISafetyChatScreen } from "@/screens/AISafetyChatScreen/AISafetyChatScreen"
 import { SafeBoardCreateScreen } from "@/screens/SafeBoardCreateScreen/SafeBoardCreateScreen"
@@ -70,9 +72,14 @@ const AppStack = () => {
     theme: { colors },
   } = useAppTheme()
 
+  // HAS_LAUNCHED_KEY가 true면 WelcomeIntro 스킵 → Main/Home
+  // 인증 연동 후: isAuthenticated ? "Main" : "Login" 으로 교체
+  // TODO: 인증 연동 완료 후 Login 거치도록 수정
+  const initialRouteName = loadString(HAS_LAUNCHED_KEY) === "true" ? "Main" : "WelcomeIntro"
+
   return (
     <Stack.Navigator
-      initialRouteName="WelcomeIntro"
+      initialRouteName={initialRouteName}
       screenOptions={{
         headerShown: false,
         navigationBarColor: colors.background,

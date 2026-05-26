@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from "react"
 import { ActivityIndicator, FlatList, View } from "react-native"
-import { CommonActions, useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
+import { reloadAppAsync } from "expo"
 import { IconAlertCircle } from "@tabler/icons-react-native"
 
 import i18n from "i18next"
@@ -10,6 +11,7 @@ import { Text } from "@/components/Text"
 import { Toast } from "@/components/Toast"
 import { useAuth } from "@/context/AuthContext"
 import type { TxKeyPath } from "@/i18n"
+import { persistChangeLanguage, toI18nKey } from "@/i18n"
 import { translate } from "@/i18n/translate"
 import { api } from "@/services/api"
 import { colors } from "@/theme/colors"
@@ -100,11 +102,13 @@ export const LanguageSettingsScreen: FC = () => {
   /* ── 상태 ── */
   const [languages, setLanguages] = useState<Language[]>(FALLBACK_LANGUAGES)
   const [isLoading, setIsLoading] = useState(true)
-  const [selectedId, setSelectedId] = useState("ko") // 선택된 언어 code
-  const [prevSelectedId, setPrevSelectedId] = useState("ko") // PATCH 실패 시 복원용
-  const [previewLang, setPreviewLang] = useState("ko") // 모달 미리보기 언어
+  // i18n.language가 이미 MMKV 저장값 또는 "ko"로 초기화되어 있으므로 그대로 사용
+  const initialLang = i18n.language ?? "ko"
+  const [selectedId, setSelectedId] = useState(initialLang)
+  const [prevSelectedId, setPrevSelectedId] = useState(initialLang)
+  const [previewLang, setPreviewLang] = useState(initialLang)
   const [modalVisible, setModalVisible] = useState(false)
-  const [currentLanguage, setCurrentLanguage] = useState(i18n.language ?? "ko")
+  const [currentLanguage, setCurrentLanguage] = useState(initialLang)
   const [errorToast, setErrorToast] = useState(false)
 
   const {
@@ -127,6 +131,11 @@ export const LanguageSettingsScreen: FC = () => {
     }
     setIsLoading(true)
     try {
+      // TODO: 현재 GET /api/v1/common/languages 및 GET /api/v1/common/users/profile 이
+      // Authorization 헤더 미적용으로 401 Unauthorized를 반환 중.
+      // 팀원의 공통 인증 인터셉터 연결 후 정상 동작 예정.
+      // 401로 인해 langsResult.kind !== "ok" → FALLBACK_LANGUAGES 사용 (serverId: 0) →
+      // handleSelect에서 PATCH가 스킵되는 현상은 이 401의 후속 증상임.
       const [langsResult, profileResult] = await Promise.all([
         api.getLanguages(authToken),
         api.getUserProfile(authToken),
@@ -147,9 +156,10 @@ export const LanguageSettingsScreen: FC = () => {
       if (profileResult.kind === "ok") {
         const code = profileResult.profile.preferredLanguageCode
         if (code) {
+          // AuthContext가 이미 i18n + MMKV를 서버 값으로 초기화함
+          // 여기서는 UI 선택 상태만 업데이트
           setSelectedId(code)
           setPreviewLang(code)
-          i18n.changeLanguage(code)
           setCurrentLanguage(code)
         }
       }
@@ -164,7 +174,7 @@ export const LanguageSettingsScreen: FC = () => {
 
   /* ── i18n 헬퍼 ── */
 
-  const t = (key: TxKeyPath) => translate(key, { lng: previewLang })
+  const t = (key: TxKeyPath) => translate(key, { lng: toI18nKey(previewLang) })
 
   /* ── 언어 선택 → 모달 표시 + 즉시 PATCH → navigation reset ── */
 
@@ -174,51 +184,49 @@ export const LanguageSettingsScreen: FC = () => {
     setPrevSelectedId(prev)
     setSelectedId(code)
     setPreviewLang(code)
-    setModalVisible(true)
 
     const lang = languages.find((l) => l.code === code)
 
     // PATCH (fallback serverId===0 이면 스킵)
     if (lang && lang.serverId !== 0 && authToken) {
+      // [LOG 1] PATCH 요청 body 확인
+      console.log("[LangDebug] PATCH /preferred-language →", { languageId: lang.serverId, code })
+
       const result = await api.patchPreferredLanguage(authToken, lang.serverId)
+
+      // [LOG 2] PATCH 응답 성공 여부
+      console.log("[LangDebug] PATCH result →", result.kind)
+
       if (result.kind !== "ok") {
-        setModalVisible(false)
         setSelectedId(prev)
         setPreviewLang(prev)
         setErrorToast(true)
         return
       }
+
+      // [LOG 3] PATCH 직후 GET /profile 로 서버 저장값 확인
+      const verifyResult = await api.getUserProfile(authToken)
+      if (verifyResult.kind === "ok") {
+        console.log(
+          "[LangDebug] GET /profile after PATCH → preferredLanguageCode:",
+          verifyResult.profile.preferredLanguageCode,
+        )
+      } else {
+        console.log("[LangDebug] GET /profile after PATCH failed →", verifyResult.kind)
+      }
+    } else {
+      console.log("[LangDebug] PATCH skipped — serverId:", lang?.serverId, "code:", code)
     }
 
-    // i18n 변경 후 새 언어 기준으로 모달 문구 생성
-    const nativeName = lang?.nativeName ?? code
-    i18n.changeLanguage(code)
+    // MMKV 저장 + i18n 변경 완료 후 모달 표시 (기존 프로젝트 순서 동일)
+    // → 모달 확인 시 reloadAppAsync로 앱 재시작, 재시작 후 initI18n()이 MMKV 값을 읽어 언어 복원
+    await persistChangeLanguage(code)
+    setCurrentLanguage(code)
 
-    const newTitle = translate("languageSettings:languageTitle")
-    const newDesc = translate("languageSettings:languageChangeRestart", { language: nativeName })
-    const newConfirm = CONFIRM_TEXT[code] ?? "OK"
+    // [LOG 5] 최종 i18n.language 확인
+    console.log("[LangDebug] i18n.language after persistChangeLanguage →", i18n.language)
 
-    // HomeScreen으로 reset — 모달 데이터 params로 전달
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [
-          {
-            name: "Main",
-            params: {
-              screen: "Home",
-              params: {
-                pendingLanguageModal: {
-                  title: newTitle,
-                  description: newDesc,
-                  confirmText: newConfirm,
-                },
-              },
-            },
-          },
-        ],
-      }),
-    )
+    setModalVisible(true)
   }
 
   /* ── 모달 계산값 (선택 직후 미리보기용) ── */
@@ -227,11 +235,14 @@ export const LanguageSettingsScreen: FC = () => {
   const modalLangName = selectedLanguage?.nativeName ?? selectedId
   const modalTitle = t("languageSettings:languageTitle")
   const modalDesc = translate("languageSettings:languageChangeRestart", {
-    lng: previewLang,
+    lng: toI18nKey(previewLang),
     language: modalLangName,
   })
-  const modalConfirm = CONFIRM_TEXT[previewLang] ?? translate("common:ok", { lng: previewLang })
-  const displayLang = currentLanguage.startsWith("ko") ? "ko" : "en"
+  const modalConfirm =
+    CONFIRM_TEXT[previewLang] ?? translate("common:ok", { lng: toI18nKey(previewLang) })
+  // previewLang: 선택 즉시(동기) 업데이트 → 헤더·아이템 모두 동일 시점에 반영
+  // currentLanguage는 persistChangeLanguage 완료 후 업데이트(async)이므로 사용하지 않음
+  const displayLang = toI18nKey(previewLang)
 
   /* ── 반응형 값 ── */
 
@@ -270,6 +281,7 @@ export const LanguageSettingsScreen: FC = () => {
             <FlatList
               data={languages}
               keyExtractor={(item) => item.code}
+              extraData={displayLang}
               contentContainerStyle={{
                 paddingHorizontal: listPaddingH,
                 paddingBottom: listPaddingBottom,
@@ -318,12 +330,16 @@ export const LanguageSettingsScreen: FC = () => {
         title={modalTitle}
         description={modalDesc}
         confirmText={modalConfirm}
-        onConfirm={() => setModalVisible(false)}
+        onConfirm={async () => {
+          await reloadAppAsync("language-change")
+        }}
       />
 
       <Toast
         visible={errorToast}
-        message={translate("languageSettings:languageChangeError", { lng: currentLanguage })}
+        message={translate("languageSettings:languageChangeError", {
+          lng: toI18nKey(previewLang),
+        })}
         icon={<IconAlertCircle size={14} color="#FFFFFF" />}
         iconCircleColor={colors.danger}
         onHide={() => setErrorToast(false)}

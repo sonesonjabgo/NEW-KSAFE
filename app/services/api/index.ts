@@ -82,7 +82,7 @@ export class Api {
     token: string,
   ): Promise<{ kind: "ok"; items: LanguageItem[] } | GeneralApiProblem> {
     const response = await this.apisauce.get<LanguagesResponse>(
-      "/v1/common/languages",
+      "/api/v1/common/languages",
       {},
       { headers: { Authorization: `Bearer ${token}` } },
     )
@@ -102,7 +102,7 @@ export class Api {
     token: string,
   ): Promise<{ kind: "ok"; profile: UserProfile } | GeneralApiProblem> {
     const response = await this.apisauce.get<UserProfile>(
-      "/v1/common/users/profile",
+      "/api/v1/common/users/profile",
       {},
       { headers: { Authorization: `Bearer ${token}` } },
     )
@@ -123,7 +123,7 @@ export class Api {
     languageId: number,
   ): Promise<{ kind: "ok" } | GeneralApiProblem> {
     const response = await this.apisauce.patch(
-      "/v1/common/users/preferred-language",
+      "/api/v1/common/users/preferred-language",
       { languageId },
       { headers: { Authorization: `Bearer ${token}` } },
     )

@@ -4,6 +4,10 @@ import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
 import "intl-pluralrules"
 
+import { loadString, saveString } from "../utils/storage"
+
+export const LANGUAGE_STORAGE_KEY = "i18n.lng"
+
 // if English isn't your default language, move Translations to the appropriate language file.
 import ar from "./ar"
 import en, { Translations } from "./en"
@@ -29,7 +33,27 @@ const fallbackLocale = "en-US"
 
 const systemLocales = Localization.getLocales()
 
-const resources = { ar, en, ko, es, fr, hi, id, ja, km, lo, my, ne, ru, th, ur, vi, zh, zhHans, zhHant }
+const resources = {
+  ar,
+  en,
+  ko,
+  es,
+  fr,
+  hi,
+  id,
+  ja,
+  km,
+  lo,
+  my,
+  ne,
+  ru,
+  th,
+  ur,
+  vi,
+  zh,
+  zhHans,
+  zhHant,
+}
 const supportedTags = Object.keys(resources)
 
 // Checks to see if the device locale matches any of the supported locales
@@ -58,16 +82,36 @@ if (locale?.languageTag && locale?.textDirection === "rtl") {
 export const initI18n = async () => {
   i18n.use(initReactI18next)
 
+  // MMKV에 저장된 언어를 우선 사용하고, 없으면 ko 기본값 사용 (인증 연동 전 임시)
+  // TODO: 인증 연동 후 서버 profile preferredLanguageCode를 source of truth로 복원
+  const savedLang = loadString(LANGUAGE_STORAGE_KEY)
+
   await i18n.init({
     resources,
-    lng: locale?.languageTag ?? fallbackLocale,
-    fallbackLng: fallbackLocale,
+    lng: savedLang ?? "ko",
+    fallbackLng: "ko",
     interpolation: {
       escapeValue: false,
     },
   })
 
   return i18n
+}
+
+/**
+ * BCP-47 코드 → i18n 리소스 키 변환.
+ * resources 객체의 키가 camelCase(zhHans, zhHant)이므로 하이픈 코드를 변환해야 함.
+ */
+export const toI18nKey = (bcp47Code: string): string => {
+  const map: Record<string, string> = { "zh-Hans": "zhHans", "zh-Hant": "zhHant" }
+  return map[bcp47Code] ?? bcp47Code
+}
+
+/** 언어 변경 + MMKV 영구 저장. bcp47Code는 "ko", "zh-Hans" 등 BCP-47 코드를 받아 자동 변환. */
+export const persistChangeLanguage = async (bcp47Code: string): Promise<void> => {
+  const i18nCode = toI18nKey(bcp47Code)
+  await i18n.changeLanguage(i18nCode)
+  saveString(LANGUAGE_STORAGE_KEY, i18nCode)
 }
 
 /**

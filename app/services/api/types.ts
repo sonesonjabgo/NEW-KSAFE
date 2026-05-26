@@ -39,6 +39,7 @@ export interface ApiFeedResponse {
 export interface LanguageItem {
   id: number
   code: string
+  name: string
   displayName: string
   nativeName: string
   sortOrder: number
@@ -49,6 +50,13 @@ export interface LanguagesResponse {
 }
 
 export interface UserProfile {
+  email: string
+  username: string
+  phone: string
+  role: string
+  isActive: boolean
+  isProfileCompleted: boolean
+  isFcmTokenRegistered: boolean
   preferredLanguageCode: string
 }
 
