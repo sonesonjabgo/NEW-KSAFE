@@ -230,6 +230,18 @@ const idOverrides = {
       "uk": "Ukraina",
     },
   },
+  qrScanner: {
+    title: "Bergabung ke Pendidikan/Presentasi",
+    description: "Pindai kode QR atau masukkan kode yang dibagikan presenter\nuntuk bergabung ke rapat.",
+    permissionRequired: "Izin kamera diperlukan untuk memindai kode QR.",
+    retry: "Coba Lagi",
+    languageLabel: "Bahasa",
+    currentLanguage: "Korea",
+    enterCode: "Mengalami masalah dengan kamera? Anda dapat memasukkan kode pendidikan/presentasi secara langsung.",
+    enterCodeDescription: "Masukkan kode numerik 8 digit yang dibagikan oleh presenter.",
+    joinMeeting: "Bergabung ke Rapat",
+    codePlaceholder: "Masukkan kode",
+  },
 }
 
 const id: Translations = mergeLocale(en, idOverrides as LocaleOverrides<Translations>)

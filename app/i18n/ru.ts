@@ -229,6 +229,18 @@ const ruOverrides = {
       "uk": "Украинский",
     },
   },
+  qrScanner: {
+    title: "Присоединиться к обучению/презентации",
+    description: "Отсканируйте QR-код или введите код от ведущего\nдля присоединения к встрече.",
+    permissionRequired: "Для сканирования QR-кода необходимо разрешение на использование камеры.",
+    retry: "Повторить попытку",
+    languageLabel: "Язык",
+    currentLanguage: "Корейский",
+    enterCode: "Проблемы с камерой? Вы можете ввести код обучения/презентации напрямую.",
+    enterCodeDescription: "Введите 8-значный числовой код, предоставленный ведущим.",
+    joinMeeting: "Присоединиться к встрече",
+    codePlaceholder: "Введите код",
+  },
 }
 
 const ru: Translations = mergeLocale(en, ruOverrides as LocaleOverrides<Translations>)

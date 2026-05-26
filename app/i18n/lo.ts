@@ -227,6 +227,18 @@ const loOverrides = {
       "uk": "ພາສາຢູເຄຣນ",
     },
   },
+  qrScanner: {
+    title: "ເຂົ້າຮ່ວມການສຶກສາ/ການນຳສະເໜີ",
+    description: "ສະແກນ QR ໂຄດ ຫຼື ປ້ອນລະຫັດທີ່ຜູ້ນຳສະເໜີແບ່ງປັນ\nເພື່ອເຂົ້າຮ່ວມກອງປະຊຸມ",
+    permissionRequired: "ຕ້ອງການສິດອະນຸຍາດກ້ອງຖ່າຍຮູບເພື່ອສະແກນ QR ໂຄດ",
+    retry: "ລອງໃໝ່",
+    languageLabel: "ພາສາ",
+    currentLanguage: "ເກົາຫຼີ",
+    enterCode: "ມີບັນຫາກັບກ້ອງຖ່າຍຮູບ? ທ່ານສາມາດປ້ອນລະຫັດການສຶກສາ/ການນຳສະເໜີໄດ້ໂດຍກົງ",
+    enterCodeDescription: "ປ້ອນລະຫັດຕົວເລກ 8 ຕົວທີ່ຜູ້ນຳສະເໜີແບ່ງປັນ",
+    joinMeeting: "ເຂົ້າຮ່ວມກອງປະຊຸມ",
+    codePlaceholder: "ປ້ອນລະຫັດ",
+  },
 }
 
 const lo: Translations = mergeLocale(en, loOverrides as LocaleOverrides<Translations>)

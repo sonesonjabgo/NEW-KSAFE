@@ -227,6 +227,18 @@ const thOverrides = {
       "uk": "ยูเครน",
     },
   },
+  qrScanner: {
+    title: "เข้าร่วมการศึกษา/การนำเสนอ",
+    description: "สแกน QR โค้ดหรือป้อนรหัสที่ผู้นำเสนอแชร์\nเพื่อเข้าร่วมการประชุม",
+    permissionRequired: "ต้องการสิทธิ์เข้าถึงกล้องเพื่อสแกน QR โค้ด",
+    retry: "ลองอีกครั้ง",
+    languageLabel: "ภาษา",
+    currentLanguage: "เกาหลี",
+    enterCode: "มีปัญหากับกล้อง? คุณสามารถป้อนรหัสการศึกษา/การนำเสนอโดยตรง",
+    enterCodeDescription: "ป้อนรหัสตัวเลข 8 หลักที่ผู้นำเสนอแชร์",
+    joinMeeting: "เข้าร่วมการประชุม",
+    codePlaceholder: "ป้อนรหัส",
+  },
 }
 
 const th: Translations = mergeLocale(en, thOverrides as LocaleOverrides<Translations>)

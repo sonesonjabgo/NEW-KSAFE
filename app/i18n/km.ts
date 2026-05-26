@@ -229,6 +229,18 @@ const kmOverrides = {
       "uk": "អ៊ុយក្រែន",
     },
   },
+  qrScanner: {
+    title: "ចូលរួមការអប់រំ/បទបង្ហាញ",
+    description: "ស្កេន QR Code ឬបញ្ចូលកូដដែលបានចែករំលែកដោយអ្នកបង្ហាញ\nដើម្បីចូលរួមការប្រជុំ",
+    permissionRequired: "ត្រូវការការអនុញ្ញាតកាមេរ៉ាដើម្បីស្កេន QR Code",
+    retry: "ព្យាយាមម្ដងទៀត",
+    languageLabel: "ភាសា",
+    currentLanguage: "កូរ៉េ",
+    enterCode: "មានបញ្ហាជាមួយកាមេរ៉ា? អ្នកអាចបញ្ចូលកូដការអប់រំ/បទបង្ហាញដោយផ្ទាល់",
+    enterCodeDescription: "បញ្ចូលលេខ 8 ខ្ទង់ដែលបានចែករំលែកដោយអ្នកបង្ហាញ",
+    joinMeeting: "ចូលរួមការប្រជុំ",
+    codePlaceholder: "បញ្ចូលកូដ",
+  },
 }
 
 const km: Translations = mergeLocale(en, kmOverrides as LocaleOverrides<Translations>)

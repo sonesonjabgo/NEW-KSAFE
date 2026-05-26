@@ -228,6 +228,18 @@ const viOverrides = {
       "uk": "Tiếng Ukraina",
     },
   },
+  qrScanner: {
+    title: "Tham gia Giáo dục/Thuyết trình",
+    description: "Quét mã QR hoặc nhập mã do người thuyết trình chia sẻ\nđể tham gia cuộc họp.",
+    permissionRequired: "Cần quyền truy cập máy ảnh để quét mã QR.",
+    retry: "Thử lại",
+    languageLabel: "Ngôn ngữ",
+    currentLanguage: "Tiếng Hàn",
+    enterCode: "Gặp sự cố với máy ảnh? Bạn có thể nhập trực tiếp mã giáo dục/thuyết trình.",
+    enterCodeDescription: "Nhập mã số gồm 8 chữ số do người thuyết trình chia sẻ.",
+    joinMeeting: "Tham gia cuộc họp",
+    codePlaceholder: "Nhập mã",
+  },
 }
 
 const vi: Translations = mergeLocale(en, viOverrides as LocaleOverrides<Translations>)

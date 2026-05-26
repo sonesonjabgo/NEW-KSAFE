@@ -11,6 +11,9 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { Text } from "@/components/Text"
+import i18n from "i18next"
+
+import { fromI18nKey } from "@/i18n/i18n"
 import { translate } from "@/i18n/translate"
 import { colors } from "@/theme/colors"
 import { useResponsive } from "@/theme/responsive"
@@ -169,7 +172,9 @@ export const QrScannerScreen: FC = () => {
               <IconLanguageHiragana size={20} color="#4B5563" />
               <Text style={[S.$languageText, { fontSize: langFontSize }]}>
                 {translate("qrScanner:languageLabel")}{" "}
-                <Text style={S.$languageHighlight}>· {translate("qrScanner:currentLanguage")}</Text>
+                <Text style={S.$languageHighlight}>
+                  · {translate(`languageSettings:languageNames.${fromI18nKey(i18n.language)}` as any)}
+                </Text>
               </Text>
             </View>
           </View>

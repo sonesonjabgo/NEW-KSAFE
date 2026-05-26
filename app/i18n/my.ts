@@ -229,6 +229,18 @@ const myOverrides = {
       "uk": "ယူကရိန်း",
     },
   },
+  qrScanner: {
+    title: "ပညာရေး/တင်ဆက်မှုသို့ ဝင်ရောက်ပါ",
+    description: "QR ကုဒ်ကို စကင်န်ဖတ်ပါ သို့မဟုတ် တင်ဆက်သူ မျှဝေသော ကုဒ်ကို ထည့်သွင်းပါ\nအစည်းအဝေးသို့ ဝင်ရောက်ရန်",
+    permissionRequired: "QR ကုဒ် စကင်န်ဖတ်ရန် ကင်မရာ ခွင့်ပြုချက် လိုအပ်သည်",
+    retry: "ထပ်မံကြိုးစားပါ",
+    languageLabel: "ဘာသာစကား",
+    currentLanguage: "ကိုရီးယား",
+    enterCode: "ကင်မရာနှင့် အခက်အခဲရှိပါသလား? ပညာရေး/တင်ဆက်မှု ကုဒ်ကို တိုက်ရိုက် ထည့်သွင်းနိုင်သည်",
+    enterCodeDescription: "တင်ဆက်သူ မျှဝေသော ဂဏန်း ၈ လုံးပါ ကုဒ်ကို ထည့်သွင်းပါ",
+    joinMeeting: "အစည်းအဝေးသို့ ဝင်ရောက်ပါ",
+    codePlaceholder: "ကုဒ် ထည့်သွင်းပါ",
+  },
 }
 
 const my: Translations = mergeLocale(en, myOverrides as LocaleOverrides<Translations>)

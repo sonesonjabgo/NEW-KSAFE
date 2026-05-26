@@ -228,6 +228,18 @@ const urOverrides = {
       "uk": "یوکرینی",
     },
   },
+  qrScanner: {
+    title: "تعلیم/پریزنٹیشن میں شامل ہوں",
+    description: "کیو آر کوڈ اسکین کریں یا پریزنٹر کا شیئر کردہ کوڈ درج کریں\nمیٹنگ میں شامل ہونے کے لیے۔",
+    permissionRequired: "کیو آر کوڈ اسکین کرنے کے لیے کیمرہ کی اجازت ضروری ہے۔",
+    retry: "دوبارہ کوشش کریں",
+    languageLabel: "زبان",
+    currentLanguage: "کوریائی",
+    enterCode: "کیمرہ استعمال کرنے میں دشواری ہے؟ تعلیم/پریزنٹیشن کوڈ براہ راست درج کریں۔",
+    enterCodeDescription: "پریزنٹر کا شیئر کردہ 8 ہندسوں کا نمبری کوڈ درج کریں۔",
+    joinMeeting: "میٹنگ میں شامل ہوں",
+    codePlaceholder: "کوڈ درج کریں",
+  },
 }
 
 const ur: Translations = mergeLocale(en, urOverrides as LocaleOverrides<Translations>)

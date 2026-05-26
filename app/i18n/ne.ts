@@ -229,6 +229,18 @@ const neOverrides = {
       "uk": "युक्रेनी",
     },
   },
+  qrScanner: {
+    title: "शिक्षा/प्रस्तुतिमा सहभागी हुनुहोस्",
+    description: "QR कोड स्क्यान गर्नुहोस् वा प्रस्तुतकर्ताले साझा गरेको कोड प्रविष्ट गर्नुहोस्\nसभामा सहभागी हुन।",
+    permissionRequired: "QR कोड स्क्यान गर्न क्यामेरा अनुमति आवश्यक छ।",
+    retry: "फेरि प्रयास गर्नुहोस्",
+    languageLabel: "भाषा",
+    currentLanguage: "कोरियाली",
+    enterCode: "क्यामेरामा समस्या छ? तपाईं शिक्षा/प्रस्तुति कोड सिधै प्रविष्ट गर्न सक्नुहुन्छ।",
+    enterCodeDescription: "प्रस्तुतकर्ताले साझा गरेको ८ अंकको संख्यात्मक कोड प्रविष्ट गर्नुहोस्।",
+    joinMeeting: "सभामा सहभागी हुनुहोस्",
+    codePlaceholder: "कोड प्रविष्ट गर्नुहोस्",
+  },
 }
 
 const ne: Translations = mergeLocale(en, neOverrides as LocaleOverrides<Translations>)

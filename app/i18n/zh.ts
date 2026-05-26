@@ -224,6 +224,18 @@ const zhOverrides = {
       "uk": "乌克兰语",
     },
   },
+  qrScanner: {
+    title: "加入教育/演示",
+    description: "扫描二维码或输入主讲人共享的代码\n即可加入会议。",
+    permissionRequired: "扫描二维码需要相机权限。",
+    retry: "重试",
+    languageLabel: "语言",
+    currentLanguage: "韩语",
+    enterCode: "相机使用困难？可以直接输入教育/演示代码。",
+    enterCodeDescription: "请输入主讲人共享的8位数字代码。",
+    joinMeeting: "加入会议",
+    codePlaceholder: "请输入代码",
+  },
 }
 
 const zh: Translations = mergeLocale(en, zhOverrides as LocaleOverrides<Translations>)
