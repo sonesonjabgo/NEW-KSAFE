@@ -145,6 +145,9 @@ const zhOverrides = {
     },
   },
   notify: {
+    title: "通知",
+    emptyTitle: "暂无通知",
+    emptyDescription: "您目前没有通知。\n有新通知时，我们会告知您。",
     mock: {
       boardNewPost: {
         title: "公告板有新帖子。",

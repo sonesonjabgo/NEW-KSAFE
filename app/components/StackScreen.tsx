@@ -4,6 +4,7 @@ import { IconChevronLeft } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { Text } from "@/components/Text"
+import { isRTL } from "@/i18n/rtl"
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
@@ -53,7 +54,11 @@ export function StackScreen({
           disabled={!onBack}
           activeOpacity={0.7}
         >
-          {onBack && <IconChevronLeft size={24} color="#FFFFFF" />}
+          {onBack && (
+            <View style={isRTL ? $chevronRTL : undefined}>
+              <IconChevronLeft size={24} color="#FFFFFF" />
+            </View>
+          )}
         </TouchableOpacity>
 
         <View style={$headerTitleContainer} pointerEvents="none">
@@ -77,7 +82,7 @@ const $root: ViewStyle = {
 
 const $header: ViewStyle = {
   backgroundColor: colors.navy,
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   alignItems: "center",
   justifyContent: "space-between",
   paddingHorizontal: 20,
@@ -89,12 +94,16 @@ const $headerSide: ViewStyle = {
   width: 44,
   height: 36,
   justifyContent: "center",
-  alignItems: "flex-start",
+  alignItems: "center",
 }
 
 const $headerSideRight: ViewStyle = {
   width: "auto",
-  alignItems: "flex-end",
+  alignItems: isRTL ? "flex-start" : "flex-end",
+}
+
+const $chevronRTL: ViewStyle = {
+  transform: [{ scaleX: -1 }],
 }
 
 const $headerTitleContainer: ViewStyle = {

@@ -145,6 +145,9 @@ const urOverrides = {
     },
   },
   notify: {
+    title: "اطلاعات",
+    emptyTitle: "کوئی اطلاع نہیں",
+    emptyDescription: "ابھی آپ کے پاس کوئی اطلاع نہیں ہے۔\nجب نئی اطلاعات آئیں گی تو ہم آپ کو بتائیں گے۔",
     mock: {
       boardNewPost: {
         title: "بورڈ پر نئی پوسٹ لکھی گئی ہے۔",

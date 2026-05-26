@@ -145,6 +145,9 @@ const thOverrides = {
     },
   },
   notify: {
+    title: "การแจ้งเตือน",
+    emptyTitle: "ไม่มีการแจ้งเตือน",
+    emptyDescription: "คุณไม่มีการแจ้งเตือนในขณะนี้\nเราจะแจ้งให้คุณทราบเมื่อมีการแจ้งเตือนใหม่มาถึง",
     mock: {
       boardNewPost: {
         title: "มีโพสต์ใหม่บนกระดาน",

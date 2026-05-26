@@ -146,6 +146,9 @@ const kmOverrides = {
     },
   },
   notify: {
+    title: "ការជូនដំណឹង",
+    emptyTitle: "មិនមានការជូនដំណឹង",
+    emptyDescription: "អ្នកមិនមានការជូនដំណឹងណាមួយទេ។\nយើងនឹងជូនដំណឹងអ្នកនៅពេលមានការជូនដំណឹងថ្មី។",
     mock: {
       boardNewPost: {
         title: "មានការបង្ហោះថ្មីនៅលើក្តារ។",

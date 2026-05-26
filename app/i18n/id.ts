@@ -147,6 +147,9 @@ const idOverrides = {
     },
   },
   notify: {
+    title: "Notifikasi",
+    emptyTitle: "Tidak ada notifikasi",
+    emptyDescription: "Anda tidak memiliki notifikasi saat ini.\nKami akan memberi tahu Anda ketika notifikasi baru tiba.",
     mock: {
       boardNewPost: {
         title: "Postingan baru telah dibuat di papan.",

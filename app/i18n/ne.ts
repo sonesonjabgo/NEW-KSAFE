@@ -146,6 +146,9 @@ const neOverrides = {
     },
   },
   notify: {
+    title: "सूचनाहरू",
+    emptyTitle: "कुनै सूचना छैन",
+    emptyDescription: "हाल कुनै सूचना छैन।\nनयाँ सूचना आएमा हामी तपाईंलाई जानकारी दिनेछौं।",
     mock: {
       boardNewPost: {
         title: "बोर्डमा नयाँ पोस्ट लेखिएको छ।",

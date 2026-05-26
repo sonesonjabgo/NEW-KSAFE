@@ -145,6 +145,9 @@ const viOverrides = {
     },
   },
   notify: {
+    title: "Thông báo",
+    emptyTitle: "Không có thông báo",
+    emptyDescription: "Bạn chưa có thông báo nào.\nChúng tôi sẽ thông báo khi có thông báo mới.",
     mock: {
       boardNewPost: {
         title: "Có bài đăng mới trên bảng tin.",
