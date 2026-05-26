@@ -27,8 +27,8 @@
 |---|---|---|---|
 | ✅ | 사용자 이름 | `"김영희"` 하드코딩 | auth context에서 실제 이름 표시 |
 | ✅ | 안전게시판 목록 | `BOARD_ITEMS` 하드코딩 | SafeBoardStore + fetchBoardPosts API 연동 |
-| ⬜ | 교육 배너 노출 여부 | `useState(false)` 로컬 상태 | 금일 TBM / 교육자료 존재 여부 API |
-| ⬜ | 푸시 알림 권한 요청 | BottomSheet 표시만 | 실제 푸시 권한 요청 + 토큰 등록 |
+| ✅ | 교육 배너 노출 여부 | `useState(false)` 로컬 상태 | 진행 중인 발표 세션 존재 여부 API (`/common/presentations/active`) |
+| ⬜ | 푸시 알림 권한 요청 | BottomSheet 표시만 | 실제 푸시 권한 요청 + FCM 토큰 서버 등록 (`POST /common/users/fcm-token`) — 앱 레벨 연동 |
 
 ---
 

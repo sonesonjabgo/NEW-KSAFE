@@ -44,6 +44,7 @@ import { translate } from "@/i18n/translate"
 import { useStores } from "@/models"
 import type { MainTabScreenProps } from "@/navigators/navigationTypes"
 import { SafeBoardBadge } from "@/screens/SafeBoardScreen/components/SafeBoardBadge"
+import { fetchActivePresentation } from "@/services/api/presentation"
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 import { formatDate } from "@/utils/formatDate"
@@ -85,7 +86,6 @@ export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen({ na
   const { safeBoardStore, workplaceStore } = useStores()
   const displayName = profile?.username?.trim() || user?.name?.trim() || ""
   const [selectedTab, setSelectedTab] = useState<TabType>("all")
-  // TODO: 추후 "생성된 교육/발표실 존재 여부" API 연동으로 교체
   const [showEducationBanner, setShowEducationBanner] = useState(false)
 
   const hasLoadedBoardRef = useRef(false)
@@ -143,10 +143,7 @@ export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen({ na
         Icon: GridEducation,
         label: translate("homeScreen:grid.education.label"),
         sub: translate("homeScreen:grid.education.sub"),
-        onPress: () => {
-          setShowEducationBanner(true)
-          navigation.navigate("EducationPresentation")
-        },
+        onPress: () => navigation.navigate("EducationPresentation"),
       },
       {
         Icon: GridEduJoin,
@@ -215,9 +212,10 @@ export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen({ na
     if (!workplaceStore.hasWorkplaces) {
       void workplaceStore.fetchWorkplaces()
     }
+    fetchActivePresentation().then((result) => setShowEducationBanner(result !== null))
   }, [profile, safeBoardStore, workplaceStore])
 
-  // 화면 포커스 시 새로고침 (첫 진입 제외)
+  // 화면 포커스 시 새로고침 (첫 진입 제외) + 발표 세션 확인
   useFocusEffect(
     useCallback(() => {
       if (!profile) return
@@ -227,6 +225,7 @@ export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen({ na
       }
       if (safeBoardStore.status === "pending") return
       void safeBoardStore.fetchBoardPosts()
+      fetchActivePresentation().then((result) => setShowEducationBanner(result !== null))
     }, [profile, safeBoardStore]),
   )
 
@@ -343,9 +342,13 @@ export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen({ na
               ))}
             </View>
 
-            {/* 교육/발표 참여 안내 배너 (교육/발표 메뉴 클릭 시 표시) */}
+            {/* 교육/발표 참여 안내 배너 (진행 중인 발표 세션 존재 시 표시) */}
             {showEducationBanner && (
-              <TouchableOpacity style={$eduBanner} activeOpacity={0.7}>
+              <TouchableOpacity
+                style={$eduBanner}
+                activeOpacity={0.7}
+                onPress={() => navigation.navigate("EducationPresentation")}
+              >
                 <BannerIcon width={34} height={34} color="#0B3069" style={$eduBannerIcon} />
                 <View style={$eduBannerContent}>
                   <Text text={translate("homeScreen:edu.title")} style={$eduBannerTitle} />
