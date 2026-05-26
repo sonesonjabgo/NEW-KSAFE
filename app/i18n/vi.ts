@@ -2,6 +2,191 @@ import en, { Translations } from "./en"
 import { mergeLocale, type LocaleOverrides } from "./mergeLocale"
 
 const viOverrides = {
+  mainTab: {
+    home: "Trang chủ",
+    safeBoard: "Bảng an toàn",
+    safeHealth: "Quản lý an toàn",
+    workerParticipation: "Tham gia của công nhân",
+  },
+  loginScreen: {
+    tagline: "Đối tác An toàn Nơi làm việc",
+    forgotPassword: "Quên mật khẩu?",
+    forgotPasswordModal: {
+      title: "Thông báo",
+      message: "Để khôi phục mật khẩu, vui lòng liên hệ\nquản trị viên của bạn.\nĐT: 062-383-0083",
+      confirm: "OK",
+    },
+    validation: {
+      required: "Vui lòng nhập email và mật khẩu.",
+      invalidEmail: "Vui lòng nhập địa chỉ email hợp lệ.",
+      passwordTooShort: "Mật khẩu phải có ít nhất 6 ký tự.",
+      invalidCredentials: "Vui lòng kiểm tra email hoặc mật khẩu của bạn.",
+    },
+  },
+  homeScreen: {
+    orgName: "KS산업안전협회",
+    header: { qrScan: "Quét QR", notification: "Thông báo", language: "Ngôn ngữ" },
+    greeting: { message: "Chúc một ngày an toàn!", name: "{{name}}," },
+    role: { admin: "Quản trị", worker: "Công nhân" },
+    board: {
+      title: "Bảng tin",
+      viewMore: "Xem thêm",
+      tabs: { all: "Tất cả", company: "Công ty", workplace: "Nơi làm việc" },
+    },
+    grid: {
+      interpret: { label: "Phiên dịch", sub: "Hỗ trợ phiên dịch" },
+      chatbot: { label: "Chatbot", sub: "AI Chat" },
+      translate: { label: "Dịch thuật", sub: "Dịch văn bản" },
+      education: { label: "Đào tạo", sub: "Tài liệu đào tạo" },
+      eduJoin: { label: "Tham gia đào tạo", sub: "Tham gia đào tạo" },
+      tbmJoin: { label: "Tham gia TBM", sub: "Tham gia TBM" },
+      patrol: { label: "순회점검", sub: "Kiểm tra" },
+      tbmCreate: { label: "Tạo TBM", sub: "Tạo TBM" },
+      tbmReport: { label: "Báo cáo TBM", sub: "Tạo báo cáo" },
+      hazard: { label: "Nguy hiểm", sub: "Báo cáo nguy hiểm" },
+      suggestion: { label: "Đề xuất", sub: "Gửi đề xuất" },
+    },
+    pushNotificationSheet: {
+      title: "Đừng bỏ lỡ các thông báo quan trọng",
+      description:
+        "Để nhận thông báo an toàn đúng giờ,\nvui lòng cho phép thông báo đẩy.",
+      allowButton: "Cho phép thông báo đẩy",
+      settingsButton: "Thay đổi quyền trong Cài đặt",
+    },
+  },
+  safeBoardScreen: {
+    title: "Bảng an toàn",
+    alertButton: "Cảnh báo",
+    workplaceLabel: "Nơi làm việc",
+    workplaceModal: { title: "Chọn nơi làm việc" },
+    badge: {
+      companyWide: "Toàn công ty",
+      workplace: "Nơi làm việc",
+      draft: "Bản nháp",
+      archived: "Đã lưu trữ",
+    },
+    tabs: { all: "Tất cả", myPosts: "Của tôi" },
+    empty: "Không có bài đăng",
+    write: "Viết",
+    draftSaved: "Bài đăng đã được lưu dưới dạng bản nháp.",
+  },
+  safeHealthScreen: {
+    title: "Quản lý an toàn",
+    menu: {
+      patrol: { title: "순회점검", description: "Kiểm tra an toàn" },
+      educationMaterial: { title: "Tài liệu đào tạo", description: "Tài liệu TBM" },
+      tbmManage: { title: "Quản lý TBM", description: "Tạo và quản lý" },
+      tbmReport: { title: "Báo cáo", description: "Báo cáo đã tạo" },
+      tbmJoin: { title: "Tham gia TBM", description: "Tham gia qua QR" },
+      tbmHistory: { title: "Lịch sử", description: "Lịch sử tham gia TBM" },
+      tbmJoinWorker: { title: "Tham gia TBM", description: "Tham gia TBM hiện tại" },
+      statusView: { title: "Trạng thái", description: "Trạng thái an toàn" },
+    },
+  },
+  workerParticipationScreen: {
+    title: "Tham gia của công nhân",
+    menu: {
+      hazard: { title: "Báo cáo nguy hiểm", description: "Báo cáo khu vực nguy hiểm" },
+      suggestion: { title: "Đề xuất cải tiến", description: "Gửi ý tưởng cải tiến" },
+    },
+  },
+  voiceTranslationScreen: {
+    title: "Dịch cuộc trò chuyện bằng giọng nói",
+    flipScreen: "Đảo chiều",
+    listening: "Đang nghe...",
+    speakNow: "Vui lòng nói",
+    languageMenu: { title: "Ngôn ngữ nhận dạng" },
+    languageSubtitles: {
+      korean: "(Tiếng Hàn)",
+      english: "(Tiếng Anh)",
+      chineseSimplified: "(Tiếng Trung giản thể)",
+      chineseTraditional: "(Tiếng Trung phồn thể)",
+      russian: "(Tiếng Nga)",
+      vietnamese: "",
+      indonesian: "(Tiếng Indonesia)",
+      khmer: "(Tiếng Khmer)",
+      thai: "(Tiếng Thái)",
+      urdu: "(Tiếng Urdu)",
+      nepali: "(Tiếng Nepal)",
+      lao: "(Tiếng Lào)",
+      japanese: "(Tiếng Nhật)",
+      french: "(Tiếng Pháp)",
+      spanish: "(Tiếng Tây Ban Nha)",
+    },
+  },
+  aiSafetyChatScreen: {
+    title: "Trợ lý AI An toàn",
+    aiName: "Trợ lý AI An toàn",
+    welcomeMessage: "Xin chào! Tôi là Trợ lý AI An toàn Công nghiệp.",
+    inputPlaceholder: "Nhập tin nhắn...",
+    inputHint: "Bắt buộc. Vui lòng viết từ 2 đến 1.000 ký tự.",
+    deleteDialog: {
+      title: "Xóa cuộc trò chuyện",
+      message: "Bạn có chắc chắn muốn xóa toàn bộ lịch sử trò chuyện không?",
+      confirm: "Xóa",
+      cancel: "Hủy",
+    },
+    suggestedQuestions: {
+      q1: "Giải thích các quy định an toàn chung tại công trường xây dựng",
+      q2: "Các quy tắc an toàn khi làm việc trên cao là gì?",
+      q3: "Quy trình ứng phó khẩn cấp khi xảy ra hỏa hoạn là gì?",
+    },
+  },
+  myPageScreen: {
+    logoutModal: {
+      title: "Đăng xuất",
+      message: "Bạn có chắc chắn muốn đăng xuất không?",
+      cancel: "Hủy",
+      confirm: "Đăng xuất",
+    },
+  },
+  notify: {
+    mock: {
+      boardNewPost: {
+        title: "Có bài đăng mới trên bảng tin.",
+        description: "Kiểm tra bảng tin nơi làm việc của bạn!",
+      },
+    },
+  },
+  educationPresentationScreen: {
+    title: "Đào tạo/Trình bày",
+    inviteButton: "Mời",
+  },
+  tbmListScreen: {
+    title: "Danh sách hoạt động TBM",
+    tabs: { all: "Tất cả", drafting: "Đang soạn", ongoing: "Đang diễn ra", ended: "Đã kết thúc" },
+    status: { drafting: "Đang soạn", ongoing: "Đang diễn ra", ended: "Đã kết thúc" },
+    participants: "{{count}} người tham gia",
+    fab: "Tạo hoạt động mới",
+    empty: {
+      drafting: "Không có TBM đang soạn.",
+      ongoing: "Không có TBM đang diễn ra.",
+      ended: "Không có TBM đã kết thúc.",
+      all: "Không có hoạt động TBM.",
+    },
+  },
+  welcomeIntroScreen: {
+    skip: "Bỏ qua",
+    start: "Bắt đầu",
+    slide1: {
+      step: "01",
+      title: "Dịch thuật đa ngôn ngữ thời gian thực",
+      description:
+        "Giao tiếp suôn sẻ với công nhân mọi quốc tịch.\nDịch giọng nói và văn bản tức thì\ncho môi trường làm việc an toàn hơn.",
+    },
+    slide2: {
+      step: "02",
+      title: "Quản lý TBM tích hợp",
+      description:
+        "Check-in TBM chỉ với một lần quét QR — không cần giấy tờ.\nChữ ký số và báo cáo\nhoàn thành tại một nơi.",
+    },
+    slide3: {
+      step: "03",
+      title: "Đánh giá rủi ro AI",
+      description:
+        "Chỉ cần chụp ảnh công trường và AI sẽ phân tích nguy hiểm\nvà tạo bản thảo báo cáo cho bạn.",
+    },
+  },
   languageSettings: {
     languageTitle: "Ngôn ngữ",
     languageDescription: "Thay đổi ngôn ngữ ứng dụng ngay lập tức.",
@@ -9,7 +194,35 @@ const viOverrides = {
     languageChangeRestart:
       "Đã đổi ngôn ngữ sang {{language}}.\nỨng dụng sẽ khởi động lại để áp dụng thay đổi.",
     languageChangeError: "Không thể thay đổi ngôn ngữ. Vui lòng thử lại.",
-    languageNames: en.languageSettings.languageNames,
+    languageNames: {
+      "en": "Tiếng Anh",
+      "ko": "Tiếng Hàn",
+      "zh": "Tiếng Trung",
+      "zh-Hans": "Tiếng Trung (Giản thể)",
+      "zh-Hant": "Tiếng Trung (Phồn thể)",
+      "ja": "Tiếng Nhật",
+      "es": "Tiếng Tây Ban Nha",
+      "fr": "Tiếng Pháp",
+      "de": "Tiếng Đức",
+      "it": "Tiếng Ý",
+      "ru": "Tiếng Nga",
+      "ar": "Tiếng Ả Rập",
+      "hi": "Tiếng Hindi",
+      "th": "Tiếng Thái",
+      "vi": "Tiếng Việt",
+      "id": "Tiếng Indonesia",
+      "km": "Tiếng Khmer",
+      "ur": "Tiếng Urdu",
+      "ne": "Tiếng Nepal",
+      "lo": "Tiếng Lào",
+      "my": "Tiếng Miến Điện",
+      "yue": "Tiếng Quảng Đông",
+      "pt": "Tiếng Bồ Đào Nha",
+      "pt-BR": "Tiếng Bồ Đào Nha (Brazil)",
+      "ta": "Tiếng Tamil",
+      "te": "Tiếng Telugu",
+      "uk": "Tiếng Ukraina",
+    },
   },
 }
 

@@ -2,6 +2,191 @@ import en, { Translations } from "./en"
 import { mergeLocale, type LocaleOverrides } from "./mergeLocale"
 
 const thOverrides = {
+  mainTab: {
+    home: "หน้าหลัก",
+    safeBoard: "กระดานความปลอดภัย",
+    safeHealth: "การจัดการความปลอดภัย",
+    workerParticipation: "การมีส่วนร่วมของคนงาน",
+  },
+  loginScreen: {
+    tagline: "พันธมิตรด้านความปลอดภัยในสถานที่ทำงาน",
+    forgotPassword: "ลืมรหัสผ่าน?",
+    forgotPasswordModal: {
+      title: "แจ้งเตือน",
+      message: "สำหรับการกู้คืนรหัสผ่าน โปรดติดต่อ\nผู้ดูแลระบบของคุณ\nโทร: 062-383-0083",
+      confirm: "ตกลง",
+    },
+    validation: {
+      required: "กรุณากรอกอีเมลและรหัสผ่าน",
+      invalidEmail: "กรุณากรอกที่อยู่อีเมลที่ถูกต้อง",
+      passwordTooShort: "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร",
+      invalidCredentials: "กรุณาตรวจสอบอีเมลหรือรหัสผ่านของคุณ",
+    },
+  },
+  homeScreen: {
+    orgName: "KS산업안전협회",
+    header: { qrScan: "สแกน QR", notification: "การแจ้งเตือน", language: "ภาษา" },
+    greeting: { message: "ขอให้มีวันที่ปลอดภัย!", name: "{{name}}," },
+    role: { admin: "ผู้ดูแล", worker: "คนงาน" },
+    board: {
+      title: "กระดาน",
+      viewMore: "ดูเพิ่มเติม",
+      tabs: { all: "ทั้งหมด", company: "บริษัท", workplace: "สถานที่ทำงาน" },
+    },
+    grid: {
+      interpret: { label: "ล่ามแปลภาษา", sub: "บริการล่าม" },
+      chatbot: { label: "แชทบอต", sub: "AI แชท" },
+      translate: { label: "แปลภาษา", sub: "แปลข้อความ" },
+      education: { label: "การศึกษา", sub: "สื่อการศึกษา" },
+      eduJoin: { label: "ร่วมศึกษา", sub: "ร่วมการศึกษา" },
+      tbmJoin: { label: "ร่วม TBM", sub: "ร่วม TBM" },
+      patrol: { label: "순회점검", sub: "การตรวจสอบ" },
+      tbmCreate: { label: "สร้าง TBM", sub: "สร้าง TBM" },
+      tbmReport: { label: "รายงาน TBM", sub: "สร้างรายงาน" },
+      hazard: { label: "อันตราย", sub: "รายงานอันตราย" },
+      suggestion: { label: "ข้อเสนอแนะ", sub: "ส่งข้อเสนอแนะ" },
+    },
+    pushNotificationSheet: {
+      title: "อย่าพลาดการแจ้งเตือนสำคัญ",
+      description:
+        "เพื่อรับการแจ้งเตือนความปลอดภัยตรงเวลา\nโปรดอนุญาตการแจ้งเตือน push",
+      allowButton: "อนุญาตการแจ้งเตือน Push",
+      settingsButton: "เปลี่ยนการอนุญาตในการตั้งค่า",
+    },
+  },
+  safeBoardScreen: {
+    title: "กระดานความปลอดภัย",
+    alertButton: "แจ้งเตือน",
+    workplaceLabel: "สถานที่ทำงาน",
+    workplaceModal: { title: "เลือกสถานที่ทำงาน" },
+    badge: {
+      companyWide: "ทั้งบริษัท",
+      workplace: "สถานที่ทำงาน",
+      draft: "ร่าง",
+      archived: "จัดเก็บแล้ว",
+    },
+    tabs: { all: "ทั้งหมด", myPosts: "ของฉัน" },
+    empty: "ไม่มีโพสต์",
+    write: "เขียน",
+    draftSaved: "โพสต์ถูกบันทึกเป็นร่าง",
+  },
+  safeHealthScreen: {
+    title: "การจัดการความปลอดภัย",
+    menu: {
+      patrol: { title: "순회점검", description: "การตรวจสอบความปลอดภัย" },
+      educationMaterial: { title: "สื่อการศึกษา", description: "สื่อ TBM" },
+      tbmManage: { title: "จัดการ TBM", description: "สร้างและจัดการ" },
+      tbmReport: { title: "รายงาน", description: "รายงานที่สร้างแล้ว" },
+      tbmJoin: { title: "ร่วม TBM", description: "ร่วมผ่าน QR" },
+      tbmHistory: { title: "ประวัติ", description: "ประวัติการร่วม TBM" },
+      tbmJoinWorker: { title: "ร่วม TBM", description: "ร่วม TBM ปัจจุบัน" },
+      statusView: { title: "สถานะ", description: "สถานะความปลอดภัย" },
+    },
+  },
+  workerParticipationScreen: {
+    title: "การมีส่วนร่วมของคนงาน",
+    menu: {
+      hazard: { title: "รายงานอันตราย", description: "รายงานพื้นที่อันตราย" },
+      suggestion: { title: "ข้อเสนอแนะการปรับปรุง", description: "ส่งข้อเสนอแนะ" },
+    },
+  },
+  voiceTranslationScreen: {
+    title: "การแปลการสนทนาด้วยเสียง",
+    flipScreen: "สลับ",
+    listening: "กำลังฟัง...",
+    speakNow: "กรุณาพูด",
+    languageMenu: { title: "ภาษาที่รู้จัก" },
+    languageSubtitles: {
+      korean: "(เกาหลี)",
+      english: "(อังกฤษ)",
+      chineseSimplified: "(จีนตัวย่อ)",
+      chineseTraditional: "(จีนตัวเต็ม)",
+      russian: "(รัสเซีย)",
+      vietnamese: "(เวียดนาม)",
+      indonesian: "(อินโดนีเซีย)",
+      khmer: "(เขมร)",
+      thai: "",
+      urdu: "(อูรดู)",
+      nepali: "(เนปาล)",
+      lao: "(ลาว)",
+      japanese: "(ญี่ปุ่น)",
+      french: "(ฝรั่งเศส)",
+      spanish: "(สเปน)",
+    },
+  },
+  aiSafetyChatScreen: {
+    title: "ผู้ช่วย AI ด้านความปลอดภัย",
+    aiName: "ผู้ช่วย AI ด้านความปลอดภัย",
+    welcomeMessage: "สวัสดี! ฉันคือผู้ช่วย AI ด้านความปลอดภัยทางอุตสาหกรรม",
+    inputPlaceholder: "ป้อนข้อความ...",
+    inputHint: "จำเป็น กรุณาเขียนระหว่าง 2 ถึง 1,000 ตัวอักษร",
+    deleteDialog: {
+      title: "ลบการสนทนา",
+      message: "คุณแน่ใจหรือไม่ที่จะลบประวัติการสนทนาทั้งหมด?",
+      confirm: "ลบ",
+      cancel: "ยกเลิก",
+    },
+    suggestedQuestions: {
+      q1: "อธิบายกฎความปลอดภัยทั่วไปในไซต์ก่อสร้าง",
+      q2: "กฎความปลอดภัยสำหรับการทำงานบนที่สูงคืออะไร?",
+      q3: "ขั้นตอนการตอบสนองฉุกเฉินกรณีเกิดเพลิงไหม้คืออะไร?",
+    },
+  },
+  myPageScreen: {
+    logoutModal: {
+      title: "ออกจากระบบ",
+      message: "คุณแน่ใจหรือไม่ที่จะออกจากระบบ?",
+      cancel: "ยกเลิก",
+      confirm: "ออกจากระบบ",
+    },
+  },
+  notify: {
+    mock: {
+      boardNewPost: {
+        title: "มีโพสต์ใหม่บนกระดาน",
+        description: "ตรวจสอบกระดานของสถานที่ทำงานของคุณ!",
+      },
+    },
+  },
+  educationPresentationScreen: {
+    title: "การศึกษา/การนำเสนอ",
+    inviteButton: "เชิญ",
+  },
+  tbmListScreen: {
+    title: "รายการกิจกรรม TBM",
+    tabs: { all: "ทั้งหมด", drafting: "กำลังเขียน", ongoing: "กำลังดำเนินการ", ended: "สิ้นสุด" },
+    status: { drafting: "กำลังเขียน", ongoing: "กำลังดำเนินการ", ended: "สิ้นสุด" },
+    participants: "{{count}} ผู้เข้าร่วม",
+    fab: "สร้างกิจกรรมใหม่",
+    empty: {
+      drafting: "ไม่มี TBM ที่กำลังเขียน",
+      ongoing: "ไม่มี TBM ที่กำลังดำเนินการ",
+      ended: "ไม่มี TBM ที่สิ้นสุด",
+      all: "ไม่มีกิจกรรม TBM",
+    },
+  },
+  welcomeIntroScreen: {
+    skip: "ข้าม",
+    start: "เริ่มต้น",
+    slide1: {
+      step: "01",
+      title: "การแปลหลายภาษาแบบเรียลไทม์",
+      description:
+        "สื่อสารอย่างราบรื่นกับคนงานทุกสัญชาติ\nการแปลเสียงและข้อความทันที\nเพื่อสถานที่ทำงานที่ปลอดภัยยิ่งขึ้น",
+    },
+    slide2: {
+      step: "02",
+      title: "การจัดการ TBM แบบรวม",
+      description:
+        "เช็คอิน TBM ด้วยการสแกน QR ครั้งเดียว — ไม่ต้องใช้เอกสาร\nลายเซ็นดิจิทัลและรายงาน\nเสร็จสิ้นในที่เดียว",
+    },
+    slide3: {
+      step: "03",
+      title: "การประเมินความเสี่ยง AI",
+      description:
+        "ถ่ายภาพไซต์แล้ว AI จะวิเคราะห์อันตราย\nและสร้างร่างรายงานให้คุณ",
+    },
+  },
   languageSettings: {
     languageTitle: "ภาษา",
     languageDescription: "เปลี่ยนภาษาของแอปได้ทันที",
@@ -9,7 +194,35 @@ const thOverrides = {
     languageChangeRestart:
       "เปลี่ยนภาษาเป็น {{language}}\nแล้ว แอปจะเริ่มต้นใหม่เพื่อใช้การเปลี่ยนแปลง",
     languageChangeError: "ไม่สามารถเปลี่ยนภาษาได้ กรุณาลองอีกครั้ง",
-    languageNames: en.languageSettings.languageNames,
+    languageNames: {
+      "en": "ภาษาอังกฤษ",
+      "ko": "ภาษาเกาหลี",
+      "zh": "ภาษาจีน",
+      "zh-Hans": "จีนตัวย่อ",
+      "zh-Hant": "จีนตัวเต็ม",
+      "ja": "ภาษาญี่ปุ่น",
+      "es": "ภาษาสเปน",
+      "fr": "ภาษาฝรั่งเศส",
+      "de": "ภาษาเยอรมัน",
+      "it": "ภาษาอิตาลี",
+      "ru": "ภาษารัสเซีย",
+      "ar": "ภาษาอาหรับ",
+      "hi": "ภาษาฮินดี",
+      "th": "ภาษาไทย",
+      "vi": "ภาษาเวียดนาม",
+      "id": "ภาษาอินโดนีเซีย",
+      "km": "ภาษาเขมร",
+      "ur": "ภาษาอูรดู",
+      "ne": "ภาษาเนปาล",
+      "lo": "ภาษาลาว",
+      "my": "ภาษาพม่า",
+      "yue": "กวางตุ้ง",
+      "pt": "โปรตุเกส",
+      "pt-BR": "โปรตุเกส (บราซิล)",
+      "ta": "ทมิฬ",
+      "te": "เตลูกู",
+      "uk": "ยูเครน",
+    },
   },
 }
 

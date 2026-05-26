@@ -2,6 +2,191 @@ import en, { Translations } from "./en"
 import { mergeLocale, type LocaleOverrides } from "./mergeLocale"
 
 const urOverrides = {
+  mainTab: {
+    home: "ہوم",
+    safeBoard: "حفاظت بورڈ",
+    safeHealth: "حفاظت انتظام",
+    workerParticipation: "مزدور شرکت",
+  },
+  loginScreen: {
+    tagline: "کام کی جگہ کا حفاظتی شریک",
+    forgotPassword: "پاس ورڈ بھول گئے؟",
+    forgotPasswordModal: {
+      title: "اطلاع",
+      message: "پاس ورڈ بحالی کے لیے براہ کرم اپنے\nایڈمنسٹریٹر سے رابطہ کریں۔\nفون: 062-383-0083",
+      confirm: "ٹھیک ہے",
+    },
+    validation: {
+      required: "براہ کرم اپنا ای میل اور پاس ورڈ درج کریں۔",
+      invalidEmail: "براہ کرم ایک درست ای میل ایڈریس درج کریں۔",
+      passwordTooShort: "پاس ورڈ کم از کم 6 حروف کا ہونا چاہیے۔",
+      invalidCredentials: "براہ کرم اپنا ای میل یا پاس ورڈ چیک کریں۔",
+    },
+  },
+  homeScreen: {
+    orgName: "KS산업안전협회",
+    header: { qrScan: "QR اسکین", notification: "اطلاعات", language: "زبان" },
+    greeting: { message: "محفوظ دن گزاریں!", name: "{{name}}," },
+    role: { admin: "ایڈمن", worker: "کارکن" },
+    board: {
+      title: "بورڈ",
+      viewMore: "مزید دیکھیں",
+      tabs: { all: "سب", company: "کمپنی", workplace: "کام کی جگہ" },
+    },
+    grid: {
+      interpret: { label: "ترجمانی", sub: "ترجمانی مدد" },
+      chatbot: { label: "چیٹ بوٹ", sub: "AI چیٹ" },
+      translate: { label: "ترجمہ", sub: "متن ترجمہ" },
+      education: { label: "تعلیم", sub: "تعلیمی مواد" },
+      eduJoin: { label: "تعلیم میں شامل", sub: "تعلیم میں شامل" },
+      tbmJoin: { label: "TBM میں شامل", sub: "TBM میں شامل" },
+      patrol: { label: "순회점검", sub: "معائنہ" },
+      tbmCreate: { label: "TBM بنائیں", sub: "TBM بنائیں" },
+      tbmReport: { label: "TBM رپورٹ", sub: "رپورٹ بنائیں" },
+      hazard: { label: "خطرہ", sub: "خطرہ رپورٹ" },
+      suggestion: { label: "تجویز", sub: "تجویز پیش کریں" },
+    },
+    pushNotificationSheet: {
+      title: "اہم اطلاعات نہ چھوڑیں",
+      description:
+        "وقت پر حفاظتی اطلاعات حاصل کرنے کے لیے\nپش نوٹیفکیشن کی اجازت دیں۔",
+      allowButton: "پش نوٹیفکیشن کی اجازت دیں",
+      settingsButton: "سیٹنگز میں اجازت تبدیل کریں",
+    },
+  },
+  safeBoardScreen: {
+    title: "حفاظت بورڈ",
+    alertButton: "الرٹ",
+    workplaceLabel: "کام کی جگہ",
+    workplaceModal: { title: "کام کی جگہ منتخب کریں" },
+    badge: {
+      companyWide: "پوری کمپنی",
+      workplace: "کام کی جگہ",
+      draft: "مسودہ",
+      archived: "محفوظ شدہ",
+    },
+    tabs: { all: "سب", myPosts: "میری پوسٹ" },
+    empty: "کوئی پوسٹ نہیں",
+    write: "لکھیں",
+    draftSaved: "پوسٹ مسودے کے طور پر محفوظ ہو گئی۔",
+  },
+  safeHealthScreen: {
+    title: "حفاظت انتظام",
+    menu: {
+      patrol: { title: "순회점검", description: "حفاظتی معائنہ" },
+      educationMaterial: { title: "تعلیمی مواد", description: "TBM مواد" },
+      tbmManage: { title: "TBM انتظام", description: "بنائیں اور منظم کریں" },
+      tbmReport: { title: "رپورٹ", description: "بنائی گئی رپورٹیں" },
+      tbmJoin: { title: "TBM میں شامل", description: "QR سے شامل ہوں" },
+      tbmHistory: { title: "تاریخ", description: "TBM شرکت کی تاریخ" },
+      tbmJoinWorker: { title: "TBM میں شامل", description: "موجودہ TBM میں شامل" },
+      statusView: { title: "حالت", description: "حفاظتی حالت" },
+    },
+  },
+  workerParticipationScreen: {
+    title: "مزدور شرکت",
+    menu: {
+      hazard: { title: "خطرہ رپورٹ", description: "خطرناک علاقے رپورٹ کریں" },
+      suggestion: { title: "بہتری تجویز", description: "تجویز پیش کریں" },
+    },
+  },
+  voiceTranslationScreen: {
+    title: "آواز گفتگو ترجمہ",
+    flipScreen: "پلٹائیں",
+    listening: "سن رہا ہے...",
+    speakNow: "براہ کرم بولیں",
+    languageMenu: { title: "پہچانی گئی زبان" },
+    languageSubtitles: {
+      korean: "(کوریائی)",
+      english: "(انگریزی)",
+      chineseSimplified: "(چینی سادہ)",
+      chineseTraditional: "(چینی روایتی)",
+      russian: "(روسی)",
+      vietnamese: "(ویتنامی)",
+      indonesian: "(انڈونیشیائی)",
+      khmer: "(خمیر)",
+      thai: "(تھائی)",
+      urdu: "",
+      nepali: "(نیپالی)",
+      lao: "(لاو)",
+      japanese: "(جاپانی)",
+      french: "(فرانسیسی)",
+      spanish: "(ہسپانوی)",
+    },
+  },
+  aiSafetyChatScreen: {
+    title: "AI حفاظتی معاون",
+    aiName: "AI حفاظتی معاون",
+    welcomeMessage: "السلام علیکم! میں صنعتی حفاظت AI معاون ہوں۔",
+    inputPlaceholder: "پیغام درج کریں...",
+    inputHint: "ضروری ہے۔ 2 سے 1,000 حروف کے درمیان لکھیں۔",
+    deleteDialog: {
+      title: "گفتگو حذف کریں",
+      message: "کیا آپ واقعی تمام گفتگو کی تاریخ حذف کرنا چاہتے ہیں؟",
+      confirm: "حذف کریں",
+      cancel: "منسوخ",
+    },
+    suggestedQuestions: {
+      q1: "تعمیراتی سائٹ کے عمومی حفاظتی قوانین بیان کریں",
+      q2: "بلندی پر کام کرنے کے حفاظتی اصول کیا ہیں؟",
+      q3: "آگ لگنے کی صورت میں ہنگامی ردعمل کا طریقہ کار کیا ہے؟",
+    },
+  },
+  myPageScreen: {
+    logoutModal: {
+      title: "لاگ آؤٹ",
+      message: "کیا آپ واقعی لاگ آؤٹ کرنا چاہتے ہیں؟",
+      cancel: "منسوخ",
+      confirm: "لاگ آؤٹ",
+    },
+  },
+  notify: {
+    mock: {
+      boardNewPost: {
+        title: "بورڈ پر نئی پوسٹ لکھی گئی ہے۔",
+        description: "اپنی کام کی جگہ کا بورڈ چیک کریں!",
+      },
+    },
+  },
+  educationPresentationScreen: {
+    title: "تعلیم/پیشکش",
+    inviteButton: "مدعو کریں",
+  },
+  tbmListScreen: {
+    title: "TBM سرگرمیوں کی فہرست",
+    tabs: { all: "سب", drafting: "لکھا جا رہا ہے", ongoing: "جاری", ended: "ختم" },
+    status: { drafting: "لکھا جا رہا ہے", ongoing: "جاری", ended: "ختم" },
+    participants: "{{count}} شرکاء",
+    fab: "نئی سرگرمی بنائیں",
+    empty: {
+      drafting: "کوئی TBM نہیں جو لکھی جا رہی ہو۔",
+      ongoing: "کوئی جاری TBM نہیں۔",
+      ended: "کوئی ختم ہونے والی TBM نہیں۔",
+      all: "کوئی TBM سرگرمی نہیں۔",
+    },
+  },
+  welcomeIntroScreen: {
+    skip: "چھوڑیں",
+    start: "شروع کریں",
+    slide1: {
+      step: "01",
+      title: "ریئل ٹائم کثیر لسانی ترجمہ",
+      description:
+        "تمام ممالک کے کارکنوں سے آسانی سے بات چیت کریں۔\nفوری آواز اور متن کا ترجمہ\nزیادہ محفوظ کام کی جگہ کے لیے۔",
+    },
+    slide2: {
+      step: "02",
+      title: "مربوط TBM انتظام",
+      description:
+        "ایک QR اسکین سے TBM میں چیک ان — کوئی کاغذ نہیں۔\nڈیجیٹل دستخط اور رپورٹیں\nایک جگہ مکمل۔",
+    },
+    slide3: {
+      step: "03",
+      title: "AI خطرہ تشخیص",
+      description:
+        "سائٹ کی تصویر لیں اور AI خطرات کا تجزیہ کرے گا\nاور آپ کے لیے رپورٹ کا مسودہ تیار کرے گا۔",
+    },
+  },
   languageSettings: {
     languageTitle: "زبان",
     languageDescription: "ایپ کی زبان فوراً تبدیل کریں۔",
@@ -9,7 +194,35 @@ const urOverrides = {
     languageChangeRestart:
       "زبان {{language}}\nمیں تبدیل کر دی گئی ہے۔ تبدیلیاں لاگو کرنے کے لیے ایپ دوبارہ شروع ہوگی۔",
     languageChangeError: "زبان تبدیل نہیں کی جا سکی۔ دوبارہ کوشش کریں۔",
-    languageNames: en.languageSettings.languageNames,
+    languageNames: {
+      "en": "انگریزی",
+      "ko": "کوریائی",
+      "zh": "چینی",
+      "zh-Hans": "چینی (آسان)",
+      "zh-Hant": "چینی (روایتی)",
+      "ja": "جاپانی",
+      "es": "ہسپانوی",
+      "fr": "فرانسیسی",
+      "de": "جرمن",
+      "it": "اطالوی",
+      "ru": "روسی",
+      "ar": "عربی",
+      "hi": "ہندی",
+      "th": "تھائی",
+      "vi": "ویتنامی",
+      "id": "انڈونیشیائی",
+      "km": "خمیر",
+      "ur": "اردو",
+      "ne": "نیپالی",
+      "lo": "لاو",
+      "my": "برمی",
+      "yue": "کینٹونی",
+      "pt": "پرتگالی",
+      "pt-BR": "پرتگالی (برازیل)",
+      "ta": "تامل",
+      "te": "تیلگو",
+      "uk": "یوکرینی",
+    },
   },
 }
 
