@@ -264,6 +264,12 @@ export interface UpdateCompanyPostPayload {
   deleteAttachmentIds?: string[]
 }
 
+export interface SendWorkplacePushNotificationPayload {
+  workplaceIds: string[]
+  title: string
+  body: string
+}
+
 export async function createCompanyPost(payload: CreateCompanyPostPayload): Promise<{ id: string }> {
   const {
     data: { session },
@@ -384,4 +390,29 @@ export async function initiateCompanyPostUpload(
     )
   }
   return response.data
+}
+
+export async function sendWorkplacePushNotification(
+  payload: SendWorkplacePushNotificationPayload,
+): Promise<void> {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+  const accessToken = session?.access_token
+  if (!accessToken) {
+    throw new Error("Missing authentication token for workplace push notification")
+  }
+
+  const response = await api.apisauce.post("/api/v1/common/push-notifications/workplace", payload, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  })
+
+  if (!response.ok) {
+    const status = response.status ?? "unknown"
+    const problem = response.problem ?? "Unknown error"
+    throw new Error(`Failed to send push notification (status ${status}): ${problem}`)
+  }
 }

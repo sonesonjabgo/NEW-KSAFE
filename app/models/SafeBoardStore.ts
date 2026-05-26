@@ -9,9 +9,11 @@ import {
   deleteCompanyPost,
   createCompanyPost,
   updateCompanyPost,
+  sendWorkplacePushNotification,
   AttachmentDto,
   CreateCompanyPostPayload,
   UpdateCompanyPostPayload,
+  SendWorkplacePushNotificationPayload,
   MyPostDetailDto,
   MyCompanyPostListItemDto,
   UserCompanyPostListItemDto,
@@ -279,6 +281,20 @@ export const SafeBoardStoreModel = types
       } catch (error) {
         self.setStatus("error")
         logDevError("Failed to update post", error)
+        throw error
+      }
+    }),
+
+    sendPushNotificationAction: flow(function* sendPushNotificationAction(
+      payload: SendWorkplacePushNotificationPayload,
+    ) {
+      self.setStatus("pending")
+      try {
+        yield sendWorkplacePushNotification(payload)
+        self.setStatus("success")
+      } catch (error) {
+        self.setStatus("error")
+        logDevError("Failed to send push notification", error)
         throw error
       }
     }),
