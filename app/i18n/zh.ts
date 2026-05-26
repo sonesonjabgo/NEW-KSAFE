@@ -35,6 +35,7 @@ const zhOverrides = {
       title: "公告板",
       viewMore: "查看更多",
       tabs: { all: "全部", company: "公司", workplace: "工作场所" },
+      empty: "暂无帖子",
     },
     grid: {
       interpret: { label: "口译", sub: "口译支持" },
