@@ -627,6 +627,7 @@ const $appSub: TextStyle = {
 
 const $headerActions: ViewStyle = {
   flexDirection: isRTL ? "row-reverse" : "row",
+  gap: 14,
   paddingTop: 4,
 }
 
@@ -678,6 +679,8 @@ const $greetMsg: TextStyle = {
 }
 
 const $avatar: ViewStyle = {
+  width: 52,
+  height: 52,
   marginLeft: isRTL ? 0 : 16,
   marginRight: isRTL ? 16 : 0,
 }
@@ -704,7 +707,6 @@ const $grid: ViewStyle = {
 
 const $gridCell: ViewStyle = {
   alignItems: "center",
-  justifyContent: "flex-start",
   borderRightWidth: isRTL ? 0 : StyleSheet.hairlineWidth,
   borderLeftWidth: isRTL ? StyleSheet.hairlineWidth : 0,
   borderBottomWidth: StyleSheet.hairlineWidth,
