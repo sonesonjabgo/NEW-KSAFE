@@ -88,15 +88,8 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = observer(
 
       const loadDetail = async () => {
         try {
-          if (safeBoardStore.activeTab === "my") {
+          if (isAdmin && safeBoardStore.myPosts.some((p) => p.id === id)) {
             await safeBoardStore.fetchMyPostDetail(id)
-          } else if (isAdmin) {
-            const isMyPost = safeBoardStore.myPosts.some((p) => p.id === id)
-            if (isMyPost) {
-              await safeBoardStore.fetchMyPostDetail(id)
-            } else {
-              await safeBoardStore.fetchPostDetail(id)
-            }
           } else {
             await safeBoardStore.fetchPostDetail(id)
           }

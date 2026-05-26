@@ -417,7 +417,7 @@ export const HomeScreen: FC<HomeScreenProps> = observer(function HomeScreen({ na
                       key={item.id}
                       style={$boardItem}
                       activeOpacity={0.7}
-                      onPress={() => navigation.navigate("SafeBoard")}
+                      onPress={() => navigation.navigate("SafeBoardDetail", { id: item.id })}
                     >
                       <View style={$tagWrap}>
                         <SafeBoardBadge type={item.scope} />
