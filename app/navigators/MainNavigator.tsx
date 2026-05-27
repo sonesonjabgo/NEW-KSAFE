@@ -9,6 +9,7 @@ import NavSafety from "@assets/icons/nav/nav_safety.svg"
 import NavWorker from "@assets/icons/nav/nav_worker.svg"
 
 import { Text } from "@/components/Text"
+import { isRTL } from "@/i18n"
 import { translate } from "@/i18n/translate"
 import { HomeScreen } from "@/screens/HomeScreen"
 import { SafeBoardScreen } from "@/screens/SafeBoardScreen/SafeBoardScreen"
@@ -136,7 +137,7 @@ const $tabBarOuter: ViewStyle = {
 
 const $tabBarRow: ViewStyle = {
   flex: 1,
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   alignItems: "center",
 }
 

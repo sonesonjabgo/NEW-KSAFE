@@ -33,6 +33,8 @@ import HeaderLang from "@assets/icons/nav/header_lang.svg"
 import HeaderQr from "@assets/icons/nav/header_qr.svg"
 import ProfileSwitch from "@assets/icons/nav/profile_switch.svg"
 
+import { isRTL } from "@/i18n"
+
 import { PushNotificationBottomSheet } from "@/components/PushNotificationBottomSheet"
 import { Text } from "@/components/Text"
 import { WebViewModal } from "@/components/WebViewModal"
@@ -215,7 +217,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
     paddingBottom: isSmallPhone ? 14 : 20,
     gap: isSmallPhone ? 10 : 16,
   }
-  const $appTitleDynamic: TextStyle = { fontSize: isSmallPhone ? 18 : 21 }
+  const $appTitleDynamic: TextStyle = { fontSize: isSmallPhone ? 16 : 18 }
   const $appSubDynamic: TextStyle = { fontSize: isSmallPhone ? 12 : 13 }
   const $headerActionsDynamic: ViewStyle = { gap: isSmallPhone ? 8 : 14 }
   const $headerIconWrapDynamic: ViewStyle = isSmallPhone ? { width: 22, height: 22 } : {}
@@ -422,7 +424,9 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
                   onPress={() => navigation.navigate("SafeBoard")}
                 >
                   <Text text={translate("homeScreen:board.viewMore")} style={$boardMoreText} />
-                  <ChevronRight size={12} color="#7F848C" strokeWidth={2} />
+                  <View style={isRTL ? { transform: [{ scaleX: -1 }] } : undefined}>
+                    <ChevronRight size={12} color="#7F848C" strokeWidth={2} />
+                  </View>
                 </TouchableOpacity>
               </View>
 
@@ -614,13 +618,14 @@ const $header: ViewStyle = {
 
 
 const $titleRow: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   justifyContent: "space-between",
   alignItems: "flex-start",
 }
 
 const $appTitle: TextStyle = {
   color: "#FFFFFF",
+  fontSize: 18,
   fontFamily: typography.primary.bold,
 }
 
@@ -632,7 +637,7 @@ const $appSub: TextStyle = {
 }
 
 const $headerActions: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   gap: 14,
   paddingTop: 4,
 }
@@ -660,7 +665,7 @@ const $headerActionLabel: TextStyle = {
 }
 
 const $greetRow: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   justifyContent: "space-between",
   alignItems: "center",
 }
@@ -687,7 +692,8 @@ const $greetMsg: TextStyle = {
 const $avatar: ViewStyle = {
   width: 52,
   height: 52,
-  marginStart: 16,
+  marginStart: isRTL ? 0 : 16,
+  marginEnd: isRTL ? 16 : 0,
 }
 
 const $body: ViewStyle = {
@@ -705,7 +711,7 @@ const $grid: ViewStyle = {
   shadowOpacity: 0.08,
   shadowRadius: 8,
   elevation: 3,
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   flexWrap: "wrap",
   overflow: "hidden",
 }
@@ -759,7 +765,7 @@ const $boardSection: ViewStyle = {
 }
 
 const $boardHeader: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   justifyContent: "space-between",
   alignItems: "center",
   marginBottom: 12,
@@ -772,7 +778,7 @@ const $boardTitle: TextStyle = {
 }
 
 const $boardMoreBtn: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   alignItems: "center",
   gap: 2,
 }
@@ -784,7 +790,7 @@ const $boardMoreText: TextStyle = {
 }
 
 const $tabRow: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   borderBottomWidth: 1,
   borderBottomColor: "#E9ECF0",
 }
@@ -837,7 +843,7 @@ const $boardList: ViewStyle = {
 }
 
 const $boardItem: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   alignItems: "flex-start",
   paddingVertical: 18,
   paddingHorizontal: 16,
@@ -848,8 +854,8 @@ const $boardItem: ViewStyle = {
 
 const $tagWrap: ViewStyle = {
   flexShrink: 0,
-  alignItems: "flex-start",
-  maxWidth: 120,
+  alignItems: isRTL ? "flex-end" : "flex-start",
+  width: 96,
   overflow: "hidden",
 }
 
@@ -934,7 +940,7 @@ const $footer: ViewStyle = {
 }
 
 const $footerLinks: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   justifyContent: "center",
   alignItems: "center",
   flexWrap: "wrap",
