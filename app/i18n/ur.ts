@@ -76,7 +76,7 @@ const urOverrides = {
     title: "حفاظت بورڈ",
     alertButton: "الرٹ",
     workplaceLabel: "کام کی جگہ",
-    workplaceModal: { title: "کام کی جگہ منتخب کریں" },
+    workplaceModal: { title: "کام کی جگہ منتخب کریں", allOption: "سب" },
     badge: {
       companyWide: "پوری کمپنی",
       workplace: "کام کی جگہ",
@@ -87,6 +87,100 @@ const urOverrides = {
     empty: "کوئی پوسٹ نہیں",
     write: "لکھیں",
     draftSaved: "پوسٹ مسودے کے طور پر محفوظ ہو گئی۔",
+    allWorkplaces: "تمام کام کی جگہیں",
+    notifySent: "اطلاع بھیج دی گئی۔",
+  },
+  safeBoardDetailScreen: {
+    title: "پوسٹ کی تفصیل",
+    loadError: "پوسٹ لوڈ نہیں ہو سکی۔",
+    authorLabel: "مصنف",
+    editButton: "ترمیم",
+    alertOn: "اطلاع آن",
+    alertOff: "اطلاع آف",
+    publishButton: "شائع کریں",
+    deleteButton: "حذف کریں",
+    publishModal: {
+      title: "پوسٹ شائع کریں",
+      message:
+        "کیا آپ واقعی یہ پوسٹ شائع کرنا چاہتے ہیں؟\nشائع ہونے کے بعد کام کی جگہ کے اراکین اسے دیکھ سکیں گے۔",
+      cancel: "منسوخ",
+      confirm: "شائع کریں",
+    },
+    deleteModal: {
+      title: "پوسٹ حذف کریں",
+      message:
+        "کیا آپ واقعی یہ پوسٹ حذف کرنا چاہتے ہیں؟\nحذف شدہ پوسٹ بحال نہیں کی جا سکتی۔",
+      cancel: "منسوخ",
+      confirm: "حذف کریں",
+    },
+    toasts: {
+      publishSuccess: "پوسٹ کامیابی سے شائع ہوئی۔",
+      publishError: "پوسٹ شائع کرنے میں ناکامی۔",
+      deleteSuccess: "پوسٹ کامیابی سے حذف ہوئی۔",
+      deleteError: "پوسٹ حذف کرنے میں ناکامی۔",
+    },
+  },
+  safeBoardCreateScreen: {
+    title: "پوسٹ لکھیں",
+    guide: {
+      title: "تحریری رہنمائی",
+      description:
+        "منتخب کام کی جگہ کے اراکین کے ساتھ اعلانات شیئر کریں۔ عنوان اور مواد درج کریں، اور اختیاری طور پر فائل منسلک کریں یا پش نوٹیفکیشن بھیجیں۔",
+    },
+    workplace: {
+      label: "کام کی جگہ",
+      placeholder: "کام کی جگہ منتخب کریں",
+      helper: "براہ کرم پوسٹ کرنے کے لیے کام کی جگہ منتخب کریں۔",
+    },
+    postTitle: {
+      label: "پوسٹ کا عنوان",
+      placeholder: "اعلان کا عنوان درج کریں۔",
+      helper: "زیادہ سے زیادہ 80 حروف۔",
+    },
+    content: {
+      label: "پوسٹ کا مواد",
+      placeholder: "سائٹ پر پہنچانے کے لیے تفصیلی مواد درج کریں۔",
+      helper: "زیادہ سے زیادہ 4,000 حروف۔",
+    },
+    attachment: {
+      label: "منسلکات",
+      card1Text: "(اختیاری) آپ\n50MB تک کی فائل اپلوڈ کر سکتے ہیں۔",
+      uploadButton: "فائل اپلوڈ کریں",
+      noFile: "کوئی فائل منتخب نہیں۔",
+      uploadError: "فائل اپلوڈ ناکام۔ دوبارہ کوشش کریں۔",
+    },
+    pushNotification: {
+      label: "پش نوٹیفکیشن بھیجیں",
+      cardText:
+        "اگر منتخب ہو تو پوسٹ کے وقت منتخب کام کی جگہ کے تمام اراکین کو پش نوٹیفکیشن بھیجی جائے گی۔",
+    },
+    save: "محفوظ کریں",
+    titleEdit: "پوسٹ میں ترمیم",
+    saveError: "محفوظ کرنے میں ناکامی۔ دوبارہ کوشش کریں۔",
+  },
+  safeBoardNotifyScreen: {
+    title: "کام کی جگہ پش نوٹیفکیشن بھیجیں",
+    guide: {
+      title: "تحریری رہنمائی",
+      description:
+        "اپنے زیر انتظام ایک یا زیادہ کام کی جگہیں منتخب کریں اور فیلڈ اراکین کو بھیجنے کے لیے اطلاع لکھیں۔",
+    },
+    workplace: {
+      label: "کام کی جگہ منتخب کریں",
+      helper: "{{total}} کام کی جگہوں میں سے {{selected}} کو بھیج رہے ہیں",
+    },
+    notifyTitle: {
+      label: "اطلاع کا عنوان",
+      placeholder: "مختصر عنوان درج کریں۔",
+      helper: "زیادہ سے زیادہ 50 حروف۔",
+    },
+    content: {
+      label: "پش نوٹیفکیشن کا مواد",
+      placeholder: "اس کام کی جگہ کو بھیجی جانے والی اطلاعی پیغام درج کریں۔",
+      helper: "زیادہ سے زیادہ 240 حروف۔",
+    },
+    send: "اطلاع بھیجیں",
+    sendSuccess: "اطلاع بھیج دی گئی۔",
   },
   safeHealthScreen: {
     title: "حفاظت انتظام",

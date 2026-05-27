@@ -76,7 +76,7 @@ const loOverrides = {
     title: "ກະດານຄວາມປອດໄພ",
     alertButton: "ການເຕືອນ",
     workplaceLabel: "ບ່ອນເຮັດວຽກ",
-    workplaceModal: { title: "ເລືອກບ່ອນເຮັດວຽກ" },
+    workplaceModal: { title: "ເລືອກບ່ອນເຮັດວຽກ", allOption: "ທັງໝົດ" },
     badge: {
       companyWide: "ທົ່ວບໍລິສັດ",
       workplace: "ບ່ອນເຮັດວຽກ",
@@ -87,6 +87,99 @@ const loOverrides = {
     empty: "ບໍ່ມີໂພສ",
     write: "ຂຽນ",
     draftSaved: "ໂພສຖືກບັນທຶກເປັນຮ່າງ.",
+    allWorkplaces: "ທຸກບ່ອນເຮັດວຽກ",
+    notifySent: "ການແຈ້ງເຕືອນຖືກສົ່ງແລ້ວ.",
+  },
+  safeBoardDetailScreen: {
+    title: "ລາຍລະອຽດໂພສ",
+    loadError: "ບໍ່ສາມາດໂຫຼດໂພສໄດ້.",
+    authorLabel: "ຜູ້ຂຽນ",
+    editButton: "ແກ້ໄຂ",
+    alertOn: "ການແຈ້ງເຕືອນ ເປີດ",
+    alertOff: "ການແຈ້ງເຕືອນ ປິດ",
+    publishButton: "ເຜີຍແຜ່",
+    deleteButton: "ລຶບ",
+    publishModal: {
+      title: "ເຜີຍແຜ່ໂພສ",
+      message:
+        "ທ່ານແນ່ໃຈທີ່ຈະເຜີຍແຜ່ໂພສນີ້ບໍ?\nຫຼັງຈາກເຜີຍແຜ່ ສະມາຊິກຂອງບ່ອນເຮັດວຽກຈະເຫັນໄດ້.",
+      cancel: "ຍົກເລີກ",
+      confirm: "ເຜີຍແຜ່",
+    },
+    deleteModal: {
+      title: "ລຶບໂພສ",
+      message: "ທ່ານແນ່ໃຈທີ່ຈະລຶບໂພສນີ້ບໍ?\nໂພສທີ່ລຶບແລ້ວຈະຟື້ນຄືນບໍ່ໄດ້.",
+      cancel: "ຍົກເລີກ",
+      confirm: "ລຶບ",
+    },
+    toasts: {
+      publishSuccess: "ເຜີຍແຜ່ໂພສສຳເລັດ.",
+      publishError: "ການເຜີຍແຜ່ໂພສລົ້ມເຫຼວ.",
+      deleteSuccess: "ລຶບໂພສສຳເລັດ.",
+      deleteError: "ການລຶບໂພສລົ້ມເຫຼວ.",
+    },
+  },
+  safeBoardCreateScreen: {
+    title: "ຂຽນໂພສ",
+    guide: {
+      title: "ຄຳແນະນຳການຂຽນ",
+      description:
+        "ແບ່ງປັນປະກາດໃຫ້ສະມາຊິກຂອງບ່ອນເຮັດວຽກທີ່ເລືອກ. ໃສ່ຫົວຂໍ້ ແລະ ເນື້ອໃນ ແລ້ວສາມາດຕິດໄຟ ຫຼື ສ່ົງການແຈ້ງເຕືອນ push.",
+    },
+    workplace: {
+      label: "ບ່ອນເຮັດວຽກ",
+      placeholder: "ເລືອກບ່ອນເຮັດວຽກ",
+      helper: "ກະລຸນາເລືອກບ່ອນເຮັດວຽກສຳລັບການໂພສ.",
+    },
+    postTitle: {
+      label: "ຫົວຂໍ້ໂພສ",
+      placeholder: "ໃສ່ຫົວຂໍ້ປະກາດ.",
+      helper: "ສູງສຸດ 80 ຕົວອັກສອນ.",
+    },
+    content: {
+      label: "ເນື້ອໃນໂພສ",
+      placeholder: "ໃສ່ເນື້ອໃນລະອຽດທີ່ຈະສ່ົງໄປໃຫ້ສະໜາມ.",
+      helper: "ສູງສຸດ 4,000 ຕົວອັກສອນ.",
+    },
+    attachment: {
+      label: "ໄຟລ໌ຄັດແນບ",
+      card1Text: "(ບໍ່ບັງຄັບ) ທ່ານສາມາດອັບໂຫລດ\nໄຟລ໌ສູງສຸດ 50MB.",
+      uploadButton: "ອັບໂຫລດໄຟລ໌",
+      noFile: "ບໍ່ໄດ້ເລືອກໄຟລ໌.",
+      uploadError: "ການອັບໂຫລດໄຟລ໌ລົ້ມເຫຼວ. ກະລຸນາລອງໃໝ່.",
+    },
+    pushNotification: {
+      label: "ສ່ົງການແຈ້ງເຕືອນ Push",
+      cardText:
+        "ຖ້າເລືອກ ເມື່ອໂພສ ການແຈ້ງເຕືອນ push ຈະຖືກສ່ົງໄປຫາສະມາຊິກທັງໝົດຂອງບ່ອນເຮັດວຽກທີ່ເລືອກ.",
+    },
+    save: "ບັນທຶກ",
+    titleEdit: "ແກ້ໄຂໂພສ",
+    saveError: "ການບັນທຶກລົ້ມເຫຼວ. ກະລຸນາລອງໃໝ່.",
+  },
+  safeBoardNotifyScreen: {
+    title: "ສ່ົງການແຈ້ງເຕືອນ Push ບ່ອນເຮັດວຽກ",
+    guide: {
+      title: "ຄຳແນະນຳການຂຽນ",
+      description:
+        "ເລືອກບ່ອນເຮັດວຽກໜຶ່ງ ຫຼື ຫຼາຍຂອງທ່ານ ແລ້ວຂຽນການແຈ້ງເຕືອນເພື່ອສ່ົງໄປຫາສະມາຊິກ.",
+    },
+    workplace: {
+      label: "ເລືອກບ່ອນເຮັດວຽກ",
+      helper: "ກຳລັງສ່ົງໄປຫາ {{selected}} ໃນ {{total}} ບ່ອນເຮັດວຽກ",
+    },
+    notifyTitle: {
+      label: "ຫົວຂໍ້ການແຈ້ງເຕືອນ",
+      placeholder: "ໃສ່ຫົວຂໍ້ສັ້ນ.",
+      helper: "ສູງສຸດ 50 ຕົວອັກສອນ.",
+    },
+    content: {
+      label: "ເນື້ອໃນການແຈ້ງເຕືອນ Push",
+      placeholder: "ໃສ່ຂໍ້ຄວາມການແຈ້ງເຕືອນທີ່ຈະສ່ົງໄປຫາບ່ອນເຮັດວຽກນີ້.",
+      helper: "ສູງສຸດ 240 ຕົວອັກສອນ.",
+    },
+    send: "ສ່ົງການແຈ້ງເຕືອນ",
+    sendSuccess: "ການແຈ້ງເຕືອນຖືກສົ່ງແລ້ວ.",
   },
   safeHealthScreen: {
     title: "ການຄຸ້ມຄອງຄວາມປອດໄພ",

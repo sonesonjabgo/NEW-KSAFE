@@ -1,6 +1,7 @@
 import { FC, useState } from "react"
 import { ScrollView, TouchableOpacity, View, ViewStyle, TextStyle } from "react-native"
 import { Bell, Send, Trash2, User } from "lucide-react-native"
+import { useTranslation } from "react-i18next"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { useResponsive } from "@/theme/responsive"
@@ -30,6 +31,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
   const item = allMockItems.find((p) => p.id === id)
   if (!item) return null
 
+  useTranslation()
   const { isSmallPhone } = useResponsive()
   const modalCardStyle: ViewStyle = { width: isSmallPhone ? 290 : 330 }
   const isAdmin = role === "admin"

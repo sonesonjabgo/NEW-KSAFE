@@ -209,7 +209,8 @@ const es: Translations = {
     title: "Tablero de seguridad",
     alertButton: "Enviar alerta",
     workplaceLabel: "Lugar de trabajo seleccionado",
-    workplaceModal: { title: "Seleccionar lugar de trabajo" },
+    allWorkplaces: "Todos los lugares de trabajo",
+    workplaceModal: { title: "Seleccionar lugar de trabajo", allOption: "Todos" },
     badge: {
       companyWide: "Toda la empresa",
       workplace: "Lugar de trabajo",
@@ -220,9 +221,11 @@ const es: Translations = {
     empty: "No hay publicaciones",
     write: "Escribir",
     draftSaved: "La publicación se ha guardado como borrador.",
+    notifySent: "Notificación enviada.",
   },
   safeBoardDetailScreen: {
     title: "Detalle de publicación",
+    loadError: "No se pudo cargar la publicación.",
     authorLabel: "Autor",
     editButton: "Editar",
     alertOn: "Alerta activada",
@@ -240,6 +243,12 @@ const es: Translations = {
       message: "¿Está seguro de que desea eliminar esta publicación?",
       cancel: "Cancelar",
       confirm: "Eliminar",
+    },
+    toasts: {
+      publishSuccess: "Publicación publicada correctamente.",
+      publishError: "Error al publicar la publicación.",
+      deleteSuccess: "Publicación eliminada correctamente.",
+      deleteError: "Error al eliminar la publicación.",
     },
   },
   safeBoardNotifyScreen: {
@@ -280,19 +289,20 @@ const es: Translations = {
     },
     postTitle: {
       label: "Título de la publicación",
-      placeholder: "Ingrese el título (máx. 200 caracteres)",
-      helper: "Ingrese un título claro y descriptivo.",
+      placeholder: "Ingrese el título del anuncio.",
+      helper: "Hasta 80 caracteres.",
     },
     content: {
       label: "Contenido de la publicación",
-      placeholder: "Ingrese el contenido (máx. 2000 caracteres)",
-      helper: "Describa el tema de seguridad en detalle.",
+      placeholder: "Ingrese el contenido detallado para entregar al sitio.",
+      helper: "Hasta 4,000 caracteres.",
     },
     attachment: {
       label: "Archivos adjuntos",
       card1Text: "(Opcional) Puede cargar\narchivos de hasta 50 MB.",
       uploadButton: "Cargar archivo",
       noFile: "No se han seleccionado archivos.",
+      uploadError: "Error al cargar el archivo. Inténtelo de nuevo.",
     },
     pushNotification: {
       label: "Enviar notificación push",
@@ -300,6 +310,8 @@ const es: Translations = {
         "Al seleccionar, se enviará una notificación push a todos los miembros del lugar de trabajo seleccionado al publicar.",
     },
     save: "Guardar",
+    titleEdit: "Editar publicación",
+    saveError: "Error al guardar la publicación. Inténtelo de nuevo.",
   },
 
   safeHealthScreen: {

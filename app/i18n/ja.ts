@@ -204,7 +204,8 @@ const ja: Translations = {
     title: "安全掲示板",
     alertButton: "警報",
     workplaceLabel: "作業場",
-    workplaceModal: { title: "作業場を選択" },
+    allWorkplaces: "全作業場",
+    workplaceModal: { title: "作業場を選択", allOption: "全て" },
     badge: {
       companyWide: "全社",
       workplace: "作業場",
@@ -215,9 +216,11 @@ const ja: Translations = {
     empty: "投稿がありません",
     write: "投稿する",
     draftSaved: "下書きとして保存されました。",
+    notifySent: "通知を送信しました。",
   },
   safeBoardDetailScreen: {
     title: "投稿詳細",
+    loadError: "投稿を読み込めませんでした。",
     authorLabel: "作成者",
     editButton: "編集",
     alertOn: "警報ON",
@@ -235,6 +238,12 @@ const ja: Translations = {
       message: "この投稿を削除しますか？",
       cancel: "キャンセル",
       confirm: "削除",
+    },
+    toasts: {
+      publishSuccess: "投稿を公開しました。",
+      publishError: "投稿の公開に失敗しました。",
+      deleteSuccess: "投稿を削除しました。",
+      deleteError: "投稿の削除に失敗しました。",
     },
   },
   safeBoardNotifyScreen: {
@@ -270,25 +279,28 @@ const ja: Translations = {
     },
     postTitle: {
       label: "タイトル",
-      placeholder: "投稿タイトルを入力（最大200文字）",
-      helper: "明確でわかりやすいタイトルを入力してください。",
+      placeholder: "お知らせのタイトルを入力してください。",
+      helper: "最大80文字。",
     },
     content: {
       label: "投稿内容",
-      placeholder: "投稿内容を入力（最大2000文字）",
-      helper: "安全に関する問題を詳しく説明してください。",
+      placeholder: "現場に伝える詳細な内容を入力してください。",
+      helper: "最大4,000文字。",
     },
     attachment: {
       label: "添付ファイル",
       card1Text: "（任意）最大50MBのファイルを\nアップロードできます。",
       uploadButton: "ファイルをアップロード",
       noFile: "ファイルが選択されていません。",
+      uploadError: "ファイルのアップロードに失敗しました。もう一度お試しください。",
     },
     pushNotification: {
       label: "プッシュ通知を送信",
       cardText: "選択時、投稿後に選択した作業場の全メンバーにプッシュ通知が送信されます。",
     },
     save: "保存",
+    titleEdit: "投稿を編集",
+    saveError: "保存に失敗しました。もう一度お試しください。",
   },
 
   safeHealthScreen: {

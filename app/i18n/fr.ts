@@ -207,7 +207,8 @@ const fr: Translations = {
     title: "Tableau de sécurité",
     alertButton: "Alerte",
     workplaceLabel: "Lieu de travail",
-    workplaceModal: { title: "Sélectionner le lieu de travail" },
+    allWorkplaces: "Tous les lieux de travail",
+    workplaceModal: { title: "Sélectionner le lieu de travail", allOption: "Tous" },
     badge: {
       companyWide: "Toute la société",
       workplace: "Lieu de travail",
@@ -218,9 +219,11 @@ const fr: Translations = {
     empty: "Vide",
     write: "Écrire",
     draftSaved: "Publication enregistrée en brouillon.",
+    notifySent: "Notification envoyée.",
   },
   safeBoardDetailScreen: {
     title: "Détail de la publication",
+    loadError: "Impossible de charger la publication.",
     authorLabel: "Auteur",
     editButton: "Modifier",
     alertOn: "Alerte ON",
@@ -238,6 +241,12 @@ const fr: Translations = {
       message: "Êtes-vous sûr de vouloir supprimer cette publication ?",
       cancel: "Annuler",
       confirm: "Supprimer",
+    },
+    toasts: {
+      publishSuccess: "Publication publiée avec succès.",
+      publishError: "Échec de la publication.",
+      deleteSuccess: "Publication supprimée avec succès.",
+      deleteError: "Échec de la suppression de la publication.",
     },
   },
   safeBoardNotifyScreen: {
@@ -277,19 +286,20 @@ const fr: Translations = {
     },
     postTitle: {
       label: "Titre de la publication",
-      placeholder: "Entrez le titre de la publication (max 200 caractères)",
-      helper: "Entrez un titre clair et descriptif.",
+      placeholder: "Entrez le titre de l'annonce.",
+      helper: "Jusqu'à 80 caractères.",
     },
     content: {
       label: "Contenu de la publication",
-      placeholder: "Entrez le contenu de la publication (max 2000 caractères)",
-      helper: "Décrivez le problème de sécurité en détail.",
+      placeholder: "Entrez le contenu détaillé à transmettre au site.",
+      helper: "Jusqu'à 4 000 caractères.",
     },
     attachment: {
       label: "Pièces jointes",
       card1Text: "(Facultatif) Vous pouvez télécharger\ndes fichiers jusqu'à 50 Mo.",
       uploadButton: "Télécharger un fichier",
       noFile: "Aucun fichier sélectionné.",
+      uploadError: "Échec du téléchargement du fichier. Veuillez réessayer.",
     },
     pushNotification: {
       label: "Envoyer une notification push",
@@ -297,6 +307,8 @@ const fr: Translations = {
         "Si sélectionné, une notification push sera envoyée à tous les membres du lieu de travail sélectionné lors de la publication.",
     },
     save: "Enregistrer",
+    titleEdit: "Modifier la publication",
+    saveError: "Échec de l'enregistrement. Veuillez réessayer.",
   },
 
   safeHealthScreen: {

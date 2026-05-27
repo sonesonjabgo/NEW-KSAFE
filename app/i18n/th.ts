@@ -76,7 +76,7 @@ const thOverrides = {
     title: "กระดานความปลอดภัย",
     alertButton: "แจ้งเตือน",
     workplaceLabel: "สถานที่ทำงาน",
-    workplaceModal: { title: "เลือกสถานที่ทำงาน" },
+    workplaceModal: { title: "เลือกสถานที่ทำงาน", allOption: "ทั้งหมด" },
     badge: {
       companyWide: "ทั้งบริษัท",
       workplace: "สถานที่ทำงาน",
@@ -87,6 +87,99 @@ const thOverrides = {
     empty: "ไม่มีโพสต์",
     write: "เขียน",
     draftSaved: "โพสต์ถูกบันทึกเป็นร่าง",
+    allWorkplaces: "ทุกสถานที่ทำงาน",
+    notifySent: "ส่งการแจ้งเตือนแล้ว.",
+  },
+  safeBoardDetailScreen: {
+    title: "รายละเอียดโพสต์",
+    loadError: "ไม่สามารถโหลดโพสต์ได้",
+    authorLabel: "ผู้เขียน",
+    editButton: "แก้ไข",
+    alertOn: "แจ้งเตือน เปิด",
+    alertOff: "แจ้งเตือน ปิด",
+    publishButton: "เผยแพร่",
+    deleteButton: "ลบ",
+    publishModal: {
+      title: "เผยแพร่โพสต์",
+      message:
+        "คุณแน่ใจที่จะเผยแพร่โพสต์นี้หรือไม่?\nหลังจากเผยแพร่ สมาชิกสถานที่ทำงานจะสามารถมองเห็นได้",
+      cancel: "ยกเลิก",
+      confirm: "เผยแพร่",
+    },
+    deleteModal: {
+      title: "ลบโพสต์",
+      message: "คุณแน่ใจที่จะลบโพสต์นี้หรือไม่?\nไม่สามารถกู้คืนโพสต์ที่ลบแล้วได้",
+      cancel: "ยกเลิก",
+      confirm: "ลบ",
+    },
+    toasts: {
+      publishSuccess: "เผยแพร่โพสต์สำเร็จ",
+      publishError: "ไม่สามารถเผยแพร่โพสต์ได้",
+      deleteSuccess: "ลบโพสต์สำเร็จ",
+      deleteError: "ไม่สามารถลบโพสต์ได้",
+    },
+  },
+  safeBoardCreateScreen: {
+    title: "เขียนโพสต์",
+    guide: {
+      title: "คู่มือการเขียน",
+      description:
+        "แบ่งปันประกาศกับสมาชิกสถานที่ทำงานที่เลือก กรอกชื่อเรื่องและเนื้อหา และเลือกแนบไฟล์หรือส่งการแจ้งเตือน push",
+    },
+    workplace: {
+      label: "สถานที่ทำงาน",
+      placeholder: "เลือกสถานที่ทำงาน",
+      helper: "กรุณาเลือกสถานที่ทำงานสำหรับโพสต์",
+    },
+    postTitle: {
+      label: "ชื่อเรื่องโพสต์",
+      placeholder: "กรอกชื่อเรื่องประกาศ",
+      helper: "สูงสุด 80 ตัวอักษร",
+    },
+    content: {
+      label: "เนื้อหาโพสต์",
+      placeholder: "กรอกรายละเอียดเนื้อหาที่ต้องการส่งถึงสนาม",
+      helper: "สูงสุด 4,000 ตัวอักษร",
+    },
+    attachment: {
+      label: "ไฟล์แนบ",
+      card1Text: "(ไม่จำเป็น) คุณสามารถอัปโหลด\nไฟล์ได้สูงสุด 50MB",
+      uploadButton: "อัปโหลดไฟล์",
+      noFile: "ไม่ได้เลือกไฟล์",
+      uploadError: "อัปโหลดไฟล์ล้มเหลว กรุณาลองอีกครั้ง",
+    },
+    pushNotification: {
+      label: "ส่งการแจ้งเตือน Push",
+      cardText:
+        "หากเลือก จะส่งการแจ้งเตือน push ไปยังสมาชิกทุกคนในสถานที่ทำงานที่เลือกเมื่อโพสต์",
+    },
+    save: "บันทึก",
+    titleEdit: "แก้ไขโพสต์",
+    saveError: "บันทึกล้มเหลว กรุณาลองอีกครั้ง",
+  },
+  safeBoardNotifyScreen: {
+    title: "ส่งการแจ้งเตือน Push สถานที่ทำงาน",
+    guide: {
+      title: "คู่มือการเขียน",
+      description:
+        "เลือกสถานที่ทำงานที่คุณดูแลหนึ่งแห่งหรือมากกว่า และเขียนการแจ้งเตือนเพื่อส่งถึงสมาชิกภาคสนาม",
+    },
+    workplace: {
+      label: "เลือกสถานที่ทำงาน",
+      helper: "กำลังส่งไปยัง {{selected}} จาก {{total}} สถานที่ทำงาน",
+    },
+    notifyTitle: {
+      label: "ชื่อเรื่องการแจ้งเตือน",
+      placeholder: "กรอกชื่อเรื่องสั้น",
+      helper: "สูงสุด 50 ตัวอักษร",
+    },
+    content: {
+      label: "เนื้อหาการแจ้งเตือน Push",
+      placeholder: "กรอกข้อความการแจ้งเตือนที่จะส่งถึงสถานที่ทำงานนี้",
+      helper: "สูงสุด 240 ตัวอักษร",
+    },
+    send: "ส่งการแจ้งเตือน",
+    sendSuccess: "ส่งการแจ้งเตือนแล้ว",
   },
   safeHealthScreen: {
     title: "การจัดการความปลอดภัย",

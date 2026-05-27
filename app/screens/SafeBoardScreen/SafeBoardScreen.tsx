@@ -1,6 +1,7 @@
 import { FC, useEffect, useMemo, useRef, useState } from "react"
 import { Animated, FlatList, Modal, Pressable, TouchableOpacity, View, ViewStyle } from "react-native"
 import { BellRing, Building, Check, ChevronDown } from "lucide-react-native"
+import { useTranslation } from "react-i18next"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import TbmFabIcon from "@assets/images/tbm-fab-icon.svg"
@@ -42,6 +43,7 @@ const filterByWorkplace = (posts: SafeBoardItem[], workplaceId: number): SafeBoa
 }
 
 export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route }) => {
+  useTranslation()
   const insets = useSafeAreaInsets()
   const fabBottom = useMemo<ViewStyle>(() => ({ bottom: 30 + insets.bottom }), [insets.bottom])
   const { role } = useRole()

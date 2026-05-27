@@ -78,7 +78,7 @@ const idOverrides = {
     title: "Papan Keamanan",
     alertButton: "Peringatan",
     workplaceLabel: "Tempat Kerja",
-    workplaceModal: { title: "Pilih Tempat Kerja" },
+    workplaceModal: { title: "Pilih Tempat Kerja", allOption: "Semua" },
     badge: {
       companyWide: "Seluruh Perusahaan",
       workplace: "Tempat Kerja",
@@ -89,6 +89,98 @@ const idOverrides = {
     empty: "Tidak ada posting",
     write: "Tulis",
     draftSaved: "Posting disimpan sebagai draf.",
+    allWorkplaces: "Semua Tempat Kerja",
+    notifySent: "Notifikasi terkirim.",
+  },
+  safeBoardDetailScreen: {
+    title: "Detail Posting",
+    loadError: "Gagal memuat posting.",
+    authorLabel: "Penulis",
+    editButton: "Edit",
+    alertOn: "Notifikasi ON",
+    alertOff: "Notifikasi OFF",
+    publishButton: "Terbitkan",
+    deleteButton: "Hapus",
+    publishModal: {
+      title: "Terbitkan Posting",
+      message: "Apakah Anda yakin ingin menerbitkan posting ini?\nPosting akan terlihat oleh anggota tempat kerja.",
+      cancel: "Batal",
+      confirm: "Terbitkan",
+    },
+    deleteModal: {
+      title: "Hapus Posting",
+      message: "Apakah Anda yakin ingin menghapus posting ini?\nPosting yang dihapus tidak dapat dipulihkan.",
+      cancel: "Batal",
+      confirm: "Hapus",
+    },
+    toasts: {
+      publishSuccess: "Posting berhasil diterbitkan.",
+      publishError: "Gagal menerbitkan posting.",
+      deleteSuccess: "Posting berhasil dihapus.",
+      deleteError: "Gagal menghapus posting.",
+    },
+  },
+  safeBoardCreateScreen: {
+    title: "Tulis Posting",
+    guide: {
+      title: "Panduan Penulisan",
+      description:
+        "Bagikan pengumuman kepada anggota tempat kerja yang dipilih. Masukkan judul dan konten, dan opsional lampirkan file atau kirim notifikasi push.",
+    },
+    workplace: {
+      label: "Tempat Kerja",
+      placeholder: "Pilih tempat kerja",
+      helper: "Silakan pilih tempat kerja untuk diposting.",
+    },
+    postTitle: {
+      label: "Judul Posting",
+      placeholder: "Masukkan judul pengumuman.",
+      helper: "Maksimal 80 karakter.",
+    },
+    content: {
+      label: "Isi Posting",
+      placeholder: "Masukkan konten detail untuk disampaikan ke lapangan.",
+      helper: "Maksimal 4.000 karakter.",
+    },
+    attachment: {
+      label: "Lampiran",
+      card1Text: "(Opsional) Anda dapat mengunggah\nfile hingga 50MB.",
+      uploadButton: "Unggah File",
+      noFile: "Tidak ada file yang dipilih.",
+      uploadError: "Unggah file gagal. Silakan coba lagi.",
+    },
+    pushNotification: {
+      label: "Kirim Notifikasi Push",
+      cardText:
+        "Jika dipilih, notifikasi push akan dikirim ke semua anggota tempat kerja yang dipilih saat posting.",
+    },
+    save: "Simpan",
+    titleEdit: "Edit Posting",
+    saveError: "Gagal menyimpan. Silakan coba lagi.",
+  },
+  safeBoardNotifyScreen: {
+    title: "Kirim Notifikasi Push Tempat Kerja",
+    guide: {
+      title: "Panduan Penulisan",
+      description:
+        "Pilih satu atau lebih tempat kerja yang Anda kelola dan tulis notifikasi untuk dikirim ke anggota lapangan.",
+    },
+    workplace: {
+      label: "Pilih Tempat Kerja",
+      helper: "Mengirim ke {{selected}} dari {{total}} tempat kerja",
+    },
+    notifyTitle: {
+      label: "Judul Notifikasi",
+      placeholder: "Masukkan judul singkat.",
+      helper: "Maksimal 50 karakter.",
+    },
+    content: {
+      label: "Isi Notifikasi Push",
+      placeholder: "Masukkan pesan notifikasi untuk dikirim ke tempat kerja ini.",
+      helper: "Maksimal 240 karakter.",
+    },
+    send: "Kirim Notifikasi",
+    sendSuccess: "Notifikasi terkirim.",
   },
   safeHealthScreen: {
     title: "Manajemen Keselamatan",

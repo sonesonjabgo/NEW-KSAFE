@@ -12,6 +12,7 @@ import {
 } from "react-native"
 import { IconChevronDown } from "@tabler/icons-react-native"
 import { X } from "lucide-react-native"
+import { useTranslation } from "react-i18next"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import BoardClip from "@assets/icons/board/board_clip.svg"
@@ -35,6 +36,7 @@ const MOCK_WORKPLACES = [
 ]
 
 export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigation }) => {
+  useTranslation()
   const insets = useSafeAreaInsets()
   const { isSmallPhone } = useResponsive()
 

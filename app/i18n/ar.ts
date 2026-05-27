@@ -203,7 +203,8 @@ const ar: Translations = {
     title: "لوحة الأمان",
     alertButton: "إرسال تنبيه",
     workplaceLabel: "موقع العمل المحدد",
-    workplaceModal: { title: "اختر موقع العمل" },
+    allWorkplaces: "جميع مواقع العمل",
+    workplaceModal: { title: "اختر موقع العمل", allOption: "الكل" },
     badge: {
       companyWide: "الشركة بأكملها",
       workplace: "موقع العمل",
@@ -214,9 +215,11 @@ const ar: Translations = {
     empty: "لا توجد منشورات",
     write: "كتابة",
     draftSaved: "تم حفظ المنشور كمسودة.",
+    notifySent: "تم إرسال الإشعار.",
   },
   safeBoardDetailScreen: {
     title: "تفاصيل المنشور",
+    loadError: "فشل تحميل المنشور.",
     authorLabel: "الكاتب",
     editButton: "تعديل",
     alertOn: "تنبيه مفعّل",
@@ -234,6 +237,12 @@ const ar: Translations = {
       message: "هل أنت متأكد من حذف هذا المنشور؟",
       cancel: "إلغاء",
       confirm: "حذف",
+    },
+    toasts: {
+      publishSuccess: "تم نشر المنشور بنجاح.",
+      publishError: "فشل نشر المنشور.",
+      deleteSuccess: "تم حذف المنشور بنجاح.",
+      deleteError: "فشل حذف المنشور.",
     },
   },
   safeBoardNotifyScreen: {
@@ -274,25 +283,28 @@ const ar: Translations = {
     },
     postTitle: {
       label: "عنوان المنشور",
-      placeholder: "أدخل عنوان المنشور (حد أقصى 200 حرف)",
-      helper: "أدخل عنواناً واضحاً ومحدداً.",
+      placeholder: "أدخل عنوان الإعلان.",
+      helper: "حتى 80 حرفاً.",
     },
     content: {
       label: "محتوى المنشور",
-      placeholder: "أدخل محتوى المنشور (حد أقصى 2000 حرف)",
-      helper: "صف المسألة الأمنية بالتفصيل.",
+      placeholder: "أدخل المحتوى التفصيلي للموقع.",
+      helper: "حتى 4,000 حرف.",
     },
     attachment: {
       label: "المرفقات",
       card1Text: "(اختياري) يمكنك رفع\nملفات حتى 50 ميجابايت.",
       uploadButton: "رفع ملف",
       noFile: "لم يتم اختيار ملفات.",
+      uploadError: "فشل رفع الملف. حاول مجدداً.",
     },
     pushNotification: {
       label: "إرسال إشعار دفع",
       cardText: "عند التحديد، سيُرسل إشعار دفع إلى جميع أعضاء موقع العمل المحدد عند النشر.",
     },
     save: "حفظ",
+    titleEdit: "تعديل المنشور",
+    saveError: "فشل الحفظ. حاول مجدداً.",
   },
 
   safeHealthScreen: {

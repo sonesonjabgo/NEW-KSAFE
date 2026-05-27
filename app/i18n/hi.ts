@@ -205,7 +205,8 @@ const hi: Translations = {
     title: "सुरक्षा बोर्ड",
     alertButton: "अलर्ट",
     workplaceLabel: "कार्यस्थल",
-    workplaceModal: { title: "कार्यस्थल चुनें" },
+    allWorkplaces: "सभी कार्यस्थल",
+    workplaceModal: { title: "कार्यस्थल चुनें", allOption: "सभी" },
     badge: {
       companyWide: "पूरी कंपनी",
       workplace: "कार्यस्थल",
@@ -216,9 +217,11 @@ const hi: Translations = {
     empty: "खाली",
     write: "लिखें",
     draftSaved: "पोस्ट मसौदे के रूप में सहेजी गई।",
+    notifySent: "नोटिफिकेशन भेजी गई।",
   },
   safeBoardDetailScreen: {
     title: "पोस्ट विवरण",
+    loadError: "पोस्ट लोड करने में विफल।",
     authorLabel: "लेखक",
     editButton: "संपादित करें",
     alertOn: "अलर्ट चालू",
@@ -236,6 +239,12 @@ const hi: Translations = {
       message: "क्या आप वाकई इस पोस्ट को हटाना चाहते हैं?",
       cancel: "रद्द करें",
       confirm: "हटाएं",
+    },
+    toasts: {
+      publishSuccess: "पोस्ट सफलतापूर्वक प्रकाशित की गई।",
+      publishError: "पोस्ट प्रकाशित करने में विफल।",
+      deleteSuccess: "पोस्ट सफलतापूर्वक हटाई गई।",
+      deleteError: "पोस्ट हटाने में विफल।",
     },
   },
   safeBoardNotifyScreen: {
@@ -272,19 +281,20 @@ const hi: Translations = {
     },
     postTitle: {
       label: "पोस्ट शीर्षक",
-      placeholder: "पोस्ट शीर्षक दर्ज करें (अधिकतम 200 अक्षर)",
-      helper: "एक स्पष्ट और वर्णनात्मक शीर्षक दर्ज करें।",
+      placeholder: "घोषणा शीर्षक दर्ज करें।",
+      helper: "अधिकतम 80 अक्षर।",
     },
     content: {
       label: "पोस्ट सामग्री",
-      placeholder: "पोस्ट सामग्री दर्ज करें (अधिकतम 2000 अक्षर)",
-      helper: "सुरक्षा समस्या का विस्तार से वर्णन करें।",
+      placeholder: "साइट पर पहुंचाने के लिए विस्तृत सामग्री दर्ज करें।",
+      helper: "अधिकतम 4,000 अक्षर।",
     },
     attachment: {
       label: "संलग्नक",
       card1Text: "(वैकल्पिक) आप 50MB तक\nफ़ाइलें अपलोड कर सकते हैं।",
       uploadButton: "फ़ाइल अपलोड करें",
       noFile: "कोई फ़ाइल चयनित नहीं।",
+      uploadError: "फ़ाइल अपलोड विफल। कृपया पुनः प्रयास करें।",
     },
     pushNotification: {
       label: "पुश नोटिफिकेशन भेजें",
@@ -292,6 +302,8 @@ const hi: Translations = {
         "चयनित होने पर, पोस्ट करने पर चयनित कार्यस्थल के सभी सदस्यों को पुश नोटिफिकेशन भेजी जाएगी।",
     },
     save: "सहेजें",
+    titleEdit: "पोस्ट संपादित करें",
+    saveError: "सहेजने में विफल। कृपया पुनः प्रयास करें।",
   },
 
   safeHealthScreen: {

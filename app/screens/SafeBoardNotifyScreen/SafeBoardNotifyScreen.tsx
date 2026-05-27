@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native"
 import { Check } from "lucide-react-native"
+import { useTranslation } from "react-i18next"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { useResponsive } from "@/theme/responsive"
@@ -31,6 +32,7 @@ const MOCK_WORKPLACES = [
 ]
 
 export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigation }) => {
+  useTranslation()
   const insets = useSafeAreaInsets()
   const { isSmallPhone } = useResponsive()
 

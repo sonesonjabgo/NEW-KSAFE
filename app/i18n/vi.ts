@@ -76,7 +76,7 @@ const viOverrides = {
     title: "Bảng an toàn",
     alertButton: "Cảnh báo",
     workplaceLabel: "Nơi làm việc",
-    workplaceModal: { title: "Chọn nơi làm việc" },
+    workplaceModal: { title: "Chọn nơi làm việc", allOption: "Tất cả" },
     badge: {
       companyWide: "Toàn công ty",
       workplace: "Nơi làm việc",
@@ -87,6 +87,98 @@ const viOverrides = {
     empty: "Không có bài đăng",
     write: "Viết",
     draftSaved: "Bài đăng đã được lưu dưới dạng bản nháp.",
+    allWorkplaces: "Tất cả nơi làm việc",
+    notifySent: "Đã gửi thông báo.",
+  },
+  safeBoardDetailScreen: {
+    title: "Chi tiết bài đăng",
+    loadError: "Không thể tải bài đăng.",
+    authorLabel: "Tác giả",
+    editButton: "Chỉnh sửa",
+    alertOn: "Thông báo BẬT",
+    alertOff: "Thông báo TẮT",
+    publishButton: "Đăng",
+    deleteButton: "Xóa",
+    publishModal: {
+      title: "Đăng bài",
+      message: "Bạn có chắc muốn đăng bài này không?\nBài sẽ hiển thị với các thành viên nơi làm việc.",
+      cancel: "Hủy",
+      confirm: "Đăng",
+    },
+    deleteModal: {
+      title: "Xóa bài đăng",
+      message: "Bạn có chắc muốn xóa bài này không?\nBài đã xóa không thể khôi phục.",
+      cancel: "Hủy",
+      confirm: "Xóa",
+    },
+    toasts: {
+      publishSuccess: "Bài đăng đã được đăng thành công.",
+      publishError: "Đăng bài thất bại.",
+      deleteSuccess: "Bài đăng đã được xóa thành công.",
+      deleteError: "Xóa bài thất bại.",
+    },
+  },
+  safeBoardCreateScreen: {
+    title: "Viết bài",
+    guide: {
+      title: "Hướng dẫn viết",
+      description:
+        "Chia sẻ thông báo với thành viên nơi làm việc đã chọn. Nhập tiêu đề và nội dung, tùy chọn đính kèm tệp hoặc gửi thông báo đẩy.",
+    },
+    workplace: {
+      label: "Nơi làm việc",
+      placeholder: "Chọn nơi làm việc",
+      helper: "Vui lòng chọn nơi làm việc để đăng.",
+    },
+    postTitle: {
+      label: "Tiêu đề bài đăng",
+      placeholder: "Nhập tiêu đề thông báo.",
+      helper: "Tối đa 80 ký tự.",
+    },
+    content: {
+      label: "Nội dung bài đăng",
+      placeholder: "Nhập nội dung chi tiết để truyền đến hiện trường.",
+      helper: "Tối đa 4.000 ký tự.",
+    },
+    attachment: {
+      label: "Tệp đính kèm",
+      card1Text: "(Tùy chọn) Bạn có thể tải lên\ncác tệp tối đa 50MB.",
+      uploadButton: "Tải lên tệp",
+      noFile: "Không có tệp nào được chọn.",
+      uploadError: "Tải lên tệp thất bại. Vui lòng thử lại.",
+    },
+    pushNotification: {
+      label: "Gửi thông báo đẩy",
+      cardText:
+        "Khi chọn, thông báo đẩy sẽ được gửi đến tất cả thành viên nơi làm việc đã chọn sau khi đăng.",
+    },
+    save: "Lưu",
+    titleEdit: "Chỉnh sửa bài đăng",
+    saveError: "Lưu thất bại. Vui lòng thử lại.",
+  },
+  safeBoardNotifyScreen: {
+    title: "Gửi thông báo đẩy nơi làm việc",
+    guide: {
+      title: "Hướng dẫn viết",
+      description:
+        "Chọn một hoặc nhiều nơi làm việc bạn quản lý và viết thông báo để gửi đến thành viên hiện trường.",
+    },
+    workplace: {
+      label: "Chọn nơi làm việc",
+      helper: "Đang gửi đến {{selected}} trong {{total}} nơi làm việc",
+    },
+    notifyTitle: {
+      label: "Tiêu đề thông báo",
+      placeholder: "Nhập tiêu đề ngắn gọn.",
+      helper: "Tối đa 50 ký tự.",
+    },
+    content: {
+      label: "Nội dung thông báo đẩy",
+      placeholder: "Nhập tin nhắn thông báo để gửi đến nơi làm việc này.",
+      helper: "Tối đa 240 ký tự.",
+    },
+    send: "Gửi thông báo",
+    sendSuccess: "Đã gửi thông báo.",
   },
   safeHealthScreen: {
     title: "Quản lý an toàn",
