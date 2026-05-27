@@ -854,6 +854,7 @@ const $boardItem: ViewStyle = {
 
 const $tagWrap: ViewStyle = {
   flexShrink: 0,
+  width: 64,
   alignItems: isRTL ? "flex-end" : "flex-start",
   overflow: "hidden",
 }
