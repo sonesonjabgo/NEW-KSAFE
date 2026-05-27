@@ -1,5 +1,6 @@
 import { FC, useMemo } from "react"
 import { View } from "react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
@@ -11,6 +12,7 @@ import type { WorkerParticipationScreenProps } from "./types"
 
 export const WorkerParticipationScreen: FC<WorkerParticipationScreenProps> = ({ navigation }) => {
   const mockWorkerParticipationMenus = useMemo(() => getMockWorkerParticipationMenus(), [])
+  const insets = useSafeAreaInsets()
 
   const handleMenuPress = (id: number) => {
     if (id === 1) {
@@ -22,8 +24,10 @@ export const WorkerParticipationScreen: FC<WorkerParticipationScreenProps> = ({ 
 
   return (
     <View style={S.$screenContainer}>
-      <View style={S.$headerContainer}>
-        <Text text={translate("workerParticipationScreen:title")} style={S.$headerTitle} />
+      <View
+        style={[S.$headerContainer, { paddingTop: insets.top + 10, paddingBottom: 14, minHeight: 100, justifyContent: "center" }]}
+      >
+        <Text text={translate("workerParticipationScreen:title")} style={[S.$headerTitle, { fontSize: 20 }]} />
       </View>
 
       <View style={S.$contentContainer}>
