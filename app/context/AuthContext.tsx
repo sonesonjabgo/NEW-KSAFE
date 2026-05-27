@@ -8,6 +8,9 @@ import {
   useState,
 } from "react"
 
+import i18n from "i18next"
+
+import { persistChangeLanguage, toI18nKey } from "@/i18n"
 import { translate } from "@/i18n/translate"
 import { registerSignOutHandler } from "@/services/api/auth/authSignOutBridge"
 import { supabase } from "@/services/api/auth/supabase"
@@ -102,6 +105,17 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       try {
         const data = await fetchMyProfile(accessToken)
         setProfile(data)
+
+        // 서버 preferredLanguageCode와 로컬 i18n 언어 동기화
+        // 앱 시작·로그인 시 다른 기기에서 변경된 언어값을 UI에 반영하기 위해 처리
+        const serverCode = data.preferredLanguageCode
+        if (serverCode) {
+          const serverLangKey = toI18nKey(serverCode)
+          if (serverLangKey !== i18n.language) {
+            await persistChangeLanguage(serverCode)
+          }
+        }
+
         return { ok: true, data }
       } catch (err) {
         logDevError("Failed to fetch profile", err)
