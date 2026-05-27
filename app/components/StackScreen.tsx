@@ -4,7 +4,7 @@ import { IconChevronLeft } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { Text } from "@/components/Text"
-import { isRTL } from "@/i18n/rtl"
+import { isRTL } from "@/i18n"
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 

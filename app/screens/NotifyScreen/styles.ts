@@ -1,5 +1,6 @@
 import { ViewStyle, TextStyle } from "react-native"
 
+import { isRTL } from "@/i18n"
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
@@ -24,7 +25,7 @@ export const $body: ViewStyle = {
 
 /* ── 헤더 우측 버튼 ── */
 export const $headerActions: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   gap: 4,
 }
 
@@ -51,7 +52,7 @@ export const $card: ViewStyle = {
   borderColor: CARD_UNREAD_BORDER,
   borderRadius: 16,
   borderWidth: 1.5,
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   gap: 12,
 }
 
@@ -69,16 +70,19 @@ export const $cardContent: ViewStyle = {
 export const $cardTitle: TextStyle = {
   color: CARD_TEXT,
   fontFamily: typography.primary.bold,
+  textAlign: isRTL ? "right" : "left",
 }
 
 export const $cardDesc: TextStyle = {
   color: CARD_TEXT,
   fontFamily: typography.primary.normal,
+  textAlign: isRTL ? "right" : "left",
 }
 
 export const $cardTime: TextStyle = {
   color: CARD_TIME_COLOR,
   fontFamily: typography.primary.normal,
+  textAlign: isRTL ? "right" : "left",
 }
 
 /* ── 아이콘 원형 — width/height/borderRadius 동적 적용 ── */
