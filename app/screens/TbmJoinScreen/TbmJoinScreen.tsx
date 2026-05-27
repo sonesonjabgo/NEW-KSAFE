@@ -16,6 +16,7 @@ import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
+import { useResponsive } from "@/theme/responsive"
 
 import { mockTbmJoinData } from "./mockData"
 import * as S from "./styles"
@@ -25,6 +26,7 @@ type TbmJoinScreenProps = AppStackScreenProps<"TbmJoin">
 
 export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
+  const { isSmallPhone } = useResponsive()
   const [selectedId, setSelectedId] = useState<number | null>(null)
   const [infoModalVisible, setInfoModalVisible] = useState(false)
   const [noSelectionModalVisible, setNoSelectionModalVisible] = useState(false)
@@ -98,7 +100,10 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
       >
         <View style={S.$wrapper}>
           <View style={S.$container}>
-            <Text text={translate("tbmJoinScreen:selectPrompt")} style={S.$selectPrompt} />
+            <Text
+              text={translate("tbmJoinScreen:selectPrompt")}
+              style={[S.$selectPrompt, isSmallPhone && { fontSize: 17 }]}
+            />
 
             {hasData ? (
               <FlatList<TbmJoinItem>
@@ -112,8 +117,14 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
             ) : (
               <View style={S.$emptyContainer}>
                 <TbmEmptyImage width={150} height={162} />
-                <Text text={translate("tbmJoinScreen:empty.title")} style={S.$emptyTitle} />
-                <Text text={translate("tbmJoinScreen:empty.subtitle")} style={S.$emptySubtitle} />
+                <Text
+                  text={translate("tbmJoinScreen:empty.title")}
+                  style={[S.$emptyTitle, isSmallPhone && { fontSize: 17 }]}
+                />
+                <Text
+                  text={translate("tbmJoinScreen:empty.subtitle")}
+                  style={[S.$emptySubtitle, isSmallPhone && { fontSize: 14 }]}
+                />
               </View>
             )}
           </View>
@@ -136,6 +147,7 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
 
       <ConfirmModal
         visible={noSelectionModalVisible}
+        cardStyle={{ width: isSmallPhone ? 290 : 330 }}
         icon={
           <View style={S.$noSelectionIconCircle}>
             <IconAlertCircle size={19} color="#1062D8" />
