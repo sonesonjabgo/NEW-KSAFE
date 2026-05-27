@@ -1,5 +1,6 @@
 import { FC, useState } from "react"
 import { Linking, ScrollView, TouchableOpacity, View, ViewStyle, TextStyle } from "react-native"
+import { useResponsive } from "@/theme/responsive"
 import {
   IconBell,
   IconCamera,
@@ -31,6 +32,8 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
   const displayName = profile?.username?.trim() || user?.name?.trim() || ""
   const displayEmail = user?.email || ""
   const { role } = useRole()
+  const { isSmallPhone } = useResponsive()
+  const modalCardStyle: ViewStyle = { width: isSmallPhone ? 290 : 330 }
   const [notificationEnabled, setNotificationEnabled] = useState(true)
   const [logoutModalVisible, setLogoutModalVisible] = useState(false)
 
@@ -122,6 +125,7 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
 
       <ConfirmModal
         visible={logoutModalVisible}
+        cardStyle={modalCardStyle}
         icon={
           <View style={$logoutModalIconCircle}>
             <IconPower size={26} color={colors.danger} />
