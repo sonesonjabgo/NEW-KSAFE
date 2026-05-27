@@ -210,7 +210,7 @@ const $permissionCard: ViewStyle = {
   backgroundColor: "#FFFFFF",
   borderRadius: 12,
   borderWidth: 1,
-  borderColor: "#ABABAB",
+  borderColor: "#DDDDDD",
   overflow: "hidden",
 }
 
@@ -224,7 +224,7 @@ const $logoutButton: ViewStyle = {
   paddingVertical: 14,
   borderRadius: 10,
   borderWidth: 1.5,
-  borderColor: "#ABABAB",
+  borderColor: "#DDDDDD",
   backgroundColor: "#FFFFFF",
 }
 
