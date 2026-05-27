@@ -31,7 +31,8 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
   const item = allMockItems.find((p) => p.id === id)
   if (!item) return null
 
-  useTranslation()
+  const { i18n } = useTranslation()
+  const isRTL = i18n.language === "ur"
   const { isSmallPhone } = useResponsive()
   const modalCardStyle: ViewStyle = { width: isSmallPhone ? 290 : 330 }
   const isAdmin = role === "admin"
@@ -61,8 +62,8 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
         <View style={$outerContainer}>
           {/* 게시글 정보 카드 */}
           <View style={$card}>
-            <View style={$badgeDateRow}>
-              <View style={$badgeRow}>
+            <View style={[$badgeDateRow, isRTL && { flexDirection: "row-reverse" }]}>
+              <View style={[$badgeRow, isRTL && { flexDirection: "row-reverse" }]}>
                 <SafeBoardBadge type={item.scope} />
                 {showStatusBadge && (
                   <SafeBoardBadge type={item.status === "draft" ? "draft" : "archived"} />
@@ -75,7 +76,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
 
             {canEdit && (
               <TouchableOpacity
-                style={$alertRow}
+                style={[$alertRow, isRTL && { flexDirection: "row-reverse" }]}
                 activeOpacity={0.7}
                 onPress={() => setAlertOn((v) => !v)}
               >
@@ -91,7 +92,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
               </TouchableOpacity>
             )}
 
-            <View style={$authorRow}>
+            <View style={[$authorRow, isRTL && { flexDirection: "row-reverse" }]}>
               <View style={$authorIconWrap}>
                 <User size={14} color="#606679" strokeWidth={2} />
               </View>
@@ -117,7 +118,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
         {canEdit && (
           <View style={[$actionBar, { paddingBottom: insets.bottom + 12 }]}>
             <TouchableOpacity
-              style={[$actionBtn, $publishBtn]}
+              style={[$actionBtn, $publishBtn, isRTL && { flexDirection: "row-reverse" }]}
               activeOpacity={0.8}
               onPress={() => setPublishModalVisible(true)}
             >
@@ -128,7 +129,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
               />
             </TouchableOpacity>
             <TouchableOpacity
-              style={[$actionBtn, $deleteBtn]}
+              style={[$actionBtn, $deleteBtn, isRTL && { flexDirection: "row-reverse" }]}
               activeOpacity={0.8}
               onPress={() => setDeleteModalVisible(true)}
             >

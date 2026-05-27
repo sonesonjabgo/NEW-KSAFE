@@ -32,7 +32,8 @@ const MOCK_WORKPLACES = [
 ]
 
 export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigation }) => {
-  useTranslation()
+  const { i18n } = useTranslation()
+  const isRTL = i18n.language === "ur"
   const insets = useSafeAreaInsets()
   const { isSmallPhone } = useResponsive()
 
@@ -79,7 +80,7 @@ export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigati
             keyboardShouldPersistTaps="handled"
           >
             {/* 작성 가이드 */}
-            <View style={[S.$card, S.$guideRow]}>
+            <View style={[S.$card, S.$guideRow, isRTL && { flexDirection: "row-reverse" }]}>
               <View style={S.$guideIconWrap}>
                 <HeaderBell width={25} height={25} color="#1062D8" />
               </View>
@@ -104,7 +105,11 @@ export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigati
                   return (
                     <View key={workplace}>
                       <TouchableOpacity
-                        style={[S.$workplaceRow, isSelected && S.$workplaceRowSelected]}
+                        style={[
+                          S.$workplaceRow,
+                          isSelected && S.$workplaceRowSelected,
+                          isRTL && { flexDirection: "row-reverse" },
+                        ]}
                         activeOpacity={0.7}
                         onPress={() => toggleWorkplace(workplace)}
                       >
@@ -132,16 +137,16 @@ export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigati
 
             {/* 알림 제목 */}
             <View style={S.$section}>
-              <View style={S.$sectionLabelRow}>
+              <View style={[S.$sectionLabelRow, isRTL && { flexDirection: "row-reverse" }]}>
                 <Text
                   text={translate("safeBoardNotifyScreen:notifyTitle.label")}
                   style={S.$sectionLabel}
                 />
                 <Text text=" *" style={S.$requiredMark} />
               </View>
-              <View style={S.$inputRow}>
+              <View style={[S.$inputRow, isRTL && { flexDirection: "row-reverse" }]}>
                 <TextInput
-                  style={S.$inputText}
+                  style={[S.$inputText, isRTL && { textAlign: "right" }]}
                   value={notifyTitle}
                   onChangeText={(t) => setNotifyTitle(t.slice(0, 50))}
                   placeholder={translate("safeBoardNotifyScreen:notifyTitle.placeholder")}
@@ -157,7 +162,7 @@ export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigati
 
             {/* 알림 내용 */}
             <View style={[S.$section, { borderBottomWidth: 0 }]}>
-              <View style={S.$sectionLabelRow}>
+              <View style={[S.$sectionLabelRow, isRTL && { flexDirection: "row-reverse" }]}>
                 <Text
                   text={translate("safeBoardNotifyScreen:content.label")}
                   style={S.$sectionLabel}
@@ -166,7 +171,7 @@ export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigati
               </View>
               <View style={S.$textarea}>
                 <TextInput
-                  style={S.$textareaInput}
+                  style={[S.$textareaInput, isRTL && { textAlign: "right" }]}
                   value={content}
                   onChangeText={(t) => setContent(t.slice(0, 240))}
                   placeholder={translate("safeBoardNotifyScreen:content.placeholder")}

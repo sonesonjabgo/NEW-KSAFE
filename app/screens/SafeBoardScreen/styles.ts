@@ -6,16 +6,16 @@ import { typography } from "@/theme/typography"
 // ── Header right slot ─────────────────────────────────────────────────────────
 
 export const $bellIconContainer: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: "column",
   alignItems: "center",
-  flexWrap: "nowrap",
-  gap: 6,
+  gap: 3,
 }
 
 export const $bellText: TextStyle = {
   color: "#FFFFFF",
-  fontSize: 12,
+  fontSize: 11,
   fontFamily: typography.primary.medium,
+  textAlign: "center",
 }
 
 // ── Workplace selector ────────────────────────────────────────────────────────
@@ -119,7 +119,6 @@ export const $emptyText: TextStyle = {
 
 export const $fabWrapper: ViewStyle = {
   position: "absolute",
-  right: 20,
   alignItems: "center",
 }
 

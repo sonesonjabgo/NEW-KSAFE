@@ -36,7 +36,8 @@ const MOCK_WORKPLACES = [
 ]
 
 export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigation }) => {
-  useTranslation()
+  const { i18n } = useTranslation()
+  const isRTL = i18n.language === "ur"
   const insets = useSafeAreaInsets()
   const { isSmallPhone } = useResponsive()
 
@@ -111,7 +112,7 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
             keyboardShouldPersistTaps="handled"
           >
             {/* 작성 가이드 */}
-            <View style={[S.$card, S.$guideRow]}>
+            <View style={[S.$card, S.$guideRow, isRTL && { flexDirection: "row-reverse" }]}>
               <View style={S.$guideIconWrap}>
                 <HeaderBell width={25} height={25} color="#1062D8" />
               </View>
@@ -131,7 +132,7 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
                 style={S.$sectionLabel}
               />
               <TouchableOpacity
-                style={S.$inputRow}
+                style={[S.$inputRow, isRTL && { flexDirection: "row-reverse" }]}
                 activeOpacity={0.7}
                 onPress={openWorkplaceModal}
               >
@@ -150,16 +151,16 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
 
             {/* 게시글 제목 */}
             <View style={S.$section}>
-              <View style={S.$labelRow}>
+              <View style={[S.$labelRow, isRTL && { flexDirection: "row-reverse" }]}>
                 <Text
                   text={translate("safeBoardCreateScreen:postTitle.label")}
                   style={S.$sectionLabel}
                 />
                 <Text text=" *" style={S.$required} />
               </View>
-              <View style={S.$inputRow}>
+              <View style={[S.$inputRow, isRTL && { flexDirection: "row-reverse" }]}>
                 <TextInput
-                  style={S.$inputText}
+                  style={[S.$inputText, isRTL && { textAlign: "right" }]}
                   value={title}
                   onChangeText={(t) => setTitle(t.slice(0, 200))}
                   placeholder={translate("safeBoardCreateScreen:postTitle.placeholder")}
@@ -175,7 +176,7 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
 
             {/* 게시글 내용 */}
             <View style={S.$section}>
-              <View style={S.$labelRow}>
+              <View style={[S.$labelRow, isRTL && { flexDirection: "row-reverse" }]}>
                 <Text
                   text={translate("safeBoardCreateScreen:content.label")}
                   style={S.$sectionLabel}
@@ -184,7 +185,7 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
               </View>
               <View style={S.$textarea}>
                 <TextInput
-                  style={S.$textareaInput}
+                  style={[S.$textareaInput, isRTL && { textAlign: "right" }]}
                   value={content}
                   onChangeText={(t) => setContent(t.slice(0, 2000))}
                   placeholder={translate("safeBoardCreateScreen:content.placeholder")}
@@ -207,7 +208,7 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
                 style={S.$sectionLabel}
               />
               {/* 카드1 */}
-              <View style={S.$attachCard}>
+              <View style={[S.$attachCard, isRTL && { flexDirection: "row-reverse" }]}>
                 <BoardClip width={isSmallPhone ? 22 : 30} height={isSmallPhone ? 22 : 30} color="#1062D8" />
                 <Text
                   text={translate("safeBoardCreateScreen:attachment.card1Text")}
@@ -227,7 +228,7 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
 
               {/* 카드2 */}
               {attachedFiles.length === 0 ? (
-                <View style={S.$attachCard2Empty}>
+                <View style={[S.$attachCard2Empty, isRTL && { flexDirection: "row-reverse" }]}>
                   <BoardClip width={20} height={20} color="#48B568" />
                   <Text
                     text={translate("safeBoardCreateScreen:attachment.noFile")}
@@ -237,7 +238,7 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
               ) : (
                 <View style={S.$attachCard2FileList}>
                   {attachedFiles.map((file, idx) => (
-                    <View key={idx} style={S.$attachCard2FileRow}>
+                    <View key={idx} style={[S.$attachCard2FileRow, isRTL && { flexDirection: "row-reverse" }]}>
                       <BoardClip width={20} height={20} color="#525252" />
                       <Text text={file} style={S.$attachCard2FileText} numberOfLines={1} />
                       <TouchableOpacity
@@ -264,7 +265,13 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
                 text={translate("safeBoardCreateScreen:pushNotification.label")}
                 style={S.$sectionLabel}
               />
-              <View style={[S.$attachCard, isSmallPhone && { paddingTop: 18, paddingBottom: 18 }]}>
+              <View
+                style={[
+                  S.$attachCard,
+                  isSmallPhone && { paddingTop: 18, paddingBottom: 18 },
+                  isRTL && { flexDirection: "row-reverse" },
+                ]}
+              >
                 <HeaderBell
                   width={isSmallPhone ? 24 : 30}
                   height={isSmallPhone ? 24 : 30}

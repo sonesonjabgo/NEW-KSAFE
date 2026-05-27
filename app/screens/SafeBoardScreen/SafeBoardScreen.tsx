@@ -43,7 +43,8 @@ const filterByWorkplace = (posts: SafeBoardItem[], workplaceId: number): SafeBoa
 }
 
 export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route }) => {
-  useTranslation()
+  const { i18n } = useTranslation()
+  const isRTL = i18n.language === "ur"
   const insets = useSafeAreaInsets()
   const fabBottom = useMemo<ViewStyle>(() => ({ bottom: 30 + insets.bottom }), [insets.bottom])
   const { role } = useRole()
@@ -106,7 +107,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
             <View style={S.$workplaceContainer}>
               <Text text={translate("safeBoardScreen:workplaceLabel")} style={S.$workplaceLabel} />
               <TouchableOpacity
-                style={S.$workplaceSelectorNew}
+                style={[S.$workplaceSelectorNew, isRTL && { flexDirection: "row-reverse" }]}
                 activeOpacity={0.6}
                 onPress={openModal}
               >
@@ -121,7 +122,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
               </TouchableOpacity>
             </View>
 
-            <View style={S.$tabContainer}>
+            <View style={[S.$tabContainer, isRTL && { flexDirection: "row-reverse" }]}>
               <TouchableOpacity
                 style={[S.$tab, activeTab === "all" && S.$activeTab]}
                 activeOpacity={0.7}
@@ -191,7 +192,11 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
               return (
                 <TouchableOpacity
                   key={workplace}
-                  style={[S.$workplaceOption, isSelected && S.$workplaceOptionSelected]}
+                  style={[
+                    S.$workplaceOption,
+                    isSelected && S.$workplaceOptionSelected,
+                    isRTL && { flexDirection: "row-reverse" },
+                  ]}
                   activeOpacity={0.7}
                   onPress={() => {
                     setSelectedWorkplace(workplace)
@@ -217,7 +222,10 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
 
       {/* FAB — StackScreen의 overflow:hidden 밖에 배치 */}
       {isAdmin && (
-        <View style={[S.$fabWrapper, fabBottom]} pointerEvents="box-none">
+        <View
+          style={[S.$fabWrapper, fabBottom, isRTL ? { left: 20 } : { right: 20 }]}
+          pointerEvents="box-none"
+        >
           <TouchableOpacity
             style={S.$fab}
             activeOpacity={0.8}

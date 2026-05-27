@@ -1,6 +1,7 @@
 import { FC } from "react"
 import { View, TouchableOpacity, TextStyle, ViewStyle } from "react-native"
 import { PencilLine, MapPin } from "lucide-react-native"
+import { useTranslation } from "react-i18next"
 
 import BoardPin from "@assets/icons/board/board_pin.svg"
 
@@ -31,20 +32,22 @@ export const SafeBoardCard: FC<SafeBoardCardProps> = ({
   showDivider = true,
   onPress,
 }) => {
+  const { i18n } = useTranslation()
+  const isRTL = i18n.language === "ur"
   const statusBadgeType = showStatus ? getStatusBadgeType(item.status) : null
 
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
       <View style={$cardContainer}>
-        <View style={$contentWrapper}>
+        <View style={[$contentWrapper, isRTL && { flexDirection: "row-reverse" }]}>
           <View style={$mainContent}>
-            <View style={$scopeLabelRow}>
+            <View style={[$scopeLabelRow, isRTL && { flexDirection: "row-reverse" }]}>
               <SafeBoardBadge type={item.scope} />
               {statusBadgeType && <SafeBoardBadge type={statusBadgeType} />}
             </View>
             <Text text={item.title} style={$titleText} numberOfLines={3} />
             {item.scope === "workplace" ? (
-              <View style={$metaRow}>
+              <View style={[$metaRow, isRTL && { flexDirection: "row-reverse" }]}>
                 <MapPin size={12} color="#979797" strokeWidth={2.5} />
                 <Text text={item.workplaceName} style={$metaWorkplace} numberOfLines={1} />
                 <Text text=" · " style={$metaText} />
@@ -54,7 +57,7 @@ export const SafeBoardCard: FC<SafeBoardCardProps> = ({
               <Text text={item.createdAt} style={$metaText} />
             )}
           </View>
-          <View style={$iconContainer}>
+          <View style={[$iconContainer, isRTL && { flexDirection: "row-reverse" }]}>
             {item.isPinned && <BoardPin width={23} height={23} />}
             {showEditIcon && <PencilLine size={16} color="#979797" strokeWidth={2.5} />}
           </View>
