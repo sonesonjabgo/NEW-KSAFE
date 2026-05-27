@@ -274,17 +274,17 @@ const ko: Translations = {
     workplace: {
       label: "사업장 선택",
       placeholder: "사업장을 선택하세요",
-      helper: "이 게시글이 적용될 사업장을 선택하세요.",
+      helper: "글을 게시할 사업장을 선택해주세요.",
     },
     postTitle: {
       label: "게시글 제목",
-      placeholder: "제목을 입력하세요 (최대 200자)",
-      helper: "명확하고 구체적인 제목을 입력하세요.",
+      placeholder: "공지 제목을 입력하세요.",
+      helper: "최대 80자까지 입력할 수 있습니다.",
     },
     content: {
       label: "게시글 내용",
-      placeholder: "내용을 입력하세요 (최대 2000자)",
-      helper: "안전 관련 내용을 자세히 작성해 주세요.",
+      placeholder: "현장에 전달할 상세 내용을 입력하세요.",
+      helper: "최대 4,000자까지 입력할 수 있습니다.",
     },
     attachment: {
       label: "첨부파일",

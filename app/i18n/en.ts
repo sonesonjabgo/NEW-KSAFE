@@ -276,17 +276,17 @@ const en = {
     workplace: {
       label: "Workplace",
       placeholder: "Select workplace",
-      helper: "Select the workplace this post applies to.",
+      helper: "Please select the workplace to post in.",
     },
     postTitle: {
       label: "Post Title",
-      placeholder: "Enter post title (max 200 characters)",
-      helper: "Enter a clear and descriptive title.",
+      placeholder: "Enter announcement title.",
+      helper: "Up to 80 characters.",
     },
     content: {
       label: "Post Content",
-      placeholder: "Enter post content (max 2000 characters)",
-      helper: "Describe the safety issue in detail.",
+      placeholder: "Enter the detailed content to deliver to the site.",
+      helper: "Up to 4,000 characters.",
     },
     attachment: {
       label: "Attachments",

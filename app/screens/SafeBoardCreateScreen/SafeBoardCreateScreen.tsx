@@ -38,7 +38,7 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
   const [workplace, setWorkplace] = useState("")
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
-  const [sendPush, setSendPush] = useState(false)
+  const [sendPush, setSendPush] = useState(true)
   const [attachedFiles, setAttachedFiles] = useState<string[]>([])
   const [workplaceModalVisible, setWorkplaceModalVisible] = useState(false)
 
