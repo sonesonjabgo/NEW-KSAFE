@@ -61,7 +61,10 @@ export function StackScreen({
           )}
         </TouchableOpacity>
 
-        <View style={$headerTitleContainer} pointerEvents="none">
+        <View
+          style={[$headerTitleContainer, { top: insets.top + 10, bottom: 14 }]}
+          pointerEvents="none"
+        >
           <Text text={title} style={$headerTitle} />
         </View>
 
@@ -95,11 +98,13 @@ const $headerSide: ViewStyle = {
   height: 36,
   justifyContent: "center",
   alignItems: "center",
+  transform: [{ translateY: 2 }],
 }
 
 const $headerSideRight: ViewStyle = {
   width: "auto",
   alignItems: isRTL ? "flex-start" : "flex-end",
+  transform: [{ translateY: 1 }],
 }
 
 const $chevronRTL: ViewStyle = {
@@ -110,14 +115,18 @@ const $headerTitleContainer: ViewStyle = {
   position: "absolute",
   left: 0,
   right: 0,
+  justifyContent: "center",
   alignItems: "center",
 }
 
 const $headerTitle: TextStyle = {
   fontSize: 20,
+  lineHeight: 24,
   fontFamily: typography.primary.semiBold,
   color: "#FFFFFF",
   textAlign: "center",
+  includeFontPadding: false,
+  textAlignVertical: "center",
 }
 
 const $content: ViewStyle = {
