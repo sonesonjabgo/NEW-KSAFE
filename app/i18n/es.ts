@@ -51,11 +51,14 @@ const es: Translations = {
       message: "Para recuperar su contraseña, contacte al administrador.\nTeléfono: 062-383-0083",
       confirm: "Aceptar",
     },
-    validation: {
-      required: "Por favor ingrese su correo electrónico y contraseña.",
-      invalidEmail: "Por favor ingrese una dirección de correo válida.",
-      passwordTooShort: "La contraseña debe tener al menos 6 caracteres.",
-      invalidCredentials: "Por favor verifique su correo electrónico o contraseña.",
+    alert: {
+      invalidCredentials: "Correo electrónico o contraseña incorrectos.",
+      signInFailed: "Error al iniciar sesión. Por favor intente de nuevo.",
+      fillFields: "Por favor complete todos los campos requeridos.",
+      passwordLength: "La contraseña debe tener al menos 6 caracteres.",
+      unauthorizedRole: "Esta cuenta no tiene acceso.",
+      deactivatedAccount: "Esta cuenta ha sido desactivada. Contacte a su administrador.",
+      profileLoadFailed: "No se pudo cargar la información del usuario. Intente de nuevo.",
     },
   },
   demoNavigator: {

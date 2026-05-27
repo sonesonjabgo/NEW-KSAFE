@@ -1,5 +1,6 @@
 import { FC, useState } from "react"
 import {
+  ActivityIndicator,
   TextInput,
   TextStyle,
   TouchableOpacity,
@@ -20,6 +21,7 @@ import MailSvg from "@assets/icons/login/mail.svg"
 
 import { ConfirmModal } from "@/components/ConfirmModal"
 import { Screen } from "@/components/Screen"
+import { useAuth } from "@/context/AuthContext"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { colors } from "@/theme/colors"
@@ -29,6 +31,7 @@ interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
 export const LoginScreen: FC<LoginScreenProps> = () => {
   const navigation = useNavigation<any>()
+  const { signIn } = useAuth()
   const [secureText, setSecureText] = useState(true)
   const [forgotModalVisible, setForgotModalVisible] = useState(false)
   const [isEmailFocused, setIsEmailFocused] = useState(false)
@@ -37,6 +40,8 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
   const [password, setPassword] = useState("")
   const [emailError, setEmailError] = useState("")
   const [passwordError, setPasswordError] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [loginError, setLoginError] = useState("")
   const { bottom: bottomInset } = useSafeAreaInsets()
   const {
     width,
@@ -115,27 +120,37 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
 
   const EMAIL_REGEX = /\S+@\S+\.\S+/
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     let emailErr = ""
     let passwordErr = ""
 
     if (!email) {
-      emailErr = translate("loginScreen:validation.required")
+      emailErr = translate("loginScreen:alert.fillFields")
     } else if (!EMAIL_REGEX.test(email)) {
-      emailErr = translate("loginScreen:validation.invalidEmail")
+      emailErr = translate("loginScreen:alert.invalidCredentials")
     }
 
     if (!password) {
-      passwordErr = translate("loginScreen:validation.required")
+      passwordErr = translate("loginScreen:alert.fillFields")
     } else if (password.length < 6) {
-      passwordErr = translate("loginScreen:validation.passwordTooShort")
+      passwordErr = translate("loginScreen:alert.passwordLength")
     }
 
     setEmailError(emailErr)
     setPasswordError(passwordErr)
 
-    // TODO: 실제 로그인 연동 시 (emailErr || passwordErr) 조건에서 return 처리
-    // TODO: API 로그인 실패 응답 시 setPasswordError(translate("loginScreen:validation.invalidCredentials"))
+    if (emailErr || passwordErr) return
+
+    setLoginError("")
+    setLoading(true)
+    const result = await signIn(email.trim(), password)
+    setLoading(false)
+
+    if (result.error) {
+      setLoginError(result.error)
+      return
+    }
+
     navigation.navigate("Main")
   }
 
@@ -193,9 +208,9 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
                   onBlur={() => {
                     setIsEmailFocused(false)
                     if (!email) {
-                      setEmailError(translate("loginScreen:validation.required"))
+                      setEmailError(translate("loginScreen:alert.fillFields"))
                     } else if (!EMAIL_REGEX.test(email)) {
-                      setEmailError(translate("loginScreen:validation.invalidEmail"))
+                      setEmailError(translate("loginScreen:alert.invalidCredentials"))
                     } else {
                       setEmailError("")
                     }
@@ -231,9 +246,9 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
                   onBlur={() => {
                     setIsPasswordFocused(false)
                     if (!password) {
-                      setPasswordError(translate("loginScreen:validation.required"))
+                      setPasswordError(translate("loginScreen:alert.fillFields"))
                     } else if (password.length < 6) {
-                      setPasswordError(translate("loginScreen:validation.passwordTooShort"))
+                      setPasswordError(translate("loginScreen:alert.passwordLength"))
                     } else {
                       setPasswordError("")
                     }
@@ -254,13 +269,21 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
 
             <View style={$gapL} />
 
+            {/* API 로그인 에러 */}
+            {!!loginError && <RNText style={$errorText}>{loginError}</RNText>}
+
             {/* 로그인 버튼 */}
             <TouchableOpacity
-              style={[$loginButton, $controlDynamic]}
+              style={[$loginButton, $controlDynamic, loading && $loginButtonDisabled]}
               onPress={handleLogin}
               activeOpacity={0.85}
+              disabled={loading}
             >
-              <RNText style={$loginButtonText}>{translate("loginScreen:logIn")}</RNText>
+              {loading ? (
+                <ActivityIndicator color="#FFFFFF" />
+              ) : (
+                <RNText style={$loginButtonText}>{translate("loginScreen:logIn")}</RNText>
+              )}
             </TouchableOpacity>
 
             <View style={$gapS} />
@@ -416,6 +439,10 @@ const $loginButton: ViewStyle = {
   borderRadius: 12,
   justifyContent: "center",
   alignItems: "center",
+}
+
+const $loginButtonDisabled: ViewStyle = {
+  opacity: 0.6,
 }
 
 const $loginButtonText: TextStyle = {

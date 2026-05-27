@@ -36,6 +36,7 @@ import ProfileSwitch from "@assets/icons/nav/profile_switch.svg"
 import { PushNotificationBottomSheet } from "@/components/PushNotificationBottomSheet"
 import { Text } from "@/components/Text"
 import { WebViewModal } from "@/components/WebViewModal"
+import { useAuth } from "@/context/AuthContext"
 import { useRole } from "@/context/RoleContext"
 import { isRTL } from "@/i18n/rtl"
 import { translate } from "@/i18n/translate"
@@ -58,7 +59,9 @@ type TabType = "all" | "company" | "workplace"
 export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
   const insets = useSafeAreaInsets()
   const { i18n } = useTranslation()
-  const { role: userRole, setRole: setUserRole } = useRole()
+  const { user, profile } = useAuth()
+  const displayName = profile?.username?.trim() || user?.name?.trim() || ""
+  const { role: userRole } = useRole()
   const [selectedTab, setSelectedTab] = useState<TabType>("all")
 
   // 언어 변경 완료 모달 — LanguageSettingsScreen에서 navigation.reset 후 전달
@@ -280,31 +283,6 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
         >
           {/* ── Header (blue background) ── */}
           <View style={[$header, $headerDynamic, { paddingTop: insets.top + 12 }]}>
-            {/* ── 임시 개발용 토글 영역 ── */}
-            <View style={$devToggleArea}>
-              {/* 역할 전환 */}
-              <View style={$roleToggleRow}>
-                <TouchableOpacity
-                  style={[$roleToggleBtn, userRole === "admin" && $roleToggleBtnActive]}
-                  onPress={() => setUserRole("admin")}
-                >
-                  <Text
-                    text={translate("homeScreen:role.admin")}
-                    style={[$roleToggleText, userRole === "admin" && $roleToggleTextActive]}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[$roleToggleBtn, userRole === "worker" && $roleToggleBtnActive]}
-                  onPress={() => setUserRole("worker")}
-                >
-                  <Text
-                    text={translate("homeScreen:role.worker")}
-                    style={[$roleToggleText, userRole === "worker" && $roleToggleTextActive]}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-
             {/* Row 1: Logo + Actions */}
             <View style={$titleRow}>
               <View style={{ maxWidth: "45%", flexShrink: 1 }}>
@@ -364,7 +342,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
             <View style={[$greetRow, $greetRowDynamic]}>
               <View style={$greetLeft}>
                 <Text
-                  text={translate("homeScreen:greeting.name", { name: "김영희" })}
+                  text={translate("homeScreen:greeting.name", { name: displayName })}
                   style={[$greetBold, $greetBoldDynamic]}
                   numberOfLines={2}
                 />
@@ -628,40 +606,6 @@ const $header: ViewStyle = {
   backgroundColor: colors.navy,
 }
 
-const $devToggleArea: ViewStyle = {
-  alignItems: "center",
-  gap: 8,
-  marginBottom: 10,
-}
-
-const $roleToggleRow: ViewStyle = {
-  flexDirection: "row",
-  alignSelf: "center",
-  backgroundColor: "rgba(255,255,255,0.15)",
-  borderRadius: 8,
-  padding: 3,
-  gap: 4,
-}
-
-const $roleToggleBtn: ViewStyle = {
-  paddingVertical: 6,
-  paddingHorizontal: 16,
-  borderRadius: 6,
-}
-
-const $roleToggleBtnActive: ViewStyle = {
-  backgroundColor: "#FFFFFF",
-}
-
-const $roleToggleText: TextStyle = {
-  fontSize: 13,
-  fontFamily: typography.primary.semiBold,
-  color: "rgba(255,255,255,0.6)",
-}
-
-const $roleToggleTextActive: TextStyle = {
-  color: colors.navy,
-}
 
 const $titleRow: ViewStyle = {
   flexDirection: isRTL ? "row-reverse" : "row",

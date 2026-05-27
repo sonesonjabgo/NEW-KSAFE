@@ -96,7 +96,7 @@ const CONFIRM_TEXT: Record<string, string> = {
 
 export const LanguageSettingsScreen: FC = () => {
   const navigation = useNavigation()
-  const { authToken } = useAuth()
+  const { token: authToken } = useAuth()
 
   /* ── 상태 ── */
   const [languages, setLanguages] = useState<Language[]>(FALLBACK_LANGUAGES)

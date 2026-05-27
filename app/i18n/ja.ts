@@ -51,11 +51,14 @@ const ja: Translations = {
       message: "パスワード再発行については、\n管理者にお問い合わせください。\n電話：062-383-0083",
       confirm: "確認",
     },
-    validation: {
-      required: "メールアドレスとパスワードを入力してください。",
-      invalidEmail: "有効なメールアドレスを入力してください。",
-      passwordTooShort: "パスワードは6文字以上で入力してください。",
-      invalidCredentials: "メールアドレスまたはパスワードを確認してください。",
+    alert: {
+      invalidCredentials: "メールアドレスまたはパスワードが正しくありません。",
+      signInFailed: "ログインに失敗しました。再度お試しください。",
+      fillFields: "必須項目をすべて入力してください。",
+      passwordLength: "パスワードは6文字以上で入力してください。",
+      unauthorizedRole: "このアカウントにはアクセス権限がありません。",
+      deactivatedAccount: "このアカウントは無効化されています。管理者にお問い合わせください。",
+      profileLoadFailed: "ユーザー情報の読み込みに失敗しました。再度お試しください。",
     },
   },
   demoNavigator: {

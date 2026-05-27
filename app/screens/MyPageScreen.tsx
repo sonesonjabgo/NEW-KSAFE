@@ -24,21 +24,17 @@ import { typography } from "@/theme/typography"
 
 const ICON_COLOR = "#000000"
 
-const MOCK_USER = {
-  admin: { userName: "김관리", email: "admin-5@example.com" },
-  worker: { userName: "김근로", email: "worker-1@example.com" },
-} as const
-
 const ORG_NAME = "KS산업안전협회"
 
 export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) => {
-  const { authEmail, logout } = useAuth()
+  const { user, profile, signOut } = useAuth()
+  const displayName = profile?.username?.trim() || user?.name?.trim() || ""
+  const displayEmail = user?.email || ""
   const { role } = useRole()
   const [notificationEnabled, setNotificationEnabled] = useState(true)
   const [logoutModalVisible, setLogoutModalVisible] = useState(false)
 
   const isWorker = role === "worker"
-  const mockUser = MOCK_USER[role]
 
   const handleOpenSettings = () => {
     Linking.openSettings()
@@ -46,7 +42,7 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
 
   const handleLogoutConfirm = () => {
     setLogoutModalVisible(false)
-    logout()
+    void signOut()
     navigation.reset({ index: 0, routes: [{ name: "Login" }] })
   }
 
@@ -62,11 +58,7 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
             <View style={$headerRight} />
           </View>
 
-          <ProfileCard
-            orgName={ORG_NAME}
-            userName={mockUser.userName}
-            email={authEmail || mockUser.email}
-          />
+          <ProfileCard orgName={ORG_NAME} userName={displayName} email={displayEmail} />
 
           {isWorker && <WorkplaceChip name={translate("myPageScreen:workplace.label")} />}
         </View>

@@ -16,11 +16,14 @@ const zhOverrides = {
       message: "如需找回密码，请联系\n您的管理员。\n电话：062-383-0083",
       confirm: "确定",
     },
-    validation: {
-      required: "请输入您的邮箱和密码。",
-      invalidEmail: "请输入有效的邮箱地址。",
-      passwordTooShort: "密码至少需要6个字符。",
-      invalidCredentials: "请检查您的邮箱或密码。",
+    alert: {
+      invalidCredentials: "邮箱或密码不正确。",
+      signInFailed: "登录失败，请重试。",
+      fillFields: "请填写所有必填项。",
+      passwordLength: "密码至少需要6个字符。",
+      unauthorizedRole: "该账户没有访问权限。",
+      deactivatedAccount: "该账户已被停用，请联系管理员。",
+      profileLoadFailed: "无法加载用户信息，请重试。",
     },
   },
   homeScreen: {

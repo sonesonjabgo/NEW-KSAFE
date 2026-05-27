@@ -36,7 +36,7 @@ export const EpisodeProvider: FC<PropsWithChildren<EpisodeProviderProps>> = ({ c
   const fetchEpisodes = useCallback(async () => {
     const response = await api.getEpisodes()
     if (response.kind === "ok") {
-      setEpisodes(response.episodes)
+      setEpisodes((response as any).episodes ?? [])
     } else {
       console.error(`Error fetching episodes: ${JSON.stringify(response)}`)
     }

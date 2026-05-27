@@ -4,10 +4,13 @@
  * Generally speaking, it will contain an auth flow (registration, login, forgot password)
  * and a "main" flow which the user will use once logged in.
  */
+import { useEffect } from "react"
 import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 
 import Config from "@/config"
+import { useAuth } from "@/context/AuthContext"
+import { useRole } from "@/context/RoleContext"
 import { AiRiskDocCreatorScreen } from "@/screens/AiRiskDocCreatorScreen"
 import { AISafetyChatScreen } from "@/screens/AISafetyChatScreen/AISafetyChatScreen"
 import { EducationMaterialDetailScreen } from "@/screens/EducationMaterialDetailScreen/EducationMaterialDetailScreen"
@@ -65,18 +68,24 @@ const exitRoutes = Config.exitRoutes
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
-type AppStackProps = {
-  initialRouteName: keyof AppStackParamList
-}
-
-const AppStack = ({ initialRouteName }: AppStackProps) => {
+const AppStack = () => {
   const {
     theme: { colors },
   } = useAppTheme()
+  const { isAuthenticated, user } = useAuth()
+  const { setRole } = useRole()
+
+  useEffect(() => {
+    if (user?.role === "workplace_admin") {
+      setRole("admin")
+    } else {
+      setRole("worker")
+    }
+  }, [user?.role, setRole])
 
   return (
     <Stack.Navigator
-      initialRouteName={initialRouteName}
+      initialRouteName={isAuthenticated ? "Main" : "WelcomeIntro"}
       screenOptions={{
         headerShown: false,
         navigationBarColor: colors.background,
@@ -134,11 +143,7 @@ const AppStack = ({ initialRouteName }: AppStackProps) => {
   )
 }
 
-type AppNavigatorProps = NavigationProps & {
-  initialRouteName: keyof AppStackParamList
-}
-
-export const AppNavigator = ({ initialRouteName, ...props }: AppNavigatorProps) => {
+export const AppNavigator = (props: NavigationProps) => {
   const { navigationTheme } = useAppTheme()
 
   useBackButtonHandler((routeName) => exitRoutes.includes(routeName))
@@ -146,7 +151,7 @@ export const AppNavigator = ({ initialRouteName, ...props }: AppNavigatorProps) 
   return (
     <NavigationContainer ref={navigationRef} theme={navigationTheme} {...props}>
       <ErrorBoundary catchErrors={Config.catchErrors}>
-        <AppStack initialRouteName={initialRouteName} />
+        <AppStack />
       </ErrorBoundary>
     </NavigationContainer>
   )

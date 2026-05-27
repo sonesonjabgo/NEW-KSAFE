@@ -52,11 +52,14 @@ const fr: Translations = {
         "Pour la récupération de mot de passe, veuillez contacter\nvotre administrateur.\nTél : 062-383-0083",
       confirm: "OK",
     },
-    validation: {
-      required: "Veuillez saisir votre e-mail et votre mot de passe.",
-      invalidEmail: "Veuillez saisir une adresse e-mail valide.",
-      passwordTooShort: "Le mot de passe doit comporter au moins 6 caractères.",
-      invalidCredentials: "Veuillez vérifier votre e-mail ou mot de passe.",
+    alert: {
+      invalidCredentials: "E-mail ou mot de passe incorrect.",
+      signInFailed: "Échec de la connexion. Veuillez réessayer.",
+      fillFields: "Veuillez remplir tous les champs requis.",
+      passwordLength: "Le mot de passe doit comporter au moins 6 caractères.",
+      unauthorizedRole: "Ce compte n'a pas accès.",
+      deactivatedAccount: "Ce compte a été désactivé. Veuillez contacter votre administrateur.",
+      profileLoadFailed: "Impossible de charger les informations utilisateur. Réessayez.",
     },
   },
   demoNavigator: {

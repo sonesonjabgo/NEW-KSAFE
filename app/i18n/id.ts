@@ -17,11 +17,14 @@ const idOverrides = {
         "Untuk pemulihan kata sandi, silakan hubungi\nadministrator Anda.\nTelp: 062-383-0083",
       confirm: "OK",
     },
-    validation: {
-      required: "Harap masukkan email dan kata sandi Anda.",
-      invalidEmail: "Harap masukkan alamat email yang valid.",
-      passwordTooShort: "Kata sandi minimal 6 karakter.",
-      invalidCredentials: "Periksa email atau kata sandi Anda.",
+    alert: {
+      invalidCredentials: "Email atau kata sandi tidak valid.",
+      signInFailed: "Masuk gagal. Silakan coba lagi.",
+      fillFields: "Harap isi semua kolom yang diperlukan.",
+      passwordLength: "Kata sandi minimal 6 karakter.",
+      unauthorizedRole: "Akun ini tidak memiliki akses.",
+      deactivatedAccount: "Akun ini telah dinonaktifkan. Hubungi administrator Anda.",
+      profileLoadFailed: "Gagal memuat informasi pengguna. Silakan coba lagi.",
     },
   },
   homeScreen: {

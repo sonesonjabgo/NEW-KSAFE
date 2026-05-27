@@ -16,11 +16,14 @@ const viOverrides = {
       message: "Để khôi phục mật khẩu, vui lòng liên hệ\nquản trị viên của bạn.\nĐT: 062-383-0083",
       confirm: "OK",
     },
-    validation: {
-      required: "Vui lòng nhập email và mật khẩu.",
-      invalidEmail: "Vui lòng nhập địa chỉ email hợp lệ.",
-      passwordTooShort: "Mật khẩu phải có ít nhất 6 ký tự.",
-      invalidCredentials: "Vui lòng kiểm tra email hoặc mật khẩu của bạn.",
+    alert: {
+      invalidCredentials: "Email hoặc mật khẩu không hợp lệ.",
+      signInFailed: "Đăng nhập thất bại. Vui lòng thử lại.",
+      fillFields: "Vui lòng điền đầy đủ các trường bắt buộc.",
+      passwordLength: "Mật khẩu phải có ít nhất 6 ký tự.",
+      unauthorizedRole: "Tài khoản này không có quyền truy cập.",
+      deactivatedAccount: "Tài khoản này đã bị vô hiệu hóa. Vui lòng liên hệ quản trị viên.",
+      profileLoadFailed: "Không thể tải thông tin người dùng. Vui lòng thử lại.",
     },
   },
   homeScreen: {
