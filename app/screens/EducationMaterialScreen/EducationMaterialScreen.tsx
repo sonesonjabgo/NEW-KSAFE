@@ -12,6 +12,7 @@ import { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { MOCK_EDUCATION_MATERIALS } from "@/screens/EducationSelectScreen/mockData"
 import * as Shared from "@/screens/EducationSelectScreen/styles"
 import { EducationMaterial, EducationSubcategory } from "@/screens/EducationSelectScreen/types"
+import { useResponsive } from "@/theme/responsive"
 
 import * as S from "./styles"
 
@@ -39,6 +40,7 @@ export const EducationMaterialScreen: FC<EducationMaterialScreenProps> = ({ navi
   const [query, setQuery] = useState("")
   const [categoryTab, setCategoryTab] = useState<CategoryTab>("전체")
 
+  const { isSmallPhone } = useResponsive()
   const sourceTabs = useMemo(
     () => [
       translate("educationSelectScreen:sourceTab1"),
@@ -113,13 +115,21 @@ export const EducationMaterialScreen: FC<EducationMaterialScreenProps> = ({ navi
             return (
               <TouchableOpacity
                 key={index}
-                style={[Shared.$sourceTab, isActive && Shared.$sourceTabActive]}
+                style={[
+                  Shared.$sourceTab,
+                  isActive && Shared.$sourceTabActive,
+                  isSmallPhone && { paddingVertical: 10 },
+                ]}
                 activeOpacity={0.7}
                 onPress={() => handleSourceTabChange(index as 0 | 1 | 2)}
               >
                 <Text
                   text={label}
-                  style={[Shared.$sourceTabText, isActive && Shared.$sourceTabTextActive]}
+                  style={[
+                    Shared.$sourceTabText,
+                    isActive && Shared.$sourceTabTextActive,
+                    isSmallPhone && { fontSize: 13 },
+                  ]}
                 />
               </TouchableOpacity>
             )
@@ -128,11 +138,11 @@ export const EducationMaterialScreen: FC<EducationMaterialScreenProps> = ({ navi
 
         {/* 검색 바 — 내가 만든 자료 탭에서는 숨김 */}
         {sourceTabIndex !== 2 && (
-          <View style={Shared.$searchSection}>
-            <View style={Shared.$searchRow}>
-              <IconSearch size={24} color="#A9AAAC" />
+          <View style={[Shared.$searchSection, isSmallPhone && { paddingVertical: 10 }]}>
+            <View style={[Shared.$searchRow, isSmallPhone && { height: 50 }]}>
+              <IconSearch size={isSmallPhone ? 20 : 24} color="#A9AAAC" />
               <TextInput
-                style={Shared.$searchInput}
+                style={[Shared.$searchInput, isSmallPhone && { fontSize: 14 }]}
                 value={query}
                 onChangeText={setQuery}
                 placeholder={translate("educationSelectScreen:searchPlaceholder")}

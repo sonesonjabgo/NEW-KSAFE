@@ -9,6 +9,7 @@ import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
 import { AppStackScreenProps } from "@/navigators/navigationTypes"
+import { useResponsive } from "@/theme/responsive"
 
 import { MOCK_EDUCATION_MATERIALS } from "./mockData"
 import * as S from "./styles"
@@ -28,6 +29,7 @@ const CATEGORY_TABS: CategoryTab[] = ["전체", "감전사고", "공통", "기�
 
 export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigation, route }) => {
   const insets = useSafeAreaInsets()
+  const { isSmallPhone } = useResponsive()
   const { initialSelected = [], onConfirm } = route.params
 
   const [sourceTabIndex, setSourceTabIndex] = useState<0 | 1 | 2>(0)
@@ -129,22 +131,33 @@ export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigati
             return (
               <TouchableOpacity
                 key={index}
-                style={[S.$sourceTab, isActive && S.$sourceTabActive]}
+                style={[
+                  S.$sourceTab,
+                  isActive && S.$sourceTabActive,
+                  isSmallPhone && { paddingVertical: 10 },
+                ]}
                 activeOpacity={0.7}
                 onPress={() => handleSourceTabChange(index as 0 | 1 | 2)}
               >
-                <Text text={label} style={[S.$sourceTabText, isActive && S.$sourceTabTextActive]} />
+                <Text
+                  text={label}
+                  style={[
+                    S.$sourceTabText,
+                    isActive && S.$sourceTabTextActive,
+                    isSmallPhone && { fontSize: 13 },
+                  ]}
+                />
               </TouchableOpacity>
             )
           })}
         </View>
 
         {/* 검색 바 */}
-        <View style={S.$searchSection}>
-          <View style={S.$searchRow}>
-            <IconSearch size={24} color="#A9AAAC" />
+        <View style={[S.$searchSection, isSmallPhone && { paddingVertical: 10 }]}>
+          <View style={[S.$searchRow, isSmallPhone && { height: 50 }]}>
+            <IconSearch size={isSmallPhone ? 20 : 24} color="#A9AAAC" />
             <TextInput
-              style={S.$searchInput}
+              style={[S.$searchInput, isSmallPhone && { fontSize: 14 }]}
               value={query}
               onChangeText={setQuery}
               placeholder={translate("educationSelectScreen:searchPlaceholder")}
