@@ -26,6 +26,7 @@ import { Text } from "@/components/Text"
 import { Toast } from "@/components/Toast"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
+import { useResponsive } from "@/theme/responsive"
 
 import { mockProposalDetails } from "./mockData"
 import * as S from "./styles"
@@ -68,6 +69,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
 }) => {
   const { role } = useRole()
   const insets = useSafeAreaInsets()
+  const { isSmallPhone } = useResponsive()
   const isAdmin = role === "admin"
 
   // TODO: 추후 로그인 사용자 정보 연동 시 실제 사용자 이름으로 교체
@@ -854,6 +856,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
 
       <ConfirmModal
         visible={deleteModalVisible}
+        cardStyle={{ width: isSmallPhone ? 290 : 330 }}
         icon={
           <View style={S.$modalDeleteIconCircle}>
             <IconTrash size={26} color="#E03526" />
