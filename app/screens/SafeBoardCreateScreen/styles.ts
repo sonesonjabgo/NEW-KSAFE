@@ -149,7 +149,7 @@ export const $attachCard: ViewStyle = {
   borderColor: "#B5CEF3",
   borderRadius: 12,
   backgroundColor: "#F4F8FD",
-  height: 66,
+  minHeight: 66,
   paddingHorizontal: 16,
 }
 

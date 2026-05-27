@@ -17,6 +17,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import BoardClip from "@assets/icons/board/board_clip.svg"
 import HeaderBell from "@assets/icons/nav/header_bell.svg"
 
+import { useResponsive } from "@/theme/responsive"
+
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
@@ -34,6 +36,7 @@ const MOCK_WORKPLACES = [
 
 export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
+  const { isSmallPhone } = useResponsive()
 
   const [workplace, setWorkplace] = useState("")
   const [title, setTitle] = useState("")
@@ -114,7 +117,7 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
                 <Text text={translate("safeBoardCreateScreen:guide.title")} style={S.$guideTitle} />
                 <Text
                   text={translate("safeBoardCreateScreen:guide.description")}
-                  style={S.$guideDesc}
+                  style={[S.$guideDesc, isSmallPhone && { fontSize: 14 }]}
                 />
               </View>
             </View>
@@ -203,10 +206,10 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
               />
               {/* 카드1 */}
               <View style={S.$attachCard}>
-                <BoardClip width={30} height={30} color="#1062D8" />
+                <BoardClip width={isSmallPhone ? 22 : 30} height={isSmallPhone ? 22 : 30} color="#1062D8" />
                 <Text
                   text={translate("safeBoardCreateScreen:attachment.card1Text")}
-                  style={S.$attachCardText}
+                  style={[S.$attachCardText, isSmallPhone && { fontSize: 12 }]}
                 />
                 <TouchableOpacity
                   style={S.$attachUploadBtn}
@@ -248,13 +251,23 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
             </View>
 
             {/* 푸시 알림 함께 보내기 */}
-            <View style={[S.$section, { borderBottomWidth: 0, gap: 20 }]}>
+            <View
+              style={[
+                S.$section,
+                { borderBottomWidth: 0, gap: 20 },
+                isSmallPhone && { paddingTop: 12, paddingBottom: 28 },
+              ]}
+            >
               <Text
                 text={translate("safeBoardCreateScreen:pushNotification.label")}
                 style={S.$sectionLabel}
               />
-              <View style={S.$attachCard}>
-                <HeaderBell width={30} height={30} color="#1062D8" />
+              <View style={[S.$attachCard, isSmallPhone && { paddingTop: 18, paddingBottom: 18 }]}>
+                <HeaderBell
+                  width={isSmallPhone ? 24 : 30}
+                  height={isSmallPhone ? 24 : 30}
+                  color="#1062D8"
+                />
                 <Text
                   text={translate("safeBoardCreateScreen:pushNotification.cardText")}
                   style={S.$attachCardText}
