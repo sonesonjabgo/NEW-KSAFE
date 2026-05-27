@@ -847,7 +847,7 @@ const $boardItem: ViewStyle = {
   alignItems: "flex-start",
   paddingVertical: 18,
   paddingHorizontal: 16,
-  gap: 6,
+  gap: 12,
   borderBottomWidth: StyleSheet.hairlineWidth,
   borderBottomColor: "#E9ECF0",
 }
@@ -855,7 +855,6 @@ const $boardItem: ViewStyle = {
 const $tagWrap: ViewStyle = {
   flexShrink: 0,
   alignItems: isRTL ? "flex-end" : "flex-start",
-  width: 96,
   overflow: "hidden",
 }
 
