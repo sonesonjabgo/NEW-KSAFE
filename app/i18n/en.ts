@@ -568,6 +568,11 @@ const en = {
   educationPresentationScreen: {
     title: "Education/Presentation",
     inviteButton: "Invite",
+    inviteModal: {
+      title: "Invite Participants",
+      description: "Share the QR code or invite code\nto invite participants.",
+      close: "Close",
+    },
     inputLanguageLabel: "Input Language",
     languageMenu: { title: "Select Language" },
     recognizing: "Recognizing voice...",

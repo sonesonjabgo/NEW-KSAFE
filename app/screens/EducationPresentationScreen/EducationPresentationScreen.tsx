@@ -1,5 +1,6 @@
 import { FC, useState, useRef, useCallback } from "react"
 import {
+  Modal,
   View,
   ViewStyle,
   TextStyle,
@@ -17,8 +18,10 @@ import {
   IconMicrophone,
   IconArrowUp,
   IconInfoCircle,
+  IconUsers,
 } from "@tabler/icons-react-native"
 import { Square } from "lucide-react-native"
+import QRCode from "react-native-qrcode-svg"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { LanguagePickerModal } from "@/components/LanguagePickerModal"
@@ -28,6 +31,7 @@ import { LANGUAGES, LanguageKey } from "@/constants/languages"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { colors } from "@/theme/colors"
+import { useResponsive } from "@/theme/responsive"
 import { typography } from "@/theme/typography"
 
 // TODO: API 연동 시 navigation params로 roomId 수신
@@ -52,6 +56,7 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
   navigation,
 }) => {
   const { bottom } = useSafeAreaInsets()
+  const { isSmallPhone } = useResponsive()
   const flatListRef = useRef<FlatList<MessageItem>>(null)
 
   const [inputLanguage, setInputLanguage] = useState<LanguageKey>("korean")
@@ -63,6 +68,7 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
   const [inputHeight, setInputHeight] = useState(40)
   const [inputFocused, setInputFocused] = useState(false)
   const [showValidationError, setShowValidationError] = useState(false)
+  const [inviteModalVisible, setInviteModalVisible] = useState(false)
 
   const getLangLabel = (key: LanguageKey) =>
     translate(`educationPresentationScreen:languages.${key}` as any)
@@ -104,7 +110,7 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
         title={`${translate("educationPresentationScreen:title")}\n${MOCK_ROOM_ID}`}
         onBack={() => navigation.goBack()}
         rightSlot={
-          <TouchableOpacity activeOpacity={0.7}>
+          <TouchableOpacity activeOpacity={0.7} onPress={() => setInviteModalVisible(true)}>
             <Text
               text={translate("educationPresentationScreen:inviteButton")}
               style={$inviteText}
@@ -268,6 +274,75 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
         onSelect={setInputLanguage}
         onClose={() => setLangMenuVisible(false)}
       />
+
+      <Modal
+        visible={inviteModalVisible}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setInviteModalVisible(false)}
+      >
+        <TouchableOpacity
+          style={$inviteModalOverlay}
+          activeOpacity={1}
+          onPress={() => setInviteModalVisible(false)}
+        >
+          <TouchableOpacity
+            style={[
+              $inviteModalCard,
+              isSmallPhone && { width: 290, height: 440, paddingTop: 24, paddingBottom: 18 },
+            ]}
+            activeOpacity={1}
+            onPress={() => {}}
+          >
+            {/* 아이콘 */}
+            <View style={[$inviteIconCircle, isSmallPhone && { marginBottom: 10 }]}>
+              <IconUsers size={24} color={colors.blue} strokeWidth={1.8} />
+            </View>
+
+            {/* 제목 */}
+            <Text
+              text={translate("educationPresentationScreen:inviteModal.title")}
+              style={[$inviteModalTitle, isSmallPhone && { marginBottom: 6 }]}
+            />
+
+            {/* 설명 */}
+            <Text
+              text={translate("educationPresentationScreen:inviteModal.description")}
+              style={[$inviteModalDesc, isSmallPhone && { marginBottom: 12 }]}
+            />
+
+            {/* QR 코드 */}
+            <View
+              style={[
+                $qrWrapper,
+                isSmallPhone && { height: 135, marginBottom: 10, padding: 12 },
+              ]}
+            >
+              <QRCode value={MOCK_ROOM_ID} size={isSmallPhone ? 100 : 130} />
+            </View>
+
+            {/* 숫자 코드 */}
+            <View style={[$numericCodeBox, isSmallPhone && { height: 44, marginBottom: 12 }]}>
+              <Text
+                text={MOCK_ROOM_ID}
+                style={[$numericCodeText, isSmallPhone && { fontSize: 22 }]}
+              />
+            </View>
+
+            {/* 닫기 버튼 */}
+            <TouchableOpacity
+              style={[$inviteCloseBtn, isSmallPhone && { width: 254, height: 46 }]}
+              activeOpacity={0.8}
+              onPress={() => setInviteModalVisible(false)}
+            >
+              <Text
+                text={translate("educationPresentationScreen:inviteModal.close")}
+                style={$inviteCloseBtnText}
+              />
+            </TouchableOpacity>
+          </TouchableOpacity>
+        </TouchableOpacity>
+      </Modal>
     </>
   )
 }
@@ -529,4 +604,99 @@ const $validationError: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
   color: "#EF4444",
+}
+
+// ── 참여자 초대 모달 ──────────────────────────────────────────────────────────
+
+const $inviteModalOverlay: ViewStyle = {
+  flex: 1,
+  backgroundColor: "rgba(0,0,0,0.45)",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+const $inviteModalCard: ViewStyle = {
+  width: 330,
+  height: 522,
+  backgroundColor: "#FFFFFF",
+  borderRadius: 18,
+  alignItems: "center",
+  paddingTop: 32,
+  paddingHorizontal: 18,
+  paddingBottom: 24,
+}
+
+const $inviteIconCircle: ViewStyle = {
+  width: 52,
+  height: 52,
+  borderRadius: 26,
+  backgroundColor: "#EAF1FD",
+  alignItems: "center",
+  justifyContent: "center",
+  marginBottom: 14,
+}
+
+const $inviteModalTitle: TextStyle = {
+  fontSize: 17,
+  fontFamily: typography.primary.semiBold,
+  color: "#000000",
+  textAlign: "center",
+  lineHeight: 20,
+  marginBottom: 10,
+}
+
+const $inviteModalDesc: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.normal,
+  color: "#7B7B7B",
+  textAlign: "center",
+  lineHeight: 18,
+  marginBottom: 18,
+}
+
+const $qrWrapper: ViewStyle = {
+  alignItems: "center",
+  justifyContent: "center",
+  borderWidth: 2,
+  borderColor: "#E5E7EB",
+  borderRadius: 16,
+  backgroundColor: "#FFFFFF",
+  width: "100%",
+  height: 165,
+  marginBottom: 12,
+  padding: 16,
+}
+
+const $numericCodeBox: ViewStyle = {
+  width: "100%",
+  height: 52,
+  borderWidth: 1,
+  borderColor: "#E5E7EB",
+  borderRadius: 12,
+  backgroundColor: "#FFFFFF",
+  alignItems: "center",
+  justifyContent: "center",
+  marginBottom: 16,
+}
+
+const $numericCodeText: TextStyle = {
+  fontSize: 28,
+  fontFamily: typography.primary.semiBold,
+  color: "#111827",
+  letterSpacing: 2,
+}
+
+const $inviteCloseBtn: ViewStyle = {
+  width: 294,
+  height: 51,
+  backgroundColor: colors.blue,
+  borderRadius: 12,
+  alignItems: "center",
+  justifyContent: "center",
+}
+
+const $inviteCloseBtnText: TextStyle = {
+  fontSize: 16,
+  fontFamily: typography.primary.semiBold,
+  color: "#FFFFFF",
 }

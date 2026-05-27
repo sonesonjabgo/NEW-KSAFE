@@ -557,6 +557,11 @@ const ko: Translations = {
   educationPresentationScreen: {
     title: "교육/발표",
     inviteButton: "초대",
+    inviteModal: {
+      title: "참여자 초대",
+      description: "QR 코드나 초대 코드를 공유하여\n참여자를 초대할 수 있습니다.",
+      close: "닫기",
+    },
     inputLanguageLabel: "입력 언어",
     languageMenu: { title: "언어 선택" },
     recognizing: "음성 인식 중...",
