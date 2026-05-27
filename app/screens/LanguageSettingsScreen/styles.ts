@@ -1,5 +1,6 @@
 import { ViewStyle, TextStyle } from "react-native"
 
+import { isRTL } from "@/i18n"
 import { colors } from "@/theme/colors"
 
 // 테마 토큰에 없는 디자인 전용 색상
@@ -28,6 +29,7 @@ export const $loadingContainer: ViewStyle = {
 /* ── 안내 문구 — fontSize/paddingTop/paddingBottom 동적 적용 ── */
 export const $guideText: TextStyle = {
   color: TEXT_GUIDE,
+  textAlign: isRTL ? "right" : "left",
 }
 
 /* ── 언어 항목 — height/paddingHorizontal/marginBottom 동적 적용 ── */
@@ -37,7 +39,7 @@ export const $item: ViewStyle = {
   borderColor: ITEM_BORDER,
   borderRadius: 10,
   borderWidth: 1,
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   justifyContent: "space-between",
 }
 
@@ -49,7 +51,7 @@ export const $itemSelected: ViewStyle = {
 export const $itemContent: ViewStyle = {
   alignItems: "center",
   flex: 1,
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   gap: 10,
   overflow: "hidden",
 }
@@ -57,6 +59,7 @@ export const $itemContent: ViewStyle = {
 /* fontSize 동적 적용 */
 export const $itemLabel: TextStyle = {
   color: TEXT_DARK,
+  textAlign: isRTL ? "right" : "left",
 }
 
 /* ── 모달 딤 오버레이 ── */
@@ -85,6 +88,7 @@ export const $modalIconCircle: ViewStyle = {
 export const $modalTitle: TextStyle = {
   color: TEXT_DARK,
   fontWeight: "700",
+  textAlign: "center",
 }
 
 /* fontSize/marginTop 동적 적용 */
