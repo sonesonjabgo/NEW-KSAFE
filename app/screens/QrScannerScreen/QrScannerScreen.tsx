@@ -14,7 +14,7 @@ import { Text } from "@/components/Text"
 import i18n from "i18next"
 
 import { fromI18nKey } from "@/i18n/i18n"
-import { isRTL } from "@/i18n/rtl"
+import { isRTL } from "@/i18n"
 import { translate } from "@/i18n/translate"
 import { colors } from "@/theme/colors"
 import { useResponsive } from "@/theme/responsive"

@@ -1,5 +1,6 @@
 import { ViewStyle, TextStyle } from "react-native"
 
+import { isRTL } from "@/i18n"
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
@@ -31,7 +32,7 @@ export const $root: ViewStyle = {
 
 /* ── 헤더 (StackScreen 기준과 동일) ── */
 export const $header: ViewStyle = {
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   alignItems: "center",
   paddingHorizontal: 20,
   paddingBottom: 14,
@@ -174,10 +175,10 @@ export const $permissionBanner: ViewStyle = {
   alignSelf: "stretch",
   backgroundColor: WARNING_BG,
   borderRadius: 10,
-  flexDirection: "row",
-  gap: 6,
-  paddingHorizontal: 12,
-  paddingVertical: 10,
+  flexDirection: isRTL ? "row-reverse" : "row",
+  gap: 8,
+  paddingHorizontal: 14,
+  paddingVertical: 12,
 }
 
 export const $permissionText: TextStyle = {
@@ -209,7 +210,7 @@ export const $languageCard: ViewStyle = {
   borderColor: BORDER_LIGHT,
   borderRadius: 14,
   borderWidth: 1,
-  flexDirection: "row",
+  flexDirection: isRTL ? "row-reverse" : "row",
   gap: 10,
   paddingHorizontal: 16,
   // paddingVertical: 동적 적용
