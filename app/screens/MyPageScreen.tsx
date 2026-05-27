@@ -43,7 +43,7 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
   const handleLogoutConfirm = () => {
     setLogoutModalVisible(false)
     void signOut()
-    navigation.reset({ index: 0, routes: [{ name: "Login" }] })
+    // signOut() → isAuthenticated = false → AppNavigator가 Guest 스택(WelcomeIntro)으로 자동 전환
   }
 
   return (

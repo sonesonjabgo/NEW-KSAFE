@@ -9,7 +9,6 @@ import {
   View,
   ViewStyle,
 } from "react-native"
-import { useNavigation } from "@react-navigation/native"
 import { IconAlertCircle } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -30,7 +29,6 @@ import { useResponsive } from "@/theme/responsive"
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
 export const LoginScreen: FC<LoginScreenProps> = () => {
-  const navigation = useNavigation<any>()
   const { signIn } = useAuth()
   const [secureText, setSecureText] = useState(true)
   const [forgotModalVisible, setForgotModalVisible] = useState(false)
@@ -116,8 +114,6 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
       setPasswordError(translate("loginScreen:validation.invalidCredentials"))
       return
     }
-
-    navigation.navigate("Main")
   }
 
   return (
@@ -378,7 +374,7 @@ const $errorText: TextStyle = {
 }
 
 const $inputIcon: ViewStyle = {
-  marginRight: 8,
+  marginEnd: 8,
 }
 
 // height는 $textInputDynamic에서 주입
