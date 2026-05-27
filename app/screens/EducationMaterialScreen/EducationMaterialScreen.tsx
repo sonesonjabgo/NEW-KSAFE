@@ -1,5 +1,5 @@
 import { FC, useCallback, useMemo, useState } from "react"
-import { FlatList, TextInput, TouchableOpacity, View } from "react-native"
+import { FlatList, ScrollView, TextInput, TouchableOpacity, View } from "react-native"
 import { IconPlus, IconSearch } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -147,7 +147,12 @@ export const EducationMaterialScreen: FC<EducationMaterialScreenProps> = ({ navi
           <>
             {/* 카테고리 탭 — 내가 만든 자료 탭에서는 숨김 */}
             {sourceTabIndex !== 2 && (
-              <View style={Shared.$categoryRow}>
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                style={Shared.$categoryScrollView}
+                contentContainerStyle={Shared.$categoryRow}
+              >
                 {CATEGORY_TABS.map((cat) => {
                   const isActive = cat === categoryTab
                   return (
@@ -167,7 +172,7 @@ export const EducationMaterialScreen: FC<EducationMaterialScreenProps> = ({ navi
                     </TouchableOpacity>
                   )
                 })}
-              </View>
+              </ScrollView>
             )}
 
             {/* 카드 리스트 */}

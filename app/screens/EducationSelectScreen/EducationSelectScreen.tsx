@@ -1,5 +1,5 @@
 import { FC, useCallback, useMemo, useState } from "react"
-import { FlatList, TextInput, TouchableOpacity, View } from "react-native"
+import { FlatList, ScrollView, TextInput, TouchableOpacity, View } from "react-native"
 import { IconSearch } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -157,7 +157,12 @@ export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigati
         {hasSourceData ? (
           <>
             {/* 카테고리 탭 */}
-            <View style={S.$categoryRow}>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={S.$categoryScrollView}
+              contentContainerStyle={S.$categoryRow}
+            >
               {CATEGORY_TABS.map((cat) => {
                 const isActive = cat === categoryTab
                 return (
@@ -174,7 +179,7 @@ export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigati
                   </TouchableOpacity>
                 )
               })}
-            </View>
+            </ScrollView>
 
             {/* 카드 리스트 */}
             <FlatList

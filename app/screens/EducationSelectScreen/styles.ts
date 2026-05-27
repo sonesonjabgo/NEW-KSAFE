@@ -65,17 +65,21 @@ export const $searchInput: TextStyle = {
 
 // ── Category chips ─────────────────────────────────────────────────────────────
 
+export const $categoryScrollView: ViewStyle = {
+  backgroundColor: "#FFFFFF",
+  flexShrink: 0,
+}
+
 export const $categoryRow: ViewStyle = {
   flexDirection: "row",
-  backgroundColor: "#FFFFFF",
   paddingHorizontal: 20,
   paddingVertical: 12,
-  gap: 8,
+  gap: 10,
 }
 
 export const $categoryChip: ViewStyle = {
-  flexGrow: 1,
   paddingVertical: 7,
+  paddingHorizontal: 16,
   borderRadius: 20,
   backgroundColor: "#F9FAFE",
   alignItems: "center",
