@@ -10,6 +10,8 @@ import {
 import { Check } from "lucide-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
+import { useResponsive } from "@/theme/responsive"
+
 import HeaderBell from "@assets/icons/nav/header_bell.svg"
 
 import { StackScreen } from "@/components/StackScreen"
@@ -30,6 +32,7 @@ const MOCK_WORKPLACES = [
 
 export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
+  const { isSmallPhone } = useResponsive()
 
   const [selectedWorkplaces, setSelectedWorkplaces] = useState<string[]>([])
   const [notifyTitle, setNotifyTitle] = useState("")
@@ -82,7 +85,7 @@ export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigati
                 <Text text={translate("safeBoardNotifyScreen:guide.title")} style={S.$guideTitle} />
                 <Text
                   text={translate("safeBoardNotifyScreen:guide.description")}
-                  style={S.$guideDesc}
+                  style={[S.$guideDesc, isSmallPhone && { fontSize: 13 }]}
                 />
               </View>
             </View>

@@ -245,7 +245,7 @@ const fr: Translations = {
     guide: {
       title: "Guide de rédaction",
       description:
-        "Sélectionnez un ou plusieurs lieux de travail que vous gérez\net rédigez une notification à envoyer\naux membres du site.",
+        "Sélectionnez un ou plusieurs lieux de travail que vous gérez et rédigez une notification à envoyer aux membres du site.",
     },
     workplace: {
       label: "Sélectionner le lieu de travail",

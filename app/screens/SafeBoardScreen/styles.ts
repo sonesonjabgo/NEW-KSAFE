@@ -1,5 +1,6 @@
 import { ViewStyle, TextStyle } from "react-native"
 
+import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
 // ── Header right slot ─────────────────────────────────────────────────────────
@@ -114,31 +115,34 @@ export const $emptyText: TextStyle = {
   fontFamily: typography.primary.normal,
 }
 
-// ── Floating button ───────────────────────────────────────────────────────────
+// ── FAB ───────────────────────────────────────────────────────────────────────
 
-export const $floatingButton: ViewStyle = {
+export const $fabWrapper: ViewStyle = {
   position: "absolute",
-  bottom: 24,
-  end: 20,
+  right: 20,
+  alignItems: "center",
+}
+
+export const $fab: ViewStyle = {
   width: 80,
   height: 80,
   borderRadius: 40,
-  backgroundColor: "#0B3069",
+  backgroundColor: colors.navy,
   justifyContent: "center",
   alignItems: "center",
-  flexDirection: "column",
-  gap: 4,
   shadowColor: "#000000",
-  shadowOffset: { width: 0, height: 4 },
-  shadowOpacity: 0.25,
-  shadowRadius: 10,
+  shadowOffset: { width: 0, height: 6 },
+  shadowOpacity: 0.3,
+  shadowRadius: 16,
   elevation: 8,
 }
 
-export const $floatingButtonText: TextStyle = {
+export const $fabLabel: TextStyle = {
+  marginTop: 4,
   fontSize: 11,
-  fontFamily: typography.primary.semiBold,
   color: "#FFFFFF",
+  fontFamily: typography.primary.bold,
+  textAlign: "center",
 }
 
 // ── Workplace modal ───────────────────────────────────────────────────────────

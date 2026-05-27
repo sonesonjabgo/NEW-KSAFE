@@ -247,7 +247,7 @@ const es: Translations = {
     guide: {
       title: "Guía de redacción",
       description:
-        "Seleccione uno o más lugares de trabajo que gestione\ny escriba una notificación para enviar\na los miembros del sitio.",
+        "Seleccione uno o más lugares de trabajo que gestione y escriba una notificación para enviar a los miembros del sitio.",
     },
     workplace: {
       label: "Seleccionar lugar de trabajo",
@@ -271,7 +271,7 @@ const es: Translations = {
     guide: {
       title: "Guía de redacción",
       description:
-        "Seleccione uno o más lugares de trabajo que gestione\ny escriba una notificación para enviar\na los miembros del sitio.",
+        "Seleccione uno o más lugares de trabajo que gestione y escriba una notificación para enviar a los miembros del sitio.",
     },
     workplace: {
       label: "Seleccionar lugar de trabajo",

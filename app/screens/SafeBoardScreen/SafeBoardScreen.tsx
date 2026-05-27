@@ -1,6 +1,9 @@
-import { FC, useEffect, useRef, useState } from "react"
-import { Animated, FlatList, Modal, Pressable, TouchableOpacity, View } from "react-native"
-import { BellRing, Building, Check, ChevronDown, PencilLine } from "lucide-react-native"
+import { FC, useEffect, useMemo, useRef, useState } from "react"
+import { Animated, FlatList, Modal, Pressable, TouchableOpacity, View, ViewStyle } from "react-native"
+import { BellRing, Building, Check, ChevronDown } from "lucide-react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+
+import TbmFabIcon from "@assets/images/tbm-fab-icon.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -39,6 +42,8 @@ const filterByWorkplace = (posts: SafeBoardItem[], workplaceId: number): SafeBoa
 }
 
 export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route }) => {
+  const insets = useSafeAreaInsets()
+  const fabBottom = useMemo<ViewStyle>(() => ({ bottom: 30 + insets.bottom }), [insets.bottom])
   const { role } = useRole()
   const [activeTab, setActiveTab] = useState<AdminTab>("all")
   const [selectedWorkplace, setSelectedWorkplace] = useState("서울 한강 레지던스 RC공사 현장")
@@ -168,16 +173,6 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
           onHide={() => setToastVisible(false)}
         />
 
-        {isAdmin && (
-          <TouchableOpacity
-            style={S.$floatingButton}
-            activeOpacity={0.8}
-            onPress={() => navigation.navigate("SafeBoardCreate")}
-          >
-            <PencilLine size={20} color="#FFFFFF" strokeWidth={1.8} />
-            <Text text={translate("safeBoardScreen:write")} style={S.$floatingButtonText} />
-          </TouchableOpacity>
-        )}
       </StackScreen>
 
       <Modal
@@ -217,6 +212,20 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
           </Animated.View>
         </Pressable>
       </Modal>
+
+      {/* FAB — StackScreen의 overflow:hidden 밖에 배치 */}
+      {isAdmin && (
+        <View style={[S.$fabWrapper, fabBottom]} pointerEvents="box-none">
+          <TouchableOpacity
+            style={S.$fab}
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate("SafeBoardCreate")}
+          >
+            <TbmFabIcon width={29} height={29} />
+            <Text text={translate("safeBoardScreen:write")} style={S.$fabLabel} />
+          </TouchableOpacity>
+        </View>
+      )}
     </>
   )
 }

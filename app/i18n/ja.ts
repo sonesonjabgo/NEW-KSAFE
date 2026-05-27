@@ -241,7 +241,7 @@ const ja: Translations = {
     title: "作業場プッシュ通知送信",
     guide: {
       title: "作成ガイド",
-      description: "管理する作業場を1つ以上選択し、\n現場メンバーに届ける通知を作成してください。",
+      description: "管理する作業場を1つ以上選択し、現場メンバーに届ける通知を作成してください。",
     },
     workplace: {
       label: "作業場を選択",

@@ -307,7 +307,7 @@ const en = {
     guide: {
       title: "Writing Guide",
       description:
-        "Select one or more workplaces you manage\nand write a notification to deliver\nto site members.",
+        "Select one or more workplaces you manage and write a notification to deliver to site members.",
     },
     workplace: {
       label: "Select Workplace",

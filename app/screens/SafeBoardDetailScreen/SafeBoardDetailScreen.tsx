@@ -3,6 +3,8 @@ import { ScrollView, TouchableOpacity, View, ViewStyle, TextStyle } from "react-
 import { Bell, Send, Trash2, User } from "lucide-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
+import { useResponsive } from "@/theme/responsive"
+
 import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -28,6 +30,8 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
   const item = allMockItems.find((p) => p.id === id)
   if (!item) return null
 
+  const { isSmallPhone } = useResponsive()
+  const modalCardStyle: ViewStyle = { width: isSmallPhone ? 290 : 330 }
   const isAdmin = role === "admin"
   const isMyPost = mockMyPosts.some((p) => p.id === id)
   const canEdit = isAdmin && isMyPost
@@ -135,6 +139,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
 
       <ConfirmModal
         visible={publishModalVisible}
+        cardStyle={modalCardStyle}
         icon={
           <View style={$publishIconCircle}>
             <Send size={26} color="#1062D8" strokeWidth={2} />
@@ -154,6 +159,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
 
       <ConfirmModal
         visible={deleteModalVisible}
+        cardStyle={modalCardStyle}
         icon={
           <View style={$deleteIconCircle}>
             <Trash2 size={26} color="#E42E2B" strokeWidth={2} />
