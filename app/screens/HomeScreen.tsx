@@ -309,7 +309,6 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
                     text={translate("homeScreen:header.qrScan")}
                     style={[$headerActionLabel, $headerActionLabelDynamic]}
                     numberOfLines={1}
-                    ellipsizeMode="tail"
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -337,7 +336,6 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
                     text={translate("homeScreen:header.language")}
                     style={[$headerActionLabel, $headerActionLabelDynamic]}
                     numberOfLines={1}
-                    ellipsizeMode="tail"
                   />
                 </TouchableOpacity>
               </View>
@@ -854,7 +852,7 @@ const $boardItem: ViewStyle = {
 
 const $tagWrap: ViewStyle = {
   flexShrink: 0,
-  width: 64,
+  width: 60,
   alignItems: isRTL ? "flex-end" : "flex-start",
   overflow: "hidden",
 }
