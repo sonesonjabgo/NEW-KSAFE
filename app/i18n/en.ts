@@ -403,7 +403,7 @@ const en = {
     title: "Industrial Safety AI Assistant",
     aiName: "Industrial Safety AI Assistant",
     welcomeMessage:
-      "Hello! I am the Industrial Safety AI Assistant.\nIf you have any questions about construction site safety, feel free to ask anytime.",
+      "Hello! I'm the Smart Safety Management AI Chatbot.\nIf you have any questions about workplace regulations, procedures, or emergency response manuals, feel free to ask anytime.",
     inputPlaceholder: "Enter a message...",
     inputHint: "Required. Please write between 2 and 1,000 characters.",
     deleteDialog: {

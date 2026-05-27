@@ -227,7 +227,8 @@ const viOverrides = {
   aiSafetyChatScreen: {
     title: "Trợ lý AI An toàn",
     aiName: "Trợ lý AI An toàn",
-    welcomeMessage: "Xin chào! Tôi là Trợ lý AI An toàn Công nghiệp.",
+    welcomeMessage:
+      "Xin chào! Tôi là chatbot AI quản lý an toàn thông minh.\nNếu bạn có câu hỏi về quy định nơi làm việc, quy trình hoặc hướng dẫn ứng phó khẩn cấp, hãy hỏi bất cứ lúc nào.",
     inputPlaceholder: "Nhập tin nhắn...",
     inputHint: "Bắt buộc. Vui lòng viết từ 2 đến 1.000 ký tự.",
     deleteDialog: {

@@ -14,6 +14,8 @@ import {
 } from "react-native"
 import { IconTrash, IconSend2 } from "@tabler/icons-react-native"
 
+import ChatbotIcon from "@assets/icons/chatbot/chatbot.svg"
+
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
@@ -218,7 +220,9 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
     }
     return (
       <View style={$aiMsgWrapper}>
-        <View style={$aiAvatar} />
+        <View style={$aiAvatar}>
+          <ChatbotIcon width={22} height={22} />
+        </View>
         <View style={$aiMsgContent}>
           <Text text={translate("aiSafetyChatScreen:aiName")} style={$aiMsgName} />
           <View style={$aiBubble}>
@@ -233,7 +237,9 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
     if (!isLoading) return null
     return (
       <View style={$aiMsgWrapper}>
-        <View style={$aiAvatar} />
+        <View style={$aiAvatar}>
+          <ChatbotIcon width={22} height={22} />
+        </View>
         <View style={$aiMsgContent}>
           <Text text={translate("aiSafetyChatScreen:aiName")} style={$aiMsgName} />
           <View style={[$aiBubble, $loadingBubble]}>
@@ -247,7 +253,9 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
   const renderWelcomeContent = () => (
     <View style={$welcomeContainer}>
       <View style={$welcomeMsgRow}>
-        <View style={$aiAvatar} />
+        <View style={$aiAvatar}>
+          <ChatbotIcon width={22} height={22} />
+        </View>
         <View style={$aiMsgContent}>
           <Text text={translate("aiSafetyChatScreen:aiName")} style={$aiMsgName} />
           <View style={$aiBubble}>
@@ -393,6 +401,8 @@ const $aiAvatar: ViewStyle = {
   backgroundColor: "#EEF4FF",
   borderWidth: 1,
   borderColor: "#C8D8F5",
+  justifyContent: "center",
+  alignItems: "center",
 }
 
 const $aiMsgContent: ViewStyle = {

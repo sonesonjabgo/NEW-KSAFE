@@ -391,7 +391,8 @@ const fr: Translations = {
   aiSafetyChatScreen: {
     title: "Assistant sécurité IA",
     aiName: "Assistant sécurité IA",
-    welcomeMessage: "Bonjour ! Je suis l'assistant IA de sécurité industrielle.",
+    welcomeMessage:
+      "Bonjour ! Je suis le chatbot IA de gestion intelligente de la sécurité.\nSi vous avez des questions sur les règlements du lieu de travail, les procédures ou les manuels de réponse aux urgences, n'hésitez pas à poser des questions.",
     inputPlaceholder: "Entrez un message...",
     inputHint: "Obligatoire. Veuillez écrire entre 2 et 1 000 caractères.",
     deleteDialog: {

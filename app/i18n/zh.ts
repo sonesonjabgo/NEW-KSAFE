@@ -226,7 +226,8 @@ const zhOverrides = {
   aiSafetyChatScreen: {
     title: "AI安全助手",
     aiName: "AI安全助手",
-    welcomeMessage: "您好！我是工业安全AI助手。",
+    welcomeMessage:
+      "您好！我是智能安全管理AI聊天机器人。\n如果您对工作场所的规定、流程或紧急应对手册有任何疑问，请随时提问。",
     inputPlaceholder: "输入消息...",
     inputHint: "必填。请输入2到1,000个字符。",
     deleteDialog: {

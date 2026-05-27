@@ -401,7 +401,7 @@ const es: Translations = {
     title: "Asistente AI de seguridad industrial",
     aiName: "Asistente AI de seguridad industrial",
     welcomeMessage:
-      "¡Hola! Soy el Asistente AI de Seguridad Industrial.\nSi tienes alguna pregunta sobre la seguridad en obras de construcción, no dudes en preguntar.",
+      "¡Hola! Soy el chatbot de IA de gestión de seguridad inteligente.\nSi tienes alguna pregunta sobre las regulaciones del lugar de trabajo, procedimientos o manuales de respuesta a emergencias, no dudes en preguntar.",
     inputPlaceholder: "Escribe un mensaje...",
     inputHint: "Obligatorio. Por favor escribe entre 2 y 1,000 caracteres.",
     deleteDialog: {

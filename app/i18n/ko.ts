@@ -394,7 +394,7 @@ const ko: Translations = {
     title: "산업안전AI 도우미",
     aiName: "산업안전AI 도우미",
     welcomeMessage:
-      "안녕하세요! 저는 산업안전AI 도우미입니다.\n건설 현장 안전에 관한 질문이 있으시면 언제든지 물어보세요.",
+      "안녕하세요! 스마트안전 관리AI 챗봇입니다.\n현장의 규정, 절차, 비상 대응 메뉴얼등 궁금한 점이 있으시다면 언제든지 질문해주세요.",
     inputPlaceholder: "메시지를 입력하세요...",
     inputHint: "필수 입력. 2~1,000자 이내로 작성하세요.",
     deleteDialog: {

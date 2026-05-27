@@ -371,7 +371,8 @@ const ja: Translations = {
   aiSafetyChatScreen: {
     title: "AIセーフティアシスタント",
     aiName: "AIセーフティアシスタント",
-    welcomeMessage: "こんにちは！産業安全AIアシスタントです。",
+    welcomeMessage:
+      "こんにちは！スマート安全管理AIチャットボットです。\n現場の規定、手順、緊急対応マニュアルなど、ご不明な点がございましたら、いつでもご質問ください。",
     inputPlaceholder: "メッセージを入力...",
     inputHint: "必須。2〜1,000文字で入力してください。",
     deleteDialog: {

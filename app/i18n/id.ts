@@ -229,7 +229,8 @@ const idOverrides = {
   aiSafetyChatScreen: {
     title: "Asisten Keselamatan AI",
     aiName: "Asisten Keselamatan AI",
-    welcomeMessage: "Halo! Saya adalah Asisten AI Keselamatan Industri.",
+    welcomeMessage:
+      "Halo! Saya adalah chatbot AI manajemen keselamatan cerdas.\nJika Anda memiliki pertanyaan tentang peraturan tempat kerja, prosedur, atau panduan tanggap darurat, jangan ragu untuk bertanya kapan saja.",
     inputPlaceholder: "Masukkan pesan...",
     inputHint: "Wajib diisi. Tulis antara 2 hingga 1.000 karakter.",
     deleteDialog: {
