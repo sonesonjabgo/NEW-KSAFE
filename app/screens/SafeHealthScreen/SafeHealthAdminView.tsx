@@ -1,5 +1,7 @@
 import { FC, useMemo } from "react"
-import { View } from "react-native"
+import { ScrollView, View } from "react-native"
+
+import { useResponsive } from "@/theme/responsive"
 
 import { SafeHealthMenuItemComponent } from "./components/SafeHealthMenuItem"
 import { getMockAdminMenus } from "./mock/mockSafeHealthMenuData"
@@ -7,10 +9,15 @@ import * as S from "./styles"
 
 export const SafeHealthAdminView: FC = () => {
   const mockAdminMenus = useMemo(() => getMockAdminMenus(), [])
+  const { isSmallPhone } = useResponsive()
 
   return (
-    <View style={S.$contentContainer}>
-      <View style={S.$menuCard}>
+    <ScrollView
+      style={{ flex: 1 }}
+      contentContainerStyle={S.$contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
+      <View style={[S.$menuCard, isSmallPhone && { marginBottom: 16 }]}>
         {mockAdminMenus.map((item, index) => (
           <SafeHealthMenuItemComponent
             key={item.id}
@@ -19,6 +26,6 @@ export const SafeHealthAdminView: FC = () => {
           />
         ))}
       </View>
-    </View>
+    </ScrollView>
   )
 }
