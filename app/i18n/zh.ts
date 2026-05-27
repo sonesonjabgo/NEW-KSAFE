@@ -9,7 +9,12 @@ const zhOverrides = {
     workerParticipation: "工人参与",
   },
   loginScreen: {
+    logIn: "登录",
     tagline: "职场安全伙伴",
+    emailFieldLabel: "邮箱",
+    emailFieldPlaceholder: "请输入邮箱地址",
+    passwordFieldLabel: "密码",
+    passwordFieldPlaceholder: "请输入密码",
     forgotPassword: "忘记密码？",
     forgotPasswordModal: {
       title: "通知",
@@ -24,6 +29,12 @@ const zhOverrides = {
       unauthorizedRole: "该账户没有访问权限。",
       deactivatedAccount: "该账户已被停用，请联系管理员。",
       profileLoadFailed: "无法加载用户信息，请重试。",
+    },
+    validation: {
+      required: "请输入您的邮箱和密码。",
+      invalidEmail: "请输入有效的邮箱地址。",
+      passwordTooShort: "密码至少需要6个字符。",
+      invalidCredentials: "请检查您的邮箱或密码。",
     },
   },
   homeScreen: {

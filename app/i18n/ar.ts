@@ -55,9 +55,15 @@ const ar: Translations = {
       signInFailed: "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
       fillFields: "يرجى ملء جميع الحقول المطلوبة.",
       passwordLength: "يجب أن تكون كلمة المرور 6 أحرف على الأقل.",
-      unauthorizedRole: "هذا الحساب ليس لديه صلاحية الوصول.",
-      deactivatedAccount: "تم تعطيل هذا الحساب. يرجى التواصل مع المسؤول.",
+      unauthorizedRole: "هذا الحساب لا يملك صلاحية الوصول.",
+      deactivatedAccount: "تم إلغاء تفعيل هذا الحساب. يرجى التواصل مع المسؤول.",
       profileLoadFailed: "فشل تحميل معلومات المستخدم. يرجى المحاولة مرة أخرى.",
+    },
+    validation: {
+      required: "يرجى إدخال البريد الإلكتروني وكلمة المرور.",
+      invalidEmail: "يرجى إدخال بريد إلكتروني صحيح.",
+      passwordTooShort: "يجب أن تكون كلمة المرور 6 أحرف على الأقل.",
+      invalidCredentials: "يرجى التحقق من البريد الإلكتروني أو كلمة المرور.",
     },
   },
   demoNavigator: {

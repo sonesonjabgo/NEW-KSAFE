@@ -9,7 +9,12 @@ const kmOverrides = {
     workerParticipation: "ការចូលរួមរបស់កម្មករ",
   },
   loginScreen: {
+    logIn: "ចូល",
     tagline: "ដៃគូសុវត្ថិភាពការងារ",
+    emailFieldLabel: "អ៊ីមែល",
+    emailFieldPlaceholder: "បញ្ចូលអាសយដ្ឋានអ៊ីមែល",
+    passwordFieldLabel: "ពាក្យសម្ងាត់",
+    passwordFieldPlaceholder: "បញ្ចូលពាក្យសម្ងាត់",
     forgotPassword: "ភ្លេចពាក្យសម្ងាត់?",
     forgotPasswordModal: {
       title: "សេចក្តីជូនដំណឹង",
@@ -19,12 +24,18 @@ const kmOverrides = {
     },
     alert: {
       invalidCredentials: "អ៊ីមែល ឬពាក្យសម្ងាត់មិនត្រឹមត្រូវ។",
-      signInFailed: "ការចូលបានបរាជ័យ។ សូមព្យាយាមម្តងទៀត។",
-      fillFields: "សូមបំពេញគ្រប់វាលដែលត្រូវការ។",
+      signInFailed: "ចូលប្រើបរាជ័យ។ សូមព្យាយាមម្ដងទៀត។",
+      fillFields: "សូមបំពេញព័ត៌មានទាំងអស់ដែលត្រូវការ។",
       passwordLength: "ពាក្យសម្ងាត់ត្រូវមានយ៉ាងហោចណាស់ 6 តួអក្សរ។",
       unauthorizedRole: "គណនីនេះមិនមានសិទ្ធិចូលប្រើ។",
       deactivatedAccount: "គណនីនេះត្រូវបានបិទ។ សូមទាក់ទងអ្នកគ្រប់គ្រង។",
-      profileLoadFailed: "បរាជ័យក្នុងការផ្ទុកព័ត៌មានអ្នកប្រើ។ សូមព្យាយាមម្តងទៀត។",
+      profileLoadFailed: "មិនអាចផ្ទុកព័ត៌មានអ្នកប្រើ។ សូមព្យាយាមម្ដងទៀត។",
+    },
+    validation: {
+      required: "សូមបញ្ចូលអ៊ីមែល និងពាក្យសម្ងាត់របស់អ្នក។",
+      invalidEmail: "សូមបញ្ចូលអាសយដ្ឋានអ៊ីមែលត្រឹមត្រូវ។",
+      passwordTooShort: "ពាក្យសម្ងាត់ត្រូវមានយ៉ាងហោចណាស់ 6 តួអក្សរ។",
+      invalidCredentials: "សូមពិនិត្យអ៊ីមែល ឬពាក្យសម្ងាត់របស់អ្នក។",
     },
   },
   homeScreen: {

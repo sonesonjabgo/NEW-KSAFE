@@ -38,7 +38,6 @@ import { Text } from "@/components/Text"
 import { WebViewModal } from "@/components/WebViewModal"
 import { useAuth } from "@/context/AuthContext"
 import { useRole } from "@/context/RoleContext"
-import { isRTL } from "@/i18n/rtl"
 import { translate } from "@/i18n/translate"
 import type { MainTabScreenProps } from "@/navigators/navigationTypes"
 import { LanguageChangedModal } from "@/screens/LanguageSettingsScreen/components/LanguageChangedModal"
@@ -615,7 +614,7 @@ const $header: ViewStyle = {
 
 
 const $titleRow: ViewStyle = {
-  flexDirection: isRTL ? "row-reverse" : "row",
+  flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "flex-start",
 }
@@ -633,7 +632,7 @@ const $appSub: TextStyle = {
 }
 
 const $headerActions: ViewStyle = {
-  flexDirection: isRTL ? "row-reverse" : "row",
+  flexDirection: "row",
   gap: 14,
   paddingTop: 4,
 }
@@ -661,7 +660,7 @@ const $headerActionLabel: TextStyle = {
 }
 
 const $greetRow: ViewStyle = {
-  flexDirection: isRTL ? "row-reverse" : "row",
+  flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",
 }
@@ -688,8 +687,7 @@ const $greetMsg: TextStyle = {
 const $avatar: ViewStyle = {
   width: 52,
   height: 52,
-  marginLeft: isRTL ? 0 : 16,
-  marginRight: isRTL ? 16 : 0,
+  marginStart: 16,
 }
 
 const $body: ViewStyle = {
@@ -707,7 +705,7 @@ const $grid: ViewStyle = {
   shadowOpacity: 0.08,
   shadowRadius: 8,
   elevation: 3,
-  flexDirection: isRTL ? "row-reverse" : "row",
+  flexDirection: "row",
   flexWrap: "wrap",
   overflow: "hidden",
 }
@@ -715,8 +713,7 @@ const $grid: ViewStyle = {
 const $gridCell: ViewStyle = {
   alignItems: "center",
   justifyContent: "flex-start",
-  borderRightWidth: isRTL ? 0 : StyleSheet.hairlineWidth,
-  borderLeftWidth: isRTL ? StyleSheet.hairlineWidth : 0,
+  borderEndWidth: StyleSheet.hairlineWidth,
   borderBottomWidth: StyleSheet.hairlineWidth,
   borderColor: "#E9ECF0",
   minHeight: 120,
@@ -762,7 +759,7 @@ const $boardSection: ViewStyle = {
 }
 
 const $boardHeader: ViewStyle = {
-  flexDirection: isRTL ? "row-reverse" : "row",
+  flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",
   marginBottom: 12,
@@ -775,7 +772,7 @@ const $boardTitle: TextStyle = {
 }
 
 const $boardMoreBtn: ViewStyle = {
-  flexDirection: isRTL ? "row-reverse" : "row",
+  flexDirection: "row",
   alignItems: "center",
   gap: 2,
 }
@@ -787,7 +784,7 @@ const $boardMoreText: TextStyle = {
 }
 
 const $tabRow: ViewStyle = {
-  flexDirection: isRTL ? "row-reverse" : "row",
+  flexDirection: "row",
   borderBottomWidth: 1,
   borderBottomColor: "#E9ECF0",
 }
@@ -840,7 +837,7 @@ const $boardList: ViewStyle = {
 }
 
 const $boardItem: ViewStyle = {
-  flexDirection: isRTL ? "row-reverse" : "row",
+  flexDirection: "row",
   alignItems: "flex-start",
   paddingVertical: 18,
   paddingHorizontal: 16,
@@ -937,7 +934,7 @@ const $footer: ViewStyle = {
 }
 
 const $footerLinks: ViewStyle = {
-  flexDirection: isRTL ? "row-reverse" : "row",
+  flexDirection: "row",
   justifyContent: "center",
   alignItems: "center",
   flexWrap: "wrap",

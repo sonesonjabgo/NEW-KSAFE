@@ -16,8 +16,6 @@ import { SafeHealthMainScreen } from "@/screens/SafeHealthScreen/SafeHealthMainS
 import { WorkerParticipationScreen } from "@/screens/WorkerParticipationScreen/WorkerParticipationScreen"
 import { typography } from "@/theme/typography"
 
-import { isRTL } from "@/i18n/rtl"
-
 import type { MainTabParamList } from "./navigationTypes"
 
 const Tab = createBottomTabNavigator<MainTabParamList>()
@@ -138,7 +136,7 @@ const $tabBarOuter: ViewStyle = {
 
 const $tabBarRow: ViewStyle = {
   flex: 1,
-  flexDirection: isRTL ? "row-reverse" : "row",
+  flexDirection: "row",
   alignItems: "center",
 }
 

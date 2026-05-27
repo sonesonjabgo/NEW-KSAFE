@@ -53,12 +53,18 @@ const hi: Translations = {
     },
     alert: {
       invalidCredentials: "ईमेल या पासवर्ड गलत है।",
-      signInFailed: "लॉगिन विफल हुआ। कृपया पुनः प्रयास करें।",
+      signInFailed: "साइन इन विफल। कृपया पुनः प्रयास करें।",
       fillFields: "कृपया सभी आवश्यक फ़ील्ड भरें।",
-      passwordLength: "पासवर्ड कम से कम 6 अक्षरों का होना चाहिए।",
-      unauthorizedRole: "इस खाते को एक्सेस नहीं है।",
-      deactivatedAccount: "यह खाता निष्क्रिय कर दिया गया है। कृपया अपने व्यवस्थापक से संपर्क करें।",
-      profileLoadFailed: "उपयोगकर्ता जानकारी लोड नहीं हो सकी। पुनः प्रयास करें।",
+      passwordLength: "पासवर्ड कम से कम 6 वर्णों का होना चाहिए।",
+      unauthorizedRole: "इस खाते को पहुंच नहीं है।",
+      deactivatedAccount: "यह खाता निष्क्रिय कर दिया गया है। कृपया व्यवस्थापक से संपर्क करें।",
+      profileLoadFailed: "उपयोगकर्ता जानकारी लोड करने में विफल। कृपया पुनः प्रयास करें।",
+    },
+    validation: {
+      required: "कृपया अपना ईमेल और पासवर्ड दर्ज करें।",
+      invalidEmail: "कृपया एक वैध ईमेल पता दर्ज करें।",
+      passwordTooShort: "पासवर्ड कम से कम 6 अक्षरों का होना चाहिए।",
+      invalidCredentials: "कृपया अपना ईमेल या पासवर्ड जांचें।",
     },
   },
   demoNavigator: {

@@ -9,7 +9,12 @@ const urOverrides = {
     workerParticipation: "مزدور شرکت",
   },
   loginScreen: {
+    logIn: "لاگ ان",
     tagline: "کام کی جگہ کا حفاظتی شریک",
+    emailFieldLabel: "ای میل",
+    emailFieldPlaceholder: "اپنا ای میل ایڈریس درج کریں",
+    passwordFieldLabel: "پاس ورڈ",
+    passwordFieldPlaceholder: "اپنا پاس ورڈ درج کریں",
     forgotPassword: "پاس ورڈ بھول گئے؟",
     forgotPasswordModal: {
       title: "اطلاع",
@@ -17,13 +22,19 @@ const urOverrides = {
       confirm: "ٹھیک ہے",
     },
     alert: {
-      invalidCredentials: "ای میل یا پاس ورڈ غلط ہے۔",
-      signInFailed: "لاگ ان ناکام ہوا۔ دوبارہ کوشش کریں۔",
-      fillFields: "براہ کرم تمام ضروری خانے پُر کریں۔",
+      invalidCredentials: "ای میل یا پاس ورڈ درست نہیں ہے۔",
+      signInFailed: "لاگ ان ناکام۔ براہ کرم دوبارہ کوشش کریں۔",
+      fillFields: "تمام ضروری خانے پُر کریں۔",
       passwordLength: "پاس ورڈ کم از کم 6 حروف کا ہونا چاہیے۔",
       unauthorizedRole: "اس اکاؤنٹ کو رسائی نہیں ہے۔",
-      deactivatedAccount: "یہ اکاؤنٹ غیر فعال کر دیا گیا ہے۔ براہ کرم اپنے منتظم سے رابطہ کریں۔",
-      profileLoadFailed: "صارف کی معلومات لوڈ نہیں ہو سکیں۔ دوبارہ کوشش کریں۔",
+      deactivatedAccount: "یہ اکاؤنٹ غیر فعال ہے۔ براہ کرم ایڈمنسٹریٹر سے رابطہ کریں۔",
+      profileLoadFailed: "صارف کی معلومات لوڈ نہیں ہو سکیں۔ براہ کرم دوبارہ کوشش کریں۔",
+    },
+    validation: {
+      required: "براہ کرم اپنا ای میل اور پاس ورڈ درج کریں۔",
+      invalidEmail: "براہ کرم ایک درست ای میل ایڈریس درج کریں۔",
+      passwordTooShort: "پاس ورڈ کم از کم 6 حروف کا ہونا چاہیے۔",
+      invalidCredentials: "براہ کرم اپنا ای میل یا پاس ورڈ چیک کریں۔",
     },
   },
   homeScreen: {

@@ -9,7 +9,12 @@ const viOverrides = {
     workerParticipation: "Tham gia của công nhân",
   },
   loginScreen: {
+    logIn: "Đăng nhập",
     tagline: "Đối tác An toàn Nơi làm việc",
+    emailFieldLabel: "Email",
+    emailFieldPlaceholder: "Nhập địa chỉ email",
+    passwordFieldLabel: "Mật khẩu",
+    passwordFieldPlaceholder: "Nhập mật khẩu",
     forgotPassword: "Quên mật khẩu?",
     forgotPasswordModal: {
       title: "Thông báo",
@@ -17,13 +22,19 @@ const viOverrides = {
       confirm: "OK",
     },
     alert: {
-      invalidCredentials: "Email hoặc mật khẩu không hợp lệ.",
+      invalidCredentials: "Email hoặc mật khẩu không đúng.",
       signInFailed: "Đăng nhập thất bại. Vui lòng thử lại.",
       fillFields: "Vui lòng điền đầy đủ các trường bắt buộc.",
       passwordLength: "Mật khẩu phải có ít nhất 6 ký tự.",
       unauthorizedRole: "Tài khoản này không có quyền truy cập.",
       deactivatedAccount: "Tài khoản này đã bị vô hiệu hóa. Vui lòng liên hệ quản trị viên.",
       profileLoadFailed: "Không thể tải thông tin người dùng. Vui lòng thử lại.",
+    },
+    validation: {
+      required: "Vui lòng nhập email và mật khẩu.",
+      invalidEmail: "Vui lòng nhập địa chỉ email hợp lệ.",
+      passwordTooShort: "Mật khẩu phải có ít nhất 6 ký tự.",
+      invalidCredentials: "Vui lòng kiểm tra email hoặc mật khẩu của bạn.",
     },
   },
   homeScreen: {

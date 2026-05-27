@@ -9,7 +9,12 @@ const thOverrides = {
     workerParticipation: "การมีส่วนร่วมของคนงาน",
   },
   loginScreen: {
+    logIn: "เข้าสู่ระบบ",
     tagline: "พันธมิตรด้านความปลอดภัยในสถานที่ทำงาน",
+    emailFieldLabel: "อีเมล",
+    emailFieldPlaceholder: "กรอกที่อยู่อีเมล",
+    passwordFieldLabel: "รหัสผ่าน",
+    passwordFieldPlaceholder: "กรอกรหัสผ่าน",
     forgotPassword: "ลืมรหัสผ่าน?",
     forgotPasswordModal: {
       title: "แจ้งเตือน",
@@ -18,12 +23,18 @@ const thOverrides = {
     },
     alert: {
       invalidCredentials: "อีเมลหรือรหัสผ่านไม่ถูกต้อง",
-      signInFailed: "เข้าสู่ระบบล้มเหลว โปรดลองอีกครั้ง",
-      fillFields: "โปรดกรอกข้อมูลทุกช่องที่จำเป็น",
+      signInFailed: "เข้าสู่ระบบล้มเหลว กรุณาลองอีกครั้ง",
+      fillFields: "กรุณากรอกข้อมูลที่จำเป็นทั้งหมด",
       passwordLength: "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร",
       unauthorizedRole: "บัญชีนี้ไม่มีสิทธิ์เข้าถึง",
-      deactivatedAccount: "บัญชีนี้ถูกปิดใช้งาน โปรดติดต่อผู้ดูแลระบบ",
-      profileLoadFailed: "โหลดข้อมูลผู้ใช้ล้มเหลว โปรดลองอีกครั้ง",
+      deactivatedAccount: "บัญชีนี้ถูกปิดใช้งาน กรุณาติดต่อผู้ดูแลระบบ",
+      profileLoadFailed: "ไม่สามารถโหลดข้อมูลผู้ใช้ กรุณาลองอีกครั้ง",
+    },
+    validation: {
+      required: "กรุณากรอกอีเมลและรหัสผ่าน",
+      invalidEmail: "กรุณากรอกที่อยู่อีเมลที่ถูกต้อง",
+      passwordTooShort: "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร",
+      invalidCredentials: "กรุณาตรวจสอบอีเมลหรือรหัสผ่านของคุณ",
     },
   },
   homeScreen: {

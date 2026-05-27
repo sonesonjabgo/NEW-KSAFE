@@ -9,7 +9,12 @@ const myOverrides = {
     workerParticipation: "အလုပ်သမားပါဝင်မှု",
   },
   loginScreen: {
+    logIn: "ဝင်ရောက်ရန်",
     tagline: "အလုပ်ခွင် ဘေးကင်းရေး မိတ်ဖက်",
+    emailFieldLabel: "အီးမေးလ်",
+    emailFieldPlaceholder: "အီးမေးလ်လိပ်စာ ထည့်သွင်းပါ",
+    passwordFieldLabel: "စကားဝှက်",
+    passwordFieldPlaceholder: "စကားဝှက် ထည့်သွင်းပါ",
     forgotPassword: "စကားဝှက် မေ့သွားပြီလား?",
     forgotPasswordModal: {
       title: "အသိပေးချက်",
@@ -17,13 +22,19 @@ const myOverrides = {
       confirm: "ကောင်းပြီ",
     },
     alert: {
-      invalidCredentials: "အီးမေးလ် သို့မဟုတ် စကားဝှက် မမှန်ကန်ပါ။",
+      invalidCredentials: "အီးမေးလ် သို့မဟုတ် စကားဝှက် မှားယွင်းနေသည်။",
       signInFailed: "ဝင်ရောက်မှု မအောင်မြင်ပါ။ ထပ်မံကြိုးစားပါ။",
-      fillFields: "လိုအပ်သောအကွက်များ အားလုံးဖြည့်ပါ။",
+      fillFields: "လိုအပ်သော အချက်အလက်များ ဖြည့်သွင်းပါ။",
       passwordLength: "စကားဝှက်တွင် အနည်းဆုံး စာလုံး ၆ လုံး ရှိရမည်။",
       unauthorizedRole: "ဤအကောင့်တွင် ဝင်ရောက်ခွင့် မရှိပါ။",
-      deactivatedAccount: "ဤအကောင့်ကို ပိတ်ထားပြီးဖြစ်သည်။ စီမံခန့်ခွဲသူနှင့် ဆက်သွယ်ပါ။",
-      profileLoadFailed: "အသုံးပြုသူ အချက်အလက် ရယူမရပါ။ ထပ်မံကြိုးစားပါ။",
+      deactivatedAccount: "ဤအကောင့်ကို ပိတ်ထားသည်။ စီမံခန့်ခွဲသူနှင့် ��က်သွယ်ပါ။",
+      profileLoadFailed: "အသုံးပြုသူ အချက်အလက် ဖတ်ယူ၍ မရပါ။ ထပ်မံကြိုးစားပါ။",
+    },
+    validation: {
+      required: "အီးမေးလ်နှင့် စကားဝှက် ထည့်သွင်းပါ။",
+      invalidEmail: "မှန်ကန်သော အီးမေး��်လိပ်စာ ထည့်သွင်းပါ။",
+      passwordTooShort: "စကားဝှက်တွင် အနည်းဆုံး စာလုံး ၆ လုံး ရှိရမည်။",
+      invalidCredentials: "သင်၏ အီးမေးလ် သို့မဟုတ် စကားဝှက် စစ်���ေးပါ။",
     },
   },
   homeScreen: {

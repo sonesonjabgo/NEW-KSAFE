@@ -9,7 +9,12 @@ const loOverrides = {
     workerParticipation: "ການມີສ່ວນຮ່ວມຂອງຄົນງານ",
   },
   loginScreen: {
+    logIn: "ເຂົ້າສູ່ລະບົບ",
     tagline: "ຄູ່ຮ່ວມງານດ້ານຄວາມປອດໄພໃນບ່ອນເຮັດວຽກ",
+    emailFieldLabel: "ອີເມລ",
+    emailFieldPlaceholder: "ໃສ່ທີ່ຢູ່ອີເມລ",
+    passwordFieldLabel: "ລະຫັດຜ່ານ",
+    passwordFieldPlaceholder: "ໃສ່ລະຫັດຜ່ານ",
     forgotPassword: "ລືມລະຫັດຜ່ານ?",
     forgotPasswordModal: {
       title: "ແຈ້ງການ",
@@ -18,12 +23,18 @@ const loOverrides = {
     },
     alert: {
       invalidCredentials: "ອີເມລ ຫຼື ລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ.",
-      signInFailed: "ເຂົ້າສູ່ລະບົບລົ້ມເຫລວ. ກະລຸນາລອງໃໝ່.",
+      signInFailed: "ເຂົ້າສູ່ລະບົບລົ້ມເຫຼວ. ກະລຸນາລອງໃໝ່.",
       fillFields: "ກະລຸນາຕື່ມຂໍ້ມູນທຸກຊ່ອງທີ່ຕ້ອງການ.",
       passwordLength: "ລະຫັດຜ່ານຕ້ອງມີຢ່າງໜ້ອຍ 6 ຕົວອັກສອນ.",
-      unauthorizedRole: "ບັນຊີນີ້ບໍ່ມີສິດເຂົ້າເຖິງ.",
-      deactivatedAccount: "ບັນຊີນີ້ຖືກປິດໃຊ້ງານ. ກະລຸນາຕິດຕໍ່ຜູ້ດູແລລະບົບ.",
-      profileLoadFailed: "ໂຫລດຂໍ້ມູນຜູ້ໃຊ້ລົ້ມເຫລວ. ກະລຸນາລອງໃໝ່.",
+      unauthorizedRole: "ບັນຊີນີ້ບໍ່ມີສິດເຂົ້າໃຊ້.",
+      deactivatedAccount: "ບັນຊີນີ້ຖືກປິດໃຊ້ງານ. ກະລຸນາຕິດຕໍ່ຜູ້ດູແລ.",
+      profileLoadFailed: "ບໍ່ສາມາດໂຫຼດຂໍ້ມູນຜູ້ໃຊ້. ກະລຸນາລອງໃໝ່.",
+    },
+    validation: {
+      required: "ກະລຸນາໃສ່ອີເມລ ແລະ ລະຫັດຜ່ານ.",
+      invalidEmail: "ກະລຸນາໃສ່ທີ່ຢູ່ອີເມລທີ່ຖືກຕ້ອງ.",
+      passwordTooShort: "ລະຫັດຜ່ານຕ້ອງມີຢ່າງໜ້ອຍ 6 ຕົວອັກສອນ.",
+      invalidCredentials: "ກະລຸນາກວດສອບອີເມລ ຫຼື ລະຫັດຜ່ານຂອງທ່ານ.",
     },
   },
   homeScreen: {

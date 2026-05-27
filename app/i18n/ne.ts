@@ -9,7 +9,12 @@ const neOverrides = {
     workerParticipation: "कामदार सहभागिता",
   },
   loginScreen: {
+    logIn: "लगइन",
     tagline: "कार्यस्थल सुरक्षा साझेदार",
+    emailFieldLabel: "इमेल",
+    emailFieldPlaceholder: "इमेल ठेगाना प्रविष्ट गर्नुहोस्",
+    passwordFieldLabel: "पासवर्ड",
+    passwordFieldPlaceholder: "पासवर्ड प्रविष्ट गर्नुहोस्",
     forgotPassword: "पासवर्ड बिर्सनुभयो?",
     forgotPasswordModal: {
       title: "सूचना",
@@ -22,9 +27,15 @@ const neOverrides = {
       signInFailed: "लगइन असफल भयो। कृपया पुनः प्रयास गर्नुहोस्।",
       fillFields: "कृपया सबै आवश्यक फिल्डहरू भर्नुहोस्।",
       passwordLength: "पासवर्ड कम्तीमा ६ वर्णको हुनु पर्छ।",
-      unauthorizedRole: "यो खाताको पहुँच अधिकार छैन।",
-      deactivatedAccount: "यो खाता निष्क्रिय गरिएको छ। कृपया आफ्नो प्रशासकलाई सम्पर्क गर्नुहोस्।",
-      profileLoadFailed: "प्रयोगकर्ता जानकारी लोड गर्न सकिएन। पुनः प्रयास गर्नुहोस्।",
+      unauthorizedRole: "यस खातामा पहुँच छैन।",
+      deactivatedAccount: "यो खाता निष्क्रिय गरिएको छ। कृपया प्रशासकलाई सम्पर्क गर्नुहोस्।",
+      profileLoadFailed: "प्रयोगकर्ता जानकारी लोड हुन सकेन। कृपया पुनः प्रयास गर्नुहोस्।",
+    },
+    validation: {
+      required: "कृपया आफ्नो इमेल र पासवर्ड प्रविष्ट गर्नुहोस्।",
+      invalidEmail: "कृपया मान्य इमेल ठेगाना प्रविष्ट गर्नुहोस्।",
+      passwordTooShort: "पासवर्ड कम्तीमा ६ वर्णको हुनु पर्छ।",
+      invalidCredentials: "कृपया आफ्नो इमेल वा पासवर्ड जाँच गर्नुहोस्।",
     },
   },
   homeScreen: {

@@ -53,13 +53,19 @@ const fr: Translations = {
       confirm: "OK",
     },
     alert: {
-      invalidCredentials: "E-mail ou mot de passe incorrect.",
+      invalidCredentials: "Adresse e-mail ou mot de passe incorrect.",
       signInFailed: "Échec de la connexion. Veuillez réessayer.",
-      fillFields: "Veuillez remplir tous les champs requis.",
+      fillFields: "Veuillez remplir tous les champs obligatoires.",
       passwordLength: "Le mot de passe doit comporter au moins 6 caractères.",
       unauthorizedRole: "Ce compte n'a pas accès.",
       deactivatedAccount: "Ce compte a été désactivé. Veuillez contacter votre administrateur.",
-      profileLoadFailed: "Impossible de charger les informations utilisateur. Réessayez.",
+      profileLoadFailed: "Impossible de charger les informations utilisateur. Veuillez réessayer.",
+    },
+    validation: {
+      required: "Veuillez saisir votre e-mail et votre mot de passe.",
+      invalidEmail: "Veuillez saisir une adresse e-mail valide.",
+      passwordTooShort: "Le mot de passe doit comporter au moins 6 caractères.",
+      invalidCredentials: "Veuillez vérifier votre e-mail ou mot de passe.",
     },
   },
   demoNavigator: {

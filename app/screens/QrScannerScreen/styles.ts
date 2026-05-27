@@ -1,6 +1,5 @@
 import { ViewStyle, TextStyle } from "react-native"
 
-import { isRTL } from "@/i18n/rtl"
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
@@ -32,7 +31,7 @@ export const $root: ViewStyle = {
 
 /* ── 헤더 (StackScreen 기준과 동일) ── */
 export const $header: ViewStyle = {
-  flexDirection: isRTL ? "row-reverse" : "row",
+  flexDirection: "row",
   alignItems: "center",
   paddingHorizontal: 20,
   paddingBottom: 14,
@@ -175,7 +174,7 @@ export const $permissionBanner: ViewStyle = {
   alignSelf: "stretch",
   backgroundColor: WARNING_BG,
   borderRadius: 10,
-  flexDirection: isRTL ? "row-reverse" : "row",
+  flexDirection: "row",
   gap: 6,
   paddingHorizontal: 12,
   paddingVertical: 10,
@@ -185,7 +184,6 @@ export const $permissionText: TextStyle = {
   color: WARNING_TEXT,
   flex: 1,
   lineHeight: 18,
-  textAlign: isRTL ? "right" : "left",
   // fontSize: 동적 적용
 }
 
@@ -211,7 +209,7 @@ export const $languageCard: ViewStyle = {
   borderColor: BORDER_LIGHT,
   borderRadius: 14,
   borderWidth: 1,
-  flexDirection: isRTL ? "row-reverse" : "row",
+  flexDirection: "row",
   gap: 10,
   paddingHorizontal: 16,
   // paddingVertical: 동적 적용
@@ -270,7 +268,6 @@ export const $sheetDesc: TextStyle = {
   fontSize: 15,
   lineHeight: 22,
   marginBottom: 16,
-  textAlign: isRTL ? "right" : "left",
 }
 
 /* ── 코드 입력 필드 ── */
@@ -283,7 +280,6 @@ export const $codeInput: TextStyle = {
   marginBottom: 8,
   paddingHorizontal: 14,
   paddingVertical: 14,
-  textAlign: isRTL ? "right" : "left",
 }
 
 /* ── 도움말 텍스트 ── */
@@ -292,7 +288,6 @@ export const $helperText: TextStyle = {
   fontSize: 13,
   lineHeight: 20,
   marginBottom: 24,
-  textAlign: isRTL ? "right" : "left",
 }
 
 /* ── 회의 참여 버튼 ── */

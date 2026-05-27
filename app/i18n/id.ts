@@ -9,7 +9,12 @@ const idOverrides = {
     workerParticipation: "Partisipasi Pekerja",
   },
   loginScreen: {
+    logIn: "Masuk",
     tagline: "Mitra Keselamatan Tempat Kerja",
+    emailFieldLabel: "Email",
+    emailFieldPlaceholder: "Masukkan alamat email Anda",
+    passwordFieldLabel: "Kata Sandi",
+    passwordFieldPlaceholder: "Masukkan kata sandi Anda",
     forgotPassword: "Lupa kata sandi?",
     forgotPasswordModal: {
       title: "Pemberitahuan",
@@ -20,11 +25,17 @@ const idOverrides = {
     alert: {
       invalidCredentials: "Email atau kata sandi tidak valid.",
       signInFailed: "Masuk gagal. Silakan coba lagi.",
-      fillFields: "Harap isi semua kolom yang diperlukan.",
+      fillFields: "Harap isi semua kolom yang wajib diisi.",
       passwordLength: "Kata sandi minimal 6 karakter.",
       unauthorizedRole: "Akun ini tidak memiliki akses.",
-      deactivatedAccount: "Akun ini telah dinonaktifkan. Hubungi administrator Anda.",
+      deactivatedAccount: "Akun ini telah dinonaktifkan. Silakan hubungi administrator.",
       profileLoadFailed: "Gagal memuat informasi pengguna. Silakan coba lagi.",
+    },
+    validation: {
+      required: "Harap masukkan email dan kata sandi Anda.",
+      invalidEmail: "Harap masukkan alamat email yang valid.",
+      passwordTooShort: "Kata sandi minimal 6 karakter.",
+      invalidCredentials: "Periksa email atau kata sandi Anda.",
     },
   },
   homeScreen: {

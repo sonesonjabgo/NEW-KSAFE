@@ -9,7 +9,12 @@ const ruOverrides = {
     workerParticipation: "Участие работников",
   },
   loginScreen: {
+    logIn: "Войти",
     tagline: "Партнёр по безопасности на рабочем месте",
+    emailFieldLabel: "Электронная почта",
+    emailFieldPlaceholder: "Введите адрес электронной почты",
+    passwordFieldLabel: "Пароль",
+    passwordFieldPlaceholder: "Введите пароль",
     forgotPassword: "Забыли пароль?",
     forgotPasswordModal: {
       title: "Уведомление",
@@ -18,12 +23,18 @@ const ruOverrides = {
     },
     alert: {
       invalidCredentials: "Неверный адрес электронной почты или пароль.",
-      signInFailed: "Ошибка входа. Пожалуйста, попробуйте снова.",
+      signInFailed: "Не удалось войти. Пожалуйста, повторите попытку.",
       fillFields: "Пожалуйста, заполните все обязательные поля.",
       passwordLength: "Пароль должен содержать не менее 6 символов.",
-      unauthorizedRole: "Этот аккаунт не имеет доступа.",
-      deactivatedAccount: "Этот аккаунт деактивирован. Обратитесь к администратору.",
-      profileLoadFailed: "Не удалось загрузить информацию о пользователе. Попробуйте снова.",
+      unauthorizedRole: "У этого аккаунта нет доступа.",
+      deactivatedAccount: "Этот аккаунт деактивирован. Пожалуйста, свяжитесь с администратором.",
+      profileLoadFailed: "Не удалось загрузить данные пользователя. Пожалуйста, повторите попытку.",
+    },
+    validation: {
+      required: "Введите адрес электронной почты и пароль.",
+      invalidEmail: "Введите действительный адрес электронной почты.",
+      passwordTooShort: "Пароль должен содержать не менее 6 символов.",
+      invalidCredentials: "Проверьте адрес электронной почты или пароль.",
     },
   },
   homeScreen: {
