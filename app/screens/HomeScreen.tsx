@@ -847,7 +847,7 @@ const $boardItem: ViewStyle = {
   alignItems: "flex-start",
   paddingVertical: 18,
   paddingHorizontal: 16,
-  gap: 12,
+  gap: 6,
   borderBottomWidth: StyleSheet.hairlineWidth,
   borderBottomColor: "#E9ECF0",
 }
