@@ -43,13 +43,13 @@ export const getMockAdminMenus = (): SafeHealthMenuItem[] => [
 
 export const getMockWorkerMenus = (): SafeHealthMenuItem[] => [
   {
-    id: 1,
+    id: 5, // SafeHealthMenuItem handlePress: id 5 → TbmJoin
     title: translate("safeHealthScreen:menu.tbmJoinWorker.title"),
     description: translate("safeHealthScreen:menu.tbmJoinWorker.description"),
     icon: "Users",
   },
   {
-    id: 2,
+    id: 6, // SafeHealthMenuItem handlePress: id 6 → TbmParticipationHistory
     title: translate("safeHealthScreen:menu.statusView.title"),
     description: translate("safeHealthScreen:menu.statusView.description"),
     icon: "LayoutList",
