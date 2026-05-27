@@ -12,7 +12,7 @@ import { useAuth } from "@/context/AuthContext"
 import type { TxKeyPath } from "@/i18n"
 import { fromI18nKey, persistChangeLanguage, toI18nKey } from "@/i18n"
 import { translate } from "@/i18n/translate"
-import { api } from "@/services/api"
+import { getLanguages, getUserProfile, patchPreferredLanguage } from "@/services/api/language"
 import { colors } from "@/theme/colors"
 import { useResponsive } from "@/theme/responsive"
 
@@ -136,8 +136,8 @@ export const LanguageSettingsScreen: FC = () => {
       // 401로 인해 langsResult.kind !== "ok" → FALLBACK_LANGUAGES 사용 (serverId: 0) →
       // handleSelect에서 PATCH가 스킵되는 현상은 이 401의 후속 증상임.
       const [langsResult, profileResult] = await Promise.all([
-        api.getLanguages(authToken),
-        api.getUserProfile(authToken),
+        getLanguages(authToken),
+        getUserProfile(authToken),
       ])
 
       if (langsResult.kind === "ok" && langsResult.items.length > 0) {
@@ -191,7 +191,7 @@ export const LanguageSettingsScreen: FC = () => {
       // [LOG 1] PATCH 요청 body 확인
       console.log("[LangDebug] PATCH /preferred-language →", { languageId: lang.serverId, code })
 
-      const result = await api.patchPreferredLanguage(authToken, lang.serverId)
+      const result = await patchPreferredLanguage(authToken, lang.serverId)
 
       // [LOG 2] PATCH 응답 성공 여부
       console.log("[LangDebug] PATCH result →", result.kind)
@@ -204,7 +204,7 @@ export const LanguageSettingsScreen: FC = () => {
       }
 
       // [LOG 3] PATCH 직후 GET /profile 로 서버 저장값 확인
-      const verifyResult = await api.getUserProfile(authToken)
+      const verifyResult = await getUserProfile(authToken)
       if (verifyResult.kind === "ok") {
         console.log(
           "[LangDebug] GET /profile after PATCH → preferredLanguageCode:",
