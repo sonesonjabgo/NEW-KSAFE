@@ -32,25 +32,35 @@ export const PushNotificationBottomSheet: FC<PushNotificationBottomSheetProps> =
 }) => {
   const insets = useSafeAreaInsets()
   const [modalVisible, setModalVisible] = useState(false)
-  const slideAnim = useRef(new Animated.Value(SHEET_HEIGHT)).current
   const fadeAnim = useRef(new Animated.Value(0)).current
+  const slideAnim = useRef(new Animated.Value(SHEET_HEIGHT)).current
+  // 닫힘 콜백이 늦게 실행돼도 열린 모달을 닫지 않도록 방어
+  const shouldHideRef = useRef(false)
 
   useEffect(() => {
     if (isVisible) {
+      shouldHideRef.current = false
+      fadeAnim.setValue(0)
+      slideAnim.setValue(SHEET_HEIGHT)
       setModalVisible(true)
       Animated.parallel([
-        Animated.timing(fadeAnim, { toValue: 1, duration: 220, useNativeDriver: true }),
+        Animated.timing(fadeAnim, { toValue: 1, duration: 250, useNativeDriver: true }),
         Animated.spring(slideAnim, { toValue: 0, bounciness: 4, useNativeDriver: true }),
       ]).start()
     } else {
+      shouldHideRef.current = true
       Animated.parallel([
-        Animated.timing(fadeAnim, { toValue: 0, duration: 200, useNativeDriver: true }),
+        Animated.timing(fadeAnim, { toValue: 0, duration: 220, useNativeDriver: true }),
         Animated.timing(slideAnim, {
           toValue: SHEET_HEIGHT,
-          duration: 250,
+          duration: 220,
           useNativeDriver: true,
         }),
-      ]).start(() => setModalVisible(false))
+      ]).start(({ finished }) => {
+        if (finished && shouldHideRef.current) {
+          setModalVisible(false)
+        }
+      })
     }
   }, [isVisible, fadeAnim, slideAnim])
 
@@ -63,7 +73,7 @@ export const PushNotificationBottomSheet: FC<PushNotificationBottomSheetProps> =
         <Animated.View
           style={[
             $sheet,
-            { height: SHEET_HEIGHT + insets.bottom, paddingBottom: insets.bottom + 20 },
+            { paddingBottom: insets.bottom + 20 },
             { transform: [{ translateY: slideAnim }] },
           ]}
         >
@@ -134,7 +144,7 @@ const $dragHandle: ViewStyle = {
 
 const $content: ViewStyle = {
   alignItems: "center",
-  marginBottom: 28,
+  marginBottom: 20,
   gap: 8,
 }
 
@@ -148,7 +158,7 @@ const $title: TextStyle = {
 
 const $description: TextStyle = {
   fontSize: 15,
-  fontFamily: typography.primary.semiBold,
+  fontFamily: typography.primary.medium,
   lineHeight: 23,
   textAlign: "center",
   color: "#888888",
@@ -161,7 +171,7 @@ const $allowBtn: ViewStyle = {
   borderRadius: 10,
   alignItems: "center",
   justifyContent: "center",
-  marginBottom: 14,
+  marginBottom: 20,
 }
 
 const $allowBtnLabel: TextStyle = {

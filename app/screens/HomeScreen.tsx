@@ -1,6 +1,7 @@
 import { FC, useEffect, useState, useMemo } from "react"
 import {
   Linking,
+  PermissionsAndroid,
   Platform,
   View,
   ViewStyle,
@@ -9,6 +10,7 @@ import {
   ScrollView,
   StyleSheet,
 } from "react-native"
+import * as Notifications from "expo-notifications"
 import { ChevronRight } from "lucide-react-native"
 import { useTranslation } from "react-i18next"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
@@ -86,8 +88,37 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
     breakpoint: _breakpoint,
   } = useResponsive()
 
-  const handlePushAllow = () => setPushNotificationVisible(false)
-  const handlePushOpenSettings = () => setPushNotificationVisible(false)
+  const handlePushAllow = async () => {
+    let granted = false
+    if (Platform.OS === "android") {
+      const androidVersion = Number(Platform.Version)
+      if (!Number.isNaN(androidVersion) && androidVersion < 33) {
+        granted = true
+      } else {
+        const result = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+        )
+        granted = result === PermissionsAndroid.RESULTS.GRANTED
+      }
+    } else {
+      const result = (await Notifications.requestPermissionsAsync()) as unknown as {
+        granted: boolean
+      }
+      granted = result.granted
+    }
+    if (granted) {
+      setPushNotificationVisible(false)
+    }
+  }
+
+  const handlePushOpenSettings = () => {
+    if (Platform.OS === "ios") {
+      Linking.openURL("app-settings:")
+    } else {
+      Linking.openSettings()
+    }
+    setPushNotificationVisible(false)
+  }
 
   const openWebView = (url: string, title: string) => {
     if (Platform.OS === "web") {
@@ -188,7 +219,26 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
   )
 
   useEffect(() => {
-    setPushNotificationVisible(true)
+    const checkPushPermission = async () => {
+      try {
+        if (Platform.OS === "android") {
+          const androidVersion = Number(Platform.Version)
+          if (!Number.isNaN(androidVersion) && androidVersion < 33) return
+          const hasPermission = await PermissionsAndroid.check(
+            PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+          )
+          if (!hasPermission) setPushNotificationVisible(true)
+        } else {
+          const result = (await Notifications.getPermissionsAsync()) as unknown as {
+            granted: boolean
+          }
+          if (!result.granted) setPushNotificationVisible(true)
+        }
+      } catch {
+        setPushNotificationVisible(true)
+      }
+    }
+    void checkPushPermission()
   }, [])
 
   useEffect(() => {
