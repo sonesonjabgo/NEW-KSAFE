@@ -200,6 +200,7 @@ export const $permissionText: TextStyle = {
   color: WARNING_TEXT,
   flex: 1,
   lineHeight: 18,
+  textAlign: isRTL ? "right" : "left",
   // fontSize: 동적 적용
 }
 
