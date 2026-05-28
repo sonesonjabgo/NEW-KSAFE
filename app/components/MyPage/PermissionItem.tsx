@@ -10,6 +10,7 @@ interface PermissionItemProps {
   description: string
   type: "button" | "switch"
   buttonLabel?: string
+  isGranted?: boolean
   switchValue?: boolean
   onSwitchChange?: (value: boolean) => void
   onButtonPress?: () => void
@@ -22,6 +23,7 @@ export const PermissionItem: FC<PermissionItemProps> = ({
   description,
   type,
   buttonLabel = "허용",
+  isGranted,
   switchValue,
   onSwitchChange,
   onButtonPress,
@@ -38,7 +40,7 @@ export const PermissionItem: FC<PermissionItemProps> = ({
         <View style={$control}>
           {type === "button" ? (
             <TouchableOpacity onPress={onButtonPress} activeOpacity={0.7}>
-              <Text text={buttonLabel} style={$allowButton} />
+              <Text text={buttonLabel} style={[$allowButton, !isGranted && $notAllowedButton]} />
             </TouchableOpacity>
           ) : (
             <CustomToggle value={!!switchValue} onValueChange={onSwitchChange ?? (() => {})} />
@@ -110,9 +112,9 @@ const $container: ViewStyle = {
 }
 
 const $iconContainer: ViewStyle = {
-  width: 44,
-  height: 44,
-  borderRadius: 12,
+  width: 28,
+  height: 28,
+  borderRadius: 8,
   justifyContent: "center",
   alignItems: "center",
 }
@@ -144,6 +146,10 @@ const $allowButton: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.semiBold,
   color: "#4A6CF7",
+}
+
+const $notAllowedButton: TextStyle = {
+  color: "#9AA0AD",
 }
 
 const $divider: ViewStyle = {

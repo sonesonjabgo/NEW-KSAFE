@@ -158,6 +158,7 @@ const ar: Translations = {
       title: "لوحة الأمان",
       viewMore: "المزيد",
       tabs: { all: "الكل", company: "الشركة بأكملها", workplace: "موقع العمل" },
+      empty: "No posts available.",
     },
     edu: {
       title: "الانضمام إلى التعليم/العرض الحالي",
@@ -323,6 +324,7 @@ const ar: Translations = {
     title: "ترجمة المحادثة الصوتية",
     flipScreen: "تدوير",
     listening: "جارٍ الاستماع...",
+    tapToSpeak: "اضغط للتحدث",
     speakNow: "تحدث الآن",
     languageMenu: {
       title: "اللغة المعرَّفة",
@@ -385,6 +387,7 @@ const ar: Translations = {
 
   myPageScreen: {
     title: "صفحتي",
+    orgName: "KS산업안전협회",
     workplace: {
       label: "موقع عمل برج كرين Gwanggyo",
     },
@@ -409,6 +412,8 @@ const ar: Translations = {
         title: "إشعارات الدفع",
         description: "تنبيهات TBM، تحذيرات الخطر، إشعارات مكان العمل",
       },
+      allowed: "مسموح",
+      notAllowed: "غير مسموح",
     },
     logout: "تسجيل خروج",
     logoutModal: {
@@ -865,6 +870,8 @@ const ar: Translations = {
       helper: "الوصف اختياري. يمكن إدخال حتى 10,000 حرف.",
     },
     submit: "تسجيل",
+    submitSuccess: "Material registered successfully.",
+    submitError: "Failed to register material. Please try again.",
   },
 
   educationMaterialDetailScreen: {
@@ -888,6 +895,7 @@ const ar: Translations = {
     confirm: "اكتمال الاختيار ({{count}})",
     confirmNone: "اكتمال الاختيار",
     emptyText: "لا توجد مواد تعليمية.",
+    categoryAll: "All",
   },
 
   improvementProposalDetailScreen: {
@@ -1016,6 +1024,7 @@ const ar: Translations = {
 
   tbmReportInquiryScreen: {
     title: "استفسار تقرير TBM",
+    untitled: "(No title)",
     tabs: {
       all: "الكل",
       requested: "مطلوب",
@@ -1160,6 +1169,8 @@ const ar: Translations = {
     cautionResponse: "استجابة التحذير",
     unit: "حالة",
     workplaceLabel: "موقع العمل",
+    statusNormal: "Normal",
+    statusAbnormal: "Caution",
   },
 
   tbmParticipationHistoryDetailScreen: {

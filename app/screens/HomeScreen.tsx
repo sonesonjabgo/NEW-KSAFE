@@ -37,6 +37,8 @@ import ProfileSwitch from "@assets/icons/nav/profile_switch.svg"
 
 import { isRTL } from "@/i18n"
 
+import { loadString, saveString } from "@/utils/storage"
+
 import { PushNotificationBottomSheet } from "@/components/PushNotificationBottomSheet"
 import { Text } from "@/components/Text"
 import { WebViewModal } from "@/components/WebViewModal"
@@ -219,7 +221,19 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
   )
 
   useEffect(() => {
+    const NOTIFICATION_PROMPT_KEY = "notification-permission:lastPromptedAt"
+    const NOTIFICATION_PROMPT_COOLDOWN_MS = 1000 * 60 * 60 * 12 // 12시간
+
+    const showPrompt = () => {
+      saveString(NOTIFICATION_PROMPT_KEY, Date.now().toString())
+      setPushNotificationVisible(true)
+    }
+
     const checkPushPermission = async () => {
+      // 12시간 이내에 이미 표시했으면 건너뜀 (언어 변경 재시작 등 대응)
+      const lastPromptedAt = Number(loadString(NOTIFICATION_PROMPT_KEY) ?? 0)
+      if (Date.now() - lastPromptedAt < NOTIFICATION_PROMPT_COOLDOWN_MS) return
+
       try {
         if (Platform.OS === "android") {
           const androidVersion = Number(Platform.Version)
@@ -227,15 +241,15 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
           const hasPermission = await PermissionsAndroid.check(
             PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
           )
-          if (!hasPermission) setPushNotificationVisible(true)
+          if (!hasPermission) showPrompt()
         } else {
           const result = (await Notifications.getPermissionsAsync()) as unknown as {
             granted: boolean
           }
-          if (!result.granted) setPushNotificationVisible(true)
+          if (!result.granted) showPrompt()
         }
       } catch {
-        setPushNotificationVisible(true)
+        showPrompt()
       }
     }
     void checkPushPermission()

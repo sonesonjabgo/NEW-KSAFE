@@ -177,6 +177,7 @@ const en = {
         company: "Company",
         workplace: "Workplace",
       },
+      empty: "No posts available.",
     },
     edu: {
       title: "Join Existing Education/Presentation",
@@ -359,6 +360,7 @@ const en = {
     title: "Voice Conversation Translation",
     flipScreen: "Flip",
     listening: "Listening...",
+    tapToSpeak: "Tap to speak",
     speakNow: "Speak now",
     languageMenu: {
       title: "Recognized Language",
@@ -421,6 +423,7 @@ const en = {
 
   myPageScreen: {
     title: "My Page",
+    orgName: "KS Industrial Safety Association",
     workplace: {
       label: "Gwangyo Tower Crane Workplace",
     },
@@ -438,13 +441,15 @@ const en = {
       },
       photo: {
         title: "Photos/Library",
-        description: "AI risk assessment, image translation, TBM education materials",
+        description: "AI risk assessment, image translation, TBM education/log materials",
         button: "Allow",
       },
       notification: {
         title: "Push Notifications",
         description: "TBM notifications, hazard alerts, workplace announcements",
       },
+      allowed: "Allowed",
+      notAllowed: "Not Allowed",
     },
     logout: "Log Out",
     logoutModal: {
@@ -914,6 +919,8 @@ const en = {
       helper: "Description is optional. If provided, up to 10,000 characters can be entered.",
     },
     submit: "Register",
+    submitSuccess: "Material registered successfully.",
+    submitError: "Failed to register material. Please try again.",
   },
 
   educationMaterialDetailScreen: {
@@ -937,6 +944,7 @@ const en = {
     confirm: "Complete ({{count}})",
     confirmNone: "Complete",
     emptyText: "No educational materials available.",
+    categoryAll: "All",
   },
 
   improvementProposalDetailScreen: {
@@ -1066,6 +1074,7 @@ const en = {
 
   tbmReportInquiryScreen: {
     title: "TBM Report Inquiry",
+    untitled: "(No title)",
     tabs: {
       all: "All",
       requested: "Requested",
@@ -1211,6 +1220,8 @@ const en = {
     cautionResponse: "Caution Response",
     unit: "case(s)",
     workplaceLabel: "Workplace",
+    statusNormal: "Normal",
+    statusAbnormal: "Caution",
   },
 
   tbmParticipationHistoryDetailScreen: {

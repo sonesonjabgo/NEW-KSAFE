@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useRef, useState } from "react"
 import {
   ActivityIndicator,
   Platform,
@@ -31,6 +31,7 @@ interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
 export const LoginScreen: FC<LoginScreenProps> = () => {
   const { signIn } = useAuth()
+  const passwordInputRef = useRef<TextInput>(null)
   const [secureText, setSecureText] = useState(true)
   const [forgotModalVisible, setForgotModalVisible] = useState(false)
   const [isEmailFocused, setIsEmailFocused] = useState(false)
@@ -167,8 +168,11 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
                   keyboardType="email-address"
                   autoCapitalize="none"
                   underlineColorAndroid="transparent"
+                  returnKeyType="next"
+                  blurOnSubmit={false}
                   value={email}
                   onChangeText={setEmail}
+                  onSubmitEditing={() => passwordInputRef.current?.focus()}
                   onFocus={() => setIsEmailFocused(true)}
                   onBlur={() => {
                     setIsEmailFocused(false)
@@ -201,13 +205,16 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
               >
                 <LockSvg width={18} height={18} color="#9CA3AF" style={$inputIcon} />
                 <TextInput
+                  ref={passwordInputRef}
                   style={[$textInput, $passwordInput, $textInputDynamic]}
                   placeholder={translate("loginScreen:passwordFieldPlaceholder")}
                   placeholderTextColor="#9CA3AF"
                   secureTextEntry={secureText}
                   underlineColorAndroid="transparent"
+                  returnKeyType="done"
                   value={password}
                   onChangeText={setPassword}
+                  onSubmitEditing={handleLogin}
                   onFocus={() => setIsPasswordFocused(true)}
                   onBlur={() => {
                     setIsPasswordFocused(false)

@@ -163,6 +163,7 @@ const hi: Translations = {
       title: "सुरक्षा बोर्ड",
       viewMore: "और देखें",
       tabs: { all: "सभी", company: "पूरी कंपनी", workplace: "कार्यस्थल" },
+      empty: "No posts available.",
     },
     edu: { title: "शिक्षा", description: "विवरण" },
     banner: { text: "सुरक्षित वातावरण" },
@@ -322,6 +323,7 @@ const hi: Translations = {
     title: "वॉयस वार्तालाप अनुवाद",
     flipScreen: "पलटें",
     listening: "सुन रहा है...",
+    tapToSpeak: "बोलने के लिए टैप करें",
     speakNow: "अभी बोलें",
     languageMenu: {
       title: "पहचानी गई भाषा",
@@ -384,6 +386,7 @@ const hi: Translations = {
 
   myPageScreen: {
     title: "मेरा पृष्ठ",
+    orgName: "KS산업안전협회",
     workplace: {
       label: "ग्वांগগियो टावर क्रेन वर्कप्लेस",
     },
@@ -408,6 +411,8 @@ const hi: Translations = {
         title: "पुश नोटिफिकेशन",
         description: "TBM अलर्ट, जोखिम चेतावनी, कार्यस्थल नोटिस",
       },
+      allowed: "अनुमत",
+      notAllowed: "अनुमति नहीं",
     },
     logout: "लॉग आउट",
     logoutModal: {
@@ -865,7 +870,9 @@ const hi: Translations = {
       placeholder: "शिक्षा सामग्री दर्ज करें",
       helper: "विवरण वैकल्पिक है। यदि प्रदान किया गया है, तो 10,000 अक्षर तक दर्ज किए जा सकते हैं।",
     },
-    submit: "दर्ज करें",
+    submit: "PLACEHOLDER",
+    submitSuccess: "Material registered successfully.",
+    submitError: "Failed to register material. Please try again.",
   },
 
   educationMaterialDetailScreen: {
@@ -889,6 +896,7 @@ const hi: Translations = {
     confirm: "पूर्ण ({{count}})",
     confirmNone: "पूर्ण",
     emptyText: "कोई शैक्षिक सामग्री उपलब्ध नहीं।",
+    categoryAll: "All",
   },
 
   improvementProposalDetailScreen: {
@@ -1019,6 +1027,7 @@ const hi: Translations = {
 
   tbmReportInquiryScreen: {
     title: "TBM रिपोर्ट जांच",
+    untitled: "(No title)",
     tabs: {
       all: "सभी",
       requested: "अनुरोधित",
@@ -1163,7 +1172,9 @@ const hi: Translations = {
     totalParticipation: "कुल भागीदारी",
     cautionResponse: "सावधानी प्रतिक्रिया",
     unit: "मामला",
-    workplaceLabel: "कार्यस्थल",
+    workplaceLabel: "PLACEHOLDER_WL",
+    statusNormal: "Normal",
+    statusAbnormal: "Caution",
   },
 
   tbmParticipationHistoryDetailScreen: {
