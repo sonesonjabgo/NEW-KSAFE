@@ -182,20 +182,13 @@ export const QrScannerScreen: FC = () => {
               ]}
             >
               {showCamera ? (
-                <>
-                  <Camera
-                    style={S.$camera}
-                    device={device}
-                    pixelFormat="yuv"
-                    isActive
-                    codeScanner={codeScanner}
-                  />
-                  {/* 코너 브래킷 오버레이 */}
-                  <View style={[S.$cornerTL, { width: cornerSize, height: cornerSize }]} />
-                  <View style={[S.$cornerTR, { width: cornerSize, height: cornerSize }]} />
-                  <View style={[S.$cornerBL, { width: cornerSize, height: cornerSize }]} />
-                  <View style={[S.$cornerBR, { width: cornerSize, height: cornerSize }]} />
-                </>
+                <Camera
+                  style={S.$camera}
+                  device={device}
+                  pixelFormat="yuv"
+                  isActive
+                  codeScanner={codeScanner}
+                />
               ) : (
                 <>
                   <View style={[S.$cornerTL, { width: cornerSize, height: cornerSize }]} />
