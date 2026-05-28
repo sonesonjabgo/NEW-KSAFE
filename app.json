@@ -2,7 +2,7 @@
   "name": "NEW-KSAFE",
   "slug": "NEW-KSAFE",
   "scheme": "new-ksafe",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "orientation": "portrait",
   "userInterfaceStyle": "automatic",
   "icon": "./assets/images/app-icon-all.png",
@@ -16,21 +16,20 @@
   ],
   "android": {
     "icon": "./assets/images/app-icon-android-legacy.png",
-    "package": "com.newksafe",
+    "package": "kr.co.kscenter.ksafeone",
     "adaptiveIcon": {
       "foregroundImage": "./assets/images/app-icon-android-adaptive-foreground.png",
       "backgroundImage": "./assets/images/app-icon-android-adaptive-background.png"
     },
     "allowBackup": false,
-    "edgeToEdgeEnabled": true
+    "edgeToEdgeEnabled": true,
+    "versionCode": 51
   },
   "ios": {
     "icon": "./assets/images/app-icon-ios.png",
     "supportsTablet": true,
-    "bundleIdentifier": "com.newksafe",
-    "infoPlist": {
-      "NSLocationWhenInUseUsageDescription": "$(PRODUCT_NAME) uses your location to ensure workplace safety compliance."
-    }
+    "bundleIdentifier": "kr.co.kscenter.ksafeone",
+    "buildNumber": "51"
   },
   "web": {
     "favicon": "./assets/images/app-icon-web-favicon.png",
