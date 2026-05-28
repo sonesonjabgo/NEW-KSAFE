@@ -149,6 +149,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
   const [inputText, setInputText] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [conversationStarted, setConversationStarted] = useState(false)
+  const [inputFocused, setInputFocused] = useState(false)
 
   const canSend = inputText.trim().length >= 2 && inputText.trim().length <= 1000 && !isLoading
 
@@ -307,7 +308,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
           />
         )}
 
-        <View style={[$inputContainer, { paddingBottom: Math.max(20, insets.bottom + 8) }]}>
+        <View style={[$inputContainer, { paddingBottom: inputFocused ? 8 : Math.max(20, insets.bottom + 8) }]}>
           <View style={$inputRow}>
             <TextInput
               style={$textInput}
@@ -317,6 +318,8 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
               onChangeText={setInputText}
               maxLength={1000}
               editable={!isLoading}
+              onFocus={() => setInputFocused(true)}
+              onBlur={() => setInputFocused(false)}
             />
             <TouchableOpacity
               style={[$sendButton, canSend ? $sendButtonActive : $sendButtonInactive]}
