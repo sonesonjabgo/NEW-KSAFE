@@ -186,7 +186,7 @@ export const $cornerBR: ViewStyle = {
 
 /* ── 카메라 권한 배너 ── */
 export const $permissionBanner: ViewStyle = {
-  alignItems: "center",
+  alignItems: "flex-start",
   alignSelf: "stretch",
   backgroundColor: WARNING_BG,
   borderRadius: 10,
