@@ -1,6 +1,7 @@
 import { FC, useState } from "react"
 import {
   ActivityIndicator,
+  Platform,
   TextInput,
   TextStyle,
   TouchableOpacity,
@@ -122,9 +123,12 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
       <Screen
         style={$root}
         contentContainerStyle={$screenContent}
-        preset="fixed"
+        preset="scroll"
         safeAreaEdges={["top"]}
         backgroundColor={colors.navy}
+        KeyboardAvoidingViewProps={{
+          behavior: Platform.OS === "ios" ? "padding" : undefined,
+        }}
       >
         {/* 상단 네이비 영역 */}
         <View style={[$navySection, $navySectionDynamic]}>
@@ -282,7 +286,7 @@ const $root: ViewStyle = {
   backgroundColor: colors.navy,
 }
 
-const $screenContent: ViewStyle = { flex: 1 }
+const $screenContent: ViewStyle = { flexGrow: 1 }
 
 const $navySection: ViewStyle = {
   width: "100%",
