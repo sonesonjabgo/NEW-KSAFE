@@ -1,6 +1,7 @@
 import { FC, useRef, useState } from "react"
 import {
   ActivityIndicator,
+  Image,
   Platform,
   TextInput,
   TextStyle,
@@ -16,7 +17,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import EyeOffSvg from "@assets/icons/login/eye-off.svg"
 import EyeSvg from "@assets/icons/login/eye.svg"
 import LockSvg from "@assets/icons/login/lock.svg"
-import LogoSvg from "@assets/icons/login/logo-ksafeone.svg"
+const LogoIcon = require("@assets/images/whiteIcon.png")
 import MailSvg from "@assets/icons/login/mail.svg"
 
 import { ConfirmModal } from "@/components/ConfirmModal"
@@ -134,7 +135,7 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
         {/* 상단 네이비 영역 */}
         <View style={[$navySection, $navySectionDynamic]}>
           <View style={[$logoContainer, $logoContainerDynamic]}>
-            <LogoSvg width={logoSize} height={logoSize} style={$logoImage} />
+            <Image source={LogoIcon} style={[$logoImage, { width: logoSize, height: logoSize }]} resizeMode="contain" />
             <RNText style={[$brandName, $brandNameDynamic]}>K-SAFEONE</RNText>
             <RNText style={[$tagline, $taglineDynamic]}>{translate("loginScreen:tagline")}</RNText>
           </View>
