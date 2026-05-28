@@ -18,6 +18,9 @@ import type { Session } from "@/services/api/auth/supabase"
 import { api } from "@/services/api/index"
 import { fetchMyProfile, MyProfileResponseDto } from "@/services/api/profile"
 import { logDevError } from "@/utils/logDevError"
+import { remove } from "@/utils/storage"
+
+const NOTIFICATION_PROMPT_KEY = "notification-permission:lastPromptedAt"
 import { resolvePrimaryRole, UserRole } from "@/utils/roles"
 
 type AuthUser = {
@@ -147,6 +150,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     setProfile(null)
     setError(null)
     api.resetRequestBlock()
+    remove(NOTIFICATION_PROMPT_KEY)
     try {
       await supabase.auth.signOut({ scope: "local" })
     } catch (err) {
