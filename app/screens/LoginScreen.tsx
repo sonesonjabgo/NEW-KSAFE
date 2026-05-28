@@ -2,6 +2,7 @@ import { FC, useRef, useState } from "react"
 import {
   ActivityIndicator,
   Image,
+  ImageStyle,
   Platform,
   TextInput,
   TextStyle,
@@ -308,7 +309,7 @@ const $logoContainer: ViewStyle = {
 }
 
 // width/height는 JSX props(logoSize)로 제어 — marginBottom만 유지
-const $logoImage: ViewStyle = {
+const $logoImage: ImageStyle = {
   marginBottom: 8,
 }
 

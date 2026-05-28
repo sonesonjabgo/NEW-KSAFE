@@ -12,6 +12,7 @@ import {
   ListRenderItemInfo,
   Text as RNText,
 } from "react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { IconTrash, IconSend2 } from "@tabler/icons-react-native"
 
 import ChatbotIcon from "@assets/icons/chatbot/chatbot.svg"
@@ -141,6 +142,7 @@ function LoadingDots() {
 }
 
 export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) => {
+  const insets = useSafeAreaInsets()
   const flatListRef = useRef<FlatList<Message>>(null)
 
   const [messages, setMessages] = useState<Message[]>([])
@@ -281,7 +283,8 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
     >
       <KeyboardAvoidingView
         style={$keyboardView}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        behavior="padding"
+        keyboardVerticalOffset={insets.top + 60}
       >
         {conversationStarted ? (
           <FlatList
@@ -304,7 +307,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
           />
         )}
 
-        <View style={$inputContainer}>
+        <View style={[$inputContainer, { paddingBottom: Math.max(20, insets.bottom + 8) }]}>
           <View style={$inputRow}>
             <TextInput
               style={$textInput}
