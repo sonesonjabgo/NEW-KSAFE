@@ -88,13 +88,9 @@ const zhOverrides = {
     empty: "暂无帖子",
     write: "写帖",
     draftSaved: "帖子已保存为草稿。",
-    allWorkplaces: "所有工作场所",
-    workplaceModal: { title: "选择工作场所", allOption: "全部" },
-    notifySent: "通知已发送。",
   },
   safeBoardDetailScreen: {
     title: "帖子详情",
-    loadError: "帖子加载失败。",
     authorLabel: "作者",
     editButton: "编辑",
     alertOn: "通知 ON",
@@ -112,12 +108,6 @@ const zhOverrides = {
       message: "确定要删除此帖子吗？\n删除后无法恢复。",
       cancel: "取消",
       confirm: "删除",
-    },
-    toasts: {
-      publishSuccess: "帖子发布成功。",
-      publishError: "帖子发布失败。",
-      deleteSuccess: "帖子删除成功。",
-      deleteError: "帖子删除失败。",
     },
   },
   safeBoardCreateScreen: {
@@ -146,15 +136,12 @@ const zhOverrides = {
       card1Text: "（可选）可上传\n最大50MB的文件。",
       uploadButton: "上传文件",
       noFile: "未选择文件。",
-      uploadError: "文件上传失败。请重试。",
     },
     pushNotification: {
       label: "发送推送通知",
       cardText: "选中时，发帖后将向所选工作场所所有成员发送推送通知。",
     },
     save: "保存",
-    titleEdit: "编辑帖子",
-    saveError: "保存失败。请重试。",
   },
   safeBoardNotifyScreen: {
     title: "发送工作场所推送通知",

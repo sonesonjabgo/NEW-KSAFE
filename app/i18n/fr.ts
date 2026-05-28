@@ -207,8 +207,7 @@ const fr: Translations = {
     title: "Tableau de sécurité",
     alertButton: "Alerte",
     workplaceLabel: "Lieu de travail",
-    allWorkplaces: "Tous les lieux de travail",
-    workplaceModal: { title: "Sélectionner le lieu de travail", allOption: "Tous" },
+    workplaceModal: { title: "Sélectionner le lieu de travail" },
     badge: {
       companyWide: "Toute la société",
       workplace: "Lieu de travail",
@@ -219,11 +218,9 @@ const fr: Translations = {
     empty: "Vide",
     write: "Écrire",
     draftSaved: "Publication enregistrée en brouillon.",
-    notifySent: "Notification envoyée.",
   },
   safeBoardDetailScreen: {
     title: "Détail de la publication",
-    loadError: "Impossible de charger la publication.",
     authorLabel: "Auteur",
     editButton: "Modifier",
     alertOn: "Alerte ON",
@@ -241,12 +238,6 @@ const fr: Translations = {
       message: "Êtes-vous sûr de vouloir supprimer cette publication ?",
       cancel: "Annuler",
       confirm: "Supprimer",
-    },
-    toasts: {
-      publishSuccess: "Publication publiée avec succès.",
-      publishError: "Échec de la publication.",
-      deleteSuccess: "Publication supprimée avec succès.",
-      deleteError: "Échec de la suppression de la publication.",
     },
   },
   safeBoardNotifyScreen: {
@@ -299,7 +290,6 @@ const fr: Translations = {
       card1Text: "(Facultatif) Vous pouvez télécharger\ndes fichiers jusqu'à 50 Mo.",
       uploadButton: "Télécharger un fichier",
       noFile: "Aucun fichier sélectionné.",
-      uploadError: "Échec du téléchargement du fichier. Veuillez réessayer.",
     },
     pushNotification: {
       label: "Envoyer une notification push",
@@ -307,8 +297,6 @@ const fr: Translations = {
         "Si sélectionné, une notification push sera envoyée à tous les membres du lieu de travail sélectionné lors de la publication.",
     },
     save: "Enregistrer",
-    titleEdit: "Modifier la publication",
-    saveError: "Échec de l'enregistrement. Veuillez réessayer.",
   },
 
   safeHealthScreen: {

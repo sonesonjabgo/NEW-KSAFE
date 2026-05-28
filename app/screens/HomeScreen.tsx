@@ -274,13 +274,6 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
   const $footerLinksDynamic: ViewStyle = { gap: isSmallPhone ? 6 : 10 }
   const $footerLinkDynamic: TextStyle = { fontSize: isSmallPhone ? 10 : 11 }
   const headerTopOffset = isSmallPhone ? 20 : isTablet ? 36 : 32
-  const $bannerOverlayTitleDynamic: TextStyle = { fontSize: isTablet ? 18 : 14 }
-  const $bannerOverlayDescDynamic: TextStyle = {
-    fontSize: isTablet ? 12 : 9,
-    lineHeight: isTablet ? 18 : 14,
-  }
-  const $bannerOverlayActionTextDynamic: TextStyle = { fontSize: isTablet ? 14 : 11 }
-
   return (
     <>
       <View style={$root}>

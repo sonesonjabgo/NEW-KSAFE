@@ -209,8 +209,7 @@ const es: Translations = {
     title: "Tablero de seguridad",
     alertButton: "Enviar alerta",
     workplaceLabel: "Lugar de trabajo seleccionado",
-    allWorkplaces: "Todos los lugares de trabajo",
-    workplaceModal: { title: "Seleccionar lugar de trabajo", allOption: "Todos" },
+    workplaceModal: { title: "Seleccionar lugar de trabajo" },
     badge: {
       companyWide: "Toda la empresa",
       workplace: "Lugar de trabajo",
@@ -221,11 +220,9 @@ const es: Translations = {
     empty: "No hay publicaciones",
     write: "Escribir",
     draftSaved: "La publicación se ha guardado como borrador.",
-    notifySent: "Notificación enviada.",
   },
   safeBoardDetailScreen: {
     title: "Detalle de publicación",
-    loadError: "No se pudo cargar la publicación.",
     authorLabel: "Autor",
     editButton: "Editar",
     alertOn: "Alerta activada",
@@ -243,12 +240,6 @@ const es: Translations = {
       message: "¿Está seguro de que desea eliminar esta publicación?",
       cancel: "Cancelar",
       confirm: "Eliminar",
-    },
-    toasts: {
-      publishSuccess: "Publicación publicada correctamente.",
-      publishError: "Error al publicar la publicación.",
-      deleteSuccess: "Publicación eliminada correctamente.",
-      deleteError: "Error al eliminar la publicación.",
     },
   },
   safeBoardNotifyScreen: {
@@ -302,7 +293,6 @@ const es: Translations = {
       card1Text: "(Opcional) Puede cargar\narchivos de hasta 50 MB.",
       uploadButton: "Cargar archivo",
       noFile: "No se han seleccionado archivos.",
-      uploadError: "Error al cargar el archivo. Inténtelo de nuevo.",
     },
     pushNotification: {
       label: "Enviar notificación push",
@@ -310,8 +300,6 @@ const es: Translations = {
         "Al seleccionar, se enviará una notificación push a todos los miembros del lugar de trabajo seleccionado al publicar.",
     },
     save: "Guardar",
-    titleEdit: "Editar publicación",
-    saveError: "Error al guardar la publicación. Inténtelo de nuevo.",
   },
 
   safeHealthScreen: {

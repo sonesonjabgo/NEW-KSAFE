@@ -203,8 +203,7 @@ const ar: Translations = {
     title: "لوحة الأمان",
     alertButton: "إرسال تنبيه",
     workplaceLabel: "موقع العمل المحدد",
-    allWorkplaces: "جميع مواقع العمل",
-    workplaceModal: { title: "اختر موقع العمل", allOption: "الكل" },
+    workplaceModal: { title: "اختر موقع العمل" },
     badge: {
       companyWide: "الشركة بأكملها",
       workplace: "موقع العمل",
@@ -215,11 +214,9 @@ const ar: Translations = {
     empty: "لا توجد منشورات",
     write: "كتابة",
     draftSaved: "تم حفظ المنشور كمسودة.",
-    notifySent: "تم إرسال الإشعار.",
   },
   safeBoardDetailScreen: {
     title: "تفاصيل المنشور",
-    loadError: "فشل تحميل المنشور.",
     authorLabel: "الكاتب",
     editButton: "تعديل",
     alertOn: "تنبيه مفعّل",
@@ -237,12 +234,6 @@ const ar: Translations = {
       message: "هل أنت متأكد من حذف هذا المنشور؟",
       cancel: "إلغاء",
       confirm: "حذف",
-    },
-    toasts: {
-      publishSuccess: "تم نشر المنشور بنجاح.",
-      publishError: "فشل نشر المنشور.",
-      deleteSuccess: "تم حذف المنشور بنجاح.",
-      deleteError: "فشل حذف المنشور.",
     },
   },
   safeBoardNotifyScreen: {
@@ -296,15 +287,12 @@ const ar: Translations = {
       card1Text: "(اختياري) يمكنك رفع\nملفات حتى 50 ميجابايت.",
       uploadButton: "رفع ملف",
       noFile: "لم يتم اختيار ملفات.",
-      uploadError: "فشل رفع الملف. حاول مجدداً.",
     },
     pushNotification: {
       label: "إرسال إشعار دفع",
       cardText: "عند التحديد، سيُرسل إشعار دفع إلى جميع أعضاء موقع العمل المحدد عند النشر.",
     },
     save: "حفظ",
-    titleEdit: "تعديل المنشور",
-    saveError: "فشل الحفظ. حاول مجدداً.",
   },
 
   safeHealthScreen: {
