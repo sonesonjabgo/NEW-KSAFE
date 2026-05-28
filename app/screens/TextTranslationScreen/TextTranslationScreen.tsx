@@ -1,4 +1,4 @@
-import { FC, useState, useRef, useCallback } from "react"
+import { FC, useState, useRef, useCallback, useEffect } from "react"
 import {
   View,
   ViewStyle,
@@ -7,9 +7,11 @@ import {
   FlatList,
   TextInput,
   KeyboardAvoidingView,
+  Keyboard,
   Platform,
   ListRenderItemInfo,
 } from "react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 import {
   IconChevronDown,
   IconArrowsExchange,
@@ -47,6 +49,7 @@ const DUMMY_TRANSLATIONS: TranslationItem[] = [
 type InputMode = "voice" | "text"
 
 export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigation }) => {
+  const insets = useSafeAreaInsets()
   const flatListRef = useRef<FlatList<TranslationItem>>(null)
 
   const [sourceLanguage, setSourceLanguage] = useState<LanguageKey>("korean")
@@ -59,6 +62,7 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
   const [showValidationError, setShowValidationError] = useState(false)
   const [inputHeight, setInputHeight] = useState(40)
 
+  const [keyboardHeight, setKeyboardHeight] = useState(0)
   const [langMenuVisible, setLangMenuVisible] = useState(false)
   const [langMenuTarget, setLangMenuTarget] = useState<"source" | "target">("source")
 
@@ -111,12 +115,31 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
     }, 100)
   }, [inputText])
 
-  const handleExitTextMode = () => {
+  const handleExitTextMode = useCallback(() => {
     setInputMode("voice")
     setInputText("")
     setShowValidationError(false)
     setInputHeight(40)
-  }
+  }, [])
+
+  useEffect(() => {
+    if (Platform.OS === "ios") {
+      const hideSub = Keyboard.addListener("keyboardWillHide", handleExitTextMode)
+      return () => hideSub.remove()
+    } else {
+      const showSub = Keyboard.addListener("keyboardDidShow", (e) => {
+        setKeyboardHeight(e.endCoordinates.height)
+      })
+      const hideSub = Keyboard.addListener("keyboardDidHide", () => {
+        setKeyboardHeight(0)
+        handleExitTextMode()
+      })
+      return () => {
+        showSub.remove()
+        hideSub.remove()
+      }
+    }
+  }, [handleExitTextMode])
 
   const renderTranslationItem = ({ item }: ListRenderItemInfo<TranslationItem>) => (
     <View style={$translationCard}>
@@ -172,8 +195,9 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
         </View>
 
         <KeyboardAvoidingView
-          style={$keyboardView}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={[$keyboardView, Platform.OS === "android" && { paddingBottom: keyboardHeight }]}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+          keyboardVerticalOffset={Platform.OS === "ios" ? insets.top + 60 : 0}
         >
           <View style={$chatWrapBox}>
             <View style={[$chatInnerBox, isListening && $chatInnerBoxListening]}>
@@ -205,7 +229,7 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
           </View>
 
           {inputMode === "voice" ? (
-            <View style={$voiceInputArea}>
+            <View style={[$voiceInputArea, { paddingBottom: Math.max(32, insets.bottom + 16) }]}>
               <TouchableOpacity
                 style={$sideIconBtn}
                 onPress={() => navigation.navigate("ImageTranslation")}
@@ -235,7 +259,7 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
               </TouchableOpacity>
             </View>
           ) : (
-            <View style={$textInputArea}>
+            <View style={[$textInputArea, { paddingBottom: inputFocused ? 8 : Math.max(16, insets.bottom + 8) }]}>
               <View style={$inputTopRow}>
                 <Text text={translate("textTranslationScreen:inputHint")} style={$inputHintText} />
                 <Text text={`${inputText.length}/1000`} style={$inputCountText} />
