@@ -350,6 +350,7 @@ const ko: Translations = {
     title: "음성 대화 번역",
     flipScreen: "돌리기",
     listening: "음성을 듣는 중...",
+    tapToSpeak: "마이크를 눌러 말씀해 주세요",
     speakNow: "말씀해 주세요",
     languageMenu: {
       title: "인식된 언어",

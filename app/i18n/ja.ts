@@ -317,6 +317,7 @@ const ja: Translations = {
     title: "音声会話翻訳",
     flipScreen: "反転",
     listening: "音声認識中...",
+    tapToSpeak: "タップして話す",
     speakNow: "話してください",
     languageMenu: {
       title: "認識言語",

@@ -346,6 +346,7 @@ const es: Translations = {
     title: "Traducción de conversación de voz",
     flipScreen: "Voltear",
     listening: "Escuchando...",
+    tapToSpeak: "Toca para hablar",
     speakNow: "Hable ahora",
     languageMenu: {
       title: "Idioma reconocido",

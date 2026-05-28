@@ -337,6 +337,7 @@ const fr: Translations = {
     title: "Traduction de conversation vocale",
     flipScreen: "Inverser",
     listening: "Écoute en cours...",
+    tapToSpeak: "Appuyez pour parler",
     speakNow: "Parlez maintenant",
     languageMenu: {
       title: "Langue reconnue",

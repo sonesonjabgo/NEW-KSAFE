@@ -359,6 +359,7 @@ const en = {
     title: "Voice Conversation Translation",
     flipScreen: "Flip",
     listening: "Listening...",
+    tapToSpeak: "Tap to speak",
     speakNow: "Speak now",
     languageMenu: {
       title: "Recognized Language",

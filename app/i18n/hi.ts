@@ -323,6 +323,7 @@ const hi: Translations = {
     title: "वॉयस वार्तालाप अनुवाद",
     flipScreen: "पलटें",
     listening: "सुन रहा है...",
+    tapToSpeak: "बोलने के लिए टैप करें",
     speakNow: "अभी बोलें",
     languageMenu: {
       title: "पहचानी गई भाषा",

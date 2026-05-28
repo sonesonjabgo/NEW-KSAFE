@@ -324,6 +324,7 @@ const ar: Translations = {
     title: "ترجمة المحادثة الصوتية",
     flipScreen: "تدوير",
     listening: "جارٍ الاستماع...",
+    tapToSpeak: "اضغط للتحدث",
     speakNow: "تحدث الآن",
     languageMenu: {
       title: "اللغة المعرَّفة",
