@@ -164,6 +164,7 @@ const es: Translations = {
       title: "Tablero de seguridad",
       viewMore: "Ver más",
       tabs: { all: "Todo", company: "Toda la empresa", workplace: "Lugar de trabajo" },
+      empty: "No posts available.",
     },
     edu: {
       title: "Unirse a educación/presentación existente",
@@ -407,6 +408,7 @@ const es: Translations = {
 
   myPageScreen: {
     title: "Mi Página",
+    orgName: "KS산업안전협회",
     workplace: {
       label: "Lugar de Trabajo de la Grúa de Torre",
     },
@@ -893,7 +895,9 @@ const es: Translations = {
       helper:
         "La descripción es opcional. Si se proporciona, se pueden ingresar hasta 10,000 caracteres.",
     },
-    submit: "Registrar",
+    submit: "PLACEHOLDER",
+    submitSuccess: "Material registered successfully.",
+    submitError: "Failed to register material. Please try again.",
   },
 
   educationMaterialDetailScreen: {
@@ -917,6 +921,7 @@ const es: Translations = {
     confirm: "Confirmar selección ({{count}})",
     confirmNone: "Confirmar selección",
     emptyText: "No hay materiales educativos disponibles.",
+    categoryAll: "All",
   },
 
   improvementProposalDetailScreen: {
@@ -1047,6 +1052,7 @@ const es: Translations = {
 
   tbmReportInquiryScreen: {
     title: "Consulta de informe TBM",
+    untitled: "(No title)",
     tabs: {
       all: "Todo",
       requested: "Solicitado",
@@ -1194,7 +1200,9 @@ const es: Translations = {
     totalParticipation: "Total de participaciones",
     cautionResponse: "Respuesta de precaución",
     unit: "caso(s)",
-    workplaceLabel: "Lugar de trabajo",
+    workplaceLabel: "PLACEHOLDER_WL",
+    statusNormal: "Normal",
+    statusAbnormal: "Caution",
   },
 
   tbmParticipationHistoryDetailScreen: {

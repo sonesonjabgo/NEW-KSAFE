@@ -162,6 +162,7 @@ const ja: Translations = {
       title: "掲示板",
       viewMore: "もっと見る",
       tabs: { all: "全て", company: "会社", workplace: "作業場" },
+      empty: "No posts available.",
     },
     edu: { title: "教育", description: "説明" },
     banner: { text: "安全な環境" },
@@ -378,6 +379,7 @@ const ja: Translations = {
 
   myPageScreen: {
     title: "マイページ",
+    orgName: "KS산업안전협회",
     workplace: {
       label: "広教タワークレーン作業場",
     },
@@ -857,7 +859,9 @@ const ja: Translations = {
       placeholder: "教育内容を入力",
       helper: "説明は任意です。最大10,000文字まで入力できます。",
     },
-    submit: "登録",
+    submit: "PLACEHOLDER",
+    submitSuccess: "Material registered successfully.",
+    submitError: "Failed to register material. Please try again.",
   },
 
   educationMaterialDetailScreen: {
@@ -881,6 +885,7 @@ const ja: Translations = {
     confirm: "完了（{{count}}件）",
     confirmNone: "完了",
     emptyText: "利用可能な教育資料がありません。",
+    categoryAll: "All",
   },
 
   improvementProposalDetailScreen: {
@@ -1009,6 +1014,7 @@ const ja: Translations = {
 
   tbmReportInquiryScreen: {
     title: "TBM報告書照会",
+    untitled: "(No title)",
     tabs: {
       all: "全て",
       requested: "申請済み",
@@ -1152,7 +1158,9 @@ const ja: Translations = {
     totalParticipation: "総参加回数",
     cautionResponse: "注意対応",
     unit: "回",
-    workplaceLabel: "作業場",
+    workplaceLabel: "PLACEHOLDER_WL",
+    statusNormal: "Normal",
+    statusAbnormal: "Caution",
   },
 
   tbmParticipationHistoryDetailScreen: {

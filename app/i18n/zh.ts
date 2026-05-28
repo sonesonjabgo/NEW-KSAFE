@@ -77,7 +77,6 @@ const zhOverrides = {
     title: "安全公告板",
     alertButton: "警报",
     workplaceLabel: "工作场所",
-    workplaceModal: { title: "选择工作场所" },
     badge: {
       companyWide: "全公司",
       workplace: "工作场所",

@@ -165,6 +165,7 @@ const fr: Translations = {
       title: "Tableau de sécurité",
       viewMore: "Plus",
       tabs: { all: "Tout", company: "Toute la société", workplace: "Lieu de travail" },
+      empty: "No posts available.",
     },
     edu: { title: "Éducation", description: "Description" },
     banner: { text: "Environnement sûr" },
@@ -398,6 +399,7 @@ const fr: Translations = {
 
   myPageScreen: {
     title: "Ma Page",
+    orgName: "KS산업안전협회",
     workplace: {
       label: "Lieu de travail Gwanggyo Tower Crane",
     },
@@ -886,7 +888,9 @@ const fr: Translations = {
       helper:
         "La description est facultative. Si fournie, jusqu'à 10 000 caractères peuvent être saisis.",
     },
-    submit: "Enregistrer",
+    submit: "PLACEHOLDER",
+    submitSuccess: "Material registered successfully.",
+    submitError: "Failed to register material. Please try again.",
   },
 
   educationMaterialDetailScreen: {
@@ -910,6 +914,7 @@ const fr: Translations = {
     confirm: "Complet ({{count}})",
     confirmNone: "Complet",
     emptyText: "Aucun matériau éducatif disponible.",
+    categoryAll: "All",
   },
 
   improvementProposalDetailScreen: {
@@ -1040,6 +1045,7 @@ const fr: Translations = {
 
   tbmReportInquiryScreen: {
     title: "Enquête sur le rapport TBM",
+    untitled: "(No title)",
     tabs: {
       all: "Tout",
       requested: "Demandé",
@@ -1189,7 +1195,9 @@ const fr: Translations = {
     totalParticipation: "Participation totale",
     cautionResponse: "Réponse de précaution",
     unit: "cas",
-    workplaceLabel: "Lieu de travail",
+    workplaceLabel: "PLACEHOLDER_WL",
+    statusNormal: "Normal",
+    statusAbnormal: "Caution",
   },
 
   tbmParticipationHistoryDetailScreen: {
