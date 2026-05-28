@@ -36,6 +36,6 @@ module.exports = ({ config }: ConfigContext): Partial<ExpoConfig> => {
         ],
       },
     },
-    plugins: [...existingPlugins, "expo-notifications"],
+    plugins: [...existingPlugins, "expo-notifications", "react-native-vision-camera"],
   }
 }

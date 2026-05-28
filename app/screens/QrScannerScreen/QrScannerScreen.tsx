@@ -1,6 +1,6 @@
-import { FC, useState } from "react"
+import { FC, useCallback, useEffect } from "react"
 import { ScrollView, StatusBar, TouchableOpacity, View } from "react-native"
-import { useNavigation } from "@react-navigation/native"
+import { useIsFocused, useNavigation } from "@react-navigation/native"
 import {
   IconAlertTriangle,
   IconChevronLeft,
@@ -9,6 +9,13 @@ import {
   IconQrcode,
 } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+import {
+  Camera,
+  useCameraDevice,
+  useCameraPermission,
+  useCodeScanner,
+} from "react-native-vision-camera"
+import { useState } from "react"
 
 import { Text } from "@/components/Text"
 import i18n from "i18next"
@@ -26,7 +33,10 @@ export const QrScannerScreen: FC = () => {
   const navigation = useNavigation()
   const { top } = useSafeAreaInsets()
   const [isCodeSheetOpen, setIsCodeSheetOpen] = useState(false)
-  const [hasCameraPermission, setHasCameraPermission] = useState(false)
+  const isFocused = useIsFocused()
+
+  const { hasPermission, requestPermission } = useCameraPermission()
+  const device = useCameraDevice("back")
 
   const {
     width,
@@ -38,6 +48,26 @@ export const QrScannerScreen: FC = () => {
     isShortHeight,
     breakpoint,
   } = useResponsive()
+
+  useEffect(() => {
+    if (!hasPermission) {
+      void requestPermission()
+    }
+  }, [hasPermission, requestPermission])
+
+  const codeScanner = useCodeScanner({
+    codeTypes: ["qr"],
+    onCodeScanned: (codes) => {
+      const value = codes[0]?.value
+      if (!value) return
+      // TODO: QR 코드 값 파싱 후 해당 화면으로 이동 (API 연동 시 구현)
+      console.log("[QR] scanned:", value)
+    },
+  })
+
+  const handleRetry = useCallback(() => {
+    void requestPermission()
+  }, [requestPermission])
 
   // QR 프레임 크기 — 화면 크기 기반 반응형
   const qrFrameSize = isShortHeight
@@ -79,6 +109,8 @@ export const QrScannerScreen: FC = () => {
   // 언어 카드
   const langCardPaddingV = isSmallPhone || isShortHeight ? 10 : 14
   const langFontSize = isSmallPhone ? 13 : 14
+
+  const showCamera = isFocused && hasPermission && !!device
 
   return (
     <>
@@ -142,16 +174,40 @@ export const QrScannerScreen: FC = () => {
             ]}
           >
             {/* QR 스캔 프레임 */}
-            <View style={[S.$qrFrameWrapper, { width: qrFrameSize, height: qrFrameSize }]}>
-              <View style={[S.$cornerTL, { width: cornerSize, height: cornerSize }]} />
-              <View style={[S.$cornerTR, { width: cornerSize, height: cornerSize }]} />
-              <View style={[S.$cornerBL, { width: cornerSize, height: cornerSize }]} />
-              <View style={[S.$cornerBR, { width: cornerSize, height: cornerSize }]} />
-
-              <IconQrcode size={qrIconSize} color="#CACACA" strokeWidth={1.2} />
+            <View
+              style={[
+                S.$qrFrameWrapper,
+                { width: qrFrameSize, height: qrFrameSize },
+                showCamera && S.$qrFrameWrapperCamera,
+              ]}
+            >
+              {showCamera ? (
+                <>
+                  <Camera
+                    style={S.$camera}
+                    device={device}
+                    pixelFormat="yuv"
+                    isActive
+                    codeScanner={codeScanner}
+                  />
+                  {/* 코너 브래킷 오버레이 */}
+                  <View style={[S.$cornerTL, { width: cornerSize, height: cornerSize }]} />
+                  <View style={[S.$cornerTR, { width: cornerSize, height: cornerSize }]} />
+                  <View style={[S.$cornerBL, { width: cornerSize, height: cornerSize }]} />
+                  <View style={[S.$cornerBR, { width: cornerSize, height: cornerSize }]} />
+                </>
+              ) : (
+                <>
+                  <View style={[S.$cornerTL, { width: cornerSize, height: cornerSize }]} />
+                  <View style={[S.$cornerTR, { width: cornerSize, height: cornerSize }]} />
+                  <View style={[S.$cornerBL, { width: cornerSize, height: cornerSize }]} />
+                  <View style={[S.$cornerBR, { width: cornerSize, height: cornerSize }]} />
+                  <IconQrcode size={qrIconSize} color="#CACACA" strokeWidth={1.2} />
+                </>
+              )}
             </View>
 
-            {!hasCameraPermission && (
+            {!hasPermission && (
               <>
                 {/* 카메라 권한 없음 경고 */}
                 <View style={S.$permissionBanner}>
@@ -165,7 +221,7 @@ export const QrScannerScreen: FC = () => {
                 <TouchableOpacity
                   style={[S.$retryBtn, { paddingVertical: retryPaddingV }]}
                   activeOpacity={0.85}
-                  onPress={() => setHasCameraPermission(true)}
+                  onPress={handleRetry}
                 >
                   <Text style={[S.$retryBtnText, { fontSize: retryFontSize }]}>
                     {translate("qrScanner:retry")}
