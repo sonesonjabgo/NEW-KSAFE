@@ -530,6 +530,11 @@ const ar: Translations = {
   educationPresentationScreen: {
     title: "التعليم/العرض",
     inviteButton: "دعوة",
+    inviteModal: {
+      title: "Invite Participants",
+      description: "Share the QR code or invite code\nto invite participants.",
+      close: "Close",
+    },
     inputLanguageLabel: "لغة الإدخال",
     languageMenu: { title: "اختر اللغة" },
     recognizing: "جارٍ التعرف على الصوت...",

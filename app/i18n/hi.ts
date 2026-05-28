@@ -530,6 +530,11 @@ const hi: Translations = {
   educationPresentationScreen: {
     title: "शिक्षा/प्रस्तुति",
     inviteButton: "आमंत्रित करें",
+    inviteModal: {
+      title: "Invite Participants",
+      description: "Share the QR code or invite code\nto invite participants.",
+      close: "Close",
+    },
     inputLanguageLabel: "इनपुट भाषा",
     languageMenu: { title: "भाषा चुनें" },
     recognizing: "आवाज़ पहचान रही है...",

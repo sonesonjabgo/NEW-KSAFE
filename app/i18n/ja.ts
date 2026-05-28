@@ -524,6 +524,11 @@ const ja: Translations = {
   educationPresentationScreen: {
     title: "教育/発表",
     inviteButton: "招待",
+    inviteModal: {
+      title: "Invite Participants",
+      description: "Share the QR code or invite code\nto invite participants.",
+      close: "Close",
+    },
     inputLanguageLabel: "入力言語",
     languageMenu: { title: "言語を選択" },
     recognizing: "音声認識中...",

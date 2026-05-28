@@ -251,6 +251,11 @@ const zhOverrides = {
   educationPresentationScreen: {
     title: "教育/演示",
     inviteButton: "邀请",
+    inviteModal: {
+      title: "Invite Participants",
+      description: "Share the QR code or invite code\nto invite participants.",
+      close: "Close",
+    },
   },
   tbmListScreen: {
     title: "TBM活动列表",

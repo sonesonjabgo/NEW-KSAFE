@@ -557,6 +557,11 @@ const es: Translations = {
   educationPresentationScreen: {
     title: "Educación/Presentación",
     inviteButton: "Invitar",
+    inviteModal: {
+      title: "Invite Participants",
+      description: "Share the QR code or invite code\nto invite participants.",
+      close: "Close",
+    },
     inputLanguageLabel: "Idioma de entrada",
     languageMenu: { title: "Seleccionar idioma" },
     recognizing: "Reconociendo voz...",
