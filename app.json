@@ -27,7 +27,10 @@
   "ios": {
     "icon": "./assets/images/app-icon-ios.png",
     "supportsTablet": true,
-    "bundleIdentifier": "com.newksafe"
+    "bundleIdentifier": "com.newksafe",
+    "infoPlist": {
+      "NSLocationWhenInUseUsageDescription": "$(PRODUCT_NAME) uses your location to ensure workplace safety compliance."
+    }
   },
   "web": {
     "favicon": "./assets/images/app-icon-web-favicon.png",
