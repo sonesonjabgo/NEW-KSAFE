@@ -405,6 +405,8 @@ const ja: Translations = {
         title: "プッシュ通知",
         description: "TBM通知、危険警報、作業場公開情報",
       },
+      allowed: "許可済み",
+      notAllowed: "未許可",
     },
     logout: "ログアウト",
     logoutModal: {

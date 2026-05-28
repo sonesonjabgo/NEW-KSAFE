@@ -436,6 +436,8 @@ const es: Translations = {
         title: "Notificaciones Push",
         description: "Alertas TBM, advertencias de peligro, avisos del lugar de trabajo",
       },
+      allowed: "Permitido",
+      notAllowed: "No Permitido",
     },
     logout: "Cerrar Sesión",
     logoutModal: {

@@ -411,6 +411,8 @@ const hi: Translations = {
         title: "पुश नोटिफिकेशन",
         description: "TBM अलर्ट, जोखिम चेतावनी, कार्यस्थल नोटिस",
       },
+      allowed: "अनुमत",
+      notAllowed: "अनुमति नहीं",
     },
     logout: "लॉग आउट",
     logoutModal: {

@@ -412,6 +412,8 @@ const ar: Translations = {
         title: "إشعارات الدفع",
         description: "تنبيهات TBM، تحذيرات الخطر، إشعارات مكان العمل",
       },
+      allowed: "مسموح",
+      notAllowed: "غير مسموح",
     },
     logout: "تسجيل خروج",
     logoutModal: {

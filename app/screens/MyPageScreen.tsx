@@ -1,5 +1,6 @@
 import { FC, useState } from "react"
 import { Linking, ScrollView, TouchableOpacity, View, ViewStyle, TextStyle } from "react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useResponsive } from "@/theme/responsive"
 import {
   IconBell,
@@ -22,6 +23,7 @@ import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
+import { useDevicePermissions } from "@/utils/useDevicePermissions"
 
 const ICON_COLOR = "#000000"
 
@@ -33,9 +35,15 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
   const displayEmail = user?.email || ""
   const { role } = useRole()
   const { isSmallPhone } = useResponsive()
+  const { top } = useSafeAreaInsets()
   const modalCardStyle: ViewStyle = { width: isSmallPhone ? 290 : 330 }
-  const [notificationEnabled, setNotificationEnabled] = useState(true)
   const [logoutModalVisible, setLogoutModalVisible] = useState(false)
+
+  const { permissions } = useDevicePermissions()
+  const cameraGranted = permissions.find((p) => p.type === "camera")?.isGranted ?? false
+  const micGranted = permissions.find((p) => p.type === "microphone")?.isGranted ?? false
+  const photoGranted = permissions.find((p) => p.type === "photos")?.isGranted ?? false
+  const notifGranted = permissions.find((p) => p.type === "notifications")?.isGranted ?? false
 
   const isWorker = role === "worker"
 
@@ -52,7 +60,7 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
   return (
     <>
       <View style={$root}>
-        <View style={$header}>
+        <View style={[$header, { paddingTop: top + 10 }]}>
           <View style={$headerTop}>
             <TouchableOpacity style={$backButton} onPress={() => navigation.goBack()}>
               <IconChevronLeft size={24} color="#FFFFFF" />
@@ -79,7 +87,12 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
                 title={translate("myPageScreen:permissions.camera.title")}
                 description={translate("myPageScreen:permissions.camera.description")}
                 type="button"
-                buttonLabel={translate("myPageScreen:permissions.camera.button")}
+                isGranted={cameraGranted}
+                buttonLabel={translate(
+                  cameraGranted
+                    ? "myPageScreen:permissions.allowed"
+                    : "myPageScreen:permissions.notAllowed",
+                )}
                 onButtonPress={handleOpenSettings}
                 showDivider
               />
@@ -88,7 +101,12 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
                 title={translate("myPageScreen:permissions.microphone.title")}
                 description={translate("myPageScreen:permissions.microphone.description")}
                 type="button"
-                buttonLabel={translate("myPageScreen:permissions.microphone.button")}
+                isGranted={micGranted}
+                buttonLabel={translate(
+                  micGranted
+                    ? "myPageScreen:permissions.allowed"
+                    : "myPageScreen:permissions.notAllowed",
+                )}
                 onButtonPress={handleOpenSettings}
                 showDivider
               />
@@ -97,7 +115,12 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
                 title={translate("myPageScreen:permissions.photo.title")}
                 description={translate("myPageScreen:permissions.photo.description")}
                 type="button"
-                buttonLabel={translate("myPageScreen:permissions.photo.button")}
+                isGranted={photoGranted}
+                buttonLabel={translate(
+                  photoGranted
+                    ? "myPageScreen:permissions.allowed"
+                    : "myPageScreen:permissions.notAllowed",
+                )}
                 onButtonPress={handleOpenSettings}
                 showDivider
               />
@@ -106,8 +129,8 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
                 title={translate("myPageScreen:permissions.notification.title")}
                 description={translate("myPageScreen:permissions.notification.description")}
                 type="switch"
-                switchValue={notificationEnabled}
-                onSwitchChange={setNotificationEnabled}
+                switchValue={notifGranted}
+                onSwitchChange={() => handleOpenSettings()}
               />
             </View>
           </View>
@@ -152,7 +175,6 @@ const $header: ViewStyle = {
   backgroundColor: "#0B3069",
   flexDirection: "column",
   alignItems: "center",
-  paddingTop: 20,
   paddingBottom: 20,
   paddingHorizontal: 16,
 }

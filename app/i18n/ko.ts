@@ -177,6 +177,7 @@ const ko: Translations = {
         company: "회사전체",
         workplace: "사업장",
       },
+      empty: "게시글이 없습니다.",
     },
     edu: {
       title: "기존 교육/발표 참여",
@@ -413,6 +414,7 @@ const ko: Translations = {
 
   myPageScreen: {
     title: "마이페이지",
+    orgName: "KS산업안전협회",
     workplace: {
       label: "광교 타워크레인 작업장",
     },
@@ -437,6 +439,8 @@ const ko: Translations = {
         title: "푸시 알림",
         description: "TBM 알림, 위험 경보, 사업장 공지",
       },
+      allowed: "허용",
+      notAllowed: "허용 전",
     },
     logout: "로그아웃",
     logoutModal: {
@@ -902,6 +906,8 @@ const ko: Translations = {
       helper: "설명은 비워둘 수 있으며, 입력 시 최대 10,000자까지 작성할 수 있습니다.",
     },
     submit: "등록하기",
+    submitSuccess: "자료가 등록되었습니다.",
+    submitError: "자료 등록에 실패했습니다. 다시 시도해 주세요.",
   },
 
   educationMaterialDetailScreen: {
@@ -925,6 +931,7 @@ const ko: Translations = {
     confirm: "선택완료 ({{count}}개)",
     confirmNone: "선택완료",
     emptyText: "회사 교육자료가 없습니다.",
+    categoryAll: "전체",
   },
 
   improvementProposalDetailScreen: {
@@ -1053,6 +1060,7 @@ const ko: Translations = {
 
   tbmReportInquiryScreen: {
     title: "TBM 보고서 조회",
+    untitled: "(제목 없음)",
     tabs: {
       all: "전체",
       requested: "요청됨",
@@ -1197,6 +1205,8 @@ const ko: Translations = {
     cautionResponse: "주의 응답",
     unit: "건",
     workplaceLabel: "사업장",
+    statusNormal: "정상",
+    statusAbnormal: "주의",
   },
 
   tbmParticipationHistoryDetailScreen: {

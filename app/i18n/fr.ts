@@ -427,6 +427,8 @@ const fr: Translations = {
         title: "Notifications Push",
         description: "Alertes TBM, avertissements de danger, avis du lieu de travail",
       },
+      allowed: "Autorisé",
+      notAllowed: "Non Autorisé",
     },
     logout: "Déconnexion",
     logoutModal: {
