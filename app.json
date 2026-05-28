@@ -29,7 +29,10 @@
     "icon": "./assets/images/app-icon-ios.png",
     "supportsTablet": true,
     "bundleIdentifier": "kr.co.kscenter.ksafeone",
-    "buildNumber": "51"
+    "buildNumber": "51",
+    "infoPlist": {
+      "NSLocationWhenInUseUsageDescription": "$(PRODUCT_NAME) uses your location to ensure workplace safety compliance."
+    }
   },
   "web": {
     "favicon": "./assets/images/app-icon-web-favicon.png",
