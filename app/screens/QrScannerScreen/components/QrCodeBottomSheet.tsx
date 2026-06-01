@@ -127,7 +127,11 @@ export const QrCodeBottomSheet: FC<Props> = ({ isVisible, onClose }) => {
             placeholder={translate("qrScanner:codePlaceholder")}
             placeholderTextColor="#9CA3AF"
             value={accessCode}
-            onChangeText={(text) => setAccessCode(text.replace(/[^0-9]/g, "").slice(0, 8))}
+            onChangeText={(text) => {
+              const cleaned = text.replace(/[^0-9]/g, "").slice(0, 8)
+              setAccessCode(cleaned)
+              if (cleaned.length === 8) Keyboard.dismiss()
+            }}
             keyboardType="number-pad"
             maxLength={8}
           />
