@@ -224,7 +224,7 @@ export const ImprovementProposalListScreen: FC<ImprovementProposalListScreenProp
           activeOpacity={0.8}
           onPress={() => navigation.navigate("ImprovementProposalCreate")}
         >
-          <TbmFabIcon width={29} height={29} />
+          <TbmFabIcon width={30} height={30} />
           <Text text={translate("improvementProposalListScreen:fab")} style={S.$fabLabel} />
         </TouchableOpacity>
       </View>

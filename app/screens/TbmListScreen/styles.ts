@@ -183,10 +183,16 @@ export const $emptyText: TextStyle = {
 
 // ── FAB ───────────────────────────────────────────────────────────────────────
 
+export const $fabWrapper: ViewStyle = {
+  position: "absolute",
+  right: 20,
+  alignItems: "center",
+}
+
 export const $fab: ViewStyle = {
-  width: 80,
-  height: 80,
-  borderRadius: 40,
+  width: 96,
+  height: 96,
+  borderRadius: 48,
   backgroundColor: colors.navy,
   justifyContent: "center",
   alignItems: "center",
@@ -199,8 +205,10 @@ export const $fab: ViewStyle = {
 
 export const $fabLabel: TextStyle = {
   marginTop: 4,
-  fontSize: 11,
+  fontSize: 13,
+  lineHeight: 16,
   color: "#FFFFFF",
   fontFamily: typography.primary.bold,
   textAlign: "center",
+  includeFontPadding: false,
 }
