@@ -163,21 +163,6 @@ export const $cardAuthorRow: ViewStyle = {
   gap: 6,
 }
 
-export const $cardAvatar: ViewStyle = {
-  width: 24,
-  height: 24,
-  borderRadius: 12,
-  backgroundColor: "#F3F2F0",
-  justifyContent: "center",
-  alignItems: "center",
-}
-
-export const $cardAvatarText: TextStyle = {
-  fontSize: 11,
-  fontFamily: typography.primary.semiBold,
-  color: "#666666",
-}
-
 export const $cardAuthorName: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.semiBold,

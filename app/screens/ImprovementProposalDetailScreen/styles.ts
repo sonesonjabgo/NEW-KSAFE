@@ -67,22 +67,6 @@ export const $authorRow: ViewStyle = {
   gap: 12,
 }
 
-export const $authorAvatar: ViewStyle = {
-  width: 36,
-  height: 36,
-  borderRadius: 18,
-  backgroundColor: "#F3F2F0",
-  justifyContent: "center",
-  alignItems: "center",
-  flexShrink: 0,
-}
-
-export const $authorAvatarText: TextStyle = {
-  fontSize: 14,
-  fontFamily: typography.primary.semiBold,
-  color: "#666666",
-}
-
 export const $authorInfo: ViewStyle = {
   flex: 1,
 }
@@ -570,21 +554,6 @@ export const $resultManagerRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
   gap: 6,
-}
-
-export const $resultManagerAvatar: ViewStyle = {
-  width: 22,
-  height: 22,
-  borderRadius: 11,
-  backgroundColor: "#F3F2F0",
-  justifyContent: "center",
-  alignItems: "center",
-}
-
-export const $resultManagerAvatarText: TextStyle = {
-  fontSize: 10,
-  fontFamily: typography.primary.semiBold,
-  color: "#666666",
 }
 
 export const $resultManagerName: TextStyle = {

@@ -1140,9 +1140,15 @@ const fr: Translations = {
       delete: "Supprimer",
       reportPreview: "Aperçu du Rapport",
     },
+    toast: {
+      reportSuccess: "Le rapport a été ouvert.",
+      reportFail: "Échec de la génération du rapport.",
+    },
   },
   patrolCreateScreen: {
     title: "Créer une inspection de ronde",
+    editTitle: "Modifier l'inspection de ronde",
+    editSubmitButton: "Enregistrer les modifications",
     section: {
       approver: {
         title: "Approbateur (Obligatoire)",

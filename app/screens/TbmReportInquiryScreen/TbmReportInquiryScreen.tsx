@@ -5,6 +5,7 @@ import TbmEmptyImage from "@assets/images/tbm-empty.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { UserAvatar } from "@/components/UserAvatar"
 import { translate } from "@/i18n/translate"
 
 import { mockTbmReports } from "./mockData"
@@ -53,7 +54,7 @@ const TbmReportCard: FC<{ item: TbmReportItem; onPress: () => void }> = ({ item,
 
       {/* 작성자 + 현장 */}
       <View style={S.$cardMetaRow}>
-        <View style={S.$cardAvatar} />
+        <UserAvatar initial={item.author.charAt(0)} size={24} />
         <Text text={item.author} style={S.$cardMetaAuthor} numberOfLines={1} />
         <Text text={` · ${item.location}`} style={S.$cardMetaLocation} numberOfLines={1} />
       </View>

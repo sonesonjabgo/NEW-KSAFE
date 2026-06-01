@@ -1107,9 +1107,15 @@ const ja: Translations = {
       delete: "削除",
       reportPreview: "レポートプレビュー",
     },
+    toast: {
+      reportSuccess: "レポートが開きました。",
+      reportFail: "レポートの生成に失敗しました。",
+    },
   },
   patrolCreateScreen: {
     title: "巡回点検作成",
+    editTitle: "巡回点検修正",
+    editSubmitButton: "変更を保存",
     section: {
       approver: {
         title: "承認者（必須）",

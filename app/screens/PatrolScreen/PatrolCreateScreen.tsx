@@ -64,12 +64,20 @@ const MOCK_TEMPLATES: SelectionItem[] = [
   },
 ]
 
-export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation }) => {
-  const [requirements, setRequirements] = useState("")
-  const [selectedApprover, setSelectedApprover] = useState<SelectionItem | null>(null)
-  const [selectedReviewer, setSelectedReviewer] = useState<SelectionItem | null>(null)
-  const [selectedTemplate, setSelectedTemplate] = useState<SelectionItem | null>(null)
-  const [items, setItems] = useState<InspectionItem[]>([])
+export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation, route }) => {
+  const editData = route.params?.editData
+  const isEditMode = editData !== undefined
+  const [requirements, setRequirements] = useState(editData?.requirements ?? "")
+  const [selectedApprover, setSelectedApprover] = useState<SelectionItem | null>(
+    editData?.approver ?? null,
+  )
+  const [selectedReviewer, setSelectedReviewer] = useState<SelectionItem | null>(
+    editData?.reviewer ?? null,
+  )
+  const [selectedTemplate, setSelectedTemplate] = useState<SelectionItem | null>(
+    editData ? MOCK_TEMPLATES[0] : null,
+  )
+  const [items, setItems] = useState<InspectionItem[]>(editData?.items ?? [])
   const [modalVisible, setModalVisible] = useState(false)
   const [activeModal, setActiveModal] = useState<ModalType>("approver")
   const [successVisible, setSuccessVisible] = useState(false)
@@ -164,7 +172,7 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation }) 
 
   return (
     <StackScreen
-      title={translate("patrolCreateScreen:title")}
+      title={translate(isEditMode ? "patrolCreateScreen:editTitle" : "patrolCreateScreen:title")}
       onBack={() => navigation.goBack()}
       squareTop
       contentBg="#FFFFFF"
@@ -454,7 +462,14 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation }) 
           activeOpacity={0.8}
           onPress={() => setSuccessVisible(true)}
         >
-          <Text text={translate("patrolCreateScreen:submitButton")} style={$submitButtonText} />
+          <Text
+            text={translate(
+              isEditMode
+                ? "patrolCreateScreen:editSubmitButton"
+                : "patrolCreateScreen:submitButton",
+            )}
+            style={$submitButtonText}
+          />
         </TouchableOpacity>
       </KeyboardAwareScrollView>
 

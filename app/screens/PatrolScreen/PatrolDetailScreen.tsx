@@ -1,11 +1,15 @@
-import { FC } from "react"
-import { ScrollView, TouchableOpacity, View, TextStyle, ViewStyle } from "react-native"
-import { CircleCheck, CircleAlert } from "lucide-react-native"
+import { FC, useState } from "react"
+import { ActivityIndicator, Linking, ScrollView, TouchableOpacity, View, TextStyle, ViewStyle } from "react-native"
+import { CircleCheck, CircleAlert, X } from "lucide-react-native"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { Toast } from "@/components/Toast"
+import { UserAvatar } from "@/components/UserAvatar"
 import { translate } from "@/i18n/translate"
+import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
+import { Asset } from "expo-asset"
 
 import type { PatrolDetailScreenProps } from "./types"
 
@@ -53,16 +57,74 @@ const MOCK_GOOD = 9
 const MOCK_BAD = 3
 
 export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) => {
-  const badge = BADGE_STYLES[MOCK_PATROL.status]
+  const [status, setStatus] = useState<PatrolStatus>(MOCK_PATROL.status)
+  const [isGeneratingReport, setIsGeneratingReport] = useState(false)
+  const [toastVisible, setToastVisible] = useState(false)
+  const [toastMessage, setToastMessage] = useState("")
+  const [toastIsError, setToastIsError] = useState(false)
+  const badge = BADGE_STYLES[status]
+
+  const handlePrimaryAction = () => {
+    if (status === "inProgress") setStatus("underReview")
+    else if (status === "underReview") setStatus("approved")
+    else if (status === "approved") setStatus("inProgress")
+  }
+
+  const showToast = (message: string, isError: boolean = false) => {
+    setToastMessage(message)
+    setToastIsError(isError)
+    setToastVisible(true)
+  }
+
+  const handleReportPreview = async () => {
+    if (isGeneratingReport) return
+    setIsGeneratingReport(true)
+    try {
+      const [asset] = await Asset.loadAsync(
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        require("@assets/SameplePatrolReport.pdf"),
+      )
+      await Linking.openURL(asset.localUri ?? asset.uri)
+      showToast(translate("patrolDetailScreen:toast.reportSuccess"))
+    } catch {
+      showToast(translate("patrolDetailScreen:toast.reportFail"), true)
+    } finally {
+      setIsGeneratingReport(false)
+    }
+  }
 
   return (
+    <>
     <StackScreen
       title={translate("patrolDetailScreen:title")}
       onBack={() => navigation.goBack()}
       squareTop
       contentBg="#FFFFFF"
       rightSlot={
-        <TouchableOpacity activeOpacity={0.7}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={() =>
+            navigation.navigate("PatrolCreate", {
+              editData: {
+                approver: { id: "2", name: MOCK_PATROL.approver, subtitle: "KS산업안전협회" },
+                reviewer: { id: "1", name: MOCK_PATROL.reviewer, subtitle: "KS산업안전협회" },
+                requirements: MOCK_OVERALL_ACTION,
+                items: [
+                  {
+                    id: "1",
+                    name: MOCK_PATROL.title,
+                    checkCards: MOCK_CHECK_ITEMS.map((item) => ({
+                      id: item.id,
+                      checkName: item.name,
+                      status: item.status,
+                      badNote: item.note,
+                    })),
+                  },
+                ],
+              },
+            })
+          }
+        >
           <Text text={translate("patrolDetailScreen:editButton")} style={$editButton} />
         </TouchableOpacity>
       }
@@ -104,7 +166,7 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
           <View style={[$cardTopRow, $rowGap]}>
             <View style={[$cardBadge, { backgroundColor: badge.bg }]}>
               <Text
-                text={translate(`patrolScreen:badge.${MOCK_PATROL.status}`)}
+                text={translate(`patrolScreen:badge.${status}`)}
                 style={[$cardBadgeText, { color: badge.text }]}
               />
             </View>
@@ -131,7 +193,7 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
 
           {/* 작성자 + 현장 */}
           <View style={[$metaRow, $metaRowGap]}>
-            <View style={$avatar} />
+            <UserAvatar initial={MOCK_PATROL.author.charAt(0)} size={24} />
             <Text text={MOCK_PATROL.author} style={$metaAuthor} numberOfLines={1} />
             <Text text={` · ${MOCK_PATROL.location}`} style={$metaLocation} numberOfLines={1} />
           </View>
@@ -199,39 +261,52 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
         </View>
         {/* 하단 버튼 */}
         <View style={$buttonArea}>
-          <TouchableOpacity style={$btnBlue} activeOpacity={0.8}>
-            <Text text={translate("patrolDetailScreen:buttons.submit")} style={$btnWhiteText} />
-          </TouchableOpacity>
-          <TouchableOpacity style={$btnBlue} activeOpacity={0.8}>
+          <TouchableOpacity style={$btnBlue} activeOpacity={0.8} onPress={handlePrimaryAction}>
             <Text
-              text={translate("patrolDetailScreen:buttons.editComplete")}
+              text={
+                status === "inProgress"
+                  ? translate("patrolDetailScreen:buttons.submit")
+                  : status === "underReview"
+                    ? translate("patrolDetailScreen:buttons.reviewComplete")
+                    : translate("patrolDetailScreen:buttons.approve")
+              }
               style={$btnWhiteText}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={$btnBlue} activeOpacity={0.8}>
-            <Text
-              text={translate("patrolDetailScreen:buttons.reviewComplete")}
-              style={$btnWhiteText}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={$btnBlue} activeOpacity={0.8}>
-            <Text text={translate("patrolDetailScreen:buttons.approve")} style={$btnWhiteText} />
-          </TouchableOpacity>
-          <TouchableOpacity style={$btnGray} activeOpacity={0.8}>
-            <Text text={translate("patrolDetailScreen:buttons.recall")} style={$btnWhiteText} />
-          </TouchableOpacity>
-          <TouchableOpacity style={$btnRed} activeOpacity={0.8}>
-            <Text text={translate("patrolDetailScreen:buttons.delete")} style={$btnRedText} />
-          </TouchableOpacity>
-          <TouchableOpacity style={$btnOutline} activeOpacity={0.8}>
-            <Text
-              text={translate("patrolDetailScreen:buttons.reportPreview")}
-              style={$btnOutlineText}
-            />
+          {status === "inProgress" && (
+            <TouchableOpacity style={$btnRed} activeOpacity={0.8}>
+              <Text
+                text={translate("patrolDetailScreen:buttons.delete")}
+                style={$btnWhiteText}
+              />
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity
+            style={$btnOutline}
+            activeOpacity={0.8}
+            onPress={handleReportPreview}
+            disabled={isGeneratingReport}
+          >
+            {isGeneratingReport ? (
+              <ActivityIndicator size="small" color="#4C4C4C" />
+            ) : (
+              <Text
+                text={translate("patrolDetailScreen:buttons.reportPreview")}
+                style={$btnOutlineText}
+              />
+            )}
           </TouchableOpacity>
         </View>
       </ScrollView>
     </StackScreen>
+    <Toast
+      visible={toastVisible}
+      message={toastMessage}
+      icon={<X size={14} color="#FFFFFF" strokeWidth={2.5} />}
+      iconCircleColor={toastIsError ? colors.danger : colors.blue}
+      onHide={() => setToastVisible(false)}
+    />
+    </>
   )
 }
 
@@ -378,15 +453,7 @@ const $cardDivider: ViewStyle = {
 const $metaRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-}
-
-const $avatar: ViewStyle = {
-  width: 24,
-  height: 24,
-  borderRadius: 12,
-  backgroundColor: "#F3F2F0",
-  marginRight: 6,
-  flexShrink: 0,
+  gap: 6,
 }
 
 const $metaAuthor: TextStyle = {
@@ -547,15 +614,9 @@ const $btnBlue: ViewStyle = {
   backgroundColor: "#1062D8",
 }
 
-const $btnGray: ViewStyle = {
-  ...$btnBase,
-  backgroundColor: "#707070",
-}
-
 const $btnRed: ViewStyle = {
   ...$btnBase,
-  borderWidth: 1,
-  borderColor: "#FF0000",
+  backgroundColor: colors.danger,
 }
 
 const $btnOutline: ViewStyle = {
@@ -570,11 +631,6 @@ const $btnWhiteText: TextStyle = {
   color: "#FFFFFF",
 }
 
-const $btnRedText: TextStyle = {
-  fontSize: 16,
-  fontFamily: semiBold,
-  color: "#FF0000",
-}
 
 const $btnOutlineText: TextStyle = {
   fontSize: 16,

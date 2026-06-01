@@ -7,6 +7,7 @@ import EducationFrame from "@assets/icons/education_frame.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { UserAvatar } from "@/components/UserAvatar"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { mockTbmDetails } from "@/screens/TbmDetailScreen/mockData"
@@ -137,7 +138,12 @@ export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, rou
 
           {/* 진행 담당 프로필 */}
           <View style={$profileRow}>
-            <View style={S.$cardAvatar} />
+            <UserAvatar
+              initial={history.managerName.charAt(0)}
+              size={36}
+              bgColor="#E0E0E0"
+              textColor="#555555"
+            />
             <View style={$profileText}>
               <Text
                 text={translate("tbmParticipationHistoryDetailScreen:manager")}

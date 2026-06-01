@@ -14,6 +14,7 @@ import TbmEmptyImage from "@assets/images/tbm-empty.svg"
 import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { UserAvatar } from "@/components/UserAvatar"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { useResponsive } from "@/theme/responsive"
@@ -75,7 +76,12 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
         <View style={S.$cardContent}>
           <Text text={item.title} style={S.$cardTitle} numberOfLines={1} />
           <View style={S.$cardMeta}>
-            <View style={S.$cardAvatar} />
+            <UserAvatar
+              initial={item.authorName.charAt(0)}
+              size={18}
+              bgColor="#E0E0E0"
+              textColor="#555555"
+            />
             <Text text={item.authorName} style={S.$cardAuthor} />
             <Text text={`· ${item.date}`} style={S.$cardDate} />
           </View>
