@@ -1,5 +1,5 @@
 import { FC, useState } from "react"
-import { ScrollView, TouchableOpacity, View, TextStyle, ViewStyle } from "react-native"
+import { ActivityIndicator, ScrollView, TouchableOpacity, View, TextStyle, ViewStyle } from "react-native"
 import { CircleCheck, CircleAlert } from "lucide-react-native"
 
 import { StackScreen } from "@/components/StackScreen"
@@ -8,6 +8,8 @@ import { UserAvatar } from "@/components/UserAvatar"
 import { translate } from "@/i18n/translate"
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
+import { generateAndSharePatrolReport } from "@/utils/patrolGenerator"
+import { openPdfDocument } from "@/utils/openPdfDocument"
 
 import type { PatrolDetailScreenProps } from "./types"
 
@@ -56,12 +58,41 @@ const MOCK_BAD = 3
 
 export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) => {
   const [status, setStatus] = useState<PatrolStatus>(MOCK_PATROL.status)
+  const [isGeneratingReport, setIsGeneratingReport] = useState(false)
   const badge = BADGE_STYLES[status]
 
   const handlePrimaryAction = () => {
     if (status === "inProgress") setStatus("underReview")
     else if (status === "underReview") setStatus("approved")
     else if (status === "approved") setStatus("inProgress")
+  }
+
+  const handleReportPreview = async () => {
+    if (isGeneratingReport) return
+    setIsGeneratingReport(true)
+    try {
+      const uri = await generateAndSharePatrolReport({
+        workplaceName: MOCK_PATROL.location,
+        date: MOCK_PATROL.date,
+        author: MOCK_PATROL.author,
+        reviewer: MOCK_PATROL.reviewer,
+        approver: MOCK_PATROL.approver,
+        checkItems: MOCK_CHECK_ITEMS.map((item) => ({
+          name: item.name,
+          result: item.status,
+          note: item.note || undefined,
+        })),
+        overallAction: MOCK_OVERALL_ACTION,
+        totalCount: MOCK_TOTAL,
+        goodCount: MOCK_GOOD,
+        badCount: MOCK_BAD,
+      })
+      await openPdfDocument(uri)
+    } catch {
+      // 에러 처리는 API 연동 시 Toast로 교체
+    } finally {
+      setIsGeneratingReport(false)
+    }
   }
 
   return (
@@ -228,11 +259,20 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
               />
             </TouchableOpacity>
           )}
-          <TouchableOpacity style={$btnOutline} activeOpacity={0.8}>
-            <Text
-              text={translate("patrolDetailScreen:buttons.reportPreview")}
-              style={$btnOutlineText}
-            />
+          <TouchableOpacity
+            style={$btnOutline}
+            activeOpacity={0.8}
+            onPress={handleReportPreview}
+            disabled={isGeneratingReport}
+          >
+            {isGeneratingReport ? (
+              <ActivityIndicator size="small" color="#4C4C4C" />
+            ) : (
+              <Text
+                text={translate("patrolDetailScreen:buttons.reportPreview")}
+                style={$btnOutlineText}
+              />
+            )}
           </TouchableOpacity>
         </View>
       </ScrollView>

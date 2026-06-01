@@ -41,6 +41,6 @@ module.exports = ({ config }: ConfigContext): Partial<ExpoConfig> => {
           "촬영한 사진을 라이브러리에 저장하기 위해 접근이 필요합니다.",
       },
     },
-    plugins: [...existingPlugins, "expo-notifications"],
+    plugins: [...existingPlugins, "expo-notifications", "expo-sharing"],
   }
 }
