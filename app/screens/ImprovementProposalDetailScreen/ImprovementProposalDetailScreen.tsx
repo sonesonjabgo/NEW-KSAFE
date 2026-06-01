@@ -1,5 +1,6 @@
-import { FC, useCallback, useMemo, useState } from "react"
+import { FC, useCallback, useEffect, useMemo, useState } from "react"
 import {
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
   // eslint-disable-next-line no-restricted-imports
@@ -70,6 +71,15 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
   const { role } = useRole()
   const insets = useSafeAreaInsets()
   const { isSmallPhone } = useResponsive()
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false)
+
+  useEffect(() => {
+    const showEvent = Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow"
+    const hideEvent = Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide"
+    const showSub = Keyboard.addListener(showEvent, () => setIsKeyboardVisible(true))
+    const hideSub = Keyboard.addListener(hideEvent, () => setIsKeyboardVisible(false))
+    return () => { showSub.remove(); hideSub.remove() }
+  }, [])
   const isAdmin = role === "admin"
 
   // TODO: 추후 로그인 사용자 정보 연동 시 실제 사용자 이름으로 교체
@@ -753,7 +763,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
 
           {/* 하단 버튼 — 역할/작성자 조건 분기 */}
           {(isOwnProposal || isAdmin) && (
-            <View style={[S.$bottomBar, { paddingBottom: insets.bottom + 16 }]}>
+            <View style={[S.$bottomBar, { paddingBottom: isKeyboardVisible ? 16 : insets.bottom + 16 }]}>
               {editMode ? (
                 /* 수정 모드: 취소 / 저장 */
                 <>

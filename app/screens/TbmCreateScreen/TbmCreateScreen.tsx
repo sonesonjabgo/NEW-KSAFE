@@ -1,6 +1,7 @@
-import { FC, useCallback, useMemo, useRef, useState } from "react"
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   Animated,
+  Keyboard,
   KeyboardAvoidingView,
   Modal,
   Platform,
@@ -44,6 +45,15 @@ function formatDate(d: Date): string {
 
 export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false)
+
+  useEffect(() => {
+    const showEvent = Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow"
+    const hideEvent = Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide"
+    const showSub = Keyboard.addListener(showEvent, () => setIsKeyboardVisible(true))
+    const hideSub = Keyboard.addListener(hideEvent, () => setIsKeyboardVisible(false))
+    return () => { showSub.remove(); hideSub.remove() }
+  }, [])
 
   const [selectedEducationIds, setSelectedEducationIds] = useState<number[]>([])
   const [workplace, setWorkplace] = useState("")
@@ -335,7 +345,7 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
           </KeyboardAwareScrollView>
 
           {/* 하단 제출 버튼 */}
-          <View style={[S.$submitBar, { paddingBottom: insets.bottom + 16 }]}>
+          <View style={[S.$submitBar, { paddingBottom: isKeyboardVisible ? 16 : insets.bottom + 16 }]}>
             <TouchableOpacity
               style={[S.$submitBtn, !isValid && S.$submitBtnDisabled]}
               activeOpacity={0.8}

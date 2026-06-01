@@ -1,17 +1,18 @@
-import { FC, useCallback, useMemo, useRef, useState } from "react"
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   Animated,
+  Keyboard,
   KeyboardAvoidingView,
   Modal,
   PanResponder,
   Platform,
-  ScrollView,
   StyleSheet,
   // eslint-disable-next-line no-restricted-imports
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native"
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
 import { IconAlertCircle, IconBuilding, IconChevronDown } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -35,6 +36,15 @@ export const ImprovementProposalCreateScreen: FC<ImprovementProposalCreateScreen
   navigation,
 }) => {
   const insets = useSafeAreaInsets()
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false)
+
+  useEffect(() => {
+    const showEvent = Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow"
+    const hideEvent = Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide"
+    const showSub = Keyboard.addListener(showEvent, () => setIsKeyboardVisible(true))
+    const hideSub = Keyboard.addListener(hideEvent, () => setIsKeyboardVisible(false))
+    return () => { showSub.remove(); hideSub.remove() }
+  }, [])
   const [workplace, setWorkplace] = useState("")
   const [content, setContent] = useState("")
   const [workplaceModalVisible, setWorkplaceModalVisible] = useState(false)
@@ -118,13 +128,15 @@ export const ImprovementProposalCreateScreen: FC<ImprovementProposalCreateScreen
       >
         <KeyboardAvoidingView
           style={S.$flex1}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+          keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 60) : 0}
         >
-          <ScrollView
+          <KeyboardAwareScrollView
             style={S.$scrollContent}
             contentContainerStyle={S.$scrollInner}
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
+            bottomOffset={Platform.OS === "ios" ? 200 : 150}
           >
             {/* 작성 가이드 */}
             <View style={S.$guideCard}>
@@ -215,10 +227,10 @@ export const ImprovementProposalCreateScreen: FC<ImprovementProposalCreateScreen
                 </View>
               )}
             </View>
-          </ScrollView>
+          </KeyboardAwareScrollView>
 
           {/* 하단 제출 버튼 */}
-          <View style={[S.$submitBar, { paddingBottom: insets.bottom + 16 }]}>
+          <View style={[S.$submitBar, { paddingBottom: isKeyboardVisible ? 16 : insets.bottom + 16 }]}>
             <TouchableOpacity
               style={[S.$submitBtn, (!isValid || isSubmitting) && S.$submitBtnDisabled]}
               activeOpacity={0.8}

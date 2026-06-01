@@ -1,5 +1,6 @@
-import { FC, useCallback, useMemo, useState } from "react"
+import { FC, useCallback, useEffect, useMemo, useState } from "react"
 import {
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
   TextInput,
@@ -28,6 +29,15 @@ export const EducationMaterialRegisterScreen: FC<EducationMaterialRegisterScreen
   navigation,
 }) => {
   const insets = useSafeAreaInsets()
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false)
+
+  useEffect(() => {
+    const showEvent = Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow"
+    const hideEvent = Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide"
+    const showSub = Keyboard.addListener(showEvent, () => setIsKeyboardVisible(true))
+    const hideSub = Keyboard.addListener(hideEvent, () => setIsKeyboardVisible(false))
+    return () => { showSub.remove(); hideSub.remove() }
+  }, [])
 
   const [selectedFile, setSelectedFile] = useState<{ name: string; size: string } | null>(null)
   const [educationTitle, setEducationTitle] = useState("")
@@ -208,7 +218,7 @@ export const EducationMaterialRegisterScreen: FC<EducationMaterialRegisterScreen
         </KeyboardAwareScrollView>
 
         {/* 하단 등록하기 버튼 */}
-        <View style={[S.$submitBar, { paddingBottom: insets.bottom + 16 }]}>
+        <View style={[S.$submitBar, { paddingBottom: isKeyboardVisible ? 16 : insets.bottom + 16 }]}>
           <TouchableOpacity
             style={[S.$submitBtn, !isValid && S.$submitBtnDisabled]}
             activeOpacity={0.8}

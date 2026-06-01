@@ -1,6 +1,7 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import {
   Image,
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
   TextInput,
@@ -25,6 +26,15 @@ import type { TbmReportScreenProps } from "./types"
 export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route }) => {
   const { id } = route.params
   const insets = useSafeAreaInsets()
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false)
+
+  useEffect(() => {
+    const showEvent = Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow"
+    const hideEvent = Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide"
+    const showSub = Keyboard.addListener(showEvent, () => setIsKeyboardVisible(true))
+    const hideSub = Keyboard.addListener(hideEvent, () => setIsKeyboardVisible(false))
+    return () => { showSub.remove(); hideSub.remove() }
+  }, [])
 
   const detail = mockTbmDetails[id]
 
@@ -201,7 +211,7 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
         </KeyboardAwareScrollView>
 
         {/* ── 하단 생성 버튼 ── */}
-        <View style={[S.$submitBar, { paddingBottom: (insets.bottom || 0) + 16 }]}>
+        <View style={[S.$submitBar, { paddingBottom: isKeyboardVisible ? 16 : (insets.bottom || 0) + 16 }]}>
           <TouchableOpacity
             style={S.$submitBtn}
             activeOpacity={0.8}

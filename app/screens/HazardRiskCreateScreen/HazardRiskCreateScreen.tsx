@@ -1,7 +1,8 @@
-import { FC, useCallback, useMemo, useRef, useState } from "react"
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   Animated,
   Image,
+  Keyboard,
   KeyboardAvoidingView,
   Modal,
   Platform,
@@ -37,6 +38,15 @@ const MOCK_WORKPLACES = [
 
 export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false)
+
+  useEffect(() => {
+    const showEvent = Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow"
+    const hideEvent = Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide"
+    const showSub = Keyboard.addListener(showEvent, () => setIsKeyboardVisible(true))
+    const hideSub = Keyboard.addListener(hideEvent, () => setIsKeyboardVisible(false))
+    return () => { showSub.remove(); hideSub.remove() }
+  }, [])
 
   const [workplace, setWorkplace] = useState("")
   const [location, setLocation] = useState("")
@@ -245,7 +255,7 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
           </KeyboardAwareScrollView>
 
           {/* 제출하기 버튼 */}
-          <View style={[S.$submitBar, { paddingBottom: insets.bottom + 16 }]}>
+          <View style={[S.$submitBar, { paddingBottom: isKeyboardVisible ? 16 : insets.bottom + 16 }]}>
             <TouchableOpacity
               style={[S.$submitBtn, !isValid && S.$submitBtnDisabled]}
               activeOpacity={0.8}
