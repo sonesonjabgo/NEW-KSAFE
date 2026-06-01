@@ -16,6 +16,7 @@ export const $container: ViewStyle = {
 
 export const $heading: TextStyle = {
   fontSize: 26,
+  lineHeight: 34,
   fontFamily: typography.primary.semiBold,
   color: "#000000",
   marginBottom: 17,
@@ -55,10 +56,12 @@ export const $cardSelected: ViewStyle = {
 
 export const $emoji: TextStyle = {
   fontSize: 72,
+  lineHeight: 88,
 }
 
 export const $cardLabel: TextStyle = {
   fontSize: 17,
+  lineHeight: 24,
   fontFamily: typography.primary.semiBold,
   color: "#333333",
 }

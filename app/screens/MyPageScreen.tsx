@@ -197,6 +197,7 @@ const $headerTitle: TextStyle = {
   flex: 1,
   color: "#FFFFFF",
   fontSize: 21,
+  lineHeight: 28,
   fontFamily: typography.primary.semiBold,
   textAlign: "center",
 }

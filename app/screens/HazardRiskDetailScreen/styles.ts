@@ -394,6 +394,7 @@ export const $historyHeaderRow: ViewStyle = {
 
 export const $historyTitle: TextStyle = {
   fontSize: 19,
+  lineHeight: 26,
   fontFamily: typography.primary.bold,
   color: "#252525",
 }

@@ -81,6 +81,7 @@ export const $summaryCountRow: ViewStyle = {
 
 export const $summaryCountNavy: TextStyle = {
   fontSize: 26,
+  lineHeight: 34,
   fontFamily: typography.primary.bold,
   color: colors.navy,
 }
@@ -93,6 +94,7 @@ export const $summaryUnitNavy: TextStyle = {
 
 export const $summaryCountBlue: TextStyle = {
   fontSize: 26,
+  lineHeight: 34,
   fontFamily: typography.primary.bold,
   color: colors.blue,
 }
