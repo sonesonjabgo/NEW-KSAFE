@@ -28,7 +28,7 @@ export const $activeTab: ViewStyle = {
 export const $tabText: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.semiBold,
-  color: "#999999",
+  color: "#555555",
 }
 
 export const $activeTabText: TextStyle = {
@@ -69,7 +69,7 @@ export const $cardTopRow: ViewStyle = {
 
 export const $cardDate: TextStyle = {
   fontSize: 12,
-  color: "#A9A9A9",
+  color: "#555555",
   fontFamily: typography.primary.normal,
 }
 
@@ -82,7 +82,7 @@ export const $cardTitle: TextStyle = {
 
 export const $cardParticipants: TextStyle = {
   fontSize: 13,
-  color: "#999999",
+  color: "#555555",
   fontFamily: typography.primary.normal,
   marginTop: 2,
 }
@@ -109,7 +109,7 @@ export const $cardMetaAuthor: TextStyle = {
 
 export const $cardMetaLocation: TextStyle = {
   fontSize: 12,
-  color: "#A9A9A9",
+  color: "#555555",
   fontFamily: typography.primary.normal,
   flexShrink: 1,
 }
@@ -146,7 +146,7 @@ export const $badgeFailed: ViewStyle = {
 
 export const $badgeRequestedText: TextStyle = {
   fontSize: 11,
-  color: "#606679",
+  color: "#333333",
   fontFamily: typography.primary.semiBold,
 }
 

@@ -97,7 +97,7 @@ export const $required: TextStyle = {
 export const $helperText: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#979797",
+  color: "#555555",
 }
 
 // ── Input Row (workplace selector) ────────────────────────────────────────────
@@ -122,7 +122,7 @@ export const $inputText: TextStyle = {
 }
 
 export const $inputPlaceholder: TextStyle = {
-  color: "#BBBBBB",
+  color: "#555555",
 }
 
 // ── Textarea ──────────────────────────────────────────────────────────────────
@@ -256,7 +256,7 @@ export const $modalItemText: TextStyle = {
   flex: 1,
   fontSize: 15,
   fontFamily: typography.primary.normal,
-  color: "#888888",
+  color: "#555555",
 }
 
 export const $modalItemTextSelected: TextStyle = {

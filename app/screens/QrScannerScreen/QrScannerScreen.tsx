@@ -139,7 +139,7 @@ export const QrScannerScreen: FC = () => {
               <View style={[S.$cornerTR, { width: cornerSize, height: cornerSize }]} />
               <View style={[S.$cornerBL, { width: cornerSize, height: cornerSize }]} />
               <View style={[S.$cornerBR, { width: cornerSize, height: cornerSize }]} />
-              <IconQrcode size={qrIconSize} color="#CACACA" strokeWidth={1.2} />
+              <IconQrcode size={qrIconSize} color="#909090" strokeWidth={1.2} />
             </View>
           </View>
 

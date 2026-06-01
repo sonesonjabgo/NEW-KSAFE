@@ -205,7 +205,7 @@ export const ImprovementProposalCreateScreen: FC<ImprovementProposalCreateScreen
                   value={content}
                   onChangeText={setContent}
                   placeholder={translate("improvementProposalCreateScreen:detail.placeholder")}
-                  placeholderTextColor="#BBBBBB"
+                  placeholderTextColor="#666666"
                   multiline
                   scrollEnabled={false}
                   underlineColorAndroid="transparent"

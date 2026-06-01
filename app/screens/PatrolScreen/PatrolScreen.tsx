@@ -296,7 +296,7 @@ const $workplaceSelector: ViewStyle = {
 const $workplaceLabel: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.medium,
-  color: "#979797",
+  color: "#555555",
 }
 
 const $workplaceName: TextStyle = {
@@ -348,7 +348,7 @@ const $badgeText: TextStyle = {
 const $cardDate: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
 }
 
 const $cardTitle: TextStyle = {
@@ -366,7 +366,7 @@ const $reviewRow: ViewStyle = {
 const $reviewLabel: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.semiBold,
-  color: "#979797",
+  color: "#555555",
 }
 
 const $reviewName: TextStyle = {
@@ -397,7 +397,7 @@ const $cardMetaAuthor: TextStyle = {
 const $cardMetaLocation: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
   flexShrink: 1,
 }
 

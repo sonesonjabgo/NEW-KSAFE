@@ -52,7 +52,7 @@ export const $badgeText: TextStyle = {
 export const $categoryLabel: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.semiBold,
-  color: "#606060",
+  color: "#555555",
 }
 
 export const $title: TextStyle = {
@@ -73,7 +73,7 @@ export const $authorBadge: ViewStyle = {
 export const $authorBadgeText: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.medium,
-  color: "#606679",
+  color: "#333333",
 }
 
 export const $dateRow: ViewStyle = {
@@ -85,7 +85,7 @@ export const $dateRow: ViewStyle = {
 export const $dateText: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.medium,
-  color: "#606060",
+  color: "#555555",
 }
 
 // ── Card 2 ─────────────────────────────────────────────────────────────────────
@@ -105,7 +105,7 @@ export const $attachmentHeaderText: TextStyle = {
 export const $fileMetaText: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#767676",
+  color: "#555555",
 }
 
 export const $fileChip: ViewStyle = {

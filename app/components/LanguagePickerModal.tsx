@@ -221,7 +221,7 @@ const $itemTextSelected: TextStyle = {
 const $itemSubtitle: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#9CA3AF",
+  color: "#555555",
 }
 
 const $itemCheck: TextStyle = {

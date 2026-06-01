@@ -229,7 +229,7 @@ const $section: ViewStyle = {
 const $sectionTitle: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.semiBold,
-  color: "#6B7280",
+  color: "#555555",
   marginBottom: 10,
   textTransform: "uppercase",
   letterSpacing: 0.5,

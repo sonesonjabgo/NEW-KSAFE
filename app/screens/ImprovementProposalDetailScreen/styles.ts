@@ -44,7 +44,7 @@ export const $infoCardTopRow: ViewStyle = {
 export const $infoDate: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
 }
 
 export const $infoContent: TextStyle = {
@@ -80,7 +80,7 @@ export const $authorName: TextStyle = {
 export const $authorWorkplace: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#979797",
+  color: "#555555",
   marginTop: 2,
 }
 
@@ -107,7 +107,7 @@ export const $statusBadgeStyle: Record<ProposalStatus, ViewStyle> = {
 }
 
 export const $statusBadgeTextStyle: Record<ProposalStatus, TextStyle> = {
-  pending: { color: "#606679" },
+  pending: { color: "#333333" },
   ongoing: { color: "#18A24A" },
   reflected: { color: "#214ACC" },
   rejected: { color: "#D84040" },
@@ -169,7 +169,7 @@ export const $statusBtn: ViewStyle = {
 export const $statusBtnText: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#C6C6C6",
+  color: "#555555",
 }
 
 export const $statusBtnSelectedOngoing: ViewStyle = {
@@ -239,7 +239,7 @@ export const $pendingMessageBox: ViewStyle = {
 export const $pendingMessageText: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#AAAAAA",
+  color: "#555555",
   textAlign: "center",
   lineHeight: 22,
 }
@@ -305,13 +305,13 @@ export const $timelineTitle: TextStyle = {
 export const $timelineDate: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
 }
 
 export const $timelineDesc: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#979797",
+  color: "#555555",
 }
 
 export const $timelineDotActive: ViewStyle = {
@@ -458,7 +458,7 @@ export const $editTextareaInput: TextStyle = {
 export const $editHelperText: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#979797",
+  color: "#555555",
   marginTop: 6,
 }
 
@@ -548,7 +548,7 @@ export const $resultDateRow: ViewStyle = {
 export const $resultDateText: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#888888",
+  color: "#555555",
 }
 
 export const $resultManagerRow: ViewStyle = {
@@ -634,7 +634,7 @@ export const $processingTextareaInput: TextStyle = {
 export const $processingHelperText: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#979797",
+  color: "#555555",
   marginTop: 6,
 }
 
@@ -706,7 +706,7 @@ export const $workerInfoText: TextStyle = {
   flex: 1,
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#888888",
+  color: "#555555",
   textAlign: "center",
   lineHeight: 20,
 }

@@ -155,6 +155,6 @@ const $loadingTitle: TextStyle = {
 const $loadingDesc: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#888888",
+  color: "#555555",
   textAlign: "center",
 }

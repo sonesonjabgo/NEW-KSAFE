@@ -241,7 +241,7 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
                   <TextInput
                     style={S.$dashedInput}
                     placeholder={translate(PLACEHOLDER_I18N_KEY[selectedStatus] as any)}
-                    placeholderTextColor="#BBBBBB"
+                    placeholderTextColor="#666666"
                     multiline
                     editable={isInputEnabled}
                     value={actionNote}

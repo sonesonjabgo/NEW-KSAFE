@@ -372,7 +372,7 @@ const $statLabel: TextStyle = {
   fontSize: 14,
   lineHeight: 20,
   fontFamily: semiBold,
-  color: "#585858",
+  color: "#555555",
 }
 
 const $statDivider: ViewStyle = {
@@ -421,7 +421,7 @@ const $cardBadgeText: TextStyle = {
 const $cardDate: TextStyle = {
   fontSize: 12,
   fontFamily: normal,
-  color: "#A9A9A9",
+  color: "#555555",
 }
 
 const $cardTitle: TextStyle = {
@@ -439,7 +439,7 @@ const $reviewRow: ViewStyle = {
 const $reviewLabel: TextStyle = {
   fontSize: 12,
   fontFamily: semiBold,
-  color: "#979797",
+  color: "#555555",
 }
 
 const $reviewName: TextStyle = {
@@ -470,7 +470,7 @@ const $metaAuthor: TextStyle = {
 const $metaLocation: TextStyle = {
   fontSize: 12,
   fontFamily: normal,
-  color: "#A9A9A9",
+  color: "#555555",
   flexShrink: 1,
 }
 

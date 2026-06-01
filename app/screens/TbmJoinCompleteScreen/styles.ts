@@ -30,7 +30,7 @@ export const $heading: TextStyle = {
 export const $subtitle: TextStyle = {
   fontSize: 17,
   fontFamily: typography.primary.medium,
-  color: "#7B7B7B",
+  color: "#555555",
   textAlign: "center",
 }
 

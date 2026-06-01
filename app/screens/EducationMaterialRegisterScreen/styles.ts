@@ -78,7 +78,7 @@ export const $sectionLabel: TextStyle = {
 export const $helperText: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.medium,
-  color: "#979797",
+  color: "#555555",
   paddingHorizontal: 12,
 }
 
@@ -100,7 +100,7 @@ export const $uploadBoxText: TextStyle = {
   flex: 1,
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#BBBBBB",
+  color: "#555555",
 }
 
 // ── File chip (after upload) ──────────────────────────────────────────────────
@@ -139,7 +139,7 @@ export const $fileChipName: TextStyle = {
 export const $fileChipSize: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#888888",
+  color: "#555555",
 }
 
 // ── Checkbox ──────────────────────────────────────────────────────────────────
@@ -184,7 +184,7 @@ export const $checkboxLabel: TextStyle = {
 export const $checkboxDesc: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.medium,
-  color: "#979797",
+  color: "#555555",
   paddingLeft: 28,
 }
 

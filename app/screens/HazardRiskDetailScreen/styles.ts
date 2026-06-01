@@ -39,7 +39,7 @@ export const $cardTopRow: ViewStyle = {
 export const $cardDate: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
 }
 
 // ── Status Badge ──────────────────────────────────────────────────────────────
@@ -70,7 +70,7 @@ export const $inlineLabel: TextStyle = {
   width: 60,
   fontSize: 14,
   fontFamily: typography.primary.semiBold,
-  color: "#979797",
+  color: "#555555",
   flexShrink: 0,
 }
 
@@ -110,7 +110,7 @@ export const $photoItem: ImageStyle = {
 export const $noPhotosText: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#BBBBBB",
+  color: "#555555",
 }
 
 // ── Manager Profile ───────────────────────────────────────────────────────────
@@ -198,7 +198,7 @@ export const $statusButton: ViewStyle = {
 export const $statusButtonText: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.semiBold,
-  color: "#AAAAAA",
+  color: "#555555",
 }
 
 export const $selectedBadge: ViewStyle = {
@@ -239,7 +239,7 @@ export const $dashedInput: TextStyle = {
 export const $noteHint: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.medium,
-  color: "#979797",
+  color: "#555555",
 }
 
 export const $noteDivider: ViewStyle = {
@@ -278,7 +278,7 @@ export const $photoHintRow: ViewStyle = {
 export const $photoHintText: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.medium,
-  color: "#747474",
+  color: "#555555",
   lineHeight: 18,
   flex: 1,
 }
@@ -402,13 +402,13 @@ export const $historyTitle: TextStyle = {
 export const $historyDate: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#909090",
+  color: "#555555",
 }
 
 export const $historyContent: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.normal,
-  color: "#574D4A",
+  color: "#555555",
   lineHeight: 22,
 }
 

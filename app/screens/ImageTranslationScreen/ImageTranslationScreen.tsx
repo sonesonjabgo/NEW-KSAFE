@@ -114,7 +114,7 @@ const $selectImageTitle: TextStyle = {
 const $selectImageDesc: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#9CA3AF",
+  color: "#555555",
   textAlign: "center",
   lineHeight: 20,
 }
@@ -137,7 +137,7 @@ const $langRow: ViewStyle = {
 const $langLabel: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#6B7280",
+  color: "#555555",
 }
 
 const $langBtn: ViewStyle = {

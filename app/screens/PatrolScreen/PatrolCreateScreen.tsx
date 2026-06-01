@@ -279,7 +279,7 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation, ro
                   <TextInput
                     style={$itemInput}
                     placeholder={translate("patrolCreateScreen:section.items.itemNamePlaceholder")}
-                    placeholderTextColor="#ABABAB"
+                    placeholderTextColor="#666666"
                     value={item.name}
                     onChangeText={(text) => updateItemName(item.id, text)}
                     maxLength={100}
@@ -325,7 +325,7 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation, ro
                           placeholder={translate(
                             "patrolCreateScreen:section.items.checkNamePlaceholder",
                           )}
-                          placeholderTextColor="#ABABAB"
+                          placeholderTextColor="#666666"
                           value={card.checkName}
                           onChangeText={(text) =>
                             updateCheckCard(item.id, card.id, { checkName: text })
@@ -379,7 +379,7 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation, ro
                               placeholder={translate(
                                 "patrolCreateScreen:section.items.badNotePlaceholder",
                               )}
-                              placeholderTextColor="#ABABAB"
+                              placeholderTextColor="#666666"
                               value={card.badNote}
                               onChangeText={(text) =>
                                 updateCheckCard(item.id, card.id, { badNote: text })
@@ -445,7 +445,7 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation, ro
           multiline
           textAlignVertical="top"
           placeholder={translate("patrolCreateScreen:section.requirements.placeholder")}
-          placeholderTextColor="#CCCCCC"
+          placeholderTextColor="#666666"
           value={requirements}
           onChangeText={setRequirements}
           maxLength={1000}
@@ -613,14 +613,14 @@ const $selectorButton: ViewStyle = {
   justifyContent: "space-between",
   paddingHorizontal: 16,
   borderWidth: 1,
-  borderColor: "#ABABAB",
+  borderColor: "#888888",
   borderRadius: 8,
 }
 
 const $selectorPlaceholder: TextStyle = {
   fontSize: 17,
   fontFamily: typography.primary.medium,
-  color: "#ABABAB",
+  color: "#555555",
   flex: 1,
 }
 
@@ -645,7 +645,7 @@ const $itemInputRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
   borderWidth: 1,
-  borderColor: "#ABABAB",
+  borderColor: "#888888",
   borderRadius: 8,
   backgroundColor: "#FFFFFF",
   overflow: "hidden",
@@ -693,7 +693,7 @@ const $checkTitle: TextStyle = {
 const $checkNameInput: TextStyle = {
   height: 50,
   borderWidth: 1,
-  borderColor: "#ABABAB",
+  borderColor: "#888888",
   borderRadius: 8,
   paddingHorizontal: 14,
   fontSize: 15,
@@ -747,7 +747,7 @@ const $badNoteInput: TextStyle = {
   paddingBottom: 12,
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#ABABAB",
+  color: "#555555",
   backgroundColor: "#F3F2F0",
 }
 
@@ -806,7 +806,7 @@ const $addItemButtonText: TextStyle = {
 const $sectionDescription: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.medium,
-  color: "#979797",
+  color: "#555555",
 }
 
 // ── Text Area ─────────────────────────────────────────────────────────────────
@@ -814,7 +814,7 @@ const $sectionDescription: TextStyle = {
 const $textArea: TextStyle = {
   height: 135,
   borderWidth: 1,
-  borderColor: "#ABABAB",
+  borderColor: "#888888",
   borderRadius: 8,
   paddingHorizontal: 16,
   paddingTop: 14,
@@ -974,7 +974,7 @@ const $successTitle: TextStyle = {
 const $successMessage: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.medium,
-  color: "#7B7B7B",
+  color: "#555555",
   textAlign: "center",
 }
 

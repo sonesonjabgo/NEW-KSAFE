@@ -265,7 +265,7 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
                     showValidationError && $textInputError,
                   ]}
                   placeholder={translate("educationPresentationScreen:inputPlaceholder")}
-                  placeholderTextColor="#ABABAB"
+                  placeholderTextColor="#666666"
                   value={inputText}
                   onChangeText={(t) => {
                     setInputText(t.slice(0, 1000))
@@ -403,7 +403,7 @@ const $langSelectorBar: ViewStyle = {
 const $langSelectorLabel: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#6B7280",
+  color: "#555555",
 }
 
 const $headerRoomId: TextStyle = {
@@ -460,7 +460,7 @@ const $messageBubble: ViewStyle = {
 const $messageSender: TextStyle = {
   fontSize: 11,
   fontFamily: typography.primary.semiBold,
-  color: "#6B7280",
+  color: "#555555",
 }
 
 const $messageText: TextStyle = {
@@ -510,7 +510,7 @@ const $statusText: TextStyle = {
   flex: 1,
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#6B7280",
+  color: "#555555",
   lineHeight: 16,
 }
 
@@ -590,13 +590,13 @@ const $inputTopRow: ViewStyle = {
 const $inputHintText: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#9CA3AF",
+  color: "#555555",
 }
 
 const $inputCountText: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#9CA3AF",
+  color: "#555555",
 }
 
 const $textInputRow: ViewStyle = {
@@ -691,7 +691,7 @@ const $inviteModalTitle: TextStyle = {
 const $inviteModalDesc: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#7B7B7B",
+  color: "#555555",
   textAlign: "center",
   lineHeight: 18,
   marginBottom: 18,

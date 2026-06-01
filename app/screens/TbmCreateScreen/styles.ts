@@ -46,7 +46,7 @@ export const $sectionLabel: TextStyle = {
 export const $helperText: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#979797",
+  color: "#555555",
 }
 
 // ── Card ─────────────────────────────────────────────────────────────────────
@@ -117,7 +117,7 @@ export const $inputText: TextStyle = {
 }
 
 export const $inputPlaceholder: TextStyle = {
-  color: "#BBBBBB",
+  color: "#555555",
 }
 
 // ── Checkbox ──────────────────────────────────────────────────────────────────

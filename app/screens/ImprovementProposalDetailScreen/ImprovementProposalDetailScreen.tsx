@@ -627,7 +627,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                     <View style={S.$processingReadBox}>
                       <Text text={MOCK_RESULT_CONTENT} style={S.$processingReadText} />
                       <View style={S.$lockRow}>
-                        <IconLock size={18} color="#BBBBBB" />
+                        <IconLock size={18} color="#888888" />
                       </View>
                     </View>
                   ) : localStatus === "rejected" ? (
@@ -635,7 +635,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                     <View style={S.$processingReadBoxRejected}>
                       <Text text={MOCK_REJECTED_CONTENT} style={S.$processingReadText} />
                       <View style={S.$lockRow}>
-                        <IconLock size={18} color="#BBBBBB" />
+                        <IconLock size={18} color="#888888" />
                       </View>
                     </View>
                   ) : selectedCard === "reflected" || selectedCard === "rejected" ? (
@@ -659,7 +659,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                               ? "improvementProposalDetailScreen:statusChange.rejectedProcessingPlaceholder"
                               : "improvementProposalDetailScreen:statusChange.processingPlaceholder",
                           )}
-                          placeholderTextColor="#BBBBBB"
+                          placeholderTextColor="#666666"
                           multiline
                           scrollEnabled={false}
                           underlineColorAndroid="transparent"

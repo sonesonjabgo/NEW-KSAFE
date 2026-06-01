@@ -61,7 +61,7 @@ export const $badgeFailed: ViewStyle = {
 export const $badgeRequestedText: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.semiBold,
-  color: "#606679",
+  color: "#333333",
 }
 
 export const $badgeGeneratingText: TextStyle = {
@@ -85,7 +85,7 @@ export const $badgeFailedText: TextStyle = {
 export const $cardDate: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
 }
 
 export const $cardInfoRow: ViewStyle = {
@@ -172,7 +172,7 @@ export const $historyValue: TextStyle = {
 export const $historyValueEmpty: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#BBBBBB",
+  color: "#555555",
 }
 
 // ── Regenerate Section ────────────────────────────────────────────────────────
@@ -231,7 +231,7 @@ export const $regenSectionLabel: TextStyle = {
 export const $regenInputContainer: ViewStyle = {
   height: 48,
   borderWidth: 1,
-  borderColor: "#ABABAB",
+  borderColor: "#888888",
   borderRadius: 8,
   paddingHorizontal: 16,
   justifyContent: "center",
@@ -247,7 +247,7 @@ export const $regenInputText: TextStyle = {
 export const $regenInputDescription: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.medium,
-  color: "#979797",
+  color: "#555555",
 }
 
 export const $regenCautionCard: ViewStyle = {
@@ -308,7 +308,7 @@ export const $pdfButtonText: TextStyle = {
 export const $bottomNote: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.medium,
-  color: "#979797",
+  color: "#555555",
   textAlign: "center",
   marginBottom: 10,
 }

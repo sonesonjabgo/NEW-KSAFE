@@ -31,7 +31,7 @@ export const $workplaceContainer: ViewStyle = {
 export const $workplaceLabel: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.medium,
-  color: "#979797",
+  color: "#555555",
   marginBottom: 8,
 }
 
@@ -83,7 +83,7 @@ export const $activeTab: ViewStyle = {
 export const $tabText: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.semiBold,
-  color: "#979797",
+  color: "#555555",
 }
 
 export const $activeTabText: TextStyle = {
@@ -111,7 +111,7 @@ export const $emptyContainer: ViewStyle = {
 
 export const $emptyText: TextStyle = {
   fontSize: 15,
-  color: "#999999",
+  color: "#555555",
   fontFamily: typography.primary.normal,
 }
 

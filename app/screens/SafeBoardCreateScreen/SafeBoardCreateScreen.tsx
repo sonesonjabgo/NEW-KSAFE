@@ -176,7 +176,7 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
                   value={title}
                   onChangeText={(t) => setTitle(t.slice(0, 200))}
                   placeholder={translate("safeBoardCreateScreen:postTitle.placeholder")}
-                  placeholderTextColor="#BBBBBB"
+                  placeholderTextColor="#666666"
                   maxLength={200}
                 />
               </View>
@@ -201,7 +201,7 @@ export const SafeBoardCreateScreen: FC<SafeBoardCreateScreenProps> = ({ navigati
                   value={content}
                   onChangeText={(t) => setContent(t.slice(0, 2000))}
                   placeholder={translate("safeBoardCreateScreen:content.placeholder")}
-                  placeholderTextColor="#BBBBBB"
+                  placeholderTextColor="#666666"
                   maxLength={2000}
                   multiline
                   scrollEnabled={false}

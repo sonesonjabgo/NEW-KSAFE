@@ -42,7 +42,7 @@ export const $activeTab: ViewStyle = {
 export const $tabText: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.semiBold,
-  color: "#999999",
+  color: "#555555",
 }
 
 export const $activeTabText: TextStyle = {
@@ -136,7 +136,7 @@ export const $cardTopRow: ViewStyle = {
 export const $cardDate: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
 }
 
 export const $cardLocation: TextStyle = {
@@ -149,7 +149,7 @@ export const $cardLocation: TextStyle = {
 export const $cardDescription: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#979797",
+  color: "#555555",
   marginBottom: 12,
   lineHeight: 18,
 }
@@ -177,7 +177,7 @@ export const $cardAuthorName: TextStyle = {
 export const $cardWorkplace: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
   flexShrink: 1,
 }
 
@@ -204,7 +204,7 @@ export const $statusBadgeStyle: Record<HazardStatus, ViewStyle> = {
 }
 
 export const $statusBadgeTextStyle: Record<HazardStatus, TextStyle> = {
-  pending: { color: "#606679" },
+  pending: { color: "#333333" },
   ongoing: { color: "#18A24A" },
   completed: { color: "#214ACC" },
   impossible: { color: "#D84040" },
@@ -254,5 +254,5 @@ export const $emptyContainer: ViewStyle = {
 export const $emptyText: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.semiBold,
-  color: "#999999",
+  color: "#555555",
 }

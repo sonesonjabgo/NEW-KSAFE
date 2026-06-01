@@ -187,7 +187,7 @@ export const $afterImagePlaceholder: ViewStyle = {
 export const $afterImagePlaceholderText: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#AAAAAA",
+  color: "#555555",
 }
 
 export const $analyzeBtn: ViewStyle = {
@@ -228,7 +228,7 @@ export const $hazardTitle: TextStyle = {
 export const $hazardEmpty: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#AAAAAA",
+  color: "#555555",
   marginBottom: 10,
 }
 
@@ -474,7 +474,7 @@ export const $emptyTitle: TextStyle = {
 export const $emptyDesc: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#888888",
+  color: "#555555",
   textAlign: "center",
   lineHeight: 21,
 }

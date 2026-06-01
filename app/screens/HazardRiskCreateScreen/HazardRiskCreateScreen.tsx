@@ -170,7 +170,7 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
                   value={location}
                   onChangeText={(t) => setLocation(t.slice(0, 200))}
                   placeholder={translate("hazardRiskCreateScreen:location.placeholder")}
-                  placeholderTextColor="#BBBBBB"
+                  placeholderTextColor="#666666"
                   maxLength={200}
                 />
               </View>
@@ -192,7 +192,7 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
                   value={hazardFactor}
                   onChangeText={(t) => setHazardFactor(t.slice(0, 1000))}
                   placeholder={translate("hazardRiskCreateScreen:hazardFactor.placeholder")}
-                  placeholderTextColor="#BBBBBB"
+                  placeholderTextColor="#666666"
                   maxLength={1000}
                   multiline
                   scrollEnabled={false}

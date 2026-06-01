@@ -81,7 +81,7 @@ export const $sectionLabel: TextStyle = {
 export const $helperText: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#979797",
+  color: "#555555",
   paddingHorizontal: 16,
 }
 
@@ -107,7 +107,7 @@ export const $inputText: TextStyle = {
 }
 
 export const $inputPlaceholder: TextStyle = {
-  color: "#BBBBBB",
+  color: "#555555",
 }
 
 // ── Textarea ──────────────────────────────────────────────────────────────────
@@ -142,7 +142,7 @@ export const $photoHintText: TextStyle = {
   flex: 1,
   fontSize: 12,
   fontFamily: typography.primary.medium,
-  color: "#747474",
+  color: "#555555",
 }
 
 // ── Site Photos ───────────────────────────────────────────────────────────────

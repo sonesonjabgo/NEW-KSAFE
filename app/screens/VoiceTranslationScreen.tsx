@@ -461,7 +461,7 @@ const $micPulseDot: ViewStyle = {
   width: 8,
   height: 8,
   borderRadius: 4,
-  backgroundColor: "#BBBBBB",
+  backgroundColor: "#888888",
 }
 
 const $activeMicPulseDot: ViewStyle = {
@@ -477,7 +477,7 @@ const $listeningText: TextStyle = {
 const $tapToSpeakText: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#9AA0AD",
+  color: "#555555",
 }
 
 const $micIconStack: ViewStyle = {

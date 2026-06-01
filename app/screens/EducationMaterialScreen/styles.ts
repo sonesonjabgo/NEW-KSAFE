@@ -36,7 +36,7 @@ export const $cardBadgeText: TextStyle = {
 export const $cardDate: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.medium,
-  color: "#606679",
+  color: "#333333",
 }
 
 export const $cardTitle: TextStyle = {
@@ -49,7 +49,7 @@ export const $cardTitle: TextStyle = {
 export const $cardFileName: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.medium,
-  color: "#979797",
+  color: "#555555",
 }
 
 export const $cardDivider: ViewStyle = {
@@ -74,7 +74,7 @@ export const $cardAuthor: TextStyle = {
 export const $cardSource: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
 }
 
 // ── Register button ────────────────────────────────────────────────────────────

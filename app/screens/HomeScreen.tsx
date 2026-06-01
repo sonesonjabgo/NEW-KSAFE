@@ -809,7 +809,7 @@ const $gridLabel: TextStyle = {
 
 const $gridSub: TextStyle = {
   fontFamily: typography.primary.medium,
-  color: "#ABABAB",
+  color: "#555555",
   textAlign: "center",
   flexShrink: 1,
   flexWrap: "wrap",
@@ -875,7 +875,7 @@ const $tabLabelActive: TextStyle = {
 }
 
 const $tabLabelInactive: TextStyle = {
-  color: "#979797",
+  color: "#555555",
 }
 
 const $tabLine: ViewStyle = {
@@ -1036,12 +1036,12 @@ const $footerLink: TextStyle = {
 
 const $footerSep: TextStyle = {
   fontSize: 11,
-  color: "#CFD0D3",
+  color: "#555555",
 }
 
 const $footerCopyright: TextStyle = {
   fontSize: 10,
-  color: "#B0B3B8",
+  color: "#555555",
   fontFamily: typography.primary.normal,
   textAlign: "center",
   marginTop: 25,

@@ -345,7 +345,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
             <TextInput
               style={$textInput}
               placeholder={translate("aiSafetyChatScreen:inputPlaceholder")}
-              placeholderTextColor="#ABABAB"
+              placeholderTextColor="#666666"
               value={inputText}
               onChangeText={setInputText}
               maxLength={1000}
@@ -359,7 +359,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
               disabled={!canSend}
               activeOpacity={0.8}
             >
-              <IconSend2 size={20} color={canSend ? "#FFFFFF" : "#ABABAB"} />
+              <IconSend2 size={20} color={canSend ? "#FFFFFF" : "#888888"} />
             </TouchableOpacity>
           </View>
           <Text text={translate("aiSafetyChatScreen:inputHint")} style={$inputHint} />
@@ -594,6 +594,6 @@ const $sendButtonInactive: ViewStyle = {
 const $inputHint: TextStyle = {
   fontSize: 11,
   fontFamily: typography.primary.normal,
-  color: "#9CA3AF",
+  color: "#555555",
   textAlign: "center",
 }

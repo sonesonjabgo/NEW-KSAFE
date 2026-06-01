@@ -43,7 +43,7 @@ export const $emptyTitle: TextStyle = {
 export const $emptySubtitle: TextStyle = {
   fontSize: 17,
   fontFamily: typography.primary.medium,
-  color: "#7B7B7B",
+  color: "#555555",
   textAlign: "center",
   marginTop: 15,
 }
@@ -161,13 +161,13 @@ export const $cardMeta: ViewStyle = {
 export const $cardAuthor: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#7B7B7B",
+  color: "#555555",
 }
 
 export const $cardDate: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#7B7B7B",
+  color: "#555555",
 }
 
 // ── No Selection Modal ────────────────────────────────────────────────────────

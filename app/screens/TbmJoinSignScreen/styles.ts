@@ -59,7 +59,7 @@ export const $placeholderContainer: ViewStyle = {
 export const $signaturePlaceholder: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.normal,
-  color: "#C0C0C0",
+  color: "#777777",
 }
 
 // ── Reset button ──────────────────────────────────────────────────────────────

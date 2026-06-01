@@ -113,14 +113,14 @@ const $metaRow: ViewStyle = {
 
 const $metaText: TextStyle = {
   fontSize: 12,
-  color: "#979797",
+  color: "#555555",
   fontFamily: typography.primary.normal,
   lineHeight: 16,
 }
 
 const $metaWorkplace: TextStyle = {
   fontSize: 12,
-  color: "#979797",
+  color: "#555555",
   fontFamily: typography.primary.normal,
   lineHeight: 16,
 }

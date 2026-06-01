@@ -153,7 +153,7 @@ const $title: TextStyle = {
   fontFamily: typography.primary.semiBold,
   lineHeight: 23,
   textAlign: "center",
-  color: "#888888",
+  color: "#555555",
 }
 
 const $description: TextStyle = {
@@ -161,7 +161,7 @@ const $description: TextStyle = {
   fontFamily: typography.primary.medium,
   lineHeight: 23,
   textAlign: "center",
-  color: "#888888",
+  color: "#555555",
 }
 
 const $allowBtn: ViewStyle = {

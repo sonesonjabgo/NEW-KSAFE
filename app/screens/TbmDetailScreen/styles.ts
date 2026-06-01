@@ -56,7 +56,7 @@ export const $badgeEnded: ViewStyle = {
 export const $badgeDraftingText: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.semiBold,
-  color: "#606679",
+  color: "#333333",
 }
 
 export const $badgeOngoingText: TextStyle = {
@@ -74,7 +74,7 @@ export const $badgeEndedText: TextStyle = {
 export const $cardDate: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
 }
 
 export const $cardTitle: TextStyle = {
@@ -110,7 +110,7 @@ export const $cardAuthorName: TextStyle = {
 export const $cardAuthorLocation: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.normal,
-  color: "#574D4A",
+  color: "#555555",
 }
 
 export const $cardDivider: ViewStyle = {
@@ -121,7 +121,7 @@ export const $cardDivider: ViewStyle = {
 export const $activityLabel: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.semiBold,
-  color: "#606060",
+  color: "#555555",
 }
 
 export const $activityContent: TextStyle = {
@@ -263,7 +263,7 @@ export const $participantBadgeDangerText: TextStyle = {
 export const $participantEmpty: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
   textAlign: "center",
   paddingVertical: 16,
 }
@@ -271,7 +271,7 @@ export const $participantEmpty: TextStyle = {
 export const $participantTime: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
   marginLeft: 12,
 }
 

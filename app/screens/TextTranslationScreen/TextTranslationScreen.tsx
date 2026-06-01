@@ -275,7 +275,7 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
                     showValidationError && $textInputError,
                   ]}
                   placeholder={translate("textTranslationScreen:inputPlaceholder")}
-                  placeholderTextColor="#ABABAB"
+                  placeholderTextColor="#666666"
                   value={inputText}
                   onChangeText={(t) => {
                     setInputText(t.slice(0, 1000))
@@ -452,7 +452,7 @@ const $sourceText: TextStyle = {
   flex: 1,
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#6B7280",
+  color: "#555555",
   lineHeight: 20,
 }
 
@@ -542,13 +542,13 @@ const $inputTopRow: ViewStyle = {
 const $inputHintText: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#9CA3AF",
+  color: "#555555",
 }
 
 const $inputCountText: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#9CA3AF",
+  color: "#555555",
 }
 
 const $textInput: TextStyle = {

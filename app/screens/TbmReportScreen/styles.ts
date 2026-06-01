@@ -132,7 +132,7 @@ export const $textarea: ViewStyle = {
 export const $helperText: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
-  color: "#9AA0AB",
+  color: "#555555",
   marginTop: 4,
 }
 
@@ -230,7 +230,7 @@ export const $photoAddBtn: ViewStyle = {
 export const $photoAddText: TextStyle = {
   fontSize: 11,
   fontFamily: typography.primary.normal,
-  color: "#AAAAAA",
+  color: "#555555",
 }
 
 export const $photoItem: ImageStyle = {

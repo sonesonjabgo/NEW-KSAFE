@@ -169,7 +169,7 @@ export const EducationMaterialRegisterScreen: FC<EducationMaterialRegisterScreen
                 placeholder={translate(
                   "educationMaterialRegisterScreen:educationTitle.placeholder",
                 )}
-                placeholderTextColor="#BBBBBB"
+                placeholderTextColor="#666666"
                 maxLength={200}
               />
             </View>
@@ -204,7 +204,7 @@ export const EducationMaterialRegisterScreen: FC<EducationMaterialRegisterScreen
                 value={content}
                 onChangeText={(t) => setContent(t.slice(0, 10000))}
                 placeholder={translate("educationMaterialRegisterScreen:content.placeholder")}
-                placeholderTextColor="#BBBBBB"
+                placeholderTextColor="#666666"
                 maxLength={10000}
                 multiline
                 scrollEnabled={false}

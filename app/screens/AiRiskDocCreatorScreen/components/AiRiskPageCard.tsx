@@ -48,7 +48,7 @@ export const AiRiskPageCard: FC<AiRiskPageCardProps> = ({
           style={S.$pageCardTitle}
         />
         <TouchableOpacity onPress={onDelete} activeOpacity={0.7} hitSlop={8}>
-          <IconTrash size={20} color="#BBBBBB" strokeWidth={1.6} />
+          <IconTrash size={20} color="#888888" strokeWidth={1.6} />
         </TouchableOpacity>
       </View>
 
