@@ -285,7 +285,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
       <KeyboardAvoidingView
         style={$keyboardView}
         behavior="padding"
-        keyboardVerticalOffset={insets.top + 60}
+        keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 60) : insets.top + 60}
       >
         {conversationStarted ? (
           <FlatList
@@ -296,6 +296,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
             contentContainerStyle={$chatList}
             ListFooterComponent={renderLoadingIndicator}
             showsVerticalScrollIndicator={false}
+            style={$flatList}
           />
         ) : (
           <FlatList
@@ -305,6 +306,7 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
             contentContainerStyle={$chatList}
             showsVerticalScrollIndicator={false}
             keyExtractor={(item) => item.id}
+            style={$flatList}
           />
         )}
 
@@ -349,6 +351,10 @@ const $trashButton: ViewStyle = {
 const $keyboardView: ViewStyle = {
   flex: 1,
   backgroundColor: colors.screenBg,
+}
+
+const $flatList: ViewStyle = {
+  flex: 1,
 }
 
 const $chatList: {
