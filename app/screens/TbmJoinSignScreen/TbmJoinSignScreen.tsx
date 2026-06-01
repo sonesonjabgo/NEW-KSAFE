@@ -26,6 +26,7 @@ export const TbmJoinSignScreen: FC<TbmJoinSignScreenProps> = ({ navigation, rout
     PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponderCapture: () => true,
       onPanResponderGrant: (evt) => {
         const { locationX, locationY } = evt.nativeEvent
         currentPath.current = `M${locationX.toFixed(1)},${locationY.toFixed(1)}`
@@ -84,7 +85,7 @@ export const TbmJoinSignScreen: FC<TbmJoinSignScreenProps> = ({ navigation, rout
                   <Path
                     key={i}
                     d={d}
-                    stroke="#1062D8"
+                    stroke="#000000"
                     strokeWidth={2.5}
                     fill="none"
                     strokeLinecap="round"
