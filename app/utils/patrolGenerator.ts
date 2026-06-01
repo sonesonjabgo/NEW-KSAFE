@@ -24,8 +24,8 @@ export const generatePatrolReport = async (data: PatrolReportData): Promise<stri
       (item) => `
     <tr>
       <td class="checkpoint-name">${item.name}</td>
-      <td class="result-cell">${item.result === "good" ? "✓" : ""}</td>
-      <td class="result-cell">${item.result === "bad" ? "✓" : ""}</td>
+      <td class="result-cell">${item.result === "good" ? "○" : ""}</td>
+      <td class="result-cell">${item.result === "bad" ? "○" : ""}</td>
       <td class="action-cell">${item.note || ""}</td>
     </tr>
   `,
@@ -33,112 +33,198 @@ export const generatePatrolReport = async (data: PatrolReportData): Promise<stri
     .join("")
 
   const html = `
-    <html>
+    <!DOCTYPE html>
+    <html lang="ko">
       <head>
+        <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
         <style>
-          @page { size: A4; margin: 10mm; }
-          body {
-            font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
-            padding: 15px;
-            font-size: 11px;
+          @page {
+            size: A4;
+            margin: 15mm 12mm;
           }
+
+          * { box-sizing: border-box; }
+
+          body {
+            font-family: 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', sans-serif;
+            font-size: 11px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+          }
+
           h1 {
             text-align: center;
-            font-size: 20px;
-            margin: 0 0 10px 0;
-            text-decoration: underline;
+            font-size: 22px;
             font-weight: bold;
+            margin: 0 0 16px 0;
+            padding-bottom: 4px;
+            letter-spacing: 4px;
           }
-          table {
+
+          /* 서명란 (작성/검토/승인) */
+          .sign-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 10px;
-            page-break-inside: auto;
+            margin-bottom: 0;
           }
-          tr { page-break-inside: avoid; page-break-after: auto; }
-          th, td {
+          .sign-table td {
             border: 1px solid #000;
-            padding: 6px;
+            text-align: center;
+            padding: 5px 4px;
+            font-size: 11px;
+            vertical-align: middle;
+          }
+          .sign-label {
+            background-color: #90EE90;
+            font-weight: bold;
+            width: 50px;
+          }
+          .sign-value {
+            width: 100px;
+            min-height: 30px;
+          }
+
+          /* 기본 정보 테이블 */
+          .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: -1px;
+            margin-bottom: 12px;
+          }
+          .info-table td {
+            border: 1px solid #000;
+            padding: 6px 8px;
+            font-size: 11px;
+            vertical-align: middle;
+          }
+          .info-label {
+            background-color: #90EE90;
+            font-weight: bold;
+            text-align: center;
+            width: 70px;
+          }
+          .info-value {
+            text-align: left;
+          }
+
+          /* 점검 항목 테이블 */
+          .inspection-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 0;
+            border-top: 2px solid #000;
+          }
+          .inspection-table th,
+          .inspection-table td {
+            border: 1px solid #000;
+            padding: 6px 4px;
             text-align: center;
             font-size: 11px;
             vertical-align: middle;
           }
-          .header-label {
-            background-color: #90EE90;
-            font-weight: bold;
-            width: 80px;
-          }
-          .header-value { text-align: left; padding-left: 10px; }
           .section-header {
             background-color: #90EE90;
             font-weight: bold;
-            text-align: center;
-          }
-          .column-header {
-            background-color: #90EE90;
-            font-weight: bold;
-            text-align: center;
-            padding: 8px 4px;
-          }
-          .checkpoint-name { text-align: left; padding-left: 10px; }
-          .result-cell { width: 50px; }
-          .action-cell { text-align: left; padding-left: 10px; min-width: 100px; }
-          .summary-cell { font-weight: bold; }
-          .overall-action-header {
-            background-color: #90EE90;
-            font-weight: bold;
+            font-size: 12px;
             text-align: left;
             padding-left: 10px;
           }
-          .overall-action-content {
+          .col-header {
+            background-color: #90EE90;
+            font-weight: bold;
+          }
+          .checkpoint-name {
             text-align: left;
-            padding: 10px;
-            min-height: 80px;
+            padding-left: 10px;
+            width: 55%;
+          }
+          .result-cell {
+            width: 9%;
+            font-size: 14px;
+          }
+          .action-cell {
+            text-align: left;
+            padding-left: 8px;
+            width: 27%;
+          }
+          .summary-row td {
+            background-color: #f5f5f5;
+            font-weight: bold;
+          }
+
+          /* 전체 조치사항 */
+          .overall-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: -1px;
+            border-top: 2px solid #000;
+          }
+          .overall-table td {
+            border: 1px solid #000;
+            padding: 8px 10px;
+            font-size: 11px;
             vertical-align: top;
           }
+          .overall-header {
+            background-color: #90EE90;
+            font-weight: bold;
+            text-align: left;
+          }
+          .overall-content {
+            min-height: 70px;
+            line-height: 1.6;
+          }
+
+          /* 페이지 나눔 방지 */
+          tr { page-break-inside: avoid; }
+          table { page-break-inside: auto; }
         </style>
       </head>
       <body>
         <h1>작업장 순회점검 일지</h1>
 
-        <table>
+        <!-- 서명란 -->
+        <table class="sign-table">
           <tr>
-            <td class="header-label">작성</td>
-            <td class="header-value" width="150">${data.author}</td>
-            <td class="header-label">검토</td>
-            <td class="header-value" width="150">${data.reviewer || ""}</td>
-            <td class="header-label">승인</td>
-            <td class="header-value" width="150">${data.approver || ""}</td>
+            <td class="sign-label">작성</td>
+            <td class="sign-value">${data.author}</td>
+            <td class="sign-label">검토</td>
+            <td class="sign-value">${data.reviewer ?? ""}</td>
+            <td class="sign-label">승인</td>
+            <td class="sign-value">${data.approver ?? ""}</td>
           </tr>
         </table>
 
-        <table style="margin-top: -1px;">
+        <!-- 기본 정보 -->
+        <table class="info-table">
           <tr>
-            <td class="header-label">사업장</td>
-            <td class="header-value" colspan="5">${data.workplaceName}</td>
+            <td class="info-label">사업장</td>
+            <td class="info-value" colspan="3">${data.workplaceName}</td>
           </tr>
           <tr>
-            <td class="header-label">점검일</td>
-            <td class="header-value" colspan="5">${data.date}</td>
+            <td class="info-label">점검일</td>
+            <td class="info-value" colspan="3">${data.date}</td>
           </tr>
         </table>
 
-        <table style="border-top: 2px solid #000;">
+        <!-- 점검 항목 -->
+        <table class="inspection-table">
           <tr>
-            <th colspan="4" class="section-header">● 점검사항</th>
+            <td colspan="4" class="section-header">● 점검사항</td>
           </tr>
           <tr>
-            <th class="column-header">점검사항</th>
-            <th class="column-header" width="50">양호</th>
-            <th class="column-header" width="50">불량</th>
-            <th class="column-header">조치사항</th>
+            <th class="col-header checkpoint-name">점검사항</th>
+            <th class="col-header result-cell">양호</th>
+            <th class="col-header result-cell">불량</th>
+            <th class="col-header action-cell">조치사항</th>
           </tr>
           ${checkRows}
-          <tr>
-            <td class="summary-cell">합계</td>
-            <td class="result-cell summary-cell">${data.goodCount}</td>
-            <td class="result-cell summary-cell">${data.badCount}</td>
+          <tr class="summary-row">
+            <td class="checkpoint-name">합 계 (전체 ${data.totalCount}개)</td>
+            <td class="result-cell">${data.goodCount}</td>
+            <td class="result-cell">${data.badCount}</td>
             <td class="action-cell"></td>
           </tr>
         </table>
@@ -146,9 +232,14 @@ export const generatePatrolReport = async (data: PatrolReportData): Promise<stri
         ${
           data.overallAction
             ? `
-        <table style="border-top: 2px solid #000;">
-          <tr><td class="overall-action-header">● 전체 조치 요구사항</td></tr>
-          <tr><td class="overall-action-content">${data.overallAction.replace(/\n/g, "<br/>")}</td></tr>
+        <!-- 전체 조치사항 -->
+        <table class="overall-table">
+          <tr>
+            <td class="overall-header">● 전체 조치 요구사항</td>
+          </tr>
+          <tr>
+            <td class="overall-content">${data.overallAction.replace(/\n/g, "<br/>")}</td>
+          </tr>
         </table>
         `
             : ""

@@ -1150,6 +1150,10 @@ const ko: Translations = {
       delete: "삭제",
       reportPreview: "보고서 미리보기",
     },
+    toast: {
+      reportSuccess: "보고서가 열렸습니다.",
+      reportFail: "보고서 생성에 실패했습니다.",
+    },
   },
   patrolCreateScreen: {
     title: "작업장 순회 점검 생성",

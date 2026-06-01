@@ -1,9 +1,10 @@
 import { FC, useState } from "react"
 import { ActivityIndicator, ScrollView, TouchableOpacity, View, TextStyle, ViewStyle } from "react-native"
-import { CircleCheck, CircleAlert } from "lucide-react-native"
+import { CircleCheck, CircleAlert, X } from "lucide-react-native"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { Toast } from "@/components/Toast"
 import { UserAvatar } from "@/components/UserAvatar"
 import { translate } from "@/i18n/translate"
 import { colors } from "@/theme/colors"
@@ -59,12 +60,21 @@ const MOCK_BAD = 3
 export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) => {
   const [status, setStatus] = useState<PatrolStatus>(MOCK_PATROL.status)
   const [isGeneratingReport, setIsGeneratingReport] = useState(false)
+  const [toastVisible, setToastVisible] = useState(false)
+  const [toastMessage, setToastMessage] = useState("")
+  const [toastIsError, setToastIsError] = useState(false)
   const badge = BADGE_STYLES[status]
 
   const handlePrimaryAction = () => {
     if (status === "inProgress") setStatus("underReview")
     else if (status === "underReview") setStatus("approved")
     else if (status === "approved") setStatus("inProgress")
+  }
+
+  const showToast = (message: string, isError: boolean = false) => {
+    setToastMessage(message)
+    setToastIsError(isError)
+    setToastVisible(true)
   }
 
   const handleReportPreview = async () => {
@@ -88,14 +98,16 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
         badCount: MOCK_BAD,
       })
       await openPdfDocument(uri)
+      showToast(translate("patrolDetailScreen:toast.reportSuccess"))
     } catch {
-      // 에러 처리는 API 연동 시 Toast로 교체
+      showToast(translate("patrolDetailScreen:toast.reportFail"), true)
     } finally {
       setIsGeneratingReport(false)
     }
   }
 
   return (
+    <>
     <StackScreen
       title={translate("patrolDetailScreen:title")}
       onBack={() => navigation.goBack()}
@@ -277,6 +289,14 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
         </View>
       </ScrollView>
     </StackScreen>
+    <Toast
+      visible={toastVisible}
+      message={toastMessage}
+      icon={<X size={14} color="#FFFFFF" strokeWidth={2.5} />}
+      iconCircleColor={toastIsError ? colors.danger : colors.blue}
+      onHide={() => setToastVisible(false)}
+    />
+    </>
   )
 }
 

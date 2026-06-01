@@ -1117,6 +1117,10 @@ const hi: Translations = {
       delete: "हटाएं",
       reportPreview: "रिपोर्ट पूर्वावलोकन",
     },
+    toast: {
+      reportSuccess: "रिपोर्ट खुल गई।",
+      reportFail: "रिपोर्ट बनाने में विफल।",
+    },
   },
   patrolCreateScreen: {
     title: "गश्त निरीक्षण बनाएं",

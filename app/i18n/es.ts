@@ -1146,6 +1146,10 @@ const es: Translations = {
       delete: "Eliminar",
       reportPreview: "Vista Previa del Informe",
     },
+    toast: {
+      reportSuccess: "El informe se abrió.",
+      reportFail: "Error al generar el informe.",
+    },
   },
   patrolCreateScreen: {
     title: "Crear inspección de ronda",

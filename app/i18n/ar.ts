@@ -1114,6 +1114,10 @@ const ar: Translations = {
       delete: "حذف",
       reportPreview: "معاينة التقرير",
     },
+    toast: {
+      reportSuccess: "تم فتح التقرير.",
+      reportFail: "فشل إنشاء التقرير.",
+    },
   },
   patrolCreateScreen: {
     title: "إنشاء فحص جولة مكان العمل",
