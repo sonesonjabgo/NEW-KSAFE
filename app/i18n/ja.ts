@@ -1061,6 +1061,11 @@ const ja: Translations = {
     regenerateNote: "新しい再生成には時間がかかる場合があります。",
     refresh: "更新",
     toastRegenerate: "レポート再生成が申請されました。",
+    processStatusRequested: "Report generation has been requested. Processing will begin shortly.",
+    processStatusGenerating: "Generating the report. Please wait a moment.",
+    processStatusCompleted: "The report is ready and available for download.",
+    processStatusFailed: "Report generation has failed.",
+    sectionFailureReason: "Failure Reason",
   },
 
   patrolScreen: {

@@ -1094,6 +1094,11 @@ const fr: Translations = {
     regenerateNote: "Une nouvelle régénération peut prendre un certain temps.",
     refresh: "Actualiser",
     toastRegenerate: "La demande de régénération du rapport a été soumise.",
+    processStatusRequested: "Report generation has been requested. Processing will begin shortly.",
+    processStatusGenerating: "Generating the report. Please wait a moment.",
+    processStatusCompleted: "The report is ready and available for download.",
+    processStatusFailed: "Report generation has failed.",
+    sectionFailureReason: "Failure Reason",
   },
 
   patrolScreen: {

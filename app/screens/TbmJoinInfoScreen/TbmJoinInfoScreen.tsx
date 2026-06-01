@@ -2,6 +2,7 @@ import { FC } from "react"
 import { ScrollView, TouchableOpacity, View } from "react-native"
 import { IconDownload } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { downloadTbmAttachment } from "@/utils/downloadTbmAttachment"
 
 import EducationFrame from "@assets/icons/education_frame.svg"
 
@@ -58,7 +59,9 @@ export const TbmJoinInfoScreen: FC<TbmJoinInfoScreenProps> = ({ navigation, rout
             <View style={S.$attachCard}>
               <EducationFrame width={22} height={22} color="#1062D8" />
               <Text text="해빙기 안전수칙.pdf" style={S.$attachName} numberOfLines={1} />
-              <IconDownload size={20} color="#1062D8" />
+              <TouchableOpacity activeOpacity={0.7} onPress={() => downloadTbmAttachment()}>
+                <IconDownload size={20} color="#1062D8" />
+              </TouchableOpacity>
             </View>
           </View>
         </ScrollView>

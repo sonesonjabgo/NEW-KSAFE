@@ -84,7 +84,7 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
         // eslint-disable-next-line @typescript-eslint/no-require-imports
         require("@assets/SameplePatrolReport.pdf"),
       )
-      await Linking.openURL(asset.localUri ?? asset.uri)
+      await Linking.openURL(asset.uri)
       showToast(translate("patrolDetailScreen:toast.reportSuccess"))
     } catch {
       showToast(translate("patrolDetailScreen:toast.reportFail"), true)

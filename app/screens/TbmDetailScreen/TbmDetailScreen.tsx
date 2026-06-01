@@ -19,6 +19,7 @@ import { Toast } from "@/components/Toast"
 import { UserAvatar } from "@/components/UserAvatar"
 import { translate } from "@/i18n/translate"
 import type { TbmStatus } from "@/screens/TbmListScreen/types"
+import { downloadTbmAttachment } from "@/utils/downloadTbmAttachment"
 
 import { mockTbmDetails } from "./mockData"
 import * as S from "./styles"
@@ -137,7 +138,7 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
               <Text text={item.title} style={S.$educationCardTitle} numberOfLines={2} />
               <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => console.log("download:", item.id)}
+                onPress={() => downloadTbmAttachment()}
               >
                 <IconDownload size={20} color="#1062D8" />
               </TouchableOpacity>

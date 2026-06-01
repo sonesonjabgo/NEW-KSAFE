@@ -14,6 +14,7 @@ import { mockTbmDetails } from "@/screens/TbmDetailScreen/mockData"
 import * as S from "@/screens/TbmDetailScreen/styles"
 import type { TbmStatus } from "@/screens/TbmListScreen/types"
 import { typography } from "@/theme/typography"
+import { downloadTbmAttachment } from "@/utils/downloadTbmAttachment"
 
 interface HistoryDetail {
   participationDate: string
@@ -183,7 +184,7 @@ export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, rou
               <Text text={item.title} style={S.$educationCardTitle} numberOfLines={2} />
               <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => console.log("download:", item.id)}
+                onPress={() => downloadTbmAttachment()}
               >
                 <IconDownload size={20} color="#1062D8" />
               </TouchableOpacity>

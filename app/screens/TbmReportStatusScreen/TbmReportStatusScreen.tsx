@@ -1,15 +1,14 @@
-import { FC, useState } from "react"
-import { ScrollView, TextInput, TouchableOpacity, View, TextStyle } from "react-native"
-import { IconAlertTriangle, IconCheck, IconDownload, IconRefresh } from "@tabler/icons-react-native"
+import { FC } from "react"
+import { ScrollView, TouchableOpacity, View } from "react-native"
+import { IconDownload } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
-import { Toast } from "@/components/Toast"
 import { translate } from "@/i18n/translate"
 import { mockTbmReports } from "@/screens/TbmReportInquiryScreen/mockData"
 import type { TbmReportStatus } from "@/screens/TbmReportInquiryScreen/types"
-import { typography } from "@/theme/typography"
+import { downloadTbmAttachment } from "@/utils/downloadTbmAttachment"
 
 import * as S from "./styles"
 import type { TbmReportStatusScreenProps } from "./types"
@@ -25,37 +24,19 @@ export const TbmReportStatusScreen: FC<TbmReportStatusScreenProps> = ({ navigati
   const { id } = route.params
   const insets = useSafeAreaInsets()
 
-  const [isRegenerateVisible, setIsRegenerateVisible] = useState(false)
-  const [isRefreshMode, setIsRefreshMode] = useState(false)
-  const [regenerateProcessName, setRegenerateProcessName] = useState("")
-  const [regenerateTeamName, setRegenerateTeamName] = useState("")
-  const [toastVisible, setToastVisible] = useState(false)
-
   const detail = mockTbmReports.find((r) => r.id === id)
-
-  const handleRegenerate = () => {
-    setIsRegenerateVisible((prev) => !prev)
-  }
-
-  const handleDownloadPdf = () => {
-    console.log("PDF 다운로드:", id)
-  }
-
-  const handleRequestRegenerate = () => {
-    console.log("재생성 요청:", id, { regenerateProcessName, regenerateTeamName })
-    setIsRegenerateVisible(false)
-    setIsRefreshMode(true)
-    setToastVisible(true)
-  }
-
-  const handleRefresh = () => {
-    console.log("새로고침:", id)
-  }
 
   if (!detail) return null
 
   const badgeStyles = getBadgeStyles(detail.status)
   const emptyLabel = "-"
+
+  const processStatusKey = {
+    requested: "processStatusRequested",
+    generating: "processStatusGenerating",
+    completed: "processStatusCompleted",
+    failed: "processStatusFailed",
+  } as const
 
   return (
     <>
@@ -64,11 +45,6 @@ export const TbmReportStatusScreen: FC<TbmReportStatusScreenProps> = ({ navigati
         onBack={() => navigation.goBack()}
         squareTop
         contentBg="#FFFFFF"
-        rightSlot={
-          <TouchableOpacity onPress={handleRegenerate} activeOpacity={0.7}>
-            <Text text={translate("tbmReportStatusScreen:regenerate")} style={$regenerateText} />
-          </TouchableOpacity>
-        }
       >
         <ScrollView contentContainerStyle={S.$scrollInner} showsVerticalScrollIndicator={false}>
           {/* ── 1. 보고서 정보 섹션 ── */}
@@ -117,7 +93,28 @@ export const TbmReportStatusScreen: FC<TbmReportStatusScreenProps> = ({ navigati
             <View style={S.$sectionHeaderLine} />
           </View>
 
-          <View style={S.$processCard} />
+          <View style={S.$processCard}>
+            <Text
+              text={translate(`tbmReportStatusScreen:${processStatusKey[detail.status]}`)}
+              style={S.$processCardText}
+            />
+          </View>
+
+          {/* ── 실패 사유 섹션 ── */}
+          {detail.status === "failed" && detail.failureReason && (
+            <>
+              <View style={S.$sectionHeaderRow}>
+                <Text
+                  text={translate("tbmReportStatusScreen:sectionFailureReason")}
+                  style={S.$sectionTitle}
+                />
+                <View style={S.$sectionHeaderLine} />
+              </View>
+              <View style={S.$failureReasonCard}>
+                <Text text={detail.failureReason} style={S.$failureReasonText} />
+              </View>
+            </>
+          )}
 
           {/* ── 3. 상태 이력 섹션 ── */}
           <View style={S.$sectionHeaderRow}>
@@ -162,143 +159,21 @@ export const TbmReportStatusScreen: FC<TbmReportStatusScreenProps> = ({ navigati
               />
             </View>
           </View>
-
-          {/* ── 4. 보고서 재생성 섹션 ── */}
-          {isRegenerateVisible && (
-            <>
-              <View style={S.$sectionHeaderRow}>
-                <Text
-                  text={translate("tbmReportStatusScreen:sectionRegenerate")}
-                  style={S.$sectionTitle}
-                />
-                <View style={S.$sectionHeaderLine} />
-              </View>
-
-              <View style={S.$regenContainer}>
-                {/* 정보 카드 */}
-                <View style={S.$regenInfoCard}>
-                  <View style={S.$regenInfoIconCircle}>
-                    <Text text="!" style={S.$regenInfoIconText} />
-                  </View>
-                  <Text
-                    text={translate("tbmReportStatusScreen:regenerateInfoText")}
-                    style={S.$regenInfoText}
-                  />
-                </View>
-
-                {/* 섹션 1 – 공정명 */}
-                <View style={S.$regenSection}>
-                  <Text
-                    text={translate("tbmReportStatusScreen:processNameLabel")}
-                    style={S.$regenSectionLabel}
-                  />
-                  <View style={S.$regenInputContainer}>
-                    <TextInput
-                      style={S.$regenInputText}
-                      value={regenerateProcessName}
-                      onChangeText={(t) => setRegenerateProcessName(t.slice(0, 50))}
-                      placeholder={translate("tbmReportStatusScreen:processNamePlaceholder")}
-                      placeholderTextColor="#979797"
-                      maxLength={50}
-                    />
-                  </View>
-                  <Text
-                    text={translate("tbmReportStatusScreen:inputDescription")}
-                    style={S.$regenInputDescription}
-                  />
-                </View>
-
-                {/* 섹션 2 – 팀/반명 */}
-                <View style={S.$regenSection}>
-                  <Text
-                    text={translate("tbmReportStatusScreen:teamNameLabel")}
-                    style={S.$regenSectionLabel}
-                  />
-                  <View style={S.$regenInputContainer}>
-                    <TextInput
-                      style={S.$regenInputText}
-                      value={regenerateTeamName}
-                      onChangeText={(t) => setRegenerateTeamName(t.slice(0, 50))}
-                      placeholder={translate("tbmReportStatusScreen:teamNamePlaceholder")}
-                      placeholderTextColor="#979797"
-                      maxLength={50}
-                    />
-                  </View>
-                  <Text
-                    text={translate("tbmReportStatusScreen:inputDescription")}
-                    style={S.$regenInputDescription}
-                  />
-                </View>
-
-                {/* 주의사항 카드 */}
-                <View style={S.$regenCautionCard}>
-                  <View style={S.$regenCautionRow}>
-                    <View style={S.$regenCautionIconWrap}>
-                      <IconAlertTriangle size={22} color="#F7A733" />
-                    </View>
-                    <Text
-                      text={[
-                        `· ${translate("tbmReportStatusScreen:cautionItem1")}`,
-                        `· ${translate("tbmReportStatusScreen:cautionItem2")}`,
-                        `· ${translate("tbmReportStatusScreen:cautionItem3")}`,
-                      ].join("\n")}
-                      style={S.$regenCautionDesc}
-                    />
-                  </View>
-                </View>
-              </View>
-            </>
-          )}
         </ScrollView>
 
         {/* ── 하단 버튼 영역 ── */}
         <View style={S.$bottomDivider} />
         <View style={[S.$bottomBar, { paddingBottom: (insets.bottom || 0) + 16 }]}>
-          {isRegenerateVisible && (
-            <Text text={translate("tbmReportStatusScreen:regenerateNote")} style={S.$bottomNote} />
-          )}
           <TouchableOpacity
             style={S.$pdfButton}
-            onPress={
-              isRegenerateVisible
-                ? handleRequestRegenerate
-                : isRefreshMode
-                  ? handleRefresh
-                  : handleDownloadPdf
-            }
+            onPress={() => downloadTbmAttachment()}
             activeOpacity={0.8}
           >
-            {isRefreshMode && !isRegenerateVisible ? (
-              <IconRefresh size={20} color="#FFFFFF" />
-            ) : !isRegenerateVisible ? (
-              <IconDownload size={20} color="#FFFFFF" />
-            ) : null}
-            <Text
-              text={
-                isRegenerateVisible
-                  ? translate("tbmReportStatusScreen:requestRegenerate")
-                  : isRefreshMode
-                    ? translate("tbmReportStatusScreen:refresh")
-                    : translate("tbmReportStatusScreen:downloadPdf")
-              }
-              style={S.$pdfButtonText}
-            />
+            <IconDownload size={20} color="#FFFFFF" />
+            <Text text={translate("tbmReportStatusScreen:downloadPdf")} style={S.$pdfButtonText} />
           </TouchableOpacity>
         </View>
       </StackScreen>
-
-      <Toast
-        visible={toastVisible}
-        message={translate("tbmReportStatusScreen:toastRegenerate")}
-        icon={<IconCheck size={14} color="#FFFFFF" strokeWidth={2.5} />}
-        onHide={() => setToastVisible(false)}
-      />
     </>
   )
-}
-
-const $regenerateText: TextStyle = {
-  fontSize: 16,
-  fontFamily: typography.primary.medium,
-  color: "#FFFFFF",
 }
