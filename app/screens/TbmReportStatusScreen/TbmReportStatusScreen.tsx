@@ -10,6 +10,7 @@ import { translate } from "@/i18n/translate"
 import { mockTbmReports } from "@/screens/TbmReportInquiryScreen/mockData"
 import type { TbmReportStatus } from "@/screens/TbmReportInquiryScreen/types"
 import { typography } from "@/theme/typography"
+import { downloadTbmAttachment } from "@/utils/downloadTbmAttachment"
 
 import * as S from "./styles"
 import type { TbmReportStatusScreenProps } from "./types"
@@ -38,7 +39,7 @@ export const TbmReportStatusScreen: FC<TbmReportStatusScreenProps> = ({ navigati
   }
 
   const handleDownloadPdf = () => {
-    console.log("PDF 다운로드:", id)
+    downloadTbmAttachment()
   }
 
   const handleRequestRegenerate = () => {
