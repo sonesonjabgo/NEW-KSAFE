@@ -157,14 +157,6 @@ export const $cardMeta: ViewStyle = {
   gap: 6,
 }
 
-export const $cardAvatar: ViewStyle = {
-  width: 18,
-  height: 18,
-  borderRadius: 9,
-  backgroundColor: "#E0E0E0",
-  flexShrink: 0,
-}
-
 export const $cardAuthor: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,

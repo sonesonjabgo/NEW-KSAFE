@@ -17,6 +17,7 @@ import Pic2 from "@assets/icons/pic2.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { UserAvatar } from "@/components/UserAvatar"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 import type { HazardRiskDetailScreenProps } from "@/screens/HazardRiskScreen/types"
@@ -159,9 +160,12 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
 
           {/* 관리자 프로필 */}
           <View style={S.$managerRow}>
-            <View style={S.$managerAvatar}>
-              <Text text={detail.managerInitial} style={S.$managerAvatarText} />
-            </View>
+            <UserAvatar
+              initial={detail.managerInitial}
+              size={40}
+              bgColor="#E5EDF8"
+              textColor="#1062D8"
+            />
             <View style={S.$managerInfo}>
               <Text text={detail.managerName} style={S.$managerName} />
               <Text text={detail.managerAffiliation} style={S.$managerAffiliation} />

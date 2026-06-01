@@ -94,15 +94,7 @@ export const $cardDivider: ViewStyle = {
 export const $cardMetaRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-}
-
-export const $cardAvatar: ViewStyle = {
-  width: 24,
-  height: 24,
-  borderRadius: 12,
-  backgroundColor: "#F3F2F0",
-  marginRight: 6,
-  flexShrink: 0,
+  gap: 6,
 }
 
 export const $cardMetaAuthor: TextStyle = {

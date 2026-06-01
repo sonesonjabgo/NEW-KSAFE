@@ -121,22 +121,6 @@ export const $managerRow: ViewStyle = {
   gap: 12,
 }
 
-export const $managerAvatar: ViewStyle = {
-  width: 40,
-  height: 40,
-  borderRadius: 20,
-  backgroundColor: "#E5EDF8",
-  justifyContent: "center",
-  alignItems: "center",
-  flexShrink: 0,
-}
-
-export const $managerAvatarText: TextStyle = {
-  fontSize: 16,
-  fontFamily: typography.primary.semiBold,
-  color: "#1062D8",
-}
-
 export const $managerInfo: ViewStyle = {
   flex: 1,
   gap: 2,

@@ -8,6 +8,7 @@ import TbmFabIcon from "@assets/images/tbm-fab-icon.svg"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { Toast } from "@/components/Toast"
+import { UserAvatar } from "@/components/UserAvatar"
 import { translate } from "@/i18n/translate"
 
 import { mockProposalData } from "./mockData"
@@ -46,9 +47,7 @@ const ProposalCard: FC<{ item: ProposalItem; onPress: () => void }> = ({ item, o
     <Text text={item.title} style={S.$cardContent} numberOfLines={1} />
     <View style={S.$cardDivider} />
     <View style={S.$cardAuthorRow}>
-      <View style={S.$cardAvatar}>
-        <Text text={item.authorInitial} style={S.$cardAvatarText} />
-      </View>
+      <UserAvatar initial={item.authorInitial} size={24} />
       <Text text={item.authorName} style={S.$cardAuthorName} />
     </View>
   </TouchableOpacity>

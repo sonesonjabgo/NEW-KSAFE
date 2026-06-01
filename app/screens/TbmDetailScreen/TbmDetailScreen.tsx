@@ -16,6 +16,7 @@ import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { Toast } from "@/components/Toast"
+import { UserAvatar } from "@/components/UserAvatar"
 import { translate } from "@/i18n/translate"
 import type { TbmStatus } from "@/screens/TbmListScreen/types"
 
@@ -100,7 +101,12 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
             </View>
 
             <View style={S.$cardAuthorRow}>
-              <View style={S.$cardAvatar} />
+              <UserAvatar
+                initial={detail.author.charAt(0)}
+                size={36}
+                bgColor="#E0E0E0"
+                textColor="#555555"
+              />
               <View>
                 <Text text={detail.author} style={S.$cardAuthorName} />
                 <Text text={detail.location} style={S.$cardAuthorLocation} />
