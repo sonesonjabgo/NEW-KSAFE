@@ -46,7 +46,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
   const { i18n } = useTranslation()
   const isRTL = i18n.language === "ur"
   const insets = useSafeAreaInsets()
-  const fabBottom = useMemo<ViewStyle>(() => ({ bottom: 30 + insets.bottom }), [insets.bottom])
+  const fabBottom = useMemo<ViewStyle>(() => ({ bottom: insets.bottom }), [insets.bottom])
   const { role } = useRole()
   const [activeTab, setActiveTab] = useState<AdminTab>("all")
   const [selectedWorkplace, setSelectedWorkplace] = useState("서울 한강 레지던스 RC공사 현장")
@@ -231,7 +231,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
             activeOpacity={0.8}
             onPress={() => navigation.navigate("SafeBoardCreate")}
           >
-            <TbmFabIcon width={29} height={29} />
+            <TbmFabIcon width={30} height={30} />
             <Text text={translate("safeBoardScreen:write")} style={S.$fabLabel} />
           </TouchableOpacity>
         </View>

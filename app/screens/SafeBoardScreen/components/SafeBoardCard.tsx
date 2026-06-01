@@ -1,9 +1,7 @@
 import { FC } from "react"
 import { View, TouchableOpacity, TextStyle, ViewStyle } from "react-native"
-import { PencilLine, MapPin } from "lucide-react-native"
+import { PencilLine, MapPin, Pin } from "lucide-react-native"
 import { useTranslation } from "react-i18next"
-
-import BoardPin from "@assets/icons/board/board_pin.svg"
 
 import { Text } from "@/components/Text"
 import { typography } from "@/theme/typography"
@@ -44,6 +42,12 @@ export const SafeBoardCard: FC<SafeBoardCardProps> = ({
             <View style={[$scopeLabelRow, isRTL && { flexDirection: "row-reverse" }]}>
               <SafeBoardBadge type={item.scope} />
               {statusBadgeType && <SafeBoardBadge type={statusBadgeType} />}
+              {item.isPinned && (
+                <View style={$pinBadge}>
+                  <Pin size={10} color="#FFBB50" strokeWidth={2.5} fill="#FFBB50" />
+                  <Text text="고정" style={$pinBadgeText} />
+                </View>
+              )}
             </View>
             <Text text={item.title} style={$titleText} numberOfLines={3} />
             {item.scope === "workplace" ? (
@@ -58,7 +62,6 @@ export const SafeBoardCard: FC<SafeBoardCardProps> = ({
             )}
           </View>
           <View style={[$iconContainer, isRTL && { flexDirection: "row-reverse" }]}>
-            {item.isPinned && <BoardPin width={23} height={23} />}
             {showEditIcon && <PencilLine size={16} color="#979797" strokeWidth={2.5} />}
           </View>
         </View>
@@ -127,6 +130,27 @@ const $iconContainer: ViewStyle = {
   gap: 10,
   justifyContent: "flex-end",
   paddingTop: 1,
+}
+
+const $pinBadge: ViewStyle = {
+  height: 22,
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 3,
+  backgroundColor: "#FFEED4",
+  borderRadius: 11,
+  paddingHorizontal: 8,
+  overflow: "hidden",
+}
+
+const $pinBadgeText: TextStyle = {
+  fontSize: 11,
+  lineHeight: 14,
+  fontFamily: typography.primary.bold,
+  color: "#FFBB50",
+  includeFontPadding: false,
+  textAlignVertical: "center",
+  transform: [{ translateY: 1 }],
 }
 
 const $divider: ViewStyle = {
