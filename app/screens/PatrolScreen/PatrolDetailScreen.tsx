@@ -1,5 +1,5 @@
 import { FC, useState } from "react"
-import { ActivityIndicator, ScrollView, TouchableOpacity, View, TextStyle, ViewStyle } from "react-native"
+import { ActivityIndicator, Linking, ScrollView, TouchableOpacity, View, TextStyle, ViewStyle } from "react-native"
 import { CircleCheck, CircleAlert, X } from "lucide-react-native"
 
 import { StackScreen } from "@/components/StackScreen"
@@ -9,8 +9,7 @@ import { UserAvatar } from "@/components/UserAvatar"
 import { translate } from "@/i18n/translate"
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
-import { generateAndSharePatrolReport } from "@/utils/patrolGenerator"
-import { openPdfDocument } from "@/utils/openPdfDocument"
+import { Asset } from "expo-asset"
 
 import type { PatrolDetailScreenProps } from "./types"
 
@@ -81,25 +80,11 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
     if (isGeneratingReport) return
     setIsGeneratingReport(true)
     try {
-      const uri = await generateAndSharePatrolReport({
-        workplaceName: MOCK_PATROL.location,
-        date: MOCK_PATROL.date,
-        author: MOCK_PATROL.author,
-        reviewer: MOCK_PATROL.reviewer,
-        approver: MOCK_PATROL.approver,
-        inspectionItems: [
-          {
-            name: MOCK_PATROL.title,
-            checkpoints: MOCK_CHECK_ITEMS.map((item) => ({
-              name: item.name,
-              result: item.status,
-              action: item.note || undefined,
-            })),
-          },
-        ],
-        overallAction: MOCK_OVERALL_ACTION,
-      })
-      await openPdfDocument(uri)
+      const [asset] = await Asset.loadAsync(
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
+        require("@assets/SameplePatrolReport.pdf"),
+      )
+      await Linking.openURL(asset.localUri ?? asset.uri)
       showToast(translate("patrolDetailScreen:toast.reportSuccess"))
     } catch {
       showToast(translate("patrolDetailScreen:toast.reportFail"), true)
