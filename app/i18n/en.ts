@@ -1164,9 +1164,15 @@ const en = {
       delete: "Delete",
       reportPreview: "Report Preview",
     },
+    toast: {
+      reportSuccess: "Report opened.",
+      reportFail: "Failed to generate report.",
+    },
   },
   patrolCreateScreen: {
     title: "Create Patrol Inspection",
+    editTitle: "Edit Patrol Inspection",
+    editSubmitButton: "Save Changes",
     section: {
       approver: {
         title: "Approver (Required)",
