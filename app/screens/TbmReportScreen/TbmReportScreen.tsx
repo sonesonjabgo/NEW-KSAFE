@@ -1,15 +1,20 @@
-import { FC, useEffect, useState } from "react"
+import { FC, useCallback, useEffect, useRef, useState } from "react"
 import {
+  Animated,
   Image,
+  ImageSourcePropType,
   Keyboard,
   KeyboardAvoidingView,
+  Modal,
+  PanResponder,
   Platform,
+  StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native"
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
-import { IconAlertTriangle, IconCalendar } from "@tabler/icons-react-native"
+import { IconAlertTriangle, IconCalendar, IconCamera, IconPhoto } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import Pic1 from "@assets/icons/pic1.svg"
@@ -18,6 +23,7 @@ import Pic2 from "@assets/icons/pic2.svg"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
+import { colors } from "@/theme/colors"
 import { mockTbmDetails } from "@/screens/TbmDetailScreen/mockData"
 
 import * as S from "./styles"
@@ -42,11 +48,54 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
   const [teamName, setTeamName] = useState("")
   const [educationSummary, setEducationSummary] = useState("")
   const [specialNotes, setSpecialNotes] = useState("")
-  const [photos, setPhotos] = useState<string[]>([])
+  const [photos, setPhotos] = useState<ImageSourcePropType[]>([])
+
+  const [captureSheetVisible, setCaptureSheetVisible] = useState(false)
+  const slideAnim = useRef(new Animated.Value(300)).current
+  const fadeAnim = useRef(new Animated.Value(0)).current
+
+  const openCaptureSheet = useCallback(() => {
+    setCaptureSheetVisible(true)
+    Animated.parallel([
+      Animated.timing(fadeAnim, { toValue: 1, duration: 200, useNativeDriver: true }),
+      Animated.timing(slideAnim, { toValue: 0, duration: 260, useNativeDriver: true }),
+    ]).start()
+  }, [fadeAnim, slideAnim])
+
+  const closeCaptureSheet = useCallback(() => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, { toValue: 0, duration: 160, useNativeDriver: true }),
+      Animated.timing(slideAnim, { toValue: 300, duration: 200, useNativeDriver: true }),
+    ]).start(() => setCaptureSheetVisible(false))
+  }, [fadeAnim, slideAnim])
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: (_, gs) => gs.dy > 5 && gs.dy > Math.abs(gs.dx),
+      onPanResponderMove: (_, gs) => { if (gs.dy > 0) slideAnim.setValue(gs.dy) },
+      onPanResponderRelease: (_, gs) => {
+        if (gs.dy > 80 || gs.vy > 0.5) {
+          closeCaptureSheet()
+        } else {
+          Animated.spring(slideAnim, { toValue: 0, useNativeDriver: true }).start()
+        }
+      },
+    }),
+  ).current
+
+  const addSamplePhoto = useCallback(() => {
+    closeCaptureSheet()
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    setPhotos((prev) => [...prev, require("@assets/images/sampleImage.jpg")])
+  }, [closeCaptureSheet])
+
+  const handleTakePhoto = addSamplePhoto
+  const handleSelectFromAlbum = addSamplePhoto
 
   if (!detail) return null
 
   return (
+    <>
     <StackScreen
       title={translate("tbmReportScreen:title")}
       onBack={() => navigation.goBack()}
@@ -182,7 +231,7 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
               <TouchableOpacity
                 style={S.$photoGuideAddBtn}
                 activeOpacity={0.7}
-                onPress={() => console.log("사진 추가")}
+                onPress={openCaptureSheet}
               >
                 <Text
                   text={translate("tbmReportScreen:sitePhotos.addButton")}
@@ -194,8 +243,8 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
             {/* 미리보기 카드 or 사진 그리드 */}
             {photos.length > 0 ? (
               <View style={S.$photoGrid}>
-                {photos.map((uri, i) => (
-                  <Image key={i} source={{ uri }} style={S.$photoItem} />
+                {photos.map((src, i) => (
+                  <Image key={i} source={src} style={S.$photoItem} />
                 ))}
               </View>
             ) : (
@@ -222,5 +271,45 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
         </View>
       </KeyboardAvoidingView>
     </StackScreen>
+
+      {/* 사진 촬영 방법 선택 바텀시트 */}
+      <Modal
+        visible={captureSheetVisible}
+        transparent
+        animationType="none"
+        onRequestClose={closeCaptureSheet}
+      >
+        <View style={StyleSheet.absoluteFill}>
+          <Animated.View
+            style={[StyleSheet.absoluteFill, S.$sheetBackdrop, { opacity: fadeAnim }]}
+          />
+          <TouchableOpacity
+            style={StyleSheet.absoluteFill}
+            onPress={closeCaptureSheet}
+            activeOpacity={1}
+          />
+          <Animated.View
+            style={[
+              S.$sheet,
+              { paddingBottom: insets.bottom + 16, transform: [{ translateY: slideAnim }] },
+            ]}
+          >
+            <View style={S.$sheetDragHandleArea} {...panResponder.panHandlers}>
+              <View style={S.$sheetDragHandleBar} />
+            </View>
+            <View style={S.$sheetBtnRow}>
+              <TouchableOpacity style={S.$sheetBtn} activeOpacity={0.7} onPress={handleTakePhoto}>
+                <IconCamera size={20} color={colors.navy} strokeWidth={1.8} />
+                <Text text={translate("aiRiskDocCreatorScreen:captureSheet.camera")} style={S.$sheetBtnLabel} />
+              </TouchableOpacity>
+              <TouchableOpacity style={S.$sheetBtn} activeOpacity={0.7} onPress={handleSelectFromAlbum}>
+                <IconPhoto size={20} color={colors.navy} strokeWidth={1.8} />
+                <Text text={translate("aiRiskDocCreatorScreen:captureSheet.album")} style={S.$sheetBtnLabel} />
+              </TouchableOpacity>
+            </View>
+          </Animated.View>
+        </View>
+      </Modal>
+    </>
   )
 }
