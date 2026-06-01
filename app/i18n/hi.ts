@@ -589,6 +589,12 @@ const hi: Translations = {
   textTranslationScreen: {
     title: "पाठ अनुवाद",
     fontSizeButton: "AA",
+    fontSizeModal: {
+      title: "टेक्स्ट आकार",
+      small: "छोटा",
+      medium: "मध्यम",
+      large: "बड़ा",
+    },
     languageMenu: {
       title: "भाषा चुनें",
     },

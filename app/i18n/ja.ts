@@ -583,6 +583,12 @@ const ja: Translations = {
   textTranslationScreen: {
     title: "テキスト翻訳",
     fontSizeButton: "AA",
+    fontSizeModal: {
+      title: "文字サイズ",
+      small: "小",
+      medium: "中",
+      large: "大",
+    },
     languageMenu: {
       title: "言語を選択",
     },

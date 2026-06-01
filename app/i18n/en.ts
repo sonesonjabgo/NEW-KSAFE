@@ -627,6 +627,12 @@ const en = {
   textTranslationScreen: {
     title: "Text Translation",
     fontSizeButton: "AA",
+    fontSizeModal: {
+      title: "Text Size",
+      small: "Small",
+      medium: "Medium",
+      large: "Large",
+    },
     languageMenu: {
       title: "Select Language",
     },

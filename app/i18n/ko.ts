@@ -616,6 +616,12 @@ const ko: Translations = {
   textTranslationScreen: {
     title: "텍스트 번역",
     fontSizeButton: "AA",
+    fontSizeModal: {
+      title: "텍스트 크기",
+      small: "작게",
+      medium: "중간",
+      large: "크게",
+    },
     languageMenu: {
       title: "언어 선택",
     },

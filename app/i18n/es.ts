@@ -616,6 +616,12 @@ const es: Translations = {
   textTranslationScreen: {
     title: "Traducción de Texto",
     fontSizeButton: "AA",
+    fontSizeModal: {
+      title: "Tamaño del texto",
+      small: "Pequeño",
+      medium: "Mediano",
+      large: "Grande",
+    },
     languageMenu: {
       title: "Seleccionar Idioma",
     },

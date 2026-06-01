@@ -589,6 +589,12 @@ const ar: Translations = {
   textTranslationScreen: {
     title: "ترجمة النص",
     fontSizeButton: "AA",
+    fontSizeModal: {
+      title: "حجم النص",
+      small: "صغير",
+      medium: "متوسط",
+      large: "كبير",
+    },
     languageMenu: {
       title: "اختر اللغة",
     },
