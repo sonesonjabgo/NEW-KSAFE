@@ -11,12 +11,11 @@ import {
   StyleSheet,
 } from "react-native"
 import * as Notifications from "expo-notifications"
-import { ChevronRight } from "lucide-react-native"
+import { ChevronRight, Pin } from "lucide-react-native"
 import { useTranslation } from "react-i18next"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import type { SvgProps } from "react-native-svg"
 
-import BoardPin from "@assets/icons/board/board_pin.svg"
 import BannerIcon from "@assets/icons/home/banner_icon.svg"
 import GridBulb from "@assets/icons/home/grid_bulb.svg"
 import GridChatbot from "@assets/icons/home/grid_chatbot.svg"
@@ -526,16 +525,19 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
                     activeOpacity={0.7}
                     onPress={() => navigation.navigate("SafeBoard")}
                   >
-                    <View style={[$tagWrap, $tagWrapDynamic]}>
+                    <View style={$homeBadgeRow}>
                       <SafeBoardBadge
                         type={item.tag === "workplace" ? "workplace" : "company_wide"}
                       />
+                      {item.pinned && (
+                        <View style={$homePinBadge}>
+                          <Pin size={10} color="#FFBB50" strokeWidth={2.5} fill="#FFBB50" />
+                          <Text text="고정" style={$homePinBadgeText} />
+                        </View>
+                      )}
                     </View>
-                    <View style={$boardItemContent}>
-                      <Text text={item.title} style={$boardItemTitle} numberOfLines={1} />
-                      <Text text={item.date} style={$boardItemDate} />
-                    </View>
-                    {item.pinned && <BoardPin width={20} height={20} />}
+                    <Text text={item.title} style={$boardItemTitle} numberOfLines={1} />
+                    <Text text={item.date} style={$boardItemDate} />
                   </TouchableOpacity>
                 ))}
               </View>
@@ -898,11 +900,9 @@ const $boardList: ViewStyle = {
 }
 
 const $boardItem: ViewStyle = {
-  flexDirection: isRTL ? "row-reverse" : "row",
-  alignItems: "flex-start",
-  paddingVertical: 18,
+  paddingVertical: 14,
   paddingHorizontal: 16,
-  gap: 12,
+  gap: 10,
   borderBottomWidth: StyleSheet.hairlineWidth,
   borderBottomColor: "#E9ECF0",
 }
@@ -935,6 +935,34 @@ const $boardItemDate: TextStyle = {
   fontFamily: typography.primary.normal,
   lineHeight: 11,
   includeFontPadding: false,
+}
+
+const $homeBadgeRow: ViewStyle = {
+  flexDirection: isRTL ? "row-reverse" : "row",
+  alignItems: "center",
+  gap: 6,
+  flexWrap: "wrap",
+}
+
+const $homePinBadge: ViewStyle = {
+  height: 22,
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 3,
+  backgroundColor: "#FFEED4",
+  borderRadius: 11,
+  paddingHorizontal: 8,
+  overflow: "hidden",
+}
+
+const $homePinBadgeText: TextStyle = {
+  fontSize: 11,
+  lineHeight: 14,
+  fontFamily: typography.primary.bold,
+  color: "#FFBB50",
+  includeFontPadding: false,
+  textAlignVertical: "center",
+  transform: [{ translateY: 1 }],
 }
 
 const $banner: ViewStyle = {
