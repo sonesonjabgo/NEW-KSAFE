@@ -2,11 +2,11 @@ import { FC, useCallback, useMemo, useState } from "react"
 import {
   KeyboardAvoidingView,
   Platform,
-  ScrollView,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native"
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
 import { IconChevronDown, IconX } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -75,13 +75,15 @@ export const EducationMaterialRegisterScreen: FC<EducationMaterialRegisterScreen
     >
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 60) : 0}
       >
-        <ScrollView
+        <KeyboardAwareScrollView
           style={S.$scrollContent}
           contentContainerStyle={S.$scrollInner}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
+          bottomOffset={Platform.OS === "ios" ? 170 : 100}
         >
           {/* 작성 가이드 */}
           <View style={[S.$card, S.$guideRow]}>
@@ -203,7 +205,7 @@ export const EducationMaterialRegisterScreen: FC<EducationMaterialRegisterScreen
               style={S.$helperText}
             />
           </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
 
         {/* 하단 등록하기 버튼 */}
         <View style={[S.$submitBar, { paddingBottom: insets.bottom + 16 }]}>
