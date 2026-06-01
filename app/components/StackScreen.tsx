@@ -17,6 +17,8 @@ interface StackScreenProps {
   contentBg?: string
   /** true이면 콘텐츠 영역 상단 radius를 제거한다. 기본값: false */
   squareTop?: boolean
+  /** 헤더 바로 아래, 콘텐츠 영역 위에 네이비 배경으로 노출되는 추가 영역 */
+  headerExtra?: ReactNode
   children: ReactNode
 }
 
@@ -41,6 +43,7 @@ export function StackScreen({
   rightSlot,
   contentBg = colors.screenBg,
   squareTop = false,
+  headerExtra,
   children,
 }: StackScreenProps) {
   const insets = useSafeAreaInsets()
@@ -70,6 +73,8 @@ export function StackScreen({
 
         <View style={[$headerSide, $headerSideRight]}>{rightSlot ?? null}</View>
       </View>
+
+      {headerExtra && <View style={$headerExtra}>{headerExtra}</View>}
 
       <View style={[$content, squareTop && $contentSquareTop, { backgroundColor: contentBg }]}>
         {children}
@@ -127,6 +132,13 @@ const $headerTitle: TextStyle = {
   textAlign: "center",
   includeFontPadding: false,
   textAlignVertical: "center",
+}
+
+const $headerExtra: ViewStyle = {
+  backgroundColor: colors.navy,
+  alignItems: "center",
+  marginTop: -12,
+  paddingBottom: 16,
 }
 
 const $content: ViewStyle = {

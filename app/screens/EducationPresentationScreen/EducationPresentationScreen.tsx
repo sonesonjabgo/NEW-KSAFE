@@ -135,7 +135,8 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
   return (
     <>
       <StackScreen
-        title={`${translate("educationPresentationScreen:title")}\n${MOCK_ROOM_ID}`}
+        title={translate("educationPresentationScreen:title")}
+        headerExtra={<Text text={MOCK_ROOM_ID} style={$headerRoomId} />}
         onBack={() => navigation.goBack()}
         rightSlot={
           <TouchableOpacity activeOpacity={0.7} onPress={() => setInviteModalVisible(true)}>
@@ -403,6 +404,12 @@ const $langSelectorLabel: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
   color: "#6B7280",
+}
+
+const $headerRoomId: TextStyle = {
+  fontSize: 20,
+  fontFamily: typography.primary.semiBold,
+  color: "#FFFFFF",
 }
 
 const $langBtn: ViewStyle = {
