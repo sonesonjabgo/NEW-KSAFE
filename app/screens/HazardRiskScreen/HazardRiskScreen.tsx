@@ -1,6 +1,9 @@
 import { FC, useMemo, useState } from "react"
 import { FlatList, ScrollView, TouchableOpacity, View } from "react-native"
-import { PencilLine } from "lucide-react-native"
+
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+
+import TbmFabIcon from "@assets/images/tbm-fab-icon.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -96,6 +99,7 @@ const EmptyState: FC<{ tab: TabKey }> = ({ tab }) => (
 // ── Screen ────────────────────────────────────────────────────────────────────
 
 export const HazardRiskScreen: FC<HazardRiskScreenProps> = ({ navigation }) => {
+  const insets = useSafeAreaInsets()
   const [activeTab, setActiveTab] = useState<TabKey>("all")
 
   const myCount = useMemo(() => mockHazardData.filter((item) => item.isMyReport).length, [])
@@ -173,14 +177,16 @@ export const HazardRiskScreen: FC<HazardRiskScreenProps> = ({ navigation }) => {
         />
       </StackScreen>
 
-      <TouchableOpacity
-        style={S.$fab}
-        activeOpacity={0.8}
-        onPress={() => navigation.navigate("HazardRiskCreate")}
-      >
-        <PencilLine size={20} color="#FFFFFF" strokeWidth={1.8} />
-        <Text text={translate("hazardRiskScreen:fab")} style={S.$fabText} />
-      </TouchableOpacity>
+      <View style={[S.$fabWrapper, { bottom: 30 + insets.bottom }]} pointerEvents="box-none">
+        <TouchableOpacity
+          style={S.$fab}
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate("HazardRiskCreate")}
+        >
+          <TbmFabIcon width={30} height={30} />
+          <Text text={translate("hazardRiskScreen:fab")} style={S.$fabText} />
+        </TouchableOpacity>
+      </View>
     </>
   )
 }

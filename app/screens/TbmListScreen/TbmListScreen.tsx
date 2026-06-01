@@ -154,12 +154,7 @@ export const TbmListScreen: FC<TbmListScreenProps> = ({ navigation }) => {
 
       {/* FAB — StackScreen의 overflow:hidden 밖에 배치 */}
       <View
-        style={{
-          position: "absolute",
-          right: 20,
-          bottom: 30 + insets.bottom,
-          alignItems: "center",
-        }}
+        style={[S.$fabWrapper, { bottom: 30 + insets.bottom }]}
         pointerEvents="box-none"
       >
         <TouchableOpacity
@@ -167,7 +162,7 @@ export const TbmListScreen: FC<TbmListScreenProps> = ({ navigation }) => {
           activeOpacity={0.8}
           onPress={() => navigation.navigate("TbmCreate")}
         >
-          <TbmFabIcon width={29} height={29} />
+          <TbmFabIcon width={30} height={30} />
           <Text text={translate("tbmListScreen:fab")} style={S.$fabLabel} />
         </TouchableOpacity>
       </View>

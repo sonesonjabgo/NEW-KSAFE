@@ -8,15 +8,15 @@ import { typography } from "@/theme/typography"
 export type SafeBoardBadgeType = "company_wide" | "workplace" | "draft" | "archived"
 
 interface BadgeConfig {
-  borderColor: string
+  bgColor: string
   textColor: string
 }
 
 const BADGE_CONFIG: Record<SafeBoardBadgeType, BadgeConfig> = {
-  company_wide: { borderColor: "#99C1F7", textColor: "#1260CE" },
-  workplace: { borderColor: "#F88526", textColor: "#F67229" },
-  draft: { borderColor: "#BCBCBC", textColor: "#A7A7A7" },
-  archived: { borderColor: "#BCBCBC", textColor: "#A7A7A7" },
+  company_wide: { bgColor: "#E3F2FD", textColor: "#1447E6" },
+  workplace: { bgColor: "#F4F2F1", textColor: "#564E4A" },
+  draft: { bgColor: "#F4F2F1", textColor: "#564E4A" },
+  archived: { bgColor: "#F4F2F1", textColor: "#564E4A" },
 }
 
 const BADGE_LABEL_KEYS: Record<SafeBoardBadgeType, string> = {
@@ -33,7 +33,7 @@ interface SafeBoardBadgeProps {
 export const SafeBoardBadge: FC<SafeBoardBadgeProps> = ({ type }) => {
   const config = BADGE_CONFIG[type]
   return (
-    <View style={[$badge, { borderColor: config.borderColor }]}>
+    <View style={[$badge, { backgroundColor: config.bgColor }]}>
       <Text
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         text={translate(BADGE_LABEL_KEYS[type] as any)}
@@ -46,7 +46,6 @@ export const SafeBoardBadge: FC<SafeBoardBadgeProps> = ({ type }) => {
 
 const $badge: ViewStyle = {
   height: 22,
-  borderWidth: 1,
   borderRadius: 11,
   justifyContent: "center",
   alignItems: "center",

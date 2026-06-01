@@ -211,13 +211,16 @@ export const $statusBadgeTextStyle: Record<HazardStatus, TextStyle> = {
 
 // ── FAB ───────────────────────────────────────────────────────────────────────
 
-export const $fab: ViewStyle = {
+export const $fabWrapper: ViewStyle = {
   position: "absolute",
-  bottom: 24,
   right: 20,
-  width: 80,
-  height: 80,
-  borderRadius: 40,
+  alignItems: "center",
+}
+
+export const $fab: ViewStyle = {
+  width: 96,
+  height: 96,
+  borderRadius: 48,
   backgroundColor: colors.navy,
   justifyContent: "center",
   alignItems: "center",
@@ -230,10 +233,12 @@ export const $fab: ViewStyle = {
 }
 
 export const $fabText: TextStyle = {
-  fontSize: 11,
+  fontSize: 13,
+  lineHeight: 16,
   color: "#FFFFFF",
-  fontFamily: typography.primary.semiBold,
+  fontFamily: typography.primary.bold,
   textAlign: "center",
+  includeFontPadding: false,
 }
 
 // ── Empty State ───────────────────────────────────────────────────────────────
