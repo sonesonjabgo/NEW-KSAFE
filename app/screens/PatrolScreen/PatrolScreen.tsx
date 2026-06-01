@@ -9,7 +9,10 @@ import {
   ViewStyle,
   TextStyle,
 } from "react-native"
-import { ChevronDown, PencilLine, Building } from "lucide-react-native"
+import { ChevronDown, Building } from "lucide-react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+
+import TbmFabIcon from "@assets/images/tbm-fab-icon.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -163,6 +166,7 @@ const PatrolCard: FC<{ item: PatrolItem; onPress: () => void }> = ({ item, onPre
 }
 
 export const PatrolScreen: FC<PatrolScreenProps> = ({ navigation }) => {
+  const insets = useSafeAreaInsets()
   const [selectedWorkplace, setSelectedWorkplace] = useState(WORKPLACES[0])
   const [showWorkplaceModal, setShowWorkplaceModal] = useState(false)
   const slideAnim = useRef(new Animated.Value(300)).current
@@ -219,14 +223,16 @@ export const PatrolScreen: FC<PatrolScreenProps> = ({ navigation }) => {
         </View>
       </StackScreen>
 
-      <TouchableOpacity
-        style={$floatingButton}
-        activeOpacity={0.8}
-        onPress={() => navigation.navigate("PatrolCreate")}
-      >
-        <PencilLine size={20} color="#FFFFFF" strokeWidth={1.8} />
-        <Text text={translate("patrolScreen:createButton")} style={$floatingButtonText} />
-      </TouchableOpacity>
+      <View style={[$fabWrapper, { bottom: 30 + insets.bottom }]} pointerEvents="box-none">
+        <TouchableOpacity
+          style={$fab}
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate("PatrolCreate")}
+        >
+          <TbmFabIcon width={30} height={30} />
+          <Text text={translate("patrolScreen:createButton")} style={$fabLabel} />
+        </TouchableOpacity>
+      </View>
 
       <Modal
         visible={showWorkplaceModal}
@@ -403,29 +409,34 @@ const $cardMetaLocation: TextStyle = {
 
 // ── Floating Button ───────────────────────────────────────────────────────────
 
-const $floatingButton: ViewStyle = {
+const $fabWrapper: ViewStyle = {
   position: "absolute",
-  bottom: 24,
   right: 20,
-  width: 80,
-  height: 80,
-  borderRadius: 40,
+  alignItems: "center",
+}
+
+const $fab: ViewStyle = {
+  width: 96,
+  height: 96,
+  borderRadius: 48,
   backgroundColor: colors.navy,
   justifyContent: "center",
   alignItems: "center",
-  flexDirection: "column",
-  gap: 4,
   shadowColor: "#000000",
-  shadowOffset: { width: 0, height: 4 },
-  shadowOpacity: 0.25,
-  shadowRadius: 10,
+  shadowOffset: { width: 0, height: 6 },
+  shadowOpacity: 0.3,
+  shadowRadius: 16,
   elevation: 8,
 }
 
-const $floatingButtonText: TextStyle = {
-  fontSize: 11,
+const $fabLabel: TextStyle = {
+  marginTop: 4,
+  fontSize: 13,
+  lineHeight: 16,
   color: "#FFFFFF",
-  fontFamily: typography.primary.semiBold,
+  fontFamily: typography.primary.bold,
+  textAlign: "center",
+  includeFontPadding: false,
 }
 
 // ── Modal ─────────────────────────────────────────────────────────────────────
