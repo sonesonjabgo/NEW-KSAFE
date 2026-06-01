@@ -44,7 +44,11 @@ export const generatePatrolReport = async (data: PatrolReportData): Promise<stri
             margin: 15mm 12mm;
           }
 
-          * { box-sizing: border-box; }
+          * {
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
 
           body {
             font-family: 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', sans-serif;
@@ -61,6 +65,7 @@ export const generatePatrolReport = async (data: PatrolReportData): Promise<stri
             margin: 0 0 16px 0;
             padding-bottom: 4px;
             letter-spacing: 4px;
+            text-decoration: underline;
           }
 
           /* 서명란 (작성/검토/승인) */
