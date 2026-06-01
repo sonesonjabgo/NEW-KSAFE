@@ -779,6 +779,8 @@ const ar: Translations = {
   },
 
   tbmCreateScreen: {
+    editTitle: "수정",
+    submitEdit: "수정하기",
     title: "إنشاء نشاط TBM",
     reset: "إعادة تعيين",
     guide: {
@@ -839,6 +841,7 @@ const ar: Translations = {
       cancel: "إلغاء",
       confirm: "حذف",
     },
+    downloadLog: "교육일지 다운로드",
     startModal: {
       title: "بدء نشاط TBM",
       message: "هل تريد بدء نشاط TBM هذا؟\nسيتغير الحالة إلى 'قيد التقدم'.",

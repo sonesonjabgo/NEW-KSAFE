@@ -807,6 +807,8 @@ const es: Translations = {
   },
 
   tbmCreateScreen: {
+    editTitle: "수정",
+    submitEdit: "수정하기",
     title: "Crear actividad TBM",
     reset: "Restablecer",
     guide: {
@@ -867,6 +869,7 @@ const es: Translations = {
       cancel: "Cancelar",
       confirm: "Eliminar",
     },
+    downloadLog: "교육일지 다운로드",
     startModal: {
       title: "Iniciar actividad TBM",
       message: "¿Desea iniciar esta actividad TBM?\nEl estado cambiará a 'En progreso'.",

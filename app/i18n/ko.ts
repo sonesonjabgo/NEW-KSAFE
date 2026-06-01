@@ -816,6 +816,8 @@ const ko: Translations = {
 
   tbmCreateScreen: {
     title: "TBM 활동 생성",
+    editTitle: "수정",
+    submitEdit: "수정하기",
     reset: "초기화",
     guide: {
       title: "작성 가이드",
@@ -875,6 +877,7 @@ const ko: Translations = {
       cancel: "취소",
       confirm: "삭제",
     },
+    downloadLog: "교육일지 다운로드",
     startModal: {
       title: "TBM 활동 시작",
       message: "이 TBM 활동을 시작하시겠습니까?\n상태가 '진행중'으로 변경됩니다.",

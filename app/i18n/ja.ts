@@ -772,6 +772,8 @@ const ja: Translations = {
   },
 
   tbmCreateScreen: {
+    editTitle: "수정",
+    submitEdit: "수정하기",
     title: "TBM活動を作成",
     reset: "リセット",
     guide: {
@@ -832,6 +834,7 @@ const ja: Translations = {
       cancel: "キャンセル",
       confirm: "削除",
     },
+    downloadLog: "교육일지 다운로드",
     startModal: {
       title: "TBM活動を開始",
       message: "このTBM活動を開始しますか？\nステータスが「進行中」に変わります。",

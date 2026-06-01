@@ -780,6 +780,8 @@ const hi: Translations = {
   },
 
   tbmCreateScreen: {
+    editTitle: "수정",
+    submitEdit: "수정하기",
     title: "TBM गतिविधि बनाएं",
     reset: "रीसेट करें",
     guide: {
@@ -840,6 +842,7 @@ const hi: Translations = {
       cancel: "रद्द करें",
       confirm: "हटाएं",
     },
+    downloadLog: "교육일지 다운로드",
     startModal: {
       title: "TBM गतिविधि शुरू करें",
       message: "क्या आप इस TBM गतिविधि को शुरू करना चाहते हैं?\nस्थिति 'प्रगति में' में बदल जाएगी।",

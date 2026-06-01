@@ -828,6 +828,8 @@ const en = {
 
   tbmCreateScreen: {
     title: "Create TBM Activity",
+    editTitle: "Edit",
+    submitEdit: "Save Changes",
     reset: "Reset",
     guide: {
       title: "Writing Guide",
@@ -887,6 +889,7 @@ const en = {
       cancel: "Cancel",
       confirm: "Delete",
     },
+    downloadLog: "Download Education Log",
     startModal: {
       title: "Start TBM Activity",
       message:

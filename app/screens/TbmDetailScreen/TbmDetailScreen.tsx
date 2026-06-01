@@ -12,6 +12,9 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import EducationFrame from "@assets/icons/education_frame.svg"
 
+import { Asset } from "expo-asset"
+import { Linking } from "react-native"
+
 import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -184,47 +187,73 @@ export const TbmDetailScreen: FC<TbmDetailScreenProps> = ({ navigation, route })
 
           {/* ── 하단 액션 바 ── */}
           <View style={S.$bottomBar}>
-            <TouchableOpacity
-              style={S.$startBtn}
-              activeOpacity={0.8}
-              onPress={() =>
-                isStarted
-                  ? navigation.navigate("TbmReport", { id: detail.id })
-                  : setStartModalVisible(true)
-              }
-            >
-              {isStarted ? (
-                <EducationFrame width={22} height={22} color="#FFFFFF" />
-              ) : (
-                <IconPlayerPlayFilled size={24} color="#FFFFFF" />
-              )}
-              <Text
-                text={translate(
-                  isStarted ? "tbmDetailScreen:endActivity" : "tbmDetailScreen:startActivity",
-                )}
-                style={S.$startBtnText}
-              />
-            </TouchableOpacity>
+            {detail.status === "종료됨" ? (
+              <TouchableOpacity
+                style={S.$startBtn}
+                activeOpacity={0.8}
+                onPress={async () => {
+                  // eslint-disable-next-line @typescript-eslint/no-require-imports
+                  const [asset] = await Asset.loadAsync(require("@assets/sampleTBMReport.pdf"))
+                  await Linking.openURL(asset.uri)
+                }}
+              >
+                <IconDownload size={22} color="#FFFFFF" />
+                <Text text={translate("tbmDetailScreen:downloadLog")} style={S.$startBtnText} />
+              </TouchableOpacity>
+            ) : (
+              <>
+                <TouchableOpacity
+                  style={S.$startBtn}
+                  activeOpacity={0.8}
+                  onPress={() =>
+                    isStarted
+                      ? navigation.navigate("TbmReport", { id: detail.id })
+                      : setStartModalVisible(true)
+                  }
+                >
+                  {isStarted ? (
+                    <EducationFrame width={22} height={22} color="#FFFFFF" />
+                  ) : (
+                    <IconPlayerPlayFilled size={24} color="#FFFFFF" />
+                  )}
+                  <Text
+                    text={translate(
+                      isStarted ? "tbmDetailScreen:endActivity" : "tbmDetailScreen:startActivity",
+                    )}
+                    style={S.$startBtnText}
+                  />
+                </TouchableOpacity>
 
-            {!isStarted && (
-              <View style={S.$actionRow}>
-                <TouchableOpacity
-                  style={S.$editBtn}
-                  activeOpacity={0.75}
-                  onPress={() => console.log("수정:", detail.id)}
-                >
-                  <IconEdit size={16} color="#4C4C4C" />
-                  <Text text={translate("tbmDetailScreen:edit")} style={S.$editBtnText} />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={S.$deleteBtn}
-                  activeOpacity={0.75}
-                  onPress={() => setDeleteModalVisible(true)}
-                >
-                  <IconTrash size={16} color="#F87165" />
-                  <Text text={translate("tbmDetailScreen:delete")} style={S.$deleteBtnText} />
-                </TouchableOpacity>
-              </View>
+                {detail.status === "작성중" && (
+                  <View style={S.$actionRow}>
+                    <TouchableOpacity
+                      style={S.$editBtn}
+                      activeOpacity={0.75}
+                      onPress={() =>
+                      navigation.navigate("TbmCreate", {
+                        editId: detail.id,
+                        initialTitle: detail.title,
+                        initialContent: detail.activityContent,
+                        initialWorkplace: detail.location,
+                        initialDateTime: detail.workDate,
+                        initialEducationIds: detail.educationMaterials.map((m) => m.id),
+                      })
+                    }
+                    >
+                      <IconEdit size={16} color="#4C4C4C" />
+                      <Text text={translate("tbmDetailScreen:edit")} style={S.$editBtnText} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={S.$deleteBtn}
+                      activeOpacity={0.75}
+                      onPress={() => setDeleteModalVisible(true)}
+                    >
+                      <IconTrash size={16} color="#F87165" />
+                      <Text text={translate("tbmDetailScreen:delete")} style={S.$deleteBtnText} />
+                    </TouchableOpacity>
+                  </View>
+                )}
+              </>
             )}
           </View>
         </ScrollView>

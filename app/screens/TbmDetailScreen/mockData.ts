@@ -1,6 +1,19 @@
 import { TbmDetail } from "./types"
 
 export const mockTbmDetails: Record<number, TbmDetail> = {
+  11: {
+    id: 11,
+    title: "안전모 착용 및 낙하물 방지 TBM",
+    status: "작성중",
+    date: "2026.06.01",
+    workDate: "2026년 6월 1일 오전 08:00",
+    author: "김 철수 현장안전팀장",
+    location: "경기 수원시 팔달구 인계동 공사현장",
+    activityContent:
+      "작업 전 안전모 착용 상태를 확인하고 낙하물 방지망 설치 여부를 점검합니다. 상부 작업 시 하부 통제 구역을 설정하고 비인가자 출입을 금지합니다.",
+    educationMaterials: [{ id: 16, title: "안전모 착용 의무화 교육 자료" }],
+    participants: [],
+  },
   1: {
     id: 1,
     title: "작업장 순회 점검",
