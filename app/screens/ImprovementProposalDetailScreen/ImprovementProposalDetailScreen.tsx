@@ -2,12 +2,12 @@ import { FC, useCallback, useMemo, useState } from "react"
 import {
   KeyboardAvoidingView,
   Platform,
-  ScrollView,
   // eslint-disable-next-line no-restricted-imports
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native"
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
 import { CommonActions } from "@react-navigation/native"
 import {
   IconAlertCircle,
@@ -428,13 +428,15 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
       >
         <KeyboardAvoidingView
           style={S.$flex1}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+          keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 60) : 0}
         >
-          <ScrollView
+          <KeyboardAwareScrollView
             style={S.$scrollView}
             contentContainerStyle={S.$scrollContent}
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
+            bottomOffset={Platform.OS === "ios" ? 200 : 100}
           >
             {editMode ? (
               /* ── 수정 모드: 상세 내용 입력 ── */
@@ -747,7 +749,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                 )
               })}
             </View>
-          </ScrollView>
+          </KeyboardAwareScrollView>
 
           {/* 하단 버튼 — 역할/작성자 조건 분기 */}
           {(isOwnProposal || isAdmin) && (
