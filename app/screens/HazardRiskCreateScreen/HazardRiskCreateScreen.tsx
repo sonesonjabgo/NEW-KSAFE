@@ -6,11 +6,11 @@ import {
   Modal,
   Platform,
   Pressable,
-  ScrollView,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native"
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
 import { IconAlertCircle, IconChevronDown } from "@tabler/icons-react-native"
 import { Building } from "lucide-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
@@ -97,13 +97,15 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
       >
         <KeyboardAvoidingView
           style={{ flex: 1 }}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+          keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 60) : 0}
         >
-          <ScrollView
+          <KeyboardAwareScrollView
             style={S.$scrollContent}
             contentContainerStyle={S.$scrollInner}
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
+            bottomOffset={Platform.OS === "ios" ? 170 : 80}
           >
             {/* 작성 가이드 */}
             <View style={[S.$card, S.$guideRow]}>
@@ -240,7 +242,7 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
                 </View>
               )}
             </View>
-          </ScrollView>
+          </KeyboardAwareScrollView>
 
           {/* 제출하기 버튼 */}
           <View style={[S.$submitBar, { paddingBottom: insets.bottom + 16 }]}>
