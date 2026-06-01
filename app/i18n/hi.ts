@@ -1071,6 +1071,11 @@ const hi: Translations = {
     regenerateNote: "नए पुनर्जनन में कुछ समय लग सकता है।",
     refresh: "रीफ्रेश करें",
     toastRegenerate: "रिपोर्ट पुनर्जनन का अनुरोध सबमिट किया गया है।",
+    processStatusRequested: "Report generation has been requested. Processing will begin shortly.",
+    processStatusGenerating: "Generating the report. Please wait a moment.",
+    processStatusCompleted: "The report is ready and available for download.",
+    processStatusFailed: "Report generation has failed.",
+    sectionFailureReason: "Failure Reason",
   },
 
   patrolScreen: {

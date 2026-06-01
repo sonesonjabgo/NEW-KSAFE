@@ -138,6 +138,31 @@ export const $processCard: ViewStyle = {
   borderWidth: 1,
   borderColor: "#E9ECF0",
   minHeight: 80,
+  justifyContent: "center",
+}
+
+export const $processCardText: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#555555",
+  lineHeight: 22,
+}
+
+// ── Failure Reason (실패 사유) ─────────────────────────────────────────────────
+
+export const $failureReasonCard: ViewStyle = {
+  backgroundColor: "#FFF5F5",
+  borderRadius: 10,
+  padding: 16,
+  borderWidth: 1,
+  borderColor: "#FFD6D6",
+}
+
+export const $failureReasonText: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#555555",
+  lineHeight: 22,
 }
 
 // ── Status History (상태 이력) ──────────────────────────────────────────────────

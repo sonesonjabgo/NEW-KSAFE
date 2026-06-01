@@ -1068,6 +1068,11 @@ const ar: Translations = {
     regenerateNote: "قد تستغرق إعادة الإنشاء الجديدة بعض الوقت.",
     refresh: "تحديث",
     toastRegenerate: "تم تقديم طلب إعادة إنشاء التقرير.",
+    processStatusRequested: "Report generation has been requested. Processing will begin shortly.",
+    processStatusGenerating: "Generating the report. Please wait a moment.",
+    processStatusCompleted: "The report is ready and available for download.",
+    processStatusFailed: "Report generation has failed.",
+    sectionFailureReason: "Failure Reason",
   },
 
   patrolScreen: {

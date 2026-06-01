@@ -1104,6 +1104,11 @@ const ko: Translations = {
     regenerateNote: "신규 재생성을 위해 시간이 소요됩니다",
     refresh: "새로고침",
     toastRegenerate: "보고서 재생성 요청이 접수되었습니다.",
+    processStatusRequested: "보고서 생성이 요청되었습니다. 곧 처리가 시작됩니다.",
+    processStatusGenerating: "보고서를 생성 중입니다. 잠시 기다려 주세요.",
+    processStatusCompleted: "보고서가 준비되어 다운로드 할 수 있습니다.",
+    processStatusFailed: "보고서 생성에 실패 했습니다.",
+    sectionFailureReason: "실패 사유",
   },
 
   patrolScreen: {
