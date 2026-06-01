@@ -4,6 +4,7 @@ import { CircleCheck, CircleAlert } from "lucide-react-native"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { UserAvatar } from "@/components/UserAvatar"
 import { translate } from "@/i18n/translate"
 import { typography } from "@/theme/typography"
 
@@ -131,7 +132,7 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
 
           {/* 작성자 + 현장 */}
           <View style={[$metaRow, $metaRowGap]}>
-            <View style={$avatar} />
+            <UserAvatar initial={MOCK_PATROL.author.charAt(0)} size={24} />
             <Text text={MOCK_PATROL.author} style={$metaAuthor} numberOfLines={1} />
             <Text text={` · ${MOCK_PATROL.location}`} style={$metaLocation} numberOfLines={1} />
           </View>
@@ -378,15 +379,7 @@ const $cardDivider: ViewStyle = {
 const $metaRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-}
-
-const $avatar: ViewStyle = {
-  width: 24,
-  height: 24,
-  borderRadius: 12,
-  backgroundColor: "#F3F2F0",
-  marginRight: 6,
-  flexShrink: 0,
+  gap: 6,
 }
 
 const $metaAuthor: TextStyle = {

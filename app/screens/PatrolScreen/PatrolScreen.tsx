@@ -13,6 +13,7 @@ import { ChevronDown, PencilLine, Building } from "lucide-react-native"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { UserAvatar } from "@/components/UserAvatar"
 import { translate } from "@/i18n/translate"
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
@@ -153,7 +154,7 @@ const PatrolCard: FC<{ item: PatrolItem; onPress: () => void }> = ({ item, onPre
 
       {/* 하단: 프로필 + 이름 + 현장 */}
       <View style={$cardMetaRow}>
-        <View style={$cardAvatar} />
+        <UserAvatar initial={item.author.charAt(0)} size={24} />
         <Text text={item.author} style={$cardMetaAuthor} numberOfLines={1} />
         <Text text={` · ${item.location}`} style={$cardMetaLocation} numberOfLines={1} />
       </View>
@@ -384,15 +385,7 @@ const $cardDivider: ViewStyle = {
 const $cardMetaRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-}
-
-const $cardAvatar: ViewStyle = {
-  width: 24,
-  height: 24,
-  borderRadius: 12,
-  backgroundColor: "#F3F2F0",
-  marginRight: 6,
-  flexShrink: 0,
+  gap: 6,
 }
 
 const $cardMetaAuthor: TextStyle = {

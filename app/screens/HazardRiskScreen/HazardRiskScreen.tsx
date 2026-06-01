@@ -4,6 +4,7 @@ import { PencilLine } from "lucide-react-native"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { UserAvatar } from "@/components/UserAvatar"
 import { translate } from "@/i18n/translate"
 
 import { mockHazardData } from "./mockData"
@@ -42,9 +43,7 @@ const HazardCard: FC<{ item: HazardItem; onPress: () => void }> = ({ item, onPre
     <Text text={item.description} style={S.$cardDescription} numberOfLines={2} />
     <View style={S.$cardDivider} />
     <View style={S.$cardAuthorRow}>
-      <View style={S.$cardAvatar}>
-        <Text text={item.reporterInitial} style={S.$cardAvatarText} />
-      </View>
+      <UserAvatar initial={item.reporterInitial} size={24} />
       <Text text={item.reporterName} style={S.$cardAuthorName} numberOfLines={1} />
       <Text text={` · ${item.workplace}`} style={S.$cardWorkplace} numberOfLines={1} />
     </View>

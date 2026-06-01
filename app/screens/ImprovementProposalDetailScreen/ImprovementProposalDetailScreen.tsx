@@ -24,6 +24,7 @@ import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { Toast } from "@/components/Toast"
+import { UserAvatar } from "@/components/UserAvatar"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 import { useResponsive } from "@/theme/responsive"
@@ -490,9 +491,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                 </View>
                 <Text text={detail.content} style={S.$infoContent} />
                 <View style={S.$authorRow}>
-                  <View style={S.$authorAvatar}>
-                    <Text text={detail.authorInitial} style={S.$authorAvatarText} />
-                  </View>
+                  <UserAvatar initial={detail.authorInitial} size={36} />
                   <View style={S.$authorInfo}>
                     <Text text={detail.authorName} style={S.$authorName} />
                     <Text text={detail.workplace} style={S.$authorWorkplace} />
@@ -544,12 +543,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                       />
                     </View>
                     <View style={S.$resultManagerRow}>
-                      <View style={S.$resultManagerAvatar}>
-                        <Text
-                          text={MOCK_RESULT_MANAGER_INITIAL}
-                          style={S.$resultManagerAvatarText}
-                        />
-                      </View>
+                      <UserAvatar initial={MOCK_RESULT_MANAGER_INITIAL} size={22} />
                       <Text text={MOCK_RESULT_MANAGER} style={S.$resultManagerName} />
                     </View>
                   </View>

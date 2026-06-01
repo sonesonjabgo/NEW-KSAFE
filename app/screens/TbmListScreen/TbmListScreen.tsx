@@ -7,6 +7,7 @@ import TbmFabIcon from "@assets/images/tbm-fab-icon.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { UserAvatar } from "@/components/UserAvatar"
 import { translate } from "@/i18n/translate"
 
 import { mockTbmData } from "./mockData"
@@ -61,7 +62,7 @@ const TbmCard: FC<{ item: TbmItem; onPress: () => void }> = ({ item, onPress }) 
 
       {/* 작성자 + 현장 */}
       <View style={S.$cardMetaRow}>
-        <View style={S.$cardAvatar} />
+        <UserAvatar initial={item.author.charAt(0)} size={24} />
         <Text text={item.author} style={S.$cardMetaAuthor} numberOfLines={1} />
         <Text text={` · ${item.location}`} style={S.$cardMetaLocation} numberOfLines={1} />
       </View>
