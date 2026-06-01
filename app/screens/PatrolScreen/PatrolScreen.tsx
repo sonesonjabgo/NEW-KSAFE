@@ -315,13 +315,15 @@ const $listContent: ViewStyle = {
 const $card: ViewStyle = {
   backgroundColor: "#FFFFFF",
   borderRadius: 12,
+  borderWidth: 1,
+  borderColor: "#ECECEC",
   paddingHorizontal: 16,
   paddingVertical: 16,
   shadowColor: "#000000",
-  shadowOffset: { width: 0, height: 4 },
-  shadowOpacity: 0.08,
-  shadowRadius: 12,
-  elevation: 4,
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.04,
+  shadowRadius: 6,
+  elevation: 2,
 }
 
 const $rowGap: ViewStyle = {

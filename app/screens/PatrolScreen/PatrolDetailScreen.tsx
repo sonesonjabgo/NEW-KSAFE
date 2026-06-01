@@ -329,7 +329,6 @@ const $content: ViewStyle = { padding: 20, paddingBottom: 40 }
 // ── 요약 카드 ──────────────────────────────────────────────────────────────────
 
 const $summaryCard: ViewStyle = {
-  height: 163,
   borderWidth: 1,
   borderColor: "#ECECEC",
   borderRadius: 12,
@@ -340,6 +339,7 @@ const $summaryCard: ViewStyle = {
 
 const $summaryCardTitle: TextStyle = {
   fontSize: 19,
+  lineHeight: 26,
   fontFamily: bold,
   color: "#000000",
 }
@@ -358,6 +358,7 @@ const $statsCol: ViewStyle = {
 
 const $statNumber: TextStyle = {
   fontSize: 28,
+  lineHeight: 36,
   fontFamily: bold,
   color: "#000000",
 }
@@ -368,6 +369,7 @@ const $statNumberBad: TextStyle = { color: "#FF0000" }
 
 const $statLabel: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: semiBold,
   color: "#585858",
 }
