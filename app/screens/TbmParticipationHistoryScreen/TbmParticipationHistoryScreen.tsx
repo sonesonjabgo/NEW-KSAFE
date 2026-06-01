@@ -186,7 +186,7 @@ const $statLabel: TextStyle = {
 
 const $countRow: ViewStyle = {
   flexDirection: "row",
-  alignItems: "flex-end",
+  alignItems: "baseline",
   gap: 4,
 }
 
@@ -209,14 +209,12 @@ const $historyList: ViewStyle = {
 }
 
 const $historyCard: ViewStyle = {
-  height: 150,
   backgroundColor: "#FFFFFF",
   borderRadius: 12,
   borderWidth: 1,
   borderColor: "#ECECEC",
   padding: 16,
-  justifyContent: "space-between",
-  gap: 16,
+  gap: 12,
 }
 
 const $historyTop: ViewStyle = {
@@ -246,9 +244,9 @@ const $historyDate: TextStyle = {
 
 const $historyTitle: TextStyle = {
   fontSize: 16,
+  lineHeight: 22,
   fontFamily: typography.primary.bold,
   color: "#000000",
-  flex: 1,
 }
 
 const $historyDivider: ViewStyle = {
