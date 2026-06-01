@@ -1,6 +1,9 @@
 import { FC, useState } from "react"
 import { TouchableOpacity, View } from "react-native"
 import { IconAlertCircle } from "@tabler/icons-react-native"
+
+import TbmBad from "@assets/icons/tbm_bad.svg"
+import TbmGood from "@assets/icons/tbm_good.svg"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { StackScreen } from "@/components/StackScreen"
@@ -47,7 +50,7 @@ export const TbmJoinHealthScreen: FC<TbmJoinHealthScreenProps> = ({ navigation, 
                 activeOpacity={0.8}
                 onPress={() => setStatus("good")}
               >
-                <Text style={S.$emoji}>😊</Text>
+                <TbmGood width={72} height={72} />
                 <Text
                   text={translate("tbmJoinHealthScreen:statusGood")}
                   style={[S.$cardLabel, status === "good" && S.$cardLabelSelected]}
@@ -59,7 +62,7 @@ export const TbmJoinHealthScreen: FC<TbmJoinHealthScreenProps> = ({ navigation, 
                 activeOpacity={0.8}
                 onPress={() => setStatus("bad")}
               >
-                <Text style={S.$emoji}>🤢</Text>
+                <TbmBad width={72} height={72} />
                 <Text
                   text={translate("tbmJoinHealthScreen:statusBad")}
                   style={[S.$cardLabel, status === "bad" && S.$cardLabelSelected]}

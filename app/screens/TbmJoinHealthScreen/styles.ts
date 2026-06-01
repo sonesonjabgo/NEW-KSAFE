@@ -54,11 +54,6 @@ export const $cardSelected: ViewStyle = {
   backgroundColor: "#ECF4FE",
 }
 
-export const $emoji: TextStyle = {
-  fontSize: 72,
-  lineHeight: 88,
-}
-
 export const $cardLabel: TextStyle = {
   fontSize: 17,
   lineHeight: 24,
