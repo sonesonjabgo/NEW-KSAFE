@@ -87,15 +87,17 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
         author: MOCK_PATROL.author,
         reviewer: MOCK_PATROL.reviewer,
         approver: MOCK_PATROL.approver,
-        checkItems: MOCK_CHECK_ITEMS.map((item) => ({
-          name: item.name,
-          result: item.status,
-          note: item.note || undefined,
-        })),
+        inspectionItems: [
+          {
+            name: MOCK_PATROL.title,
+            checkpoints: MOCK_CHECK_ITEMS.map((item) => ({
+              name: item.name,
+              result: item.status,
+              action: item.note || undefined,
+            })),
+          },
+        ],
         overallAction: MOCK_OVERALL_ACTION,
-        totalCount: MOCK_TOTAL,
-        goodCount: MOCK_GOOD,
-        badCount: MOCK_BAD,
       })
       await openPdfDocument(uri)
       showToast(translate("patrolDetailScreen:toast.reportSuccess"))

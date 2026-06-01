@@ -7,32 +7,35 @@ export interface PatrolReportData {
   author: string
   reviewer?: string
   approver?: string
-  checkItems: Array<{
+  inspectionItems: Array<{
     name: string
-    result: "good" | "bad"
-    note?: string
+    checkpoints: Array<{
+      name: string
+      result: "good" | "bad" | null
+      action?: string
+    }>
   }>
   overallAction?: string
-  totalCount: number
-  goodCount: number
-  badCount: number
 }
 
 export const generatePatrolReport = async (data: PatrolReportData): Promise<string> => {
-  // 기존 프로젝트의 2단계(항목>점검사항) 구조를 flat 데이터로 재현.
-  // API 연동 시 checkItems가 { name, checkpoints[] } 계층 구조로 바뀌면 이 부분만 교체한다.
-  const inspectionRows = data.checkItems
-    .map(
-      (item) => `
-      <tr>
-        <td rowspan="1" class="item-name">${item.name}</td>
-        <td class="checkpoint-name"></td>
-        <td class="result-cell">${item.result === "good" ? "양호" : item.result === "bad" ? "불량" : ""}</td>
-        <td class="result-cell">${item.result === "good" ? "" : item.result === "bad" ? "" : ""}</td>
-        <td class="action-cell">${item.note || ""}</td>
-      </tr>
-    `,
-    )
+  const inspectionRows = data.inspectionItems
+    .map((item) => {
+      const checkpointRows = item.checkpoints
+        .map(
+          (cp, cpIndex) => `
+        <tr>
+          ${cpIndex === 0 ? `<td rowspan="${item.checkpoints.length}" class="item-name">${item.name}</td>` : ""}
+          <td class="checkpoint-name">${cp.name}</td>
+          <td class="result-cell">${cp.result === "good" ? "양호" : cp.result === "bad" ? "불량" : ""}</td>
+          <td class="result-cell">${cp.result === "good" ? "" : cp.result === "bad" ? "" : "양호"}</td>
+          <td class="action-cell">${cp.action || ""}</td>
+        </tr>
+      `,
+        )
+        .join("")
+      return checkpointRows
+    })
     .join("")
 
   const html = `
@@ -79,7 +82,6 @@ export const generatePatrolReport = async (data: PatrolReportData): Promise<stri
             vertical-align: middle;
           }
 
-          /* 헤더 정보 테이블 */
           .header-table {
             margin-bottom: 0;
           }
@@ -95,7 +97,6 @@ export const generatePatrolReport = async (data: PatrolReportData): Promise<stri
             padding-left: 10px;
           }
 
-          /* 점검 항목 테이블 */
           .inspection-table {
             border-top: 2px solid #000;
           }
@@ -137,7 +138,6 @@ export const generatePatrolReport = async (data: PatrolReportData): Promise<stri
             min-width: 100px;
           }
 
-          /* 전체 조치 요구사항 */
           .overall-action-section {
             border-top: 2px solid #000;
           }
@@ -160,7 +160,6 @@ export const generatePatrolReport = async (data: PatrolReportData): Promise<stri
       <body>
         <h1>작업장 순회점검 일지</h1>
 
-        <!-- 헤더 정보 -->
         <table class="header-table">
           <tr>
             <td class="header-label">작성</td>
@@ -183,7 +182,6 @@ export const generatePatrolReport = async (data: PatrolReportData): Promise<stri
           </tr>
         </table>
 
-        <!-- 점검 항목 -->
         <table class="inspection-table">
           <tr>
             <th colspan="5" class="section-header">●점검사항</th>
@@ -198,7 +196,6 @@ export const generatePatrolReport = async (data: PatrolReportData): Promise<stri
           ${inspectionRows}
         </table>
 
-        <!-- 전체 조치 요구사항 -->
         ${
           data.overallAction
             ? `
@@ -213,7 +210,6 @@ export const generatePatrolReport = async (data: PatrolReportData): Promise<stri
         `
             : ""
         }
-
       </body>
     </html>
   `
