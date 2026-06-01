@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import { ScrollView, TouchableOpacity, View, TextStyle, ViewStyle } from "react-native"
 import { CircleCheck, CircleAlert } from "lucide-react-native"
 
@@ -6,6 +6,7 @@ import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { UserAvatar } from "@/components/UserAvatar"
 import { translate } from "@/i18n/translate"
+import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
 import type { PatrolDetailScreenProps } from "./types"
@@ -54,7 +55,14 @@ const MOCK_GOOD = 9
 const MOCK_BAD = 3
 
 export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) => {
-  const badge = BADGE_STYLES[MOCK_PATROL.status]
+  const [status, setStatus] = useState<PatrolStatus>(MOCK_PATROL.status)
+  const badge = BADGE_STYLES[status]
+
+  const handlePrimaryAction = () => {
+    if (status === "inProgress") setStatus("underReview")
+    else if (status === "underReview") setStatus("approved")
+    else if (status === "approved") setStatus("inProgress")
+  }
 
   return (
     <StackScreen
@@ -105,7 +113,7 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
           <View style={[$cardTopRow, $rowGap]}>
             <View style={[$cardBadge, { backgroundColor: badge.bg }]}>
               <Text
-                text={translate(`patrolScreen:badge.${MOCK_PATROL.status}`)}
+                text={translate(`patrolScreen:badge.${status}`)}
                 style={[$cardBadgeText, { color: badge.text }]}
               />
             </View>
@@ -200,30 +208,26 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
         </View>
         {/* 하단 버튼 */}
         <View style={$buttonArea}>
-          <TouchableOpacity style={$btnBlue} activeOpacity={0.8}>
-            <Text text={translate("patrolDetailScreen:buttons.submit")} style={$btnWhiteText} />
-          </TouchableOpacity>
-          <TouchableOpacity style={$btnBlue} activeOpacity={0.8}>
+          <TouchableOpacity style={$btnBlue} activeOpacity={0.8} onPress={handlePrimaryAction}>
             <Text
-              text={translate("patrolDetailScreen:buttons.editComplete")}
+              text={
+                status === "inProgress"
+                  ? translate("patrolDetailScreen:buttons.submit")
+                  : status === "underReview"
+                    ? translate("patrolDetailScreen:buttons.reviewComplete")
+                    : translate("patrolDetailScreen:buttons.approve")
+              }
               style={$btnWhiteText}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={$btnBlue} activeOpacity={0.8}>
-            <Text
-              text={translate("patrolDetailScreen:buttons.reviewComplete")}
-              style={$btnWhiteText}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={$btnBlue} activeOpacity={0.8}>
-            <Text text={translate("patrolDetailScreen:buttons.approve")} style={$btnWhiteText} />
-          </TouchableOpacity>
-          <TouchableOpacity style={$btnGray} activeOpacity={0.8}>
-            <Text text={translate("patrolDetailScreen:buttons.recall")} style={$btnWhiteText} />
-          </TouchableOpacity>
-          <TouchableOpacity style={$btnRed} activeOpacity={0.8}>
-            <Text text={translate("patrolDetailScreen:buttons.delete")} style={$btnRedText} />
-          </TouchableOpacity>
+          {status === "inProgress" && (
+            <TouchableOpacity style={$btnRed} activeOpacity={0.8}>
+              <Text
+                text={translate("patrolDetailScreen:buttons.delete")}
+                style={$btnWhiteText}
+              />
+            </TouchableOpacity>
+          )}
           <TouchableOpacity style={$btnOutline} activeOpacity={0.8}>
             <Text
               text={translate("patrolDetailScreen:buttons.reportPreview")}
@@ -540,15 +544,9 @@ const $btnBlue: ViewStyle = {
   backgroundColor: "#1062D8",
 }
 
-const $btnGray: ViewStyle = {
-  ...$btnBase,
-  backgroundColor: "#707070",
-}
-
 const $btnRed: ViewStyle = {
   ...$btnBase,
-  borderWidth: 1,
-  borderColor: "#FF0000",
+  backgroundColor: colors.danger,
 }
 
 const $btnOutline: ViewStyle = {
@@ -563,11 +561,6 @@ const $btnWhiteText: TextStyle = {
   color: "#FFFFFF",
 }
 
-const $btnRedText: TextStyle = {
-  fontSize: 16,
-  fontFamily: semiBold,
-  color: "#FF0000",
-}
 
 const $btnOutlineText: TextStyle = {
   fontSize: 16,
