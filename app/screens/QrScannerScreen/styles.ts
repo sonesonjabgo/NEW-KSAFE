@@ -11,8 +11,6 @@ const WHITE_85 = "rgba(255,255,255,0.85)"
 const BORDER_LIGHT = "#E5E7EB"
 const ACCENT_BLUE = "#2563EB"
 const TEXT_GRAY = "#374151"
-const WARNING_BG = "#FEF3C7"
-const WARNING_TEXT = "#92400E"
 const OVERLAY_BG = "rgba(0,0,0,0.4)"
 const GRAY_MEDIUM = "#D1D5DB"
 const HANDLE_COLOR = "#B0B0B0"
@@ -128,21 +126,6 @@ export const $qrFrameWrapper: ViewStyle = {
   position: "relative",
 }
 
-/* 카메라 활성 시 프레임 — 카메라 영상을 둥근 모서리로 클리핑 */
-export const $qrFrameWrapperCamera: ViewStyle = {
-  borderRadius: 12,
-  overflow: "hidden",
-}
-
-/* Camera 컴포넌트 — 프레임 전체 채움 */
-export const $camera: ViewStyle = {
-  position: "absolute",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-}
-
 /* QR 프레임 모서리 — width/height 동적 적용 */
 export const $cornerTL: ViewStyle = {
   borderColor: colors.navy,
@@ -182,41 +165,6 @@ export const $cornerBR: ViewStyle = {
   bottom: 0,
   position: "absolute",
   right: 0,
-}
-
-/* ── 카메라 권한 배너 ── */
-export const $permissionBanner: ViewStyle = {
-  alignItems: "flex-start",
-  alignSelf: "stretch",
-  backgroundColor: WARNING_BG,
-  borderRadius: 10,
-  flexDirection: isRTL ? "row-reverse" : "row",
-  gap: 8,
-  paddingHorizontal: 14,
-  paddingVertical: 12,
-}
-
-export const $permissionText: TextStyle = {
-  color: WARNING_TEXT,
-  flex: 1,
-  lineHeight: 18,
-  textAlign: isRTL ? "right" : "left",
-  // fontSize: 동적 적용
-}
-
-/* ── 다시 시도 버튼 ── */
-export const $retryBtn: ViewStyle = {
-  alignItems: "center",
-  alignSelf: "stretch",
-  backgroundColor: colors.navy,
-  borderRadius: 12,
-  // paddingVertical: 동적 적용
-}
-
-export const $retryBtnText: TextStyle = {
-  color: WHITE,
-  fontWeight: "600",
-  // fontSize: 동적 적용
 }
 
 /* ── 언어 카드 ── */
