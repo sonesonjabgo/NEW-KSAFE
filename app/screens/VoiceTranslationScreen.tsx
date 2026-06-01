@@ -2,6 +2,7 @@ import { FC, useEffect, useMemo, useRef, useState } from "react"
 import {
   Animated,
   Easing,
+  Platform,
   ScrollView,
   TextStyle,
   TouchableOpacity,
@@ -308,6 +309,7 @@ export const VoiceTranslationScreen: FC<AppStackScreenProps<"VoiceTranslation">>
         title={translate("voiceTranslationScreen:title")}
         onBack={() => navigation.goBack()}
         contentBg={colors.screenBg}
+        rightOffset={-4}
         rightSlot={
           <TouchableOpacity style={$flipButton} onPress={handleFlip}>
             <Animated.View style={{ transform: [{ rotate: flipIconRotation }] }}>
@@ -344,7 +346,8 @@ const $flipButton: ViewStyle = {
 
 const $content: ViewStyle = {
   flex: 1,
-  padding: 16,
+  paddingHorizontal: 22,
+  paddingVertical: 16,
   gap: 14,
 }
 
@@ -367,18 +370,20 @@ const $box: ViewStyle = {
   flex: 1,
   backgroundColor: "#FFFFFF",
   borderRadius: 16,
+  borderWidth: Platform.OS === "android" ? 1 : 0,
+  borderColor: "#E9ECF0",
   shadowColor: "#000",
   shadowOffset: { width: 0, height: 2 },
   shadowOpacity: 0.08,
   shadowRadius: 8,
-  elevation: 3,
+  elevation: Platform.OS === "android" ? 0 : 3,
   padding: 14,
 }
 
 const $activeBox: ViewStyle = {
   borderColor: colors.blue,
   borderWidth: 1,
-  elevation: 8,
+  elevation: Platform.OS === "android" ? 0 : 8,
   shadowColor: colors.blue,
   shadowOffset: { width: 0, height: 8 },
   shadowOpacity: 0.2,

@@ -32,7 +32,8 @@ export const $root: ViewStyle = {
 export const $header: ViewStyle = {
   flexDirection: isRTL ? "row-reverse" : "row",
   alignItems: "center",
-  paddingHorizontal: 20,
+  paddingLeft: 17,
+  paddingRight: 23,
   paddingBottom: 14,
   gap: 8,
   minHeight: 100,
@@ -42,7 +43,7 @@ export const $headerSide: ViewStyle = {
   width: 36,
   height: 36,
   justifyContent: "center",
-  alignItems: "center",
+  alignItems: "flex-start",
   flexShrink: 0,
 }
 

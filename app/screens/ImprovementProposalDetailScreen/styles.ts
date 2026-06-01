@@ -18,7 +18,7 @@ export const $scrollView: ViewStyle = {
 }
 
 export const $scrollContent: ViewStyle = {
-  paddingHorizontal: 20,
+  paddingHorizontal: 22,
   paddingTop: 20,
   paddingBottom: 24,
 }

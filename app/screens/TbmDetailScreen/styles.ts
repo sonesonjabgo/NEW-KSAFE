@@ -5,7 +5,7 @@ import { typography } from "@/theme/typography"
 // ── Scroll ────────────────────────────────────────────────────────────────────
 
 export const $scrollInner: ViewStyle = {
-  paddingHorizontal: 20,
+  paddingHorizontal: 22,
   paddingTop: 25,
   gap: 14,
 }

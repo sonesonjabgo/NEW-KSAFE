@@ -6,9 +6,9 @@ import { typography } from "@/theme/typography"
 // ── Header right slot ─────────────────────────────────────────────────────────
 
 export const $bellIconContainer: ViewStyle = {
-  flexDirection: "column",
+  flexDirection: "row",
   alignItems: "center",
-  gap: 3,
+  gap: 6,
 }
 
 export const $bellText: TextStyle = {

@@ -6,17 +6,18 @@ import { typography } from "@/theme/typography"
 export const $tabBar: ViewStyle = {
   flexDirection: "row",
   backgroundColor: "#FFFFFF",
-  paddingHorizontal: 16,
-  paddingVertical: 8,
-  gap: 6,
+  paddingHorizontal: 22,
+  paddingTop: 14,
+  paddingBottom: 0,
+  gap: 8,
 }
 
 export const $tab: ViewStyle = {
-  flex: 1,
+  height: 34,
   alignItems: "center",
   justifyContent: "center",
-  paddingVertical: 8,
-  borderRadius: 20,
+  paddingHorizontal: 20,
+  borderRadius: 17,
   backgroundColor: "#F9FAFE",
 }
 
@@ -40,7 +41,8 @@ export const $listContent: ViewStyle = {
 }
 
 export const $flatListContent: ViewStyle = {
-  padding: 16,
+  paddingHorizontal: 22,
+  paddingTop: 16,
   paddingBottom: 40,
 }
 

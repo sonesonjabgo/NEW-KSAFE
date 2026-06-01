@@ -20,8 +20,9 @@ export const $tabScrollView: ViewStyle = {
 export const $tabBarContent: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-  paddingHorizontal: 16,
-  paddingVertical: 9,
+  paddingHorizontal: 22,
+  paddingTop: 14,
+  paddingBottom: 0,
   gap: 8,
 }
 
@@ -108,7 +109,7 @@ export const $summaryUnitBlue: TextStyle = {
 // ── List ─────────────────────────────────────────────────────────────────────
 
 export const $listContent: ViewStyle = {
-  paddingHorizontal: 16,
+  paddingHorizontal: 22,
   paddingTop: 16,
   paddingBottom: 100,
   backgroundColor: "#FFFFFF",

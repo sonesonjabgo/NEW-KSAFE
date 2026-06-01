@@ -394,7 +394,7 @@ const $inviteText: TextStyle = {
 
 // 언어 선택 영역
 const $langSelectorBar: ViewStyle = {
-  paddingHorizontal: 20,
+  paddingHorizontal: 22,
   paddingTop: 14,
   paddingBottom: 12,
   gap: 8,
@@ -431,8 +431,9 @@ const $langBtnText: TextStyle = {
 }
 
 // 채팅 영역
-const $chatContent: { padding: number; paddingBottom: number; flexGrow: number } = {
-  padding: 16,
+const $chatContent: { paddingHorizontal: number; paddingTop: number; paddingBottom: number; flexGrow: number } = {
+  paddingHorizontal: 22,
+  paddingTop: 16,
   paddingBottom: 8,
   flexGrow: 1,
 }
@@ -518,15 +519,16 @@ const $controlBar: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "space-between",
-  paddingHorizontal: 20,
+  paddingHorizontal: 22,
   paddingTop: 14,
 }
 
 const $iconBtn: ViewStyle = {
   width: 48,
   height: 48,
-  alignItems: "center",
+  alignItems: "flex-start",
   justifyContent: "center",
+  paddingLeft: 6,
 }
 
 const $micControlRow: ViewStyle = {

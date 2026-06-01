@@ -15,7 +15,7 @@ export const $buttonDivider: ViewStyle = {
 
 export const $container: ViewStyle = {
   flex: 1,
-  paddingHorizontal: 16,
+  paddingHorizontal: 22,
   paddingVertical: 20,
 }
 
@@ -52,7 +52,7 @@ export const $buttonRow: ViewStyle = {
   flexDirection: "row",
   gap: 36,
   paddingTop: 28,
-  paddingHorizontal: 16,
+  paddingHorizontal: 22,
 }
 
 export const $prevBtn: ViewStyle = {
@@ -106,7 +106,7 @@ export const $card: ViewStyle = {
   borderRadius: 12,
   borderWidth: 1,
   borderColor: "#ECECEC",
-  paddingHorizontal: 16,
+  paddingHorizontal: 22,
   gap: 22,
   shadowColor: "#000000",
   shadowOffset: { width: 0, height: 2 },

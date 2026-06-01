@@ -10,7 +10,7 @@ export const $wrapper: ViewStyle = {
 
 export const $container: ViewStyle = {
   flex: 1,
-  paddingHorizontal: 16,
+  paddingHorizontal: 22,
   paddingTop: 20,
 }
 

@@ -155,6 +155,7 @@ export const AiRiskDocCreatorScreen: FC<AppStackScreenProps<"AiRiskDocCreator">>
         onBack={() => navigation.goBack()}
         contentBg="#FFFFFF"
         squareTop
+        backOffset={-6}
       >
         <ScrollView
           style={S.$scroll}

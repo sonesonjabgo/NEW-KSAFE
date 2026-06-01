@@ -246,11 +246,11 @@ export const LanguageSettingsScreen: FC = () => {
   /* ── 반응형 값 ── */
 
   const listPaddingH = isSmallPhone
-    ? 16
+    ? 18
     : isBasePhone
-      ? 20
+      ? 22
       : isLargePhone
-        ? 22
+        ? 24
         : Math.max(Math.floor((width - 560) / 2), 32)
   const listPaddingBottom = isShortHeight
     ? Math.min(Math.floor(height * 0.04), 24)

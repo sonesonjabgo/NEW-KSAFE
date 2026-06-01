@@ -8,7 +8,7 @@ import { typography } from "@/theme/typography"
 export const $sourceTabBar: ViewStyle = {
   flexDirection: "row",
   backgroundColor: "#FFFFFF",
-  paddingHorizontal: 20,
+  paddingHorizontal: 22,
   gap: 10,
   marginTop: 10,
 }

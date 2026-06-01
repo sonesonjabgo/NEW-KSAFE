@@ -19,6 +19,10 @@ interface StackScreenProps {
   squareTop?: boolean
   /** 헤더 바로 아래, 콘텐츠 영역 위에 네이비 배경으로 노출되는 추가 영역 */
   headerExtra?: ReactNode
+  /** 뒤로가기 버튼 추가 좌측 오프셋. 기본값: 0 */
+  backOffset?: number
+  /** 우측 슬롯 추가 우측 오프셋 (paddingRight 증가). 기본값: 0 */
+  rightOffset?: number
   children: ReactNode
 }
 
@@ -43,6 +47,8 @@ export function StackScreen({
   rightSlot,
   contentBg = colors.screenBg,
   squareTop = false,
+  backOffset = 0,
+  rightOffset = 0,
   headerExtra,
   children,
 }: StackScreenProps) {
@@ -50,7 +56,7 @@ export function StackScreen({
 
   return (
     <View style={$root}>
-      <View style={[$header, { paddingTop: insets.top + 10 }]}>
+      <View style={[$header, { paddingTop: insets.top + 10, paddingLeft: Math.max(0, 17 - backOffset), paddingRight: Math.max(0, 20 - rightOffset) }]}>
         <TouchableOpacity
           style={$headerSide}
           onPress={onBack}
@@ -102,7 +108,7 @@ const $headerSide: ViewStyle = {
   width: 44,
   height: 36,
   justifyContent: "center",
-  alignItems: "center",
+  alignItems: "flex-start",
   transform: [{ translateY: 2 }],
 }
 

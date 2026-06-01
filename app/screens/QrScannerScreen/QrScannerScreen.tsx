@@ -56,7 +56,7 @@ export const QrScannerScreen: FC = () => {
   const qrIconSize = isSmallPhone || isShortHeight ? 64 : 80
 
   // 콘텐츠 영역 패딩
-  const contentPaddingH = isTablet ? 32 : isSmallPhone ? 16 : 20
+  const contentPaddingH = isTablet ? 32 : isSmallPhone ? 18 : 22
   const contentPaddingT = isSmallPhone || isShortHeight ? 16 : 24
 
   // 스캔 카드 패딩

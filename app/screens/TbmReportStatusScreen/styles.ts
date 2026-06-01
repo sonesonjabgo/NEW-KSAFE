@@ -4,7 +4,7 @@ import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
 export const $scrollInner: ViewStyle = {
-  paddingHorizontal: 20,
+  paddingHorizontal: 22,
   paddingTop: 25,
   paddingBottom: 24,
   gap: 20,

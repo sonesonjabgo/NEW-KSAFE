@@ -100,6 +100,7 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
       onBack={() => navigation.goBack()}
       squareTop
       contentBg="#FFFFFF"
+      rightOffset={-4}
       rightSlot={
         <TouchableOpacity
           activeOpacity={0.7}
@@ -324,7 +325,7 @@ const $editButton: TextStyle = {
 
 const $scroll: ViewStyle = { flex: 1 }
 
-const $content: ViewStyle = { padding: 20, paddingBottom: 40 }
+const $content: ViewStyle = { paddingHorizontal: 22, paddingTop: 20, paddingBottom: 40 }
 
 // ── 요약 카드 ──────────────────────────────────────────────────────────────────
 

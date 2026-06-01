@@ -185,7 +185,8 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
 
 const $outerContainer: ViewStyle = {
   flex: 1,
-  padding: 16,
+  paddingHorizontal: 22,
+  paddingTop: 16,
   gap: 12,
 }
 

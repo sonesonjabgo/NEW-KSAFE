@@ -557,7 +557,8 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation, ro
 const $scrollView: ViewStyle = { flex: 1 }
 
 const $scrollContent: ViewStyle = {
-  padding: 20,
+  paddingHorizontal: 22,
+  paddingTop: 20,
   paddingBottom: 40,
 }
 

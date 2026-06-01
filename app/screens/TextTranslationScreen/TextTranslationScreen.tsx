@@ -161,6 +161,7 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
         title={translate("textTranslationScreen:title")}
         onBack={() => navigation.goBack()}
         contentBg="#FFFFFF"
+        rightOffset={-4}
         rightSlot={
           <TouchableOpacity style={$headerSideRight}>
             <Text text={translate("textTranslationScreen:fontSizeButton")} style={$fontSizeText} />

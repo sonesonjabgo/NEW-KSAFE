@@ -98,6 +98,7 @@ export const TbmJoinScreen: FC<TbmJoinScreenProps> = ({ navigation }) => {
         title={translate("tbmJoinScreen:title")}
         onBack={() => navigation.goBack()}
         squareTop
+        backOffset={4}
         rightSlot={
           <TouchableOpacity onPress={() => setInfoModalVisible(true)} activeOpacity={0.7}>
             <IconInfoCircle size={24} color="#FFFFFF" />

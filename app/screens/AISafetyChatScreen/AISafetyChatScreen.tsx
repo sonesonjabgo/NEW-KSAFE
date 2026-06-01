@@ -388,11 +388,13 @@ const $flatList: ViewStyle = {
 }
 
 const $chatList: {
-  padding: number
+  paddingHorizontal: number
+  paddingTop: number
   paddingBottom: number
   flexGrow: number
 } = {
-  padding: 16,
+  paddingHorizontal: 22,
+  paddingTop: 16,
   paddingBottom: 8,
   flexGrow: 1,
 }

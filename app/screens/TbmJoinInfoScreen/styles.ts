@@ -13,7 +13,7 @@ export const $container: ViewStyle = {
 }
 
 export const $scrollContent: ViewStyle = {
-  paddingHorizontal: 16,
+  paddingHorizontal: 22,
   paddingTop: 20,
   paddingBottom: 12,
 }

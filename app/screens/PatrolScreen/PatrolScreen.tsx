@@ -280,7 +280,8 @@ const $screenContainer: ViewStyle = {
 
 const $container: ViewStyle = {
   flex: 1,
-  padding: 15,
+  paddingHorizontal: 22,
+  paddingVertical: 15,
 }
 
 // ── Workplace Selector ────────────────────────────────────────────────────────

@@ -8,7 +8,8 @@ export const $scroll: ViewStyle = {
 }
 
 export const $scrollContent: ViewStyle = {
-  padding: 16,
+  paddingHorizontal: 22,
+  paddingTop: 16,
   gap: 12,
   paddingBottom: 32,
 }

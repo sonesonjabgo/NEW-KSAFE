@@ -7,7 +7,7 @@ import { typography } from "@/theme/typography"
 export const $flex1: ViewStyle = { flex: 1 }
 
 export const $scrollContent: ViewStyle = {
-  paddingHorizontal: 20,
+  paddingHorizontal: 22,
   paddingTop: 20,
   paddingBottom: 48,
   gap: 16,
