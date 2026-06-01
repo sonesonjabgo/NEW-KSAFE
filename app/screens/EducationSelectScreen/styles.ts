@@ -40,7 +40,7 @@ export const $sourceTabTextActive: TextStyle = {
 export const $searchSection: ViewStyle = {
   backgroundColor: "#FFFFFF",
   paddingHorizontal: 20,
-  paddingVertical: 14,
+  paddingVertical: 8,
 }
 
 export const $searchRow: ViewStyle = {
@@ -66,14 +66,16 @@ export const $searchInput: TextStyle = {
 // ── Category chips ─────────────────────────────────────────────────────────────
 
 export const $categoryScrollView: ViewStyle = {
+  height: 44,
   backgroundColor: "#FFFFFF",
   flexShrink: 0,
 }
 
 export const $categoryRow: ViewStyle = {
   flexDirection: "row",
+  alignItems: "center",
   paddingHorizontal: 20,
-  paddingVertical: 12,
+  paddingVertical: 6,
   gap: 10,
 }
 
@@ -91,6 +93,7 @@ export const $categoryChipActive: ViewStyle = {
 
 export const $categoryChipText: TextStyle = {
   fontSize: 13,
+  lineHeight: 18,
   fontFamily: typography.primary.bold,
   color: "#606679",
 }

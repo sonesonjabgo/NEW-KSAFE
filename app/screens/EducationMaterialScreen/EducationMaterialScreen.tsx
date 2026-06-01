@@ -160,7 +160,7 @@ export const EducationMaterialScreen: FC<EducationMaterialScreenProps> = ({ navi
               <ScrollView
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                style={Shared.$categoryScrollView}
+                style={[Shared.$categoryScrollView, { height: 44, flexShrink: 0, flexGrow: 0 }]}
                 contentContainerStyle={Shared.$categoryRow}
               >
                 {CATEGORY_TABS.map((cat) => {
@@ -187,6 +187,7 @@ export const EducationMaterialScreen: FC<EducationMaterialScreenProps> = ({ navi
 
             {/* 카드 리스트 */}
             <FlatList
+              style={{ flex: 1 }}
               data={filtered}
               keyExtractor={(item) => String(item.id)}
               renderItem={renderItem}

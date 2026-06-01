@@ -10,6 +10,7 @@ import {
   ViewStyle,
   TextStyle,
 } from "react-native"
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
 import { Check, ChevronDown, Plus } from "lucide-react-native"
 
 import { StackScreen } from "@/components/StackScreen"
@@ -168,11 +169,12 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation }) 
       squareTop
       contentBg="#FFFFFF"
     >
-      <ScrollView
+      <KeyboardAwareScrollView
         style={$scrollView}
         contentContainerStyle={$scrollContent}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
+        bottomOffset={200}
       >
         {/* Section 1: 승인자 (필수) */}
         <View style={$titleRow}>
@@ -454,7 +456,7 @@ export const PatrolCreateScreen: FC<PatrolCreateScreenProps> = ({ navigation }) 
         >
           <Text text={translate("patrolCreateScreen:submitButton")} style={$submitButtonText} />
         </TouchableOpacity>
-      </ScrollView>
+      </KeyboardAwareScrollView>
 
       {/* Selection Modal */}
       <Modal visible={modalVisible} transparent animationType="fade" onRequestClose={closeModal}>

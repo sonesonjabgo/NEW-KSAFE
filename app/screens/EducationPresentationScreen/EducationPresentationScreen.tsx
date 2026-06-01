@@ -357,7 +357,7 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
             </View>
 
             {/* 숫자 코드 */}
-            <View style={[$numericCodeBox, isSmallPhone && { height: 44, marginBottom: 12 }]}>
+            <View style={[$numericCodeBox, isSmallPhone && { paddingVertical: 8, marginBottom: 12 }]}>
               <Text
                 text={MOCK_ROOM_ID}
                 style={[$numericCodeText, isSmallPhone && { fontSize: 22 }]}
@@ -710,18 +710,19 @@ const $qrWrapper: ViewStyle = {
 
 const $numericCodeBox: ViewStyle = {
   width: "100%",
-  height: 52,
   borderWidth: 1,
   borderColor: "#E5E7EB",
   borderRadius: 12,
   backgroundColor: "#FFFFFF",
   alignItems: "center",
   justifyContent: "center",
+  paddingVertical: 12,
   marginBottom: 16,
 }
 
 const $numericCodeText: TextStyle = {
   fontSize: 28,
+  lineHeight: 34,
   fontFamily: typography.primary.semiBold,
   color: "#111827",
   letterSpacing: 2,

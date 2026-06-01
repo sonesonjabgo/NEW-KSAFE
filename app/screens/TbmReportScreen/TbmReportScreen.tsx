@@ -1,13 +1,14 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import {
   Image,
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
-  ScrollView,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native"
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
 import { IconAlertTriangle, IconCalendar } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -25,6 +26,15 @@ import type { TbmReportScreenProps } from "./types"
 export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route }) => {
   const { id } = route.params
   const insets = useSafeAreaInsets()
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false)
+
+  useEffect(() => {
+    const showEvent = Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow"
+    const hideEvent = Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide"
+    const showSub = Keyboard.addListener(showEvent, () => setIsKeyboardVisible(true))
+    const hideSub = Keyboard.addListener(hideEvent, () => setIsKeyboardVisible(false))
+    return () => { showSub.remove(); hideSub.remove() }
+  }, [])
 
   const detail = mockTbmDetails[id]
 
@@ -45,13 +55,15 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
     >
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 60) : 0}
       >
-        <ScrollView
+        <KeyboardAwareScrollView
           style={S.$scrollContent}
           contentContainerStyle={[S.$scrollInner, { paddingBottom: (insets.bottom || 0) + 40 }]}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
+          bottomOffset={Platform.OS === "ios" ? 170 : 80}
         >
           {/* ── 1+2. 주의사항 + 활동명 카드 (간격 20, 아래 섹션과 40) ── */}
           <View style={{ gap: 20, marginBottom: 5 }}>
@@ -196,10 +208,10 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
               </View>
             )}
           </View>
-        </ScrollView>
+        </KeyboardAwareScrollView>
 
         {/* ── 하단 생성 버튼 ── */}
-        <View style={[S.$submitBar, { paddingBottom: (insets.bottom || 0) + 16 }]}>
+        <View style={[S.$submitBar, { paddingBottom: isKeyboardVisible ? 16 : (insets.bottom || 0) + 16 }]}>
           <TouchableOpacity
             style={S.$submitBtn}
             activeOpacity={0.8}

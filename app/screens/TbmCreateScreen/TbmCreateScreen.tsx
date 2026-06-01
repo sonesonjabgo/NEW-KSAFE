@@ -1,15 +1,16 @@
-import { FC, useCallback, useMemo, useRef, useState } from "react"
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import {
   Animated,
+  Keyboard,
   KeyboardAvoidingView,
   Modal,
   Platform,
-  ScrollView,
   StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native"
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
 import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker"
 import { IconChevronDown } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
@@ -44,6 +45,15 @@ function formatDate(d: Date): string {
 
 export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false)
+
+  useEffect(() => {
+    const showEvent = Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow"
+    const hideEvent = Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide"
+    const showSub = Keyboard.addListener(showEvent, () => setIsKeyboardVisible(true))
+    const hideSub = Keyboard.addListener(hideEvent, () => setIsKeyboardVisible(false))
+    return () => { showSub.remove(); hideSub.remove() }
+  }, [])
 
   const [selectedEducationIds, setSelectedEducationIds] = useState<number[]>([])
   const [workplace, setWorkplace] = useState("")
@@ -183,13 +193,15 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
       >
         <KeyboardAvoidingView
           style={{ flex: 1 }}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+          keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 60) : 0}
         >
-          <ScrollView
+          <KeyboardAwareScrollView
             style={S.$scrollContent}
             contentContainerStyle={S.$scrollInner}
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
+            bottomOffset={Platform.OS === "ios" ? 170 : 80}
           >
             {/* 작성 가이드 */}
             <View style={[S.$card, S.$guideRow]}>
@@ -330,10 +342,10 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
                 />
               </TouchableOpacity>
             </View>
-          </ScrollView>
+          </KeyboardAwareScrollView>
 
           {/* 하단 제출 버튼 */}
-          <View style={[S.$submitBar, { paddingBottom: insets.bottom + 16 }]}>
+          <View style={[S.$submitBar, { paddingBottom: isKeyboardVisible ? 16 : insets.bottom + 16 }]}>
             <TouchableOpacity
               style={[S.$submitBtn, !isValid && S.$submitBtnDisabled]}
               activeOpacity={0.8}

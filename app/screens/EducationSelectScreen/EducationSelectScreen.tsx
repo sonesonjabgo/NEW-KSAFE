@@ -173,7 +173,7 @@ export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigati
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
-              style={S.$categoryScrollView}
+              style={[S.$categoryScrollView, { height: 44, flexShrink: 0, flexGrow: 0 }]}
               contentContainerStyle={S.$categoryRow}
             >
               {CATEGORY_TABS.map((cat) => {
@@ -196,6 +196,7 @@ export const EducationSelectScreen: FC<EducationSelectScreenProps> = ({ navigati
 
             {/* 카드 리스트 */}
             <FlatList
+              style={{ flex: 1 }}
               data={filtered}
               keyExtractor={(item) => String(item.id)}
               renderItem={renderItem}

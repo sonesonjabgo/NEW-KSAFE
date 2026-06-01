@@ -1,12 +1,13 @@
-import { FC, useCallback, useMemo, useState } from "react"
+import { FC, useCallback, useEffect, useMemo, useState } from "react"
 import {
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
-  ScrollView,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native"
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
 import { Check } from "lucide-react-native"
 import { useTranslation } from "react-i18next"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
@@ -36,6 +37,15 @@ export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigati
   const isRTL = i18n.language === "ur"
   const insets = useSafeAreaInsets()
   const { isSmallPhone } = useResponsive()
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false)
+
+  useEffect(() => {
+    const showEvent = Platform.OS === "ios" ? "keyboardWillShow" : "keyboardDidShow"
+    const hideEvent = Platform.OS === "ios" ? "keyboardWillHide" : "keyboardDidHide"
+    const showSub = Keyboard.addListener(showEvent, () => setIsKeyboardVisible(true))
+    const hideSub = Keyboard.addListener(hideEvent, () => setIsKeyboardVisible(false))
+    return () => { showSub.remove(); hideSub.remove() }
+  }, [])
 
   const [selectedWorkplaces, setSelectedWorkplaces] = useState<string[]>([])
   const [notifyTitle, setNotifyTitle] = useState("")
@@ -71,13 +81,15 @@ export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigati
       >
         <KeyboardAvoidingView
           style={{ flex: 1 }}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+          keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 60) : 0}
         >
-          <ScrollView
+          <KeyboardAwareScrollView
             style={S.$scrollContent}
             contentContainerStyle={S.$scrollInner}
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
+            bottomOffset={Platform.OS === "ios" ? 170 : 80}
           >
             {/* 작성 가이드 */}
             <View style={[S.$card, S.$guideRow, isRTL && { flexDirection: "row-reverse" }]}>
@@ -186,10 +198,10 @@ export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigati
                 style={S.$helperText}
               />
             </View>
-          </ScrollView>
+          </KeyboardAwareScrollView>
 
           {/* 알림 전송 버튼 */}
-          <View style={[S.$submitBar, { paddingBottom: insets.bottom + 16 }]}>
+          <View style={[S.$submitBar, { paddingBottom: isKeyboardVisible ? 16 : insets.bottom + 16 }]}>
             <TouchableOpacity
               style={[S.$submitBtn, !isValid && S.$submitBtnDisabled]}
               activeOpacity={0.8}

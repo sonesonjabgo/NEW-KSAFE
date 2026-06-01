@@ -3,12 +3,13 @@ import {
   Animated,
   Image,
   Modal,
+  Platform,
   Pressable,
-  ScrollView,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native"
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
 import { Check, CircleAlert, Ellipsis, X } from "lucide-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -110,7 +111,13 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
       contentBg={colors.screenBg}
       squareTop
     >
-      <ScrollView contentContainerStyle={S.$scrollContent} showsVerticalScrollIndicator={false}>
+      <KeyboardAwareScrollView
+        style={S.$flex1}
+        contentContainerStyle={S.$scrollContent}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        bottomOffset={Platform.OS === "ios" ? 120 : 100}
+      >
         {/* 제보 정보 카드 */}
         <View style={S.$infoCard}>
           {/* 뱃지 + 날짜 */}
@@ -398,7 +405,7 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
               })}
           </View>
         </View>
-      </ScrollView>
+      </KeyboardAwareScrollView>
 
       {/* 사진 추가 모달 */}
       <Modal
