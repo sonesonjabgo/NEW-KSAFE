@@ -1157,6 +1157,8 @@ const ko: Translations = {
   },
   patrolCreateScreen: {
     title: "작업장 순회 점검 생성",
+    editTitle: "작업장 순회 점검 수정",
+    editSubmitButton: "점검 수정",
     section: {
       approver: {
         title: "승인자 (필수)",

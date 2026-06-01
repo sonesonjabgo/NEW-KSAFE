@@ -1171,6 +1171,8 @@ const en = {
   },
   patrolCreateScreen: {
     title: "Create Patrol Inspection",
+    editTitle: "Edit Patrol Inspection",
+    editSubmitButton: "Save Changes",
     section: {
       approver: {
         title: "Approver (Required)",

@@ -1121,6 +1121,8 @@ const ar: Translations = {
   },
   patrolCreateScreen: {
     title: "إنشاء فحص جولة مكان العمل",
+    editTitle: "تعديل فحص جولة مكان العمل",
+    editSubmitButton: "حفظ التعديلات",
     section: {
       approver: {
         title: "المعتمد (مطلوب)",

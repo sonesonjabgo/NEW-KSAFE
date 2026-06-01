@@ -1147,6 +1147,8 @@ const fr: Translations = {
   },
   patrolCreateScreen: {
     title: "Créer une inspection de ronde",
+    editTitle: "Modifier l'inspection de ronde",
+    editSubmitButton: "Enregistrer les modifications",
     section: {
       approver: {
         title: "Approbateur (Obligatoire)",

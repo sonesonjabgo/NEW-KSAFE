@@ -1114,6 +1114,8 @@ const ja: Translations = {
   },
   patrolCreateScreen: {
     title: "巡回点検作成",
+    editTitle: "巡回点検修正",
+    editSubmitButton: "変更を保存",
     section: {
       approver: {
         title: "承認者（必須）",

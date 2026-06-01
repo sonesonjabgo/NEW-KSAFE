@@ -101,7 +101,30 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
       squareTop
       contentBg="#FFFFFF"
       rightSlot={
-        <TouchableOpacity activeOpacity={0.7}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={() =>
+            navigation.navigate("PatrolCreate", {
+              editData: {
+                approver: { id: "2", name: MOCK_PATROL.approver, subtitle: "KS산업안전협회" },
+                reviewer: { id: "1", name: MOCK_PATROL.reviewer, subtitle: "KS산업안전협회" },
+                requirements: MOCK_OVERALL_ACTION,
+                items: [
+                  {
+                    id: "1",
+                    name: MOCK_PATROL.title,
+                    checkCards: MOCK_CHECK_ITEMS.map((item) => ({
+                      id: item.id,
+                      checkName: item.name,
+                      status: item.status,
+                      badNote: item.note,
+                    })),
+                  },
+                ],
+              },
+            })
+          }
+        >
           <Text text={translate("patrolDetailScreen:editButton")} style={$editButton} />
         </TouchableOpacity>
       }
