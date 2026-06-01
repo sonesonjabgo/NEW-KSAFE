@@ -135,7 +135,7 @@ export const $managerName: TextStyle = {
 export const $managerAffiliation: TextStyle = {
   fontSize: 13,
   fontFamily: typography.primary.normal,
-  color: "#9EA3AF",
+  color: "#555555",
 }
 
 // ── Admin Section ─────────────────────────────────────────────────────────────
