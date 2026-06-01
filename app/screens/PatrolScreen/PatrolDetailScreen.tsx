@@ -85,7 +85,6 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
         require("@assets/SameplePatrolReport.pdf"),
       )
       await Linking.openURL(asset.uri)
-      showToast(translate("patrolDetailScreen:toast.reportSuccess"))
     } catch {
       showToast(translate("patrolDetailScreen:toast.reportFail"), true)
     } finally {
