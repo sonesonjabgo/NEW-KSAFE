@@ -112,14 +112,14 @@ const $metaRow: ViewStyle = {
 }
 
 const $metaText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   color: "#555555",
   fontFamily: typography.primary.normal,
   lineHeight: 16,
 }
 
 const $metaWorkplace: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   color: "#555555",
   fontFamily: typography.primary.normal,
   lineHeight: 16,
@@ -144,7 +144,7 @@ const $pinBadge: ViewStyle = {
 }
 
 const $pinBadgeText: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   lineHeight: 14,
   fontFamily: typography.primary.bold,
   color: "#FFBB50",

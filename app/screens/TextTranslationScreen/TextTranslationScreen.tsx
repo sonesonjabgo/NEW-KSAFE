@@ -361,7 +361,7 @@ const $langFlag: TextStyle = {
 
 const $langBtnText: TextStyle = {
   flex: 1,
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: colors.blue,
 }
@@ -407,7 +407,7 @@ const $chatTopBanner: ViewStyle = {
 }
 
 const $listeningText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: colors.blue,
 }
@@ -540,13 +540,13 @@ const $inputTopRow: ViewStyle = {
 }
 
 const $inputHintText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
 
 const $inputCountText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -590,7 +590,7 @@ const $sendBtnInactive: ViewStyle = {
 }
 
 const $validationError: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#EF4444",
 }

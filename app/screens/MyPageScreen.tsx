@@ -227,7 +227,7 @@ const $section: ViewStyle = {
 }
 
 const $sectionTitle: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#555555",
   marginBottom: 10,

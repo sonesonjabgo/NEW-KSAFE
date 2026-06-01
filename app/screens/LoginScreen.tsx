@@ -383,7 +383,7 @@ const $inputRowError: ViewStyle = {
 }
 
 const $errorText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   color: colors.danger,
   marginTop: 4,
 }

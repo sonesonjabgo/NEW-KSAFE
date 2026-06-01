@@ -469,13 +469,13 @@ const $activeMicPulseDot: ViewStyle = {
 }
 
 const $listeningText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: colors.blue,
 }
 
 const $tapToSpeakText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }

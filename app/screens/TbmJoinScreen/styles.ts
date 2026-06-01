@@ -159,13 +159,13 @@ export const $cardMeta: ViewStyle = {
 }
 
 export const $cardAuthor: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }

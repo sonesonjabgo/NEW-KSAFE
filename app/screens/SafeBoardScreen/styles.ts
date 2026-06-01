@@ -13,7 +13,7 @@ export const $bellIconContainer: ViewStyle = {
 
 export const $bellText: TextStyle = {
   color: "#FFFFFF",
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   textAlign: "center",
 }
@@ -138,7 +138,7 @@ export const $fab: ViewStyle = {
 
 export const $fabLabel: TextStyle = {
   marginTop: 4,
-  fontSize: 13,
+  fontSize: 14,
   lineHeight: 16,
   color: "#FFFFFF",
   fontFamily: typography.primary.bold,

@@ -54,25 +54,25 @@ export const $badgeEnded: ViewStyle = {
 }
 
 export const $badgeDraftingText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#333333",
 }
 
 export const $badgeOngoingText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#18A24A",
 }
 
 export const $badgeEndedText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#FFFFFF",
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -243,19 +243,19 @@ export const $participantBadgeDanger: ViewStyle = {
 }
 
 export const $participantBadgeNormalText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#18A24A",
 }
 
 export const $participantBadgeCautionText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#D97706",
 }
 
 export const $participantBadgeDangerText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#F04E3E",
 }
@@ -269,7 +269,7 @@ export const $participantEmpty: TextStyle = {
 }
 
 export const $participantTime: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
   marginLeft: 12,

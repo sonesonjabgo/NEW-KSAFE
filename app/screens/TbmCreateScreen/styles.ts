@@ -44,7 +44,7 @@ export const $sectionLabel: TextStyle = {
 }
 
 export const $helperText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -154,7 +154,7 @@ export const $checkboxDot: ViewStyle = {
 }
 
 export const $checkboxLabel: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#666666",
 }
@@ -199,7 +199,7 @@ export const $educationCountHeader: ViewStyle = {
 }
 
 export const $educationStatusBadgeText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#1062D8",
 }
@@ -212,7 +212,7 @@ export const $educationMultipleBadge: ViewStyle = {
 }
 
 export const $educationMultipleBadgeText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#1062D8",
 }
@@ -246,7 +246,7 @@ export const $educationCountText: TextStyle = {
 }
 
 export const $educationCountHelper: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
 }

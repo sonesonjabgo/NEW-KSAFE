@@ -95,7 +95,7 @@ export const $required: TextStyle = {
 }
 
 export const $helperText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -156,7 +156,7 @@ export const $errorRow: ViewStyle = {
 
 export const $errorText: TextStyle = {
   flex: 1,
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#E03C3C",
 }

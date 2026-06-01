@@ -401,7 +401,7 @@ const $langSelectorBar: ViewStyle = {
 }
 
 const $langSelectorLabel: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -458,7 +458,7 @@ const $messageBubble: ViewStyle = {
 }
 
 const $messageSender: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#555555",
 }
@@ -480,7 +480,7 @@ const $recognizingRow: ViewStyle = {
 }
 
 const $recognizingText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: colors.blue,
 }
@@ -508,7 +508,7 @@ const $statusIconCircle: ViewStyle = {
 
 const $statusText: TextStyle = {
   flex: 1,
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
   lineHeight: 16,
@@ -538,7 +538,7 @@ const $micControlRow: ViewStyle = {
 }
 
 const $micLabel: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#374151",
 }
@@ -588,13 +588,13 @@ const $inputTopRow: ViewStyle = {
 }
 
 const $inputHintText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
 
 const $inputCountText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -644,7 +644,7 @@ const $sendBtnInactive: ViewStyle = {
 }
 
 const $validationError: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#EF4444",
 }
@@ -689,7 +689,7 @@ const $inviteModalTitle: TextStyle = {
 }
 
 const $inviteModalDesc: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
   textAlign: "center",

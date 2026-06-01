@@ -40,7 +40,7 @@ export const $activeTab: ViewStyle = {
 }
 
 export const $tabText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#555555",
 }
@@ -68,7 +68,7 @@ export const $summaryCard: ViewStyle = {
 }
 
 export const $summaryLabel: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#666666",
   marginBottom: 8,
@@ -134,7 +134,7 @@ export const $cardTopRow: ViewStyle = {
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -147,7 +147,7 @@ export const $cardLocation: TextStyle = {
 }
 
 export const $cardDescription: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
   marginBottom: 12,
@@ -167,7 +167,7 @@ export const $cardAuthorRow: ViewStyle = {
 }
 
 export const $cardAuthorName: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#333333",
   flexShrink: 1,
@@ -175,7 +175,7 @@ export const $cardAuthorName: TextStyle = {
 }
 
 export const $cardWorkplace: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
   flexShrink: 1,
@@ -192,7 +192,7 @@ export const $badge: ViewStyle = {
 }
 
 export const $badgeText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
 }
 
@@ -234,7 +234,7 @@ export const $fab: ViewStyle = {
 }
 
 export const $fabText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   lineHeight: 16,
   color: "#FFFFFF",
   fontFamily: typography.primary.bold,

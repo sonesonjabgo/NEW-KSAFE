@@ -414,12 +414,12 @@ const $cardBadge: ViewStyle = {
 }
 
 const $cardBadgeText: TextStyle = {
-  fontSize: 10,
+  fontSize: 14,
   fontFamily: semiBold,
 }
 
 const $cardDate: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: normal,
   color: "#555555",
 }
@@ -437,13 +437,13 @@ const $reviewRow: ViewStyle = {
 }
 
 const $reviewLabel: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: semiBold,
   color: "#555555",
 }
 
 const $reviewName: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: semiBold,
   color: "#000000",
 }
@@ -460,7 +460,7 @@ const $metaRow: ViewStyle = {
 }
 
 const $metaAuthor: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: semiBold,
   color: "#333333",
   flexShrink: 1,
@@ -468,7 +468,7 @@ const $metaAuthor: TextStyle = {
 }
 
 const $metaLocation: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: normal,
   color: "#555555",
   flexShrink: 1,
@@ -542,7 +542,7 @@ const $goodBadge: ViewStyle = {
 }
 
 const $goodBadgeText: TextStyle = {
-  fontSize: 10,
+  fontSize: 14,
   fontFamily: semiBold,
   color: "#24804B",
 }
@@ -558,7 +558,7 @@ const $badBadge: ViewStyle = {
 }
 
 const $badBadgeText: TextStyle = {
-  fontSize: 10,
+  fontSize: 14,
   fontFamily: semiBold,
   color: "#FF0004",
 }
@@ -587,13 +587,13 @@ const $actionContent: ViewStyle = {
 }
 
 const $actionLabel: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: bold,
   color: "#E24D16",
 }
 
 const $actionText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: medium,
   color: "#4C4C4C",
 }

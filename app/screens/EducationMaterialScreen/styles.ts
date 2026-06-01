@@ -29,12 +29,12 @@ export const $cardBadge: ViewStyle = {
 }
 
 export const $cardBadgeText: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#333333",
 }
@@ -66,13 +66,13 @@ export const $cardBottomRow: ViewStyle = {
 }
 
 export const $cardAuthor: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#56524F",
 }
 
 export const $cardSource: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }

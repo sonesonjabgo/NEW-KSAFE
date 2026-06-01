@@ -668,7 +668,7 @@ const $itemDeleteButton: ViewStyle = {
 }
 
 const $itemDeleteText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#FFFFFF",
 }
@@ -804,7 +804,7 @@ const $addItemButtonText: TextStyle = {
 // ── Description ───────────────────────────────────────────────────────────────
 
 const $sectionDescription: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#555555",
 }
@@ -972,7 +972,7 @@ const $successTitle: TextStyle = {
 }
 
 const $successMessage: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#555555",
   textAlign: "center",

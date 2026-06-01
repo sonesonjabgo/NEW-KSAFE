@@ -251,7 +251,7 @@ export const $codeInput: TextStyle = {
 /* ── 도움말 텍스트 ── */
 export const $helperText: TextStyle = {
   color: HELPER_COLOR,
-  fontSize: 13,
+  fontSize: 14,
   lineHeight: 20,
   marginBottom: 24,
 }

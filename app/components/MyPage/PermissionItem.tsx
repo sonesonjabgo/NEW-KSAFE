@@ -131,7 +131,7 @@ const $title: TextStyle = {
 }
 
 const $description: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
   lineHeight: 16,
@@ -143,7 +143,7 @@ const $control: ViewStyle = {
 }
 
 const $allowButton: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#4A6CF7",
 }

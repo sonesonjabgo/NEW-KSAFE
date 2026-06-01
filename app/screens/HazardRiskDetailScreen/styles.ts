@@ -37,7 +37,7 @@ export const $cardTopRow: ViewStyle = {
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -53,7 +53,7 @@ export const $badge: ViewStyle = {
 }
 
 export const $badgeText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
 }
 
@@ -133,7 +133,7 @@ export const $managerName: TextStyle = {
 }
 
 export const $managerAffiliation: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -196,7 +196,7 @@ export const $statusButton: ViewStyle = {
 }
 
 export const $statusButtonText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#555555",
 }
@@ -230,14 +230,14 @@ export const $dashedInputCard: ViewStyle = {
 
 export const $dashedInput: TextStyle = {
   flex: 1,
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#222222",
   textAlignVertical: "top",
 }
 
 export const $noteHint: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#555555",
 }
@@ -276,7 +276,7 @@ export const $photoHintRow: ViewStyle = {
 }
 
 export const $photoHintText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#555555",
   lineHeight: 18,
@@ -299,7 +299,7 @@ export const $photoGuideCard: ViewStyle = {
 }
 
 export const $photoGuideLine: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
   lineHeight: 16,
@@ -318,7 +318,7 @@ export const $photoGuideAddBtn: ViewStyle = {
 }
 
 export const $photoGuideAddBtnText: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#1062D8",
 }

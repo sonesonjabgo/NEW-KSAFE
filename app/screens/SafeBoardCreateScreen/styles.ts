@@ -46,7 +46,7 @@ export const $sectionLabel: TextStyle = {
 }
 
 export const $helperText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -156,7 +156,7 @@ export const $attachCard: ViewStyle = {
 
 export const $attachCardText: TextStyle = {
   flex: 1,
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
   lineHeight: 20,
@@ -172,7 +172,7 @@ export const $attachUploadBtn: ViewStyle = {
 }
 
 export const $attachUploadBtnText: TextStyle = {
-  fontSize: 10,
+  fontSize: 14,
   fontFamily: typography.primary.bold,
   color: "#1062D8",
 }
@@ -188,7 +188,7 @@ export const $attachCard2Empty: ViewStyle = {
 }
 
 export const $attachCard2EmptyText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
 }
@@ -209,7 +209,7 @@ export const $attachCard2FileRow: ViewStyle = {
 
 export const $attachCard2FileText: TextStyle = {
   flex: 1,
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
 }

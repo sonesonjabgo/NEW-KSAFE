@@ -45,7 +45,7 @@ export const $badge: ViewStyle = {
 }
 
 export const $badgeText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
 }
 
@@ -71,7 +71,7 @@ export const $authorBadge: ViewStyle = {
 }
 
 export const $authorBadgeText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#333333",
 }

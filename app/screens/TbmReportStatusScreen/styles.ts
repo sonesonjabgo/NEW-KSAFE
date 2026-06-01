@@ -59,31 +59,31 @@ export const $badgeFailed: ViewStyle = {
 }
 
 export const $badgeRequestedText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#333333",
 }
 
 export const $badgeGeneratingText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#D48208",
 }
 
 export const $badgeCompletedText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#18A24A",
 }
 
 export const $badgeFailedText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#D32F2F",
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -209,7 +209,7 @@ export const $regenInfoIconText: TextStyle = {
 
 export const $regenInfoText: TextStyle = {
   flex: 1,
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
   lineHeight: 19,
@@ -245,7 +245,7 @@ export const $regenInputText: TextStyle = {
 }
 
 export const $regenInputDescription: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#555555",
 }

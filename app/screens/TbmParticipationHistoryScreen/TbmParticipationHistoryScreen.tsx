@@ -231,13 +231,13 @@ const $badge: ViewStyle = {
 }
 
 const $badgeText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#18A24A",
 }
 
 const $historyDate: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -261,13 +261,13 @@ const $historyBottom: ViewStyle = {
 }
 
 const $workplaceLabel: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#56524F",
 }
 
 const $workplaceName: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#2C2C2C",
 }

@@ -455,7 +455,7 @@ const $aiMsgContent: ViewStyle = {
 }
 
 const $aiMsgName: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#555F7C",
 }
@@ -592,7 +592,7 @@ const $sendButtonInactive: ViewStyle = {
 }
 
 const $inputHint: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
   textAlign: "center",

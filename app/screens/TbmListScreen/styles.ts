@@ -30,7 +30,7 @@ export const $activeTab: ViewStyle = {
 }
 
 export const $tabText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#555555",
 }
@@ -74,7 +74,7 @@ export const $cardTopRow: ViewStyle = {
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   color: "#555555",
   fontFamily: typography.primary.normal,
 }
@@ -87,7 +87,7 @@ export const $cardTitle: TextStyle = {
 }
 
 export const $cardParticipants: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   color: "#555555",
   fontFamily: typography.primary.normal,
   marginTop: 2,
@@ -106,7 +106,7 @@ export const $cardMetaRow: ViewStyle = {
 }
 
 export const $cardMetaAuthor: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   color: "#333333",
   fontFamily: typography.primary.semiBold,
   flexShrink: 1,
@@ -114,7 +114,7 @@ export const $cardMetaAuthor: TextStyle = {
 }
 
 export const $cardMetaLocation: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   color: "#555555",
   fontFamily: typography.primary.normal,
   flexShrink: 1,
@@ -146,19 +146,19 @@ export const $badgeEnded: ViewStyle = {
 }
 
 export const $badgeDraftingText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   color: "#333333",
   fontFamily: typography.primary.semiBold,
 }
 
 export const $badgeOngoingText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   color: "#18A24A",
   fontFamily: typography.primary.semiBold,
 }
 
 export const $badgeEndedText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   color: "#FFFFFF",
   fontFamily: typography.primary.semiBold,
 }
@@ -206,7 +206,7 @@ export const $fab: ViewStyle = {
 
 export const $fabLabel: TextStyle = {
   marginTop: 4,
-  fontSize: 13,
+  fontSize: 14,
   lineHeight: 16,
   color: "#FFFFFF",
   fontFamily: typography.primary.bold,

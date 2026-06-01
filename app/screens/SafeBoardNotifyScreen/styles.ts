@@ -45,7 +45,7 @@ export const $requiredMark: TextStyle = {
 }
 
 export const $helperText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }

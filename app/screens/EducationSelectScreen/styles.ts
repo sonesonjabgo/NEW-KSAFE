@@ -92,7 +92,7 @@ export const $categoryChipActive: ViewStyle = {
 }
 
 export const $categoryChipText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   lineHeight: 18,
   fontFamily: typography.primary.bold,
   color: "#333333",
@@ -140,7 +140,7 @@ export const $cardTopRow: ViewStyle = {
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#333333",
 }
@@ -158,7 +158,7 @@ export const $cardBadge: ViewStyle = {
 }
 
 export const $cardBadgeText: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
 }
 

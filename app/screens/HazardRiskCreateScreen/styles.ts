@@ -79,7 +79,7 @@ export const $sectionLabel: TextStyle = {
 }
 
 export const $helperText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
   paddingHorizontal: 16,
@@ -140,7 +140,7 @@ export const $photoHintRow: ViewStyle = {
 
 export const $photoHintText: TextStyle = {
   flex: 1,
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#555555",
 }
@@ -162,7 +162,7 @@ export const $photoGuideCard: ViewStyle = {
 }
 
 export const $photoGuideLine: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
   lineHeight: 16,
@@ -181,7 +181,7 @@ export const $photoGuideAddBtn: ViewStyle = {
 }
 
 export const $photoGuideAddBtnText: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#1062D8",
 }

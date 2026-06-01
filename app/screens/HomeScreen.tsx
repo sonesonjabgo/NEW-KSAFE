@@ -841,7 +841,7 @@ const $boardMoreBtn: ViewStyle = {
 }
 
 const $boardMoreText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   color: "#7F848C",
   fontFamily: typography.primary.normal,
 }
@@ -862,7 +862,7 @@ const $tabItem: ViewStyle = {
 }
 
 const $tabLabel: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   textAlign: "center",
   flexShrink: 1,
@@ -920,7 +920,7 @@ const $boardItemContent: ViewStyle = {
 }
 
 const $boardItemTitle: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.bold,
   color: "#000000",
   lineHeight: 12,
@@ -930,7 +930,7 @@ const $boardItemTitle: TextStyle = {
 }
 
 const $boardItemDate: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   color: "#7F848C",
   fontFamily: typography.primary.normal,
   lineHeight: 11,
@@ -956,7 +956,7 @@ const $homePinBadge: ViewStyle = {
 }
 
 const $homePinBadgeText: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   lineHeight: 14,
   fontFamily: typography.primary.bold,
   color: "#FFBB50",
@@ -1012,7 +1012,7 @@ const $bannerOverlayAction: ViewStyle = {
 }
 
 const $bannerOverlayActionText: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#FFFFFF",
 }
@@ -1035,12 +1035,12 @@ const $footerLink: TextStyle = {
 }
 
 const $footerSep: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   color: "#555555",
 }
 
 const $footerCopyright: TextStyle = {
-  fontSize: 10,
+  fontSize: 14,
   color: "#555555",
   fontFamily: typography.primary.normal,
   textAlign: "center",
@@ -1076,7 +1076,7 @@ const $eduBannerTitle: TextStyle = {
 }
 
 const $eduBannerDesc: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#1062D8",
 }

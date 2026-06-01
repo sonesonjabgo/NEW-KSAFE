@@ -347,12 +347,12 @@ const $badge: ViewStyle = {
 }
 
 const $badgeText: TextStyle = {
-  fontSize: 10,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
 }
 
 const $cardDate: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -370,13 +370,13 @@ const $reviewRow: ViewStyle = {
 }
 
 const $reviewLabel: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#555555",
 }
 
 const $reviewName: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#000000",
 }
@@ -393,7 +393,7 @@ const $cardMetaRow: ViewStyle = {
 }
 
 const $cardMetaAuthor: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#333333",
   flexShrink: 1,
@@ -401,7 +401,7 @@ const $cardMetaAuthor: TextStyle = {
 }
 
 const $cardMetaLocation: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
   flexShrink: 1,
@@ -431,7 +431,7 @@ const $fab: ViewStyle = {
 
 const $fabLabel: TextStyle = {
   marginTop: 4,
-  fontSize: 13,
+  fontSize: 14,
   lineHeight: 16,
   color: "#FFFFFF",
   fontFamily: typography.primary.bold,

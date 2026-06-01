@@ -42,7 +42,7 @@ export const $infoCardTopRow: ViewStyle = {
 }
 
 export const $infoDate: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -95,7 +95,7 @@ export const $badge: ViewStyle = {
 }
 
 export const $badgeText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
 }
 
@@ -167,7 +167,7 @@ export const $statusBtn: ViewStyle = {
 }
 
 export const $statusBtnText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -303,13 +303,13 @@ export const $timelineTitle: TextStyle = {
 }
 
 export const $timelineDate: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
 
 export const $timelineDesc: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -333,7 +333,7 @@ export const $historyNoteBubble: ViewStyle = {
 }
 
 export const $historyNoteBubbleText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#18A24A",
   lineHeight: 18,
@@ -456,7 +456,7 @@ export const $editTextareaInput: TextStyle = {
 }
 
 export const $editHelperText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
   marginTop: 6,
@@ -471,7 +471,7 @@ export const $editErrorRow: ViewStyle = {
 
 export const $editErrorText: TextStyle = {
   flex: 1,
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#E03C3C",
 }
@@ -546,7 +546,7 @@ export const $resultDateRow: ViewStyle = {
 }
 
 export const $resultDateText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -558,7 +558,7 @@ export const $resultManagerRow: ViewStyle = {
 }
 
 export const $resultManagerName: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#1A1A1A",
 }
@@ -632,7 +632,7 @@ export const $processingTextareaInput: TextStyle = {
 }
 
 export const $processingHelperText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
   marginTop: 6,
@@ -659,7 +659,7 @@ export const $historyNoteBubbleReflected: ViewStyle = {
 }
 
 export const $historyNoteBubbleReflectedText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#1062D8",
   lineHeight: 18,
@@ -684,7 +684,7 @@ export const $historyNoteBubbleRejected: ViewStyle = {
 }
 
 export const $historyNoteBubbleRejectedText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#E03526",
   lineHeight: 18,
@@ -704,7 +704,7 @@ export const $processingReadBoxRejected: ViewStyle = {
 
 export const $workerInfoText: TextStyle = {
   flex: 1,
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
   textAlign: "center",

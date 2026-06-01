@@ -226,7 +226,7 @@ const $badgeRow: ViewStyle = {
 }
 
 const $dateText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }
@@ -247,7 +247,7 @@ const $alertRow: ViewStyle = {
 }
 
 const $alertText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#555555",
 }
@@ -281,7 +281,7 @@ const $divider: ViewStyle = {
 }
 
 const $affiliationText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#333333",
 }
