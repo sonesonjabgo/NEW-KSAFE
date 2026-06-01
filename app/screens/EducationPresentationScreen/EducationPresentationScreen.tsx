@@ -1,4 +1,4 @@
-import { FC, useState, useRef, useCallback } from "react"
+import { FC, useState, useRef, useCallback, useEffect } from "react"
 import {
   Modal,
   View,
@@ -8,6 +8,7 @@ import {
   FlatList,
   TextInput,
   KeyboardAvoidingView,
+  Keyboard,
   Platform,
   ActivityIndicator,
   ListRenderItemInfo,
@@ -55,7 +56,7 @@ interface EducationPresentationScreenProps extends AppStackScreenProps<"Educatio
 export const EducationPresentationScreen: FC<EducationPresentationScreenProps> = ({
   navigation,
 }) => {
-  const { bottom } = useSafeAreaInsets()
+  const insets = useSafeAreaInsets()
   const { isSmallPhone } = useResponsive()
   const flatListRef = useRef<FlatList<MessageItem>>(null)
 
@@ -69,6 +70,33 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
   const [inputFocused, setInputFocused] = useState(false)
   const [showValidationError, setShowValidationError] = useState(false)
   const [inviteModalVisible, setInviteModalVisible] = useState(false)
+  const [keyboardHeight, setKeyboardHeight] = useState(0)
+
+  const handleExitTextMode = useCallback(() => {
+    setInputMode("default")
+    setInputText("")
+    setShowValidationError(false)
+    setInputHeight(40)
+  }, [])
+
+  useEffect(() => {
+    if (Platform.OS === "ios") {
+      const hideSub = Keyboard.addListener("keyboardWillHide", handleExitTextMode)
+      return () => hideSub.remove()
+    } else {
+      const showSub = Keyboard.addListener("keyboardDidShow", (e) => {
+        setKeyboardHeight(e.endCoordinates.height)
+      })
+      const hideSub = Keyboard.addListener("keyboardDidHide", () => {
+        setKeyboardHeight(0)
+        handleExitTextMode()
+      })
+      return () => {
+        showSub.remove()
+        hideSub.remove()
+      }
+    }
+  }, [handleExitTextMode])
 
   const getLangLabel = (key: LanguageKey) =>
     translate(`educationPresentationScreen:languages.${key}` as any)
@@ -107,7 +135,8 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
   return (
     <>
       <StackScreen
-        title={`${translate("educationPresentationScreen:title")}\n${MOCK_ROOM_ID}`}
+        title={translate("educationPresentationScreen:title")}
+        headerExtra={<Text text={MOCK_ROOM_ID} style={$headerRoomId} />}
         onBack={() => navigation.goBack()}
         rightSlot={
           <TouchableOpacity activeOpacity={0.7} onPress={() => setInviteModalVisible(true)}>
@@ -135,7 +164,11 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
           </TouchableOpacity>
         </View>
 
-        <KeyboardAvoidingView style={$flex} behavior={Platform.OS === "ios" ? "padding" : "height"}>
+        <KeyboardAvoidingView
+          style={[$flex, Platform.OS === "android" && { paddingBottom: keyboardHeight }]}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+          keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 60) : 0}
+        >
           {/* 채팅 영역 */}
           <FlatList
             ref={flatListRef}
@@ -147,18 +180,20 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
             showsVerticalScrollIndicator={false}
           />
 
-          {/* 음성 인식 중 표시 — 항상 고정 높이 확보, 비활성 시 빈 공간 유지 */}
-          <View style={$recognizingRow}>
-            {micActive && (
-              <>
-                <ActivityIndicator size="small" color={colors.blue} />
-                <Text
-                  text={translate("educationPresentationScreen:recognizing")}
-                  style={$recognizingText}
-                />
-              </>
-            )}
-          </View>
+          {/* 음성 인식 중 표시 — 텍스트 입력 모드에서는 숨김 */}
+          {inputMode === "default" && (
+            <View style={$recognizingRow}>
+              {micActive && (
+                <>
+                  <ActivityIndicator size="small" color={colors.blue} />
+                  <Text
+                    text={translate("educationPresentationScreen:recognizing")}
+                    style={$recognizingText}
+                  />
+                </>
+              )}
+            </View>
+          )}
 
           {inputMode === "default" ? (
             <>
@@ -178,7 +213,7 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
               </View>
 
               {/* 하단 컨트롤 바 */}
-              <View style={[$controlBar, { paddingBottom: bottom + 16 }]}>
+              <View style={[$controlBar, { paddingBottom: insets.bottom + 16 }]}>
                 <TouchableOpacity
                   style={$iconBtn}
                   onPress={handleEnterTextMode}
@@ -212,7 +247,7 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
             </>
           ) : (
             /* 텍스트 입력 모드 — TextTranslationScreen의 입력 UI와 동일한 구조 */
-            <View style={[$textInputArea, { paddingBottom: bottom + 16 }]}>
+            <View style={[$textInputArea, { paddingBottom: inputFocused ? 8 : Math.max(16, insets.bottom + 8) }]}>
               <View style={$inputTopRow}>
                 <Text
                   text={translate("educationPresentationScreen:inputHint")}
@@ -369,6 +404,12 @@ const $langSelectorLabel: TextStyle = {
   fontSize: 12,
   fontFamily: typography.primary.normal,
   color: "#6B7280",
+}
+
+const $headerRoomId: TextStyle = {
+  fontSize: 20,
+  fontFamily: typography.primary.semiBold,
+  color: "#FFFFFF",
 }
 
 const $langBtn: ViewStyle = {

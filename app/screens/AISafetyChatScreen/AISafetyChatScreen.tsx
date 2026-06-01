@@ -7,6 +7,7 @@ import {
   FlatList,
   TextInput,
   KeyboardAvoidingView,
+  Keyboard,
   Platform,
   Alert,
   ListRenderItemInfo,
@@ -150,6 +151,21 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
   const [isLoading, setIsLoading] = useState(false)
   const [conversationStarted, setConversationStarted] = useState(false)
   const [inputFocused, setInputFocused] = useState(false)
+  const [keyboardHeight, setKeyboardHeight] = useState(0)
+
+  useEffect(() => {
+    if (Platform.OS === "ios") return
+    const showSub = Keyboard.addListener("keyboardDidShow", (e) => {
+      setKeyboardHeight(e.endCoordinates.height)
+    })
+    const hideSub = Keyboard.addListener("keyboardDidHide", () => {
+      setKeyboardHeight(0)
+    })
+    return () => {
+      showSub.remove()
+      hideSub.remove()
+    }
+  }, [])
 
   const canSend = inputText.trim().length >= 2 && inputText.trim().length <= 1000 && !isLoading
 
@@ -283,9 +299,9 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
       }
     >
       <KeyboardAvoidingView
-        style={$keyboardView}
-        behavior="padding"
-        keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 60) : insets.top + 60}
+        style={[$keyboardView, Platform.OS === "android" && { paddingBottom: keyboardHeight }]}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+        keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 60) : 0}
       >
         {conversationStarted ? (
           <FlatList
@@ -310,7 +326,21 @@ export const AISafetyChatScreen: FC<AISafetyChatScreenProps> = ({ navigation }) 
           />
         )}
 
-        <View style={[$inputContainer, { paddingBottom: inputFocused ? 8 : Math.max(20, insets.bottom + 8) }]}>
+        <View
+          style={[
+            $inputContainer,
+            {
+              paddingBottom:
+                Platform.OS === "android"
+                  ? keyboardHeight > 0
+                    ? 20
+                    : Math.max(20, insets.bottom + 8)
+                  : inputFocused
+                    ? 8
+                    : Math.max(20, insets.bottom + 8),
+            },
+          ]}
+        >
           <View style={$inputRow}>
             <TextInput
               style={$textInput}
