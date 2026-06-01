@@ -21,6 +21,7 @@ export const $container: ViewStyle = {
 
 export const $selectPrompt: TextStyle = {
   fontSize: 21,
+  lineHeight: 28,
   fontFamily: typography.primary.bold,
   color: "#000000",
   marginBottom: 16,

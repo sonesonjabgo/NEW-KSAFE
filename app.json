@@ -59,7 +59,18 @@
         }
       }
     ],
-    "expo-build-properties"
+    "expo-build-properties",
+    [
+      "react-native-permissions",
+      {
+        "iosPermissions": [
+          "Camera",
+          "Microphone",
+          "PhotoLibrary",
+          "PhotoLibraryAddOnly"
+        ]
+      }
+    ]
   ],
   "experiments": {
     "tsconfigPaths": true

@@ -40,6 +40,7 @@ export const $required: TextStyle = {
 
 export const $sectionLabel: TextStyle = {
   fontSize: 19,
+  lineHeight: 26,
   fontFamily: typography.primary.semiBold,
   color: colors.navy,
 }

@@ -315,6 +315,7 @@ const $logoImage: ImageStyle = {
 
 const $brandName: TextStyle = {
   fontSize: 22,
+  lineHeight: 30,
   color: "#FFFFFF",
   fontWeight: "bold",
   letterSpacing: 1,
@@ -342,6 +343,7 @@ const $cardContent: ViewStyle = {
 
 const $cardTitle: TextStyle = {
   fontSize: 22,
+  lineHeight: 30,
   fontWeight: "bold",
   color: "#1B2A4A",
 }

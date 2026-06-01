@@ -412,6 +412,7 @@ export const $editLabelRow: ViewStyle = {
 
 export const $editLabel: TextStyle = {
   fontSize: 19,
+  lineHeight: 26,
   fontFamily: typography.primary.semiBold,
   color: colors.navy,
 }
