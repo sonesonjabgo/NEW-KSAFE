@@ -16,6 +16,7 @@ export const $container: ViewStyle = {
 
 export const $heading: TextStyle = {
   fontSize: 26,
+  lineHeight: 34,
   fontFamily: typography.primary.semiBold,
   color: "#000000",
   marginBottom: 17,
@@ -23,6 +24,7 @@ export const $heading: TextStyle = {
 
 export const $description: TextStyle = {
   fontSize: 17,
+  lineHeight: 24,
   fontFamily: typography.primary.normal,
   color: "#181818",
   marginBottom: 24,
