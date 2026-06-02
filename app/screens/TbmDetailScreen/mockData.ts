@@ -184,6 +184,23 @@ export const mockTbmDetails: Record<number, TbmDetail> = {
       { id: 3, name: "허 준영", badge: "주의", time: "10:12" },
     ],
   },
+  12: {
+    id: 12,
+    title: "작업 전 안전장비 점검 TBM",
+    status: "종료됨",
+    date: "2026.02.03",
+    workDate: "2026년 2월 3일 오전 09:00",
+    author: "이 정민 현장안전팀장",
+    location: "부산 센텀 물류센터 현장",
+    activityContent:
+      "작업 시작 전 개인보호장비 착용 상태를 전수 점검합니다. 안전모, 안전화, 안전조끼의 이상 유무를 확인하고 불량 장비는 즉시 교체 후 작업에 임합니다.",
+    educationMaterials: [{ id: 17, title: "개인보호장비 착용 및 점검 교육" }],
+    participants: [
+      { id: 1, name: "이 수빈", badge: "정상", time: "09:05" },
+      { id: 2, name: "박 준서", badge: "정상", time: "09:08" },
+      { id: 3, name: "최 지훈", badge: "정상", time: "09:11" },
+    ],
+  },
   10: {
     id: 10,
     title: "굴삭기 작업 TBM",
