@@ -1299,12 +1299,16 @@ const es: Translations = {
       label: "Ubicación",
       placeholder: "Ej: Pasillo este del 2.º piso, entrada de la zona B",
       helper: "Hasta 200 caracteres.",
+      errorRequired: "Please enter the location.",
+      errorMaxLength: "Location must be 200 characters or less.",
     },
     hazardFactor: {
       label: "Factor de riesgo",
       placeholder:
         "¿Qué factores de riesgo hay?\nEjemplos:\n · El pasamanos de la escalera está suelto, lo que supone riesgo de caída.\n · Cables expuestos que representan riesgo de electrocución.",
       helper: "Hasta 1,000 caracteres.",
+      errorRequired: "Please enter the hazard factor.",
+      errorMaxLength: "Hazard factor must be 1,000 characters or less.",
     },
     sitePhotos: {
       label: "Fotos del sitio",
@@ -1316,7 +1320,18 @@ const es: Translations = {
       guide: "Debe registrar al menos 1 foto del sitio.\nPuede adjuntar de 1 a 5 fotos.",
       preview: "Se mostrará una vista previa al agregar una imagen.",
     },
-    submit: "Enviar",
+    submit: "Submit",
+    deletePhotoModal: {
+      title: "Delete Photo",
+      message: "Are you sure you want to delete this photo?",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
+    successModal: {
+      title: "Success",
+      message: "Your hazard report has been submitted.",
+      confirm: "OK",
+    },
   },
 
   hazardRiskScreen: {

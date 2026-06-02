@@ -71,6 +71,11 @@ export const $section: ViewStyle = {
   borderBottomColor: "#E9ECF0",
 }
 
+export const $labelRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+}
+
 export const $sectionLabel: TextStyle = {
   fontSize: 19,
   lineHeight: 26,
@@ -78,11 +83,18 @@ export const $sectionLabel: TextStyle = {
   color: colors.navy,
 }
 
+export const $required: TextStyle = {
+  fontSize: 15,
+  lineHeight: 26,
+  fontFamily: typography.primary.semiBold,
+  color: "#FF0000",
+  marginLeft: 2,
+}
+
 export const $helperText: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#555555",
-  paddingHorizontal: 16,
 }
 
 // ── Input ─────────────────────────────────────────────────────────────────────
@@ -108,6 +120,64 @@ export const $inputText: TextStyle = {
 
 export const $inputPlaceholder: TextStyle = {
   color: "#555555",
+}
+
+export const $inputRowFocused: ViewStyle = {
+  borderColor: "#1062D8",
+  borderWidth: 2,
+  backgroundColor: "#ECF4FE",
+}
+
+export const $textareaFocused: ViewStyle = {
+  borderColor: "#1062D8",
+  borderWidth: 2,
+  backgroundColor: "#ECF4FE",
+}
+
+export const $inputRowError: ViewStyle = {
+  borderColor: "#E03C3C",
+  borderWidth: 1.5,
+  backgroundColor: "#FFFFFF",
+}
+
+export const $textareaError: ViewStyle = {
+  borderColor: "#E03C3C",
+  borderWidth: 1.5,
+  backgroundColor: "#FFFFFF",
+}
+
+export const $errorRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 4,
+  marginTop: 2,
+}
+
+export const $errorText: TextStyle = {
+  flex: 1,
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#E03C3C",
+}
+
+export const $helperRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+}
+
+export const $charCountRow: ViewStyle = {
+  alignItems: "flex-end",
+}
+
+export const $charCountText: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#888888",
+}
+
+export const $charCountTextError: TextStyle = {
+  color: "#E03C3C",
 }
 
 // ── Textarea ──────────────────────────────────────────────────────────────────
@@ -214,6 +284,24 @@ export const $photoItem: ImageStyle = {
   height: 90,
   borderRadius: 10,
   backgroundColor: "#E0E0E0",
+}
+
+export const $deleteIconCircle: ViewStyle = {
+  width: 56,
+  height: 56,
+  borderRadius: 28,
+  backgroundColor: "#FDECEA",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+export const $successIconCircle: ViewStyle = {
+  width: 56,
+  height: 56,
+  borderRadius: 28,
+  backgroundColor: "#E8F0FE",
+  justifyContent: "center",
+  alignItems: "center",
 }
 
 export const $photoItemWrapper: ViewStyle = {

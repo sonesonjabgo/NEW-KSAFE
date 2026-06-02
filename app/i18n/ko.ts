@@ -1300,12 +1300,16 @@ const ko: Translations = {
       label: "위치",
       placeholder: "예) 2층 동측 복도, B구역 작업장 입구 등",
       helper: "입력 시 최대 200자까지 작성할 수 있습니다.",
+      errorRequired: "위치를 입력해주세요.",
+      errorMaxLength: "위치는 최대 200자 이하로 입력해주세요.",
     },
     hazardFactor: {
       label: "위험요인",
       placeholder:
         "어떤 위험요인이 있나요?\n예시)\n · 계단 손잡이가 흔들려 낙상 위험이 있습니다.\n · 전선이 노출되어 감전 위험이 있습니다.",
       helper: "입력 시 최대 1,000자까지 작성할 수 있습니다.",
+      errorRequired: "위험요인을 입력해주세요.",
+      errorMaxLength: "위험요인은 최대 1,000자 이하로 입력해주세요.",
     },
     sitePhotos: {
       label: "현장 사진",
@@ -1319,6 +1323,17 @@ const ko: Translations = {
       preview: "이미지를 추가하면 미리보기가 표시됩니다.",
     },
     submit: "제출하기",
+    deletePhotoModal: {
+      title: "사진 삭제",
+      message: "이 사진을 삭제하시겠습니까?",
+      cancel: "취소",
+      confirm: "삭제",
+    },
+    successModal: {
+      title: "성공",
+      message: "유해위험개소 제보가 등록되었습니다.",
+      confirm: "확인",
+    },
   },
 
   hazardRiskScreen: {

@@ -1315,12 +1315,16 @@ const en = {
       label: "Location",
       placeholder: "e.g., 2F east corridor, entrance to Zone B workshop",
       helper: "Up to 200 characters.",
+      errorRequired: "Please enter the location.",
+      errorMaxLength: "Location must be 200 characters or less.",
     },
     hazardFactor: {
       label: "Hazard Factor",
       placeholder:
         "What hazard factors are there?\nExamples:\n · The stair railing is loose, posing a fall risk.\n · Exposed wires create an electrocution hazard.",
       helper: "Up to 1,000 characters.",
+      errorRequired: "Please enter the hazard factor.",
+      errorMaxLength: "Hazard factor must be 1,000 characters or less.",
     },
     sitePhotos: {
       label: "Site Photos",
@@ -1334,6 +1338,17 @@ const en = {
       preview: "A preview will be shown when you add an image.",
     },
     submit: "Submit",
+    deletePhotoModal: {
+      title: "Delete Photo",
+      message: "Are you sure you want to delete this photo?",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
+    successModal: {
+      title: "Success",
+      message: "Your hazard report has been submitted.",
+      confirm: "OK",
+    },
   },
 
   hazardRiskScreen: {

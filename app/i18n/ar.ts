@@ -1264,12 +1264,16 @@ const ar: Translations = {
       label: "الموقع",
       placeholder: "مثال: الممر الشرقي بالطابق الثاني، مدخل منطقة العمل B",
       helper: "حتى 200 حرف.",
+      errorRequired: "Please enter the location.",
+      errorMaxLength: "Location must be 200 characters or less.",
     },
     hazardFactor: {
       label: "عامل الخطر",
       placeholder:
         "ما هي عوامل الخطر الموجودة؟\nأمثلة:\n · درابزين الدرج متقلقل مما يشكل خطر السقوط.\n · أسلاك مكشوفة تشكل خطر الصعق الكهربائي.",
       helper: "حتى 1,000 حرف.",
+      errorRequired: "Please enter the hazard factor.",
+      errorMaxLength: "Hazard factor must be 1,000 characters or less.",
     },
     sitePhotos: {
       label: "صور الموقع",
@@ -1281,7 +1285,18 @@ const ar: Translations = {
       guide: "يجب تسجيل صورة واحدة على الأقل من الموقع.\nيمكنك إرفاق من 1 إلى 5 صور.",
       preview: "ستظهر معاينة عند إضافة صورة.",
     },
-    submit: "إرسال",
+    submit: "Submit",
+    deletePhotoModal: {
+      title: "Delete Photo",
+      message: "Are you sure you want to delete this photo?",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
+    successModal: {
+      title: "Success",
+      message: "Your hazard report has been submitted.",
+      confirm: "OK",
+    },
   },
 
   hazardRiskScreen: {

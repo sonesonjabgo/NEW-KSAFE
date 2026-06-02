@@ -1257,12 +1257,16 @@ const ja: Translations = {
       label: "場所",
       placeholder: "例：2階東側廊下、B区域作業場入口など",
       helper: "最大200文字まで入力できます。",
+      errorRequired: "Please enter the location.",
+      errorMaxLength: "Location must be 200 characters or less.",
     },
     hazardFactor: {
       label: "危険要因",
       placeholder:
         "どのような危険要因がありますか？\n例：\n · 階段の手すりがぐらついており、転落の危険があります。\n · 電線が露出しており、感電の危険があります。",
       helper: "最大1,000文字まで入力できます。",
+      errorRequired: "Please enter the hazard factor.",
+      errorMaxLength: "Hazard factor must be 1,000 characters or less.",
     },
     sitePhotos: {
       label: "現場写真",
@@ -1274,7 +1278,18 @@ const ja: Translations = {
       guide: "現場写真を最低1枚登録してください。\n1枚から最大5枚まで添付できます。",
       preview: "画像を追加するとプレビューが表示されます。",
     },
-    submit: "送信する",
+    submit: "Submit",
+    deletePhotoModal: {
+      title: "Delete Photo",
+      message: "Are you sure you want to delete this photo?",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
+    successModal: {
+      title: "Success",
+      message: "Your hazard report has been submitted.",
+      confirm: "OK",
+    },
   },
 
   hazardRiskScreen: {

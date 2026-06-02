@@ -1268,12 +1268,16 @@ const hi: Translations = {
       label: "स्थान",
       placeholder: "उदा: दूसरी मंजिल का पूर्वी गलियारा, ज़ोन B कार्यस्थल प्रवेश द्वार",
       helper: "अधिकतम 200 अक्षर।",
+      errorRequired: "Please enter the location.",
+      errorMaxLength: "Location must be 200 characters or less.",
     },
     hazardFactor: {
       label: "जोखिम कारक",
       placeholder:
         "कौन से जोखिम कारक हैं?\nउदाहरण:\n · सीढ़ी की रेलिंग ढीली है, जिससे गिरने का खतरा है।\n · उजागर तार बिजली के झटके का खतरा पैदा करते हैं।",
       helper: "अधिकतम 1,000 अक्षर।",
+      errorRequired: "Please enter the hazard factor.",
+      errorMaxLength: "Hazard factor must be 1,000 characters or less.",
     },
     sitePhotos: {
       label: "साइट फ़ोटो",
@@ -1285,7 +1289,18 @@ const hi: Translations = {
       guide: "कम से कम 1 साइट फ़ोटो दर्ज करना आवश्यक है।\n1 से 5 फ़ोटो तक संलग्न की जा सकती हैं।",
       preview: "छवि जोड़ने पर पूर्वावलोकन दिखाया जाएगा।",
     },
-    submit: "सबमिट करें",
+    submit: "Submit",
+    deletePhotoModal: {
+      title: "Delete Photo",
+      message: "Are you sure you want to delete this photo?",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
+    successModal: {
+      title: "Success",
+      message: "Your hazard report has been submitted.",
+      confirm: "OK",
+    },
   },
 
   hazardRiskScreen: {

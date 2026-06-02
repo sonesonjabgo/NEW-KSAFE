@@ -13,13 +13,14 @@ import {
 } from "react-native"
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
 import { IconAlertCircle, IconChevronDown } from "@tabler/icons-react-native"
-import { Building, X } from "lucide-react-native"
+import { Building, Check, Trash2, X } from "lucide-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import HeaderBell from "@assets/icons/nav/header_bell.svg"
 import Pic1 from "@assets/icons/pic1.svg"
 import Pic2 from "@assets/icons/pic2.svg"
 
+import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
@@ -54,6 +55,16 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
   const [photos, setPhotos] = useState<string[]>([])
   const [workplaceModalVisible, setWorkplaceModalVisible] = useState(false)
   const [photoModalVisible, setPhotoModalVisible] = useState(false)
+  const [locationFocused, setLocationFocused] = useState(false)
+  const [hazardFocused, setHazardFocused] = useState(false)
+  const [deletePhotoIndex, setDeletePhotoIndex] = useState<number | null>(null)
+  const [successModalVisible, setSuccessModalVisible] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+
+  const hasLocationError = submitted && !location.trim()
+  const hasHazardError = submitted && !hazardFactor.trim()
+  const isLocationAtLimit = location.length >= 200
+  const isHazardAtLimit = hazardFactor.length >= 1000
 
   const slideAnim = useRef(new Animated.Value(300)).current
   const photoSlideAnim = useRef(new Animated.Value(300)).current
@@ -94,8 +105,11 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
   )
 
   const handleSubmit = useCallback(() => {
+    setSubmitted(true)
+    if (!isValid) return
     console.log(JSON.stringify({ workplace, location, hazardFactor, photos }, null, 2))
-  }, [workplace, location, hazardFactor, photos])
+    setSuccessModalVisible(true)
+  }, [isValid, workplace, location, hazardFactor, photos])
 
   return (
     <>
@@ -160,11 +174,20 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
 
             {/* 위치 */}
             <View style={S.$section}>
-              <Text
-                text={translate("hazardRiskCreateScreen:location.label")}
-                style={S.$sectionLabel}
-              />
-              <View style={S.$inputRow}>
+              <View style={S.$labelRow}>
+                <Text
+                  text={translate("hazardRiskCreateScreen:location.label")}
+                  style={S.$sectionLabel}
+                />
+                <Text text=" *" style={S.$required} />
+              </View>
+              <View
+                style={[
+                  S.$inputRow,
+                  locationFocused && !hasLocationError && !isLocationAtLimit && S.$inputRowFocused,
+                  (hasLocationError || isLocationAtLimit) && S.$inputRowError,
+                ]}
+              >
                 <TextInput
                   style={S.$inputText}
                   value={location}
@@ -172,21 +195,56 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
                   placeholder={translate("hazardRiskCreateScreen:location.placeholder")}
                   placeholderTextColor="#666666"
                   maxLength={200}
+                  onFocus={() => setLocationFocused(true)}
+                  onBlur={() => setLocationFocused(false)}
                 />
               </View>
-              <Text
-                text={translate("hazardRiskCreateScreen:location.helper")}
-                style={S.$helperText}
-              />
+              <View style={S.$helperRow}>
+                <Text
+                  text={translate("hazardRiskCreateScreen:location.helper")}
+                  style={[S.$helperText, { flex: 1 }]}
+                />
+                <Text
+                  text={`${location.length} / 200`}
+                  style={[S.$charCountText, isLocationAtLimit && S.$charCountTextError]}
+                />
+              </View>
+              {isLocationAtLimit && (
+                <View style={S.$errorRow}>
+                  <IconAlertCircle size={14} color="#E03C3C" strokeWidth={2} />
+                  <Text
+                    text={translate("hazardRiskCreateScreen:location.errorMaxLength")}
+                    style={S.$errorText}
+                  />
+                </View>
+              )}
+              {hasLocationError && (
+                <View style={S.$errorRow}>
+                  <IconAlertCircle size={14} color="#E03C3C" strokeWidth={2} />
+                  <Text
+                    text={translate("hazardRiskCreateScreen:location.errorRequired")}
+                    style={S.$errorText}
+                  />
+                </View>
+              )}
             </View>
 
             {/* 위험요인 */}
             <View style={S.$section}>
-              <Text
-                text={translate("hazardRiskCreateScreen:hazardFactor.label")}
-                style={S.$sectionLabel}
-              />
-              <View style={S.$textarea}>
+              <View style={S.$labelRow}>
+                <Text
+                  text={translate("hazardRiskCreateScreen:hazardFactor.label")}
+                  style={S.$sectionLabel}
+                />
+                <Text text=" *" style={S.$required} />
+              </View>
+              <View
+                style={[
+                  S.$textarea,
+                  hazardFocused && !hasHazardError && !isHazardAtLimit && S.$textareaFocused,
+                  (hasHazardError || isHazardAtLimit) && S.$textareaError,
+                ]}
+              >
                 <TextInput
                   style={S.$textareaInput}
                   value={hazardFactor}
@@ -196,20 +254,52 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
                   maxLength={1000}
                   multiline
                   scrollEnabled={false}
+                  onFocus={() => setHazardFocused(true)}
+                  onBlur={() => setHazardFocused(false)}
                 />
               </View>
-              <Text
-                text={translate("hazardRiskCreateScreen:hazardFactor.helper")}
-                style={S.$helperText}
-              />
+              <View style={S.$helperRow}>
+                <Text
+                  text={translate("hazardRiskCreateScreen:hazardFactor.helper")}
+                  style={[S.$helperText, { flex: 1 }]}
+                />
+                <Text
+                  text={`${hazardFactor.length} / 1,000`}
+                  style={[
+                    S.$charCountText,
+                    hazardFactor.length >= 1000 && S.$charCountTextError,
+                  ]}
+                />
+              </View>
+              {isHazardAtLimit && (
+                <View style={S.$errorRow}>
+                  <IconAlertCircle size={14} color="#E03C3C" strokeWidth={2} />
+                  <Text
+                    text={translate("hazardRiskCreateScreen:hazardFactor.errorMaxLength")}
+                    style={S.$errorText}
+                  />
+                </View>
+              )}
+              {hasHazardError && (
+                <View style={S.$errorRow}>
+                  <IconAlertCircle size={14} color="#E03C3C" strokeWidth={2} />
+                  <Text
+                    text={translate("hazardRiskCreateScreen:hazardFactor.errorRequired")}
+                    style={S.$errorText}
+                  />
+                </View>
+              )}
             </View>
 
             {/* 현장 사진 */}
             <View style={[S.$section, { borderBottomWidth: 0 }]}>
-              <Text
-                text={translate("hazardRiskCreateScreen:sitePhotos.label")}
-                style={S.$sectionLabel}
-              />
+              <View style={S.$labelRow}>
+                <Text
+                  text={translate("hazardRiskCreateScreen:sitePhotos.label")}
+                  style={S.$sectionLabel}
+                />
+                <Text text=" *" style={S.$required} />
+              </View>
               <View style={S.$photoHintRow}>
                 <IconAlertCircle size={15} color="#747474" />
                 <Text
@@ -244,7 +334,7 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
                       <TouchableOpacity
                         style={S.$photoRemoveBtn}
                         activeOpacity={0.8}
-                        onPress={() => setPhotos((prev) => prev.filter((_, idx) => idx !== i))}
+                        onPress={() => setDeletePhotoIndex(i)}
                       >
                         <X size={12} color="#FFFFFF" strokeWidth={2.5} />
                       </TouchableOpacity>
@@ -370,6 +460,44 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
           </Animated.View>
         </Pressable>
       </Modal>
+
+      <ConfirmModal
+        visible={successModalVisible}
+        icon={
+          <View style={S.$successIconCircle}>
+            <Check size={26} color="#1062D8" strokeWidth={2} />
+          </View>
+        }
+        title={translate("hazardRiskCreateScreen:successModal.title")}
+        message={translate("hazardRiskCreateScreen:successModal.message")}
+        confirmLabel={translate("hazardRiskCreateScreen:successModal.confirm")}
+        confirmBgColor="#1062D8"
+        onConfirm={() => {
+          setSuccessModalVisible(false)
+          navigation.goBack()
+        }}
+      />
+
+      <ConfirmModal
+        visible={deletePhotoIndex !== null}
+        icon={
+          <View style={S.$deleteIconCircle}>
+            <Trash2 size={26} color="#E42E2B" strokeWidth={2} />
+          </View>
+        }
+        title={translate("hazardRiskCreateScreen:deletePhotoModal.title")}
+        message={translate("hazardRiskCreateScreen:deletePhotoModal.message")}
+        cancelLabel={translate("hazardRiskCreateScreen:deletePhotoModal.cancel")}
+        confirmLabel={translate("hazardRiskCreateScreen:deletePhotoModal.confirm")}
+        confirmBgColor="#E42E2B"
+        onCancel={() => setDeletePhotoIndex(null)}
+        onConfirm={() => {
+          if (deletePhotoIndex !== null) {
+            setPhotos((prev) => prev.filter((_, idx) => idx !== deletePhotoIndex))
+          }
+          setDeletePhotoIndex(null)
+        }}
+      />
     </>
   )
 }
