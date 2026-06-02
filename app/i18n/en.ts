@@ -1025,6 +1025,10 @@ const en = {
       cancel: "Cancel",
       confirm: "Delete",
     },
+    toast: {
+      noAction: "Please select Reflected or Rejected.",
+      noNote: "Please enter the processing details.",
+    },
   },
 
   improvementProposalCreateScreen: {

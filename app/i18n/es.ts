@@ -1006,6 +1006,10 @@ const es: Translations = {
       cancel: "Cancelar",
       confirm: "Eliminar",
     },
+    toast: {
+      noAction: "Por favor, seleccione Reflejado o Rechazado.",
+      noNote: "Por favor, ingrese los detalles del procesamiento.",
+    },
   },
 
   improvementProposalCreateScreen: {

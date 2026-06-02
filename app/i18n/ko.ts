@@ -1011,6 +1011,10 @@ const ko: Translations = {
       cancel: "취소",
       confirm: "삭제",
     },
+    toast: {
+      noAction: "반영완료 또는 반영불가를 선택해주세요.",
+      noNote: "처리 내용을 입력해주세요.",
+    },
   },
 
   improvementProposalCreateScreen: {

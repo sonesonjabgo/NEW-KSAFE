@@ -978,6 +978,10 @@ const hi: Translations = {
       cancel: "रद्द करें",
       confirm: "हटाएं",
     },
+    toast: {
+      noAction: "कृपया प्रतिबिंबित या अस्वीकृत चुनें।",
+      noNote: "कृपया प्रसंस्करण विवरण दर्ज करें।",
+    },
   },
 
   improvementProposalCreateScreen: {

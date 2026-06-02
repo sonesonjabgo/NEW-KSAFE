@@ -968,6 +968,10 @@ const ja: Translations = {
       cancel: "キャンセル",
       confirm: "削除",
     },
+    toast: {
+      noAction: "反映完了または反映不可を選択してください。",
+      noNote: "処理内容を入力してください。",
+    },
   },
 
   improvementProposalCreateScreen: {

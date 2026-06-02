@@ -999,6 +999,10 @@ const fr: Translations = {
       cancel: "Annuler",
       confirm: "Supprimer",
     },
+    toast: {
+      noAction: "Veuillez sélectionner Réfléchi ou Rejeté.",
+      noNote: "Veuillez saisir les détails du traitement.",
+    },
   },
 
   improvementProposalCreateScreen: {

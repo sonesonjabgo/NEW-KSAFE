@@ -975,6 +975,10 @@ const ar: Translations = {
       cancel: "إلغاء",
       confirm: "حذف",
     },
+    toast: {
+      noAction: "يرجى اختيار مكتمل أو مرفوض.",
+      noNote: "يرجى إدخال تفاصيل المعالجة.",
+    },
   },
 
   improvementProposalCreateScreen: {
