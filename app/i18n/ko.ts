@@ -1387,6 +1387,15 @@ const ko: Translations = {
         adminSuffix: " - 관리자({{name}})",
       },
     },
+    bottomButton: {
+      proceed: "진행하기",
+      saveAction: "처리 내용 저장",
+      alreadyProcessed: "이미 처리된 제보입니다.",
+    },
+    toast: {
+      noAction: "조치완료 또는 조치불가를 선택해주세요.",
+      noNote: "조치 내용을 입력해주세요.",
+    },
   },
 
   welcomeIntroScreen: {

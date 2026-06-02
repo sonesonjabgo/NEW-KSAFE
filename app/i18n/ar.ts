@@ -1350,6 +1350,15 @@ const ar: Translations = {
         adminSuffix: " - المشرف ({{name}})",
       },
     },
+    bottomButton: {
+      proceed: "المتابعة",
+      saveAction: "حفظ الإجراء",
+      alreadyProcessed: "تمت معالجة هذا البلاغ بالفعل.",
+    },
+    toast: {
+      noAction: "يرجى اختيار مكتمل أو مستحيل.",
+      noNote: "يرجى إدخال تفاصيل الإجراء.",
+    },
   },
 
   welcomeIntroScreen: {

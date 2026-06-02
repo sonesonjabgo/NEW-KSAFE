@@ -1355,6 +1355,15 @@ const hi: Translations = {
         adminSuffix: " - व्यवस्थापक ({{name}})",
       },
     },
+    bottomButton: {
+      proceed: "आगे बढ़ें",
+      saveAction: "कार्रवाई सहेजें",
+      alreadyProcessed: "इस रिपोर्ट को पहले ही संसाधित किया जा चुका है।",
+    },
+    toast: {
+      noAction: "कृपया पूर्ण या असंभव चुनें।",
+      noNote: "कृपया कार्रवाई का विवरण दर्ज करें।",
+    },
   },
 
   welcomeIntroScreen: {

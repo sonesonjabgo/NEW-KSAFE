@@ -1343,6 +1343,15 @@ const ja: Translations = {
         adminSuffix: " - 管理者({{name}})",
       },
     },
+    bottomButton: {
+      proceed: "進行する",
+      saveAction: "対応内容を保存",
+      alreadyProcessed: "この通報はすでに処理済みです。",
+    },
+    toast: {
+      noAction: "対応完了または対応不可を選択してください。",
+      noNote: "対応内容を入力してください。",
+    },
   },
 
   welcomeIntroScreen: {

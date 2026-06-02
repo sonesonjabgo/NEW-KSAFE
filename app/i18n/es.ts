@@ -1386,6 +1386,15 @@ const es: Translations = {
         adminSuffix: " - Administrador ({{name}})",
       },
     },
+    bottomButton: {
+      proceed: "Proceder",
+      saveAction: "Guardar acción",
+      alreadyProcessed: "Este informe ya ha sido procesado.",
+    },
+    toast: {
+      noAction: "Por favor, seleccione Completado o Imposible.",
+      noNote: "Por favor, ingrese los detalles de la acción.",
+    },
   },
 
   welcomeIntroScreen: {

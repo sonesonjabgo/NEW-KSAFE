@@ -2,15 +2,21 @@ import { FC, useCallback, useRef, useState } from "react"
 import {
   Animated,
   Image,
+  ImageSourcePropType,
   Modal,
+  PanResponder,
   Platform,
-  Pressable,
+  StyleSheet,
   TextInput,
+  TextStyle,
   TouchableOpacity,
   View,
+  ViewStyle,
 } from "react-native"
+
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
 import { Check, CircleAlert, Ellipsis, X } from "lucide-react-native"
+import { IconCamera, IconPhoto } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import Pic1 from "@assets/icons/pic1.svg"
@@ -18,15 +24,22 @@ import Pic2 from "@assets/icons/pic2.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { Toast } from "@/components/Toast"
 import { UserAvatar } from "@/components/UserAvatar"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 import type { HazardRiskDetailScreenProps } from "@/screens/HazardRiskScreen/types"
 import type { HazardStatus } from "@/screens/HazardRiskScreen/types"
 import { colors } from "@/theme/colors"
+import { typography } from "@/theme/typography"
 
 import { mockHazardDetails } from "./mockData"
 import * as S from "./styles"
+
+function formatDate(d: Date) {
+  const pad = (n: number) => String(n).padStart(2, "0")
+  return `${d.getFullYear()}.${pad(d.getMonth() + 1)}.${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`
+}
 
 const STATUS_BADGE_STYLE: Record<HazardStatus, { bg: string; text: string }> = {
   pending: { bg: "#E5E6E9", text: "#606679" },
@@ -85,27 +98,62 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
   const { id } = route.params
   const detail = mockHazardDetails[id] ?? mockHazardDetails[1]
   const { role } = useRole()
-  const [selectedStatus, setSelectedStatus] = useState<HazardStatus>(detail.status)
-  const [actionNote, setActionNote] = useState("")
-  const [actionPhotos, setActionPhotos] = useState<string[]>([])
-  const [photoModalVisible, setPhotoModalVisible] = useState(false)
+  const [status, setStatus] = useState<HazardStatus>(detail.status)
+  const [pendingAction, setPendingAction] = useState<"completed" | "impossible" | null>(null)
+  const [actionNote, setActionNote] = useState(
+    detail.history?.find((h) => h.status === "completed" || h.status === "impossible")?.note ?? "",
+  )
+  const [localHistory, setLocalHistory] = useState(detail.history ?? [])
+  const [actionPhotos, setActionPhotos] = useState<ImageSourcePropType[]>([])
+  const [captureSheetVisible, setCaptureSheetVisible] = useState(false)
+  const [toastVisible, setToastVisible] = useState(false)
+  const [toastMessage, setToastMessage] = useState("")
 
-  const photoSlideAnim = useRef(new Animated.Value(300)).current
+  const isOngoing = status === "ongoing"
+  const isDone = status === "completed" || status === "impossible"
+  const isInputEditable = isOngoing && pendingAction !== null
+  const showPhotoSection = isOngoing && pendingAction === "completed"
+
+  const slideAnim = useRef(new Animated.Value(300)).current
+  const fadeAnim = useRef(new Animated.Value(0)).current
 
   const openPhotoModal = useCallback(() => {
-    setPhotoModalVisible(true)
-    Animated.timing(photoSlideAnim, { toValue: 0, duration: 250, useNativeDriver: true }).start()
-  }, [photoSlideAnim])
+    setCaptureSheetVisible(true)
+    Animated.parallel([
+      Animated.timing(fadeAnim, { toValue: 1, duration: 200, useNativeDriver: true }),
+      Animated.timing(slideAnim, { toValue: 0, duration: 260, useNativeDriver: true }),
+    ]).start()
+  }, [fadeAnim, slideAnim])
 
   const closePhotoModal = useCallback(() => {
-    Animated.timing(photoSlideAnim, { toValue: 300, duration: 200, useNativeDriver: true }).start(
-      () => setPhotoModalVisible(false),
-    )
-  }, [photoSlideAnim])
+    Animated.parallel([
+      Animated.timing(fadeAnim, { toValue: 0, duration: 160, useNativeDriver: true }),
+      Animated.timing(slideAnim, { toValue: 300, duration: 200, useNativeDriver: true }),
+    ]).start(() => setCaptureSheetVisible(false))
+  }, [fadeAnim, slideAnim])
 
-  const isInputEnabled = selectedStatus === "completed" || selectedStatus === "impossible"
+  const panResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: (_, gs) => gs.dy > 5 && gs.dy > Math.abs(gs.dx),
+      onPanResponderMove: (_, gs) => { if (gs.dy > 0) slideAnim.setValue(gs.dy) },
+      onPanResponderRelease: (_, gs) => {
+        if (gs.dy > 80 || gs.vy > 0.5) {
+          closePhotoModal()
+        } else {
+          Animated.spring(slideAnim, { toValue: 0, useNativeDriver: true }).start()
+        }
+      },
+    }),
+  ).current
+
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const addSamplePhoto = useCallback(() => {
+    closePhotoModal()
+    setActionPhotos((prev) => [...prev, require("@assets/images/sampleImage.jpg")])
+  }, [closePhotoModal])
 
   return (
+    <>
     <StackScreen
       title={translate("hazardRiskDetailScreen:title")}
       onBack={() => navigation.goBack()}
@@ -114,7 +162,7 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
     >
       <KeyboardAwareScrollView
         style={S.$flex1}
-        contentContainerStyle={S.$scrollContent}
+        contentContainerStyle={[S.$scrollContent, role === "admin" && { paddingBottom: 80 }]}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
         bottomOffset={Platform.OS === "ios" ? 120 : 100}
@@ -123,7 +171,7 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
         <View style={S.$infoCard}>
           {/* 뱃지 + 날짜 */}
           <View style={S.$cardTopRow}>
-            <StatusBadge status={detail.status} />
+            <StatusBadge status={status} />
             <Text text={detail.date} style={S.$cardDate} />
           </View>
 
@@ -194,14 +242,17 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
 
             {/* 카드 */}
             <View style={S.$adminCard}>
-              {/* 상태 변경 버튼 3개 */}
+              {/* 상태 버튼 3개 — 항상 표시, 상태에 따라 인터랙션 제어 */}
               <View style={S.$statusButtonRow}>
-                {ACTION_STATUSES.map((status) => {
-                  const isSelected = selectedStatus === status
-                  const btnColor = ACTION_BUTTON_COLOR[status]
+                {ACTION_STATUSES.map((s) => {
+                  const isSelected = isOngoing
+                    ? pendingAction === null ? s === "ongoing" : pendingAction === s
+                    : status === s
+                  const isEnabled = isOngoing && (s === "completed" || s === "impossible")
+                  const btnColor = ACTION_BUTTON_COLOR[s]
                   return (
                     <TouchableOpacity
-                      key={status}
+                      key={s}
                       style={[
                         S.$statusButton,
                         isSelected && {
@@ -209,16 +260,20 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
                           borderColor: btnColor.border,
                         },
                       ]}
-                      onPress={() => setSelectedStatus(status)}
-                      activeOpacity={0.7}
+                      onPress={
+                        isEnabled
+                          ? () => setPendingAction(s as "completed" | "impossible")
+                          : undefined
+                      }
+                      activeOpacity={isEnabled ? 0.7 : 1}
                     >
                       {(() => {
-                        const IconComponent = ACTION_BUTTON_ICON[status]
+                        const IconComponent = ACTION_BUTTON_ICON[s]
                         const iconColor = isSelected ? btnColor.text : "#AAAAAA"
                         return <IconComponent size={24} color={iconColor} />
                       })()}
                       <Text
-                        text={translate(`hazardRiskScreen:status.${status}` as any)}
+                        text={translate(`hazardRiskScreen:status.${s}` as any)}
                         style={[S.$statusButtonText, isSelected && { color: btnColor.text }]}
                       />
                       {isSelected && (
@@ -231,7 +286,7 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
                 })}
               </View>
 
-              {/* 조치 내용 입력 + 점선 입력 카드 */}
+              {/* 조치 내용 입력 — 항상 표시 */}
               <View style={{ gap: 11 }}>
                 <Text
                   text={translate("hazardRiskDetailScreen:adminSection.noteLabel")}
@@ -240,10 +295,12 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
                 <View style={S.$dashedInputCard}>
                   <TextInput
                     style={S.$dashedInput}
-                    placeholder={translate(PLACEHOLDER_I18N_KEY[selectedStatus] as any)}
+                    placeholder={translate(
+                      PLACEHOLDER_I18N_KEY[pendingAction ?? status] as any,
+                    )}
                     placeholderTextColor="#BBBBBB"
                     multiline
-                    editable={isInputEnabled}
+                    editable={isInputEditable}
                     value={actionNote}
                     onChangeText={setActionNote}
                   />
@@ -253,12 +310,11 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
                   style={S.$noteHint}
                 />
 
-                {/* 조치완료 상태일 때만 표시 */}
-                {selectedStatus === "completed" && (
+                {/* 조치완료일 때 사진 업로드 섹션 */}
+                {showPhotoSection && (
                   <>
                     <View style={S.$noteDivider} />
 
-                    {/* 현장 사진* */}
                     <View style={S.$photoLabelContainer}>
                       <Text
                         text={translate("hazardRiskDetailScreen:adminSection.sitePhotosLabel")}
@@ -267,7 +323,6 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
                       <Text text=" *" style={[S.$photoLabel, S.$asterisk]} />
                     </View>
 
-                    {/* 안내 문구 */}
                     <View style={S.$photoHintContainer}>
                       <View style={S.$photoHintRow}>
                         <CircleAlert size={14} color="#747474" style={{ marginTop: 2 }} />
@@ -289,29 +344,30 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
                       </View>
                     </View>
 
-                    {/* 사진 등록 카드 */}
                     <View style={S.$photoGuideCard}>
                       <Pic1 width={30} height={30} />
                       <Text
                         text={translate("hazardRiskCreateScreen:sitePhotos.guide")}
                         style={[S.$photoGuideLine, { flex: 1 }]}
                       />
-                      <TouchableOpacity
-                        style={S.$photoGuideAddBtn}
-                        activeOpacity={0.7}
-                        onPress={openPhotoModal}
-                      >
-                        <Text
-                          text={translate("hazardRiskCreateScreen:sitePhotos.addButton")}
-                          style={S.$photoGuideAddBtnText}
-                        />
-                      </TouchableOpacity>
+                      {isOngoing && pendingAction === "completed" && (
+                        <TouchableOpacity
+                          style={S.$photoGuideAddBtn}
+                          activeOpacity={0.7}
+                          onPress={openPhotoModal}
+                        >
+                          <Text
+                            text={translate("hazardRiskCreateScreen:sitePhotos.addButton")}
+                            style={S.$photoGuideAddBtnText}
+                          />
+                        </TouchableOpacity>
+                      )}
                     </View>
 
                     {actionPhotos.length > 0 ? (
                       <View style={[S.$photoGrid, { marginTop: 10 }]}>
-                        {actionPhotos.map((uri, i) => (
-                          <Image key={i} source={{ uri }} style={S.$photoItem} />
+                        {actionPhotos.map((src, i) => (
+                          <Image key={i} source={src} style={S.$photoItem} />
                         ))}
                       </View>
                     ) : (
@@ -342,8 +398,8 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
 
           {/* 이력 목록 */}
           <View style={S.$historyList}>
-            {detail.history
-              ?.filter((item) => item.status !== "ongoing")
+            {localHistory
+              .filter((item) => item.status !== "ongoing")
               .slice()
               .reverse()
               .map((item, index, arr) => {
@@ -393,13 +449,15 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
                           ]}
                         >
                           <Text style={S.$historyContent}>
-                            {translate(
-                              `hazardRiskDetailScreen:statusHistory.contents.${item.status}` as any,
-                            )}
-                            {translate(
-                              "hazardRiskDetailScreen:statusHistory.contents.adminSuffix",
-                              { name: detail.managerName },
-                            )}
+                            {item.note
+                              ? `${item.note} - 관리자(${detail.managerName})`
+                              : translate(
+                                  `hazardRiskDetailScreen:statusHistory.contents.${item.status}` as any,
+                                ) +
+                                translate(
+                                  "hazardRiskDetailScreen:statusHistory.contents.adminSuffix",
+                                  { name: detail.managerName },
+                                )}
                           </Text>
                         </View>
                       )}
@@ -411,49 +469,198 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
         </View>
       </KeyboardAwareScrollView>
 
-      {/* 사진 추가 모달 */}
-      <Modal
-        visible={photoModalVisible}
-        transparent
-        animationType="fade"
-        onRequestClose={closePhotoModal}
-      >
-        <Pressable style={S.$modalOverlay} onPress={closePhotoModal}>
-          <Animated.View
-            style={[
-              S.$modalContent,
-              { paddingBottom: insets.bottom + 16, transform: [{ translateY: photoSlideAnim }] },
-            ]}
-          >
+      {/* 하단 버튼 */}
+      {role === "admin" && (
+        <View style={[$bottomBar, { paddingBottom: insets.bottom + 12 }]}>
+          {isDone ? (
+            <View style={[$bottomBtn, $bottomBtnDisabled]}>
+              <Text
+                text={translate("hazardRiskDetailScreen:bottomButton.alreadyProcessed")}
+                style={$bottomBtnTextDisabled}
+              />
+            </View>
+          ) : (
             <TouchableOpacity
-              style={S.$workplaceOption}
-              activeOpacity={0.7}
+              style={[$bottomBtn, $bottomBtnActive]}
+              activeOpacity={0.8}
               onPress={() => {
-                console.log("카메라")
-                closePhotoModal()
+                const now = formatDate(new Date())
+                if (status === "pending") {
+                  setStatus("ongoing")
+                  setLocalHistory((prev) => [
+                    ...prev,
+                    { id: Date.now(), status: "ongoing" as HazardStatus, date: now },
+                  ])
+                } else if (isOngoing) {
+                  if (!pendingAction) {
+                    setToastMessage(translate("hazardRiskDetailScreen:toast.noAction"))
+                    setToastVisible(true)
+                    return
+                  }
+                  if (!actionNote.trim()) {
+                    setToastMessage(translate("hazardRiskDetailScreen:toast.noNote"))
+                    setToastVisible(true)
+                    return
+                  }
+                  setStatus(pendingAction)
+                  setLocalHistory((prev) => [
+                    ...prev,
+                    { id: Date.now(), status: pendingAction, date: now, note: actionNote.trim() },
+                  ])
+                  setPendingAction(null)
+                }
               }}
             >
               <Text
-                text={translate("hazardRiskCreateScreen:sitePhotos.camera")}
-                style={S.$workplaceOptionText}
+                text={
+                  status === "pending"
+                    ? translate("hazardRiskDetailScreen:bottomButton.proceed")
+                    : translate("hazardRiskDetailScreen:bottomButton.saveAction")
+                }
+                style={$bottomBtnTextActive}
               />
             </TouchableOpacity>
-            <TouchableOpacity
-              style={S.$workplaceOption}
-              activeOpacity={0.7}
-              onPress={() => {
-                console.log("앨범")
-                closePhotoModal()
-              }}
-            >
-              <Text
-                text={translate("hazardRiskCreateScreen:sitePhotos.album")}
-                style={S.$workplaceOptionText}
-              />
-            </TouchableOpacity>
-          </Animated.View>
-        </Pressable>
-      </Modal>
+          )}
+        </View>
+      )}
+
     </StackScreen>
+    <Toast
+      visible={toastVisible}
+      message={toastMessage}
+      icon={<X size={14} color="#FFFFFF" strokeWidth={2.5} />}
+      iconCircleColor={colors.danger}
+      onHide={() => setToastVisible(false)}
+    />
+
+    {/* 사진 촬영 방법 선택 바텀시트 */}
+    <Modal
+      visible={captureSheetVisible}
+      transparent
+      animationType="none"
+      onRequestClose={closePhotoModal}
+    >
+      <View style={StyleSheet.absoluteFill}>
+        <Animated.View
+          style={[StyleSheet.absoluteFill, $sheetBackdrop, { opacity: fadeAnim }]}
+        />
+        <TouchableOpacity
+          style={StyleSheet.absoluteFill}
+          onPress={closePhotoModal}
+          activeOpacity={1}
+        />
+        <Animated.View
+          style={[$sheet, { paddingBottom: insets.bottom + 16, transform: [{ translateY: slideAnim }] }]}
+        >
+          <View style={$sheetDragHandleArea} {...panResponder.panHandlers}>
+            <View style={$sheetDragHandleBar} />
+          </View>
+          <View style={$sheetBtnRow}>
+            <TouchableOpacity style={$sheetBtn} activeOpacity={0.7} onPress={addSamplePhoto}>
+              <IconCamera size={20} color={colors.navy} strokeWidth={1.8} />
+              <Text text={translate("aiRiskDocCreatorScreen:captureSheet.camera")} style={$sheetBtnLabel} />
+            </TouchableOpacity>
+            <TouchableOpacity style={$sheetBtn} activeOpacity={0.7} onPress={addSamplePhoto}>
+              <IconPhoto size={20} color={colors.navy} strokeWidth={1.8} />
+              <Text text={translate("aiRiskDocCreatorScreen:captureSheet.album")} style={$sheetBtnLabel} />
+            </TouchableOpacity>
+          </View>
+        </Animated.View>
+      </View>
+    </Modal>
+    </>
   )
+}
+
+const $bottomBar: ViewStyle = {
+  paddingHorizontal: 20,
+  paddingTop: 12,
+  backgroundColor: "#FFFFFF",
+  borderTopWidth: 1,
+  borderTopColor: "#F0F0F0",
+}
+
+const $bottomBtn: ViewStyle = {
+  height: 50,
+  borderRadius: 10,
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+const $bottomBtnActive: ViewStyle = {
+  backgroundColor: "#1062D8",
+}
+
+const $bottomBtnDisabled: ViewStyle = {
+  backgroundColor: "#F3F2F0",
+}
+
+const $bottomBtnTextActive: TextStyle = {
+  fontSize: 16,
+  fontFamily: typography.primary.semiBold,
+  color: "#FFFFFF",
+}
+
+const $bottomBtnTextDisabled: TextStyle = {
+  fontSize: 16,
+  fontFamily: typography.primary.semiBold,
+  color: "#FFFFFF",
+}
+
+const $sheetBackdrop: ViewStyle = {
+  backgroundColor: "rgba(0, 0, 0, 0.4)",
+}
+
+const $sheet: ViewStyle = {
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  right: 0,
+  backgroundColor: "#FFFFFF",
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+}
+
+const $sheetDragHandleArea: ViewStyle = {
+  alignItems: "center",
+  paddingTop: 12,
+  paddingBottom: 8,
+}
+
+const $sheetDragHandleBar: ViewStyle = {
+  width: 46,
+  height: 4,
+  borderRadius: 2,
+  backgroundColor: "#B0B0B0",
+}
+
+const $sheetBtnRow: ViewStyle = {
+  flexDirection: "row",
+  gap: 12,
+  paddingHorizontal: 20,
+  paddingTop: 12,
+}
+
+const $sheetBtn: ViewStyle = {
+  flex: 1,
+  height: 54,
+  borderRadius: 14,
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: 8,
+  backgroundColor: "#FFFFFF",
+  borderWidth: 1,
+  borderColor: "#ECECEC",
+  shadowColor: "#000000",
+  shadowOffset: { width: 0, height: 3 },
+  shadowOpacity: 0.12,
+  shadowRadius: 8,
+  elevation: 5,
+}
+
+const $sheetBtnLabel: TextStyle = {
+  fontSize: 15,
+  fontFamily: typography.primary.semiBold,
+  color: colors.navy,
 }

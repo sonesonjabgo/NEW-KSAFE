@@ -1402,6 +1402,15 @@ const en = {
         adminSuffix: " - Admin ({{name}})",
       },
     },
+    bottomButton: {
+      proceed: "Proceed",
+      saveAction: "Save Action",
+      alreadyProcessed: "This report has already been processed.",
+    },
+    toast: {
+      noAction: "Please select Completed or Impossible.",
+      noNote: "Please enter the action details.",
+    },
   },
 
   welcomeIntroScreen: {

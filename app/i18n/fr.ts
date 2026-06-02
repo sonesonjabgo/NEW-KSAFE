@@ -1383,6 +1383,15 @@ const fr: Translations = {
         adminSuffix: " - Administrateur ({{name}})",
       },
     },
+    bottomButton: {
+      proceed: "Procéder",
+      saveAction: "Enregistrer l'action",
+      alreadyProcessed: "Ce signalement a déjà été traité.",
+    },
+    toast: {
+      noAction: "Veuillez sélectionner Terminé ou Impossible.",
+      noNote: "Veuillez saisir les détails de l'action.",
+    },
   },
 
   welcomeIntroScreen: {
