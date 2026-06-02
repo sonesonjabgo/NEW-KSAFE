@@ -1384,6 +1384,14 @@ const hi: Translations = {
       proceed: "आगे बढ़ें",
       saveAction: "कार्रवाई सहेजें",
       alreadyProcessed: "इस रिपोर्ट को पहले ही संसाधित किया जा चुका है।",
+      edit: "Edit",
+      delete: "Delete",
+    },
+    deleteModal: {
+      title: "Delete Report",
+      message: "Are you sure you want to delete this report?",
+      cancel: "Cancel",
+      confirm: "Delete",
     },
     toast: {
       noAction: "कृपया पूर्ण या असंभव चुनें।",

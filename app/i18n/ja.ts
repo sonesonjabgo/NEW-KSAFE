@@ -1372,6 +1372,14 @@ const ja: Translations = {
       proceed: "進行する",
       saveAction: "対応内容を保存",
       alreadyProcessed: "この通報はすでに処理済みです。",
+      edit: "Edit",
+      delete: "Delete",
+    },
+    deleteModal: {
+      title: "Delete Report",
+      message: "Are you sure you want to delete this report?",
+      cancel: "Cancel",
+      confirm: "Delete",
     },
     toast: {
       noAction: "対応完了または対応不可を選択してください。",

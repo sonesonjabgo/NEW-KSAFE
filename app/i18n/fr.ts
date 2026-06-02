@@ -1412,6 +1412,14 @@ const fr: Translations = {
       proceed: "Procéder",
       saveAction: "Enregistrer l'action",
       alreadyProcessed: "Ce signalement a déjà été traité.",
+      edit: "Edit",
+      delete: "Delete",
+    },
+    deleteModal: {
+      title: "Delete Report",
+      message: "Are you sure you want to delete this report?",
+      cancel: "Cancel",
+      confirm: "Delete",
     },
     toast: {
       noAction: "Veuillez sélectionner Terminé ou Impossible.",

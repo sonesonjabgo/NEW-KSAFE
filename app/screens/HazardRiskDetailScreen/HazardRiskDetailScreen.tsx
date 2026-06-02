@@ -15,13 +15,14 @@ import {
 } from "react-native"
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
-import { Check, CircleAlert, Ellipsis, X } from "lucide-react-native"
+import { Check, CircleAlert, Ellipsis, Trash2, X } from "lucide-react-native"
 import { IconCamera, IconCalendar, IconLock, IconPhoto } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import Pic1 from "@assets/icons/pic1.svg"
 import Pic2 from "@assets/icons/pic2.svg"
 
+import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { Toast } from "@/components/Toast"
@@ -134,6 +135,7 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
   }, [fadeAnim, slideAnim])
 
   const isMyReport = detail.isMyReport
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false)
 
   const panResponder = useRef(
     PanResponder.create({
@@ -569,8 +571,28 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
         </View>
       </KeyboardAwareScrollView>
 
-      {/* 하단 버튼 — 관리자 */}
-      {role === "admin" && (
+      {/* 하단 버튼 — 관리자 + 본인 제보 + 대기중: 수정하기/삭제하기 */}
+      {role === "admin" && isMyReport && status === "pending" && (
+        <View style={[$bottomBar, { paddingBottom: insets.bottom + 12, flexDirection: "row", gap: 10 }]}>
+          <TouchableOpacity
+            style={[$bottomBtn, { flex: 1, borderWidth: 1, borderColor: "#DDDDDD", backgroundColor: "#FFFFFF" }]}
+            activeOpacity={0.7}
+            onPress={() => navigation.goBack()}
+          >
+            <Text text={translate("hazardRiskDetailScreen:bottomButton.edit")} style={[$bottomBtnTextActive, { color: "#333333" }]} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[$bottomBtn, { flex: 1, backgroundColor: colors.blue }]}
+            activeOpacity={0.8}
+            onPress={() => setDeleteModalVisible(true)}
+          >
+            <Text text={translate("hazardRiskDetailScreen:bottomButton.delete")} style={$bottomBtnTextActive} />
+          </TouchableOpacity>
+        </View>
+      )}
+
+      {/* 하단 버튼 — 관리자 (본인 제보 대기중 제외) */}
+      {role === "admin" && !(isMyReport && status === "pending") && (
         <View style={[$bottomBar, { paddingBottom: insets.bottom + 12 }]}>
           {isDone ? (
             <View style={[$bottomBtn, $bottomBtnDisabled]}>
@@ -640,6 +662,25 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
       icon={<X size={14} color="#FFFFFF" strokeWidth={2.5} />}
       iconCircleColor={colors.danger}
       onHide={() => setToastVisible(false)}
+    />
+
+    <ConfirmModal
+      visible={deleteModalVisible}
+      icon={
+        <View style={S.$resultIconCircleImpossible}>
+          <Trash2 size={26} color="#E03526" strokeWidth={2} />
+        </View>
+      }
+      title={translate("hazardRiskDetailScreen:deleteModal.title")}
+      message={translate("hazardRiskDetailScreen:deleteModal.message")}
+      cancelLabel={translate("hazardRiskDetailScreen:deleteModal.cancel")}
+      confirmLabel={translate("hazardRiskDetailScreen:deleteModal.confirm")}
+      confirmBgColor="#E42E2B"
+      onCancel={() => setDeleteModalVisible(false)}
+      onConfirm={() => {
+        setDeleteModalVisible(false)
+        navigation.goBack()
+      }}
     />
 
     {/* 사진 촬영 방법 선택 바텀시트 */}

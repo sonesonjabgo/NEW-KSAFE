@@ -1379,6 +1379,14 @@ const ar: Translations = {
       proceed: "المتابعة",
       saveAction: "حفظ الإجراء",
       alreadyProcessed: "تمت معالجة هذا البلاغ بالفعل.",
+      edit: "Edit",
+      delete: "Delete",
+    },
+    deleteModal: {
+      title: "Delete Report",
+      message: "Are you sure you want to delete this report?",
+      cancel: "Cancel",
+      confirm: "Delete",
     },
     toast: {
       noAction: "يرجى اختيار مكتمل أو مستحيل.",

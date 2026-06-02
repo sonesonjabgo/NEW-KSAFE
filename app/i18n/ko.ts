@@ -1416,6 +1416,14 @@ const ko: Translations = {
       proceed: "진행하기",
       saveAction: "처리 내용 저장",
       alreadyProcessed: "이미 처리된 제보입니다.",
+      edit: "수정하기",
+      delete: "삭제하기",
+    },
+    deleteModal: {
+      title: "제보 삭제",
+      message: "이 제보를 삭제하시겠습니까?",
+      cancel: "취소",
+      confirm: "삭제",
     },
     toast: {
       noAction: "조치완료 또는 조치불가를 선택해주세요.",
