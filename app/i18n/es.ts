@@ -1397,6 +1397,13 @@ const es: Translations = {
       },
     },
     workerNoEditMessage: "Reports in progress or already processed cannot be edited.",
+    editForm: {
+      title: "Edit Report",
+      locationPlaceholder: "e.g., location",
+      locationHelper: "Up to 200 characters.",
+      hazardFactorPlaceholder: "Hazard factors?",
+      hazardFactorHelper: "Up to 1,000 characters.",
+    },
     statusHistory: {
       title: "Historial de estado",
       titles: {
@@ -1417,6 +1424,8 @@ const es: Translations = {
       alreadyProcessed: "Este informe ya ha sido procesado.",
       edit: "Edit",
       delete: "Delete",
+      cancel: "Cancel",
+      save: "Save",
     },
     deleteModal: {
       title: "Delete Report",
@@ -1427,6 +1436,8 @@ const es: Translations = {
     toast: {
       noAction: "Por favor, seleccione Completado o Imposible.",
       noNote: "Por favor, ingrese los detalles de la acción.",
+      saved: "Report has been updated.",
+      deleted: "Report has been deleted.",
     },
   },
 

@@ -1354,6 +1354,13 @@ const ja: Translations = {
       },
     },
     workerNoEditMessage: "Reports in progress or already processed cannot be edited.",
+    editForm: {
+      title: "Edit Report",
+      locationPlaceholder: "e.g., location",
+      locationHelper: "Up to 200 characters.",
+      hazardFactorPlaceholder: "Hazard factors?",
+      hazardFactorHelper: "Up to 1,000 characters.",
+    },
     statusHistory: {
       title: "ステータス変更履歴",
       titles: {
@@ -1374,6 +1381,8 @@ const ja: Translations = {
       alreadyProcessed: "この通報はすでに処理済みです。",
       edit: "Edit",
       delete: "Delete",
+      cancel: "Cancel",
+      save: "Save",
     },
     deleteModal: {
       title: "Delete Report",
@@ -1384,6 +1393,8 @@ const ja: Translations = {
     toast: {
       noAction: "対応完了または対応不可を選択してください。",
       noNote: "対応内容を入力してください。",
+      saved: "Report has been updated.",
+      deleted: "Report has been deleted.",
     },
   },
 

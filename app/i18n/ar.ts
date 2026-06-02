@@ -1361,6 +1361,13 @@ const ar: Translations = {
       },
     },
     workerNoEditMessage: "Reports in progress or already processed cannot be edited.",
+    editForm: {
+      title: "Edit Report",
+      locationPlaceholder: "e.g., location",
+      locationHelper: "Up to 200 characters.",
+      hazardFactorPlaceholder: "Hazard factors?",
+      hazardFactorHelper: "Up to 1,000 characters.",
+    },
     statusHistory: {
       title: "تاريخ الحالة",
       titles: {
@@ -1381,6 +1388,8 @@ const ar: Translations = {
       alreadyProcessed: "تمت معالجة هذا البلاغ بالفعل.",
       edit: "Edit",
       delete: "Delete",
+      cancel: "Cancel",
+      save: "Save",
     },
     deleteModal: {
       title: "Delete Report",
@@ -1391,6 +1400,8 @@ const ar: Translations = {
     toast: {
       noAction: "يرجى اختيار مكتمل أو مستحيل.",
       noNote: "يرجى إدخال تفاصيل الإجراء.",
+      saved: "Report has been updated.",
+      deleted: "Report has been deleted.",
     },
   },
 

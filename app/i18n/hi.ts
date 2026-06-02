@@ -1366,6 +1366,13 @@ const hi: Translations = {
       },
     },
     workerNoEditMessage: "Reports in progress or already processed cannot be edited.",
+    editForm: {
+      title: "Edit Report",
+      locationPlaceholder: "e.g., location",
+      locationHelper: "Up to 200 characters.",
+      hazardFactorPlaceholder: "Hazard factors?",
+      hazardFactorHelper: "Up to 1,000 characters.",
+    },
     statusHistory: {
       title: "स्थिति इतिहास",
       titles: {
@@ -1386,6 +1393,8 @@ const hi: Translations = {
       alreadyProcessed: "इस रिपोर्ट को पहले ही संसाधित किया जा चुका है।",
       edit: "Edit",
       delete: "Delete",
+      cancel: "Cancel",
+      save: "Save",
     },
     deleteModal: {
       title: "Delete Report",
@@ -1396,6 +1405,8 @@ const hi: Translations = {
     toast: {
       noAction: "कृपया पूर्ण या असंभव चुनें।",
       noNote: "कृपया कार्रवाई का विवरण दर्ज करें।",
+      saved: "Report has been updated.",
+      deleted: "Report has been deleted.",
     },
   },
 

@@ -1,4 +1,4 @@
-import { FC, useCallback, useRef, useState } from "react"
+import { FC, useCallback, useMemo, useRef, useState } from "react"
 import {
   Animated,
   Image,
@@ -6,6 +6,7 @@ import {
   Modal,
   PanResponder,
   Platform,
+  Pressable,
   StyleSheet,
   TextInput,
   TextStyle,
@@ -16,7 +17,7 @@ import {
 
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
 import { Check, CircleAlert, Ellipsis, Trash2, X } from "lucide-react-native"
-import { IconCamera, IconCalendar, IconLock, IconPhoto } from "@tabler/icons-react-native"
+import { IconAlertCircle, IconCamera, IconCalendar, IconLock, IconPhoto } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import Pic1 from "@assets/icons/pic1.svg"
@@ -96,8 +97,8 @@ const StatusBadge: FC<{ status: HazardStatus }> = ({ status }) => {
 
 export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ navigation, route }) => {
   const insets = useSafeAreaInsets()
-  const { id } = route.params
-  const detail = mockHazardDetails[id] ?? mockHazardDetails[1]
+  const { id, newDetail } = route.params
+  const detail = newDetail ?? (id != null ? mockHazardDetails[id] : null) ?? mockHazardDetails[1]
   const { role } = useRole()
   const [status, setStatus] = useState<HazardStatus>(detail.status)
   const [pendingAction, setPendingAction] = useState<"completed" | "impossible" | null>(null)
@@ -110,6 +111,8 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
   const [captureSheetVisible, setCaptureSheetVisible] = useState(false)
   const [toastVisible, setToastVisible] = useState(false)
   const [toastMessage, setToastMessage] = useState("")
+  const [successToastVisible, setSuccessToastVisible] = useState(false)
+  const [successToastMessage, setSuccessToastMessage] = useState("")
 
   const isOngoing = status === "ongoing"
   const isDone = status === "completed" || status === "impossible"
@@ -136,6 +139,41 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
 
   const isMyReport = detail.isMyReport
   const [deleteModalVisible, setDeleteModalVisible] = useState(false)
+  const [editMode, setEditMode] = useState(false)
+  const [editLocation, setEditLocation] = useState(detail.location)
+  const [editHazardFactor, setEditHazardFactor] = useState(detail.description)
+  const [editPhotos, setEditPhotos] = useState<string[]>(detail.photos ?? [])
+  const [editLocationFocused, setEditLocationFocused] = useState(false)
+  const [editHazardFocused, setEditHazardFocused] = useState(false)
+  const [editPhotoModalVisible, setEditPhotoModalVisible] = useState(false)
+  const [localLocation, setLocalLocation] = useState(detail.location)
+  const [localHazardFactor, setLocalHazardFactor] = useState(detail.description)
+  const [localPhotos, setLocalPhotos] = useState<string[]>(detail.photos ?? [])
+
+  const isEditValid = useMemo(
+    () => editLocation.trim().length > 0 && editHazardFactor.trim().length > 0,
+    [editLocation, editHazardFactor],
+  )
+
+  const enterEditMode = useCallback(() => {
+    setEditLocation(localLocation)
+    setEditHazardFactor(localHazardFactor)
+    setEditPhotos([...localPhotos])
+    setEditMode(true)
+  }, [localLocation, localHazardFactor, localPhotos])
+
+  const cancelEdit = useCallback(() => {
+    setEditMode(false)
+  }, [])
+
+  const saveEdit = useCallback(() => {
+    setLocalLocation(editLocation.trim())
+    setLocalHazardFactor(editHazardFactor.trim())
+    setLocalPhotos([...editPhotos])
+    setEditMode(false)
+    setSuccessToastMessage(translate("hazardRiskDetailScreen:toast.saved"))
+    setSuccessToastVisible(true)
+  }, [editLocation, editHazardFactor, editPhotos])
 
   const panResponder = useRef(
     PanResponder.create({
@@ -171,11 +209,107 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
     >
       <KeyboardAwareScrollView
         style={S.$flex1}
-        contentContainerStyle={[S.$scrollContent, role === "admin" && { paddingBottom: 80 }]}
+        contentContainerStyle={[S.$scrollContent, { paddingBottom: 80 }]}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
         bottomOffset={Platform.OS === "ios" ? 120 : 100}
       >
+        {editMode ? (
+          /* ── 수정 모드 ─────────────────────────────────────────────────── */
+          <>
+            <Text text={translate("hazardRiskDetailScreen:editForm.title")} style={S.$editFormTitle} />
+
+            {/* 위치 */}
+            <View style={S.$editSection}>
+              <View style={S.$editLabelRow}>
+                <Text text={translate("hazardRiskDetailScreen:infoCard.locationLabel")} style={S.$editLabel} />
+                <Text text=" *" style={S.$editRequired} />
+              </View>
+              <View style={[S.$editInputField, editLocationFocused && S.$editInputFieldFocused]}>
+                <TextInput
+                  style={S.$editInputText}
+                  value={editLocation}
+                  onChangeText={(t) => setEditLocation(t.slice(0, 200))}
+                  onFocus={() => setEditLocationFocused(true)}
+                  onBlur={() => setEditLocationFocused(false)}
+                  maxLength={200}
+                  placeholder={translate("hazardRiskDetailScreen:editForm.locationPlaceholder")}
+                  placeholderTextColor="#666666"
+                />
+              </View>
+              <Text text={translate("hazardRiskDetailScreen:editForm.locationHelper")} style={S.$editHelperText} />
+            </View>
+
+            {/* 위험요인 */}
+            <View style={S.$editSection}>
+              <View style={S.$editLabelRow}>
+                <Text text={translate("hazardRiskDetailScreen:infoCard.hazardFactorLabel")} style={S.$editLabel} />
+                <Text text=" *" style={S.$editRequired} />
+              </View>
+              <View style={[S.$editTextareaField, editHazardFocused && S.$editTextareaFieldFocused]}>
+                <TextInput
+                  style={[S.$editInputText, { textAlignVertical: "top", minHeight: 108 }]}
+                  value={editHazardFactor}
+                  onChangeText={(t) => setEditHazardFactor(t.slice(0, 1000))}
+                  onFocus={() => setEditHazardFocused(true)}
+                  onBlur={() => setEditHazardFocused(false)}
+                  maxLength={1000}
+                  multiline
+                  scrollEnabled={false}
+                  placeholder={translate("hazardRiskDetailScreen:editForm.hazardFactorPlaceholder")}
+                  placeholderTextColor="#666666"
+                />
+              </View>
+              <Text text={translate("hazardRiskDetailScreen:editForm.hazardFactorHelper")} style={S.$editHelperText} />
+            </View>
+
+            {/* 현장 사진 */}
+            <View style={[S.$editSection, { borderBottomWidth: 0 }]}>
+              <View style={S.$editLabelRow}>
+                <Text text={translate("hazardRiskDetailScreen:infoCard.sitePhotosLabel")} style={S.$editLabel} />
+                <Text text=" *" style={S.$editRequired} />
+              </View>
+              <View style={S.$photoHintRow}>
+                <IconAlertCircle size={15} color="#747474" />
+                <Text text={translate("hazardRiskCreateScreen:sitePhotos.hint")} style={S.$photoHintText} />
+              </View>
+              <View style={S.$photoGuideCard}>
+                <Pic1 width={30} height={30} />
+                <Text text={translate("hazardRiskCreateScreen:sitePhotos.guide")} style={[S.$photoGuideLine, { flex: 1 }]} />
+                <TouchableOpacity
+                  style={S.$photoGuideAddBtn}
+                  activeOpacity={0.7}
+                  onPress={() => setEditPhotoModalVisible(true)}
+                >
+                  <Text text={translate("hazardRiskCreateScreen:sitePhotos.addButton")} style={S.$photoGuideAddBtnText} />
+                </TouchableOpacity>
+              </View>
+              {editPhotos.length > 0 ? (
+                <View style={S.$photoGrid}>
+                  {editPhotos.map((uri, i) => (
+                    <View key={i} style={S.$photoItemWrapper}>
+                      <Image source={{ uri }} style={S.$photoItem} />
+                      <TouchableOpacity
+                        style={S.$photoRemoveBtn}
+                        activeOpacity={0.8}
+                        onPress={() => setEditPhotos((prev) => prev.filter((_, idx) => idx !== i))}
+                      >
+                        <X size={12} color="#FFFFFF" strokeWidth={2.5} />
+                      </TouchableOpacity>
+                    </View>
+                  ))}
+                </View>
+              ) : (
+                <View style={S.$photoPreviewCard}>
+                  <Pic2 width={30} height={30} />
+                  <Text text={translate("hazardRiskCreateScreen:sitePhotos.preview")} style={S.$photoPreviewText} />
+                </View>
+              )}
+            </View>
+          </>
+        ) : (
+        /* ── 일반 보기 모드 ─────────────────────────────────────────────── */
+        <>
         {/* 제보 정보 카드 */}
         <View style={S.$infoCard}>
           {/* 뱃지 + 날짜 */}
@@ -190,7 +324,7 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
               text={translate("hazardRiskDetailScreen:infoCard.locationLabel")}
               style={S.$inlineLabel}
             />
-            <Text text={detail.location} style={S.$inlineValue} />
+            <Text text={localLocation} style={S.$inlineValue} />
           </View>
 
           {/* 위험요인 */}
@@ -199,7 +333,7 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
               text={translate("hazardRiskDetailScreen:infoCard.hazardFactorLabel")}
               style={S.$inlineLabel}
             />
-            <Text text={detail.description} style={S.$inlineValue} />
+            <Text text={localHazardFactor} style={S.$inlineValue} />
           </View>
 
           {/* 제보사진 */}
@@ -208,9 +342,9 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
               text={translate("hazardRiskDetailScreen:infoCard.sitePhotosLabel")}
               style={S.$photosSectionLabel}
             />
-            {detail.photos.length > 0 ? (
+            {localPhotos.length > 0 ? (
               <View style={S.$photoGrid}>
-                {detail.photos.map((uri, index) => (
+                {localPhotos.map((uri, index) => (
                   <Image key={index} source={{ uri }} style={S.$photoItem} />
                 ))}
               </View>
@@ -569,29 +703,55 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
               })}
           </View>
         </View>
+        </> /* 일반 보기 모드 닫기 */
+        )} {/* editMode 분기 닫기 */}
       </KeyboardAwareScrollView>
 
-      {/* 하단 버튼 — 관리자 + 본인 제보 + 대기중: 수정하기/삭제하기 */}
-      {role === "admin" && isMyReport && status === "pending" && (
+      {/* 하단 버튼 — 본인 제보 + 대기중 */}
+      {isMyReport && status === "pending" && (
         <View style={[$bottomBar, { paddingBottom: insets.bottom + 12, flexDirection: "row", gap: 10 }]}>
-          <TouchableOpacity
-            style={[$bottomBtn, { flex: 1, borderWidth: 1, borderColor: "#DDDDDD", backgroundColor: "#FFFFFF" }]}
-            activeOpacity={0.7}
-            onPress={() => navigation.goBack()}
-          >
-            <Text text={translate("hazardRiskDetailScreen:bottomButton.edit")} style={[$bottomBtnTextActive, { color: "#333333" }]} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[$bottomBtn, { flex: 1, backgroundColor: colors.blue }]}
-            activeOpacity={0.8}
-            onPress={() => setDeleteModalVisible(true)}
-          >
-            <Text text={translate("hazardRiskDetailScreen:bottomButton.delete")} style={$bottomBtnTextActive} />
-          </TouchableOpacity>
+          {editMode ? (
+            /* 수정 모드: 취소 / 저장 */
+            <>
+              <TouchableOpacity
+                style={[$bottomBtn, { flex: 1, borderWidth: 1, borderColor: "#DDDDDD", backgroundColor: "#FFFFFF" }]}
+                activeOpacity={0.7}
+                onPress={cancelEdit}
+              >
+                <Text text={translate("hazardRiskDetailScreen:bottomButton.cancel")} style={[$bottomBtnTextActive, { color: "#333333" }]} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[$bottomBtn, { flex: 1, backgroundColor: isEditValid ? colors.blue : "#CCCCCC" }]}
+                activeOpacity={0.8}
+                onPress={saveEdit}
+                disabled={!isEditValid}
+              >
+                <Text text={translate("hazardRiskDetailScreen:bottomButton.save")} style={$bottomBtnTextActive} />
+              </TouchableOpacity>
+            </>
+          ) : (
+            /* 기본: 수정하기 / 삭제하기 */
+            <>
+              <TouchableOpacity
+                style={[$bottomBtn, { flex: 1, borderWidth: 1, borderColor: "#DDDDDD", backgroundColor: "#FFFFFF" }]}
+                activeOpacity={0.7}
+                onPress={enterEditMode}
+              >
+                <Text text={translate("hazardRiskDetailScreen:bottomButton.edit")} style={[$bottomBtnTextActive, { color: "#333333" }]} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[$bottomBtn, { flex: 1, backgroundColor: colors.blue }]}
+                activeOpacity={0.8}
+                onPress={() => setDeleteModalVisible(true)}
+              >
+                <Text text={translate("hazardRiskDetailScreen:bottomButton.delete")} style={$bottomBtnTextActive} />
+              </TouchableOpacity>
+            </>
+          )}
         </View>
       )}
 
-      {/* 하단 버튼 — 관리자 (본인 제보 대기중 제외) */}
+      {/* 하단 버튼 — 관리자 전용 (본인 제보 대기중 제외) */}
       {role === "admin" && !(isMyReport && status === "pending") && (
         <View style={[$bottomBar, { paddingBottom: insets.bottom + 12 }]}>
           {isDone ? (
@@ -663,6 +823,13 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
       iconCircleColor={colors.danger}
       onHide={() => setToastVisible(false)}
     />
+    <Toast
+      visible={successToastVisible}
+      message={successToastMessage}
+      icon={<Check size={14} color="#FFFFFF" strokeWidth={2.5} />}
+      iconCircleColor={colors.blue}
+      onHide={() => setSuccessToastVisible(false)}
+    />
 
     <ConfirmModal
       visible={deleteModalVisible}
@@ -679,11 +846,46 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
       onCancel={() => setDeleteModalVisible(false)}
       onConfirm={() => {
         setDeleteModalVisible(false)
-        navigation.goBack()
+        setSuccessToastMessage(translate("hazardRiskDetailScreen:toast.deleted"))
+        setSuccessToastVisible(true)
+        setTimeout(() => navigation.goBack(), 1200)
       }}
     />
 
     {/* 사진 촬영 방법 선택 바텀시트 */}
+    {/* 수정 모드 사진 추가 모달 */}
+    <Modal
+      visible={editPhotoModalVisible}
+      transparent
+      animationType="fade"
+      onRequestClose={() => setEditPhotoModalVisible(false)}
+    >
+      <Pressable style={S.$modalOverlay} onPress={() => setEditPhotoModalVisible(false)}>
+        <View style={[S.$modalContent, { paddingBottom: insets.bottom + 16 }]}>
+          <TouchableOpacity
+            style={S.$workplaceOption}
+            activeOpacity={0.7}
+            onPress={() => {
+              setEditPhotoModalVisible(false)
+              setEditPhotos((prev) => [...prev, `https://picsum.photos/seed/editcam${Date.now()}/400/300`])
+            }}
+          >
+            <Text text={translate("hazardRiskCreateScreen:sitePhotos.camera")} style={S.$workplaceOptionText} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={S.$workplaceOption}
+            activeOpacity={0.7}
+            onPress={() => {
+              setEditPhotoModalVisible(false)
+              setEditPhotos((prev) => [...prev, `https://picsum.photos/seed/editalbum${Date.now()}/400/300`])
+            }}
+          >
+            <Text text={translate("hazardRiskCreateScreen:sitePhotos.album")} style={S.$workplaceOptionText} />
+          </TouchableOpacity>
+        </View>
+      </Pressable>
+    </Modal>
+
     <Modal
       visible={captureSheetVisible}
       transparent
@@ -720,6 +922,40 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
     </Modal>
     </>
   )
+}
+
+const $editInput: TextStyle = {
+  flex: 1,
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#111111",
+  borderWidth: 1,
+  borderColor: "#DDDDDD",
+  borderRadius: 8,
+  paddingHorizontal: 12,
+  paddingVertical: 8,
+  backgroundColor: "#FFFFFF",
+}
+
+const $editTextarea: TextStyle = {
+  flex: 1,
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#111111",
+  borderWidth: 1,
+  borderColor: "#DDDDDD",
+  borderRadius: 8,
+  paddingHorizontal: 12,
+  paddingVertical: 8,
+  backgroundColor: "#FFFFFF",
+  minHeight: 80,
+  textAlignVertical: "top",
+}
+
+const $editInputFocused: TextStyle = {
+  borderColor: "#1062D8",
+  borderWidth: 2,
+  backgroundColor: "#ECF4FE",
 }
 
 const $bottomBar: ViewStyle = {
@@ -813,4 +1049,28 @@ const $sheetBtnLabel: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.semiBold,
   color: colors.navy,
+}
+
+const $editPhotoSheet: ViewStyle = {
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  right: 0,
+  backgroundColor: "#FFFFFF",
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+  paddingTop: 8,
+}
+
+const $editPhotoOption: ViewStyle = {
+  paddingVertical: 16,
+  paddingHorizontal: 20,
+  borderBottomWidth: 1,
+  borderBottomColor: "#EEEEEE",
+}
+
+const $editPhotoOptionText: TextStyle = {
+  fontSize: 15,
+  fontFamily: typography.primary.normal,
+  color: "#111111",
 }

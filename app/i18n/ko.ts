@@ -1398,6 +1398,13 @@ const ko: Translations = {
       },
     },
     workerNoEditMessage: "진행중이거나 처리된 제보는 수정할 수 없습니다.",
+    editForm: {
+      title: "제보 정보 수정",
+      locationPlaceholder: "예) 2층 동측 복도, B구역 작업장 입구 등",
+      locationHelper: "입력 시 최대 200자까지 작성할 수 있습니다.",
+      hazardFactorPlaceholder: "어떤 위험요인이 있나요?",
+      hazardFactorHelper: "입력 시 최대 1,000자까지 작성할 수 있습니다.",
+    },
     statusHistory: {
       title: "상태 변경 이력",
       titles: {
@@ -1418,6 +1425,8 @@ const ko: Translations = {
       alreadyProcessed: "이미 처리된 제보입니다.",
       edit: "수정하기",
       delete: "삭제하기",
+      cancel: "취소",
+      save: "저장",
     },
     deleteModal: {
       title: "제보 삭제",
@@ -1428,6 +1437,8 @@ const ko: Translations = {
     toast: {
       noAction: "조치완료 또는 조치불가를 선택해주세요.",
       noNote: "조치 내용을 입력해주세요.",
+      saved: "제보가 수정되었습니다.",
+      deleted: "제보가 삭제되었습니다.",
     },
   },
 

@@ -1,5 +1,6 @@
 import { ImageStyle, TextStyle, ViewStyle } from "react-native"
 
+import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
 // ── Layout ────────────────────────────────────────────────────────────────────
@@ -643,4 +644,84 @@ export const $workplaceOptionText: TextStyle = {
   fontSize: 17,
   fontFamily: typography.primary.medium,
   color: "#000000",
+}
+
+// ── Edit Form ─────────────────────────────────────────────────────────────────
+
+export const $editFormTitle: TextStyle = {
+  fontSize: 21,
+  fontFamily: typography.primary.bold,
+  color: "#111111",
+  marginBottom: 4,
+}
+
+export const $editSection: ViewStyle = {
+  gap: 8,
+  paddingBottom: 20,
+  borderBottomWidth: 1,
+  borderBottomColor: "#E9ECF0",
+}
+
+export const $editLabelRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+}
+
+export const $editLabel: TextStyle = {
+  fontSize: 19,
+  lineHeight: 26,
+  fontFamily: typography.primary.semiBold,
+  color: colors.navy,
+}
+
+export const $editRequired: TextStyle = {
+  fontSize: 15,
+  lineHeight: 26,
+  fontFamily: typography.primary.semiBold,
+  color: "#FF0000",
+  marginLeft: 2,
+}
+
+export const $editInputField: ViewStyle = {
+  height: 48,
+  backgroundColor: "#FFFFFF",
+  borderRadius: 8,
+  borderWidth: 1,
+  borderColor: "#DDDDDD",
+  paddingHorizontal: 16,
+  justifyContent: "center",
+}
+
+export const $editInputFieldFocused: ViewStyle = {
+  borderColor: "#1062D8",
+  borderWidth: 2,
+  backgroundColor: "#ECF4FE",
+}
+
+export const $editTextareaField: ViewStyle = {
+  backgroundColor: "#FFFFFF",
+  borderRadius: 12,
+  borderWidth: 1,
+  borderColor: "#DDDDDD",
+  padding: 16,
+  minHeight: 140,
+}
+
+export const $editTextareaFieldFocused: ViewStyle = {
+  borderColor: "#1062D8",
+  borderWidth: 2,
+  backgroundColor: "#ECF4FE",
+}
+
+export const $editInputText: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#111111",
+  padding: 0,
+}
+
+export const $editHelperText: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#555555",
 }

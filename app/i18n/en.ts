@@ -1413,6 +1413,13 @@ const en = {
       },
     },
     workerNoEditMessage: "Reports in progress or already processed cannot be edited.",
+    editForm: {
+      title: "Edit Report",
+      locationPlaceholder: "e.g., 2F east corridor, entrance to Zone B",
+      locationHelper: "Up to 200 characters.",
+      hazardFactorPlaceholder: "What hazard factors are there?",
+      hazardFactorHelper: "Up to 1,000 characters.",
+    },
     statusHistory: {
       title: "Status History",
       titles: {
@@ -1433,6 +1440,8 @@ const en = {
       alreadyProcessed: "This report has already been processed.",
       edit: "Edit",
       delete: "Delete",
+      cancel: "Cancel",
+      save: "Save",
     },
     deleteModal: {
       title: "Delete Report",
@@ -1443,6 +1452,8 @@ const en = {
     toast: {
       noAction: "Please select Completed or Impossible.",
       noNote: "Please enter the action details.",
+      saved: "Report has been updated.",
+      deleted: "Report has been deleted.",
     },
   },
 

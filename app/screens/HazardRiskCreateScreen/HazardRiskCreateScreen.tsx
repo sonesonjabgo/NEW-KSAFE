@@ -107,9 +107,8 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
   const handleSubmit = useCallback(() => {
     setSubmitted(true)
     if (!isValid) return
-    console.log(JSON.stringify({ workplace, location, hazardFactor, photos }, null, 2))
     setSuccessModalVisible(true)
-  }, [isValid, workplace, location, hazardFactor, photos])
+  }, [isValid])
 
   return (
     <>
@@ -474,7 +473,26 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
         confirmBgColor="#1062D8"
         onConfirm={() => {
           setSuccessModalVisible(false)
-          navigation.goBack()
+          const now = new Date()
+          const pad = (n: number) => n.toString().padStart(2, "0")
+          const dateStr = `${now.getFullYear()}.${pad(now.getMonth() + 1)}.${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`
+          const newDetail = {
+            id: Date.now(),
+            status: "pending" as const,
+            date: dateStr,
+            location: location.trim(),
+            description: hazardFactor.trim(),
+            reporterName: "홍길동",
+            reporterInitial: "홍",
+            workplace,
+            isMyReport: true,
+            photos,
+            managerName: "김영희",
+            managerInitial: "김",
+            managerAffiliation: "안전관리팀",
+            history: [{ id: 1, status: "pending" as const, date: dateStr }],
+          }
+          navigation.replace("HazardRiskDetail", { newDetail })
         }}
       />
 
