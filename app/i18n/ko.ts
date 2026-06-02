@@ -1353,6 +1353,7 @@ const ko: Translations = {
         impossible: "조치가 불가능한 사유를 상세히 입력해주세요.",
       },
     },
+    workerNoEditMessage: "진행중이거나 처리된 제보는 수정할 수 없습니다.",
     statusHistory: {
       title: "상태 변경 이력",
       titles: {

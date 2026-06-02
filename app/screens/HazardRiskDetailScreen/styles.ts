@@ -23,11 +23,6 @@ export const $infoCard: ViewStyle = {
   paddingHorizontal: 20,
   paddingVertical: 18,
   gap: 15,
-  shadowColor: "#000000",
-  shadowOffset: { width: 0, height: 2 },
-  shadowOpacity: 0.06,
-  shadowRadius: 6,
-  elevation: 2,
 }
 
 export const $cardTopRow: ViewStyle = {
@@ -146,6 +141,89 @@ export const $adminSection: ViewStyle = {
   gap: 14,
 }
 
+// ── Result Card ───────────────────────────────────────────────────────────────
+
+export const $resultCard: ViewStyle = {
+  backgroundColor: "#FFFFFF",
+  borderRadius: 12,
+  borderWidth: 1,
+  borderColor: "#E9ECF0",
+  padding: 16,
+  gap: 12,
+}
+
+export const $resultHeaderRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 10,
+}
+
+export const $resultIconCircleCompleted: ViewStyle = {
+  width: 36,
+  height: 36,
+  borderRadius: 18,
+  backgroundColor: "#CFFFE1",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+export const $resultIconCircleImpossible: ViewStyle = {
+  width: 36,
+  height: 36,
+  borderRadius: 18,
+  backgroundColor: "#FDE8EB",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+export const $resultTitle: TextStyle = {
+  fontSize: 16,
+  fontFamily: typography.primary.bold,
+  color: "#1A1A1A",
+}
+
+export const $resultContent: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#555555",
+  lineHeight: 22,
+}
+
+export const $resultDivider: ViewStyle = {
+  height: 1,
+  backgroundColor: "#F0F0F0",
+}
+
+export const $resultFooterRow: ViewStyle = {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+}
+
+export const $resultDateRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 5,
+}
+
+export const $resultDateText: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#555555",
+}
+
+export const $resultManagerRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 6,
+}
+
+export const $resultManagerName: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#1A1A1A",
+}
+
 export const $sectionTitleRow: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
@@ -170,28 +248,22 @@ export const $adminCard: ViewStyle = {
   borderRadius: 12,
   borderWidth: 1,
   borderColor: "#E9ECF0",
-  paddingHorizontal: 20,
-  paddingVertical: 25,
-  gap: 22,
-  shadowColor: "#000000",
-  shadowOffset: { width: 0, height: 2 },
-  shadowOpacity: 0.06,
-  shadowRadius: 6,
-  elevation: 2,
+  padding: 16,
+  gap: 16,
 }
 
 export const $statusButtonRow: ViewStyle = {
   flexDirection: "row",
-  gap: 9,
+  gap: 8,
 }
 
 export const $statusButton: ViewStyle = {
   flex: 1,
-  height: 83,
-  borderRadius: 13,
-  borderWidth: 2,
-  borderColor: "#E0E0E0",
-  backgroundColor: "#F5F5F5",
+  height: 72,
+  borderRadius: 8,
+  borderWidth: 1.5,
+  borderColor: "#ECECEC",
+  backgroundColor: "#FBFBFB",
   alignItems: "center",
   justifyContent: "center",
   gap: 6,
@@ -199,14 +271,14 @@ export const $statusButton: ViewStyle = {
 
 export const $statusButtonText: TextStyle = {
   fontSize: 14,
-  fontFamily: typography.primary.semiBold,
+  fontFamily: typography.primary.normal,
   color: "#555555",
 }
 
 export const $selectedBadge: ViewStyle = {
   position: "absolute",
-  top: -9,
-  right: -9,
+  top: -8,
+  right: -8,
   width: 20,
   height: 20,
   borderRadius: 10,
@@ -228,6 +300,23 @@ export const $dashedInputCard: ViewStyle = {
   borderColor: "#ECECEC",
   backgroundColor: "#FBFBFB",
   padding: 12,
+}
+
+export const $dashedInputCardEnabled: ViewStyle = {
+  borderStyle: "solid",
+  borderColor: "#DDDDDD",
+}
+
+export const $dashedInputCardFocusedCompleted: ViewStyle = {
+  borderColor: "#1062D8",
+  borderWidth: 2,
+  borderStyle: "solid",
+}
+
+export const $dashedInputCardFocusedImpossible: ViewStyle = {
+  borderColor: "#E03526",
+  borderWidth: 2,
+  borderStyle: "solid",
 }
 
 export const $dashedInput: TextStyle = {
@@ -281,7 +370,7 @@ export const $photoHintText: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#555555",
-  lineHeight: 18,
+  lineHeight: 20,
   flex: 1,
 }
 
@@ -343,55 +432,77 @@ export const $photoPreviewText: TextStyle = {
   color: "#3E7853",
 }
 
+// ── Bottom Bar ────────────────────────────────────────────────────────────────
+
+export const $bottomBar: ViewStyle = {
+  paddingHorizontal: 16,
+  paddingTop: 12,
+  backgroundColor: "#FFFFFF",
+  borderTopWidth: 1,
+  borderTopColor: "#F0F0F0",
+}
+
+export const $workerInfoText: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#555555",
+  textAlign: "center",
+  lineHeight: 20,
+}
+
 // ── Status History ────────────────────────────────────────────────────────────
 
 export const $historyList: ViewStyle = {
-  paddingHorizontal: 10,
-  marginTop: 20,
 }
 
 export const $historyItem: ViewStyle = {
   flexDirection: "row",
+  gap: 12,
+  paddingBottom: 16,
 }
 
 export const $historyLeft: ViewStyle = {
   alignItems: "center",
-  width: 20,
-  marginRight: 15,
+  flexShrink: 0,
 }
 
 export const $historyLine: ViewStyle = {
-  width: 1.5,
-  backgroundColor: "#E9ECF0",
+  width: 2,
+  backgroundColor: "#D5D5D5",
   flex: 1,
-  marginVertical: 8,
+  marginTop: 4,
+  minHeight: 12,
 }
 
 export const $historyIconOuter: ViewStyle = {
   width: 20,
   height: 20,
   borderRadius: 10,
+  backgroundColor: "#EBE8E6",
   justifyContent: "center",
   alignItems: "center",
+  marginTop: 4,
   zIndex: 1,
 }
 
 export const $historyIconInner: ViewStyle = {
-  width: 8,
-  height: 8,
-  borderRadius: 4,
+  width: 10,
+  height: 10,
+  borderRadius: 5,
+  backgroundColor: "#BAB9BE",
+  borderWidth: 1,
+  borderColor: "#E3E2E0",
 }
 
 export const $historyRight: ViewStyle = {
   flex: 1,
-  paddingBottom: 25,
 }
 
 export const $historyHeaderRow: ViewStyle = {
   flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",
-  marginBottom: 6,
+  marginBottom: 4,
 }
 
 export const $historyTitle: TextStyle = {
@@ -415,9 +526,10 @@ export const $historyContent: TextStyle = {
 }
 
 export const $historyCard: ViewStyle = {
-  borderRadius: 8,
-  padding: 12,
-  marginTop: 10,
+  borderRadius: 6,
+  paddingHorizontal: 14,
+  paddingVertical: 10,
+  marginTop: 6,
 }
 
 // ── Modal ─────────────────────────────────────────────────────────────────────

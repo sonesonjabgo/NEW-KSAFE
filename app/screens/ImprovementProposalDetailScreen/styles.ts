@@ -272,7 +272,7 @@ export const $timelineDot: ViewStyle = {
   backgroundColor: "#EBE8E6",
   justifyContent: "center",
   alignItems: "center",
-  marginTop: 1,
+  marginTop: 4,
   flexShrink: 0,
 }
 
@@ -297,9 +297,10 @@ export const $timelineRow: ViewStyle = {
 }
 
 export const $timelineTitle: TextStyle = {
-  fontSize: 15,
-  fontFamily: typography.primary.semiBold,
-  color: "#1A1A1A",
+  fontSize: 19,
+  lineHeight: 26,
+  fontFamily: typography.primary.bold,
+  color: "#252525",
 }
 
 export const $timelineDate: TextStyle = {
@@ -309,9 +310,10 @@ export const $timelineDate: TextStyle = {
 }
 
 export const $timelineDesc: TextStyle = {
-  fontSize: 14,
+  fontSize: 15,
   fontFamily: typography.primary.normal,
   color: "#555555",
+  lineHeight: 22,
 }
 
 export const $timelineDotActive: ViewStyle = {

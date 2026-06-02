@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native"
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
-import { Check, CircleAlert, Ellipsis, X } from "lucide-react-native"
+import { Calendar, Check, CircleAlert, Ellipsis, X } from "lucide-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import Pic1 from "@assets/icons/pic1.svg"
@@ -24,8 +24,9 @@ import { translate } from "@/i18n/translate"
 import type { HazardRiskDetailScreenProps } from "@/screens/HazardRiskScreen/types"
 import type { HazardStatus } from "@/screens/HazardRiskScreen/types"
 import { colors } from "@/theme/colors"
+import { typography } from "@/theme/typography"
 
-import { mockHazardDetails } from "./mockData"
+import { MOCK_CURRENT_USER, mockHazardDetails } from "./mockData"
 import * as S from "./styles"
 
 const STATUS_BADGE_STYLE: Record<HazardStatus, { bg: string; text: string }> = {
@@ -87,6 +88,7 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
   const { role } = useRole()
   const [selectedStatus, setSelectedStatus] = useState<HazardStatus>(detail.status)
   const [actionNote, setActionNote] = useState("")
+  const [noteFocused, setNoteFocused] = useState(false)
   const [actionPhotos, setActionPhotos] = useState<string[]>([])
   const [photoModalVisible, setPhotoModalVisible] = useState(false)
 
@@ -103,13 +105,14 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
     )
   }, [photoSlideAnim])
 
+  const isMyReport = detail.reporterName === MOCK_CURRENT_USER
   const isInputEnabled = selectedStatus === "completed" || selectedStatus === "impossible"
 
   return (
     <StackScreen
       title={translate("hazardRiskDetailScreen:title")}
       onBack={() => navigation.goBack()}
-      contentBg={colors.screenBg}
+      contentBg="#FFFFFF"
       squareTop
     >
       <KeyboardAwareScrollView
@@ -180,8 +183,59 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
           </View>
         </View>
 
+        {/* 조치완료/조치불가 결과 카드 — 관리자+근로자 공통 */}
+        {(detail.status === "completed" || detail.status === "impossible") && (() => {
+          const resultItem = detail.history?.find(
+            (h) => h.status === "completed" || h.status === "impossible",
+          )
+          const isCompleted = detail.status === "completed"
+          return (
+            <View style={S.$adminSection}>
+              <View style={S.$sectionTitleRow}>
+                <Text
+                  text={translate("hazardRiskDetailScreen:adminSection.title")}
+                  style={S.$sectionTitle}
+                />
+                <View style={S.$sectionDivider} />
+              </View>
+              <View style={S.$resultCard}>
+                <View style={S.$resultHeaderRow}>
+                  <View style={isCompleted ? S.$resultIconCircleCompleted : S.$resultIconCircleImpossible}>
+                    {isCompleted
+                      ? <Check size={20} color="#18A24A" strokeWidth={2.5} />
+                      : <X size={20} color="#E03526" strokeWidth={2.5} />
+                    }
+                  </View>
+                  <Text
+                    text={translate(
+                      isCompleted
+                        ? "hazardRiskDetailScreen:statusHistory.titles.completed"
+                        : "hazardRiskDetailScreen:statusHistory.titles.impossible",
+                    )}
+                    style={S.$resultTitle}
+                  />
+                </View>
+                {resultItem?.note && (
+                  <Text text={resultItem.note} style={S.$resultContent} />
+                )}
+                <View style={S.$resultDivider} />
+                <View style={S.$resultFooterRow}>
+                  <View style={S.$resultDateRow}>
+                    <Calendar size={14} color="#888888" />
+                    <Text text={resultItem?.date ?? detail.date} style={S.$resultDateText} />
+                  </View>
+                  <View style={S.$resultManagerRow}>
+                    <UserAvatar initial={detail.managerInitial} size={22} />
+                    <Text text={detail.managerName} style={S.$resultManagerName} />
+                  </View>
+                </View>
+              </View>
+            </View>
+          )
+        })()}
+
         {/* 관리자 전용: 상태 변경 및 처리 */}
-        {role === "admin" && (
+        {role === "admin" && detail.status !== "completed" && detail.status !== "impossible" && (
           <View style={S.$adminSection}>
             {/* 섹션 제목 + 구분선 */}
             <View style={S.$sectionTitleRow}>
@@ -214,12 +268,18 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
                     >
                       {(() => {
                         const IconComponent = ACTION_BUTTON_ICON[status]
-                        const iconColor = isSelected ? btnColor.text : "#AAAAAA"
-                        return <IconComponent size={24} color={iconColor} />
+                        const iconColor = isSelected ? btnColor.text : "#C6C6C6"
+                        return <IconComponent size={20} color={iconColor} />
                       })()}
                       <Text
                         text={translate(`hazardRiskScreen:status.${status}` as any)}
-                        style={[S.$statusButtonText, isSelected && { color: btnColor.text }]}
+                        style={[
+                          S.$statusButtonText,
+                          isSelected && {
+                            color: btnColor.text,
+                            fontFamily: typography.primary.semiBold,
+                          },
+                        ]}
                       />
                       {isSelected && (
                         <View style={[S.$selectedBadge, { backgroundColor: btnColor.border }]}>
@@ -237,7 +297,14 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
                   text={translate("hazardRiskDetailScreen:adminSection.noteLabel")}
                   style={S.$noteLabel}
                 />
-                <View style={S.$dashedInputCard}>
+                <View
+                  style={[
+                    S.$dashedInputCard,
+                    isInputEnabled && S.$dashedInputCardEnabled,
+                    noteFocused && selectedStatus === "completed" && S.$dashedInputCardFocusedCompleted,
+                    noteFocused && selectedStatus === "impossible" && S.$dashedInputCardFocusedImpossible,
+                  ]}
+                >
                   <TextInput
                     style={S.$dashedInput}
                     placeholder={translate(PLACEHOLDER_I18N_KEY[selectedStatus] as any)}
@@ -246,6 +313,8 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
                     editable={isInputEnabled}
                     value={actionNote}
                     onChangeText={setActionNote}
+                    onFocus={() => setNoteFocused(true)}
+                    onBlur={() => setNoteFocused(false)}
                   />
                 </View>
                 <Text
@@ -384,24 +453,15 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
                           style={S.$historyContent}
                         />
                       ) : (
-                        <View
-                          style={[
-                            S.$historyCard,
-                            {
-                              backgroundColor: item.status === "completed" ? "#EFF4FD" : "#FDE8EB",
-                            },
-                          ]}
-                        >
-                          <Text style={S.$historyContent}>
-                            {translate(
-                              `hazardRiskDetailScreen:statusHistory.contents.${item.status}` as any,
-                            )}
-                            {translate(
-                              "hazardRiskDetailScreen:statusHistory.contents.adminSuffix",
-                              { name: detail.managerName },
-                            )}
-                          </Text>
-                        </View>
+                        <Text style={S.$historyContent}>
+                          {translate(
+                            `hazardRiskDetailScreen:statusHistory.contents.${item.status}` as any,
+                          )}
+                          {translate(
+                            "hazardRiskDetailScreen:statusHistory.contents.adminSuffix",
+                            { name: detail.managerName },
+                          )}
+                        </Text>
                       )}
                     </View>
                   </View>
@@ -410,6 +470,16 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
           </View>
         </View>
       </KeyboardAwareScrollView>
+
+      {/* 근로자 안내 메시지 — 본인 제보 + 진행중/처리 완료 */}
+      {role !== "admin" && isMyReport && detail.status !== "pending" && (
+        <View style={[S.$bottomBar, { paddingBottom: insets.bottom + 12 }]}>
+          <Text
+            text={translate("hazardRiskDetailScreen:workerNoEditMessage")}
+            style={S.$workerInfoText}
+          />
+        </View>
+      )}
 
       {/* 사진 추가 모달 */}
       <Modal

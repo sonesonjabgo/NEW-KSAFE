@@ -1316,6 +1316,7 @@ const ar: Translations = {
         impossible: "يرجى توضيح سبب استحالة الإجراء بالتفصيل.",
       },
     },
+    workerNoEditMessage: "Reports in progress or already processed cannot be edited.",
     statusHistory: {
       title: "تاريخ الحالة",
       titles: {

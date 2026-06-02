@@ -1352,6 +1352,7 @@ const es: Translations = {
         impossible: "Describa detalladamente por qué la acción no es posible.",
       },
     },
+    workerNoEditMessage: "Reports in progress or already processed cannot be edited.",
     statusHistory: {
       title: "Historial de estado",
       titles: {

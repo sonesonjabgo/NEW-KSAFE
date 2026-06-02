@@ -1368,6 +1368,7 @@ const en = {
         impossible: "Please describe in detail why the action is not possible.",
       },
     },
+    workerNoEditMessage: "Reports in progress or already processed cannot be edited.",
     statusHistory: {
       title: "Status History",
       titles: {

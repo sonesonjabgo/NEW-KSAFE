@@ -1309,6 +1309,7 @@ const ja: Translations = {
         impossible: "対応できない理由を詳しく入力してください。",
       },
     },
+    workerNoEditMessage: "Reports in progress or already processed cannot be edited.",
     statusHistory: {
       title: "ステータス変更履歴",
       titles: {

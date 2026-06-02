@@ -1321,6 +1321,7 @@ const hi: Translations = {
         impossible: "कृपया विस्तार से बताएं कि कार्रवाई क्यों संभव नहीं है।",
       },
     },
+    workerNoEditMessage: "Reports in progress or already processed cannot be edited.",
     statusHistory: {
       title: "स्थिति इतिहास",
       titles: {

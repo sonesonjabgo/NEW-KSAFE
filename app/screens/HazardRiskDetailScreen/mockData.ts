@@ -1,6 +1,9 @@
 import type { HazardDetail } from "@/screens/HazardRiskScreen/types"
 
+export const MOCK_CURRENT_USER = "홍길동"
+
 export const mockHazardDetails: Record<number, HazardDetail> = {
+  // ── 기존 데이터 (다른 사용자 / 관리자 테스트용) ────────────────────────────
   1: {
     id: 1,
     status: "pending",
@@ -11,7 +14,6 @@ export const mockHazardDetails: Record<number, HazardDetail> = {
     reporterName: "김철수",
     reporterInitial: "김",
     workplace: "광교타워크레인 현장",
-    isMyReport: true,
     photos: [
       "https://picsum.photos/seed/hazard1a/400/300",
       "https://picsum.photos/seed/hazard1b/400/300",
@@ -31,7 +33,6 @@ export const mockHazardDetails: Record<number, HazardDetail> = {
     reporterName: "이영희",
     reporterInitial: "이",
     workplace: "광교타워크레인 현장",
-    isMyReport: false,
     photos: ["https://picsum.photos/seed/hazard2a/400/300"],
     managerName: "박준호",
     managerInitial: "박",
@@ -51,7 +52,6 @@ export const mockHazardDetails: Record<number, HazardDetail> = {
     reporterName: "박민준",
     reporterInitial: "박",
     workplace: "수원역 복합개발 현장",
-    isMyReport: true,
     photos: [],
     managerName: "최지현",
     managerInitial: "최",
@@ -77,7 +77,6 @@ export const mockHazardDetails: Record<number, HazardDetail> = {
     reporterName: "최지원",
     reporterInitial: "최",
     workplace: "수원역 복합개발 현장",
-    isMyReport: false,
     photos: [
       "https://picsum.photos/seed/hazard4a/400/300",
       "https://picsum.photos/seed/hazard4b/400/300",
@@ -107,7 +106,6 @@ export const mockHazardDetails: Record<number, HazardDetail> = {
     reporterName: "정우성",
     reporterInitial: "정",
     workplace: "광교타워크레인 현장",
-    isMyReport: true,
     photos: [],
     managerName: "김영희",
     managerInitial: "김",
@@ -124,7 +122,6 @@ export const mockHazardDetails: Record<number, HazardDetail> = {
     reporterName: "한수진",
     reporterInitial: "한",
     workplace: "수원역 복합개발 현장",
-    isMyReport: false,
     photos: ["https://picsum.photos/seed/hazard6a/400/300"],
     managerName: "박준호",
     managerInitial: "박",
@@ -132,6 +129,104 @@ export const mockHazardDetails: Record<number, HazardDetail> = {
     history: [
       { id: 61, status: "pending", date: "2026.05.08 13:20" },
       { id: 62, status: "ongoing", date: "2026.05.09 14:00" },
+    ],
+  },
+
+  // ── 홍길동(본인) 테스트용 — 상태별 4가지 ──────────────────────────────────
+  // id: 7  → 대기중  (근로자: 수정/삭제 버튼 표시 예정)
+  // id: 8  → 진행중  (근로자: "수정 불가" 안내 메시지)
+  // id: 9  → 조치완료 (근로자+관리자: 결과 카드)
+  // id: 10 → 조치불가 (근로자+관리자: 결과 카드)
+
+  7: {
+    id: 7,
+    status: "pending",
+    date: "2026.06.01 09:10",
+    location: "4층 복도",
+    description:
+      "소화기 비치함 덮개가 파손되어 소화기가 외부에 노출되어 있습니다. 화재 시 신속한 사용에 지장이 있을 수 있습니다.",
+    reporterName: "홍길동",
+    reporterInitial: "홍",
+    workplace: "광교타워크레인 현장",
+    photos: ["https://picsum.photos/seed/hazard7a/400/300"],
+    managerName: "김영희",
+    managerInitial: "김",
+    managerAffiliation: "안전관리팀",
+    history: [{ id: 71, status: "pending", date: "2026.06.01 09:10" }],
+  },
+  8: {
+    id: 8,
+    status: "ongoing",
+    date: "2026.05.30 14:22",
+    location: "지하 주차장 입구",
+    description:
+      "차량 진출입 구간 바닥 도색이 마모되어 구분선이 불명확합니다. 보행자와 차량 동선이 겹쳐 충돌 위험이 있습니다.",
+    reporterName: "홍길동",
+    reporterInitial: "홍",
+    workplace: "광교타워크레인 현장",
+    photos: [
+      "https://picsum.photos/seed/hazard8a/400/300",
+      "https://picsum.photos/seed/hazard8b/400/300",
+    ],
+    managerName: "박준호",
+    managerInitial: "박",
+    managerAffiliation: "시설관리팀",
+    history: [
+      { id: 81, status: "pending", date: "2026.05.30 14:22" },
+      { id: 82, status: "ongoing", date: "2026.05.31 09:00" },
+    ],
+  },
+  9: {
+    id: 9,
+    status: "completed",
+    date: "2026.05.28 10:05",
+    location: "2층 창고",
+    description:
+      "선반 고정 볼트 이완으로 선반이 기울어져 있습니다. 무거운 자재가 적재되어 있어 낙하 사고 위험이 높습니다.",
+    reporterName: "홍길동",
+    reporterInitial: "홍",
+    workplace: "수원역 복합개발 현장",
+    photos: ["https://picsum.photos/seed/hazard9a/400/300"],
+    managerName: "최지현",
+    managerInitial: "최",
+    managerAffiliation: "안전관리팀",
+    history: [
+      { id: 91, status: "pending", date: "2026.05.28 10:05" },
+      { id: 92, status: "ongoing", date: "2026.05.28 13:30" },
+      {
+        id: 93,
+        status: "completed",
+        date: "2026.05.29 11:00",
+        note: "선반 볼트 전체 재조임 및 과적 자재 재배치 완료하였습니다. 추가 점검 후 이상 없음을 확인하였습니다.",
+      },
+    ],
+  },
+  10: {
+    id: 10,
+    status: "impossible",
+    date: "2026.05.25 16:40",
+    location: "옥상 환기구",
+    description:
+      "환기구 덮개 부식으로 파손 위험이 있습니다. 장기간 방치로 인해 부식이 심화되어 덮개 일부가 들뜬 상태입니다.",
+    reporterName: "홍길동",
+    reporterInitial: "홍",
+    workplace: "수원역 복합개발 현장",
+    photos: [
+      "https://picsum.photos/seed/hazard10a/400/300",
+      "https://picsum.photos/seed/hazard10b/400/300",
+    ],
+    managerName: "이수현",
+    managerInitial: "이",
+    managerAffiliation: "현장관리팀",
+    history: [
+      { id: 101, status: "pending", date: "2026.05.25 16:40" },
+      { id: 102, status: "ongoing", date: "2026.05.26 10:00" },
+      {
+        id: 103,
+        status: "impossible",
+        date: "2026.05.27 15:20",
+        note: "제조사 단종 부품으로 교체가 불가합니다. 건물 노후화로 전면 교체 공사가 필요하며, 예산 협의 후 장기 계획에 반영 예정입니다.",
+      },
     ],
   },
 }

@@ -10,7 +10,7 @@ import { Text } from "@/components/Text"
 import { UserAvatar } from "@/components/UserAvatar"
 import { translate } from "@/i18n/translate"
 
-import { mockHazardData } from "./mockData"
+import { MOCK_CURRENT_USER, mockHazardData } from "./mockData"
 import * as S from "./styles"
 import type { HazardItem, HazardRiskScreenProps, HazardStatus } from "./types"
 
@@ -102,7 +102,10 @@ export const HazardRiskScreen: FC<HazardRiskScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
   const [activeTab, setActiveTab] = useState<TabKey>("all")
 
-  const myCount = useMemo(() => mockHazardData.filter((item) => item.isMyReport).length, [])
+  const myCount = useMemo(
+    () => mockHazardData.filter((item) => item.reporterName === MOCK_CURRENT_USER).length,
+    [],
+  )
   const completedCount = useMemo(
     () => mockHazardData.filter((item) => item.status === "completed").length,
     [],
