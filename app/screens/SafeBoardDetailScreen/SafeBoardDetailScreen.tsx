@@ -1,6 +1,6 @@
 import { FC, useState } from "react"
 import { ScrollView, TouchableOpacity, View, ViewStyle, TextStyle } from "react-native"
-import { Bell, Send, Trash2, User } from "lucide-react-native"
+import { Bell, Send, Trash2 } from "lucide-react-native"
 import { useTranslation } from "react-i18next"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -9,6 +9,7 @@ import { useResponsive } from "@/theme/responsive"
 import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
+import { UserAvatar } from "@/components/UserAvatar"
 import { useRole } from "@/context/RoleContext"
 import { translate } from "@/i18n/translate"
 import type { AppStackScreenProps } from "@/navigators/navigationTypes"
@@ -38,6 +39,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
   const isAdmin = role === "admin"
   const isMyPost = mockMyPosts.some((p) => p.id === id)
   const canEdit = isAdmin && isMyPost
+  const isDraft = item.status === "draft"
 
   const showStatusBadge = item.status === "draft" || item.status === "archived"
 
@@ -49,7 +51,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
         contentBg="#F9FAFE"
         squareTop
         rightSlot={
-          canEdit ? (
+          canEdit && isDraft ? (
             <TouchableOpacity
               onPress={() => navigation.navigate("SafeBoardCreate")}
               activeOpacity={0.7}
@@ -93,13 +95,8 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
             )}
 
             <View style={[$authorRow, isRTL && { flexDirection: "row-reverse" }]}>
-              <View style={$authorIconWrap}>
-                <User size={14} color="#606679" strokeWidth={2} />
-              </View>
-              <Text
-                text={`${translate("safeBoardDetailScreen:authorLabel")} ${item.authorName}`}
-                style={$authorText}
-              />
+              <UserAvatar initial={item.authorName.charAt(0)} size={28} />
+              <Text text={item.authorName} style={$authorText} />
             </View>
 
             <View style={$divider} />
@@ -115,7 +112,7 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
           </View>
         </View>
 
-        {canEdit && (
+        {canEdit && isDraft && (
           <View style={[$actionBar, { paddingBottom: insets.bottom + 12 }]}>
             <TouchableOpacity
               style={[$actionBtn, $publishBtn, isRTL && { flexDirection: "row-reverse" }]}
@@ -258,14 +255,6 @@ const $authorRow: ViewStyle = {
   marginBottom: 14,
 }
 
-const $authorIconWrap: ViewStyle = {
-  width: 28,
-  height: 28,
-  borderRadius: 14,
-  backgroundColor: "#F0F2F5",
-  justifyContent: "center",
-  alignItems: "center",
-}
 
 const $authorText: TextStyle = {
   fontSize: 14,
