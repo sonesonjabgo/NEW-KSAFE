@@ -532,6 +532,38 @@ export const $historyCard: ViewStyle = {
   marginTop: 6,
 }
 
+export const $historyNoteBubbleCompleted: ViewStyle = {
+  backgroundColor: "#EFF4FD",
+  borderRadius: 6,
+  paddingHorizontal: 14,
+  paddingVertical: 10,
+  marginTop: 6,
+  alignSelf: "flex-start",
+}
+
+export const $historyNoteBubbleCompletedText: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#1062D8",
+  lineHeight: 18,
+}
+
+export const $historyNoteBubbleImpossible: ViewStyle = {
+  backgroundColor: "#FDE8EB",
+  borderRadius: 6,
+  paddingHorizontal: 14,
+  paddingVertical: 10,
+  marginTop: 6,
+  alignSelf: "flex-start",
+}
+
+export const $historyNoteBubbleImpossibleText: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#E03526",
+  lineHeight: 18,
+}
+
 // ── Modal ─────────────────────────────────────────────────────────────────────
 
 export const $modalOverlay: ViewStyle = {

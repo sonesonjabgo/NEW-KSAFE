@@ -452,6 +452,14 @@ export const HazardRiskDetailScreen: FC<HazardRiskDetailScreenProps> = ({ naviga
                           text={translate("hazardRiskDetailScreen:statusHistory.contents.pending")}
                           style={S.$historyContent}
                         />
+                      ) : item.note && item.status === "completed" ? (
+                        <View style={S.$historyNoteBubbleCompleted}>
+                          <Text text={item.note} style={S.$historyNoteBubbleCompletedText} />
+                        </View>
+                      ) : item.note && item.status === "impossible" ? (
+                        <View style={S.$historyNoteBubbleImpossible}>
+                          <Text text={item.note} style={S.$historyNoteBubbleImpossibleText} />
+                        </View>
                       ) : (
                         <Text style={S.$historyContent}>
                           {translate(
