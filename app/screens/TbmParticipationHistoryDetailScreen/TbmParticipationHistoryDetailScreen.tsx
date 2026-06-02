@@ -54,6 +54,48 @@ const mockHistoryDetails: Record<number, HistoryDetail> = {
     workplace: "광교 타워크레인 사업장",
     managerName: "권 민수",
   },
+  6: {
+    participationDate: "2026.02.13 08:00",
+    workDate: "2026.02.13 09:00",
+    workplace: "광교 타워크레인 사업장",
+    managerName: "권 민수",
+  },
+  7: {
+    participationDate: "2026.02.12 09:15",
+    workDate: "2026.02.12 10:00",
+    workplace: "서울 한강 레지던스 RC공사 현장",
+    managerName: "김 철수",
+  },
+  8: {
+    participationDate: "2026.02.11 08:45",
+    workDate: "2026.02.11 09:30",
+    workplace: "서울 한강 레지던스 RC공사 현장",
+    managerName: "김 철수",
+  },
+  9: {
+    participationDate: "2026.02.10 07:30",
+    workDate: "2026.02.10 08:30",
+    workplace: "서울 한강 레지던스 RC공사 현장",
+    managerName: "김 철수",
+  },
+  10: {
+    participationDate: "2026.02.07 09:00",
+    workDate: "2026.02.07 10:00",
+    workplace: "부산 센텀 물류센터 현장",
+    managerName: "이 정민",
+  },
+  11: {
+    participationDate: "2026.02.05 08:30",
+    workDate: "2026.02.05 09:30",
+    workplace: "부산 센텀 물류센터 현장",
+    managerName: "이 정민",
+  },
+  12: {
+    participationDate: "2026.02.03 08:00",
+    workDate: "2026.02.03 09:00",
+    workplace: "부산 센텀 물류센터 현장",
+    managerName: "이 정민",
+  },
 }
 
 const STATUS_LABEL: Record<TbmStatus, "drafting" | "ongoing" | "ended"> = {
@@ -163,7 +205,9 @@ export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, rou
           />
           <View style={S.$educationHeaderLine} />
         </View>
-        <View style={S.$educationCard} />
+        <View style={S.$detailCard}>
+          <Text text={tbm.activityContent} style={S.$activityContent} />
+        </View>
 
         {/* ── 교육자료 섹션 ── */}
         <View style={S.$educationHeaderRow}>

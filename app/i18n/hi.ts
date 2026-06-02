@@ -589,6 +589,12 @@ const hi: Translations = {
   textTranslationScreen: {
     title: "पाठ अनुवाद",
     fontSizeButton: "AA",
+    fontSizeModal: {
+      title: "टेक्स्ट आकार",
+      small: "छोटा",
+      medium: "मध्यम",
+      large: "बड़ा",
+    },
     languageMenu: {
       title: "भाषा चुनें",
     },
@@ -774,6 +780,8 @@ const hi: Translations = {
   },
 
   tbmCreateScreen: {
+    editTitle: "수정",
+    submitEdit: "수정하기",
     title: "TBM गतिविधि बनाएं",
     reset: "रीसेट करें",
     guide: {
@@ -834,6 +842,7 @@ const hi: Translations = {
       cancel: "रद्द करें",
       confirm: "हटाएं",
     },
+    downloadLog: "교육일지 다운로드",
     startModal: {
       title: "TBM गतिविधि शुरू करें",
       message: "क्या आप इस TBM गतिविधि को शुरू करना चाहते हैं?\nस्थिति 'प्रगति में' में बदल जाएगी।",
@@ -968,6 +977,10 @@ const hi: Translations = {
         "क्या आप इस प्रस्ताव को हटाना चाहते हैं?\nहटाए गए प्रस्ताव को पुनः प्राप्त नहीं किया जा सकता।",
       cancel: "रद्द करें",
       confirm: "हटाएं",
+    },
+    toast: {
+      noAction: "कृपया प्रतिबिंबित या अस्वीकृत चुनें।",
+      noNote: "कृपया प्रसंस्करण विवरण दर्ज करें।",
     },
   },
 
@@ -1121,6 +1134,12 @@ const hi: Translations = {
       recall: "वापस लें",
       delete: "हटाएं",
       reportPreview: "रिपोर्ट पूर्वावलोकन",
+    },
+    deleteModal: {
+      title: "निरीक्षण हटाएं",
+      message: "क्या आप इस निरीक्षण को हटाना चाहते हैं?\nयह क्रिया पूर्ववत नहीं की जा सकती।",
+      cancel: "रद्द करें",
+      confirm: "हटाएं",
     },
     toast: {
       reportSuccess: "रिपोर्ट खुल गई।",
@@ -1339,6 +1358,15 @@ const hi: Translations = {
         impossible: "कार्य को असंभव के रूप में संसाधित किया गया है।",
         adminSuffix: " - व्यवस्थापक ({{name}})",
       },
+    },
+    bottomButton: {
+      proceed: "आगे बढ़ें",
+      saveAction: "कार्रवाई सहेजें",
+      alreadyProcessed: "इस रिपोर्ट को पहले ही संसाधित किया जा चुका है।",
+    },
+    toast: {
+      noAction: "कृपया पूर्ण या असंभव चुनें।",
+      noNote: "कृपया कार्रवाई का विवरण दर्ज करें।",
     },
   },
 

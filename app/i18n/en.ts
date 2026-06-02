@@ -627,6 +627,12 @@ const en = {
   textTranslationScreen: {
     title: "Text Translation",
     fontSizeButton: "AA",
+    fontSizeModal: {
+      title: "Text Size",
+      small: "Small",
+      medium: "Medium",
+      large: "Large",
+    },
     languageMenu: {
       title: "Select Language",
     },
@@ -822,6 +828,8 @@ const en = {
 
   tbmCreateScreen: {
     title: "Create TBM Activity",
+    editTitle: "Edit",
+    submitEdit: "Save Changes",
     reset: "Reset",
     guide: {
       title: "Writing Guide",
@@ -881,6 +889,7 @@ const en = {
       cancel: "Cancel",
       confirm: "Delete",
     },
+    downloadLog: "Download Education Log",
     startModal: {
       title: "Start TBM Activity",
       message:
@@ -1015,6 +1024,10 @@ const en = {
         "Are you sure you want to delete this proposal?\nDeleted proposals cannot be recovered.",
       cancel: "Cancel",
       confirm: "Delete",
+    },
+    toast: {
+      noAction: "Please select Reflected or Rejected.",
+      noNote: "Please enter the processing details.",
     },
   },
 
@@ -1168,6 +1181,12 @@ const en = {
       recall: "Recall",
       delete: "Delete",
       reportPreview: "Report Preview",
+    },
+    deleteModal: {
+      title: "Delete Inspection",
+      message: "Are you sure you want to delete this inspection? This action cannot be undone.",
+      cancel: "Cancel",
+      confirm: "Delete",
     },
     toast: {
       reportSuccess: "Report opened.",
@@ -1386,6 +1405,15 @@ const en = {
         impossible: "The action has been processed as impossible.",
         adminSuffix: " - Admin ({{name}})",
       },
+    },
+    bottomButton: {
+      proceed: "Proceed",
+      saveAction: "Save Action",
+      alreadyProcessed: "This report has already been processed.",
+    },
+    toast: {
+      noAction: "Please select Completed or Impossible.",
+      noNote: "Please enter the action details.",
     },
   },
 

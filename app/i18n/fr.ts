@@ -607,6 +607,12 @@ const fr: Translations = {
   textTranslationScreen: {
     title: "Traduction de Texte",
     fontSizeButton: "AA",
+    fontSizeModal: {
+      title: "Taille du texte",
+      small: "Petite",
+      medium: "Moyenne",
+      large: "Grande",
+    },
     languageMenu: {
       title: "Sélectionner la Langue",
     },
@@ -793,6 +799,8 @@ const fr: Translations = {
   },
 
   tbmCreateScreen: {
+    editTitle: "수정",
+    submitEdit: "수정하기",
     title: "Créer une activité TBM",
     reset: "Réinitialiser",
     guide: {
@@ -854,6 +862,7 @@ const fr: Translations = {
       cancel: "Annuler",
       confirm: "Supprimer",
     },
+    downloadLog: "교육일지 다운로드",
     startModal: {
       title: "Démarrer l'activité TBM",
       message: "Voulez-vous démarrer cette activité TBM?\nLe statut passera à 'En cours'.",
@@ -989,6 +998,10 @@ const fr: Translations = {
         "Voulez-vous supprimer cette proposition ?\nLes propositions supprimées ne peuvent pas être récupérées.",
       cancel: "Annuler",
       confirm: "Supprimer",
+    },
+    toast: {
+      noAction: "Veuillez sélectionner Réfléchi ou Rejeté.",
+      noNote: "Veuillez saisir les détails du traitement.",
     },
   },
 
@@ -1144,6 +1157,12 @@ const fr: Translations = {
       recall: "Rappeler",
       delete: "Supprimer",
       reportPreview: "Aperçu du Rapport",
+    },
+    deleteModal: {
+      title: "Supprimer l'inspection",
+      message: "Êtes-vous sûr de vouloir supprimer cette inspection ?\nCette action est irréversible.",
+      cancel: "Annuler",
+      confirm: "Supprimer",
     },
     toast: {
       reportSuccess: "Le rapport a été ouvert.",
@@ -1367,6 +1386,15 @@ const fr: Translations = {
         impossible: "L'action a été traitée comme impossible.",
         adminSuffix: " - Administrateur ({{name}})",
       },
+    },
+    bottomButton: {
+      proceed: "Procéder",
+      saveAction: "Enregistrer l'action",
+      alreadyProcessed: "Ce signalement a déjà été traité.",
+    },
+    toast: {
+      noAction: "Veuillez sélectionner Terminé ou Impossible.",
+      noNote: "Veuillez saisir les détails de l'action.",
     },
   },
 

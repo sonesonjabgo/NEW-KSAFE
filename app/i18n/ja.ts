@@ -583,6 +583,12 @@ const ja: Translations = {
   textTranslationScreen: {
     title: "テキスト翻訳",
     fontSizeButton: "AA",
+    fontSizeModal: {
+      title: "文字サイズ",
+      small: "小",
+      medium: "中",
+      large: "大",
+    },
     languageMenu: {
       title: "言語を選択",
     },
@@ -766,6 +772,8 @@ const ja: Translations = {
   },
 
   tbmCreateScreen: {
+    editTitle: "수정",
+    submitEdit: "수정하기",
     title: "TBM活動を作成",
     reset: "リセット",
     guide: {
@@ -826,6 +834,7 @@ const ja: Translations = {
       cancel: "キャンセル",
       confirm: "削除",
     },
+    downloadLog: "교육일지 다운로드",
     startModal: {
       title: "TBM活動を開始",
       message: "このTBM活動を開始しますか？\nステータスが「進行中」に変わります。",
@@ -958,6 +967,10 @@ const ja: Translations = {
       message: "この提案を削除しますか？\n削除した提案は復元できません。",
       cancel: "キャンセル",
       confirm: "削除",
+    },
+    toast: {
+      noAction: "反映完了または反映不可を選択してください。",
+      noNote: "処理内容を入力してください。",
     },
   },
 
@@ -1111,6 +1124,12 @@ const ja: Translations = {
       recall: "回収",
       delete: "削除",
       reportPreview: "レポートプレビュー",
+    },
+    deleteModal: {
+      title: "点検を削除",
+      message: "この点検を削除してもよろしいですか？\n削除後は復元できません。",
+      cancel: "キャンセル",
+      confirm: "削除",
     },
     toast: {
       reportSuccess: "レポートが開きました。",
@@ -1327,6 +1346,15 @@ const ja: Translations = {
         impossible: "措置不可として処理されました。",
         adminSuffix: " - 管理者({{name}})",
       },
+    },
+    bottomButton: {
+      proceed: "進行する",
+      saveAction: "対応内容を保存",
+      alreadyProcessed: "この通報はすでに処理済みです。",
+    },
+    toast: {
+      noAction: "対応完了または対応不可を選択してください。",
+      noNote: "対応内容を入力してください。",
     },
   },
 

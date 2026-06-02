@@ -616,6 +616,12 @@ const es: Translations = {
   textTranslationScreen: {
     title: "Traducción de Texto",
     fontSizeButton: "AA",
+    fontSizeModal: {
+      title: "Tamaño del texto",
+      small: "Pequeño",
+      medium: "Mediano",
+      large: "Grande",
+    },
     languageMenu: {
       title: "Seleccionar Idioma",
     },
@@ -801,6 +807,8 @@ const es: Translations = {
   },
 
   tbmCreateScreen: {
+    editTitle: "수정",
+    submitEdit: "수정하기",
     title: "Crear actividad TBM",
     reset: "Restablecer",
     guide: {
@@ -861,6 +869,7 @@ const es: Translations = {
       cancel: "Cancelar",
       confirm: "Eliminar",
     },
+    downloadLog: "교육일지 다운로드",
     startModal: {
       title: "Iniciar actividad TBM",
       message: "¿Desea iniciar esta actividad TBM?\nEl estado cambiará a 'En progreso'.",
@@ -996,6 +1005,10 @@ const es: Translations = {
         "¿Está seguro de que desea eliminar esta propuesta?\nLas propuestas eliminadas no se pueden recuperar.",
       cancel: "Cancelar",
       confirm: "Eliminar",
+    },
+    toast: {
+      noAction: "Por favor, seleccione Reflejado o Rechazado.",
+      noNote: "Por favor, ingrese los detalles del procesamiento.",
     },
   },
 
@@ -1150,6 +1163,12 @@ const es: Translations = {
       recall: "Retirar",
       delete: "Eliminar",
       reportPreview: "Vista Previa del Informe",
+    },
+    deleteModal: {
+      title: "Eliminar inspección",
+      message: "¿Está seguro de que desea eliminar esta inspección?\nEsta acción no se puede deshacer.",
+      cancel: "Cancelar",
+      confirm: "Eliminar",
     },
     toast: {
       reportSuccess: "El informe se abrió.",
@@ -1370,6 +1389,15 @@ const es: Translations = {
         impossible: "La acción ha sido procesada como imposible.",
         adminSuffix: " - Administrador ({{name}})",
       },
+    },
+    bottomButton: {
+      proceed: "Proceder",
+      saveAction: "Guardar acción",
+      alreadyProcessed: "Este informe ya ha sido procesado.",
+    },
+    toast: {
+      noAction: "Por favor, seleccione Completado o Imposible.",
+      noNote: "Por favor, ingrese los detalles de la acción.",
     },
   },
 

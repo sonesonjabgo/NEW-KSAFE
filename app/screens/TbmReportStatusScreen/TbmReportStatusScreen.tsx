@@ -3,12 +3,14 @@ import { ScrollView, TouchableOpacity, View } from "react-native"
 import { IconDownload } from "@tabler/icons-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
+import { Asset } from "expo-asset"
+import { Linking } from "react-native"
+
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
 import { mockTbmReports } from "@/screens/TbmReportInquiryScreen/mockData"
 import type { TbmReportStatus } from "@/screens/TbmReportInquiryScreen/types"
-import { downloadTbmAttachment } from "@/utils/downloadTbmAttachment"
 
 import * as S from "./styles"
 import type { TbmReportStatusScreenProps } from "./types"
@@ -27,6 +29,12 @@ export const TbmReportStatusScreen: FC<TbmReportStatusScreenProps> = ({ navigati
   const detail = mockTbmReports.find((r) => r.id === id)
 
   if (!detail) return null
+
+  const handleDownload = async () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const [asset] = await Asset.loadAsync(require("@assets/sampleTBMReport.pdf"))
+    await Linking.openURL(asset.uri)
+  }
 
   const badgeStyles = getBadgeStyles(detail.status)
   const emptyLabel = "-"
@@ -162,17 +170,21 @@ export const TbmReportStatusScreen: FC<TbmReportStatusScreenProps> = ({ navigati
         </ScrollView>
 
         {/* ── 하단 버튼 영역 ── */}
-        <View style={S.$bottomDivider} />
-        <View style={[S.$bottomBar, { paddingBottom: (insets.bottom || 0) + 16 }]}>
-          <TouchableOpacity
-            style={S.$pdfButton}
-            onPress={() => downloadTbmAttachment()}
-            activeOpacity={0.8}
-          >
-            <IconDownload size={20} color="#FFFFFF" />
-            <Text text={translate("tbmReportStatusScreen:downloadPdf")} style={S.$pdfButtonText} />
-          </TouchableOpacity>
-        </View>
+        {detail.status === "completed" && (
+          <>
+            <View style={S.$bottomDivider} />
+            <View style={[S.$bottomBar, { paddingBottom: (insets.bottom || 0) + 16 }]}>
+              <TouchableOpacity
+                style={S.$pdfButton}
+                onPress={handleDownload}
+                activeOpacity={0.8}
+              >
+                <IconDownload size={20} color="#FFFFFF" />
+                <Text text={translate("tbmReportStatusScreen:downloadPdf")} style={S.$pdfButtonText} />
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
       </StackScreen>
     </>
   )

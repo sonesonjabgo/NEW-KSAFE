@@ -1,7 +1,8 @@
 import { FC, useState } from "react"
 import { ActivityIndicator, Linking, ScrollView, TouchableOpacity, View, TextStyle, ViewStyle } from "react-native"
-import { CircleCheck, CircleAlert, X } from "lucide-react-native"
+import { CircleCheck, CircleAlert, Trash2, X } from "lucide-react-native"
 
+import { ConfirmModal } from "@/components/ConfirmModal"
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
 import { Toast } from "@/components/Toast"
@@ -23,42 +24,147 @@ interface CheckItem {
   note: string
 }
 
+interface PatrolDetailData {
+  status: PatrolStatus
+  date: string
+  title: string
+  reviewer: string
+  approver: string
+  author: string
+  location: string
+  overallAction: string
+  checkItems: CheckItem[]
+  total: number
+  good: number
+  bad: number
+}
+
 const BADGE_STYLES: Record<PatrolStatus, { bg: string; text: string }> = {
   underReview: { bg: "#FEECDF", text: "#FD9040" },
   inProgress: { bg: "#E5E6E9", text: "#606679" },
   approved: { bg: "#CFFFE0", text: "#18A24A" },
 }
 
-const MOCK_PATROL = {
-  status: "approved" as PatrolStatus,
-  date: "2025.05.20 09:30",
-  title: "작업장 순회 점검",
-  reviewer: "김소정",
-  approver: "이민준",
-  author: "박민준",
-  location: "서울 한강 레지던스 RC공사 현장",
+const MOCK_PATROL_DETAILS: Record<string, PatrolDetailData> = {
+  "1": {
+    status: "underReview",
+    date: "2025.05.20 09:30",
+    title: "작업장 순회 점검",
+    reviewer: "김철수",
+    approver: "이부장",
+    author: "박민준",
+    location: "서울 한강 레지던스 RC공사 현장",
+    overallAction: "작업장 주변 안전 시설물 점검 및 정비 실시 바랍니다.",
+    checkItems: [
+      { id: "1", name: "안전모 착용 여부", status: "good", note: "" },
+      { id: "2", name: "작업 통로 안전 확보", status: "bad", note: "작업 통로에 장애물이 있어 즉시 제거 필요합니다." },
+      { id: "3", name: "소화기 비치 상태", status: "good", note: "" },
+    ],
+    total: 12, good: 9, bad: 3,
+  },
+  "2": {
+    status: "inProgress",
+    date: "2025.05.19 14:15",
+    title: "작업장 순회 점검",
+    reviewer: "최영호",
+    approver: "정과장",
+    author: "홍길동",
+    location: "서울 한강 레지던스 RC공사 현장",
+    overallAction: "전기 설비 주변 안전 거리 확보 및 표지판 부착 요망.",
+    checkItems: [
+      { id: "1", name: "전기 설비 안전 거리", status: "bad", note: "설비 주변 1m 이내 장애물 제거 필요합니다." },
+      { id: "2", name: "안전모 착용 여부", status: "good", note: "" },
+      { id: "3", name: "비상구 확보 상태", status: "good", note: "" },
+    ],
+    total: 10, good: 7, bad: 3,
+  },
+  "3": {
+    status: "approved",
+    date: "2025.05.18 11:00",
+    title: "작업장 순회 점검",
+    reviewer: "이영수",
+    approver: "김부장",
+    author: "이민호",
+    location: "서울 한강 레지던스 RC공사 현장",
+    overallAction: "전반적으로 양호한 상태이며 정기 점검 유지 권고.",
+    checkItems: [
+      { id: "1", name: "안전모 착용 여부", status: "good", note: "" },
+      { id: "2", name: "소화기 비치 상태", status: "good", note: "" },
+      { id: "3", name: "작업 통로 안전 확보", status: "good", note: "" },
+    ],
+    total: 15, good: 15, bad: 0,
+  },
+  "4": {
+    status: "underReview",
+    date: "2025.05.17 16:45",
+    title: "작업장 순회 점검",
+    reviewer: "강현우",
+    approver: "박팀장",
+    author: "조성현",
+    location: "서울 한강 레지던스 RC공사 현장",
+    overallAction: "고소 작업 구간 안전망 재설치 및 추락 방지 조치 필요.",
+    checkItems: [
+      { id: "1", name: "안전망 설치 상태", status: "bad", note: "고소 작업 구간 안전망 훼손 확인, 즉시 교체 필요." },
+      { id: "2", name: "안전모 착용 여부", status: "good", note: "" },
+      { id: "3", name: "추락 방지 시설", status: "bad", note: "난간 고정 볼트 2개 누락 상태." },
+    ],
+    total: 11, good: 7, bad: 4,
+  },
+  "5": {
+    status: "approved",
+    date: "2025.05.16 08:20",
+    title: "작업장 순회 점검",
+    reviewer: "손민재",
+    approver: "윤부장",
+    author: "임준혁",
+    location: "서울 한강 레지던스 RC공사 현장",
+    overallAction: "점검 결과 이상 없음. 현 상태 유지 권고.",
+    checkItems: [
+      { id: "1", name: "안전모 착용 여부", status: "good", note: "" },
+      { id: "2", name: "소화기 비치 상태", status: "good", note: "" },
+      { id: "3", name: "비상구 확보 상태", status: "good", note: "" },
+    ],
+    total: 13, good: 13, bad: 0,
+  },
+  "6": {
+    status: "inProgress",
+    date: "2025.05.15 13:50",
+    title: "작업장 순회 점검",
+    reviewer: "오세훈",
+    approver: "강부장",
+    author: "유재석",
+    location: "서울 한강 레지던스 RC공사 현장",
+    overallAction: "중장비 운행 구간 유도원 배치 및 안전선 재도색 요망.",
+    checkItems: [
+      { id: "1", name: "중장비 운행 안전선", status: "bad", note: "안전선 색상 바래 식별 불가, 재도색 요청." },
+      { id: "2", name: "유도원 배치 여부", status: "bad", note: "오전 시간대 유도원 미배치 확인." },
+      { id: "3", name: "안전모 착용 여부", status: "good", note: "" },
+    ],
+    total: 9, good: 5, bad: 4,
+  },
+  "7": {
+    status: "underReview",
+    date: "2025.05.14 10:05",
+    title: "작업장 순회 점검",
+    reviewer: "김영일",
+    approver: "이대리",
+    author: "최준",
+    location: "서울 한강 레지던스 RC공사 현장",
+    overallAction: "용접 작업 구간 화재 예방 조치 및 소화 장비 추가 비치 요망.",
+    checkItems: [
+      { id: "1", name: "소화기 비치 상태", status: "bad", note: "용접 구간 인근 소화기 미비치 확인." },
+      { id: "2", name: "안전모 착용 여부", status: "good", note: "" },
+      { id: "3", name: "작업 통로 안전 확보", status: "good", note: "" },
+    ],
+    total: 10, good: 8, bad: 2,
+  },
 }
 
-const MOCK_OVERALL_ACTION = "작업장 주변 안전 시설물 점검 및 정비 실시 바랍니다."
-
-const MOCK_CHECK_ITEMS: CheckItem[] = [
-  { id: "1", name: "안전모 착용 여부", status: "good", note: "" },
-  {
-    id: "2",
-    name: "작업 통로 안전 확보",
-    status: "bad",
-    note: "작업 통로에 장애물이 있어 즉시 제거 필요합니다.",
-  },
-  { id: "3", name: "소화기 비치 상태", status: "good", note: "" },
-]
-
-const MOCK_TOTAL = 12
-const MOCK_GOOD = 9
-const MOCK_BAD = 3
-
-export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) => {
-  const [status, setStatus] = useState<PatrolStatus>(MOCK_PATROL.status)
+export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation, route }) => {
+  const detail = MOCK_PATROL_DETAILS[route.params.id] ?? MOCK_PATROL_DETAILS["1"]
+  const [status, setStatus] = useState<PatrolStatus>(detail.status)
   const [isGeneratingReport, setIsGeneratingReport] = useState(false)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [toastVisible, setToastVisible] = useState(false)
   const [toastMessage, setToastMessage] = useState("")
   const [toastIsError, setToastIsError] = useState(false)
@@ -85,7 +191,6 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
         require("@assets/SameplePatrolReport.pdf"),
       )
       await Linking.openURL(asset.uri)
-      showToast(translate("patrolDetailScreen:toast.reportSuccess"))
     } catch {
       showToast(translate("patrolDetailScreen:toast.reportFail"), true)
     } finally {
@@ -101,32 +206,34 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
       squareTop
       contentBg="#FFFFFF"
       rightSlot={
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={() =>
-            navigation.navigate("PatrolCreate", {
-              editData: {
-                approver: { id: "2", name: MOCK_PATROL.approver, subtitle: "KS산업안전협회" },
-                reviewer: { id: "1", name: MOCK_PATROL.reviewer, subtitle: "KS산업안전협회" },
-                requirements: MOCK_OVERALL_ACTION,
-                items: [
-                  {
-                    id: "1",
-                    name: MOCK_PATROL.title,
-                    checkCards: MOCK_CHECK_ITEMS.map((item) => ({
-                      id: item.id,
-                      checkName: item.name,
-                      status: item.status,
-                      badNote: item.note,
-                    })),
-                  },
-                ],
-              },
-            })
-          }
-        >
-          <Text text={translate("patrolDetailScreen:editButton")} style={$editButton} />
-        </TouchableOpacity>
+        status === "inProgress" ? (
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() =>
+              navigation.navigate("PatrolCreate", {
+                editData: {
+                  approver: { id: "2", name: detail.approver, subtitle: "KS산업안전협회" },
+                  reviewer: { id: "1", name: detail.reviewer, subtitle: "KS산업안전협회" },
+                  requirements: detail.overallAction,
+                  items: [
+                    {
+                      id: "1",
+                      name: detail.title,
+                      checkCards: detail.checkItems.map((item) => ({
+                        id: item.id,
+                        checkName: item.name,
+                        status: item.status,
+                        badNote: item.note,
+                      })),
+                    },
+                  ],
+                },
+              })
+            }
+          >
+            <Text text={translate("patrolDetailScreen:editButton")} style={$editButton} />
+          </TouchableOpacity>
+        ) : undefined
       }
     >
       <ScrollView
@@ -142,17 +249,17 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
           />
           <View style={$statsRow}>
             <View style={$statsCol}>
-              <Text text={String(MOCK_TOTAL)} style={$statNumber} />
+              <Text text={String(detail.total)} style={$statNumber} />
               <Text text={translate("patrolDetailScreen:summaryCard.total")} style={$statLabel} />
             </View>
             <View style={$statDivider} />
             <View style={$statsCol}>
-              <Text text={String(MOCK_GOOD)} style={[$statNumber, $statNumberGood]} />
+              <Text text={String(detail.good)} style={[$statNumber, $statNumberGood]} />
               <Text text={translate("patrolDetailScreen:summaryCard.good")} style={$statLabel} />
             </View>
             <View style={$statDivider} />
             <View style={$statsCol}>
-              <Text text={String(MOCK_BAD)} style={[$statNumber, $statNumberBad]} />
+              <Text text={String(detail.bad)} style={[$statNumber, $statNumberBad]} />
               <Text text={translate("patrolDetailScreen:summaryCard.bad")} style={$statLabel} />
             </View>
           </View>
@@ -170,22 +277,22 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
                 style={[$cardBadgeText, { color: badge.text }]}
               />
             </View>
-            <Text text={MOCK_PATROL.date} style={$cardDate} />
+            <Text text={detail.date} style={$cardDate} />
           </View>
 
           {/* 제목 */}
-          <Text text={MOCK_PATROL.title} style={[$cardTitle, $rowGap]} numberOfLines={1} />
+          <Text text={detail.title} style={[$cardTitle, $rowGap]} numberOfLines={1} />
 
           {/* 검토자 */}
           <View style={[$reviewRow, $rowGap]}>
             <Text text={translate("patrolScreen:card.reviewer")} style={$reviewLabel} />
-            <Text text={MOCK_PATROL.reviewer} style={$reviewName} />
+            <Text text={detail.reviewer} style={$reviewName} />
           </View>
 
           {/* 승인자 */}
           <View style={[$reviewRow, $rowGap]}>
             <Text text={translate("patrolScreen:card.approver")} style={$reviewLabel} />
-            <Text text={MOCK_PATROL.approver} style={$reviewName} />
+            <Text text={detail.approver} style={$reviewName} />
           </View>
 
           {/* 구분선 */}
@@ -193,9 +300,9 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
 
           {/* 작성자 + 현장 */}
           <View style={[$metaRow, $metaRowGap]}>
-            <UserAvatar initial={MOCK_PATROL.author.charAt(0)} size={24} />
-            <Text text={MOCK_PATROL.author} style={$metaAuthor} numberOfLines={1} />
-            <Text text={` · ${MOCK_PATROL.location}`} style={$metaLocation} numberOfLines={1} />
+            <UserAvatar initial={detail.author.charAt(0)} size={24} />
+            <Text text={detail.author} style={$metaAuthor} numberOfLines={1} />
+            <Text text={` · ${detail.location}`} style={$metaLocation} numberOfLines={1} />
           </View>
 
           {/* 추가 구분선 */}
@@ -206,7 +313,7 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
             text={translate("patrolDetailScreen:detailCard.overallActions")}
             style={[$sectionTitle, $sectionTitleGap]}
           />
-          <Text text={MOCK_OVERALL_ACTION} style={[$overallActionText, $overallActionGap]} />
+          <Text text={detail.overallAction} style={[$overallActionText, $overallActionGap]} />
 
           {/* 점검 항목 */}
           <Text
@@ -214,7 +321,7 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
             style={[$sectionTitle, $inspectionTitleGap]}
           />
           <View style={$checkItemList}>
-            {MOCK_CHECK_ITEMS.map((item) => (
+            {detail.checkItems.map((item) => (
               <View key={item.id}>
                 <Text text={item.name} style={$checkItemName} />
                 <View style={$gap8} />
@@ -274,7 +381,7 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
             />
           </TouchableOpacity>
           {status === "inProgress" && (
-            <TouchableOpacity style={$btnRed} activeOpacity={0.8}>
+            <TouchableOpacity style={$btnRed} activeOpacity={0.8} onPress={() => setShowDeleteModal(true)}>
               <Text
                 text={translate("patrolDetailScreen:buttons.delete")}
                 style={$btnWhiteText}
@@ -305,6 +412,20 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation }) 
       icon={<X size={14} color="#FFFFFF" strokeWidth={2.5} />}
       iconCircleColor={toastIsError ? colors.danger : colors.blue}
       onHide={() => setToastVisible(false)}
+    />
+    <ConfirmModal
+      visible={showDeleteModal}
+      icon={<Trash2 size={28} color={colors.danger} strokeWidth={1.8} />}
+      title={translate("patrolDetailScreen:deleteModal.title")}
+      message={translate("patrolDetailScreen:deleteModal.message")}
+      cancelLabel={translate("patrolDetailScreen:deleteModal.cancel")}
+      confirmLabel={translate("patrolDetailScreen:deleteModal.confirm")}
+      confirmBgColor={colors.danger}
+      onCancel={() => setShowDeleteModal(false)}
+      onConfirm={() => {
+        setShowDeleteModal(false)
+        navigation.goBack()
+      }}
     />
     </>
   )
