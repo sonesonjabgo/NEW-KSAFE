@@ -31,8 +31,8 @@ export const $cardTopRow: ViewStyle = {
 }
 
 export const $badge: ViewStyle = {
-  paddingHorizontal: 10,
-  paddingVertical: 4,
+  paddingHorizontal: 8,
+  paddingVertical: 2,
   borderRadius: 4,
   justifyContent: "center",
   alignItems: "center",
@@ -60,25 +60,33 @@ export const $badgeFailed: ViewStyle = {
 
 export const $badgeRequestedText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#333333",
 }
 
 export const $badgeGeneratingText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#D48208",
 }
 
 export const $badgeCompletedText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#18A24A",
 }
 
 export const $badgeFailedText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#D32F2F",
 }
 
@@ -96,7 +104,9 @@ export const $cardInfoRow: ViewStyle = {
 
 export const $cardInfoLabel: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#555555",
   minWidth: 56,
 }
@@ -159,7 +169,9 @@ export const $historyRow: ViewStyle = {
 
 export const $historyLabel: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#555555",
 }
 

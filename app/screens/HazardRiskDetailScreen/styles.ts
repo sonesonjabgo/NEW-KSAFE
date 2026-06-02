@@ -45,16 +45,18 @@ export const $cardDate: TextStyle = {
 // ── Status Badge ──────────────────────────────────────────────────────────────
 
 export const $badge: ViewStyle = {
-  paddingVertical: 4,
-  paddingHorizontal: 10,
-  borderRadius: 6,
+  paddingVertical: 2,
+  paddingHorizontal: 8,
+  borderRadius: 4,
   justifyContent: "center",
   alignItems: "center",
 }
 
 export const $badgeText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
 }
 
 // ── Inline Info Row (위치 / 위험요인) ─────────────────────────────────────────
@@ -153,7 +155,7 @@ export const $sectionTitleRow: ViewStyle = {
 export const $sectionTitle: TextStyle = {
   fontSize: 16,
   fontFamily: typography.primary.semiBold,
-  color: "#555555",
+  color: "#1A1A1A",
   flexShrink: 0,
 }
 

@@ -167,7 +167,7 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
         <KeyboardAvoidingView
           style={[$flex, Platform.OS === "android" && { paddingBottom: keyboardHeight }]}
           behavior={Platform.OS === "ios" ? "padding" : undefined}
-          keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 60) : 0}
+          keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(135, insets.top + 75) : 0}
         >
           {/* 채팅 영역 */}
           <FlatList

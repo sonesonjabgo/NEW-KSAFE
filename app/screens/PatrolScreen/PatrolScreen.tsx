@@ -339,16 +339,16 @@ const $cardTopRow: ViewStyle = {
 }
 
 const $badge: ViewStyle = {
-  width: 44,
-  height: 20,
+  paddingHorizontal: 8,
+  paddingVertical: 2,
   borderRadius: 4,
   justifyContent: "center",
   alignItems: "center",
 }
 
 const $badgeText: TextStyle = {
-  fontSize: 12,
-  lineHeight: 16,
+  fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
   includeFontPadding: false,
 }

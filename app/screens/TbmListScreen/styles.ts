@@ -74,8 +74,8 @@ export const $cardTopRow: ViewStyle = {
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 13,
-  lineHeight: 18,
+  fontSize: 14,
+  lineHeight: 20,
   color: "#777777",
   fontFamily: typography.primary.normal,
 }
@@ -124,8 +124,8 @@ export const $cardMetaLocation: TextStyle = {
 // ── Badge ─────────────────────────────────────────────────────────────────────
 
 export const $badge: ViewStyle = {
-  width: 44,
-  height: 20,
+  paddingHorizontal: 8,
+  paddingVertical: 2,
   borderRadius: 4,
   justifyContent: "center",
   alignItems: "center",
@@ -147,24 +147,24 @@ export const $badgeEnded: ViewStyle = {
 }
 
 export const $badgeDraftingText: TextStyle = {
-  fontSize: 12,
-  lineHeight: 16,
+  fontSize: 14,
+  lineHeight: 20,
   color: "#333333",
   fontFamily: typography.primary.semiBold,
   includeFontPadding: false,
 }
 
 export const $badgeOngoingText: TextStyle = {
-  fontSize: 12,
-  lineHeight: 16,
+  fontSize: 14,
+  lineHeight: 20,
   color: "#18A24A",
   fontFamily: typography.primary.semiBold,
   includeFontPadding: false,
 }
 
 export const $badgeEndedText: TextStyle = {
-  fontSize: 12,
-  lineHeight: 16,
+  fontSize: 14,
+  lineHeight: 20,
   color: "#FFFFFF",
   fontFamily: typography.primary.semiBold,
   includeFontPadding: false,

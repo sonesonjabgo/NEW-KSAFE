@@ -140,7 +140,7 @@ export const $cardDate: TextStyle = {
 }
 
 export const $cardLocation: TextStyle = {
-  fontSize: 14,
+  fontSize: 16,
   fontFamily: typography.primary.semiBold,
   color: "#111111",
   marginBottom: 4,
@@ -193,7 +193,9 @@ export const $badge: ViewStyle = {
 
 export const $badgeText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
 }
 
 export const $statusBadgeStyle: Record<HazardStatus, ViewStyle> = {

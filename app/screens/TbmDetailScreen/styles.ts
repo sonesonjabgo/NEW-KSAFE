@@ -31,8 +31,8 @@ export const $cardTopRow: ViewStyle = {
 }
 
 export const $badge: ViewStyle = {
-  paddingHorizontal: 10,
-  paddingVertical: 4,
+  paddingHorizontal: 8,
+  paddingVertical: 2,
   borderRadius: 4,
   justifyContent: "center",
   alignItems: "center",
@@ -55,19 +55,25 @@ export const $badgeEnded: ViewStyle = {
 
 export const $badgeDraftingText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#333333",
 }
 
 export const $badgeOngoingText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#18A24A",
 }
 
 export const $badgeEndedText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#FFFFFF",
 }
 
@@ -120,7 +126,9 @@ export const $cardDivider: ViewStyle = {
 
 export const $activityLabel: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#555555",
 }
 
@@ -176,9 +184,9 @@ export const $educationIconCircle: ViewStyle = {
 export const $educationCardTitle: TextStyle = {
   flex: 1,
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
   color: "#000000",
-  lineHeight: 20,
 }
 
 // ── Participant Section ───────────────────────────────────────────────────────
@@ -215,14 +223,16 @@ export const $participantCard: ViewStyle = {
 export const $participantName: TextStyle = {
   flex: 1,
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#111111",
 }
 
 export const $participantBadge: ViewStyle = {
-  width: 34,
-  height: 20,
-  borderRadius: 20,
+  paddingHorizontal: 8,
+  paddingVertical: 2,
+  borderRadius: 4,
   justifyContent: "center",
   alignItems: "center",
 }
@@ -344,7 +354,9 @@ export const $editBtn: ViewStyle = {
 
 export const $editBtnText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#4C4C4C",
 }
 
@@ -361,6 +373,8 @@ export const $deleteBtn: ViewStyle = {
 
 export const $deleteBtnText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#F87165",
 }

@@ -61,5 +61,4 @@ const $badgeText: TextStyle = {
   fontFamily: typography.primary.bold,
   includeFontPadding: false,
   textAlignVertical: "center",
-  transform: [{ translateY: 0 }],
 }

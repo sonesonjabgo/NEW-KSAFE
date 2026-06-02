@@ -406,16 +406,16 @@ const $cardTopRow: ViewStyle = {
 }
 
 const $cardBadge: ViewStyle = {
-  width: 44,
-  height: 20,
+  paddingHorizontal: 8,
+  paddingVertical: 2,
   borderRadius: 4,
   justifyContent: "center",
   alignItems: "center",
 }
 
 const $cardBadgeText: TextStyle = {
-  fontSize: 12,
-  lineHeight: 16,
+  fontSize: 14,
+  lineHeight: 20,
   fontFamily: semiBold,
   includeFontPadding: false,
 }
@@ -534,8 +534,8 @@ const $checkCardText: TextStyle = {
 }
 
 const $goodBadge: ViewStyle = {
-  width: 34,
-  height: 20,
+  paddingHorizontal: 8,
+  paddingVertical: 2,
   borderRadius: 4,
   backgroundColor: "#DFF6E7",
   justifyContent: "center",
@@ -544,16 +544,16 @@ const $goodBadge: ViewStyle = {
 }
 
 const $goodBadgeText: TextStyle = {
-  fontSize: 12,
-  lineHeight: 16,
+  fontSize: 14,
+  lineHeight: 20,
   fontFamily: semiBold,
   color: "#24804B",
   includeFontPadding: false,
 }
 
 const $badBadge: ViewStyle = {
-  width: 34,
-  height: 20,
+  paddingHorizontal: 8,
+  paddingVertical: 2,
   borderRadius: 4,
   backgroundColor: "#FDE8EB",
   justifyContent: "center",
@@ -562,8 +562,8 @@ const $badBadge: ViewStyle = {
 }
 
 const $badBadgeText: TextStyle = {
-  fontSize: 12,
-  lineHeight: 16,
+  fontSize: 14,
+  lineHeight: 20,
   fontFamily: semiBold,
   color: "#FF0004",
   includeFontPadding: false,

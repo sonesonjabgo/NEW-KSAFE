@@ -96,7 +96,9 @@ export const $badge: ViewStyle = {
 
 export const $badgeText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
 }
 
 export const $statusBadgeStyle: Record<ProposalStatus, ViewStyle> = {
@@ -127,7 +129,7 @@ export const $sectionHeaderRow: ViewStyle = {
 }
 
 export const $sectionTitle: TextStyle = {
-  fontSize: 15,
+  fontSize: 16,
   fontFamily: typography.primary.semiBold,
   color: "#1A1A1A",
 }
@@ -214,8 +216,6 @@ export const $statusBtnBadge: ViewStyle = {
   borderRadius: 10,
   justifyContent: "center",
   alignItems: "center",
-  borderWidth: 2,
-  borderColor: "#FFFFFF",
 }
 
 export const $inputLabel: TextStyle = {

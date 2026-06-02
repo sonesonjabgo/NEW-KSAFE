@@ -198,7 +198,7 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
         <KeyboardAvoidingView
           style={[$keyboardView, Platform.OS === "android" && { paddingBottom: keyboardHeight }]}
           behavior={Platform.OS === "ios" ? "padding" : undefined}
-          keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 60) : 0}
+          keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 40) : 0}
         >
           <View style={$chatWrapBox}>
             <View style={[$chatInnerBox, isListening && $chatInnerBoxListening]}>

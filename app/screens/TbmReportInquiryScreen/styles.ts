@@ -146,26 +146,34 @@ export const $badgeFailed: ViewStyle = {
 
 export const $badgeRequestedText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   color: "#333333",
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
 }
 
 export const $badgeGeneratingText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   color: "#D48208",
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
 }
 
 export const $badgeCompletedText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   color: "#18A24A",
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
 }
 
 export const $badgeFailedText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   color: "#D32F2F",
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
 }
 
 // ── Empty State ───────────────────────────────────────────────────────────────

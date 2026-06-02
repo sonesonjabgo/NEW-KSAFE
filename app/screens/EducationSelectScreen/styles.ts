@@ -159,7 +159,9 @@ export const $cardBadge: ViewStyle = {
 
 export const $cardBadgeText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
 }
 
 export const $cardTitle: TextStyle = {
