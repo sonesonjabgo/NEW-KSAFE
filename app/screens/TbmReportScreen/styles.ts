@@ -12,7 +12,7 @@ export const $scrollContent: ViewStyle = {
 }
 
 export const $scrollInner: ViewStyle = {
-  paddingHorizontal: 20,
+  paddingHorizontal: 22,
   paddingTop: 28,
   paddingBottom: 40,
   gap: 35,
@@ -63,7 +63,7 @@ export const $activityNameInfo: ViewStyle = {
 }
 
 export const $activityNameLabel: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
 }
@@ -130,9 +130,9 @@ export const $textarea: ViewStyle = {
 }
 
 export const $helperText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#9AA0AB",
+  color: "#555555",
   marginTop: 4,
 }
 
@@ -167,7 +167,7 @@ export const $photoGuideTextBlock: ViewStyle = {
 }
 
 export const $photoGuideLine: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
   lineHeight: 16,
@@ -186,7 +186,7 @@ export const $photoGuideAddBtn: ViewStyle = {
 }
 
 export const $photoGuideAddBtnText: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#1062D8",
 }
@@ -228,9 +228,9 @@ export const $photoAddBtn: ViewStyle = {
 }
 
 export const $photoAddText: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#AAAAAA",
+  color: "#555555",
 }
 
 export const $photoItem: ImageStyle = {

@@ -26,8 +26,9 @@ export const $tabScrollView: ViewStyle = {
 export const $tabBarContent: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-  paddingHorizontal: 16,
-  paddingVertical: 10,
+  paddingHorizontal: 22,
+  paddingTop: 14,
+  paddingBottom: 0,
   gap: 8,
 }
 
@@ -35,7 +36,7 @@ export const $tab: ViewStyle = {
   height: 34,
   alignItems: "center",
   justifyContent: "center",
-  paddingHorizontal: 28,
+  paddingHorizontal: 20,
   borderRadius: 17,
   backgroundColor: "#F9FAFE",
 }
@@ -45,9 +46,9 @@ export const $activeTab: ViewStyle = {
 }
 
 export const $tabText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
-  color: "#999999",
+  color: "#555555",
 }
 
 export const $activeTabText: TextStyle = {
@@ -73,7 +74,7 @@ export const $summaryCard: ViewStyle = {
 }
 
 export const $summaryLabel: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#666666",
   marginBottom: 8,
@@ -112,7 +113,7 @@ export const $summaryUnitBlue: TextStyle = {
 // ── List ─────────────────────────────────────────────────────────────────────
 
 export const $listContent: ViewStyle = {
-  paddingHorizontal: 16,
+  paddingHorizontal: 22,
   paddingTop: 16,
   paddingBottom: 120,
   backgroundColor: "#FFFFFF",
@@ -137,9 +138,9 @@ export const $cardTopRow: ViewStyle = {
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
 }
 
 export const $cardTitle: TextStyle = {
@@ -150,9 +151,9 @@ export const $cardTitle: TextStyle = {
 }
 
 export const $cardContent: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#979797",
+  color: "#555555",
   marginBottom: 12,
   lineHeight: 18,
 }
@@ -170,7 +171,7 @@ export const $cardAuthorRow: ViewStyle = {
 }
 
 export const $cardAuthorName: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#333333",
 }
@@ -186,8 +187,10 @@ export const $badge: ViewStyle = {
 }
 
 export const $badgeText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
 }
 
 export const $statusBadgeStyle: Record<ProposalStatus, ViewStyle> = {
@@ -198,7 +201,7 @@ export const $statusBadgeStyle: Record<ProposalStatus, ViewStyle> = {
 }
 
 export const $statusBadgeTextStyle: Record<ProposalStatus, TextStyle> = {
-  pending: { color: "#606679" },
+  pending: { color: "#333333" },
   ongoing: { color: "#18A24A" },
   reflected: { color: "#214ACC" },
   rejected: { color: "#D84040" },
@@ -216,7 +219,7 @@ export const $emptyContainer: ViewStyle = {
 export const $emptyText: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.semiBold,
-  color: "#999999",
+  color: "#555555",
 }
 
 // ── FAB ───────────────────────────────────────────────────────────────────────
@@ -237,7 +240,7 @@ export const $fab: ViewStyle = {
 
 export const $fabLabel: TextStyle = {
   marginTop: 4,
-  fontSize: 13,
+  fontSize: 14,
   lineHeight: 16,
   color: "#FFFFFF",
   fontFamily: typography.primary.bold,

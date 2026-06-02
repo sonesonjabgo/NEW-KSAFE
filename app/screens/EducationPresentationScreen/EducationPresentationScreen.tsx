@@ -167,7 +167,7 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
         <KeyboardAvoidingView
           style={[$flex, Platform.OS === "android" && { paddingBottom: keyboardHeight }]}
           behavior={Platform.OS === "ios" ? "padding" : undefined}
-          keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 60) : 0}
+          keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(135, insets.top + 75) : 0}
         >
           {/* 채팅 영역 */}
           <FlatList
@@ -265,7 +265,7 @@ export const EducationPresentationScreen: FC<EducationPresentationScreenProps> =
                     showValidationError && $textInputError,
                   ]}
                   placeholder={translate("educationPresentationScreen:inputPlaceholder")}
-                  placeholderTextColor="#ABABAB"
+                  placeholderTextColor="#666666"
                   value={inputText}
                   onChangeText={(t) => {
                     setInputText(t.slice(0, 1000))
@@ -394,16 +394,16 @@ const $inviteText: TextStyle = {
 
 // 언어 선택 영역
 const $langSelectorBar: ViewStyle = {
-  paddingHorizontal: 20,
+  paddingHorizontal: 22,
   paddingTop: 14,
   paddingBottom: 12,
   gap: 8,
 }
 
 const $langSelectorLabel: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#6B7280",
+  color: "#555555",
 }
 
 const $headerRoomId: TextStyle = {
@@ -431,8 +431,9 @@ const $langBtnText: TextStyle = {
 }
 
 // 채팅 영역
-const $chatContent: { padding: number; paddingBottom: number; flexGrow: number } = {
-  padding: 16,
+const $chatContent: { paddingHorizontal: number; paddingTop: number; paddingBottom: number; flexGrow: number } = {
+  paddingHorizontal: 22,
+  paddingTop: 16,
   paddingBottom: 8,
   flexGrow: 1,
 }
@@ -457,9 +458,10 @@ const $messageBubble: ViewStyle = {
 }
 
 const $messageSender: TextStyle = {
-  fontSize: 11,
+  fontSize: 12,
+  lineHeight: 16,
   fontFamily: typography.primary.semiBold,
-  color: "#6B7280",
+  color: "#555555",
 }
 
 const $messageText: TextStyle = {
@@ -479,7 +481,7 @@ const $recognizingRow: ViewStyle = {
 }
 
 const $recognizingText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: colors.blue,
 }
@@ -507,9 +509,9 @@ const $statusIconCircle: ViewStyle = {
 
 const $statusText: TextStyle = {
   flex: 1,
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#6B7280",
+  color: "#555555",
   lineHeight: 16,
 }
 
@@ -518,15 +520,16 @@ const $controlBar: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "space-between",
-  paddingHorizontal: 20,
+  paddingHorizontal: 22,
   paddingTop: 14,
 }
 
 const $iconBtn: ViewStyle = {
   width: 48,
   height: 48,
-  alignItems: "center",
+  alignItems: "flex-start",
   justifyContent: "center",
+  paddingLeft: 6,
 }
 
 const $micControlRow: ViewStyle = {
@@ -536,7 +539,7 @@ const $micControlRow: ViewStyle = {
 }
 
 const $micLabel: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#374151",
 }
@@ -586,15 +589,15 @@ const $inputTopRow: ViewStyle = {
 }
 
 const $inputHintText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#9CA3AF",
+  color: "#555555",
 }
 
 const $inputCountText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#9CA3AF",
+  color: "#555555",
 }
 
 const $textInputRow: ViewStyle = {
@@ -642,7 +645,7 @@ const $sendBtnInactive: ViewStyle = {
 }
 
 const $validationError: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#EF4444",
 }
@@ -687,9 +690,9 @@ const $inviteModalTitle: TextStyle = {
 }
 
 const $inviteModalDesc: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#7B7B7B",
+  color: "#555555",
   textAlign: "center",
   lineHeight: 18,
   marginBottom: 18,

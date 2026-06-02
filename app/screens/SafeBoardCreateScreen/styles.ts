@@ -12,7 +12,7 @@ export const $scrollContent: ViewStyle = {
 }
 
 export const $scrollInner: ViewStyle = {
-  paddingHorizontal: 20,
+  paddingHorizontal: 22,
   paddingTop: 28,
   paddingBottom: 40,
   gap: 35,
@@ -33,7 +33,8 @@ export const $labelRow: ViewStyle = {
 }
 
 export const $required: TextStyle = {
-  fontSize: 19,
+  fontSize: 15,
+  lineHeight: 26,
   fontFamily: typography.primary.semiBold,
   color: "#FF0000",
 }
@@ -46,9 +47,9 @@ export const $sectionLabel: TextStyle = {
 }
 
 export const $helperText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#979797",
+  color: "#555555",
 }
 
 // ── Card (guide) ──────────────────────────────────────────────────────────────
@@ -117,7 +118,7 @@ export const $inputText: TextStyle = {
 }
 
 export const $inputPlaceholder: TextStyle = {
-  color: "#BBBBBB",
+  color: "#555555",
 }
 
 // ── Textarea ──────────────────────────────────────────────────────────────────
@@ -156,7 +157,7 @@ export const $attachCard: ViewStyle = {
 
 export const $attachCardText: TextStyle = {
   flex: 1,
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
   lineHeight: 20,
@@ -172,7 +173,7 @@ export const $attachUploadBtn: ViewStyle = {
 }
 
 export const $attachUploadBtnText: TextStyle = {
-  fontSize: 10,
+  fontSize: 14,
   fontFamily: typography.primary.bold,
   color: "#1062D8",
 }
@@ -188,7 +189,7 @@ export const $attachCard2Empty: ViewStyle = {
 }
 
 export const $attachCard2EmptyText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
 }
@@ -209,7 +210,7 @@ export const $attachCard2FileRow: ViewStyle = {
 
 export const $attachCard2FileText: TextStyle = {
   flex: 1,
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
 }

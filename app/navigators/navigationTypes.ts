@@ -98,7 +98,7 @@ export type AppStackParamList = {
   AiRiskDocCreator: undefined
   HazardRiskList: undefined
   HazardRiskCreate: undefined
-  HazardRiskDetail: { id: number }
+  HazardRiskDetail: { id?: number; newDetail?: import("@/screens/HazardRiskScreen/types").HazardDetail }
   SafeBoardDetail: { id: number }
   SafeBoardCreate: undefined
   SafeBoardNotify: undefined

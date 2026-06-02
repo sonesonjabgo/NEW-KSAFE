@@ -205,6 +205,7 @@ export const PatrolDetailScreen: FC<PatrolDetailScreenProps> = ({ navigation, ro
       onBack={() => navigation.goBack()}
       squareTop
       contentBg="#FFFFFF"
+      rightOffset={-4}
       rightSlot={
         status === "inProgress" ? (
           <TouchableOpacity
@@ -445,7 +446,7 @@ const $editButton: TextStyle = {
 
 const $scroll: ViewStyle = { flex: 1 }
 
-const $content: ViewStyle = { padding: 20, paddingBottom: 40 }
+const $content: ViewStyle = { paddingHorizontal: 22, paddingTop: 20, paddingBottom: 40 }
 
 // ── 요약 카드 ──────────────────────────────────────────────────────────────────
 
@@ -492,7 +493,7 @@ const $statLabel: TextStyle = {
   fontSize: 14,
   lineHeight: 20,
   fontFamily: semiBold,
-  color: "#585858",
+  color: "#555555",
 }
 
 const $statDivider: ViewStyle = {
@@ -526,22 +527,24 @@ const $cardTopRow: ViewStyle = {
 }
 
 const $cardBadge: ViewStyle = {
-  width: 44,
-  height: 20,
+  paddingHorizontal: 8,
+  paddingVertical: 2,
   borderRadius: 4,
   justifyContent: "center",
   alignItems: "center",
 }
 
 const $cardBadgeText: TextStyle = {
-  fontSize: 10,
+  fontSize: 14,
+  lineHeight: 20,
   fontFamily: semiBold,
+  includeFontPadding: false,
 }
 
 const $cardDate: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: normal,
-  color: "#A9A9A9",
+  color: "#555555",
 }
 
 const $cardTitle: TextStyle = {
@@ -557,13 +560,13 @@ const $reviewRow: ViewStyle = {
 }
 
 const $reviewLabel: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: semiBold,
-  color: "#979797",
+  color: "#555555",
 }
 
 const $reviewName: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: semiBold,
   color: "#000000",
 }
@@ -580,7 +583,7 @@ const $metaRow: ViewStyle = {
 }
 
 const $metaAuthor: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: semiBold,
   color: "#333333",
   flexShrink: 1,
@@ -588,9 +591,9 @@ const $metaAuthor: TextStyle = {
 }
 
 const $metaLocation: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: normal,
-  color: "#A9A9A9",
+  color: "#555555",
   flexShrink: 1,
 }
 
@@ -652,8 +655,8 @@ const $checkCardText: TextStyle = {
 }
 
 const $goodBadge: ViewStyle = {
-  width: 34,
-  height: 20,
+  paddingHorizontal: 8,
+  paddingVertical: 2,
   borderRadius: 4,
   backgroundColor: "#DFF6E7",
   justifyContent: "center",
@@ -662,14 +665,16 @@ const $goodBadge: ViewStyle = {
 }
 
 const $goodBadgeText: TextStyle = {
-  fontSize: 10,
+  fontSize: 14,
+  lineHeight: 20,
   fontFamily: semiBold,
   color: "#24804B",
+  includeFontPadding: false,
 }
 
 const $badBadge: ViewStyle = {
-  width: 34,
-  height: 20,
+  paddingHorizontal: 8,
+  paddingVertical: 2,
   borderRadius: 4,
   backgroundColor: "#FDE8EB",
   justifyContent: "center",
@@ -678,9 +683,11 @@ const $badBadge: ViewStyle = {
 }
 
 const $badBadgeText: TextStyle = {
-  fontSize: 10,
+  fontSize: 14,
+  lineHeight: 20,
   fontFamily: semiBold,
   color: "#FF0004",
+  includeFontPadding: false,
 }
 
 const $actionCard: ViewStyle = {
@@ -707,13 +714,13 @@ const $actionContent: ViewStyle = {
 }
 
 const $actionLabel: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: bold,
   color: "#E24D16",
 }
 
 const $actionText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: medium,
   color: "#4C4C4C",
 }

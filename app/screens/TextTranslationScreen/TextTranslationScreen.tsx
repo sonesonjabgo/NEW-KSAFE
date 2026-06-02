@@ -185,6 +185,7 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
         title={translate("textTranslationScreen:title")}
         onBack={() => navigation.goBack()}
         contentBg="#FFFFFF"
+        rightOffset={-4}
         rightSlot={
           <TouchableOpacity style={$headerSideRight} activeOpacity={0.7} onPress={openFontSizeModal}>
             <Text text={translate("textTranslationScreen:fontSizeButton")} style={$fontSizeText} />
@@ -221,7 +222,7 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
         <KeyboardAvoidingView
           style={[$keyboardView, Platform.OS === "android" && { paddingBottom: keyboardHeight }]}
           behavior={Platform.OS === "ios" ? "padding" : undefined}
-          keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 60) : 0}
+          keyboardVerticalOffset={Platform.OS === "ios" ? Math.max(100, insets.top + 40) : 0}
         >
           <View style={$chatWrapBox}>
             <View style={[$chatInnerBox, isListening && $chatInnerBoxListening]}>
@@ -298,7 +299,7 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
                     showValidationError && $textInputError,
                   ]}
                   placeholder={translate("textTranslationScreen:inputPlaceholder")}
-                  placeholderTextColor="#ABABAB"
+                  placeholderTextColor="#666666"
                   value={inputText}
                   onChangeText={(t) => {
                     setInputText(t.slice(0, 1000))
@@ -433,7 +434,7 @@ const $langFlag: TextStyle = {
 
 const $langBtnText: TextStyle = {
   flex: 1,
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: colors.blue,
 }
@@ -479,7 +480,7 @@ const $chatTopBanner: ViewStyle = {
 }
 
 const $listeningText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: colors.blue,
 }
@@ -524,7 +525,7 @@ const $sourceText: TextStyle = {
   flex: 1,
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#6B7280",
+  color: "#555555",
   lineHeight: 20,
 }
 
@@ -612,15 +613,15 @@ const $inputTopRow: ViewStyle = {
 }
 
 const $inputHintText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#9CA3AF",
+  color: "#555555",
 }
 
 const $inputCountText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#9CA3AF",
+  color: "#555555",
 }
 
 const $textInput: TextStyle = {
@@ -662,7 +663,7 @@ const $sendBtnInactive: ViewStyle = {
 }
 
 const $validationError: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#EF4444",
 }

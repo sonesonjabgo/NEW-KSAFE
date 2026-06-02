@@ -15,7 +15,7 @@ export const $scrollContent: ViewStyle = {
 }
 
 export const $scrollInner: ViewStyle = {
-  paddingHorizontal: 20,
+  paddingHorizontal: 22,
   paddingTop: 28,
   paddingBottom: 40,
   gap: 28,
@@ -95,9 +95,9 @@ export const $required: TextStyle = {
 }
 
 export const $helperText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#979797",
+  color: "#555555",
 }
 
 // ── Input Row (workplace selector) ────────────────────────────────────────────
@@ -122,7 +122,7 @@ export const $inputText: TextStyle = {
 }
 
 export const $inputPlaceholder: TextStyle = {
-  color: "#BBBBBB",
+  color: "#555555",
 }
 
 // ── Textarea ──────────────────────────────────────────────────────────────────
@@ -156,7 +156,7 @@ export const $errorRow: ViewStyle = {
 
 export const $errorText: TextStyle = {
   flex: 1,
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#E03C3C",
 }
@@ -256,7 +256,7 @@ export const $modalItemText: TextStyle = {
   flex: 1,
   fontSize: 15,
   fontFamily: typography.primary.normal,
-  color: "#888888",
+  color: "#555555",
 }
 
 export const $modalItemTextSelected: TextStyle = {

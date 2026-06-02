@@ -96,7 +96,7 @@ export const $toggleLabel: TextStyle = {
 }
 
 export const $toggleDesc: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: colors.toggleDesc,
   marginTop: 4,
@@ -159,7 +159,7 @@ export const $imageCol: ViewStyle = {
 }
 
 export const $imageLabel: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: colors.textDim,
   marginBottom: 6,
@@ -185,9 +185,9 @@ export const $afterImagePlaceholder: ViewStyle = {
 }
 
 export const $afterImagePlaceholderText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#AAAAAA",
+  color: "#555555",
 }
 
 export const $analyzeBtn: ViewStyle = {
@@ -226,9 +226,9 @@ export const $hazardTitle: TextStyle = {
 }
 
 export const $hazardEmpty: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#AAAAAA",
+  color: "#555555",
   marginBottom: 10,
 }
 
@@ -242,13 +242,13 @@ export const $analysisBox: ViewStyle = {
 }
 
 export const $analysisPlaceholder: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: colors.iconMuted,
 }
 
 export const $analysisResultText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: colors.analysisResult,
   lineHeight: 20,
@@ -293,7 +293,7 @@ export const $hazardMarker: ViewStyle = {
 
 export const $hazardMarkerText: TextStyle = {
   color: "#FFFFFF",
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.bold,
 }
 
@@ -318,7 +318,7 @@ export const $hazardBadge: ViewStyle = {
 
 export const $hazardBadgeText: TextStyle = {
   color: "#FFFFFF",
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.bold,
 }
 
@@ -474,7 +474,7 @@ export const $emptyTitle: TextStyle = {
 export const $emptyDesc: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#888888",
+  color: "#555555",
   textAlign: "center",
   lineHeight: 21,
 }

@@ -13,7 +13,7 @@ export const $scrollContent: ViewStyle = {
 }
 
 export const $scrollInner: ViewStyle = {
-  paddingHorizontal: 20,
+  paddingHorizontal: 22,
   paddingTop: 28,
   paddingBottom: 40,
   gap: 35,
@@ -44,9 +44,9 @@ export const $sectionLabel: TextStyle = {
 }
 
 export const $helperText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#979797",
+  color: "#555555",
 }
 
 // ── Card ─────────────────────────────────────────────────────────────────────
@@ -117,7 +117,7 @@ export const $inputText: TextStyle = {
 }
 
 export const $inputPlaceholder: TextStyle = {
-  color: "#BBBBBB",
+  color: "#555555",
 }
 
 // ── Checkbox ──────────────────────────────────────────────────────────────────
@@ -154,7 +154,7 @@ export const $checkboxDot: ViewStyle = {
 }
 
 export const $checkboxLabel: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#666666",
 }
@@ -199,7 +199,7 @@ export const $educationCountHeader: ViewStyle = {
 }
 
 export const $educationStatusBadgeText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#1062D8",
 }
@@ -212,7 +212,7 @@ export const $educationMultipleBadge: ViewStyle = {
 }
 
 export const $educationMultipleBadgeText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#1062D8",
 }
@@ -246,7 +246,7 @@ export const $educationCountText: TextStyle = {
 }
 
 export const $educationCountHelper: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
 }

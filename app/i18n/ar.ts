@@ -1264,12 +1264,16 @@ const ar: Translations = {
       label: "الموقع",
       placeholder: "مثال: الممر الشرقي بالطابق الثاني، مدخل منطقة العمل B",
       helper: "حتى 200 حرف.",
+      errorRequired: "Please enter the location.",
+      errorMaxLength: "Location must be 200 characters or less.",
     },
     hazardFactor: {
       label: "عامل الخطر",
       placeholder:
         "ما هي عوامل الخطر الموجودة؟\nأمثلة:\n · درابزين الدرج متقلقل مما يشكل خطر السقوط.\n · أسلاك مكشوفة تشكل خطر الصعق الكهربائي.",
       helper: "حتى 1,000 حرف.",
+      errorRequired: "Please enter the hazard factor.",
+      errorMaxLength: "Hazard factor must be 1,000 characters or less.",
     },
     sitePhotos: {
       label: "صور الموقع",
@@ -1281,7 +1285,18 @@ const ar: Translations = {
       guide: "يجب تسجيل صورة واحدة على الأقل من الموقع.\nيمكنك إرفاق من 1 إلى 5 صور.",
       preview: "ستظهر معاينة عند إضافة صورة.",
     },
-    submit: "إرسال",
+    submit: "Submit",
+    deletePhotoModal: {
+      title: "Delete Photo",
+      message: "Are you sure you want to delete this photo?",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
+    successModal: {
+      title: "Success",
+      message: "Your hazard report has been submitted.",
+      confirm: "OK",
+    },
   },
 
   hazardRiskScreen: {
@@ -1325,6 +1340,11 @@ const ar: Translations = {
     },
     adminSection: {
       title: "تغيير الحالة والإجراء",
+      resultTitle: "Action Result",
+      resultCompleted: "Action Completed",
+      resultDateLabel: "Action Date:",
+      resultImpossible: "Action Not Possible",
+      noteLabelImpossible: "Reason for Impossibility",
       noteLabel: "أدخل تفاصيل الإجراء",
       noteHint: "يمكن إدخال حتى 2,000 حرف.",
       sitePhotosLabel: "صور الموقع",
@@ -1339,6 +1359,14 @@ const ar: Translations = {
           "يرجى وصف الإجراء المتخذ بالتفصيل (مثال: أُعيد تركيب الدرابزين، تم تركيب واقي الكابل)",
         impossible: "يرجى توضيح سبب استحالة الإجراء بالتفصيل.",
       },
+    },
+    workerNoEditMessage: "Reports in progress or already processed cannot be edited.",
+    editForm: {
+      title: "Edit Report",
+      locationPlaceholder: "e.g., location",
+      locationHelper: "Up to 200 characters.",
+      hazardFactorPlaceholder: "Hazard factors?",
+      hazardFactorHelper: "Up to 1,000 characters.",
     },
     statusHistory: {
       title: "تاريخ الحالة",
@@ -1358,10 +1386,22 @@ const ar: Translations = {
       proceed: "المتابعة",
       saveAction: "حفظ الإجراء",
       alreadyProcessed: "تمت معالجة هذا البلاغ بالفعل.",
+      edit: "Edit",
+      delete: "Delete",
+      cancel: "Cancel",
+      save: "Save",
+    },
+    deleteModal: {
+      title: "Delete Report",
+      message: "Are you sure you want to delete this report?",
+      cancel: "Cancel",
+      confirm: "Delete",
     },
     toast: {
       noAction: "يرجى اختيار مكتمل أو مستحيل.",
       noNote: "يرجى إدخال تفاصيل الإجراء.",
+      saved: "Report has been updated.",
+      deleted: "Report has been deleted.",
     },
   },
 

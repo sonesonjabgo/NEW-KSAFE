@@ -4,7 +4,7 @@ import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
 export const $scrollInner: ViewStyle = {
-  paddingHorizontal: 20,
+  paddingHorizontal: 22,
   paddingTop: 25,
   paddingBottom: 24,
   gap: 20,
@@ -31,8 +31,8 @@ export const $cardTopRow: ViewStyle = {
 }
 
 export const $badge: ViewStyle = {
-  paddingHorizontal: 10,
-  paddingVertical: 4,
+  paddingHorizontal: 8,
+  paddingVertical: 2,
   borderRadius: 4,
   justifyContent: "center",
   alignItems: "center",
@@ -59,33 +59,41 @@ export const $badgeFailed: ViewStyle = {
 }
 
 export const $badgeRequestedText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
-  color: "#606679",
+  includeFontPadding: false,
+  color: "#333333",
 }
 
 export const $badgeGeneratingText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#D48208",
 }
 
 export const $badgeCompletedText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#18A24A",
 }
 
 export const $badgeFailedText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#D32F2F",
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
 }
 
 export const $cardInfoRow: ViewStyle = {
@@ -96,7 +104,9 @@ export const $cardInfoRow: ViewStyle = {
 
 export const $cardInfoLabel: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#555555",
   minWidth: 56,
 }
@@ -184,7 +194,9 @@ export const $historyRow: ViewStyle = {
 
 export const $historyLabel: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
   color: "#555555",
 }
 
@@ -197,7 +209,7 @@ export const $historyValue: TextStyle = {
 export const $historyValueEmpty: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#BBBBBB",
+  color: "#555555",
 }
 
 // ── Regenerate Section ────────────────────────────────────────────────────────
@@ -234,7 +246,7 @@ export const $regenInfoIconText: TextStyle = {
 
 export const $regenInfoText: TextStyle = {
   flex: 1,
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
   lineHeight: 19,
@@ -256,7 +268,7 @@ export const $regenSectionLabel: TextStyle = {
 export const $regenInputContainer: ViewStyle = {
   height: 48,
   borderWidth: 1,
-  borderColor: "#ABABAB",
+  borderColor: "#888888",
   borderRadius: 8,
   paddingHorizontal: 16,
   justifyContent: "center",
@@ -270,9 +282,9 @@ export const $regenInputText: TextStyle = {
 }
 
 export const $regenInputDescription: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
-  color: "#979797",
+  color: "#555555",
 }
 
 export const $regenCautionCard: ViewStyle = {
@@ -333,7 +345,7 @@ export const $pdfButtonText: TextStyle = {
 export const $bottomNote: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.medium,
-  color: "#979797",
+  color: "#555555",
   textAlign: "center",
   marginBottom: 10,
 }

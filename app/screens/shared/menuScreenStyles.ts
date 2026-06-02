@@ -68,8 +68,8 @@ export const $menuTitle: TextStyle = {
 }
 
 export const $menuDescription: TextStyle = {
-  fontSize: 12,
-  color: "#979797",
+  fontSize: 14,
+  color: "#555555",
   fontFamily: typography.primary.normal,
   lineHeight: 16,
 }
@@ -96,6 +96,6 @@ export const $emptyContainer: ViewStyle = {
 
 export const $emptyText: TextStyle = {
   fontSize: 15,
-  color: "#999999",
+  color: "#555555",
   fontFamily: typography.primary.normal,
 }

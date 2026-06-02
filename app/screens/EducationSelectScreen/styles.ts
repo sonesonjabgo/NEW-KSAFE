@@ -8,7 +8,7 @@ import { typography } from "@/theme/typography"
 export const $sourceTabBar: ViewStyle = {
   flexDirection: "row",
   backgroundColor: "#FFFFFF",
-  paddingHorizontal: 20,
+  paddingHorizontal: 22,
   gap: 10,
   marginTop: 10,
 }
@@ -28,7 +28,7 @@ export const $sourceTabActive: ViewStyle = {
 export const $sourceTabText: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.bold,
-  color: "#AAAAAA",
+  color: "#555555",
 }
 
 export const $sourceTabTextActive: TextStyle = {
@@ -92,10 +92,10 @@ export const $categoryChipActive: ViewStyle = {
 }
 
 export const $categoryChipText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   lineHeight: 18,
   fontFamily: typography.primary.bold,
-  color: "#606679",
+  color: "#333333",
 }
 
 export const $categoryChipTextActive: TextStyle = {
@@ -140,9 +140,9 @@ export const $cardTopRow: ViewStyle = {
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
-  color: "#606679",
+  color: "#333333",
 }
 
 export const $cardTopRight: ViewStyle = {
@@ -158,8 +158,10 @@ export const $cardBadge: ViewStyle = {
 }
 
 export const $cardBadgeText: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
 }
 
 export const $cardTitle: TextStyle = {

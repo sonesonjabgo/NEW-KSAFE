@@ -9,7 +9,10 @@ import {
   ViewStyle,
   TextStyle,
 } from "react-native"
-import { ChevronDown, PencilLine, Building } from "lucide-react-native"
+import { ChevronDown, Building } from "lucide-react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+
+import TbmFabIcon from "@assets/images/tbm-fab-icon.svg"
 
 import { StackScreen } from "@/components/StackScreen"
 import { Text } from "@/components/Text"
@@ -163,6 +166,7 @@ const PatrolCard: FC<{ item: PatrolItem; onPress: () => void }> = ({ item, onPre
 }
 
 export const PatrolScreen: FC<PatrolScreenProps> = ({ navigation }) => {
+  const insets = useSafeAreaInsets()
   const [selectedWorkplace, setSelectedWorkplace] = useState(WORKPLACES[0])
   const [showWorkplaceModal, setShowWorkplaceModal] = useState(false)
   const slideAnim = useRef(new Animated.Value(300)).current
@@ -219,14 +223,16 @@ export const PatrolScreen: FC<PatrolScreenProps> = ({ navigation }) => {
         </View>
       </StackScreen>
 
-      <TouchableOpacity
-        style={$floatingButton}
-        activeOpacity={0.8}
-        onPress={() => navigation.navigate("PatrolCreate")}
-      >
-        <PencilLine size={20} color="#FFFFFF" strokeWidth={1.8} />
-        <Text text={translate("patrolScreen:createButton")} style={$floatingButtonText} />
-      </TouchableOpacity>
+      <View style={[$fabWrapper, { bottom: 30 + insets.bottom }]} pointerEvents="box-none">
+        <TouchableOpacity
+          style={$fab}
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate("PatrolCreate")}
+        >
+          <TbmFabIcon width={30} height={30} />
+          <Text text={translate("patrolScreen:createButton")} style={$fabLabel} />
+        </TouchableOpacity>
+      </View>
 
       <Modal
         visible={showWorkplaceModal}
@@ -280,7 +286,8 @@ const $screenContainer: ViewStyle = {
 
 const $container: ViewStyle = {
   flex: 1,
-  padding: 15,
+  paddingHorizontal: 22,
+  paddingVertical: 15,
 }
 
 // ── Workplace Selector ────────────────────────────────────────────────────────
@@ -296,7 +303,7 @@ const $workplaceSelector: ViewStyle = {
 const $workplaceLabel: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.medium,
-  color: "#979797",
+  color: "#555555",
 }
 
 const $workplaceName: TextStyle = {
@@ -333,22 +340,24 @@ const $cardTopRow: ViewStyle = {
 }
 
 const $badge: ViewStyle = {
-  width: 44,
-  height: 20,
+  paddingHorizontal: 8,
+  paddingVertical: 2,
   borderRadius: 4,
   justifyContent: "center",
   alignItems: "center",
 }
 
 const $badgeText: TextStyle = {
-  fontSize: 10,
+  fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
 }
 
 const $cardDate: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
 }
 
 const $cardTitle: TextStyle = {
@@ -364,13 +373,13 @@ const $reviewRow: ViewStyle = {
 }
 
 const $reviewLabel: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
-  color: "#979797",
+  color: "#555555",
 }
 
 const $reviewName: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#000000",
 }
@@ -387,7 +396,7 @@ const $cardMetaRow: ViewStyle = {
 }
 
 const $cardMetaAuthor: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#333333",
   flexShrink: 1,
@@ -395,37 +404,42 @@ const $cardMetaAuthor: TextStyle = {
 }
 
 const $cardMetaLocation: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
   flexShrink: 1,
 }
 
 // ── Floating Button ───────────────────────────────────────────────────────────
 
-const $floatingButton: ViewStyle = {
+const $fabWrapper: ViewStyle = {
   position: "absolute",
-  bottom: 24,
   right: 20,
-  width: 80,
-  height: 80,
-  borderRadius: 40,
+  alignItems: "center",
+}
+
+const $fab: ViewStyle = {
+  width: 96,
+  height: 96,
+  borderRadius: 48,
   backgroundColor: colors.navy,
   justifyContent: "center",
   alignItems: "center",
-  flexDirection: "column",
-  gap: 4,
   shadowColor: "#000000",
-  shadowOffset: { width: 0, height: 4 },
-  shadowOpacity: 0.25,
-  shadowRadius: 10,
+  shadowOffset: { width: 0, height: 6 },
+  shadowOpacity: 0.3,
+  shadowRadius: 16,
   elevation: 8,
 }
 
-const $floatingButtonText: TextStyle = {
-  fontSize: 11,
+const $fabLabel: TextStyle = {
+  marginTop: 4,
+  fontSize: 14,
+  lineHeight: 16,
   color: "#FFFFFF",
-  fontFamily: typography.primary.semiBold,
+  fontFamily: typography.primary.bold,
+  textAlign: "center",
+  includeFontPadding: false,
 }
 
 // ── Modal ─────────────────────────────────────────────────────────────────────

@@ -166,7 +166,7 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
                 <TextInput
                   style={[$textInput, $textInputDynamic]}
                   placeholder={translate("loginScreen:emailFieldPlaceholder")}
-                  placeholderTextColor="#9CA3AF"
+                  placeholderTextColor="#666666"
                   keyboardType="email-address"
                   autoCapitalize="none"
                   underlineColorAndroid="transparent"
@@ -210,7 +210,7 @@ export const LoginScreen: FC<LoginScreenProps> = () => {
                   ref={passwordInputRef}
                   style={[$textInput, $passwordInput, $textInputDynamic]}
                   placeholder={translate("loginScreen:passwordFieldPlaceholder")}
-                  placeholderTextColor="#9CA3AF"
+                  placeholderTextColor="#666666"
                   secureTextEntry={secureText}
                   underlineColorAndroid="transparent"
                   returnKeyType="done"
@@ -383,7 +383,7 @@ const $inputRowError: ViewStyle = {
 }
 
 const $errorText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   color: colors.danger,
   marginTop: 4,
 }
@@ -430,7 +430,7 @@ const $forgotWrapper: ViewStyle = {
 
 const $forgotText: TextStyle = {
   fontSize: 14,
-  color: "#6B7280",
+  color: "#555555",
   textDecorationLine: "underline",
 }
 

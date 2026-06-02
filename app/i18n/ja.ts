@@ -1257,12 +1257,16 @@ const ja: Translations = {
       label: "場所",
       placeholder: "例：2階東側廊下、B区域作業場入口など",
       helper: "最大200文字まで入力できます。",
+      errorRequired: "Please enter the location.",
+      errorMaxLength: "Location must be 200 characters or less.",
     },
     hazardFactor: {
       label: "危険要因",
       placeholder:
         "どのような危険要因がありますか？\n例：\n · 階段の手すりがぐらついており、転落の危険があります。\n · 電線が露出しており、感電の危険があります。",
       helper: "最大1,000文字まで入力できます。",
+      errorRequired: "Please enter the hazard factor.",
+      errorMaxLength: "Hazard factor must be 1,000 characters or less.",
     },
     sitePhotos: {
       label: "現場写真",
@@ -1274,7 +1278,18 @@ const ja: Translations = {
       guide: "現場写真を最低1枚登録してください。\n1枚から最大5枚まで添付できます。",
       preview: "画像を追加するとプレビューが表示されます。",
     },
-    submit: "送信する",
+    submit: "Submit",
+    deletePhotoModal: {
+      title: "Delete Photo",
+      message: "Are you sure you want to delete this photo?",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
+    successModal: {
+      title: "Success",
+      message: "Your hazard report has been submitted.",
+      confirm: "OK",
+    },
   },
 
   hazardRiskScreen: {
@@ -1318,6 +1333,11 @@ const ja: Translations = {
     },
     adminSection: {
       title: "ステータス変更と対応",
+      resultTitle: "Action Result",
+      resultCompleted: "Action Completed",
+      resultDateLabel: "Action Date:",
+      resultImpossible: "Action Not Possible",
+      noteLabelImpossible: "Reason for Impossibility",
       noteLabel: "対応内容を入力",
       noteHint: "最大2,000文字まで入力できます。",
       sitePhotosLabel: "現場写真",
@@ -1332,6 +1352,14 @@ const ja: Translations = {
           "実施した対応内容を詳しく入力してください（例：手すりを再設置、ケーブル保護カバーを設置）",
         impossible: "対応できない理由を詳しく入力してください。",
       },
+    },
+    workerNoEditMessage: "Reports in progress or already processed cannot be edited.",
+    editForm: {
+      title: "Edit Report",
+      locationPlaceholder: "e.g., location",
+      locationHelper: "Up to 200 characters.",
+      hazardFactorPlaceholder: "Hazard factors?",
+      hazardFactorHelper: "Up to 1,000 characters.",
     },
     statusHistory: {
       title: "ステータス変更履歴",
@@ -1351,10 +1379,22 @@ const ja: Translations = {
       proceed: "進行する",
       saveAction: "対応内容を保存",
       alreadyProcessed: "この通報はすでに処理済みです。",
+      edit: "Edit",
+      delete: "Delete",
+      cancel: "Cancel",
+      save: "Save",
+    },
+    deleteModal: {
+      title: "Delete Report",
+      message: "Are you sure you want to delete this report?",
+      cancel: "Cancel",
+      confirm: "Delete",
     },
     toast: {
       noAction: "対応完了または対応不可を選択してください。",
       noNote: "対応内容を入力してください。",
+      saved: "Report has been updated.",
+      deleted: "Report has been deleted.",
     },
   },
 

@@ -182,7 +182,8 @@ export const SafeBoardDetailScreen: FC<SafeBoardDetailScreenProps> = ({ navigati
 
 const $outerContainer: ViewStyle = {
   flex: 1,
-  padding: 16,
+  paddingHorizontal: 22,
+  paddingTop: 16,
   gap: 12,
 }
 
@@ -223,8 +224,9 @@ const $badgeRow: ViewStyle = {
 
 const $dateText: TextStyle = {
   fontSize: 13,
+  lineHeight: 18,
   fontFamily: typography.primary.normal,
-  color: "#979797",
+  color: "#777777",
 }
 
 const $titleText: TextStyle = {
@@ -243,9 +245,10 @@ const $alertRow: ViewStyle = {
 }
 
 const $alertText: TextStyle = {
-  fontSize: 12,
+  fontSize: 15,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
-  color: "#979797",
+  color: "#333333",
 }
 
 const $authorRow: ViewStyle = {
@@ -258,6 +261,7 @@ const $authorRow: ViewStyle = {
 
 const $authorText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.medium,
   color: "#333333",
 }
@@ -269,9 +273,9 @@ const $divider: ViewStyle = {
 }
 
 const $affiliationText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#606679",
+  color: "#333333",
 }
 
 const $contentText: TextStyle = {

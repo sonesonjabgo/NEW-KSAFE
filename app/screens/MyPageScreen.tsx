@@ -69,9 +69,10 @@ export const MyPageScreen: FC<AppStackScreenProps<"MyPage">> = ({ navigation }) 
             <View style={$headerRight} />
           </View>
 
-          <ProfileCard orgName={ORG_NAME} userName={displayName} email={displayEmail} />
-
-          {isWorker && <WorkplaceChip name={translate("myPageScreen:workplace.label")} />}
+          <View style={$userInfoWrapper}>
+            <ProfileCard orgName={ORG_NAME} userName={displayName} email={displayEmail} />
+            {isWorker && <WorkplaceChip name={translate("myPageScreen:workplace.label")} />}
+          </View>
         </View>
 
         <ScrollView
@@ -171,6 +172,11 @@ const $root: ViewStyle = {
   backgroundColor: "#F9FAFE",
 }
 
+const $userInfoWrapper: ViewStyle = {
+  width: "100%",
+  paddingHorizontal: 6,
+}
+
 const $header: ViewStyle = {
   backgroundColor: "#0B3069",
   flexDirection: "column",
@@ -217,13 +223,13 @@ const $scrollContent: ViewStyle = {
 
 const $section: ViewStyle = {
   marginTop: 24,
-  marginHorizontal: 20,
+  marginHorizontal: 22,
 }
 
 const $sectionTitle: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
-  color: "#6B7280",
+  color: "#555555",
   marginBottom: 10,
   textTransform: "uppercase",
   letterSpacing: 0.5,
@@ -242,11 +248,11 @@ const $logoutButton: ViewStyle = {
   alignItems: "center",
   justifyContent: "center",
   gap: 8,
-  marginHorizontal: 20,
+  marginHorizontal: 22,
   marginTop: 24,
   paddingVertical: 14,
   borderRadius: 10,
-  borderWidth: 1.5,
+  borderWidth: 1,
   borderColor: "#DDDDDD",
   backgroundColor: "#FFFFFF",
 }

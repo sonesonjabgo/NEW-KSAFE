@@ -12,7 +12,7 @@ export const $scrollContent: ViewStyle = {
 }
 
 export const $scrollInner: ViewStyle = {
-  paddingHorizontal: 20,
+  paddingHorizontal: 22,
   paddingTop: 28,
   paddingBottom: 40,
   gap: 35,
@@ -71,6 +71,11 @@ export const $section: ViewStyle = {
   borderBottomColor: "#E9ECF0",
 }
 
+export const $labelRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+}
+
 export const $sectionLabel: TextStyle = {
   fontSize: 19,
   lineHeight: 26,
@@ -78,11 +83,18 @@ export const $sectionLabel: TextStyle = {
   color: colors.navy,
 }
 
+export const $required: TextStyle = {
+  fontSize: 15,
+  lineHeight: 26,
+  fontFamily: typography.primary.semiBold,
+  color: "#FF0000",
+  marginLeft: 2,
+}
+
 export const $helperText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#979797",
-  paddingHorizontal: 16,
+  color: "#555555",
 }
 
 // ── Input ─────────────────────────────────────────────────────────────────────
@@ -107,7 +119,65 @@ export const $inputText: TextStyle = {
 }
 
 export const $inputPlaceholder: TextStyle = {
-  color: "#BBBBBB",
+  color: "#555555",
+}
+
+export const $inputRowFocused: ViewStyle = {
+  borderColor: "#1062D8",
+  borderWidth: 2,
+  backgroundColor: "#ECF4FE",
+}
+
+export const $textareaFocused: ViewStyle = {
+  borderColor: "#1062D8",
+  borderWidth: 2,
+  backgroundColor: "#ECF4FE",
+}
+
+export const $inputRowError: ViewStyle = {
+  borderColor: "#E03C3C",
+  borderWidth: 1.5,
+  backgroundColor: "#FFFFFF",
+}
+
+export const $textareaError: ViewStyle = {
+  borderColor: "#E03C3C",
+  borderWidth: 1.5,
+  backgroundColor: "#FFFFFF",
+}
+
+export const $errorRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 4,
+  marginTop: 2,
+}
+
+export const $errorText: TextStyle = {
+  flex: 1,
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#E03C3C",
+}
+
+export const $helperRow: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+}
+
+export const $charCountRow: ViewStyle = {
+  alignItems: "flex-end",
+}
+
+export const $charCountText: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.normal,
+  color: "#888888",
+}
+
+export const $charCountTextError: TextStyle = {
+  color: "#E03C3C",
 }
 
 // ── Textarea ──────────────────────────────────────────────────────────────────
@@ -140,15 +210,15 @@ export const $photoHintRow: ViewStyle = {
 
 export const $photoHintText: TextStyle = {
   flex: 1,
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
-  color: "#747474",
+  color: "#555555",
 }
 
 // ── Site Photos ───────────────────────────────────────────────────────────────
 
 export const $photoGuideCard: ViewStyle = {
-  height: 83,
+  minHeight: 66,
   backgroundColor: "#F4F8FD",
   borderRadius: 9,
   borderWidth: 1,
@@ -157,15 +227,15 @@ export const $photoGuideCard: ViewStyle = {
   paddingHorizontal: 12,
   paddingVertical: 15,
   flexDirection: "row",
-  alignItems: "center",
+  alignItems: "flex-start",
   gap: 10,
 }
 
 export const $photoGuideLine: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
-  lineHeight: 16,
+  lineHeight: 20,
 }
 
 export const $photoGuideAddBtn: ViewStyle = {
@@ -181,7 +251,7 @@ export const $photoGuideAddBtn: ViewStyle = {
 }
 
 export const $photoGuideAddBtnText: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#1062D8",
 }
@@ -214,6 +284,43 @@ export const $photoItem: ImageStyle = {
   height: 90,
   borderRadius: 10,
   backgroundColor: "#E0E0E0",
+}
+
+export const $deleteIconCircle: ViewStyle = {
+  width: 56,
+  height: 56,
+  borderRadius: 28,
+  backgroundColor: "#FDECEA",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+export const $successIconCircle: ViewStyle = {
+  width: 56,
+  height: 56,
+  borderRadius: 28,
+  backgroundColor: "#E8F0FE",
+  justifyContent: "center",
+  alignItems: "center",
+}
+
+export const $photoItemWrapper: ViewStyle = {
+  position: "relative",
+  width: 90,
+  height: 90,
+}
+
+export const $photoRemoveBtn: ViewStyle = {
+  position: "absolute",
+  top: 5,
+  right: 5,
+  width: 22,
+  height: 22,
+  borderRadius: 11,
+  backgroundColor: "rgba(0,0,0,0.55)",
+  justifyContent: "center",
+  alignItems: "center",
+  zIndex: 1,
 }
 
 // ── Submit Bar ────────────────────────────────────────────────────────────────

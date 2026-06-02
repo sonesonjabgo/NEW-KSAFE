@@ -1300,12 +1300,16 @@ const ko: Translations = {
       label: "위치",
       placeholder: "예) 2층 동측 복도, B구역 작업장 입구 등",
       helper: "입력 시 최대 200자까지 작성할 수 있습니다.",
+      errorRequired: "위치를 입력해주세요.",
+      errorMaxLength: "위치는 최대 200자 이하로 입력해주세요.",
     },
     hazardFactor: {
       label: "위험요인",
       placeholder:
         "어떤 위험요인이 있나요?\n예시)\n · 계단 손잡이가 흔들려 낙상 위험이 있습니다.\n · 전선이 노출되어 감전 위험이 있습니다.",
       helper: "입력 시 최대 1,000자까지 작성할 수 있습니다.",
+      errorRequired: "위험요인을 입력해주세요.",
+      errorMaxLength: "위험요인은 최대 1,000자 이하로 입력해주세요.",
     },
     sitePhotos: {
       label: "현장 사진",
@@ -1319,6 +1323,17 @@ const ko: Translations = {
       preview: "이미지를 추가하면 미리보기가 표시됩니다.",
     },
     submit: "제출하기",
+    deletePhotoModal: {
+      title: "사진 삭제",
+      message: "이 사진을 삭제하시겠습니까?",
+      cancel: "취소",
+      confirm: "삭제",
+    },
+    successModal: {
+      title: "성공",
+      message: "유해위험개소 제보가 등록되었습니다.",
+      confirm: "확인",
+    },
   },
 
   hazardRiskScreen: {
@@ -1362,7 +1377,12 @@ const ko: Translations = {
     },
     adminSection: {
       title: "상태 변경 및 처리",
+      resultTitle: "조치 결과",
+      resultCompleted: "조치완료입니다",
+      resultImpossible: "조치불가입니다",
+      resultDateLabel: "조치일:",
       noteLabel: "조치 내용 입력",
+      noteLabelImpossible: "조치 불가 사유",
       noteHint: "입력 시 최대 2,000자까지 작성할 수 있습니다.",
       sitePhotosLabel: "현장 사진",
       sitePhotosHints: {
@@ -1376,6 +1396,14 @@ const ko: Translations = {
           "어떻게 조치했는지 상세히 입력해주세요 (예: 손잡이 재설치 완료, 전선 보호관 설치 완료)",
         impossible: "조치가 불가능한 사유를 상세히 입력해주세요.",
       },
+    },
+    workerNoEditMessage: "진행중이거나 처리된 제보는 수정할 수 없습니다.",
+    editForm: {
+      title: "제보 정보 수정",
+      locationPlaceholder: "예) 2층 동측 복도, B구역 작업장 입구 등",
+      locationHelper: "입력 시 최대 200자까지 작성할 수 있습니다.",
+      hazardFactorPlaceholder: "어떤 위험요인이 있나요?",
+      hazardFactorHelper: "입력 시 최대 1,000자까지 작성할 수 있습니다.",
     },
     statusHistory: {
       title: "상태 변경 이력",
@@ -1395,10 +1423,22 @@ const ko: Translations = {
       proceed: "진행하기",
       saveAction: "처리 내용 저장",
       alreadyProcessed: "이미 처리된 제보입니다.",
+      edit: "수정하기",
+      delete: "삭제하기",
+      cancel: "취소",
+      save: "저장",
+    },
+    deleteModal: {
+      title: "제보 삭제",
+      message: "이 제보를 삭제하시겠습니까?",
+      cancel: "취소",
+      confirm: "삭제",
     },
     toast: {
       noAction: "조치완료 또는 조치불가를 선택해주세요.",
       noNote: "조치 내용을 입력해주세요.",
+      saved: "제보가 수정되었습니다.",
+      deleted: "제보가 삭제되었습니다.",
     },
   },
 

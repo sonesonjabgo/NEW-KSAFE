@@ -162,7 +162,7 @@ export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigati
                   value={notifyTitle}
                   onChangeText={(t) => setNotifyTitle(t.slice(0, 50))}
                   placeholder={translate("safeBoardNotifyScreen:notifyTitle.placeholder")}
-                  placeholderTextColor="#BBBBBB"
+                  placeholderTextColor="#666666"
                   maxLength={50}
                 />
               </View>
@@ -187,7 +187,7 @@ export const SafeBoardNotifyScreen: FC<SafeBoardNotifyScreenProps> = ({ navigati
                   value={content}
                   onChangeText={(t) => setContent(t.slice(0, 240))}
                   placeholder={translate("safeBoardNotifyScreen:content.placeholder")}
-                  placeholderTextColor="#BBBBBB"
+                  placeholderTextColor="#666666"
                   maxLength={240}
                   multiline
                   scrollEnabled={false}

@@ -117,7 +117,7 @@ export const SafeBoardScreen: FC<SafeBoardScreenProps> = ({ navigation, route })
                   numberOfLines={1}
                 />
                 <View style={S.$chevronContainer}>
-                  <ChevronDown size={16} color="#979797" strokeWidth={2} />
+                  <ChevronDown size={35} color="#979797" strokeWidth={1.8} />
                 </View>
               </TouchableOpacity>
             </View>

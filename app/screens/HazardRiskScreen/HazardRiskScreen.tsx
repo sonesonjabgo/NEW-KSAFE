@@ -104,7 +104,7 @@ export const HazardRiskScreen: FC<HazardRiskScreenProps> = ({ navigation }) => {
 
   const myCount = useMemo(() => mockHazardData.filter((item) => item.isMyReport).length, [])
   const completedCount = useMemo(
-    () => mockHazardData.filter((item) => item.status === "completed").length,
+    () => mockHazardData.filter((item) => item.status === "completed" || item.status === "impossible").length,
     [],
   )
 

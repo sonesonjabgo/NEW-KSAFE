@@ -263,7 +263,7 @@ const $infoRow: ViewStyle = {
 const $infoLabel: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#606060",
+  color: "#555555",
   width: 64,
 }
 
@@ -287,7 +287,7 @@ const $profileText: ViewStyle = {
 const $managerRole: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.normal,
-  color: "#574D4A",
+  color: "#555555",
 }
 
 const $managerName: TextStyle = {

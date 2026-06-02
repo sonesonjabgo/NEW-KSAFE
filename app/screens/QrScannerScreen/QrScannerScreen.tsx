@@ -56,7 +56,7 @@ export const QrScannerScreen: FC = () => {
   const qrIconSize = isSmallPhone || isShortHeight ? 64 : 80
 
   // 콘텐츠 영역 패딩
-  const contentPaddingH = isTablet ? 32 : isSmallPhone ? 16 : 20
+  const contentPaddingH = isTablet ? 32 : isSmallPhone ? 18 : 22
   const contentPaddingT = isSmallPhone || isShortHeight ? 16 : 24
 
   // 스캔 카드 패딩
@@ -139,7 +139,7 @@ export const QrScannerScreen: FC = () => {
               <View style={[S.$cornerTR, { width: cornerSize, height: cornerSize }]} />
               <View style={[S.$cornerBL, { width: cornerSize, height: cornerSize }]} />
               <View style={[S.$cornerBR, { width: cornerSize, height: cornerSize }]} />
-              <IconQrcode size={qrIconSize} color="#CACACA" strokeWidth={1.2} />
+              <IconQrcode size={qrIconSize} color="#909090" strokeWidth={1.2} />
             </View>
           </View>
 

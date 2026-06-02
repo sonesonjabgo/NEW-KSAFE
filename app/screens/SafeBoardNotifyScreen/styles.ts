@@ -45,9 +45,9 @@ export const $requiredMark: TextStyle = {
 }
 
 export const $helperText: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#979797",
+  color: "#555555",
 }
 
 // ── Guide card ────────────────────────────────────────────────────────────────

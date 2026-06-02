@@ -29,14 +29,16 @@ export const $cardBadge: ViewStyle = {
 }
 
 export const $cardBadgeText: TextStyle = {
-  fontSize: 11,
+  fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
-  color: "#606679",
+  color: "#333333",
 }
 
 export const $cardTitle: TextStyle = {
@@ -49,7 +51,7 @@ export const $cardTitle: TextStyle = {
 export const $cardFileName: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.medium,
-  color: "#979797",
+  color: "#555555",
 }
 
 export const $cardDivider: ViewStyle = {
@@ -66,15 +68,15 @@ export const $cardBottomRow: ViewStyle = {
 }
 
 export const $cardAuthor: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#56524F",
 }
 
 export const $cardSource: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
 }
 
 // ── Register button ────────────────────────────────────────────────────────────

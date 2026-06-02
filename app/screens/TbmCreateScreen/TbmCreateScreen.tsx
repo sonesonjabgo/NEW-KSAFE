@@ -275,7 +275,7 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation, route })
                   value={title}
                   onChangeText={(t) => setTitle(t.slice(0, 200))}
                   placeholder={translate("tbmCreateScreen:activityTitle.placeholder")}
-                  placeholderTextColor="#BBBBBB"
+                  placeholderTextColor="#666666"
                   maxLength={200}
                 />
               </View>
@@ -294,7 +294,7 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation, route })
                   value={content}
                   onChangeText={(t) => setContent(t.slice(0, 2000))}
                   placeholder={translate("tbmCreateScreen:content.placeholder")}
-                  placeholderTextColor="#BBBBBB"
+                  placeholderTextColor="#666666"
                   maxLength={2000}
                   multiline
                   scrollEnabled={false}

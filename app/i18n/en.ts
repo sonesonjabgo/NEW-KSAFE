@@ -1315,12 +1315,16 @@ const en = {
       label: "Location",
       placeholder: "e.g., 2F east corridor, entrance to Zone B workshop",
       helper: "Up to 200 characters.",
+      errorRequired: "Please enter the location.",
+      errorMaxLength: "Location must be 200 characters or less.",
     },
     hazardFactor: {
       label: "Hazard Factor",
       placeholder:
         "What hazard factors are there?\nExamples:\n · The stair railing is loose, posing a fall risk.\n · Exposed wires create an electrocution hazard.",
       helper: "Up to 1,000 characters.",
+      errorRequired: "Please enter the hazard factor.",
+      errorMaxLength: "Hazard factor must be 1,000 characters or less.",
     },
     sitePhotos: {
       label: "Site Photos",
@@ -1334,6 +1338,17 @@ const en = {
       preview: "A preview will be shown when you add an image.",
     },
     submit: "Submit",
+    deletePhotoModal: {
+      title: "Delete Photo",
+      message: "Are you sure you want to delete this photo?",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
+    successModal: {
+      title: "Success",
+      message: "Your hazard report has been submitted.",
+      confirm: "OK",
+    },
   },
 
   hazardRiskScreen: {
@@ -1377,6 +1392,11 @@ const en = {
     },
     adminSection: {
       title: "Status Change & Action",
+      resultTitle: "Action Result",
+      resultCompleted: "Action Completed",
+      resultImpossible: "Action Not Possible",
+      resultDateLabel: "Action Date:",
+      noteLabelImpossible: "Reason for Impossibility",
       noteLabel: "Enter Action Details",
       noteHint: "Up to 2,000 characters can be entered.",
       sitePhotosLabel: "Site Photos",
@@ -1391,6 +1411,14 @@ const en = {
           "Please describe the action taken in detail (e.g., handrail reinstalled, cable protector installed)",
         impossible: "Please describe in detail why the action is not possible.",
       },
+    },
+    workerNoEditMessage: "Reports in progress or already processed cannot be edited.",
+    editForm: {
+      title: "Edit Report",
+      locationPlaceholder: "e.g., 2F east corridor, entrance to Zone B",
+      locationHelper: "Up to 200 characters.",
+      hazardFactorPlaceholder: "What hazard factors are there?",
+      hazardFactorHelper: "Up to 1,000 characters.",
     },
     statusHistory: {
       title: "Status History",
@@ -1410,10 +1438,22 @@ const en = {
       proceed: "Proceed",
       saveAction: "Save Action",
       alreadyProcessed: "This report has already been processed.",
+      edit: "Edit",
+      delete: "Delete",
+      cancel: "Cancel",
+      save: "Save",
+    },
+    deleteModal: {
+      title: "Delete Report",
+      message: "Are you sure you want to delete this report?",
+      cancel: "Cancel",
+      confirm: "Delete",
     },
     toast: {
       noAction: "Please select Completed or Impossible.",
       noNote: "Please enter the action details.",
+      saved: "Report has been updated.",
+      deleted: "Report has been deleted.",
     },
   },
 

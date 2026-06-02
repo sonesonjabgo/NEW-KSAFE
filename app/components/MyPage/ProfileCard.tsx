@@ -52,7 +52,7 @@ const $textArea: ViewStyle = {
 }
 
 const $orgName: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   color: "rgba(255,255,255,0.65)",
   fontFamily: typography.primary.normal,
 }
@@ -65,7 +65,7 @@ const $userName: TextStyle = {
 }
 
 const $email: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   color: "rgba(255,255,255,0.55)",
   fontFamily: typography.primary.normal,
   marginTop: 3,

@@ -15,7 +15,7 @@ export const $buttonDivider: ViewStyle = {
 
 export const $container: ViewStyle = {
   flex: 1,
-  paddingHorizontal: 16,
+  paddingHorizontal: 22,
   paddingVertical: 20,
 }
 
@@ -43,7 +43,7 @@ export const $emptyTitle: TextStyle = {
 export const $emptySubtitle: TextStyle = {
   fontSize: 17,
   fontFamily: typography.primary.medium,
-  color: "#7B7B7B",
+  color: "#555555",
   textAlign: "center",
   marginTop: 15,
 }
@@ -52,7 +52,7 @@ export const $buttonRow: ViewStyle = {
   flexDirection: "row",
   gap: 36,
   paddingTop: 28,
-  paddingHorizontal: 16,
+  paddingHorizontal: 22,
 }
 
 export const $prevBtn: ViewStyle = {
@@ -106,7 +106,7 @@ export const $card: ViewStyle = {
   borderRadius: 12,
   borderWidth: 1,
   borderColor: "#ECECEC",
-  paddingHorizontal: 16,
+  paddingHorizontal: 22,
   gap: 22,
   shadowColor: "#000000",
   shadowOffset: { width: 0, height: 2 },
@@ -159,15 +159,15 @@ export const $cardMeta: ViewStyle = {
 }
 
 export const $cardAuthor: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#7B7B7B",
+  color: "#555555",
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 13,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#7B7B7B",
+  color: "#555555",
 }
 
 // ── No Selection Modal ────────────────────────────────────────────────────────

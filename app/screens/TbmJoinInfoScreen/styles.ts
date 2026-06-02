@@ -13,7 +13,7 @@ export const $container: ViewStyle = {
 }
 
 export const $scrollContent: ViewStyle = {
-  paddingHorizontal: 16,
+  paddingHorizontal: 22,
   paddingTop: 20,
   paddingBottom: 12,
 }
@@ -55,7 +55,7 @@ export const $cardTitle: TextStyle = {
 export const $cardSubtitle: TextStyle = {
   fontSize: 16,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
 }
 
 // ── Title ─────────────────────────────────────────────────────────────────────

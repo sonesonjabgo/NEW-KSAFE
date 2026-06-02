@@ -572,8 +572,8 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
               </View>
             )}
 
-            {/* 상태 변경 및 처리 (관리자 전용, 본인 작성 진행중 / 저장 완료 제외) */}
-            {isAdmin && (!isOwnProposal || detail.status !== "ongoing") && savedResult === null && (
+            {/* 상태 변경 및 처리 (관리자 전용, 본인 작성 진행중 제외) */}
+            {isAdmin && (!isOwnProposal || detail.status !== "ongoing") && (
               <View style={S.$section}>
                 <SectionHeader
                   title={translate("improvementProposalDetailScreen:statusChange.sectionTitle")}
@@ -634,17 +634,17 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                   {localStatus === "reflected" ? (
                     /* 반영완료 처리된 상태: 읽기 전용 박스 (파란 배경) */
                     <View style={S.$processingReadBox}>
-                      <Text text={MOCK_RESULT_CONTENT} style={S.$processingReadText} />
+                      <Text text={savedResult?.content ?? ""} style={S.$processingReadText} />
                       <View style={S.$lockRow}>
-                        <IconLock size={18} color="#BBBBBB" />
+                        <IconLock size={18} color="#888888" />
                       </View>
                     </View>
                   ) : localStatus === "rejected" ? (
                     /* 반영불가 처리된 상태: 읽기 전용 박스 (빨간 배경) */
                     <View style={S.$processingReadBoxRejected}>
-                      <Text text={MOCK_REJECTED_CONTENT} style={S.$processingReadText} />
+                      <Text text={savedResult?.content ?? ""} style={S.$processingReadText} />
                       <View style={S.$lockRow}>
-                        <IconLock size={18} color="#BBBBBB" />
+                        <IconLock size={18} color="#888888" />
                       </View>
                     </View>
                   ) : selectedCard === "reflected" || selectedCard === "rejected" ? (
@@ -668,7 +668,7 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
                               ? "improvementProposalDetailScreen:statusChange.rejectedProcessingPlaceholder"
                               : "improvementProposalDetailScreen:statusChange.processingPlaceholder",
                           )}
-                          placeholderTextColor="#BBBBBB"
+                          placeholderTextColor="#666666"
                           multiline
                           scrollEnabled={false}
                           underlineColorAndroid="transparent"

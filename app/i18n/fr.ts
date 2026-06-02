@@ -1295,12 +1295,16 @@ const fr: Translations = {
       label: "Emplacement",
       placeholder: "Ex : Couloir est du 2e étage, entrée de la zone B",
       helper: "Jusqu'à 200 caractères.",
+      errorRequired: "Please enter the location.",
+      errorMaxLength: "Location must be 200 characters or less.",
     },
     hazardFactor: {
       label: "Facteur de risque",
       placeholder:
         "Quels sont les facteurs de risque ?\nExemples :\n · La rampe d'escalier est instable, présentant un risque de chute.\n · Des fils exposés créent un risque d'électrocution.",
       helper: "Jusqu'à 1 000 caractères.",
+      errorRequired: "Please enter the hazard factor.",
+      errorMaxLength: "Hazard factor must be 1,000 characters or less.",
     },
     sitePhotos: {
       label: "Photos du site",
@@ -1313,7 +1317,18 @@ const fr: Translations = {
         "Au moins 1 photo du site doit être enregistrée.\nVous pouvez joindre de 1 à 5 photos.",
       preview: "Un aperçu s'affichera lorsque vous ajouterez une image.",
     },
-    submit: "Soumettre",
+    submit: "Submit",
+    deletePhotoModal: {
+      title: "Delete Photo",
+      message: "Are you sure you want to delete this photo?",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
+    successModal: {
+      title: "Success",
+      message: "Your hazard report has been submitted.",
+      confirm: "OK",
+    },
   },
 
   hazardRiskScreen: {
@@ -1357,6 +1372,11 @@ const fr: Translations = {
     },
     adminSection: {
       title: "Changement de statut et action",
+      resultTitle: "Action Result",
+      resultCompleted: "Action Completed",
+      resultDateLabel: "Action Date:",
+      resultImpossible: "Action Not Possible",
+      noteLabelImpossible: "Reason for Impossibility",
       noteLabel: "Entrez les détails de l'action",
       noteHint: "Jusqu'à 2 000 caractères peuvent être saisis.",
       sitePhotosLabel: "Photos du site",
@@ -1372,6 +1392,14 @@ const fr: Translations = {
           "Veuillez décrire en détail l'action entreprise (ex. garde-corps réinstallé, protège-câbles installé)",
         impossible: "Veuillez décrire en détail pourquoi l'action n'est pas possible.",
       },
+    },
+    workerNoEditMessage: "Reports in progress or already processed cannot be edited.",
+    editForm: {
+      title: "Edit Report",
+      locationPlaceholder: "e.g., location",
+      locationHelper: "Up to 200 characters.",
+      hazardFactorPlaceholder: "Hazard factors?",
+      hazardFactorHelper: "Up to 1,000 characters.",
     },
     statusHistory: {
       title: "Historique des statuts",
@@ -1391,10 +1419,22 @@ const fr: Translations = {
       proceed: "Procéder",
       saveAction: "Enregistrer l'action",
       alreadyProcessed: "Ce signalement a déjà été traité.",
+      edit: "Edit",
+      delete: "Delete",
+      cancel: "Cancel",
+      save: "Save",
+    },
+    deleteModal: {
+      title: "Delete Report",
+      message: "Are you sure you want to delete this report?",
+      cancel: "Cancel",
+      confirm: "Delete",
     },
     toast: {
       noAction: "Veuillez sélectionner Terminé ou Impossible.",
       noNote: "Veuillez saisir les détails de l'action.",
+      saved: "Report has been updated.",
+      deleted: "Report has been deleted.",
     },
   },
 

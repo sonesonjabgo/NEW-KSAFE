@@ -56,10 +56,9 @@ const $badge: ViewStyle = {
 }
 
 const $badgeText: TextStyle = {
-  fontSize: 11,
-  lineHeight: 14,
+  fontSize: 12,
+  lineHeight: 16,
   fontFamily: typography.primary.bold,
   includeFontPadding: false,
   textAlignVertical: "center",
-  transform: [{ translateY: 1 }],
 }

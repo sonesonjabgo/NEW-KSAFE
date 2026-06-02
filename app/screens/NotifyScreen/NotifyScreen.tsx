@@ -115,6 +115,7 @@ export const NotifyScreen: FC = () => {
       onBack={() => navigation.goBack()}
       contentBg={colors.screenBg}
       squareTop
+      rightOffset={6}
       rightSlot={
         <View style={S.$headerActions}>
           <TouchableOpacity

@@ -1268,12 +1268,16 @@ const hi: Translations = {
       label: "स्थान",
       placeholder: "उदा: दूसरी मंजिल का पूर्वी गलियारा, ज़ोन B कार्यस्थल प्रवेश द्वार",
       helper: "अधिकतम 200 अक्षर।",
+      errorRequired: "Please enter the location.",
+      errorMaxLength: "Location must be 200 characters or less.",
     },
     hazardFactor: {
       label: "जोखिम कारक",
       placeholder:
         "कौन से जोखिम कारक हैं?\nउदाहरण:\n · सीढ़ी की रेलिंग ढीली है, जिससे गिरने का खतरा है।\n · उजागर तार बिजली के झटके का खतरा पैदा करते हैं।",
       helper: "अधिकतम 1,000 अक्षर।",
+      errorRequired: "Please enter the hazard factor.",
+      errorMaxLength: "Hazard factor must be 1,000 characters or less.",
     },
     sitePhotos: {
       label: "साइट फ़ोटो",
@@ -1285,7 +1289,18 @@ const hi: Translations = {
       guide: "कम से कम 1 साइट फ़ोटो दर्ज करना आवश्यक है।\n1 से 5 फ़ोटो तक संलग्न की जा सकती हैं।",
       preview: "छवि जोड़ने पर पूर्वावलोकन दिखाया जाएगा।",
     },
-    submit: "सबमिट करें",
+    submit: "Submit",
+    deletePhotoModal: {
+      title: "Delete Photo",
+      message: "Are you sure you want to delete this photo?",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
+    successModal: {
+      title: "Success",
+      message: "Your hazard report has been submitted.",
+      confirm: "OK",
+    },
   },
 
   hazardRiskScreen: {
@@ -1329,6 +1344,11 @@ const hi: Translations = {
     },
     adminSection: {
       title: "स्थिति परिवर्तन और कार्रवाई",
+      resultTitle: "Action Result",
+      resultCompleted: "Action Completed",
+      resultDateLabel: "Action Date:",
+      resultImpossible: "Action Not Possible",
+      noteLabelImpossible: "Reason for Impossibility",
       noteLabel: "कार्रवाई विवरण दर्ज करें",
       noteHint: "अधिकतम 2,000 अक्षर दर्ज किए जा सकते हैं।",
       sitePhotosLabel: "साइट फ़ोटो",
@@ -1344,6 +1364,14 @@ const hi: Translations = {
           "कृपया की गई कार्रवाई का विस्तार से वर्णन करें (उदा. रेलिंग पुनः स्थापित, केबल प्रोटेक्टर लगाया)",
         impossible: "कृपया विस्तार से बताएं कि कार्रवाई क्यों संभव नहीं है।",
       },
+    },
+    workerNoEditMessage: "Reports in progress or already processed cannot be edited.",
+    editForm: {
+      title: "Edit Report",
+      locationPlaceholder: "e.g., location",
+      locationHelper: "Up to 200 characters.",
+      hazardFactorPlaceholder: "Hazard factors?",
+      hazardFactorHelper: "Up to 1,000 characters.",
     },
     statusHistory: {
       title: "स्थिति इतिहास",
@@ -1363,10 +1391,22 @@ const hi: Translations = {
       proceed: "आगे बढ़ें",
       saveAction: "कार्रवाई सहेजें",
       alreadyProcessed: "इस रिपोर्ट को पहले ही संसाधित किया जा चुका है।",
+      edit: "Edit",
+      delete: "Delete",
+      cancel: "Cancel",
+      save: "Save",
+    },
+    deleteModal: {
+      title: "Delete Report",
+      message: "Are you sure you want to delete this report?",
+      cancel: "Cancel",
+      confirm: "Delete",
     },
     toast: {
       noAction: "कृपया पूर्ण या असंभव चुनें।",
       noNote: "कृपया कार्रवाई का विवरण दर्ज करें।",
+      saved: "Report has been updated.",
+      deleted: "Report has been deleted.",
     },
   },
 

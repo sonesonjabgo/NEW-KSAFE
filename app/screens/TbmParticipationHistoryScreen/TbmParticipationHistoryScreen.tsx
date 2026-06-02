@@ -236,7 +236,7 @@ const $statCard: ViewStyle = {
 const $statLabel: TextStyle = {
   fontSize: 15,
   fontFamily: typography.primary.normal,
-  color: "#574D4A",
+  color: "#555555",
 }
 
 const $countRow: ViewStyle = {
@@ -255,7 +255,7 @@ const $statUnit: TextStyle = {
   fontSize: 15,
   lineHeight: 15,
   fontFamily: typography.primary.normal,
-  color: "#574D4A",
+  color: "#555555",
 }
 
 const $historyList: ViewStyle = {
@@ -285,14 +285,14 @@ const $badge: ViewStyle = {
 }
 
 const $badgeText: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
 }
 
 const $historyDate: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.normal,
-  color: "#A9A9A9",
+  color: "#555555",
 }
 
 const $historyTitle: TextStyle = {
@@ -314,13 +314,13 @@ const $historyBottom: ViewStyle = {
 }
 
 const $workplaceLabel: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   color: "#56524F",
 }
 
 const $workplaceName: TextStyle = {
-  fontSize: 12,
+  fontSize: 14,
   fontFamily: typography.primary.semiBold,
   color: "#2C2C2C",
 }

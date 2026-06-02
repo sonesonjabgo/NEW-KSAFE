@@ -125,7 +125,7 @@ export const QrCodeBottomSheet: FC<Props> = ({ isVisible, onClose }) => {
           <TextInput
             style={S.$codeInput}
             placeholder={translate("qrScanner:codePlaceholder")}
-            placeholderTextColor="#9CA3AF"
+            placeholderTextColor="#666666"
             value={accessCode}
             onChangeText={(text) => {
               const cleaned = text.replace(/[^0-9]/g, "").slice(0, 8)

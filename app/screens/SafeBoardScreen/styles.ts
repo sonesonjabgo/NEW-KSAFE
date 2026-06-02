@@ -6,7 +6,7 @@ import { typography } from "@/theme/typography"
 // ── Header right slot ─────────────────────────────────────────────────────────
 
 export const $bellIconContainer: ViewStyle = {
-  flexDirection: "column",
+  flexDirection: "row",
   alignItems: "center",
   justifyContent: "center",
   gap: 1,
@@ -16,7 +16,7 @@ export const $bellIconContainer: ViewStyle = {
 
 export const $bellText: TextStyle = {
   color: "#FFFFFF",
-  fontSize: 11,
+  fontSize: 14,
   fontFamily: typography.primary.medium,
   textAlign: "center",
 }
@@ -34,7 +34,7 @@ export const $workplaceContainer: ViewStyle = {
 export const $workplaceLabel: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.medium,
-  color: "#979797",
+  color: "#555555",
   marginBottom: 8,
 }
 
@@ -86,7 +86,7 @@ export const $activeTab: ViewStyle = {
 export const $tabText: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.semiBold,
-  color: "#979797",
+  color: "#555555",
 }
 
 export const $activeTabText: TextStyle = {
@@ -114,7 +114,7 @@ export const $emptyContainer: ViewStyle = {
 
 export const $emptyText: TextStyle = {
   fontSize: 15,
-  color: "#999999",
+  color: "#555555",
   fontFamily: typography.primary.normal,
 }
 
@@ -141,7 +141,7 @@ export const $fab: ViewStyle = {
 
 export const $fabLabel: TextStyle = {
   marginTop: 4,
-  fontSize: 13,
+  fontSize: 14,
   lineHeight: 16,
   color: "#FFFFFF",
   fontFamily: typography.primary.bold,

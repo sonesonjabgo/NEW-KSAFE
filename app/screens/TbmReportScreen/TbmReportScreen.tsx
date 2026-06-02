@@ -152,7 +152,7 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
                 value={processName}
                 onChangeText={setProcessName}
                 placeholder={translate("tbmReportScreen:processName.placeholder")}
-                placeholderTextColor="#BBBBBB"
+                placeholderTextColor="#666666"
                 maxLength={50}
               />
             </View>
@@ -168,7 +168,7 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
                 value={teamName}
                 onChangeText={setTeamName}
                 placeholder={translate("tbmReportScreen:teamName.placeholder")}
-                placeholderTextColor="#BBBBBB"
+                placeholderTextColor="#666666"
                 maxLength={50}
               />
             </View>
@@ -187,7 +187,7 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
                 value={educationSummary}
                 onChangeText={setEducationSummary}
                 placeholder={translate("tbmReportScreen:educationSummary.placeholder")}
-                placeholderTextColor="#BBBBBB"
+                placeholderTextColor="#666666"
                 multiline
                 scrollEnabled={false}
                 maxLength={1000}
@@ -208,7 +208,7 @@ export const TbmReportScreen: FC<TbmReportScreenProps> = ({ navigation, route })
                 value={specialNotes}
                 onChangeText={setSpecialNotes}
                 placeholder={translate("tbmReportScreen:specialNotes.placeholder")}
-                placeholderTextColor="#BBBBBB"
+                placeholderTextColor="#666666"
                 multiline
                 scrollEnabled={false}
                 maxLength={500}
