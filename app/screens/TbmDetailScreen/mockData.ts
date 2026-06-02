@@ -1,6 +1,19 @@
 import { TbmDetail } from "./types"
 
 export const mockTbmDetails: Record<number, TbmDetail> = {
+  11: {
+    id: 11,
+    title: "안전모 착용 및 낙하물 방지 TBM",
+    status: "작성중",
+    date: "2026.06.01",
+    workDate: "2026년 6월 1일 오전 08:00",
+    author: "김 철수 현장안전팀장",
+    location: "경기 수원시 팔달구 인계동 공사현장",
+    activityContent:
+      "작업 전 안전모 착용 상태를 확인하고 낙하물 방지망 설치 여부를 점검합니다. 상부 작업 시 하부 통제 구역을 설정하고 비인가자 출입을 금지합니다.",
+    educationMaterials: [{ id: 16, title: "안전모 착용 의무화 교육 자료" }],
+    participants: [],
+  },
   1: {
     id: 1,
     title: "작업장 순회 점검",
@@ -169,6 +182,23 @@ export const mockTbmDetails: Record<number, TbmDetail> = {
       { id: 1, name: "피 성현", badge: "정상", time: "10:06" },
       { id: 2, name: "하 민아", badge: "정상", time: "10:09" },
       { id: 3, name: "허 준영", badge: "주의", time: "10:12" },
+    ],
+  },
+  12: {
+    id: 12,
+    title: "작업 전 안전장비 점검 TBM",
+    status: "종료됨",
+    date: "2026.02.03",
+    workDate: "2026년 2월 3일 오전 09:00",
+    author: "이 정민 현장안전팀장",
+    location: "부산 센텀 물류센터 현장",
+    activityContent:
+      "작업 시작 전 개인보호장비 착용 상태를 전수 점검합니다. 안전모, 안전화, 안전조끼의 이상 유무를 확인하고 불량 장비는 즉시 교체 후 작업에 임합니다.",
+    educationMaterials: [{ id: 17, title: "개인보호장비 착용 및 점검 교육" }],
+    participants: [
+      { id: 1, name: "이 수빈", badge: "정상", time: "09:05" },
+      { id: 2, name: "박 준서", badge: "정상", time: "09:08" },
+      { id: 3, name: "최 지훈", badge: "정상", time: "09:11" },
     ],
   },
   10: {

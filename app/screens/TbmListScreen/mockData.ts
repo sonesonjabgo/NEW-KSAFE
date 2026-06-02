@@ -2,6 +2,15 @@ import { TbmItem } from "./types"
 
 export const mockTbmData: TbmItem[] = [
   {
+    id: 11,
+    title: "안전모 착용 및 낙하물 방지 TBM",
+    status: "작성중",
+    date: "2026.06.01",
+    participants: 0,
+    author: "김 철수 현장안전팀장",
+    location: "경기 수원시 팔달구 인계동 공사현장",
+  },
+  {
     id: 1,
     title: "작업장 순회 점검",
     status: "진행중",

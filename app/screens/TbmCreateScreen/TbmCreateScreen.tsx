@@ -43,7 +43,9 @@ function formatDate(d: Date): string {
   return `${yyyy}.${mm}.${dd} ${hh}:${min}`
 }
 
-export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
+export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation, route }) => {
+  const params = route.params
+  const isEditMode = !!(params?.editId)
   const insets = useSafeAreaInsets()
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false)
 
@@ -55,13 +57,17 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
     return () => { showSub.remove(); hideSub.remove() }
   }, [])
 
-  const [selectedEducationIds, setSelectedEducationIds] = useState<number[]>([])
-  const [workplace, setWorkplace] = useState("")
+  const [selectedEducationIds, setSelectedEducationIds] = useState<number[]>(
+    () => params?.initialEducationIds ?? [],
+  )
+  const [workplace, setWorkplace] = useState(() => params?.initialWorkplace ?? "")
   const [selectedDate, setSelectedDate] = useState(() => new Date())
-  const [dateTime, setDateTime] = useState(() => formatDate(new Date()))
+  const [dateTime, setDateTime] = useState(
+    () => params?.initialDateTime ?? formatDate(new Date()),
+  )
   const [includeDateInTitle, setIncludeDateInTitle] = useState(false)
-  const [title, setTitle] = useState("")
-  const [content, setContent] = useState("")
+  const [title, setTitle] = useState(() => params?.initialTitle ?? "")
+  const [content, setContent] = useState(() => params?.initialContent ?? "")
   const [workplaceModalVisible, setWorkplaceModalVisible] = useState(false)
   const [datePickerVisible, setDatePickerVisible] = useState(false)
   const [datePickerMode, setDatePickerMode] = useState<"date" | "time">("date")
@@ -178,17 +184,19 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
   return (
     <>
       <StackScreen
-        title={translate("tbmCreateScreen:title")}
+        title={translate(isEditMode ? "tbmCreateScreen:editTitle" : "tbmCreateScreen:title")}
         onBack={() => navigation.goBack()}
         contentBg="#FFFFFF"
         squareTop
         rightSlot={
-          <TouchableOpacity
-            onPress={handleReset}
-            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-          >
-            <Text text={resetLabel} style={S.$resetLabel} />
-          </TouchableOpacity>
+          !isEditMode ? (
+            <TouchableOpacity
+              onPress={handleReset}
+              hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+            >
+              <Text text={resetLabel} style={S.$resetLabel} />
+            </TouchableOpacity>
+          ) : undefined
         }
       >
         <KeyboardAvoidingView
@@ -352,7 +360,10 @@ export const TbmCreateScreen: FC<TbmCreateScreenProps> = ({ navigation }) => {
               onPress={handleSubmit}
               disabled={!isValid}
             >
-              <Text text={translate("tbmCreateScreen:submit")} style={S.$submitBtnText} />
+              <Text
+                text={translate(isEditMode ? "tbmCreateScreen:submitEdit" : "tbmCreateScreen:submit")}
+                style={S.$submitBtnText}
+              />
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>

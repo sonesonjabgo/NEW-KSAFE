@@ -589,6 +589,12 @@ const ar: Translations = {
   textTranslationScreen: {
     title: "ترجمة النص",
     fontSizeButton: "AA",
+    fontSizeModal: {
+      title: "حجم النص",
+      small: "صغير",
+      medium: "متوسط",
+      large: "كبير",
+    },
     languageMenu: {
       title: "اختر اللغة",
     },
@@ -773,6 +779,8 @@ const ar: Translations = {
   },
 
   tbmCreateScreen: {
+    editTitle: "수정",
+    submitEdit: "수정하기",
     title: "إنشاء نشاط TBM",
     reset: "إعادة تعيين",
     guide: {
@@ -833,6 +841,7 @@ const ar: Translations = {
       cancel: "إلغاء",
       confirm: "حذف",
     },
+    downloadLog: "교육일지 다운로드",
     startModal: {
       title: "بدء نشاط TBM",
       message: "هل تريد بدء نشاط TBM هذا؟\nسيتغير الحالة إلى 'قيد التقدم'.",
@@ -966,6 +975,10 @@ const ar: Translations = {
       cancel: "إلغاء",
       confirm: "حذف",
     },
+    toast: {
+      noAction: "يرجى اختيار مكتمل أو مرفوض.",
+      noNote: "يرجى إدخال تفاصيل المعالجة.",
+    },
   },
 
   improvementProposalCreateScreen: {
@@ -1068,6 +1081,11 @@ const ar: Translations = {
     regenerateNote: "قد تستغرق إعادة الإنشاء الجديدة بعض الوقت.",
     refresh: "تحديث",
     toastRegenerate: "تم تقديم طلب إعادة إنشاء التقرير.",
+    processStatusRequested: "Report generation has been requested. Processing will begin shortly.",
+    processStatusGenerating: "Generating the report. Please wait a moment.",
+    processStatusCompleted: "The report is ready and available for download.",
+    processStatusFailed: "Report generation has failed.",
+    sectionFailureReason: "Failure Reason",
   },
 
   patrolScreen: {
@@ -1113,6 +1131,12 @@ const ar: Translations = {
       recall: "سحب",
       delete: "حذف",
       reportPreview: "معاينة التقرير",
+    },
+    deleteModal: {
+      title: "حذف الفحص",
+      message: "هل أنت متأكد من حذف هذا الفحص؟\nلا يمكن التراجع عن هذا الإجراء.",
+      cancel: "إلغاء",
+      confirm: "حذف",
     },
     toast: {
       reportSuccess: "تم فتح التقرير.",
@@ -1301,6 +1325,11 @@ const ar: Translations = {
     },
     adminSection: {
       title: "تغيير الحالة والإجراء",
+      resultTitle: "Action Result",
+      resultCompleted: "Action Completed",
+      resultDateLabel: "Action Date:",
+      resultImpossible: "Action Not Possible",
+      noteLabelImpossible: "Reason for Impossibility",
       noteLabel: "أدخل تفاصيل الإجراء",
       noteHint: "يمكن إدخال حتى 2,000 حرف.",
       sitePhotosLabel: "صور الموقع",
@@ -1330,6 +1359,15 @@ const ar: Translations = {
         impossible: "تمت معالجة الإجراء على أنه مستحيل.",
         adminSuffix: " - المشرف ({{name}})",
       },
+    },
+    bottomButton: {
+      proceed: "المتابعة",
+      saveAction: "حفظ الإجراء",
+      alreadyProcessed: "تمت معالجة هذا البلاغ بالفعل.",
+    },
+    toast: {
+      noAction: "يرجى اختيار مكتمل أو مستحيل.",
+      noNote: "يرجى إدخال تفاصيل الإجراء.",
     },
   },
 

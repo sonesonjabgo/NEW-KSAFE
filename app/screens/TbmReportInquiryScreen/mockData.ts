@@ -70,6 +70,8 @@ export const mockTbmReports: TbmReportItem[] = [
     teamName: "C팀 1반",
     requestedAt: "2026.05.14 11:00",
     startedAt: "2026.05.14 11:05",
+    failureReason:
+      "업로드된 교육자료 파일에서 텍스트를 인식하지 못했습니다. 지원되지 않는 파일 형식이거나 손상된 파일일 수 있습니다. (code: AI_OCR_FAILED)",
     history: [
       { status: "requested", time: "2026.05.14 11:00", description: "보고서 생성 요청" },
       { status: "generating", time: "2026.05.14 11:05", description: "AI 보고서 분석 중" },

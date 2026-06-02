@@ -11,6 +11,7 @@ export interface HazardItem {
   reporterName: string
   reporterInitial: string
   workplace: string
+  isMyReport: boolean
 }
 
 export interface HazardHistoryItem {

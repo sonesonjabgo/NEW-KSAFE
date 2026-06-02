@@ -8,8 +8,6 @@ import type { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { colors } from "@/theme/colors"
 import { typography } from "@/theme/typography"
 
-const MOCK_TOTAL = 12
-const MOCK_CAUTION = 3
 
 interface TbmHistoryItem {
   id: number
@@ -36,7 +34,7 @@ const mockHistoryData: TbmHistoryItem[] = [
   },
   {
     id: 3,
-    badge: "정상",
+    badge: "주의",
     date: "2026.02.17 07:45",
     title: "고소작업 안전교육",
     workplace: "광교 타워크레인 사업장",
@@ -54,6 +52,55 @@ const mockHistoryData: TbmHistoryItem[] = [
     date: "2026.02.15 09:30",
     title: "비계 설치 작업 전 TBM",
     workplace: "광교 타워크레인 사업장",
+  },
+  {
+    id: 6,
+    badge: "주의",
+    date: "2026.02.13 08:00",
+    title: "중장비 운행 안전수칙 교육",
+    workplace: "광교 타워크레인 사업장",
+  },
+  {
+    id: 7,
+    badge: "정상",
+    date: "2026.02.12 09:15",
+    title: "용접 작업 화재 예방 TBM",
+    workplace: "서울 한강 레지던스 RC공사 현장",
+  },
+  {
+    id: 8,
+    badge: "정상",
+    date: "2026.02.11 08:45",
+    title: "굴착 작업 안전점검",
+    workplace: "서울 한강 레지던스 RC공사 현장",
+  },
+  {
+    id: 9,
+    badge: "주의",
+    date: "2026.02.10 07:30",
+    title: "추락 방지 안전교육",
+    workplace: "서울 한강 레지던스 RC공사 현장",
+  },
+  {
+    id: 10,
+    badge: "정상",
+    date: "2026.02.07 09:00",
+    title: "밀폐공간 작업 전 TBM",
+    workplace: "부산 센텀 물류센터 현장",
+  },
+  {
+    id: 11,
+    badge: "정상",
+    date: "2026.02.05 08:30",
+    title: "지게차 운행 안전수칙",
+    workplace: "부산 센텀 물류센터 현장",
+  },
+  {
+    id: 12,
+    badge: "정상",
+    date: "2026.02.03 08:00",
+    title: "작업 전 안전장비 점검 TBM",
+    workplace: "부산 센텀 물류센터 현장",
   },
 ]
 
@@ -82,11 +129,18 @@ interface HistoryCardProps {
   onPress: () => void
 }
 
-const HistoryCard: FC<HistoryCardProps> = ({ item, onPress }) => (
+const BADGE_STYLE: Record<string, { bg: string; text: string }> = {
+  정상: { bg: "#CFFFE1", text: "#18A24A" },
+  주의: { bg: "#FFF6E6", text: "#D97706" },
+}
+
+const HistoryCard: FC<HistoryCardProps> = ({ item, onPress }) => {
+  const badgeColor = BADGE_STYLE[item.badge] ?? BADGE_STYLE["정상"]
+  return (
   <TouchableOpacity style={$historyCard} activeOpacity={0.75} onPress={onPress}>
     <View style={$historyTop}>
-      <View style={$badge}>
-        <Text text={item.badge} style={$badgeText} />
+      <View style={[$badge, { backgroundColor: badgeColor.bg }]}>
+        <Text text={item.badge} style={[$badgeText, { color: badgeColor.text }]} />
       </View>
       <Text text={item.date} style={$historyDate} />
     </View>
@@ -103,7 +157,8 @@ const HistoryCard: FC<HistoryCardProps> = ({ item, onPress }) => (
       <Text text={item.workplace} style={$workplaceName} numberOfLines={1} />
     </View>
   </TouchableOpacity>
-)
+  )
+}
 
 // ── Screen ────────────────────────────────────────────────
 
@@ -127,11 +182,11 @@ export const TbmParticipationHistoryScreen: FC<TbmParticipationHistoryScreenProp
         <View style={$statRow}>
           <StatCard
             label={translate("tbmParticipationHistoryScreen:totalParticipation")}
-            count={MOCK_TOTAL}
+            count={mockHistoryData.length}
           />
           <StatCard
             label={translate("tbmParticipationHistoryScreen:cautionResponse")}
-            count={MOCK_CAUTION}
+            count={mockHistoryData.filter((i) => i.badge === "주의").length}
             countColor={colors.blue}
           />
         </View>
@@ -224,7 +279,6 @@ const $historyTop: ViewStyle = {
 }
 
 const $badge: ViewStyle = {
-  backgroundColor: "#CFFFE1",
   borderRadius: 4,
   paddingHorizontal: 8,
   paddingVertical: 2,
@@ -233,7 +287,6 @@ const $badge: ViewStyle = {
 const $badgeText: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.medium,
-  color: "#18A24A",
 }
 
 const $historyDate: TextStyle = {

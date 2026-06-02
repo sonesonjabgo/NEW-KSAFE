@@ -148,7 +148,7 @@ export const $photoHintText: TextStyle = {
 // ── Site Photos ───────────────────────────────────────────────────────────────
 
 export const $photoGuideCard: ViewStyle = {
-  height: 83,
+  minHeight: 66,
   backgroundColor: "#F4F8FD",
   borderRadius: 9,
   borderWidth: 1,
@@ -157,7 +157,7 @@ export const $photoGuideCard: ViewStyle = {
   paddingHorizontal: 12,
   paddingVertical: 15,
   flexDirection: "row",
-  alignItems: "center",
+  alignItems: "flex-start",
   gap: 10,
 }
 
@@ -165,7 +165,7 @@ export const $photoGuideLine: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
-  lineHeight: 16,
+  lineHeight: 20,
 }
 
 export const $photoGuideAddBtn: ViewStyle = {
@@ -214,6 +214,25 @@ export const $photoItem: ImageStyle = {
   height: 90,
   borderRadius: 10,
   backgroundColor: "#E0E0E0",
+}
+
+export const $photoItemWrapper: ViewStyle = {
+  position: "relative",
+  width: 90,
+  height: 90,
+}
+
+export const $photoRemoveBtn: ViewStyle = {
+  position: "absolute",
+  top: 5,
+  right: 5,
+  width: 22,
+  height: 22,
+  borderRadius: 11,
+  backgroundColor: "rgba(0,0,0,0.55)",
+  justifyContent: "center",
+  alignItems: "center",
+  zIndex: 1,
 }
 
 // ── Submit Bar ────────────────────────────────────────────────────────────────

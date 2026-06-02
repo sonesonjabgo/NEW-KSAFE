@@ -589,6 +589,12 @@ const hi: Translations = {
   textTranslationScreen: {
     title: "पाठ अनुवाद",
     fontSizeButton: "AA",
+    fontSizeModal: {
+      title: "टेक्स्ट आकार",
+      small: "छोटा",
+      medium: "मध्यम",
+      large: "बड़ा",
+    },
     languageMenu: {
       title: "भाषा चुनें",
     },
@@ -774,6 +780,8 @@ const hi: Translations = {
   },
 
   tbmCreateScreen: {
+    editTitle: "수정",
+    submitEdit: "수정하기",
     title: "TBM गतिविधि बनाएं",
     reset: "रीसेट करें",
     guide: {
@@ -834,6 +842,7 @@ const hi: Translations = {
       cancel: "रद्द करें",
       confirm: "हटाएं",
     },
+    downloadLog: "교육일지 다운로드",
     startModal: {
       title: "TBM गतिविधि शुरू करें",
       message: "क्या आप इस TBM गतिविधि को शुरू करना चाहते हैं?\nस्थिति 'प्रगति में' में बदल जाएगी।",
@@ -969,6 +978,10 @@ const hi: Translations = {
       cancel: "रद्द करें",
       confirm: "हटाएं",
     },
+    toast: {
+      noAction: "कृपया प्रतिबिंबित या अस्वीकृत चुनें।",
+      noNote: "कृपया प्रसंस्करण विवरण दर्ज करें।",
+    },
   },
 
   improvementProposalCreateScreen: {
@@ -1071,6 +1084,11 @@ const hi: Translations = {
     regenerateNote: "नए पुनर्जनन में कुछ समय लग सकता है।",
     refresh: "रीफ्रेश करें",
     toastRegenerate: "रिपोर्ट पुनर्जनन का अनुरोध सबमिट किया गया है।",
+    processStatusRequested: "Report generation has been requested. Processing will begin shortly.",
+    processStatusGenerating: "Generating the report. Please wait a moment.",
+    processStatusCompleted: "The report is ready and available for download.",
+    processStatusFailed: "Report generation has failed.",
+    sectionFailureReason: "Failure Reason",
   },
 
   patrolScreen: {
@@ -1116,6 +1134,12 @@ const hi: Translations = {
       recall: "वापस लें",
       delete: "हटाएं",
       reportPreview: "रिपोर्ट पूर्वावलोकन",
+    },
+    deleteModal: {
+      title: "निरीक्षण हटाएं",
+      message: "क्या आप इस निरीक्षण को हटाना चाहते हैं?\nयह क्रिया पूर्ववत नहीं की जा सकती।",
+      cancel: "रद्द करें",
+      confirm: "हटाएं",
     },
     toast: {
       reportSuccess: "रिपोर्ट खुल गई।",
@@ -1305,6 +1329,11 @@ const hi: Translations = {
     },
     adminSection: {
       title: "स्थिति परिवर्तन और कार्रवाई",
+      resultTitle: "Action Result",
+      resultCompleted: "Action Completed",
+      resultDateLabel: "Action Date:",
+      resultImpossible: "Action Not Possible",
+      noteLabelImpossible: "Reason for Impossibility",
       noteLabel: "कार्रवाई विवरण दर्ज करें",
       noteHint: "अधिकतम 2,000 अक्षर दर्ज किए जा सकते हैं।",
       sitePhotosLabel: "साइट फ़ोटो",
@@ -1335,6 +1364,15 @@ const hi: Translations = {
         impossible: "कार्य को असंभव के रूप में संसाधित किया गया है।",
         adminSuffix: " - व्यवस्थापक ({{name}})",
       },
+    },
+    bottomButton: {
+      proceed: "आगे बढ़ें",
+      saveAction: "कार्रवाई सहेजें",
+      alreadyProcessed: "इस रिपोर्ट को पहले ही संसाधित किया जा चुका है।",
+    },
+    toast: {
+      noAction: "कृपया पूर्ण या असंभव चुनें।",
+      noNote: "कृपया कार्रवाई का विवरण दर्ज करें।",
     },
   },
 

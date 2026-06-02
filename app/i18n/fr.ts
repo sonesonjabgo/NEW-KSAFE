@@ -607,6 +607,12 @@ const fr: Translations = {
   textTranslationScreen: {
     title: "Traduction de Texte",
     fontSizeButton: "AA",
+    fontSizeModal: {
+      title: "Taille du texte",
+      small: "Petite",
+      medium: "Moyenne",
+      large: "Grande",
+    },
     languageMenu: {
       title: "Sélectionner la Langue",
     },
@@ -793,6 +799,8 @@ const fr: Translations = {
   },
 
   tbmCreateScreen: {
+    editTitle: "수정",
+    submitEdit: "수정하기",
     title: "Créer une activité TBM",
     reset: "Réinitialiser",
     guide: {
@@ -854,6 +862,7 @@ const fr: Translations = {
       cancel: "Annuler",
       confirm: "Supprimer",
     },
+    downloadLog: "교육일지 다운로드",
     startModal: {
       title: "Démarrer l'activité TBM",
       message: "Voulez-vous démarrer cette activité TBM?\nLe statut passera à 'En cours'.",
@@ -990,6 +999,10 @@ const fr: Translations = {
       cancel: "Annuler",
       confirm: "Supprimer",
     },
+    toast: {
+      noAction: "Veuillez sélectionner Réfléchi ou Rejeté.",
+      noNote: "Veuillez saisir les détails du traitement.",
+    },
   },
 
   improvementProposalCreateScreen: {
@@ -1094,6 +1107,11 @@ const fr: Translations = {
     regenerateNote: "Une nouvelle régénération peut prendre un certain temps.",
     refresh: "Actualiser",
     toastRegenerate: "La demande de régénération du rapport a été soumise.",
+    processStatusRequested: "Report generation has been requested. Processing will begin shortly.",
+    processStatusGenerating: "Generating the report. Please wait a moment.",
+    processStatusCompleted: "The report is ready and available for download.",
+    processStatusFailed: "Report generation has failed.",
+    sectionFailureReason: "Failure Reason",
   },
 
   patrolScreen: {
@@ -1139,6 +1157,12 @@ const fr: Translations = {
       recall: "Rappeler",
       delete: "Supprimer",
       reportPreview: "Aperçu du Rapport",
+    },
+    deleteModal: {
+      title: "Supprimer l'inspection",
+      message: "Êtes-vous sûr de vouloir supprimer cette inspection ?\nCette action est irréversible.",
+      cancel: "Annuler",
+      confirm: "Supprimer",
     },
     toast: {
       reportSuccess: "Le rapport a été ouvert.",
@@ -1333,6 +1357,11 @@ const fr: Translations = {
     },
     adminSection: {
       title: "Changement de statut et action",
+      resultTitle: "Action Result",
+      resultCompleted: "Action Completed",
+      resultDateLabel: "Action Date:",
+      resultImpossible: "Action Not Possible",
+      noteLabelImpossible: "Reason for Impossibility",
       noteLabel: "Entrez les détails de l'action",
       noteHint: "Jusqu'à 2 000 caractères peuvent être saisis.",
       sitePhotosLabel: "Photos du site",
@@ -1363,6 +1392,15 @@ const fr: Translations = {
         impossible: "L'action a été traitée comme impossible.",
         adminSuffix: " - Administrateur ({{name}})",
       },
+    },
+    bottomButton: {
+      proceed: "Procéder",
+      saveAction: "Enregistrer l'action",
+      alreadyProcessed: "Ce signalement a déjà été traité.",
+    },
+    toast: {
+      noAction: "Veuillez sélectionner Terminé ou Impossible.",
+      noNote: "Veuillez saisir les détails de l'action.",
     },
   },
 

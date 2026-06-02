@@ -14,6 +14,7 @@ import { Text } from "@/components/Text"
 import { translate } from "@/i18n/translate"
 import { AppStackScreenProps } from "@/navigators/navigationTypes"
 import { MOCK_EDUCATION_MATERIALS } from "@/screens/EducationSelectScreen/mockData"
+import { downloadTbmAttachment } from "@/utils/downloadTbmAttachment"
 
 import * as S from "./styles"
 
@@ -115,7 +116,7 @@ export const EducationMaterialDetailScreen: FC<EducationMaterialDetailScreenProp
           <View style={S.$fileChip}>
             <EducationFrame width={22} height={22} color="#1062D8" />
             <Text text={pureFileName} style={S.$fileChipName} numberOfLines={1} />
-            <TouchableOpacity activeOpacity={0.7} onPress={() => console.log("download:", item.id)}>
+            <TouchableOpacity activeOpacity={0.7} onPress={() => downloadTbmAttachment()}>
               <IconDownload size={20} color="#1062D8" />
             </TouchableOpacity>
           </View>

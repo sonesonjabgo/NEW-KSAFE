@@ -153,16 +153,25 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
   } | null>(null)
   const [saveProcessingToastVisible, setSaveProcessingToastVisible] = useState(false)
   const hideSaveProcessingToast = useCallback(() => setSaveProcessingToastVisible(false), [])
+  const [validationToastVisible, setValidationToastVisible] = useState(false)
+  const [validationToastMessage, setValidationToastMessage] = useState("")
+  const hideValidationToast = useCallback(() => setValidationToastVisible(false), [])
 
   const handleSaveProcessed = useCallback(() => {
-    // TODO: 추후 API 연동 시 실제 저장 처리
-    if (selectedCard !== "reflected" && selectedCard !== "rejected") return
+    if (selectedCard !== "reflected" && selectedCard !== "rejected") {
+      setValidationToastMessage(translate("improvementProposalDetailScreen:toast.noAction"))
+      setValidationToastVisible(true)
+      return
+    }
+    if (!processingContent.trim()) {
+      setValidationToastMessage(translate("improvementProposalDetailScreen:toast.noNote"))
+      setValidationToastVisible(true)
+      return
+    }
     const now = new Date()
     const pad = (n: number) => n.toString().padStart(2, "0")
     const dateStr = `${now.getFullYear()}.${pad(now.getMonth() + 1)}.${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`
-    const fallback =
-      selectedCard === "reflected" ? "설비팀 검토 결과 배치 완료함" : "검토 결과 반영이 어렵습니다."
-    const content = processingContent.trim() || fallback
+    const content = processingContent.trim()
     setSavedResult({ status: selectedCard, content, date: dateStr })
     setLocalStatus(selectedCard)
     setLocalHistory((prev) => [
@@ -858,6 +867,14 @@ export const ImprovementProposalDetailScreen: FC<ImprovementProposalDetailScreen
         message={translate("improvementProposalDetailScreen:proceedStartedMessage")}
         icon={<IconCheck size={16} color="#FFFFFF" strokeWidth={2.5} />}
         onHide={hideProceedToast}
+      />
+
+      <Toast
+        visible={validationToastVisible}
+        message={validationToastMessage}
+        icon={<IconX size={14} color="#FFFFFF" strokeWidth={2.5} />}
+        iconCircleColor="#E03526"
+        onHide={hideValidationToast}
       />
 
       <ConfirmModal

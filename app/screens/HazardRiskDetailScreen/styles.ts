@@ -104,6 +104,25 @@ export const $photoItem: ImageStyle = {
   backgroundColor: "#E0E0E0",
 }
 
+export const $photoItemWrapper: ViewStyle = {
+  position: "relative",
+  width: 88,
+  height: 88,
+}
+
+export const $photoRemoveBtn: ViewStyle = {
+  position: "absolute",
+  top: 5,
+  right: 5,
+  width: 22,
+  height: 22,
+  borderRadius: 11,
+  backgroundColor: "rgba(0,0,0,0.55)",
+  justifyContent: "center",
+  alignItems: "center",
+  zIndex: 1,
+}
+
 export const $noPhotosText: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
@@ -302,6 +321,38 @@ export const $dashedInputCard: ViewStyle = {
   padding: 12,
 }
 
+export const $readOnlyBoxCompleted: ViewStyle = {
+  borderRadius: 8,
+  borderWidth: 1,
+  borderColor: "#ECECEC",
+  backgroundColor: "#F4F8FD",
+  padding: 14,
+  minHeight: 90,
+  justifyContent: "space-between",
+}
+
+export const $readOnlyBoxImpossible: ViewStyle = {
+  borderRadius: 8,
+  borderWidth: 1,
+  borderColor: "#ECECEC",
+  backgroundColor: "#FDF7F7",
+  padding: 14,
+  minHeight: 90,
+  justifyContent: "space-between",
+}
+
+export const $readOnlyText: TextStyle = {
+  fontSize: 14,
+  fontFamily: typography.primary.normal,
+  color: "#555555",
+  lineHeight: 22,
+}
+
+export const $lockRow: ViewStyle = {
+  alignItems: "flex-end",
+  marginTop: 8,
+}
+
 export const $dashedInputCardEnabled: ViewStyle = {
   borderStyle: "solid",
   borderColor: "#DDDDDD",
@@ -375,7 +426,7 @@ export const $photoHintText: TextStyle = {
 }
 
 export const $photoGuideCard: ViewStyle = {
-  height: 83,
+  minHeight: 66,
   backgroundColor: "#F4F8FD",
   borderRadius: 9,
   borderWidth: 1,
@@ -384,7 +435,7 @@ export const $photoGuideCard: ViewStyle = {
   paddingHorizontal: 12,
   paddingVertical: 15,
   flexDirection: "row",
-  alignItems: "center",
+  alignItems: "flex-start",
   gap: 10,
   marginTop: 15,
 }
@@ -393,7 +444,7 @@ export const $photoGuideLine: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#564E4B",
-  lineHeight: 16,
+  lineHeight: 20,
 }
 
 export const $photoGuideAddBtn: ViewStyle = {

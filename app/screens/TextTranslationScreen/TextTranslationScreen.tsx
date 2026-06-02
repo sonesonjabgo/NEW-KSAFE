@@ -1,5 +1,8 @@
 import { FC, useState, useRef, useCallback, useEffect } from "react"
 import {
+  Animated,
+  Modal,
+  Pressable,
   View,
   ViewStyle,
   TextStyle,
@@ -47,6 +50,13 @@ const DUMMY_TRANSLATIONS: TranslationItem[] = [
 ]
 
 type InputMode = "voice" | "text"
+type FontSize = "small" | "medium" | "large"
+
+const FONT_SIZE_MAP: Record<FontSize, { source: number; translated: number }> = {
+  small:  { source: 12, translated: 14 },
+  medium: { source: 14, translated: 17 },
+  large:  { source: 17, translated: 21 },
+}
 
 export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigation }) => {
   const insets = useSafeAreaInsets()
@@ -65,6 +75,9 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
   const [keyboardHeight, setKeyboardHeight] = useState(0)
   const [langMenuVisible, setLangMenuVisible] = useState(false)
   const [langMenuTarget, setLangMenuTarget] = useState<"source" | "target">("source")
+  const [fontSize, setFontSize] = useState<FontSize>("medium")
+  const [showFontSizeModal, setShowFontSizeModal] = useState(false)
+  const fontSizeSlideAnim = useRef(new Animated.Value(300)).current
 
   const currentLangKey = langMenuTarget === "source" ? sourceLanguage : targetLanguage
 
@@ -93,6 +106,17 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
     translate(`textTranslationScreen:languageSubtitles.${key}` as any)
 
   const getLangFlag = (key: LanguageKey): string => LANGUAGES.find((l) => l.key === key)?.flag ?? ""
+
+  const openFontSizeModal = () => {
+    setShowFontSizeModal(true)
+    Animated.timing(fontSizeSlideAnim, { toValue: 0, duration: 250, useNativeDriver: true }).start()
+  }
+
+  const closeFontSizeModal = () => {
+    Animated.timing(fontSizeSlideAnim, { toValue: 300, duration: 200, useNativeDriver: true }).start(() =>
+      setShowFontSizeModal(false),
+    )
+  }
 
   const handleTranslate = useCallback(() => {
     const trimmed = inputText.trim()
@@ -145,8 +169,8 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
     <View style={$translationCard}>
       <View style={$cardRow}>
         <View style={$cardTexts}>
-          <Text text={item.sourceText} style={$sourceText} />
-          <Text text={item.translatedText} style={$translatedText} />
+          <Text text={item.sourceText} style={[$sourceText, { fontSize: FONT_SIZE_MAP[fontSize].source }]} />
+          <Text text={item.translatedText} style={[$translatedText, { fontSize: FONT_SIZE_MAP[fontSize].translated }]} />
         </View>
         <TouchableOpacity style={$speakerBtn} activeOpacity={0.7}>
           <IconVolume size={18} color={colors.blue} />
@@ -163,7 +187,7 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
         contentBg="#FFFFFF"
         rightOffset={-4}
         rightSlot={
-          <TouchableOpacity style={$headerSideRight}>
+          <TouchableOpacity style={$headerSideRight} activeOpacity={0.7} onPress={openFontSizeModal}>
             <Text text={translate("textTranslationScreen:fontSizeButton")} style={$fontSizeText} />
           </TouchableOpacity>
         }
@@ -319,6 +343,55 @@ export const TextTranslationScreen: FC<TextTranslationScreenProps> = ({ navigati
         onSelect={handleSelectLanguage}
         onClose={() => setLangMenuVisible(false)}
       />
+
+      <Modal
+        visible={showFontSizeModal}
+        transparent
+        animationType="fade"
+        onRequestClose={closeFontSizeModal}
+      >
+        <Pressable style={$fontSizeOverlay} onPress={closeFontSizeModal}>
+          <Animated.View
+            style={[$fontSizeModalContent, { transform: [{ translateY: fontSizeSlideAnim }] }]}
+          >
+            <Pressable>
+              <Text
+                text={translate("textTranslationScreen:fontSizeModal.title")}
+                style={$fontSizeModalTitle}
+              />
+              <View style={$fontSizeOptionsRow}>
+                {(["small", "medium", "large"] as FontSize[]).map((size) => {
+                  const isSelected = fontSize === size
+                  return (
+                    <TouchableOpacity
+                      key={size}
+                      style={[$fontSizeOption, isSelected && $fontSizeOptionSelected]}
+                      activeOpacity={0.7}
+                      onPress={() => {
+                        setFontSize(size)
+                        closeFontSizeModal()
+                      }}
+                    >
+                      <Text
+                        text="가"
+                        style={[
+                          $fontSizeSample,
+                          { fontSize: FONT_SIZE_MAP[size].translated },
+                          isSelected && $fontSizeSampleSelected,
+                        ]}
+                      />
+                      <Text
+                        text={translate(`textTranslationScreen:fontSizeModal.${size}` as any)}
+                        style={[$fontSizeLabel, isSelected && $fontSizeLabelSelected]}
+                      />
+                    </TouchableOpacity>
+                  )
+                })}
+              </View>
+            </Pressable>
+          </Animated.View>
+        </Pressable>
+      </Modal>
     </>
   )
 }
@@ -593,4 +666,70 @@ const $validationError: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.normal,
   color: "#EF4444",
+}
+
+// ── Font size modal ──
+
+const $fontSizeOverlay: ViewStyle = {
+  flex: 1,
+  backgroundColor: "rgba(0, 0, 0, 0.3)",
+  justifyContent: "flex-end",
+}
+
+const $fontSizeModalContent: ViewStyle = {
+  backgroundColor: "#FFFFFF",
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+  paddingTop: 28,
+  paddingBottom: 40,
+  paddingHorizontal: 20,
+}
+
+const $fontSizeModalTitle: TextStyle = {
+  fontSize: 17,
+  fontFamily: typography.primary.semiBold,
+  color: "#1A2236",
+  marginBottom: 20,
+  textAlign: "center",
+}
+
+const $fontSizeOptionsRow: ViewStyle = {
+  flexDirection: "row",
+  gap: 12,
+}
+
+const $fontSizeOption: ViewStyle = {
+  flex: 1,
+  alignItems: "center",
+  justifyContent: "center",
+  paddingVertical: 20,
+  borderRadius: 12,
+  borderWidth: 1.5,
+  borderColor: "#E0E5F0",
+  gap: 8,
+}
+
+const $fontSizeOptionSelected: ViewStyle = {
+  borderColor: colors.blue,
+  backgroundColor: "#EEF4FF",
+}
+
+const $fontSizeSample: TextStyle = {
+  fontFamily: typography.primary.bold,
+  color: "#1A2236",
+}
+
+const $fontSizeSampleSelected: TextStyle = {
+  color: colors.blue,
+}
+
+const $fontSizeLabel: TextStyle = {
+  fontSize: 13,
+  fontFamily: typography.primary.medium,
+  color: "#6B7280",
+}
+
+const $fontSizeLabelSelected: TextStyle = {
+  color: colors.blue,
+  fontFamily: typography.primary.semiBold,
 }

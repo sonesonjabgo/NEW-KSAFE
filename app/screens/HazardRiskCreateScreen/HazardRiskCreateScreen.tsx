@@ -13,7 +13,7 @@ import {
 } from "react-native"
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
 import { IconAlertCircle, IconChevronDown } from "@tabler/icons-react-native"
-import { Building } from "lucide-react-native"
+import { Building, X } from "lucide-react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import HeaderBell from "@assets/icons/nav/header_bell.svg"
@@ -239,7 +239,16 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
               {photos.length > 0 ? (
                 <View style={S.$photoGrid}>
                   {photos.map((uri, i) => (
-                    <Image key={i} source={{ uri }} style={S.$photoItem} />
+                    <View key={i} style={S.$photoItemWrapper}>
+                      <Image source={{ uri }} style={S.$photoItem} />
+                      <TouchableOpacity
+                        style={S.$photoRemoveBtn}
+                        activeOpacity={0.8}
+                        onPress={() => setPhotos((prev) => prev.filter((_, idx) => idx !== i))}
+                      >
+                        <X size={12} color="#FFFFFF" strokeWidth={2.5} />
+                      </TouchableOpacity>
+                    </View>
                   ))}
                 </View>
               ) : (
@@ -330,8 +339,11 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
               style={S.$workplaceOption}
               activeOpacity={0.7}
               onPress={() => {
-                console.log("카메라")
                 closePhotoModal()
+                setPhotos((prev) => [
+                  ...prev,
+                  `https://picsum.photos/seed/camera${Date.now()}/400/300`,
+                ])
               }}
             >
               <Text
@@ -343,8 +355,11 @@ export const HazardRiskCreateScreen: FC<HazardRiskCreateScreenProps> = ({ naviga
               style={S.$workplaceOption}
               activeOpacity={0.7}
               onPress={() => {
-                console.log("앨범")
                 closePhotoModal()
+                setPhotos((prev) => [
+                  ...prev,
+                  `https://picsum.photos/seed/album${Date.now()}/400/300`,
+                ])
               }}
             >
               <Text

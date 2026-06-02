@@ -14,6 +14,7 @@ import { mockTbmDetails } from "@/screens/TbmDetailScreen/mockData"
 import * as S from "@/screens/TbmDetailScreen/styles"
 import type { TbmStatus } from "@/screens/TbmListScreen/types"
 import { typography } from "@/theme/typography"
+import { downloadTbmAttachment } from "@/utils/downloadTbmAttachment"
 
 interface HistoryDetail {
   participationDate: string
@@ -52,6 +53,48 @@ const mockHistoryDetails: Record<number, HistoryDetail> = {
     workDate: "2026.02.15 10:00",
     workplace: "광교 타워크레인 사업장",
     managerName: "권 민수",
+  },
+  6: {
+    participationDate: "2026.02.13 08:00",
+    workDate: "2026.02.13 09:00",
+    workplace: "광교 타워크레인 사업장",
+    managerName: "권 민수",
+  },
+  7: {
+    participationDate: "2026.02.12 09:15",
+    workDate: "2026.02.12 10:00",
+    workplace: "서울 한강 레지던스 RC공사 현장",
+    managerName: "김 철수",
+  },
+  8: {
+    participationDate: "2026.02.11 08:45",
+    workDate: "2026.02.11 09:30",
+    workplace: "서울 한강 레지던스 RC공사 현장",
+    managerName: "김 철수",
+  },
+  9: {
+    participationDate: "2026.02.10 07:30",
+    workDate: "2026.02.10 08:30",
+    workplace: "서울 한강 레지던스 RC공사 현장",
+    managerName: "김 철수",
+  },
+  10: {
+    participationDate: "2026.02.07 09:00",
+    workDate: "2026.02.07 10:00",
+    workplace: "부산 센텀 물류센터 현장",
+    managerName: "이 정민",
+  },
+  11: {
+    participationDate: "2026.02.05 08:30",
+    workDate: "2026.02.05 09:30",
+    workplace: "부산 센텀 물류센터 현장",
+    managerName: "이 정민",
+  },
+  12: {
+    participationDate: "2026.02.03 08:00",
+    workDate: "2026.02.03 09:00",
+    workplace: "부산 센텀 물류센터 현장",
+    managerName: "이 정민",
   },
 }
 
@@ -162,7 +205,9 @@ export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, rou
           />
           <View style={S.$educationHeaderLine} />
         </View>
-        <View style={S.$educationCard} />
+        <View style={S.$detailCard}>
+          <Text text={tbm.activityContent} style={S.$activityContent} />
+        </View>
 
         {/* ── 교육자료 섹션 ── */}
         <View style={S.$educationHeaderRow}>
@@ -183,7 +228,7 @@ export const TbmParticipationHistoryDetailScreen: FC<Props> = ({ navigation, rou
               <Text text={item.title} style={S.$educationCardTitle} numberOfLines={2} />
               <TouchableOpacity
                 activeOpacity={0.7}
-                onPress={() => console.log("download:", item.id)}
+                onPress={() => downloadTbmAttachment()}
               >
                 <IconDownload size={20} color="#1062D8" />
               </TouchableOpacity>

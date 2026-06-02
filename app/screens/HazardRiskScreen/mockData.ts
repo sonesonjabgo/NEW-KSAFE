@@ -1,9 +1,6 @@
 import type { HazardItem } from "./types"
 
-export const MOCK_CURRENT_USER = "홍길동"
-
 export const mockHazardData: HazardItem[] = [
-  // 다른 사용자 제보
   {
     id: 1,
     status: "pending",
@@ -13,6 +10,7 @@ export const mockHazardData: HazardItem[] = [
     reporterName: "김철수",
     reporterInitial: "김",
     workplace: "광교타워크레인 현장",
+    isMyReport: false,
   },
   {
     id: 2,
@@ -23,6 +21,7 @@ export const mockHazardData: HazardItem[] = [
     reporterName: "이영희",
     reporterInitial: "이",
     workplace: "광교타워크레인 현장",
+    isMyReport: false,
   },
   {
     id: 3,
@@ -33,6 +32,7 @@ export const mockHazardData: HazardItem[] = [
     reporterName: "박민준",
     reporterInitial: "박",
     workplace: "수원역 복합개발 현장",
+    isMyReport: false,
   },
   {
     id: 4,
@@ -43,6 +43,7 @@ export const mockHazardData: HazardItem[] = [
     reporterName: "최지원",
     reporterInitial: "최",
     workplace: "수원역 복합개발 현장",
+    isMyReport: false,
   },
   {
     id: 5,
@@ -53,6 +54,7 @@ export const mockHazardData: HazardItem[] = [
     reporterName: "정우성",
     reporterInitial: "정",
     workplace: "광교타워크레인 현장",
+    isMyReport: false,
   },
   {
     id: 6,
@@ -63,17 +65,19 @@ export const mockHazardData: HazardItem[] = [
     reporterName: "한수진",
     reporterInitial: "한",
     workplace: "수원역 복합개발 현장",
+    isMyReport: false,
   },
-  // 홍길동 본인 제보 — 상태별 4가지
+  // 본인 제보 테스트용 (isMyReport: true) — 상태별 4가지
   {
     id: 7,
     status: "pending",
     date: "2026.06.01",
     location: "4층 복도",
     description: "소화기 비치함 덮개 파손, 소화기 외부 노출",
-    reporterName: "홍길동",
-    reporterInitial: "홍",
+    reporterName: "이민준",
+    reporterInitial: "이",
     workplace: "광교타워크레인 현장",
+    isMyReport: true,
   },
   {
     id: 8,
@@ -81,9 +85,10 @@ export const mockHazardData: HazardItem[] = [
     date: "2026.05.30",
     location: "지하 주차장 입구",
     description: "차량 진출입 구간 바닥 도색 마모, 충돌 위험",
-    reporterName: "홍길동",
-    reporterInitial: "홍",
+    reporterName: "이민준",
+    reporterInitial: "이",
     workplace: "광교타워크레인 현장",
+    isMyReport: true,
   },
   {
     id: 9,
@@ -91,9 +96,10 @@ export const mockHazardData: HazardItem[] = [
     date: "2026.05.28",
     location: "2층 창고",
     description: "선반 고정 볼트 이완, 낙하 위험",
-    reporterName: "홍길동",
-    reporterInitial: "홍",
+    reporterName: "이민준",
+    reporterInitial: "이",
     workplace: "수원역 복합개발 현장",
+    isMyReport: true,
   },
   {
     id: 10,
@@ -101,8 +107,9 @@ export const mockHazardData: HazardItem[] = [
     date: "2026.05.25",
     location: "옥상 환기구",
     description: "환기구 덮개 부식으로 파손 위험",
-    reporterName: "홍길동",
-    reporterInitial: "홍",
+    reporterName: "이민준",
+    reporterInitial: "이",
     workplace: "수원역 복합개발 현장",
+    isMyReport: true,
   },
 ]

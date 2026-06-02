@@ -8,7 +8,10 @@ import { typography } from "@/theme/typography"
 export const $bellIconContainer: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-  gap: 6,
+  justifyContent: "center",
+  gap: 1,
+  paddingVertical: 4,
+  paddingHorizontal: 6,
 }
 
 export const $bellText: TextStyle = {

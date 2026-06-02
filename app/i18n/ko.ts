@@ -616,6 +616,12 @@ const ko: Translations = {
   textTranslationScreen: {
     title: "텍스트 번역",
     fontSizeButton: "AA",
+    fontSizeModal: {
+      title: "텍스트 크기",
+      small: "작게",
+      medium: "중간",
+      large: "크게",
+    },
     languageMenu: {
       title: "언어 선택",
     },
@@ -810,6 +816,8 @@ const ko: Translations = {
 
   tbmCreateScreen: {
     title: "TBM 활동 생성",
+    editTitle: "수정",
+    submitEdit: "수정하기",
     reset: "초기화",
     guide: {
       title: "작성 가이드",
@@ -869,6 +877,7 @@ const ko: Translations = {
       cancel: "취소",
       confirm: "삭제",
     },
+    downloadLog: "교육일지 다운로드",
     startModal: {
       title: "TBM 활동 시작",
       message: "이 TBM 활동을 시작하시겠습니까?\n상태가 '진행중'으로 변경됩니다.",
@@ -1002,6 +1011,10 @@ const ko: Translations = {
       cancel: "취소",
       confirm: "삭제",
     },
+    toast: {
+      noAction: "반영완료 또는 반영불가를 선택해주세요.",
+      noNote: "처리 내용을 입력해주세요.",
+    },
   },
 
   improvementProposalCreateScreen: {
@@ -1104,6 +1117,11 @@ const ko: Translations = {
     regenerateNote: "신규 재생성을 위해 시간이 소요됩니다",
     refresh: "새로고침",
     toastRegenerate: "보고서 재생성 요청이 접수되었습니다.",
+    processStatusRequested: "보고서 생성이 요청되었습니다. 곧 처리가 시작됩니다.",
+    processStatusGenerating: "보고서를 생성 중입니다. 잠시 기다려 주세요.",
+    processStatusCompleted: "보고서가 준비되어 다운로드 할 수 있습니다.",
+    processStatusFailed: "보고서 생성에 실패 했습니다.",
+    sectionFailureReason: "실패 사유",
   },
 
   patrolScreen: {
@@ -1149,6 +1167,12 @@ const ko: Translations = {
       recall: "회수",
       delete: "삭제",
       reportPreview: "보고서 미리보기",
+    },
+    deleteModal: {
+      title: "점검 삭제",
+      message: "해당 점검을 삭제하시겠습니까?\n삭제 후에는 복구할 수 없습니다.",
+      cancel: "취소",
+      confirm: "삭제",
     },
     toast: {
       reportSuccess: "보고서가 열렸습니다.",
@@ -1338,7 +1362,12 @@ const ko: Translations = {
     },
     adminSection: {
       title: "상태 변경 및 처리",
+      resultTitle: "조치 결과",
+      resultCompleted: "조치완료입니다",
+      resultImpossible: "조치불가입니다",
+      resultDateLabel: "조치일:",
       noteLabel: "조치 내용 입력",
+      noteLabelImpossible: "조치 불가 사유",
       noteHint: "입력 시 최대 2,000자까지 작성할 수 있습니다.",
       sitePhotosLabel: "현장 사진",
       sitePhotosHints: {
@@ -1367,6 +1396,15 @@ const ko: Translations = {
         impossible: "조치 불가 처리되었습니다.",
         adminSuffix: " - 관리자({{name}})",
       },
+    },
+    bottomButton: {
+      proceed: "진행하기",
+      saveAction: "처리 내용 저장",
+      alreadyProcessed: "이미 처리된 제보입니다.",
+    },
+    toast: {
+      noAction: "조치완료 또는 조치불가를 선택해주세요.",
+      noNote: "조치 내용을 입력해주세요.",
     },
   },
 

@@ -36,7 +36,14 @@ export type AppStackParamList = {
   ImageTranslation: undefined
   EducationPresentation: undefined
   TbmList: undefined
-  TbmCreate: undefined
+  TbmCreate: {
+    editId?: number
+    initialTitle?: string
+    initialContent?: string
+    initialWorkplace?: string
+    initialDateTime?: string
+    initialEducationIds?: number[]
+  } | undefined
   TbmDetail: { id: number }
   TbmReport: { id: number }
   TbmReportInquiry: undefined

@@ -24,6 +24,7 @@ export interface TbmReportItem {
   requestedAt?: string
   startedAt?: string
   completedAt?: string
+  failureReason?: string
 }
 
 export type TbmReportInquiryScreenProps = AppStackScreenProps<"TbmReportInquiry">
