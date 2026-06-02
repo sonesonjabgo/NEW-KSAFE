@@ -290,6 +290,7 @@ const $workplaceSelector: ViewStyle = {
   flexDirection: "row",
   alignItems: "flex-end",
   justifyContent: "space-between",
+  paddingBottom: 12,
 }
 
 const $workplaceLabel: TextStyle = {

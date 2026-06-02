@@ -1131,6 +1131,12 @@ const hi: Translations = {
       delete: "हटाएं",
       reportPreview: "रिपोर्ट पूर्वावलोकन",
     },
+    deleteModal: {
+      title: "निरीक्षण हटाएं",
+      message: "क्या आप इस निरीक्षण को हटाना चाहते हैं?\nयह क्रिया पूर्ववत नहीं की जा सकती।",
+      cancel: "रद्द करें",
+      confirm: "हटाएं",
+    },
     toast: {
       reportSuccess: "रिपोर्ट खुल गई।",
       reportFail: "रिपोर्ट बनाने में विफल।",

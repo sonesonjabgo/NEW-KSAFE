@@ -1160,6 +1160,12 @@ const es: Translations = {
       delete: "Eliminar",
       reportPreview: "Vista Previa del Informe",
     },
+    deleteModal: {
+      title: "Eliminar inspección",
+      message: "¿Está seguro de que desea eliminar esta inspección?\nEsta acción no se puede deshacer.",
+      cancel: "Cancelar",
+      confirm: "Eliminar",
+    },
     toast: {
       reportSuccess: "El informe se abrió.",
       reportFail: "Error al generar el informe.",

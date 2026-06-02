@@ -1164,6 +1164,12 @@ const ko: Translations = {
       delete: "삭제",
       reportPreview: "보고서 미리보기",
     },
+    deleteModal: {
+      title: "점검 삭제",
+      message: "해당 점검을 삭제하시겠습니까?\n삭제 후에는 복구할 수 없습니다.",
+      cancel: "취소",
+      confirm: "삭제",
+    },
     toast: {
       reportSuccess: "보고서가 열렸습니다.",
       reportFail: "보고서 생성에 실패했습니다.",

@@ -1154,6 +1154,12 @@ const fr: Translations = {
       delete: "Supprimer",
       reportPreview: "Aperçu du Rapport",
     },
+    deleteModal: {
+      title: "Supprimer l'inspection",
+      message: "Êtes-vous sûr de vouloir supprimer cette inspection ?\nCette action est irréversible.",
+      cancel: "Annuler",
+      confirm: "Supprimer",
+    },
     toast: {
       reportSuccess: "Le rapport a été ouvert.",
       reportFail: "Échec de la génération du rapport.",

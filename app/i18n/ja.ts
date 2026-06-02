@@ -1121,6 +1121,12 @@ const ja: Translations = {
       delete: "削除",
       reportPreview: "レポートプレビュー",
     },
+    deleteModal: {
+      title: "点検を削除",
+      message: "この点検を削除してもよろしいですか？\n削除後は復元できません。",
+      cancel: "キャンセル",
+      confirm: "削除",
+    },
     toast: {
       reportSuccess: "レポートが開きました。",
       reportFail: "レポートの生成に失敗しました。",

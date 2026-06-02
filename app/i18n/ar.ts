@@ -1128,6 +1128,12 @@ const ar: Translations = {
       delete: "حذف",
       reportPreview: "معاينة التقرير",
     },
+    deleteModal: {
+      title: "حذف الفحص",
+      message: "هل أنت متأكد من حذف هذا الفحص؟\nلا يمكن التراجع عن هذا الإجراء.",
+      cancel: "إلغاء",
+      confirm: "حذف",
+    },
     toast: {
       reportSuccess: "تم فتح التقرير.",
       reportFail: "فشل إنشاء التقرير.",

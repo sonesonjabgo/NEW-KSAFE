@@ -1178,6 +1178,12 @@ const en = {
       delete: "Delete",
       reportPreview: "Report Preview",
     },
+    deleteModal: {
+      title: "Delete Inspection",
+      message: "Are you sure you want to delete this inspection? This action cannot be undone.",
+      cancel: "Cancel",
+      confirm: "Delete",
+    },
     toast: {
       reportSuccess: "Report opened.",
       reportFail: "Failed to generate report.",
