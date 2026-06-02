@@ -138,9 +138,10 @@ export const $cardTopRow: ViewStyle = {
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 14,
+  fontSize: 13,
+  lineHeight: 18,
   fontFamily: typography.primary.normal,
-  color: "#555555",
+  color: "#777777",
 }
 
 export const $cardTitle: TextStyle = {
@@ -187,8 +188,10 @@ export const $badge: ViewStyle = {
 }
 
 export const $badgeText: TextStyle = {
-  fontSize: 14,
+  fontSize: 12,
+  lineHeight: 16,
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
 }
 
 export const $statusBadgeStyle: Record<ProposalStatus, ViewStyle> = {

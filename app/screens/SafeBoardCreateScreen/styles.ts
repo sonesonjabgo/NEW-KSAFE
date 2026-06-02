@@ -33,7 +33,8 @@ export const $labelRow: ViewStyle = {
 }
 
 export const $required: TextStyle = {
-  fontSize: 19,
+  fontSize: 15,
+  lineHeight: 26,
   fontFamily: typography.primary.semiBold,
   color: "#FF0000",
 }

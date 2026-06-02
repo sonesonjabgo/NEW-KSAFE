@@ -243,21 +243,27 @@ export const $participantBadgeDanger: ViewStyle = {
 }
 
 export const $participantBadgeNormalText: TextStyle = {
-  fontSize: 14,
+  fontSize: 12,
+  lineHeight: 16,
   fontFamily: typography.primary.semiBold,
   color: "#18A24A",
+  includeFontPadding: false,
 }
 
 export const $participantBadgeCautionText: TextStyle = {
-  fontSize: 14,
+  fontSize: 12,
+  lineHeight: 16,
   fontFamily: typography.primary.semiBold,
   color: "#D97706",
+  includeFontPadding: false,
 }
 
 export const $participantBadgeDangerText: TextStyle = {
-  fontSize: 14,
+  fontSize: 12,
+  lineHeight: 16,
   fontFamily: typography.primary.semiBold,
   color: "#F04E3E",
+  includeFontPadding: false,
 }
 
 export const $participantEmpty: TextStyle = {

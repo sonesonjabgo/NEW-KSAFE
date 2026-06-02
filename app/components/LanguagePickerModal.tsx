@@ -171,11 +171,12 @@ const $handle: ViewStyle = {
 }
 
 const $title: TextStyle = {
-  fontSize: 15,
+  fontSize: 17,
+  lineHeight: 24,
   fontFamily: typography.primary.bold,
   color: "#1A2236",
   paddingHorizontal: 20,
-  marginBottom: 8,
+  marginBottom: 12,
 }
 
 const $separator: ViewStyle = {
@@ -219,7 +220,8 @@ const $itemTextSelected: TextStyle = {
 }
 
 const $itemSubtitle: TextStyle = {
-  fontSize: 14,
+  fontSize: 13,
+  lineHeight: 18,
   fontFamily: typography.primary.normal,
   color: "#555555",
 }

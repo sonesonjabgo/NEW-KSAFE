@@ -112,17 +112,18 @@ const $metaRow: ViewStyle = {
 }
 
 const $metaText: TextStyle = {
-  fontSize: 14,
-  color: "#555555",
+  fontSize: 13,
+  color: "#777777",
   fontFamily: typography.primary.normal,
-  lineHeight: 16,
+  lineHeight: 18,
 }
 
 const $metaWorkplace: TextStyle = {
-  fontSize: 14,
+  fontSize: 13,
   color: "#555555",
-  fontFamily: typography.primary.normal,
-  lineHeight: 16,
+  fontFamily: typography.primary.semiBold,
+  lineHeight: 18,
+  flexShrink: 1,
 }
 
 const $iconContainer: ViewStyle = {
@@ -144,13 +145,12 @@ const $pinBadge: ViewStyle = {
 }
 
 const $pinBadgeText: TextStyle = {
-  fontSize: 14,
-  lineHeight: 14,
+  fontSize: 12,
+  lineHeight: 16,
   fontFamily: typography.primary.bold,
   color: "#FFBB50",
   includeFontPadding: false,
   textAlignVertical: "center",
-  transform: [{ translateY: 1 }],
 }
 
 const $divider: ViewStyle = {

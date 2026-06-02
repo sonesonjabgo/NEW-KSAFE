@@ -302,6 +302,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
   const $avatarDynamic: ViewStyle = { width: avatarSize, height: avatarSize }
 
   // Grid — tablet: 4열 / 기본: 3열
+  const gridCols = isTablet ? 4 : 3
   const gridCellWidth = isTablet ? "25%" : "33.33%"
   const gridIconWrapSize = isSmallPhone ? 38 : 46
 
@@ -312,6 +313,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
     paddingBottom: isSmallPhone ? 16 : 13,
     paddingHorizontal: isSmallPhone ? 4 : 6,
   }
+  const getGridCellBorder = (i: number, total: number): ViewStyle => ({
+    borderEndWidth: (i + 1) % gridCols === 0 ? 0 : 1,
+    borderBottomWidth: i >= total - gridCols ? 0 : 1,
+  })
   const $gridIconWrapDynamic: ViewStyle = isSmallPhone
     ? { width: gridIconWrapSize, height: gridIconWrapSize }
     : {}
@@ -428,7 +433,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
               {visibleGridItems.map((item, i) => (
                 <TouchableOpacity
                   key={i}
-                  style={[$gridCell, $gridCellDynamic]}
+                  style={[$gridCell, $gridCellDynamic, getGridCellBorder(i, visibleGridItems.length)]}
                   activeOpacity={0.7}
                   onPress={item.onPress}
                 >
@@ -776,8 +781,7 @@ const $grid: ViewStyle = {
 const $gridCell: ViewStyle = {
   alignItems: "center",
   justifyContent: "flex-start",
-  borderEndWidth: StyleSheet.hairlineWidth,
-  borderBottomWidth: StyleSheet.hairlineWidth,
+  borderStyle: "dashed",
   borderColor: "#E9ECF0",
   minHeight: 120,
 }
@@ -903,7 +907,7 @@ const $boardItem: ViewStyle = {
   paddingVertical: 14,
   paddingHorizontal: 16,
   gap: 10,
-  borderBottomWidth: StyleSheet.hairlineWidth,
+  borderBottomWidth: 1,
   borderBottomColor: "#E9ECF0",
 }
 
@@ -923,8 +927,7 @@ const $boardItemTitle: TextStyle = {
   fontSize: 14,
   fontFamily: typography.primary.bold,
   color: "#000000",
-  lineHeight: 12,
-  includeFontPadding: false,
+  lineHeight: 20,
   flexShrink: 1,
   minWidth: 0,
 }
@@ -933,8 +936,7 @@ const $boardItemDate: TextStyle = {
   fontSize: 14,
   color: "#7F848C",
   fontFamily: typography.primary.normal,
-  lineHeight: 11,
-  includeFontPadding: false,
+  lineHeight: 18,
 }
 
 const $homeBadgeRow: ViewStyle = {
@@ -956,13 +958,12 @@ const $homePinBadge: ViewStyle = {
 }
 
 const $homePinBadgeText: TextStyle = {
-  fontSize: 14,
-  lineHeight: 14,
+  fontSize: 12,
+  lineHeight: 16,
   fontFamily: typography.primary.bold,
   color: "#FFBB50",
   includeFontPadding: false,
   textAlignVertical: "center",
-  transform: [{ translateY: 1 }],
 }
 
 const $banner: ViewStyle = {

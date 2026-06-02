@@ -458,7 +458,8 @@ const $messageBubble: ViewStyle = {
 }
 
 const $messageSender: TextStyle = {
-  fontSize: 14,
+  fontSize: 12,
+  lineHeight: 16,
   fontFamily: typography.primary.semiBold,
   color: "#555555",
 }

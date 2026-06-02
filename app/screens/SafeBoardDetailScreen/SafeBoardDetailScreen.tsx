@@ -226,9 +226,10 @@ const $badgeRow: ViewStyle = {
 }
 
 const $dateText: TextStyle = {
-  fontSize: 14,
+  fontSize: 13,
+  lineHeight: 18,
   fontFamily: typography.primary.normal,
-  color: "#555555",
+  color: "#777777",
 }
 
 const $titleText: TextStyle = {
@@ -247,9 +248,10 @@ const $alertRow: ViewStyle = {
 }
 
 const $alertText: TextStyle = {
-  fontSize: 14,
+  fontSize: 15,
+  lineHeight: 20,
   fontFamily: typography.primary.semiBold,
-  color: "#555555",
+  color: "#333333",
 }
 
 const $authorRow: ViewStyle = {
@@ -270,6 +272,7 @@ const $authorIconWrap: ViewStyle = {
 
 const $authorText: TextStyle = {
   fontSize: 14,
+  lineHeight: 20,
   fontFamily: typography.primary.medium,
   color: "#333333",
 }

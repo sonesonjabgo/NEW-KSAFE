@@ -74,8 +74,9 @@ export const $cardTopRow: ViewStyle = {
 }
 
 export const $cardDate: TextStyle = {
-  fontSize: 14,
-  color: "#555555",
+  fontSize: 13,
+  lineHeight: 18,
+  color: "#777777",
   fontFamily: typography.primary.normal,
 }
 
@@ -146,21 +147,27 @@ export const $badgeEnded: ViewStyle = {
 }
 
 export const $badgeDraftingText: TextStyle = {
-  fontSize: 14,
+  fontSize: 12,
+  lineHeight: 16,
   color: "#333333",
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
 }
 
 export const $badgeOngoingText: TextStyle = {
-  fontSize: 14,
+  fontSize: 12,
+  lineHeight: 16,
   color: "#18A24A",
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
 }
 
 export const $badgeEndedText: TextStyle = {
-  fontSize: 14,
+  fontSize: 12,
+  lineHeight: 16,
   color: "#FFFFFF",
   fontFamily: typography.primary.semiBold,
+  includeFontPadding: false,
 }
 
 // ── Empty State ───────────────────────────────────────────────────────────────

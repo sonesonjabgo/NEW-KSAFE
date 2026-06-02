@@ -414,8 +414,10 @@ const $cardBadge: ViewStyle = {
 }
 
 const $cardBadgeText: TextStyle = {
-  fontSize: 14,
+  fontSize: 12,
+  lineHeight: 16,
   fontFamily: semiBold,
+  includeFontPadding: false,
 }
 
 const $cardDate: TextStyle = {
@@ -542,9 +544,11 @@ const $goodBadge: ViewStyle = {
 }
 
 const $goodBadgeText: TextStyle = {
-  fontSize: 14,
+  fontSize: 12,
+  lineHeight: 16,
   fontFamily: semiBold,
   color: "#24804B",
+  includeFontPadding: false,
 }
 
 const $badBadge: ViewStyle = {
@@ -558,9 +562,11 @@ const $badBadge: ViewStyle = {
 }
 
 const $badBadgeText: TextStyle = {
-  fontSize: 14,
+  fontSize: 12,
+  lineHeight: 16,
   fontFamily: semiBold,
   color: "#FF0004",
+  includeFontPadding: false,
 }
 
 const $actionCard: ViewStyle = {
